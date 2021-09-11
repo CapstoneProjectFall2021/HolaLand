@@ -16,6 +16,7 @@ import java.util.List;
 @Controller
 public class MemberController {
 
+    // call MemberService from module traffic
     private final MemberService memberService;
 
     @Autowired
