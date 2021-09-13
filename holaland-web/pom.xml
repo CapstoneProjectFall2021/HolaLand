@@ -22,9 +22,15 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
+        <!-- Import module-->
         <dependency>
             <groupId>com.hola</groupId>
             <artifactId>holaland-traffic</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hola</groupId>
+            <artifactId>holaland-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

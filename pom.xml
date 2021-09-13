@@ -21,8 +21,9 @@
         <java.version>11</java.version>
     </properties>
     <modules>
-        <module>holaland-traffic</module>
         <module>holaland-web</module>
+        <module>holaland-core</module>
+        <module>holaland-traffic</module>
     </modules>
     <dependencies>
         <dependency>

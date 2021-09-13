@@ -1,5 +1,6 @@
 package com.hola.holalandweb.controller;
 
+import com.hola.holalandcore.service.AccountService;
 import com.hola.holalandtraffic.entity.Member;
 import com.hola.holalandtraffic.service.MemberService;
 
@@ -19,14 +20,19 @@ public class MemberController {
     // call MemberService from module traffic
     private final MemberService memberService;
 
+    // call AccountService from module core
+    private final AccountService accountService;
+
     @Autowired
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, AccountService accountService) {
         this.memberService = memberService;
+        this.accountService = accountService;
     }
 
     @GetMapping("/members")
     public String members(Model model) {
         backToMembers(model);
+        model.addAttribute("hello", accountService.hello());
         return "members";
     }
 
