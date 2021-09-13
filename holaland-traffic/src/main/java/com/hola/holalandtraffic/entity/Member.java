@@ -10,6 +10,7 @@ import java.sql.Date;
 @Getter
 @Setter
 
+//add comment
 public class Member {
 
     private int memberId;
