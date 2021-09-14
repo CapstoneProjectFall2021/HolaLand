@@ -4,6 +4,8 @@ import com.hola.holalandcore.service.AccountService;
 import com.hola.holalandtraffic.entity.Member;
 import com.hola.holalandtraffic.service.MemberService;
 
+import com.hola.holalandweb.util.SendEmailService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -23,16 +26,31 @@ public class MemberController {
     // call AccountService from module core
     private final AccountService accountService;
 
+    private final SendEmailService sendEmailService;
+
     @Autowired
-    public MemberController(MemberService memberService, AccountService accountService) {
+    public MemberController(MemberService memberService, AccountService accountService, SendEmailService sendEmailService) {
         this.memberService = memberService;
         this.accountService = accountService;
+        this.sendEmailService = sendEmailService;
     }
 
     @GetMapping("/members")
     public String members(Model model) {
         backToMembers(model);
-        model.addAttribute("hello", accountService.hello());
+        return "members";
+    }
+
+    @GetMapping("/send-email")
+    public String sendEmail(@RequestParam("id") Integer id, Model model) {
+        Member member = memberService.getOne(id);
+        sendEmailService.send(
+                "HolaLand",
+                "Mã kích hoạt của bạn là: 123456xxx",
+                member.getMemberEmail()
+        );
+        model.addAttribute("send", "- Gửi email thành công!");
+        backToMembers(model);
         return "members";
     }
 
