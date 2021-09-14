@@ -1,7 +1,6 @@
 package com.hola.holalandtraffic.service.impl;
 
 import com.hola.holalandtraffic.entity.Member;
-
 import com.hola.holalandtraffic.repository.MemberRepository;
 import com.hola.holalandtraffic.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;

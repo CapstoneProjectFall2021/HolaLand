@@ -1,7 +1,6 @@
 package com.hola.holalandtraffic.mapper;
 
 import com.hola.holalandtraffic.entity.Member;
-
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
