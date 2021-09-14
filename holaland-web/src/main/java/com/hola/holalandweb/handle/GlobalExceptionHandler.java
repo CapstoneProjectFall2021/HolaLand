@@ -3,7 +3,6 @@ package com.hola.holalandweb.handle;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -48,17 +47,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     // handleNullPointerException
-    @ExceptionHandler(NullPointerException.class)
-    protected ResponseEntity<Object> handleNullPointerException(NullPointerException ex, WebRequest request, Model model) {
-        List<String> details = new ArrayList<>();
-        details.add(ex.getMessage());
-
-        ResponseError err = ResponseError.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST)
-                .message("Null Pointer Exception")
-                .errors(details)
-                .build();
-        return ResponseEntityBuilder.build(err);
-    }
+//    @ExceptionHandler(NullPointerException.class)
+//    protected ResponseEntity<Object> handleNullPointerException(NullPointerException ex, WebRequest request, Model model) {
+//        List<String> details = new ArrayList<>();
+//        details.add(ex.getMessage());
+//
+//        ResponseError err = ResponseError.builder()
+//                .timestamp(LocalDateTime.now())
+//                .status(HttpStatus.BAD_REQUEST)
+//                .message("Null Pointer Exception")
+//                .errors(details)
+//                .build();
+//        return ResponseEntityBuilder.build(err);
+//    }
 }
