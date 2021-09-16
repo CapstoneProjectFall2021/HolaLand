@@ -2,6 +2,7 @@ package com.hola.holalandweb.controller;
 
 import com.hola.holalandcore.service.AccountService;
 import com.hola.holalandtraffic.entity.Member;
+import com.hola.holalandtraffic.service.BusService;
 import com.hola.holalandtraffic.service.MemberService;
 import com.hola.holalandweb.util.SendEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +27,22 @@ public class MemberController {
 
     private final SendEmailService sendEmailService;
 
+    private final BusService busService;
+
     @Autowired
-    public MemberController(MemberService memberService, AccountService accountService, SendEmailService sendEmailService) {
+    public MemberController(MemberService memberService, AccountService accountService, SendEmailService sendEmailService, BusService busService) {
         this.memberService = memberService;
         this.accountService = accountService;
         this.sendEmailService = sendEmailService;
+        this.busService = busService;
     }
 
     @GetMapping("/members")
     public String members(Model model) {
         backToMembers(model);
+        List listBus = busService.getAll();
+
+        model.addAttribute("listBus", listBus);
         return "members";
     }
 
