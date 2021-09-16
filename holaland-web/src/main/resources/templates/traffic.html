@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hola Land - Giao thông</title>
+
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" th:href="@{/css/all.css}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.css}"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/hola-land/main.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/common.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/grid.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/traffic.css}"/>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand mr-auto" href="#">Hola Land</a>
+
+      <div class="navbar-btn-group">
+        <ul class="m-0 p-0">
+          <li class="navbar-search">
+            <form class="input-group">
+              <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="search">
+              <button class="btn-search" type="submit" id="search"><i class="bi bi-search"></i></button>
+            </form>
+          </li>
+          <li class="navbar-btn dropdown">
+            <a class="dropdown-toggle" href="javascript:void(0)" id="language" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="far fa-bell m-0 fa-fw"></i>
+            </a>
+            <span class="notification-dot">8</span>
+            <ul class="dropdown-menu notification-dropdown" aria-labelledby="language">
+              <li class="dropdown-item">
+                <a href="">
+                  <div class="media">
+                    <span class="me-3">
+                      <img class="media-object" src="assets/images/system/v2.png" alt="" width="50">
+                    </span>
+                    <div class="media-body">
+                      <h6 class="media-heading">John Smith</h6>
+                      <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
+                      <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="dropdown-item notification-preview">
+                <a href="">
+                  <div class="media">
+                    <span class="me-3">
+                      <img class="media-object" src="assets/images/system/v.png" alt="" width="50">
+                    </span>
+                    <div class="media-body">
+                      <h6 class="media-heading">John Smith</h6>
+                      <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
+                      <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="dropdown-item notification-preview">
+                <a href="">
+                  <div class="media">
+                    <span class="me-3">
+                      <img class="media-object" src="assets/images/system/v.png" alt="" width="50">
+                    </span>
+                    <div class="media-body">
+                      <h6 class="media-heading">John Smith</h6>
+                      <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
+                      <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="dropdown-item btn-link">
+                <a href="" class="text-end">
+                  Xem tất cả
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="navbar-btn dropdown pointer-events-none">
+            <a class="dropdown-toggle" href="javascript:void(0)" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <!-- <i class="fas fa-caret-down m-0 fa-fw"></i> -->
+              <i class="far fa-user m-0 fa-fw"></i>
+            </a>
+            <ul class="dropdown-menu navbar-dropdown" aria-labelledby="userDropdown">
+              <div class="username">
+                <div>
+                  <i class="far fa-user fa-fw"></i>
+                </div>
+                <div>
+                  <span>Đinh Tuấn Anh</span>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#"><i class="far fa-eye fa-fw"></i>Trang cá nhân</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Đóng góp ý kiến</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#"><i class="far fa-question-circle fa-fw"></i>Trợ giúp & hỗ trợ</a>
+              <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-fw"></i>Đăng xuất</a>
+            </ul>
+          </li>
+          <li class="navbar-btn dropdown pointer-events-none">
+            <a class="dropdown-toggle" href="javascript:void(0)" id="funtionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-caret-down m-0 fa-fw"></i>
+            </a>
+            <ul class="dropdown-menu navbar-dropdown" aria-labelledby="funtionDropdown">
+              <a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt fa-fw"></i>Đăng nhập</a>
+              <a class="dropdown-item" href="#"><i class="far fa-edit fa-fw"></i>Đăng ký tài khoản</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Liên hệ & hỗ trợ</a>
+            </ul>
+          </li>
+          <li class="navbar-btn btn-sidebar-menu">
+            <button id="btn-open-sidebar" class="navbar-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <!-- Start: Sidebar -->
+      <div id="sidebar" class="sidebar">
+        <ul class="nav navbar-nav menu">
+          <li>
+            <div class="switch-theme">
+              <div>
+                <span class="label-theme"><i class="fas fa-moon fa-fw"></i>Chế độ tối</span>
+              </div>
+              <div class="btn-switch-theme">
+                <!-- <input class="form-check-input" type="checkbox" id="switch" /> -->
+                <input class="switch-button" type="checkbox" id="switch" />
+                <label for="switch"></label>
+              </div>
+            </div>
+          </li>
+          <li><a href="#"><i class="fas fa-university fa-fw"></i>FPT University</a></li>
+          <li><a href="#"><i class="fas fa-graduation-cap fa-fw"></i>Học tập</a></li>
+          <li><a href="#"><i class="fas fa-user-check fa-fw"></i>Công việc</a></li>
+          <li><a href="#"><i class="fas fa-cart-plus fa-fw"></i>Mua sắm</a></li>
+          <li><a href="#"><i class="fas fa-pizza-slice fa-fw"></i>Dịch vụ Ăn - Uống</a></li>
+          <li><a href="#"><i class="fab fa-xbox fa-fw"></i>Vui chơi - Giải trí</a></li>
+          <li><a href="#"><i class="fas fa-bus-alt fa-fw"></i>Giao thông</a></li>
+          <li><a href="#"><i class="fas fa-bars fa-fw"></i>Khác</a></li>
+        </ul>
+      </div>
+      <!-- End: Sidebar -->
+    </div>
+  </nav>
+
+  <div class="container fix-mt">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title">Giao thông</h1>
+      </div>
+    </div>
+    <div class="row list-bus">
+      <h2 class="sub-title">Danh sách xe bus</h2>
+      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-mb-20" th:each="bus, index : ${busList}">
+        <a class="label-info" th:href="@{/bus-detail(id=*{bus.tfBusId})}">
+          <div class="flex">
+            <div class="icon">
+              <i class="fas fa-bus-alt"></i>
+            </div>
+            <div class="number">
+              <h4 th:text="*{bus.tfBusName}"></h4>
+            </div>
+          </div>
+          <div class="description">
+            Giá vé: <span th:text="${#numbers.formatInteger(bus.tfBusPrice, 3, 'POINT')}"></span><sup>đ</sup>
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- Detail -->
+    <div class="row" th:if="${bus != null}">
+      <div class="col-12">
+        <h1 class="title mt-5">Thông tin xe <span th:text="*{bus.tfBusName}"></span></h1>
+      </div>
+    </div>
+    <div class="row" th:if="${bus != null}">
+      <div class="col-md-6">
+        <h2 class="sub-title">Lịch trình</h2>
+        <div class="panel">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Thứ</th>
+                <th scope="col" class="text-end">Giờ hoạt động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Thứ hai</td>
+                <td class="text-end">
+                  <span th:text="*{bus.tfBusStartTime}"></span> -
+                  <span th:text="*{bus.tfBusEndTime}"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>Thú ba</td>
+                <td class="text-end">
+                  <span th:text="*{bus.tfBusStartTime}"></span> -
+                  <span th:text="*{bus.tfBusEndTime}"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>Thứ tư</td>
+                <td class="text-end">
+                  <span th:text="*{bus.tfBusStartTime}"></span> -
+                  <span th:text="*{bus.tfBusEndTime}"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>Thứ năm</td>
+                <td class="text-end">
+                  <span th:text="*{bus.tfBusStartTime}"></span> -
+                  <span th:text="*{bus.tfBusEndTime}"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>Thứ sáu</td>
+                <td class="text-end">
+                  <span th:text="*{bus.tfBusStartTime}"></span> -
+                  <span th:text="*{bus.tfBusEndTime}"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>Thứ bảy</td>
+                <td class="text-end">
+                  <span th:text="*{bus.tfBusStartTime}"></span> -
+                  <span th:text="*{bus.tfBusEndTime}"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>Chủ nhật</td>
+                <td class="text-end">
+                  <span th:text="*{bus.tfBusStartTime}"></span> -
+                  <span th:text="*{bus.tfBusEndTime}"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 class="sub-title">Bản đồ</h2>
+        <div class="panel">
+          <a href="https://www.google.com/maps/dir/B%E1%BA%BFn+Xe+M%E1%BB%B9+%C4%90%C3%ACnh,+M%E1%BB%B9+%C4%90%C3%ACnh+2,+Nam+T%E1%BB%AB+Li%C3%AAm,+H%C3%A0+N%E1%BB%99i/B%E1%BA%BFn+xe+bus+Xu%C3%A2n+Khanh,+Xu%C3%A2n+Khanh,+S%C6%A1n+T%C3%A2y,+H%C3%A0+N%E1%BB%99i/@21.0604854,105.5371491,12z/data=!4m15!4m14!1m5!1m1!1s0x313454b2f431c099:0xe44043bacd461128!2m2!1d105.7782687!2d21.0284297!1m5!1m1!1s0x31345fbd146a1a07:0x613bee402ab278c5!2m2!1d105.440263!2d21.113549!3e0!5i1">Xem</a>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <h2 class="sub-title">Lộ trình</h2>
+        <div class="panel direction">
+          <ul class="timeline">
+            <li class="timeline-item" th:each="stop : ${bus.tfBusStops}">
+              <div class="timeline-content">
+                <span th:text="*{stop}"></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script crossorigin="anonymous" th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
+  <script crossorigin="anonymous" th:src="@{/js/hola-land/hola-land.js}"></script>
+</body>
+
+</html>

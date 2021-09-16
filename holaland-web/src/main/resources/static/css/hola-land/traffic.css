@@ -1,0 +1,93 @@
+@charset "utf-8";
+.list-bus .label-info {
+  padding: 20px 20px 16px;
+  display: block;
+  border-radius: 12px;
+  background-color: var(--primary-button-background);
+  border: 1px solid var(--primary-border-color);
+  color: var(--primary-text);
+  transition: 0.5s;
+  margin-bottom: 20px;
+}
+
+.list-bus .label-info:hover {
+  transform: scale(1.02, 1.05);
+  background-color: var(--label-button-background);
+}
+
+.list-bus .label-info .flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-bus .label-info .flex .icon i {
+  font-size: 40px;
+}
+
+.list-bus .label-info .flex .number h4 {
+  margin: 0;
+  font-size: 35px;
+  font-weight: 400;
+}
+
+.list-bus .label-info .description {
+  margin-top: 12px;
+  color: var(--secondary-text);
+}
+
+.list-bus .label-info .description span,
+.list-bus .label-info .description sup {
+  color: var(--main-text);
+}
+
+
+/*-------- Timeline css --------*/
+
+.timeline {
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+}
+
+.timeline:before {
+  position: absolute;
+  top: 7px;
+  bottom: 5px;
+  width: 2px;
+  background: #666;
+  left: 10px;
+  margin-left: 0px;
+}
+
+.timeline-item:before,
+.timeline:before {
+  content: '';
+}
+
+ ::after,
+ ::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 40px;
+  list-style: none;
+}
+
+.timeline-item+.timeline-item {
+  margin-top: 20px;
+}
+
+.timeline-item:before {
+  position: absolute;
+  top: 7px;
+  left: 4px;
+  border: 2px solid #666;
+  width: 14px;
+  height: 14px;
+  background-color: var(--main-text);
+  border-radius: 50px;
+}
