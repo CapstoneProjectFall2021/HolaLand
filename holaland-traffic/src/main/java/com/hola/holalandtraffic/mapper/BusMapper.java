@@ -26,6 +26,7 @@ public class BusMapper  implements RowMapper<Bus> {
                 .tfBusEndTime(resultSet.getString("tf_bus_end_time"))
                 .tfBusInfo(resultSet.getString("tf_bus_info"))
                 .tfBusStops(stops)
+                .tfBusPrice(resultSet.getInt("tf_bus_price"))
                 .tfBusStatus(resultSet.getInt("tf_bus_status"))
                 .build();
         return bus;
