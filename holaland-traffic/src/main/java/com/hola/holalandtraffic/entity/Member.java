@@ -9,6 +9,8 @@ import java.sql.Date;
 @Builder
 @Getter
 @Setter
+
+//hello world
 public class Member {
     
     private int memberId;
