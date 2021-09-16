@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class SendEmailServiceImpl implements SendEmailService {
 
     private JavaMailSender javaMailSender;
-
+    //fix bug email
     @Autowired
     public SendEmailServiceImpl(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
