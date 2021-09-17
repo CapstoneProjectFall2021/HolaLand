@@ -76,6 +76,7 @@
               <th class="text-center" scope="col">Giá</th>
               <th class="text-center" scope="col">Điểm dừng</th>
               <th class="text-center" scope="col">Trạng thái</th>
+              <th class="text-center" scope="col">Xóa</th>
             </tr>
             </thead>
             <tbody>
@@ -92,6 +93,7 @@
                 </div>
               </td>
               <td class="text-center" th:text="*{bus.tfBusStatus}"></td>
+              <td class="text-center" th:text="*{bus.tfBusDeleted} ? 'Đã xóa' : 'Chưa xóa'"></td>
             </tr>
             </tbody>
           </table>

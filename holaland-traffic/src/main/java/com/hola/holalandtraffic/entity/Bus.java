@@ -19,4 +19,5 @@ public class Bus {
     private List<String> tfBusStops;
     private int tfBusPrice;
     private int tfBusStatus;
+    private boolean tfBusDeleted;
 }

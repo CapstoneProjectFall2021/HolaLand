@@ -28,6 +28,7 @@ public class BusMapper  implements RowMapper<Bus> {
                 .tfBusStops(stops)
                 .tfBusPrice(resultSet.getInt("tf_bus_price"))
                 .tfBusStatus(resultSet.getInt("tf_bus_status"))
+                .tfBusDeleted(resultSet.getBoolean("tf_bus_deleted"))
                 .build();
         return bus;
     }
