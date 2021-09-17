@@ -15,7 +15,7 @@ public class MotorbikeTaxiDrivers {
     private String tfMotorbikeTaxiDriversPhone;
     private String tfMotorbikeTaxiDriversImage;
     private String tfMotorbikeTaxiDriversLicensePlates;
-    private String tfMotorbikeTaxiDriversType;
+    private String tfMotorbikeTaxiDriversVehicleType;
     private String tfMotorbikeTaxiDriversStartTime;
     private String tfMotorbikeTaxiDriversEndTime;
     private String tfMotorbikeTaxiDriversRating;

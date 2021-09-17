@@ -17,7 +17,7 @@ public class MotorbikeTaxiDriversMapper implements RowMapper<MotorbikeTaxiDriver
                 .tfMotorbikeTaxiDriversPhone(resultSet.getString("tf_motorbike_taxi_drivers_phone"))
                 .tfMotorbikeTaxiDriversImage(resultSet.getString("tf_motorbike_taxi_drivers_image"))
                 .tfMotorbikeTaxiDriversLicensePlates(resultSet.getString("tf_motorbike_taxi_drivers_license_plates"))
-                .tfMotorbikeTaxiDriversType(resultSet.getString("tf_motorbike_taxi_drivers_type"))
+                .tfMotorbikeTaxiDriversVehicleType(resultSet.getString("tf_motorbike_taxi_drivers_vehicle_type"))
                 .tfMotorbikeTaxiDriversStartTime(resultSet.getString("tf_motorbike_taxi_drivers_start_time"))
                 .tfMotorbikeTaxiDriversEndTime(resultSet.getString("tf_motorbike_taxi_drivers_end_time"))
                 .tfMotorbikeTaxiDriversRating(resultSet.getString("tf_motorbike_taxi_drivers_rating"))
