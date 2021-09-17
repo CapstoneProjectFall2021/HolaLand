@@ -15,7 +15,6 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
-@SuppressWarnings("checkstyle:Indentation")
 @Repository
 public class MemberRepositoryImpl implements MemberRepository, IRepositoryQuery {
 

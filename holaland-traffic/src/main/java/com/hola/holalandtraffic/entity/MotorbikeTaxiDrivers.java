@@ -7,7 +7,6 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-
 public class MotorbikeTaxiDrivers {
 
     private int tfMotorbikeTaxiDriversId;
