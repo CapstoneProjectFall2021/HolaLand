@@ -73,10 +73,10 @@
               <th class="text-center" scope="col">Giờ khởi hành</th>
               <th class="text-center" scope="col">Giờ nghỉ</th>
               <th class="text-center" scope="col">Thông tin tuyến</th>
-              <th class="text-center" scope="col">Xóa</th>
               <th class="text-center" scope="col">Giá</th>
               <th class="text-center" scope="col">Điểm dừng</th>
               <th class="text-center" scope="col">Trạng thái</th>
+              <th class="text-center" scope="col">Xóa</th>
             </tr>
             </thead>
             <tbody>
@@ -86,7 +86,6 @@
               <td class="text-center" th:text="*{bus.tfBusStartTime}"></td>
               <td class="text-center" th:text="*{bus.tfBusEndTime}"></td>
               <td class="text-center" th:text="*{bus.tfBusInfo}"></td>
-              <td class="text-center" th:text="*{bus.tfBusDeleted} ? 'Đã xóa' : 'Chưa xóa'"></td>
               <td class="text-center" th:text="*{bus.tfBusPrice}"></td>
               <td class="text-left">
                 <div th:each="stop : ${bus.tfBusStops}">
@@ -94,6 +93,7 @@
                 </div>
               </td>
               <td class="text-center" th:text="*{bus.tfBusStatus}"></td>
+              <td class="text-center" th:text="*{bus.tfBusDeleted} ? 'Đã xóa' : 'Chưa xóa'"></td>
             </tr>
             </tbody>
           </table>
