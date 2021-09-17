@@ -18,7 +18,7 @@ public class MotorbikeTaxiDrivers {
     private String tfMotorbikeTaxiDriversVehicleType;
     private String tfMotorbikeTaxiDriversStartTime;
     private String tfMotorbikeTaxiDriversEndTime;
-    private String tfMotorbikeTaxiDriversRating;
+    private double tfMotorbikeTaxiDriversRating;
     private int tfMotorbikeTaxiDriversStatus;
     private boolean tfMotorbikeTaxiDriversDeleted;
 }
