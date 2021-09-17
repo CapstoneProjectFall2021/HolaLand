@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 
 <head>
   <!-- Required meta tags -->
@@ -21,157 +21,157 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand mr-auto" href="#">Hola Land</a>
+  <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand mr-auto" th:href="@{/}">Hola Land</a>
 
-      <div class="navbar-btn-group">
-        <ul class="m-0 p-0">
-          <li class="navbar-search">
-            <form class="input-group">
-              <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="search">
-              <button class="btn-search" type="submit" id="search"><i class="bi bi-search"></i></button>
-            </form>
-          </li>
-          <li class="navbar-btn dropdown">
-            <a class="dropdown-toggle" href="javascript:void(0)" id="language" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="far fa-bell m-0 fa-fw"></i>
-            </a>
-            <span class="notification-dot">8</span>
-            <ul class="dropdown-menu notification-dropdown" aria-labelledby="language">
-              <li class="dropdown-item">
-                <a href="">
-                  <div class="media">
-                    <span class="me-3">
-                      <img class="media-object" src="assets/images/system/v2.png" alt="" width="50">
-                    </span>
-                    <div class="media-body">
-                      <h6 class="media-heading">John Smith</h6>
-                      <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
-                      <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
-                    </div>
+    <div class="navbar-btn-group">
+      <ul class="m-0 p-0">
+        <li class="navbar-search">
+          <form class="input-group">
+            <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="search">
+            <button class="btn-search" type="submit" id="search"><i class="bi bi-search"></i></button>
+          </form>
+        </li>
+        <li class="navbar-btn dropdown">
+          <a class="dropdown-toggle" href="javascript:void(0)" id="language" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="far fa-bell m-0 fa-fw"></i>
+          </a>
+          <span class="notification-dot">8</span>
+          <ul class="dropdown-menu notification-dropdown" aria-labelledby="language">
+            <li class="dropdown-item">
+              <a href="">
+                <div class="media">
+                      <span class="me-3">
+                        <img class="media-object" src="../images/system/v.png" alt="" width="50">
+                      </span>
+                  <div class="media-body">
+                    <h6 class="media-heading">John Smith</h6>
+                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
+                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
                   </div>
-                </a>
-              </li>
-              <li class="dropdown-item notification-preview">
-                <a href="">
-                  <div class="media">
-                    <span class="me-3">
-                      <img class="media-object" src="assets/images/system/v.png" alt="" width="50">
-                    </span>
-                    <div class="media-body">
-                      <h6 class="media-heading">John Smith</h6>
-                      <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
-                      <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="dropdown-item notification-preview">
-                <a href="">
-                  <div class="media">
-                    <span class="me-3">
-                      <img class="media-object" src="assets/images/system/v.png" alt="" width="50">
-                    </span>
-                    <div class="media-body">
-                      <h6 class="media-heading">John Smith</h6>
-                      <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
-                      <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="dropdown-item btn-link">
-                <a href="" class="text-end">
-                  Xem tất cả
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="navbar-btn dropdown pointer-events-none">
-            <a class="dropdown-toggle" href="javascript:void(0)" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <!-- <i class="fas fa-caret-down m-0 fa-fw"></i> -->
-              <i class="far fa-user m-0 fa-fw"></i>
-            </a>
-            <ul class="dropdown-menu navbar-dropdown" aria-labelledby="userDropdown">
-              <div class="username">
-                <div>
-                  <i class="far fa-user fa-fw"></i>
                 </div>
-                <div>
-                  <span>Đinh Tuấn Anh</span>
+              </a>
+            </li>
+            <li class="dropdown-item notification-preview">
+              <a href="">
+                <div class="media">
+                      <span class="me-3">
+                        <img class="media-object" src="../images/system/v.png" alt="" width="50">
+                      </span>
+                  <div class="media-body">
+                    <h6 class="media-heading">John Smith</h6>
+                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
+                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
+                  </div>
                 </div>
-              </div>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#"><i class="far fa-eye fa-fw"></i>Trang cá nhân</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Đóng góp ý kiến</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#"><i class="far fa-question-circle fa-fw"></i>Trợ giúp & hỗ trợ</a>
-              <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-fw"></i>Đăng xuất</a>
-            </ul>
-          </li>
-          <li class="navbar-btn dropdown pointer-events-none">
-            <a class="dropdown-toggle" href="javascript:void(0)" id="funtionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-caret-down m-0 fa-fw"></i>
-            </a>
-            <ul class="dropdown-menu navbar-dropdown" aria-labelledby="funtionDropdown">
-              <a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt fa-fw"></i>Đăng nhập</a>
-              <a class="dropdown-item" href="#"><i class="far fa-edit fa-fw"></i>Đăng ký tài khoản</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Liên hệ & hỗ trợ</a>
-            </ul>
-          </li>
-          <li class="navbar-btn btn-sidebar-menu">
-            <button id="btn-open-sidebar" class="navbar-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </li>
-        </ul>
-      </div>
-      <!-- Start: Sidebar -->
-      <div id="sidebar" class="sidebar">
-        <ul class="nav navbar-nav menu">
-          <li>
-            <div class="switch-theme">
+              </a>
+            </li>
+            <li class="dropdown-item notification-preview">
+              <a href="">
+                <div class="media">
+                      <span class="me-3">
+                        <img class="media-object" src="../images/system/v.png" alt="" width="50">
+                      </span>
+                  <div class="media-body">
+                    <h6 class="media-heading">John Smith</h6>
+                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
+                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li class="dropdown-item btn-link">
+              <a href="" class="text-end">
+                Xem tất cả
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="navbar-btn dropdown pointer-events-none">
+          <a class="dropdown-toggle" href="javascript:void(0)" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- <i class="fas fa-caret-down m-0 fa-fw"></i> -->
+            <i class="far fa-user m-0 fa-fw"></i>
+          </a>
+          <ul class="dropdown-menu navbar-dropdown" aria-labelledby="userDropdown">
+            <div class="username">
               <div>
-                <span class="label-theme"><i class="fas fa-moon fa-fw"></i>Chế độ tối</span>
+                <i class="far fa-user fa-fw"></i>
               </div>
-              <div class="btn-switch-theme">
-                <!-- <input class="form-check-input" type="checkbox" id="switch" /> -->
-                <input class="switch-button" type="checkbox" id="switch" />
-                <label for="switch"></label>
+              <div>
+                <span>Đinh Tuấn Anh</span>
               </div>
             </div>
-          </li>
-          <li><a href="#"><i class="fas fa-university fa-fw"></i>FPT University</a></li>
-          <li><a href="#"><i class="fas fa-graduation-cap fa-fw"></i>Học tập</a></li>
-          <li><a href="#"><i class="fas fa-user-check fa-fw"></i>Công việc</a></li>
-          <li><a href="#"><i class="fas fa-cart-plus fa-fw"></i>Mua sắm</a></li>
-          <li><a href="#"><i class="fas fa-pizza-slice fa-fw"></i>Dịch vụ Ăn - Uống</a></li>
-          <li><a href="#"><i class="fab fa-xbox fa-fw"></i>Vui chơi - Giải trí</a></li>
-          <li><a href="#"><i class="fas fa-bus-alt fa-fw"></i>Giao thông</a></li>
-          <li><a href="#"><i class="fas fa-bars fa-fw"></i>Khác</a></li>
-        </ul>
-      </div>
-      <!-- End: Sidebar -->
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#"><i class="far fa-eye fa-fw"></i>Trang cá nhân</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Đóng góp ý kiến</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#"><i class="far fa-question-circle fa-fw"></i>Trợ giúp & hỗ trợ</a>
+            <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-fw"></i>Đăng xuất</a>
+          </ul>
+        </li>
+        <li class="navbar-btn dropdown pointer-events-none">
+          <a class="dropdown-toggle" href="javascript:void(0)" id="funtionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-caret-down m-0 fa-fw"></i>
+          </a>
+          <ul class="dropdown-menu navbar-dropdown" aria-labelledby="funtionDropdown">
+            <a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt fa-fw"></i>Đăng nhập</a>
+            <a class="dropdown-item" href="#"><i class="far fa-edit fa-fw"></i>Đăng ký tài khoản</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Liên hệ & hỗ trợ</a>
+          </ul>
+        </li>
+        <li class="navbar-btn btn-sidebar-menu">
+          <button id="btn-open-sidebar" class="navbar-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </li>
+      </ul>
     </div>
-  </nav>
+    <!-- Start: Sidebar -->
+    <div id="sidebar" class="sidebar">
+      <ul class="nav navbar-nav menu">
+        <li>
+          <div class="switch-theme">
+            <div>
+              <span class="label-theme"><i class="fas fa-moon fa-fw"></i>Chế độ tối</span>
+            </div>
+            <div class="btn-switch-theme">
+              <!-- <input class="form-check-input" type="checkbox" id="switch" /> -->
+              <input class="switch-button" type="checkbox" id="switch" />
+              <label for="switch"></label>
+            </div>
+          </div>
+        </li>
+        <li><a href="#"><i class="fas fa-university fa-fw"></i>FPT University</a></li>
+        <li><a href="#"><i class="fas fa-graduation-cap fa-fw"></i>Học tập</a></li>
+        <li><a href="#"><i class="fas fa-user-check fa-fw"></i>Công việc</a></li>
+        <li><a href="#"><i class="fas fa-cart-plus fa-fw"></i>Mua sắm</a></li>
+        <li><a href="#"><i class="fas fa-pizza-slice fa-fw"></i>Dịch vụ Ăn - Uống</a></li>
+        <li><a href="#"><i class="fab fa-xbox fa-fw"></i>Vui chơi - Giải trí</a></li>
+        <li><a href="#"><i class="fas fa-bus-alt fa-fw"></i>Giao thông</a></li>
+        <li><a href="#"><i class="fas fa-bars fa-fw"></i>Khác</a></li>
+      </ul>
+    </div>
+    <!-- End: Sidebar -->
+  </div>
+</nav>
 
-  <div class="container fix-mt">
+  <div class="container fix-mt-index">
     <div class="row">
       <div class="col-12">
-        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div id="carousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <div class="x">
+              <div class="banner">
                 <h1 class="text-ellipsis">Hola Land</h1>
                 <p>Section partners with university students in Computer Science related fields of study to research and write about topics that are relevant to engineers in the modern technology landscape. You can find more information and program guidelines
                   in the GitHub repository. If you're currently enrolled in a Computer Science related field of study and are interested in participating in the program, please complete the registration form by clciking this link,
@@ -180,7 +180,7 @@
               </div>
             </div>
             <div class="carousel-item">
-              <div class="x">
+              <div class="banner">
                 <h1 class="text-ellipsis">Sự kiện chào mừng K17</h1>
                 <p>Section partners with university students in Computer Science related fields of study to research and write about topics that are relevant to engineers in the modern technology landscape. You can find more information and program guidelines
                   in the GitHub repository. If you're currently enrolled in a Computer Science related field of study and are interested in participating in the program, please complete the registration form by clciking this link,
@@ -189,7 +189,7 @@
               </div>
             </div>
             <div class="carousel-item">
-              <div class="x">
+              <div class="banner">
                 <h1 class="text-ellipsis">Sự kiện Open talk Blockchain</h1>
                 <p>Section partners with university students in Computer Science related fields of study to research and write about topics that are relevant to engineers in the modern technology landscape. You can find more information and program guidelines
                   in the GitHub repository. If you're currently enrolled in a Computer Science related field of study and are interested in participating in the program, please complete the registration form by clciking this link,
@@ -202,43 +202,43 @@
       </div>
     </div>
     <div class="row menu-feature mt-4">
-      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-mb-20">
-        <a href="#" class="card-feature">
+      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="#" class="card-feature m-mb-20">
           <i class="fas fa-university fa-fw"></i>FPT University
         </a>
       </div>
-      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-mb-20">
-        <a href="#" class="card-feature">
+      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="#" class="card-feature m-mb-20">
           <i class="fas fa-code fa-fw"></i>Học tập
         </a>
       </div>
-      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-mb-20">
-        <a href="#" class="card-feature">
+      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="#" class="card-feature m-mb-20">
           <i class="fas fa-user-check fa-fw"></i>Công việc
         </a>
       </div>
-      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-mb-20">
-        <a href="#" class="card-feature">
+      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="#" class="card-feature m-mb-20">
           <i class="fas fa-cart-plus fa-fw"></i>Mua sắm
         </a>
       </div>
-      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-mb-20">
-        <a href="#" class="card-feature">
+      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="#" class="card-feature m-mb-20">
           <i class="fas fa-pizza-slice fa-fw"></i>Ăn - Uống
         </a>
       </div>
-      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-mb-20">
-        <a href="#" class="card-feature">
+      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="#" class="card-feature m-mb-20">
           <i class="fab fa-xbox fa-fw"></i>Vui chơi - Giải trí
         </a>
       </div>
-      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-mb-20">
-        <a th:href="@{/traffic}" class="card-feature">
+      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a th:href="@{/traffic}" class="card-feature m-mb-20">
           <i class="fas fa-bus-alt fa-fw"></i>Giao thông
         </a>
       </div>
-      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3 m-mb-20">
-        <a href="#" class="card-feature">
+      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="#" class="card-feature m-mb-20">
           <i class="fas fa-bars fa-fw"></i>Khác
         </a>
       </div>

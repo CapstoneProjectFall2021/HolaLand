@@ -17,8 +17,16 @@ const changeThemeToLight = () => {
   checkbox.checked = false;
 }
 
+if (theme === null) {
+  theme = 'dark';
+}
+
 if (theme === 'dark') {
   changeThemeToDark();
+}
+
+if (theme === 'light') {
+  changeThemeToLight();
 }
 
 checkbox.addEventListener('change', () => {
@@ -30,8 +38,16 @@ checkbox.addEventListener('change', () => {
   }
 });
 
-var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-  var tooltip = new bootstrap.Tooltip(tooltipTriggerEl);
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+  const tooltip = new bootstrap.Tooltip(tooltipTriggerEl);
   tooltip.show();
 })
+
+window.onscroll = function() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    document.getElementById("navbar").className = "navbar navbar-expand-lg fixed-top dark";
+  } else {
+    document.getElementById("navbar").className = "navbar navbar-expand-lg fixed-top";
+  }
+};
