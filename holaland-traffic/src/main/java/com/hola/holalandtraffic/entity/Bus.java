@@ -16,6 +16,7 @@ public class Bus {
     private String tfBusStartTime;
     private String tfBusEndTime;
     private String tfBusInfo;
+    private boolean tfBusDeleted;
     private List<String> tfBusStops;
     private int tfBusPrice;
     private int tfBusStatus;
