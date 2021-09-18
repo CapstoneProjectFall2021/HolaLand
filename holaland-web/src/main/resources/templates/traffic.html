@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hola Land</title>
+
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" th:href="@{/css/all.css}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.css}"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/hola-land/main.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/common.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/grid.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/traffic.css}"/>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand mr-auto" th:href="@{/}">Hola Land</a>
+
+      <div class="navbar-btn-group">
+        <ul class="m-0 p-0">
+          <li class="navbar-search">
+            <form class="input-group">
+              <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="search">
+              <button class="btn-search" type="submit" id="search"><i class="bi bi-search"></i></button>
+            </form>
+          </li>
+          <li class="navbar-btn dropdown">
+            <a class="dropdown-toggle" href="javascript:void(0)" id="language" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="far fa-bell m-0 fa-fw"></i>
+            </a>
+            <span class="notification-dot">8</span>
+            <ul class="dropdown-menu notification-dropdown" aria-labelledby="language">
+              <li class="dropdown-item">
+                <a href="">
+                  <div class="media">
+                      <span class="me-3">
+                        <img class="media-object" src="../images/system/v.png" alt="" width="50">
+                      </span>
+                    <div class="media-body">
+                      <h6 class="media-heading">John Smith</h6>
+                      <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
+                      <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="dropdown-item notification-preview">
+                <a href="">
+                  <div class="media">
+                      <span class="me-3">
+                        <img class="media-object" src="../images/system/v.png" alt="" width="50">
+                      </span>
+                    <div class="media-body">
+                      <h6 class="media-heading">John Smith</h6>
+                      <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
+                      <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="dropdown-item notification-preview">
+                <a href="">
+                  <div class="media">
+                      <span class="me-3">
+                        <img class="media-object" src="../images/system/v.png" alt="" width="50">
+                      </span>
+                    <div class="media-body">
+                      <h6 class="media-heading">John Smith</h6>
+                      <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
+                      <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="dropdown-item btn-link">
+                <a href="" class="text-end">
+                  Xem tất cả
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="navbar-btn dropdown pointer-events-none">
+            <a class="dropdown-toggle" href="javascript:void(0)" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <!-- <i class="fas fa-caret-down m-0 fa-fw"></i> -->
+              <i class="far fa-user m-0 fa-fw"></i>
+            </a>
+            <ul class="dropdown-menu navbar-dropdown" aria-labelledby="userDropdown">
+              <div class="username">
+                <div>
+                  <i class="far fa-user fa-fw"></i>
+                </div>
+                <div>
+                  <span>Đinh Tuấn Anh</span>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#"><i class="far fa-eye fa-fw"></i>Trang cá nhân</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Đóng góp ý kiến</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#"><i class="far fa-question-circle fa-fw"></i>Trợ giúp & hỗ trợ</a>
+              <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-fw"></i>Đăng xuất</a>
+            </ul>
+          </li>
+          <li class="navbar-btn dropdown pointer-events-none">
+            <a class="dropdown-toggle" href="javascript:void(0)" id="funtionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-caret-down m-0 fa-fw"></i>
+            </a>
+            <ul class="dropdown-menu navbar-dropdown" aria-labelledby="funtionDropdown">
+              <a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt fa-fw"></i>Đăng nhập</a>
+              <a class="dropdown-item" href="#"><i class="far fa-edit fa-fw"></i>Đăng ký tài khoản</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Liên hệ & hỗ trợ</a>
+            </ul>
+          </li>
+          <li class="navbar-btn btn-sidebar-menu">
+            <button id="btn-open-sidebar" class="navbar-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <!-- Start: Sidebar -->
+      <div id="sidebar" class="sidebar">
+        <ul class="nav navbar-nav menu">
+          <li>
+            <div class="switch-theme">
+              <div>
+                <span class="label-theme"><i class="fas fa-moon fa-fw"></i>Chế độ tối</span>
+              </div>
+              <div class="btn-switch-theme">
+                <!-- <input class="form-check-input" type="checkbox" id="switch" /> -->
+                <input class="switch-button" type="checkbox" id="switch" />
+                <label for="switch"></label>
+              </div>
+            </div>
+          </li>
+          <li><a href="#"><i class="fas fa-university fa-fw"></i>FPT University</a></li>
+          <li><a href="#"><i class="fas fa-graduation-cap fa-fw"></i>Học tập</a></li>
+          <li><a href="#"><i class="fas fa-user-check fa-fw"></i>Công việc</a></li>
+          <li><a href="#"><i class="fas fa-cart-plus fa-fw"></i>Mua sắm</a></li>
+          <li><a href="#"><i class="fas fa-pizza-slice fa-fw"></i>Dịch vụ Ăn - Uống</a></li>
+          <li><a href="#"><i class="fab fa-xbox fa-fw"></i>Vui chơi - Giải trí</a></li>
+          <li><a href="#"><i class="fas fa-bus-alt fa-fw"></i>Giao thông</a></li>
+          <li><a href="#"><i class="fas fa-bars fa-fw"></i>Khác</a></li>
+        </ul>
+      </div>
+      <!-- End: Sidebar -->
+    </div>
+  </nav>
+
+  <div style="overflow: hidden;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3 col-left">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="title fix-pd fix-mb-title">Menu</h1>
+            </div>
+          </div>
+          <ul class="nav navbar-nav menu">
+            <li><a th:href="@{/traffic}"><i class="fas fa-bus-alt fa-fw"></i>Danh sách xe bus</a></li>
+            <li><a th:href="@{/traffic/motorbike-taxi-drivers(page=2)}"><i class="fas fa-motorcycle fa-fw"></i>Danh sách xe ôm</a></li>
+            <li><a th:href="@{/}"><i class="fas fa-chevron-left fa-fw"></i>Quay lại</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right" th:if="${page == 1}">
+          <!-- Bus list -->
+          <div class="row">
+            <div class="col-12">
+              <h1 class="title fix-mb-title">Danh sách xe bus</h1>
+            </div>
+          </div>
+          <div class="row list-bus">
+            <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-4" th:each="bus : ${busList}">
+              <a class="label-info m-mb-20" th:href="@{/traffic/bus-detail(id=*{bus.tfBusId}, page=1)}">
+                <div class="flex">
+                  <div class="icon">
+                    <i class="fas fa-bus-alt"></i>
+                  </div>
+                  <div class="number">
+                    <h4 th:text="*{bus.tfBusName}"></h4>
+                  </div>
+                </div>
+                <div class="description">
+                  Giá vé: <span th:text="${#numbers.formatInteger(bus.tfBusPrice, 3, 'POINT')}"></span><sup>đ</sup>
+                </div>
+              </a>
+            </div>
+          </div>
+          <!-- Bus info detail -->
+          <div class="row" th:if="${bus != null}">
+            <div class="col-12">
+              <h1 class="title fix-mt-title">Thông tin xe <span class="bus-name" th:text="${bus.tfBusName}"></span></h1>
+            </div>
+          </div>
+          <div class="row" th:if="${bus != null}">
+            <div class="col-md-12 col-lg-6 col-xl-7 col-xxl-8">
+              <h2 class="sub-title">Lộ trình</h2>
+              <div class="panel direction">
+                <ul class="timeline">
+                  <li class="timeline-item" th:each="stop : ${bus.tfBusStops}">
+                    <div class="timeline-content">
+                      <span th:text="*{stop}"></span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-12 col-lg-6 col-xl-5 col-xxl-4">
+              <h2 class="sub-title">Giới thiệu</h2>
+              <div class="panel">
+                <span th:text="${bus.tfBusInfo}"></span>
+              </div>
+
+              <h2 class="sub-title">Lịch trình</h2>
+              <div class="panel">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th scope="col">Thứ</th>
+                    <th scope="col" class="text-end">Giờ hoạt động</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>Thứ hai</td>
+                    <td class="text-end">
+                      <span th:text="${bus.tfBusStartTime}"></span> -
+                      <span th:text="${bus.tfBusEndTime}"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Thú ba</td>
+                    <td class="text-end">
+                      <span th:text="${bus.tfBusStartTime}"></span> -
+                      <span th:text="${bus.tfBusEndTime}"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Thứ tư</td>
+                    <td class="text-end">
+                      <span th:text="${bus.tfBusStartTime}"></span> -
+                      <span th:text="${bus.tfBusEndTime}"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Thứ năm</td>
+                    <td class="text-end">
+                      <span th:text="${bus.tfBusStartTime}"></span> -
+                      <span th:text="${bus.tfBusEndTime}"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Thứ sáu</td>
+                    <td class="text-end">
+                      <span th:text="${bus.tfBusStartTime}"></span> -
+                      <span th:text="${bus.tfBusEndTime}"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Thứ bảy</td>
+                    <td class="text-end">
+                      <span th:text="${bus.tfBusStartTime}"></span> -
+                      <span th:text="${bus.tfBusEndTime}"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Chủ nhật</td>
+                    <td class="text-end">
+                      <span th:text="${bus.tfBusStartTime}"></span> -
+                      <span th:text="${bus.tfBusEndTime}"></span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right" th:if="${page == 2}">
+          <!-- Bus list -->
+          <div class="row">
+            <div class="col-12">
+              <h1 class="title fix-mb-title">Danh sách xe ôm</h1>
+            </div>
+          </div>
+          <div class="row list-motorbike-taxi-drivers">
+            <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-4" th:each="motorbikeTaxiDrivers : ${motorbikeTaxiDriversList}">
+              <a href="javascript:void(0)" class="label-info m-mb-20">
+                <div class="flex">
+                  <div class="icon">
+                    <img class="media-object" src="../images/system/v.png" alt="" width="80">
+                  </div>
+                  <div class="name">
+                    <h4 th:text="*{motorbikeTaxiDrivers.tfMotorbikeTaxiDriversName}"></h4>
+                  </div>
+                </div>
+                <div class="description">
+                  <div class="row-info">
+                    <div><i class="fas fa-phone-alt fa-fw"></i>Số điện thoại</div>
+                    <div><span th:text="*{motorbikeTaxiDrivers.tfMotorbikeTaxiDriversPhone}"></span></div>
+                  </div>
+                  <div class="row-info">
+                    <div><i class="fas fa-motorcycle fa-fw"></i>Loại xe</div>
+                    <div><span th:text="*{motorbikeTaxiDrivers.tfMotorbikeTaxiDriversVehicleType}"></span></div>
+                  </div>
+                  <div class="row-info">
+                    <div><i class="far fa-list-alt fa-fw"></i>Biển số xe</div>
+                    <div><span th:text="*{motorbikeTaxiDrivers.tfMotorbikeTaxiDriversLicensePlates}"></span></div>
+                  </div>
+                  <div class="row-info">
+                    <div><i class="far fa-clock fa-fw"></i>Giờ làm việc</div>
+                    <div>6:00 - 20:00</div>
+                  </div>
+                  <div class="row-info">
+                    <div><i class="fas fa-check fa-fw"></i>Trạng thái</div>
+                    <div class="online">Đang hoạt động</div>
+                  </div>
+<!--                  <div class="row-info">-->
+<!--                    <div><i class="fas fa-times fa-fw"></i>Trạng thái</div>-->
+<!--                    <div>Ngừng hoạt động</div>-->
+<!--                  </div>-->
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script crossorigin="anonymous" th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
+  <script crossorigin="anonymous" th:src="@{/js/hola-land/hola-land.js}"></script>
+</body>
+
+</html>

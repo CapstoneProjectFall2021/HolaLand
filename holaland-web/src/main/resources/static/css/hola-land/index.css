@@ -1,0 +1,81 @@
+@charset "utf-8";
+.fix-mt-index {
+  margin-top: 150px;
+}
+
+.carousel-inner {
+  border-radius: var(--primary-border-radius);
+  border: 1px solid var(--primary-border-color);
+}
+
+.carousel-inner .banner {
+  padding: 25px;
+  border-radius: var(--primary-border-radius);
+  background-color: var(--primary-background);
+}
+
+.carousel-inner .banner h1 {
+  margin: 0;
+  font-weight: var(--font-weight-4);
+}
+
+.carousel-inner .banner p {
+  grid-area: content;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+
+/* Menu feature ======================================================================================================*/
+
+.menu-feature a.card-feature {
+  width: 100%;
+  border-radius: var(--primary-border-radius);
+  background-color: var(--primary-button-background);
+  border: 1px solid var(--primary-border-color);
+  color: var(--primary-text);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  justify-content: start;
+  transition: 0.4s;
+}
+
+.menu-feature a.card-feature:hover {
+  transform: scale(1.02, 1.05);
+}
+
+.menu-feature a.card-feature i {
+  width: 75px;
+  height: 75px;
+  font-size: 30px;
+  background-color: var(--secondary-button-background);
+  border-radius: 50px;
+  margin-right: 20px;
+  transition: 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+
+/* Util ==============================================================================================================*/
+
+.m-mb-20 {
+  margin-bottom: 20px;
+}
+
+
+/* Responsive ========================================================================================================*/
+
+@media (max-width: 575.98px) {
+  .fix-mt-index {
+    margin-top: 30px;
+  }
+  /*-------- Util --------*/
+  .m-mb-20 {
+    margin-bottom: 15px;
+  }
+}

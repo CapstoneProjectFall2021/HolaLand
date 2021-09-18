@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MemberMapper implements RowMapper<Member> {
-    // fix loi mapper member
+
     @Override
     public Member mapRow(ResultSet resultSet, int i) throws SQLException {
 
