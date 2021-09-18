@@ -1,4 +1,7 @@
 @charset "utf-8";
+
+/**/
+
 .dark {
   background-color: var(--primary-background) !important;
   box-shadow: 0px 1px 5px 0px rgb(0 0 0 / 50%);
@@ -38,6 +41,7 @@
 .online {
   color: var(--main-text);
 }
+
 
 /* Navbar ============================================================================================================*/
 
@@ -526,7 +530,7 @@
 
 /* Left sidebar ======================================================================================================*/
 
-.col-left>ul>li a {
+.col-left>ul.sub-menu>li a {
   font-weight: 400;
   font-size: 18px;
   padding: 10px;
@@ -538,9 +542,10 @@
   display: flex;
   align-items: center;
   transition: 0.3s;
+  margin-bottom: 4px;
 }
 
-.col-left>ul>li a i {
+.col-left>ul.sub-menu>li a i {
   width: 45px;
   height: 45px;
   background-color: var(--secondary-button-background);
@@ -553,13 +558,23 @@
   position: relative;
 }
 
-.col-left>ul>li a:hover {
+.col-left>ul.sub-menu>li a:hover {
   /* color: #f1b200; */
   background-color: var(--link-secondary-button-background);
   border-radius: var(--secondary-border-radius);
 }
 
-.col-left>ul>li a:hover i {
+.col-left>ul.sub-menu>li a:hover i {
+  background-color: var(--icon-button-background);
+}
+
+.col-left>ul.sub-menu>li a.active {
+  /* color: #f1b200; */
+  background-color: var(--link-secondary-button-background);
+  border-radius: var(--secondary-border-radius);
+}
+
+.col-left>ul.sub-menu>li a.active i {
   background-color: var(--icon-button-background);
 }
 

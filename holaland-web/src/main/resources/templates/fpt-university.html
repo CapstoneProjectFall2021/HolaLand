@@ -17,7 +17,7 @@
   <link rel="stylesheet" th:href="@{/css/hola-land/main.css}"/>
   <link rel="stylesheet" th:href="@{/css/hola-land/common.css}"/>
   <link rel="stylesheet" th:href="@{/css/hola-land/grid.css}"/>
-  <link rel="stylesheet" th:href="@{/css/hola-land/traffic.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/fpt-university.css}"/>
 </head>
 
 <body>
@@ -35,13 +35,23 @@
           </div>
           <ul class="nav navbar-nav sub-menu">
             <li>
-              <a th:href="@{/traffic}" th:classappend="${page == 1 ? 'active' : ''}">
-                <i class="fas fa-bus-alt fa-fw"></i>Danh sách xe bus
+              <a th:href="@{/fpt-university}" th:classappend="${page == 1 ? 'active' : ''}">
+                <i class="fas fa-map-marked-alt fa-fw"></i>Campus Hoà Lạc
               </a>
             </li>
             <li>
-              <a th:href="@{/traffic/motorbike-taxi-drivers(page=2)}" th:classappend="${page == 2 ? 'active' : ''}">
-                <i class="fas fa-motorcycle fa-fw"></i>Danh sách xe ôm
+              <a th:href="@{/fpt-university}" th:classappend="${page == 2 ? 'active' : ''}">
+                <i class="fas fa-users fa-fw"></i>Câu lạc bộ
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/fpt-university}" th:classappend="${page == 3 ? 'active' : ''}">
+                <i class="fas fa-headset fa-fw"></i>Phòng ban
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/fpt-university}" th:classappend="${page == 4 ? 'active' : ''}">
+                <i class="far fa-address-book fa-fw"></i>Giảng viên
               </a>
             </li>
             <li>
@@ -51,13 +61,12 @@
             </li>
           </ul>
         </div>
-        <!-- Bus list -->
+        <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right"></div>
+        <!-- 1 -->
         <th:block th:if="${page == 1}">
-          <div th:replace="traffic/bus-list :: bus"></div>
         </th:block>
-        <!-- Motorbike taxi drivers list -->
+        <!-- 2 -->
         <th:block th:if="${page == 2}">
-          <div th:replace="traffic/motorbike-taxi-drivers-list :: motorbikeTaxiDrivers"></div>
         </th:block>
       </div>
     </div>

@@ -12,6 +12,11 @@
   transition: 0.4s;
 }
 
+.list-bus .label-info.active {
+  background-color: var(--link-secondary-button-background);
+  border-radius: var(--secondary-border-radius);
+}
+
 .list-bus .label-info:hover {
   transform: scale(1.02, 1.05);
   background-color: var(--label-button-background);
