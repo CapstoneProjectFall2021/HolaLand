@@ -1,7 +1,7 @@
 package com.hola.holalandtraffic.repository;
 
 public interface IRepositoryQuery {
-
+//
     String MEMBER_GET_ALL = "SELECT * FROM member";
     String MEMBER_GET_ONE = "SELECT * FROM member WHERE member_id = ?";
     String MEMBER_ADD_ONE = "INSERT INTO member (member_name, member_gender, member_dob, member_mobile, member_email, member_rank_id, member_status_id)\n" +
