@@ -1,0 +1,50 @@
+<div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right" th:fragment="motorbikeTaxiDrivers">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="title fix-mb-title">Danh sách xe ôm</h1>
+    </div>
+  </div>
+  <div class="row list-motorbike-taxi-drivers">
+    <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-4" th:each="motorbikeTaxiDrivers : ${motorbikeTaxiDriversList}">
+      <a href="javascript:void(0)" class="label-info m-mb-20">
+        <div class="flex">
+          <div class="icon">
+            <img class="media-object" src="../images/system/v.png" alt="" width="80">
+          </div>
+          <div class="name">
+            <h4 th:text="*{motorbikeTaxiDrivers.tfMotorbikeTaxiDriversName}"></h4>
+          </div>
+        </div>
+        <div class="description">
+          <div class="row-info">
+            <div><i class="fas fa-phone-alt fa-fw"></i>Số điện thoại</div>
+            <div><span th:text="*{motorbikeTaxiDrivers.tfMotorbikeTaxiDriversPhone}"></span></div>
+          </div>
+          <div class="row-info">
+            <div><i class="fas fa-motorcycle fa-fw"></i>Loại xe</div>
+            <div><span th:text="*{motorbikeTaxiDrivers.tfMotorbikeTaxiDriversVehicleType}"></span></div>
+          </div>
+          <div class="row-info">
+            <div><i class="far fa-list-alt fa-fw"></i>Biển số xe</div>
+            <div><span th:text="*{motorbikeTaxiDrivers.tfMotorbikeTaxiDriversLicensePlates}"></span></div>
+          </div>
+          <div class="row-info">
+            <div><i class="far fa-clock fa-fw"></i>Giờ làm việc</div>
+            <div>
+              <span th:text="${motorbikeTaxiDrivers.tfMotorbikeTaxiDriversStartTime}"></span> -
+              <span th:text="${motorbikeTaxiDrivers.tfMotorbikeTaxiDriversEndTime}"></span>
+            </div>
+          </div>
+          <div class="row-info">
+            <div><i class="fas fa-check fa-fw"></i>Trạng thái</div>
+            <div class="online">Đang hoạt động</div>
+          </div>
+<!--          <div class="row-info">-->
+<!--            <div><i class="fas fa-times fa-fw"></i>Trạng thái</div>-->
+<!--            <div>Ngừng hoạt động</div>-->
+<!--          </div>-->
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hola Land</title>
+
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" th:href="@{/css/all.css}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.css}"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/hola-land/main.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/common.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/grid.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/fpt-university.css}"/>
+</head>
+
+<body>
+  <div th:replace="~{common/navbar :: navbar}"></div>
+
+  <div style="overflow: hidden;">
+    <div class="container">
+      <div class="row">
+        <!-- Sub menu -->
+        <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3 col-left">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="title fix-pd fix-mb-title">Menu</h1>
+            </div>
+          </div>
+          <ul class="nav navbar-nav sub-menu">
+            <li>
+              <a th:href="@{/fpt-university}" th:classappend="${page == 1 ? 'active' : ''}">
+                <i class="fas fa-map-marked-alt fa-fw"></i>Campus Hoà Lạc
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/fpt-university}" th:classappend="${page == 2 ? 'active' : ''}">
+                <i class="fas fa-users fa-fw"></i>Câu lạc bộ
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/fpt-university}" th:classappend="${page == 3 ? 'active' : ''}">
+                <i class="fas fa-headset fa-fw"></i>Phòng ban
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/fpt-university}" th:classappend="${page == 4 ? 'active' : ''}">
+                <i class="far fa-address-book fa-fw"></i>Giảng viên
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/}">
+                <i class="fas fa-chevron-left fa-fw"></i>Quay lại
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right"></div>
+        <!-- 1 -->
+        <th:block th:if="${page == 1}">
+        </th:block>
+        <!-- 2 -->
+        <th:block th:if="${page == 2}">
+        </th:block>
+      </div>
+    </div>
+  </div>
+
+  <th:block th:replace="~{common/script :: script/script}"></th:block>
+</body>
+
+</html>

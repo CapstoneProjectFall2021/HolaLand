@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
   <title>Member</title>
 </head>
 <body>
@@ -15,8 +15,7 @@
     <div class="row">
       <div class="col-12 mb-3 header">
         <h3 class="bg-dark-ui border-ui">
-          <p>test html</p>
-          <i class="fas fa-users fa-fw text-primary me-2 mt-5"></i>Danh sách thành viên <span th:text="${hello}"></span>
+          <i class="fas fa-users fa-fw text-primary me-2 mt-5"></i>Danh sách thành viên <span style="color: red" th:text="${send}"></span>
         </h3>
       </div>
     </div>
@@ -45,7 +44,7 @@
               <td class="text-center" th:text="*{member.memberEmail}"></td>
               <td class="text-center">
                 <a class="text-success action me-2" data-bs-placement="top"
-                   data-bs-toggle="tooltip" th:href="@{/member-detail(id=*{member.memberId})}" title="Chỉnh sửa">
+                   data-bs-toggle="tooltip" th:href="@{/send-email(id=*{member.memberId})}" title="Chỉnh sửa">
                   <i class="fas fa-pencil-alt fa-fw"></i>
                 </a>
                 <a class="text-danger action" data-bs-placement="top"
@@ -62,6 +61,91 @@
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-12 mb-3">
+        <div class="datatable bg-dark-ui border-ui" th:if="${listBus.size() != 0}">
+          <table cellspacing="0" class="table" id="listBus" width="100%">
+            <thead>
+            <tr>
+              <th class="text-center" scope="col">STT</th>
+              <th class="text-center" scope="col">Name</th>
+              <th class="text-center" scope="col">Giờ khởi hành</th>
+              <th class="text-center" scope="col">Giờ nghỉ</th>
+              <th class="text-center" scope="col">Thông tin tuyến</th>
+              <th class="text-center" scope="col">Giá</th>
+              <th class="text-center" scope="col">Điểm dừng</th>
+              <th class="text-center" scope="col">Trạng thái</th>
+              <th class="text-center" scope="col">Xóa</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="bus, index : ${listBus}">
+              <td class="text-center" th:text="*{index.count}"></td>
+              <td class="text-center" th:text="*{bus.tfBusName}"></td>
+              <td class="text-center" th:text="*{bus.tfBusStartTime}"></td>
+              <td class="text-center" th:text="*{bus.tfBusEndTime}"></td>
+              <td class="text-center" th:text="*{bus.tfBusInfo}"></td>
+              <td class="text-center" th:text="*{bus.tfBusPrice}"></td>
+              <td class="text-left">
+                <div th:each="stop : ${bus.tfBusStops}">
+                  <span th:text="*{stop}"></span>
+                </div>
+              </td>
+              <td class="text-center" th:text="*{bus.tfBusStatus}"></td>
+              <td class="text-center" th:text="*{bus.tfBusDeleted} ? 'Đã xóa' : 'Chưa xóa'"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div th:if="${listBus.size() == 0}">
+          <h5 class="alert-info bg-dark-ui border-ui">Không có bus nào!</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 mb-3">
+        <div class="datatable bg-dark-ui border-ui" th:if="${listMotorbikeTaxiDriversService.size() != 0}">
+          <table cellspacing="0" class="table" id="listMotorbikeTaxiDriversService" width="100%">
+            <thead>
+            <tr>
+              <th class="text-center" scope="col">STT</th>
+              <th class="text-center" scope="col">Name</th>
+              <th class="text-center" scope="col">SDT</th>
+              <th class="text-center" scope="col">Ảnh</th>
+              <th class="text-center" scope="col">Biển số xe</th>
+              <th class="text-center" scope="col">Loại xe</th>
+              <th class="text-center" scope="col">Giờ bắt đầu làm</th>
+              <th class="text-center" scope="col">Giờ nghỉ</th>
+              <th class="text-center" scope="col">Đánh giá</th>
+              <th class="text-center" scope="col">Trạng thái</th>
+              <th class="text-center" scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="m, index : ${listMotorbikeTaxiDriversService}">
+              <td class="text-center" th:text="*{index.count}"></td>
+              <td class="text-center" th:text="*{m.tfMotorbikeTaxiDriversName}"></td>
+              <td class="text-center" th:text="*{m.tfMotorbikeTaxiDriversPhone}"></td>
+              <td class="text-center" th:text="*{m.tfMotorbikeTaxiDriversImage}"></td>
+              <td class="text-center" th:text="*{m.tfMotorbikeTaxiDriversLicensePlates}"></td>
+              <td class="text-center" th:text="*{m.tfMotorbikeTaxiDriversVehicleType}"></td>
+              <td class="text-center" th:text="*{m.tfMotorbikeTaxiDriversStartTime}"></td>
+              <td class="text-center" th:text="*{m.tfMotorbikeTaxiDriversEndTime}"></td>
+              <td class="text-center" th:text="*{m.tfMotorbikeTaxiDriversRating}"></td>
+              <td class="text-center" th:text="*{m.tfMotorbikeTaxiDriversStatus}"></td>
+              <td class="text-center" th:text="*{m.tfMotorbikeTaxiDriversDeleted}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div th:if="${listMotorbikeTaxiDriversService.size() == 0}">
+          <h5 class="alert-info bg-dark-ui border-ui">Không có xe ôm!</h5>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 

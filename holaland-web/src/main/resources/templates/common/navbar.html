@@ -1,0 +1,145 @@
+<nav class="navbar navbar-expand-lg fixed-top" id="navbar" th:fragment="navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand mr-auto" th:href="@{/}">Hola Land</a>
+
+    <div class="navbar-btn-group">
+      <ul class="m-0 p-0">
+        <li class="navbar-search">
+          <form class="input-group">
+            <input aria-describedby="search" aria-label="Search..." class="form-control" placeholder="Search..."
+                   type="text">
+            <button class="btn-search" id="search" type="submit"><i class="bi bi-search"></i></button>
+          </form>
+        </li>
+        <li class="navbar-btn dropdown">
+          <a aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0)" id="language"
+             role="button">
+            <i class="far fa-bell m-0 fa-fw"></i>
+          </a>
+          <span class="notification-dot">8</span>
+          <!-- Start: Notification dropdown -->
+          <ul aria-labelledby="language" class="dropdown-menu notification-dropdown">
+            <li class="dropdown-item">
+              <a href="">
+                <div class="media">
+                  <span class="me-3">
+                    <img alt="" class="media-object" src="../images/system/v.png" width="50">
+                  </span>
+                  <div class="media-body">
+                    <h6 class="media-heading">John Smith</h6>
+                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
+                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li class="dropdown-item notification-preview">
+              <a href="">
+                <div class="media">
+                  <span class="me-3">
+                    <img alt="" class="media-object" src="../images/system/v.png" width="50">
+                  </span>
+                  <div class="media-body">
+                    <h6 class="media-heading">John Smith</h6>
+                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
+                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li class="dropdown-item notification-preview">
+              <a href="">
+                <div class="media">
+                  <span class="me-3">
+                    <img alt="" class="media-object" src="../images/system/v.png" width="50">
+                  </span>
+                  <div class="media-body">
+                    <h6 class="media-heading">John Smith</h6>
+                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
+                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li class="dropdown-item btn-link">
+              <a class="text-end" href="">
+                Xem tất cả
+              </a>
+            </li>
+          </ul>
+          <!-- Start: Notification dropdown -->
+        </li>
+        <li class="navbar-btn dropdown pointer-events-none">
+          <a aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0)" id="userDropdown"
+             role="button">
+            <!-- <i class="fas fa-caret-down m-0 fa-fw"></i> -->
+            <i class="far fa-user m-0 fa-fw"></i>
+          </a>
+          <ul aria-labelledby="userDropdown" class="dropdown-menu navbar-dropdown">
+            <div class="username">
+              <div>
+                <i class="far fa-user fa-fw"></i>
+              </div>
+              <div>
+                <span>Đinh Tuấn Anh</span>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#"><i class="far fa-eye fa-fw"></i>Trang cá nhân</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Đóng góp ý kiến</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#"><i class="far fa-question-circle fa-fw"></i>Trợ giúp & hỗ trợ</a>
+            <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-fw"></i>Đăng xuất</a>
+          </ul>
+        </li>
+        <li class="navbar-btn dropdown pointer-events-none">
+          <a aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0)"
+             id="funtionDropdown" role="button">
+            <i class="fas fa-caret-down m-0 fa-fw"></i>
+          </a>
+          <ul aria-labelledby="funtionDropdown" class="dropdown-menu navbar-dropdown">
+            <a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt fa-fw"></i>Đăng nhập</a>
+            <a class="dropdown-item" href="#"><i class="far fa-edit fa-fw"></i>Đăng ký tài khoản</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Liên hệ & hỗ trợ</a>
+          </ul>
+        </li>
+        <li class="navbar-btn btn-sidebar-menu">
+          <button aria-controls="sidebar" aria-expanded="false" class="navbar-toggle collapsed"
+                  data-bs-target="#sidebar" data-bs-toggle="collapse" id="btn-open-sidebar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <!-- Start: Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <ul class="nav navbar-nav menu">
+        <li>
+          <div class="switch-theme">
+            <div>
+              <span class="label-theme"><i class="fas fa-moon fa-fw"></i>Chế độ tối</span>
+            </div>
+            <div class="btn-switch-theme">
+              <!-- <input class="form-check-input" type="checkbox" id="switch" /> -->
+              <input class="switch-button" id="switch" type="checkbox"/>
+              <label for="switch"></label>
+            </div>
+          </div>
+        </li>
+        <li><a href="#"><i class="fas fa-university fa-fw"></i>FPT University</a></li>
+        <li><a href="#"><i class="fas fa-graduation-cap fa-fw"></i>Học tập</a></li>
+        <li><a href="#"><i class="fas fa-user-check fa-fw"></i>Công việc</a></li>
+        <li><a href="#"><i class="fas fa-cart-plus fa-fw"></i>Mua sắm</a></li>
+        <li><a href="#"><i class="fas fa-pizza-slice fa-fw"></i>Dịch vụ Ăn - Uống</a></li>
+        <li><a href="#"><i class="fab fa-xbox fa-fw"></i>Vui chơi - Giải trí</a></li>
+        <li><a href="#"><i class="fas fa-bus-alt fa-fw"></i>Giao thông</a></li>
+        <li><a href="#"><i class="fas fa-bars fa-fw"></i>Khác</a></li>
+      </ul>
+    </div>
+    <!-- End: Sidebar -->
+  </div>
+</nav>
