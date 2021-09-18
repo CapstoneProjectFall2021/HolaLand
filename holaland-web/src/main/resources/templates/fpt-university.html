@@ -40,17 +40,17 @@
               </a>
             </li>
             <li>
-              <a th:href="@{/fpt-university}" th:classappend="${page == 2 ? 'active' : ''}">
+              <a th:href="@{/fpt-university-club}" th:classappend="${page == 2 ? 'active' : ''}">
                 <i class="fas fa-users fa-fw"></i>Câu lạc bộ
               </a>
             </li>
             <li>
-              <a th:href="@{/fpt-university}" th:classappend="${page == 3 ? 'active' : ''}">
+              <a th:href="@{/fpt-university-department}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-headset fa-fw"></i>Phòng ban
               </a>
             </li>
             <li>
-              <a th:href="@{/fpt-university}" th:classappend="${page == 4 ? 'active' : ''}">
+              <a th:href="@{/fpt-university-lecturers}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="far fa-address-book fa-fw"></i>Giảng viên
               </a>
             </li>
@@ -61,12 +61,45 @@
             </li>
           </ul>
         </div>
-        <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right"></div>
         <!-- 1 -->
         <th:block th:if="${page == 1}">
+          <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="title fix-mb-title">Campus Hoà Lạc</h1>
+              </div>
+            </div>
+          </div>
         </th:block>
         <!-- 2 -->
         <th:block th:if="${page == 2}">
+          <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="title fix-mb-title">Câu lạc bộ</h1>
+              </div>
+            </div>
+          </div>
+        </th:block>
+        <!-- 3 -->
+        <th:block th:if="${page == 3}">
+          <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="title fix-mb-title">Phòng ban</h1>
+              </div>
+            </div>
+          </div>
+        </th:block>
+        <!-- 4 -->
+        <th:block th:if="${page == 4}">
+          <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="title fix-mb-title">Giảng viên</h1>
+              </div>
+            </div>
+          </div>
         </th:block>
       </div>
     </div>
