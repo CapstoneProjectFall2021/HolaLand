@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 public class Club {
+
     private int fptuClubId;
     private String fptuClubName;
     private String fptuClubDescription;

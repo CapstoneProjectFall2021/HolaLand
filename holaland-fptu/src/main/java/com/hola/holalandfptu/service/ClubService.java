@@ -8,5 +8,6 @@ import java.util.List;
 public interface ClubService {
 
     List<Club> getAllByType(int type) throws DataAccessException;
+
     Club getOne(int id) throws DataAccessException;
 }
