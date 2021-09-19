@@ -13,14 +13,8 @@
 
   <div class="right mb-5">
     <div class="row">
-      <div class="col-12 mb-3 header">
-        <h3 class="bg-dark-ui border-ui">
-          <i class="fas fa-users fa-fw text-primary me-2 mt-5"></i>Danh sách thành viên <span style="color: red" th:text="${send}"></span>
-        </h3>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-12 mb-3">
+        <h3>Danh sách thành viên</h3>
         <div class="datatable bg-dark-ui border-ui" th:if="${members.size() != 0}">
           <table cellspacing="0" class="table" id="members" width="100%">
             <thead>
@@ -64,6 +58,7 @@
 
     <div class="row">
       <div class="col-12 mb-3">
+        <h3>Danh sách xe bus</h3>
         <div class="datatable bg-dark-ui border-ui" th:if="${listBus.size() != 0}">
           <table cellspacing="0" class="table" id="listBus" width="100%">
             <thead>
@@ -87,11 +82,7 @@
               <td class="text-center" th:text="*{bus.tfBusEndTime}"></td>
               <td class="text-center" th:text="*{bus.tfBusInfo}"></td>
               <td class="text-center" th:text="*{bus.tfBusPrice}"></td>
-              <td class="text-left">
-                <div th:each="stop : ${bus.tfBusStops}">
-                  <span th:text="*{stop}"></span>
-                </div>
-              </td>
+              <td class="text-center">OK</td>
               <td class="text-center" th:text="*{bus.tfBusStatus}"></td>
               <td class="text-center" th:text="*{bus.tfBusDeleted} ? 'Đã xóa' : 'Chưa xóa'"></td>
             </tr>
@@ -106,7 +97,8 @@
 
     <div class="row">
       <div class="col-12 mb-3">
-        <div class="datatable bg-dark-ui border-ui" th:if="${listMotorbikeTaxiDriversService.size() != 0}">
+        <h3>Danh sách xe ôm</h3>
+        <div class="datatable bg-dark-ui border-ui" th:if="${listMotorbikeTaxiDrivers.size() != 0}">
           <table cellspacing="0" class="table" id="listMotorbikeTaxiDriversService" width="100%">
             <thead>
             <tr>
@@ -124,7 +116,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="m, index : ${listMotorbikeTaxiDriversService}">
+            <tr th:each="m, index : ${listMotorbikeTaxiDrivers}">
               <td class="text-center" th:text="*{index.count}"></td>
               <td class="text-center" th:text="*{m.tfMotorbikeTaxiDriversName}"></td>
               <td class="text-center" th:text="*{m.tfMotorbikeTaxiDriversPhone}"></td>
@@ -140,7 +132,7 @@
             </tbody>
           </table>
         </div>
-        <div th:if="${listMotorbikeTaxiDriversService.size() == 0}">
+        <div th:if="${listMotorbikeTaxiDrivers.size() == 0}">
           <h5 class="alert-info bg-dark-ui border-ui">Không có xe ôm!</h5>
         </div>
       </div>

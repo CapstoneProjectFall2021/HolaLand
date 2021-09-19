@@ -45,10 +45,10 @@ public class MemberController {
     public String members(Model model) {
         backToMembers(model);
         List listBus = busService.getAll();
-        List listMotorbikeTaxiDriversService = motorbikeTaxiDriversService.getAll();
+        List listMotorbikeTaxiDrivers= motorbikeTaxiDriversService.getAll();
 
         model.addAttribute("listBus", listBus);
-        model.addAttribute("listMotorbikeTaxiDriversService",listMotorbikeTaxiDriversService);
+        model.addAttribute("listMotorbikeTaxiDrivers",listMotorbikeTaxiDrivers);
         return "members";
     }
 
