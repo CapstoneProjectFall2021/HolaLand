@@ -88,7 +88,7 @@
 }
 
 .timeline-item+.timeline-item {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .timeline-item:before {
@@ -144,7 +144,7 @@
   align-items: center;
   justify-content: space-between;
   color: var(--secondary-text);
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .list-motorbike-taxi-drivers .label-info .description .row-info i.far,
