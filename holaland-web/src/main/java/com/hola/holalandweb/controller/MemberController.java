@@ -1,6 +1,7 @@
 package com.hola.holalandweb.controller;
 
 import com.hola.holalandcore.service.AccountService;
+import com.hola.holalandfptu.service.ClubService;
 import com.hola.holalandtraffic.entity.Member;
 import com.hola.holalandtraffic.service.BusService;
 import com.hola.holalandtraffic.service.MemberService;
@@ -32,13 +33,17 @@ public class MemberController {
 
     private final MotorbikeTaxiDriversService motorbikeTaxiDriversService;
 
+    private final ClubService clubService;
+
     @Autowired
-    public MemberController(MemberService memberService, AccountService accountService, SendEmailService sendEmailService, BusService busService, MotorbikeTaxiDriversService motorbikeTaxiDriversService) {
+    public MemberController(MemberService memberService, AccountService accountService, SendEmailService sendEmailService, BusService busService, MotorbikeTaxiDriversService motorbikeTaxiDriversService,
+                            ClubService clubService) {
         this.memberService = memberService;
         this.accountService = accountService;
         this.sendEmailService = sendEmailService;
         this.busService = busService;
         this.motorbikeTaxiDriversService = motorbikeTaxiDriversService;
+        this.clubService = clubService;
     }
 
     @GetMapping("/members")
@@ -46,9 +51,11 @@ public class MemberController {
         backToMembers(model);
         List listBus = busService.getAll();
         List listMotorbikeTaxiDrivers= motorbikeTaxiDriversService.getAll();
+        List listClub = clubService.getAllByType(1);
 
         model.addAttribute("listBus", listBus);
         model.addAttribute("listMotorbikeTaxiDrivers",listMotorbikeTaxiDrivers);
+        model.addAttribute("listClub",listClub);
         return "members";
     }
 

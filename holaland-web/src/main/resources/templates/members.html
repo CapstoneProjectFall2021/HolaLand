@@ -138,6 +138,51 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-12 mb-3">
+        <h3>Danh sách câu lạc bộ</h3>
+        <div class="datatable bg-dark-ui border-ui" th:if="${listClub.size() != 0}">
+          <table cellspacing="0" class="table" id="listClub" width="100%">
+            <thead>
+            <tr>
+              <th class="text-center" scope="col">STT</th>
+              <th class="text-center" scope="col">Name</th>
+              <th class="text-center" scope="col">Mô tả</th>
+              <th class="text-center" scope="col">Logo</th>
+              <th class="text-center" scope="col">Loại CLB</th>
+              <th class="text-center" scope="col">Fanpage</th>
+              <th class="text-center" scope="col">Số lượng thành viên</th>
+              <th class="text-center" scope="col">Tên người liên lạc</th>
+              <th class="text-center" scope="col">Email người liên lạc</th>
+              <th class="text-center" scope="col">Số điện thoại người liên lạc</th>
+              <th class="text-center" scope="col">Thành tựu</th>
+              <th class="text-center" scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="f, index : ${listClub}">
+              <td class="text-center" th:text="*{index.count}"></td>
+              <td class="text-center" th:text="*{f.fptuClubName}"></td>
+              <td class="text-center" th:text="*{f.fptuClubDescription}"></td>
+              <td class="text-center" th:text="*{f.fptuClubLogo}"></td>
+              <td class="text-center" th:text="*{f.fptuClubType}"></td>
+              <td class="text-center" th:text="*{f.fptuClubFanpage}"></td>
+              <td class="text-center" th:text="*{f.fptuClubMemberQuantity}"></td>
+              <td class="text-center" th:text="*{f.fptuClubContactName}"></td>
+              <td class="text-center" th:text="*{f.fptuClubContactEmail}"></td>
+              <td class="text-center" th:text="*{f.fptuClubContactPhone}"></td>
+              <td class="text-center" th:text="*{f.fptuClubAchievements}"></td>
+              <td class="text-center" th:text="*{f.fptuClubDeleted}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div th:if="${listClub.size() == 0}">
+          <h5 class="alert-info bg-dark-ui border-ui">Không có câu lạc bộ!</h5>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
