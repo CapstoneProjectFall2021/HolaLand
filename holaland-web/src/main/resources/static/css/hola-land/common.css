@@ -610,8 +610,9 @@
 }
 
 .label-info.active {
-  background-color: var(--link-secondary-button-background);
-  border-radius: var(--secondary-border-radius);
+  background-color: var(--label-button-background);
+  border-color: var(--primary-border-color);
+  border-radius: var(--primary-border-radius);
 }
 
 .label-info:hover {
@@ -731,6 +732,12 @@
   background-color: #4267b2 !important;
   border: none !important;
   color: #E4E6EB;
+  display: flex;
+  align-items: center;
+}
+
+.btn-facebook i {
+  font-size: 20px;
 }
 
 .btn-facebook:hover {
