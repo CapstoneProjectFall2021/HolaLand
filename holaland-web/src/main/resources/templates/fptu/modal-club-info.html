@@ -1,0 +1,58 @@
+<!-- Modal -->
+<div class="modal fade club-info" id="clubInfoModal" tabindex="-1" aria-labelledby="clubInfoModalLabel" aria-hidden="true" th:fragment="clubInfoModal">
+  <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="clubInfoModalLabel">
+          <span th:text="${club.fptuClubName}"></span>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 col-lg-6">
+            <h2 class="sub-title-small">WoW!!!</h2>
+            <div class="img">
+              <img class="media-object" src="../images/system/no-image.png" alt="">
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6">
+            <div class="description">
+              <h2 class="sub-title-small">Giới thiệu</h2>
+              <pre class="pre" th:text="${club.fptuClubDescription}"></pre>
+              <h2 class="sub-title-small">Thành tích</h2>
+              <pre class="pre" th:text="${club.fptuClubAchievements}"></pre>
+              <h2 class="sub-title-small">Thông tin liên hệ</h2>
+              <div class="contact">
+                <div class="row-info mt-0">
+                  <div><i class="fas fa-user fa-fw"></i>Người liên hệ</div>
+                  <div>
+                    <pre class="text-end" th:text="${club.fptuClubContactName}"></pre>
+                  </div>
+                </div>
+                <div class="row-info">
+                  <div><i class="fas fa-phone-alt fa-fw"></i>Số điện thoại</div>
+                  <div>
+                    <span th:text="${club.fptuClubContactPhoneNumber}"></span>
+                  </div>
+                </div>
+                <div class="row-info">
+                  <div><i class="far fa-envelope fa-fw"></i>Email</div>
+                  <div>
+                    <span th:text="${club.fptuClubContactEmail}"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-sm btn-facebook me-2" target="_blank" th:href="${club.fptuClubFanpage}">
+          <i class="fab fa-facebook-f"></i><span th:text="${club.fptuClubFanpageName}"></span>
+        </a>
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>

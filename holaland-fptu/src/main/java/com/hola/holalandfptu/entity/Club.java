@@ -13,12 +13,15 @@ public class Club {
     private String fptuClubName;
     private String fptuClubDescription;
     private String fptuClubLogo;
-    private int fptuClubType;
+    private String fptuClubImage;
+    private int fptuClubTypeId;
+    private String fptuClubFanpageName;
     private String fptuClubFanpage;
     private int fptuClubMemberQuantity;
     private String fptuClubContactName;
     private String fptuClubContactEmail;
-    private String fptuClubContactPhone;
+    private String fptuClubContactPhoneNumber;
     private String fptuClubAchievements;
+    private String fptuClubStatus;
     private boolean fptuClubDeleted;
 }

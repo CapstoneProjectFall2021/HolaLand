@@ -1,0 +1,48 @@
+<div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right" th:fragment="club">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="title fix-mb-title">Danh mục câu lạc bộ</h1>
+    </div>
+  </div>
+
+  <!-- List club type -->
+  <div class="row list-club-type">
+    <div class="col-md-12 col-lg-6 col-xl-4 col-xxl-4" th:each="clubType : ${clubTypeList}">
+      <a class="label-info m-mb-20" th:href="@{/fpt-university-club/type(clubTypeId=*{clubType.fptuClubTypeId}, page=2)}">
+        <div class="flex">
+          <div class="icon">
+            <i th:classappend="*{clubType.fptuClubTypeIcon}"></i>
+          </div>
+          <div class="number">
+            <h4 th:text="*{clubType.fptuClubTypeCount}"></h4>
+          </div>
+        </div>
+        <div class="description">
+          <p class="mb-0" th:text="*{clubType.fptuClubTypeName}"></p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- List club -->
+  <div class="row" th:if="${clubList != null}">
+    <div class="col-12">
+      <h1 class="title fix-mt-title fix-mb-title">Danh sách câu lạc bộ</h1>
+    </div>
+  </div>
+  <div class="row list-club" th:if="${clubList != null}">
+    <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-6" th:each="club : ${clubList}">
+      <a class="label-info m-mb-20" th:href="@{/fpt-university-club/detail(clubTypeId=*{club.fptuClubTypeId}, clubId=*{club.fptuClubId}, page=2)}">
+        <div class="flex">
+          <div class="icon">
+            <img class="media-object" th:src="|data:image/png;base64,*{club.fptuClubLogo}|" width="80" />
+          </div>
+          <div class="name">
+            <h4 th:text="*{club.fptuClubName}"></h4>
+            <p>Số thành viên: ~<span th:text="*{club.fptuClubMemberQuantity}"></span></p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

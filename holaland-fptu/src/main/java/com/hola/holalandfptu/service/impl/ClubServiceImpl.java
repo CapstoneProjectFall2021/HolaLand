@@ -20,8 +20,8 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public List<Club> getAllByType(int type) throws DataAccessException {
-        return clubRepository.getAllByType(type);
+    public List<Club> getAllByType(int typeId) throws DataAccessException {
+        return clubRepository.getAllByType(typeId);
     }
 
     @Override

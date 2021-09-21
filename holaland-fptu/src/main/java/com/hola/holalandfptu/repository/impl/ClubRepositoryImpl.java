@@ -22,8 +22,8 @@ public class ClubRepositoryImpl implements ClubRepository, IRepositoryQuery {
     }
 
     @Override
-    public List<Club> getAllByType(int type) throws DataAccessException {
-        return jdbcTemplate.query(CLUB_GET_ALL_BY_TYPE, new ClubMapper(), type);
+    public List<Club> getAllByType(int typeId) throws DataAccessException {
+        return jdbcTemplate.query(CLUB_GET_ALL_BY_TYPE, new ClubMapper(), typeId);
     }
 
     @Override

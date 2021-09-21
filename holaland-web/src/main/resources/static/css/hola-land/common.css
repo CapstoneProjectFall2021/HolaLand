@@ -31,6 +31,12 @@
   font-weight: 400;
 }
 
+.sub-title-small {
+  font-size: 18px;
+  margin: 0 20px 15px 20px;
+  font-weight: 400;
+}
+
 .panel {
   border-radius: var(--primary-border-radius);
   background-color: var(--primary-background);
@@ -283,7 +289,7 @@
 
 .navbar .navbar-btn-group .navbar-btn .dropdown-menu.navbar-dropdown .dropdown-item:focus,
 .navbar .navbar-btn-group .navbar-btn .dropdown-menu.navbar-dropdown .dropdown-item:hover {
-  color: #ffc107;
+  color: var(--accent-text);
   background-color: transparent;
   transform: translateX(6px);
 }
@@ -591,6 +597,145 @@
 
 .m-mb-20 {
   margin-bottom: 20px;
+}
+
+.label-info {
+  padding: 20px 20px 15px;
+  display: block;
+  border-radius: var(--primary-border-radius);
+  background-color: var(--primary-button-background);
+  border: 1px solid var(--primary-border-color);
+  color: var(--primary-text);
+  transition: 0.4s;
+}
+
+.label-info.active {
+  background-color: var(--link-secondary-button-background);
+  border-radius: var(--secondary-border-radius);
+}
+
+.label-info:hover {
+  color: var(--primary-text);
+  transform: scale(1.02, 1.05);
+  background-color: var(--label-button-background);
+}
+
+.label-info .flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label-info .flex .icon i {
+  font-size: 40px;
+}
+
+.label-info .flex .number h4 {
+  margin: 0;
+  font-size: 35px;
+  font-weight: 400;
+}
+
+.label-info .description {
+  margin-top: 8px;
+  color: var(--secondary-text);
+}
+
+.label-info .description span {
+  color: var(--main-text);
+}
+
+
+/* Modal =============================================================================================================*/
+
+.modal-backdrop.show {
+  opacity: .75;
+}
+
+.modal-content {
+  border-radius: var(--primary-border-radius);
+  background-color: var(--primary-background);
+  border: none;
+}
+
+.modal-content .btn-close {
+  background: transparent;
+  color: var(--primary-text);
+  font-size: 20px;
+  display: flex;
+}
+
+.modal-content .btn-close:focus {
+  box-shadow: none;
+}
+
+.modal-content .modal-header {
+  border-bottom: 1px solid transparent;
+  padding: 20px;
+}
+
+.modal-content .modal-header .modal-title {
+  font-weight: var(--font-weight-4);
+  font-size: 22px;
+}
+
+.modal-content .modal-body {
+  padding: 0 20px;
+}
+
+.modal-content .modal-footer {
+  border-top: 1px solid transparent;
+  padding: 16px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background-color: var(--primary-background);
+  border-radius: .5rem;
+  border: 1px solid var(--secondary-border-color);
+}
+
+.modal-body::-webkit-scrollbar {
+  width: .55rem;
+  background-color: var(--secondary-background);
+  border-radius: .5rem;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-border-color);
+  border-radius: 10px;
+}
+
+
+/* Button ============================================================================================================*/
+
+.btn-sm {
+  border-radius: 8px;
+  font-size: 16px;
+  padding: 6px 15px;
+}
+
+.btn-secondary {
+  background-color: var(--secondary-button-background);
+  border: none;
+  color: var(--primary-text);
+}
+
+.btn-secondary:hover {
+  color: var(--accent-text);
+  box-shadow: 0 0 0 3px var(--shadow-button);
+  background-color: var(--secondary-button-background);
+  border-color: var(--secondary-border-color);
+}
+
+.btn-facebook {
+  background-color: #4267b2 !important;
+  border: none !important;
+  color: #E4E6EB;
+}
+
+.btn-facebook:hover {
+  color: #FFFFFF !important;
+  box-shadow: 0 0 0 3.5px rgb(66 103 178 / 40%);
 }
 
 

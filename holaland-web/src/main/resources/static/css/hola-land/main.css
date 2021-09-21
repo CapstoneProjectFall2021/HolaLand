@@ -22,6 +22,7 @@ html[data-theme='light'] {
   --secondary-border-color: #F0F2F5;
   /* text-color -------------------------------------- */
   --main-text: #1ba80e;
+  --accent-text: #1ba80e;
   --primary-text: #050505;
   --secondary-text: #65676B;
   /* button-background-color ------------------------- */
@@ -41,6 +42,8 @@ html[data-theme='light'] {
   --shadow-1: rgb(0 0 0 / 10%);
   --shadow-2: rgb(0 0 0 / 20%);
   --shadow-inset: rgb(255 255 255 / 50%);
+  --shadow-button: rgb(27 168 14 / 35%);
+  /* border-radius ------------------------------------ */
   --primary-border-radius: 12px;
   --secondary-border-radius: 10px;
   --third-border-radius: 8px;
@@ -58,6 +61,7 @@ html[data-theme='dark'] {
   --secondary-border-color: #3A3B3C;
   /* text-color -------------------------------------- */
   --main-text: #1ba80e;
+  --accent-text: #FFC107;
   --primary-text: #E4E6EB;
   --secondary-text: #B0B3B8;
   /* button-background-color ------------------------- */
@@ -77,6 +81,8 @@ html[data-theme='dark'] {
   --shadow-1: rgb(0 0 0 / 10%);
   --shadow-2: rgb(0 0 0 / 20%);
   --shadow-inset: rgb(255 255 255 / 5%);
+  --shadow-button: rgb(255 193 7 / 35%);
+  /* border-radius ------------------------------------ */
   --primary-border-radius: 12px;
   --secondary-border-radius: 10px;
   --third-border-radius: 8px;
@@ -91,6 +97,15 @@ body {
   height: 100%;
   font-size: 16px;
   line-height: 1.75;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.5;
 }
 
 a,

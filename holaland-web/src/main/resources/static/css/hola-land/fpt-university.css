@@ -1,0 +1,59 @@
+@charset "utf-8";
+
+/* List club */
+
+.list-club .label-info {
+  min-height: 125px;
+}
+
+.list-club .label-info .flex {
+  justify-content: start;
+}
+
+.list-club .label-info .flex .icon img {
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.list-club .label-info .flex .name h4 {
+  font-size: 18px;
+  font-weight: var(--font-weight-4);
+  margin-bottom: 5px;
+}
+
+.list-club .label-info .flex .name p {
+  color: var(--secondary-text);
+  margin-bottom: 0;
+}
+
+.club-info .modal-content .modal-body .flex {
+  display: flex;
+}
+
+.club-info .modal-content .modal-body .img img {
+  width: 100%;
+  border-radius: 12px;
+  transition: 0.5s;
+}
+
+.club-info .modal-content .modal-body .img img:hover {
+  transform: scale(1.01, 1.01);
+}
+
+.club-info .modal-content .modal-body .description p,
+.club-info .modal-content .modal-body .description .pre,
+.club-info .modal-content .modal-body .description .contact {
+  background-color: var(--secondary-background);
+  padding: 15px 20px;
+  border-radius: 12px;
+  color: var(--secondary-text);
+  margin-bottom: 18px;
+}
+
+.club-info .modal-content .modal-body .description .row-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--secondary-text);
+  margin-top: 4px;
+}

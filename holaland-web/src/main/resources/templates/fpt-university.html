@@ -71,15 +71,9 @@
             </div>
           </div>
         </th:block>
-        <!-- 2 -->
+        <!-- List club -->
         <th:block th:if="${page == 2}">
-          <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right">
-            <div class="row">
-              <div class="col-12">
-                <h1 class="title fix-mb-title">Câu lạc bộ</h1>
-              </div>
-            </div>
-          </div>
+          <div th:replace="fptu/club :: club"></div>
         </th:block>
         <!-- 3 -->
         <th:block th:if="${page == 3}">
@@ -105,7 +99,18 @@
     </div>
   </div>
 
+  <!-- Import modal club detail -->
+  <th:block th:if="${club != null}">
+    <div th:replace="fptu/modal-club-info :: clubInfoModal"></div>
+  </th:block>
+
   <th:block th:replace="~{common/script :: script/script}"></th:block>
+  <script crossorigin="anonymous" th:inline="javascript">
+      /*[# th:if="${club} != null"]*/
+      const myModal = new bootstrap.Modal(document.getElementById('clubInfoModal'));
+      myModal.show();
+      /*[/]*/
+  </script>
 </body>
 
 </html>
