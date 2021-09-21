@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -34,7 +35,11 @@ public class FptUniversityController {
     @GetMapping("/fpt-university-club")
     public String goToFptUniversityClub(Model model) {
         List<ClubType> clubTypeList = clubTypeService.getAll();
+        List<Club> clubList = new ArrayList<>() {
+            { add(Club.builder().fptuClubTypeId(0).build()); }
+        };
         model.addAttribute("clubTypeList", clubTypeList);
+        model.addAttribute("clubList", clubList);
         model.addAttribute("page", 2);
         return "fpt-university";
     }

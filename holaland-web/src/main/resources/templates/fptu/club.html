@@ -8,7 +8,7 @@
   <!-- List club type -->
   <div class="row list-club-type">
     <div class="col-md-12 col-lg-6 col-xl-4 col-xxl-4" th:each="clubType : ${clubTypeList}">
-      <a class="label-info m-mb-20" th:href="@{/fpt-university-club/type(clubTypeId=*{clubType.fptuClubTypeId}, page=2)}">
+      <a class="label-info m-mb-20" th:href="@{/fpt-university-club/type(clubTypeId=*{clubType.fptuClubTypeId}, page=2)}" th:classappend="${clubType.fptuClubTypeId == clubList.get(0).fptuClubTypeId ? 'active' : ''}">
         <div class="flex">
           <div class="icon">
             <i th:classappend="*{clubType.fptuClubTypeIcon}"></i>
@@ -25,12 +25,12 @@
   </div>
 
   <!-- List club -->
-  <div class="row" th:if="${clubList != null}">
+  <div class="row" th:if="${clubList.get(0).fptuClubTypeId != 0}">
     <div class="col-12">
       <h1 class="title fix-mt-title fix-mb-title">Danh sách câu lạc bộ</h1>
     </div>
   </div>
-  <div class="row list-club" th:if="${clubList != null}">
+  <div class="row list-club" th:if="${clubList.get(0).fptuClubTypeId != 0}">
     <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-6" th:each="club : ${clubList}">
       <a class="label-info m-mb-20" th:href="@{/fpt-university-club/detail(clubTypeId=*{club.fptuClubTypeId}, clubId=*{club.fptuClubId}, page=2)}">
         <div class="flex">
