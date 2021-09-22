@@ -14,6 +14,7 @@ public class ClubMapper implements RowMapper<Club> {
         Club club = Club.builder()
                 .fptuClubId(resultSet.getInt("fptu_club_id"))
                 .fptuClubName(resultSet.getString("fptu_club_name"))
+                .fptuClubNameEn(resultSet.getString("fptu_club_name_en"))
                 .fptuClubDescription(resultSet.getString("fptu_club_description"))
                 .fptuClubLogo(resultSet.getString("fptu_club_logo"))
                 .fptuClubImage(resultSet.getString("fptu_club_image"))

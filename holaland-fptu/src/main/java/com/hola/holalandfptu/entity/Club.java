@@ -11,6 +11,7 @@ public class Club {
 
     private int fptuClubId;
     private String fptuClubName;
+    private String fptuClubNameEn;
     private String fptuClubDescription;
     private String fptuClubLogo;
     private String fptuClubImage;

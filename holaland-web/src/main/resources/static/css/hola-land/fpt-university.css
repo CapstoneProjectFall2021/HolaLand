@@ -3,7 +3,7 @@
 /* List club */
 
 .list-club .label-info {
-  min-height: 125px;
+  min-height: 122px;
 }
 
 .list-club .label-info .flex {
@@ -18,7 +18,7 @@
 .list-club .label-info .flex .name h4 {
   font-size: 18px;
   font-weight: var(--font-weight-4);
-  margin-bottom: 5px;
+  margin-bottom: 0;
 }
 
 .list-club .label-info .flex .name p {
