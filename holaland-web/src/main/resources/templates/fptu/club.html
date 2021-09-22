@@ -7,7 +7,7 @@
 
   <!-- List club type -->
   <div class="row list-club-type">
-    <div class="col-md-12 col-lg-6 col-xl-4 col-xxl-4" th:each="clubType : ${clubTypeList}">
+    <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="clubType : ${clubTypeList}">
       <a class="label-info m-mb-20" th:href="@{/fpt-university-club/type(clubTypeId=*{clubType.fptuClubTypeId}, page=2)}" th:classappend="${clubType.fptuClubTypeId == clubList.get(0).fptuClubTypeId ? 'active' : ''}">
         <div class="flex">
           <div class="icon">

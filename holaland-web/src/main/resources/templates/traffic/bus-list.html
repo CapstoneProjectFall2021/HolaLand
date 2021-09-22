@@ -7,7 +7,7 @@
 
   <!-- List bus -->
   <div class="row list-bus">
-    <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-4" th:each="bus : ${busList}">
+    <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="bus : ${busList}">
       <a class="label-info m-mb-20" th:href="@{/traffic/bus-detail(id=*{bus.tfBusId}, page=1)}" th:classappend="${bus.tfBusId == busDetail.tfBusId ? 'active' : ''}">
         <div class="flex">
           <div class="icon">
