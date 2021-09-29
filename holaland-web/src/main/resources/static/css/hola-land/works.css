@@ -1,0 +1,75 @@
+@charset "utf-8";
+
+/* List jobs */
+
+.list-jobs .label-info .flex {
+  justify-content: start;
+}
+
+
+/* .label-info .flex .content-body h4 {
+  white-space: nowrap!important;
+  overflow: hidden!important;
+  text-overflow: ellipsis!important;
+  width: 80%;
+} */
+
+.list-jobs .label-info .flex .content-body .job-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-jobs .panel .flex .content-body .job-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* Job detail */
+
+.job-detail .job-title h3 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  font-weight: var(--font-weight-4);
+}
+
+.job-detail .job-title p {
+  margin-bottom: 0;
+  color: var(--secondary-text);
+}
+
+.job-detail .job-title .apply-area {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.job-detail .job-title .apply-area .apply-area-btn {
+  width: 100%;
+}
+
+.job-detail .job-title .btn-apply a,
+.job-detail .job-title .btn-save-job a {
+  font-weight: var(--font-weight-5);
+  font-size: 14px;
+  width: 100%;
+}
+
+.job-detail .row-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--secondary-text);
+}
+
+
+/* Job save */
+
+
+/* Responsive ========================================================================================================*/
+
+@media (max-width: 1200px) {
+  .job-detail .job-title .btn-apply {
+    margin-top: 20px;
+  }
+}

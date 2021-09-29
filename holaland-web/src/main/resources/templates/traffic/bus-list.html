@@ -1,116 +1,121 @@
 <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right" th:fragment="bus">
-  <div class="row">
-    <div class="col-12">
-      <h1 class="title fix-mb-title">Danh sách xe bus</h1>
-    </div>
-  </div>
-
   <!-- List bus -->
-  <div class="row list-bus">
-    <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="bus : ${busList}">
-      <a class="label-info m-mb-20" th:href="@{/traffic/bus-detail(id=*{bus.tfBusId}, page=1)}" th:classappend="${bus.tfBusId == busDetail.tfBusId ? 'active' : ''}">
-        <div class="flex">
-          <div class="icon">
-            <i class="fas fa-bus-alt"></i>
+  <div class="list-bus">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Danh sách xe bus</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="bus : ${busList}">
+        <a class="label-info m-mb-20" th:href="@{/traffic/bus-detail(id=*{bus.tfBusId}, page=1)}"
+           th:classappend="${bus.tfBusId == busDetail.tfBusId ? 'active' : ''}">
+          <div class="flex">
+            <div class="icon">
+              <i class="fas fa-bus-alt"></i>
+            </div>
+            <div class="number">
+              <h4 th:text="*{bus.tfBusName}"></h4>
+            </div>
           </div>
-          <div class="number">
-            <h4 th:text="*{bus.tfBusName}"></h4>
+          <div class="description">
+            Giá vé: <span class="highlight" th:text="${#numbers.formatInteger(bus.tfBusPrice, 3, 'POINT')}"></span><sup>đ</sup>
           </div>
-        </div>
-        <div class="description">
-          Giá vé: <span th:text="${#numbers.formatInteger(bus.tfBusPrice, 3, 'POINT')}"></span><sup>đ</sup>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
   </div>
 
   <!-- Bus info detail -->
-  <div class="row" th:if="${busDetail.tfBusId != 0}">
-    <div class="col-12">
-      <h1 class="title fix-mt-title">Thông tin xe <span class="bus-name" th:text="${busDetail.tfBusName}"></span></h1>
-    </div>
-  </div>
-  <div class="row" th:if="${busDetail.tfBusId != 0}">
-    <div class="col-md-12 col-lg-6 col-xl-7 col-xxl-8">
-      <h2 class="sub-title">Lộ trình</h2>
-      <div class="panel direction">
-        <ul class="timeline">
-          <li class="timeline-item" th:each="stop : ${busDetail.tfBusStops}">
-            <div class="timeline-content">
-              <span th:text="*{stop}"></span>
-            </div>
-          </li>
-        </ul>
+  <div class="bus-info-detail" th:if="${busDetail.tfBusId != 0}">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mt-title">Thông tin xe tuyến <span class="bus-name"
+                                                                th:text="${busDetail.tfBusName}"></span></h1>
       </div>
     </div>
-
-    <div class="col-md-12 col-lg-6 col-xl-5 col-xxl-4">
-      <h2 class="sub-title">Giới thiệu</h2>
-      <div class="panel">
-        <span th:text="${busDetail.tfBusInfo}"></span>
+    <div class="row">
+      <div class="col-md-12 col-lg-6 col-xl-7 col-xxl-8">
+        <h2 class="sub-title">Lộ trình</h2>
+        <div class="panel direction">
+          <ul class="timeline">
+            <li class="timeline-item" th:each="stop : ${busDetail.tfBusStops}">
+              <div class="timeline-content">
+                <span th:text="*{stop}"></span>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <h2 class="sub-title">Lịch trình</h2>
-      <div class="panel">
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">Thứ</th>
-            <th scope="col" class="text-end">Giờ hoạt động</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>Thứ hai</td>
-            <td class="text-end">
-              <span th:text="${busDetail.tfBusStartTime}"></span> -
-              <span th:text="${busDetail.tfBusEndTime}"></span>
-            </td>
-          </tr>
-          <tr>
-            <td>Thú ba</td>
-            <td class="text-end">
-              <span th:text="${busDetail.tfBusStartTime}"></span> -
-              <span th:text="${busDetail.tfBusEndTime}"></span>
-            </td>
-          </tr>
-          <tr>
-            <td>Thứ tư</td>
-            <td class="text-end">
-              <span th:text="${busDetail.tfBusStartTime}"></span> -
-              <span th:text="${busDetail.tfBusEndTime}"></span>
-            </td>
-          </tr>
-          <tr>
-            <td>Thứ năm</td>
-            <td class="text-end">
-              <span th:text="${busDetail.tfBusStartTime}"></span> -
-              <span th:text="${busDetail.tfBusEndTime}"></span>
-            </td>
-          </tr>
-          <tr>
-            <td>Thứ sáu</td>
-            <td class="text-end">
-              <span th:text="${busDetail.tfBusStartTime}"></span> -
-              <span th:text="${busDetail.tfBusEndTime}"></span>
-            </td>
-          </tr>
-          <tr>
-            <td>Thứ bảy</td>
-            <td class="text-end">
-              <span th:text="${busDetail.tfBusStartTime}"></span> -
-              <span th:text="${busDetail.tfBusEndTime}"></span>
-            </td>
-          </tr>
-          <tr>
-            <td>Chủ nhật</td>
-            <td class="text-end">
-              <span th:text="${busDetail.tfBusStartTime}"></span> -
-              <span th:text="${busDetail.tfBusEndTime}"></span>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+      <div class="col-md-12 col-lg-6 col-xl-5 col-xxl-4">
+        <h2 class="sub-title">Giới thiệu</h2>
+        <div class="panel-text">
+          <span th:text="${busDetail.tfBusInfo}"></span>
+        </div>
+
+        <h2 class="sub-title">Lịch trình</h2>
+        <div class="panel-text">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Thứ</th>
+              <th scope="col" class="text-end">Giờ hoạt động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Thứ hai</td>
+              <td class="text-end">
+                <span th:text="${busDetail.tfBusStartTime}"></span> -
+                <span th:text="${busDetail.tfBusEndTime}"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>Thú ba</td>
+              <td class="text-end">
+                <span th:text="${busDetail.tfBusStartTime}"></span> -
+                <span th:text="${busDetail.tfBusEndTime}"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>Thứ tư</td>
+              <td class="text-end">
+                <span th:text="${busDetail.tfBusStartTime}"></span> -
+                <span th:text="${busDetail.tfBusEndTime}"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>Thứ năm</td>
+              <td class="text-end">
+                <span th:text="${busDetail.tfBusStartTime}"></span> -
+                <span th:text="${busDetail.tfBusEndTime}"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>Thứ sáu</td>
+              <td class="text-end">
+                <span th:text="${busDetail.tfBusStartTime}"></span> -
+                <span th:text="${busDetail.tfBusEndTime}"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>Thứ bảy</td>
+              <td class="text-end">
+                <span th:text="${busDetail.tfBusStartTime}"></span> -
+                <span th:text="${busDetail.tfBusEndTime}"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>Chủ nhật</td>
+              <td class="text-end">
+                <span th:text="${busDetail.tfBusStartTime}"></span> -
+                <span th:text="${busDetail.tfBusEndTime}"></span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

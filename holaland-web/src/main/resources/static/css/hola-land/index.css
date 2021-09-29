@@ -37,12 +37,11 @@
   background-color: var(--primary-button-background);
   border: 1px solid var(--primary-border-color);
   color: var(--primary-text);
-  font-size: 20px;
-  display: flex;
-  align-items: center;
+  font-size: 18px;
   padding: 20px;
-  justify-content: start;
   transition: 0.4s;
+  display: block;
+  position: relative;
 }
 
 .menu-feature a.card-feature:hover {
@@ -57,10 +56,31 @@
   border-radius: 50px;
   margin-right: 20px;
   transition: 0.4s;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+}
+
+.menu-feature a.card-feature .card-feature-content {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.menu-feature a.card-feature .card-feature-content .card-feature-title h4 {
+  font-size: 18px;
+  color: var(--primary-text);
+  font-weight: var(--font-weight-4);
+  margin-bottom: 0;
+}
+
+.menu-feature a.card-feature .card-feature-content .card-feature-title p {
+  font-size: 14px;
+  color: var(--secondary-text);
+  font-weight: var(--font-weight-4);
+  margin-top: 5px;
+  margin-bottom: 0;
 }
 
 

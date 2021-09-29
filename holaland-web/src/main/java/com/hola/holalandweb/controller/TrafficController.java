@@ -16,7 +16,6 @@ import java.util.List;
 public class TrafficController {
 
     private final BusService busService;
-
     private final MotorbikeTaxiDriversService motorbikeTaxiDriversService;
 
     @Autowired
@@ -33,7 +32,11 @@ public class TrafficController {
     }
 
     @GetMapping("/traffic/bus-detail")
-    public String getBusDetail(@RequestParam("id") Integer id, @RequestParam("page") Integer page, Model model) {
+    public String getBusDetail(
+            @RequestParam("id") Integer id,
+            @RequestParam("page") Integer page,
+            Model model
+    ) {
         Bus busDetail = busService.getOne(id);
         getTrafficInfo(model, busDetail, page);
         return "traffic";

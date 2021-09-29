@@ -10,14 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class FptUniversityController {
 
     private final ClubTypeService clubTypeService;
-
     private final ClubService clubService;
 
     @Autowired
@@ -35,9 +33,7 @@ public class FptUniversityController {
     @GetMapping("/fpt-university-club")
     public String goToFptUniversityClub(Model model) {
         List<ClubType> clubTypeList = clubTypeService.getAll();
-        List<Club> clubList = new ArrayList<>() {
-            { add(Club.builder().fptuClubTypeId(0).build()); }
-        };
+        List<Club> clubList = clubService.getAllByType(clubTypeList.get(0).getFptuClubTypeId());
         model.addAttribute("clubTypeList", clubTypeList);
         model.addAttribute("clubList", clubList);
         model.addAttribute("page", 2);
@@ -45,7 +41,11 @@ public class FptUniversityController {
     }
 
     @GetMapping("/fpt-university-club/type")
-    public String getFptUniversityClubType(@RequestParam("clubTypeId") Integer clubTypeId, @RequestParam("page") Integer page, Model model) {
+    public String getFptUniversityClubType(
+            @RequestParam("clubTypeId") Integer clubTypeId,
+            @RequestParam("page") Integer page,
+            Model model
+    ) {
         List<ClubType> clubTypeList = clubTypeService.getAll();
         List<Club> clubList = clubService.getAllByType(clubTypeId);
         model.addAttribute("clubTypeList", clubTypeList);
@@ -55,7 +55,12 @@ public class FptUniversityController {
     }
 
     @GetMapping("/fpt-university-club/detail")
-    public String getFptUniversityClubDetail(@RequestParam("clubTypeId") Integer clubTypeId, @RequestParam("clubId") Integer clubId, @RequestParam("page") Integer page, Model model) {
+    public String getFptUniversityClubDetail(
+            @RequestParam("clubTypeId") Integer clubTypeId,
+            @RequestParam("clubId") Integer clubId,
+            @RequestParam("page") Integer page,
+            Model model
+    ) {
         List<ClubType> clubTypeList = clubTypeService.getAll();
         List<Club> clubList = clubService.getAllByType(clubTypeId);
         Club club = clubService.getOne(clubId);

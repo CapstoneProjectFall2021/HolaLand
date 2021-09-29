@@ -23,16 +23,11 @@ public class MemberController {
 
     // call MemberService from module traffic
     private final MemberService memberService;
-
     // call AccountService from module core
     private final AccountService accountService;
-
     private final SendEmailService sendEmailService;
-
     private final BusService busService;
-
     private final MotorbikeTaxiDriversService motorbikeTaxiDriversService;
-
     private final ClubService clubService;
 
     @Autowired
@@ -50,12 +45,12 @@ public class MemberController {
     public String members(Model model) {
         backToMembers(model);
         List listBus = busService.getAll();
-        List listMotorbikeTaxiDrivers= motorbikeTaxiDriversService.getAll();
+        List listMotorbikeTaxiDrivers = motorbikeTaxiDriversService.getAll();
         List listClub = clubService.getAllByType(1);
 
         model.addAttribute("listBus", listBus);
-        model.addAttribute("listMotorbikeTaxiDrivers",listMotorbikeTaxiDrivers);
-        model.addAttribute("listClub",listClub);
+        model.addAttribute("listMotorbikeTaxiDrivers", listMotorbikeTaxiDrivers);
+        model.addAttribute("listClub", listClub);
         return "members";
     }
 
