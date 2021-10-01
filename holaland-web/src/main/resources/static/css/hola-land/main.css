@@ -19,10 +19,11 @@ html[data-theme='light'] {
   --secondary-background: #F0F2F5;
   /* border-color ------------------------------------ */
   --primary-border-color: transparent;
-  --secondary-border-color: #F0F2F5;
+  --secondary-border-color: #E4E6EB;
   /* text-color -------------------------------------- */
   --main-text: #1BA80E;
   --accent-text: #1BA80E;
+  --danger-text: #E25563;
   --primary-text: #050505;
   --secondary-text: #65676B;
   /* button-background-color ------------------------- */
@@ -42,7 +43,8 @@ html[data-theme='light'] {
   --shadow-1: rgb(0 0 0 / 10%);
   --shadow-2: rgb(0 0 0 / 20%);
   --shadow-inset: rgb(255 255 255 / 50%);
-  --shadow-button: rgb(27 168 14 / 35%);
+  /* --shadow-button: rgb(27 168 14 / 35%); */
+  --shadow-button: rgb(228 230 235 / 55%);
   /* border-radius ------------------------------------ */
   --primary-border-radius: 12px;
   --secondary-border-radius: 10px;
@@ -62,6 +64,7 @@ html[data-theme='dark'] {
   /* text-color -------------------------------------- */
   --main-text: #1ba80e;
   --accent-text: #FFC107;
+  --danger-text: #B02F3B;
   --primary-text: #E4E6EB;
   --secondary-text: #B0B3B8;
   /* button-background-color ------------------------- */
@@ -81,7 +84,8 @@ html[data-theme='dark'] {
   --shadow-1: rgb(0 0 0 / 10%);
   --shadow-2: rgb(0 0 0 / 20%);
   --shadow-inset: rgb(255 255 255 / 5%);
-  --shadow-button: rgb(255 193 7 / 35%);
+  /* --shadow-button: rgb(255 193 7 / 35%); */
+  --shadow-button: rgb(58 59 60 / 55%);
   /* border-radius ------------------------------------ */
   --primary-border-radius: 12px;
   --secondary-border-radius: 10px;
@@ -130,6 +134,7 @@ pre {
 .table {
   color: var(--primary-text);
   border-color: var(--secondary-border-color);
+  margin-bottom: 0;
 }
 
 th {

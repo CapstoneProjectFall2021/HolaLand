@@ -49,8 +49,8 @@
 }
 
 .menu-feature a.card-feature i {
-  width: 75px;
-  height: 75px;
+  width: 70px;
+  height: 70px;
   font-size: 30px;
   background-color: var(--secondary-button-background);
   border-radius: 50px;

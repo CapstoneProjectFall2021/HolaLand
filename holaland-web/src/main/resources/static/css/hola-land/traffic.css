@@ -43,7 +43,7 @@
 }
 
 .timeline-item+.timeline-item {
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .timeline-item:before {
@@ -74,8 +74,9 @@
 }
 
 .list-motorbike-taxi-drivers .label-info .flex .name h4 {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: var(--font-weight-4);
+  margin-bottom: 6px;
 }
 
 .list-motorbike-taxi-drivers .label-info .description {
@@ -88,6 +89,10 @@
   justify-content: space-between;
   color: var(--secondary-text);
   margin-top: 5px;
+}
+
+.list-motorbike-taxi-drivers .label-info:hover .description .row-info {
+  color: var(--primary-text);
 }
 
 .list-motorbike-taxi-drivers .label-info .description .row-info i.far,
