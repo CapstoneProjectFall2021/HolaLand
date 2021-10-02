@@ -21,51 +21,7 @@ import java.util.List;
 @Controller
 public class MemberController {
 
-    // call MemberService from module traffic
-    private final MemberService memberService;
-    // call AccountService from module core
-    private final AccountService accountService;
-    private final SendEmailService sendEmailService;
-    private final BusService busService;
-    private final MotorbikeTaxiDriversService motorbikeTaxiDriversService;
-    private final ClubService clubService;
-
-    @Autowired
-    public MemberController(MemberService memberService, AccountService accountService, SendEmailService sendEmailService, BusService busService, MotorbikeTaxiDriversService motorbikeTaxiDriversService,
-                            ClubService clubService) {
-        this.memberService = memberService;
-        this.accountService = accountService;
-        this.sendEmailService = sendEmailService;
-        this.busService = busService;
-        this.motorbikeTaxiDriversService = motorbikeTaxiDriversService;
-        this.clubService = clubService;
-    }
-
-    @GetMapping("/members")
-    public String members(Model model) {
-        backToMembers(model);
-        List listBus = busService.getAll();
-        List listMotorbikeTaxiDrivers = motorbikeTaxiDriversService.getAll();
-        List listClub = clubService.getAllByType(1);
-
-        model.addAttribute("listBus", listBus);
-        model.addAttribute("listMotorbikeTaxiDrivers", listMotorbikeTaxiDrivers);
-        model.addAttribute("listClub", listClub);
-        return "members";
-    }
-
-    @GetMapping("/send-email")
-    public String sendEmail(@RequestParam("id") Integer id, Model model) {
-        Member member = memberService.getOne(id);
-        sendEmailService.send(
-                "HolaLand",
-                "Mã kích hoạt của bạn là: 123456xxx",
-                member.getMemberEmail()
-        );
-        model.addAttribute("send", "- Gửi email thành công!");
-        backToMembers(model);
-        return "members";
-    }
+    
 
     @PostMapping("/add-member")
     public String addMember(@ModelAttribute("addMember") Member addMember, BindingResult bindingResult, Model model) {
