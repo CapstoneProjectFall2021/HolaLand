@@ -3,101 +3,108 @@
 /* List bus */
 
 .bus-name {
-  font-weight: var(--font-weight-5);
+    font-weight: var(--font-weight-5);
 }
 
 
 /* Timeline css */
 
 .timeline {
-  margin: 0 auto;
-  padding: 0;
-  position: relative;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
 }
 
 .timeline:before {
-  position: absolute;
-  top: 7px;
-  bottom: 7px;
-  width: 2px;
-  background: #666;
-  left: 10px;
-  margin-left: 0px;
+    position: absolute;
+    top: 7px;
+    bottom: 7px;
+    width: 2px;
+    background: #666;
+    left: 10px;
+    margin-left: 0px;
 }
 
 .timeline-item:before,
 .timeline:before {
-  content: '';
+    content: '';
 }
 
 ::after,
 ::before {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .timeline-item {
-  position: relative;
-  padding-left: 40px;
-  list-style: none;
+    position: relative;
+    padding-left: 40px;
+    list-style: none;
 }
 
-.timeline-item+.timeline-item {
-  margin-top: 5px;
+.timeline-item + .timeline-item {
+    margin-top: 5px;
 }
 
 .timeline-item:before {
-  position: absolute;
-  top: 7px;
-  left: 4px;
-  border: 2px solid #666;
-  width: 14px;
-  height: 14px;
-  background-color: var(--main-text);
-  border-radius: 50px;
+    position: absolute;
+    top: 7px;
+    left: 4px;
+    border: 2px solid #666;
+    width: 14px;
+    height: 14px;
+    background-color: var(--main-text);
+    border-radius: 50px;
 }
 
 
 /* List motorbike taxi drivers */
 
 .list-motorbike-taxi-drivers .label-info:hover {
-  transform: scale(1.02, 1.02);
+    transform: scale(1.02, 1.02);
 }
 
 .list-motorbike-taxi-drivers .label-info .flex {
-  justify-content: start;
+    justify-content: start;
 }
 
 .list-motorbike-taxi-drivers .label-info .flex .icon img {
-  border-radius: 50%;
-  margin-right: 20px;
+    border-radius: 50%;
+    margin-right: 20px;
 }
 
 .list-motorbike-taxi-drivers .label-info .flex .name h4 {
-  font-size: 17px;
-  font-weight: var(--font-weight-4);
-  margin-bottom: 6px;
+    font-size: 17px;
+    font-weight: var(--font-weight-4);
+    margin-bottom: 0;
+}
+
+.list-motorbike-taxi-drivers .label-info .flex .name p {
+    font-size: 14px;
+    margin-top: 2px;
+    margin-bottom: 6px;
+    color: var(--secondary-text);
 }
 
 .list-motorbike-taxi-drivers .label-info .description {
-  margin-top: 15px;
+    margin-top: 15px;
 }
 
 .list-motorbike-taxi-drivers .label-info .description .row-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: var(--secondary-text);
-  margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--secondary-text);
+    margin-top: 5px;
 }
 
 .list-motorbike-taxi-drivers .label-info:hover .description .row-info {
-  color: var(--primary-text);
+    color: var(--primary-text);
 }
 
 .list-motorbike-taxi-drivers .label-info .description .row-info i.far,
 .list-motorbike-taxi-drivers .label-info .description .row-info i.fas,
 .list-motorbike-taxi-drivers .label-info .description .row-info i.fab {
-  margin-right: 8px;
-  font-size: 15px;
+    margin-right: 10px;
+    font-size: 15px;
 }

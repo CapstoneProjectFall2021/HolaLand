@@ -11,7 +11,7 @@ public class ClubMapper implements RowMapper<Club> {
     @Override
     public Club mapRow(ResultSet resultSet, int i) throws SQLException {
 
-        Club club = Club.builder()
+        return Club.builder()
                 .fptuClubId(resultSet.getInt("fptu_club_id"))
                 .fptuClubName(resultSet.getString("fptu_club_name"))
                 .fptuClubNameEn(resultSet.getString("fptu_club_name_en"))
@@ -29,6 +29,5 @@ public class ClubMapper implements RowMapper<Club> {
                 .fptuClubStatus(resultSet.getString("fptu_club_status"))
                 .fptuClubDeleted(resultSet.getBoolean("fptu_club_deleted"))
                 .build();
-        return club;
     }
 }

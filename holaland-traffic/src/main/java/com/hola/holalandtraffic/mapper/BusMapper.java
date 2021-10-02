@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BusMapper  implements RowMapper<Bus> {
+public class BusMapper implements RowMapper<Bus> {
 
     @Override
     public Bus mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -17,9 +17,10 @@ public class BusMapper  implements RowMapper<Bus> {
         String temp = resultSet.getString("tf_bus_stops");
 
         Gson gson = new Gson();
-        ArrayList<String> stops = gson.fromJson(temp, new TypeToken<ArrayList<String>>(){}.getType());
+        ArrayList<String> stops = gson.fromJson(temp, new TypeToken<ArrayList<String>>() {
+        }.getType());
 
-        Bus bus = Bus.builder()
+        return Bus.builder()
                 .tfBusId(resultSet.getInt("tf_bus_id"))
                 .tfBusName(resultSet.getString("tf_bus_name"))
                 .tfBusStartTime(resultSet.getString("tf_bus_start_time"))
@@ -30,6 +31,5 @@ public class BusMapper  implements RowMapper<Bus> {
                 .tfBusStatus(resultSet.getInt("tf_bus_status"))
                 .tfBusDeleted(resultSet.getBoolean("tf_bus_deleted"))
                 .build();
-        return bus;
     }
 }

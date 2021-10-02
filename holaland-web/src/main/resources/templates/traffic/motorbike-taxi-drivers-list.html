@@ -6,15 +6,19 @@
         <h1 class="title fix-mb-title">Danh sách xe ôm</h1>
       </div>
     </div>
-    <div class="row list-motorbike-taxi-drivers">
+    <div class="row">
       <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-4" th:each="motorbikeTaxiDrivers : ${motorbikeTaxiDriversList}">
         <a href="javascript:void(0)" class="label-info m-mb-20">
           <div class="flex">
             <div class="icon">
-              <img class="media-object" src="../images/system/v.png" alt="" width="80">
+              <img class="media-object" src="../images/system/v.png" alt="" width="80"
+                   th:if="*{motorbikeTaxiDrivers.tfMotorbikeTaxiDriversGender}">
+              <img class="media-object" src="../images/system/v2.png" alt="" width="80"
+                   th:if="*{!motorbikeTaxiDrivers.tfMotorbikeTaxiDriversGender}">
             </div>
             <div class="name">
               <h4 th:text="*{motorbikeTaxiDrivers.tfMotorbikeTaxiDriversName}"></h4>
+              <p th:text="*{motorbikeTaxiDrivers.tfMotorbikeTaxiDriversGender} ? 'Nam' : 'Nữ'"></p>
             </div>
           </div>
           <div class="description">

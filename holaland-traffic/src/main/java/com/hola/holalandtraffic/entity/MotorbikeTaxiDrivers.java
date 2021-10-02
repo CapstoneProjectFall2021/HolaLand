@@ -11,6 +11,7 @@ public class MotorbikeTaxiDrivers {
 
     private int tfMotorbikeTaxiDriversId;
     private String tfMotorbikeTaxiDriversName;
+    private boolean tfMotorbikeTaxiDriversGender;
     private String tfMotorbikeTaxiDriversPhone;
     private String tfMotorbikeTaxiDriversImage;
     private String tfMotorbikeTaxiDriversLicensePlates;

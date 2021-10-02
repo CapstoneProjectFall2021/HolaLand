@@ -11,7 +11,7 @@ public class MemberMapper implements RowMapper<Member> {
     @Override
     public Member mapRow(ResultSet resultSet, int i) throws SQLException {
 
-        Member member = Member.builder()
+        return Member.builder()
                 .memberId(resultSet.getInt("member_id"))
                 .memberName(resultSet.getString("member_name"))
                 .memberGender(resultSet.getBoolean("member_gender"))
@@ -21,6 +21,5 @@ public class MemberMapper implements RowMapper<Member> {
                 .memberRankId(resultSet.getInt("member_rank_id"))
                 .memberStatusId(resultSet.getInt("member_status_id"))
                 .build();
-        return member;
     }
 }

@@ -11,9 +11,10 @@ public class MotorbikeTaxiDriversMapper implements RowMapper<MotorbikeTaxiDriver
     @Override
     public MotorbikeTaxiDrivers mapRow(ResultSet resultSet, int i) throws SQLException {
 
-        MotorbikeTaxiDrivers motorbikeTaxiDrivers = MotorbikeTaxiDrivers.builder()
+        return MotorbikeTaxiDrivers.builder()
                 .tfMotorbikeTaxiDriversId(resultSet.getInt("tf_motorbike_taxi_drivers_id"))
                 .tfMotorbikeTaxiDriversName(resultSet.getString("tf_motorbike_taxi_drivers_name"))
+                .tfMotorbikeTaxiDriversGender(resultSet.getBoolean("tf_motorbike_taxi_drivers_gender"))
                 .tfMotorbikeTaxiDriversPhone(resultSet.getString("tf_motorbike_taxi_drivers_phone"))
                 .tfMotorbikeTaxiDriversImage(resultSet.getString("tf_motorbike_taxi_drivers_image"))
                 .tfMotorbikeTaxiDriversLicensePlates(resultSet.getString("tf_motorbike_taxi_drivers_license_plates"))
@@ -24,6 +25,5 @@ public class MotorbikeTaxiDriversMapper implements RowMapper<MotorbikeTaxiDriver
                 .tfMotorbikeTaxiDriversStatus(resultSet.getInt("tf_motorbike_taxi_drivers_status"))
                 .tfMotorbikeTaxiDriversDeleted(resultSet.getBoolean("tf_motorbike_taxi_drivers_deleted"))
                 .build();
-        return motorbikeTaxiDrivers;
     }
 }

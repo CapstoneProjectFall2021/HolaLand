@@ -1,9 +1,10 @@
-<!-- Modal -->
+<!-- Modal club info -->
 <div class="modal fade club-info" id="clubInfoModal" tabindex="-1" aria-labelledby="clubInfoModalLabel"
      aria-hidden="true" th:fragment="clubInfoModal">
   <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
+        <!-- Start: Check club english name -->
         <h5 class="modal-title" id="clubInfoModalLabel" th:if="${club.fptuClubNameEn.length == 0}">
           <span th:text="${club.fptuClubName}"></span>
         </h5>
@@ -11,6 +12,7 @@
           <span th:text="${club.fptuClubName}"></span> -
           <span th:text="${club.fptuClubNameEn}"></span>
         </h5>
+        <!-- End -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
                viewBox="0 0 16 16">
