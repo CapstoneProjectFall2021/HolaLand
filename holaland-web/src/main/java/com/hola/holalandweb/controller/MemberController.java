@@ -86,6 +86,13 @@ public class MemberController {
         }
     }
 
+    @GetMapping("confirm-delete-member")
+    public String deleteMember(@RequestParam("id") Integer id, Model model) {
+        memberService.delete(id);
+        backToMembers(model);
+        return "members";
+    }
+
     private void backToMembers(Model model) {
         List<Member> members = memberService.getAll();
         model.addAttribute("addMember", Member.builder().build());
