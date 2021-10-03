@@ -28,7 +28,6 @@ public class MemberController {
     private final AccountService accountService;
     private final SendEmailService sendEmailService;
     private final BusService busService;
-    private final MotorbikeTaxiDriversService motorbikeTaxiDriversService;
     private final ClubService clubService;
     private final ClubTypeService clubTypeService;
 
@@ -39,7 +38,6 @@ public class MemberController {
         this.accountService = accountService;
         this.sendEmailService = sendEmailService;
         this.busService = busService;
-        this.motorbikeTaxiDriversService = motorbikeTaxiDriversService;
         this.clubService = clubService;
         this.clubTypeService = clubTypeService;
     }
@@ -48,12 +46,10 @@ public class MemberController {
     public String members(Model model) {
         backToMembers(model);
         List listBus = busService.getAll();
-        List listMotorbikeTaxiDrivers = motorbikeTaxiDriversService.getAll();
         List listClub = clubService.getAllByType(1);
         List listCLubType = clubTypeService.getAll();
 
         model.addAttribute("listBus", listBus);
-        model.addAttribute("listMotorbikeTaxiDrivers", listMotorbikeTaxiDrivers);
         model.addAttribute("listClub", listClub);
         model.addAttribute("listClubType", listCLubType);
         return "members";
