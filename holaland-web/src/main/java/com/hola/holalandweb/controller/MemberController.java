@@ -5,6 +5,7 @@ import com.hola.holalandfptu.service.ClubService;
 import com.hola.holalandfptu.service.ClubTypeService;
 import com.hola.holalandtraffic.entity.Bus;
 import com.hola.holalandtraffic.entity.Member;
+import com.hola.holalandtraffic.entity.MotorbikeTaxiDrivers;
 import com.hola.holalandtraffic.service.BusService;
 import com.hola.holalandtraffic.service.MemberService;
 import com.hola.holalandtraffic.service.MotorbikeTaxiDriversService;
@@ -115,6 +116,13 @@ public class MemberController {
     ) {
         Bus busDetail = busService.getOne(id);
         getTrafficInfo(model, busDetail, page);
+        return "traffic";
+    }
+    @GetMapping("/traffic/motorbike-taxi-drivers")
+    public String getMotorbikeTaxiDriversDetail(@RequestParam("page") Integer page, Model model) {
+        List<MotorbikeTaxiDrivers> motorbikeTaxiDriversList = motorbikeTaxiDriversService.getAll();
+        model.addAttribute("motorbikeTaxiDriversList", motorbikeTaxiDriversList);
+        model.addAttribute("page", page);
         return "traffic";
     }
 }
