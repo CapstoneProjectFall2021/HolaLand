@@ -11,6 +11,39 @@
 <body>
 <div class="container">
 
+  <div>
+    <table cellspacing="0" class="table" id="member" width="100%">
+      <tr>
+        <td class="text-center">Name</td>
+        <td><input type="text" id="name" name="memberName"></td>
+      </tr>
+      <tr>
+        <td class="text-center">Gender</td>
+        <td>
+          <input type="radio" id="malegender" name="memberGender"> Male
+          <input type="radio" id="femalegender" name="memberGender"> Female
+        </td>
+      </tr>
+      <tr>
+        <td class="text-center">DOB</td>
+        <td><input type="text" id="dob" name="memberName"></td>
+      </tr>
+      <tr>
+        <td class="text-center">Mobile</td>
+        <td><input type="text" id="mobile" name="memberName"></td>
+      </tr>
+      <tr>
+        <td class="text-center">Email</td>
+        <td><input type="text" id="email" name="memberName"></td>
+      </tr>
+    </table>
+    <a class="text-danger action" data-bs-placement="top"
+          data-bs-toggle="tooltip" th:href="@{/add-member}"
+          title="Thêm thành viên">
+          Thêm
+    </a>
+  </div>
+
   <div class="right mb-5">
     <div class="row">
       <div class="col-12 mb-3">
