@@ -180,6 +180,31 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-12 mb-3">
+        <h3>Danh sách câu lạc bộ</h3>
+        <div class="datatable bg-dark-ui border-ui" th:if="${listClubType.size() != 0}">
+          <table cellspacing="0" class="table" id="listClubType" width="100%">
+            <thead>
+            <tr>
+              <th class="text-center" scope="col">STT</th>
+              <th class="text-center" scope="col">Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="f, index : ${listClubType}">
+              <td class="text-center" th:text="*{index.count}"></td>
+              <td class="text-center" th:text="*{f.fptuClubTypeName}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div th:if="${listClub.size() == 0}">
+          <h5 class="alert-info bg-dark-ui border-ui">Không có câu lạc bộ!</h5>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
