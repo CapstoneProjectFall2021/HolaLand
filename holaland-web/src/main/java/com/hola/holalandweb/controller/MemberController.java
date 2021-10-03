@@ -67,7 +67,7 @@ public class MemberController {
         backToMembers(model);
         return "members";
     }
-
+    //add member
     @PostMapping("/add-member")
     public String addMember(@ModelAttribute("addMember") Member addMember, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
