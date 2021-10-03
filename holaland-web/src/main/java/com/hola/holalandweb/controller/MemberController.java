@@ -130,4 +130,20 @@ public String goToFptUniversity(Model model) {
         model.addAttribute("page", page);
         return "fpt-university";
     }
+    @GetMapping("/fpt-university-club/detail")
+    public String getFptUniversityClubDetail(
+            @RequestParam("clubTypeId") Integer clubTypeId,
+            @RequestParam("clubId") Integer clubId,
+            @RequestParam("page") Integer page,
+            Model model
+    ) {
+        List<ClubType> clubTypeList = clubTypeService.getAll();
+        List<Club> clubList = clubService.getAllByType(clubTypeId);
+        Club club = clubService.getOne(clubId);
+        model.addAttribute("clubTypeList", clubTypeList);
+        model.addAttribute("clubList", clubList);
+        model.addAttribute("club", club);
+        model.addAttribute("page", page);
+        return "fpt-university";
+    }
 }
