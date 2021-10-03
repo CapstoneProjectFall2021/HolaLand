@@ -1,8 +1,6 @@
 package com.hola.holalandweb.controller;
 
 import com.hola.holalandcore.service.AccountService;
-import com.hola.holalandfptu.entity.Club;
-import com.hola.holalandfptu.entity.ClubType;
 import com.hola.holalandfptu.service.ClubService;
 import com.hola.holalandfptu.service.ClubTypeService;
 import com.hola.holalandtraffic.entity.Member;
@@ -100,50 +98,5 @@ public class MemberController {
         model.addAttribute("addMember", Member.builder().build());
         model.addAttribute("members", members);
     }
-// demo fptu club
-@GetMapping("/fpt-university")
-public String goToFptUniversity(Model model) {
-    model.addAttribute("page", 1);
-    return "fpt-university";
-}
 
-    @GetMapping("/fpt-university-club")
-    public String goToFptUniversityClub(Model model) {
-        List<ClubType> clubTypeList = clubTypeService.getAll();
-        List<Club> clubList = clubService.getAllByType(clubTypeList.get(0).getFptuClubTypeId());
-        model.addAttribute("clubTypeList", clubTypeList);
-        model.addAttribute("clubList", clubList);
-        model.addAttribute("page", 2);
-        return "fpt-university";
-    }
-
-    @GetMapping("/fpt-university-club/type")
-    public String getFptUniversityClubType(
-            @RequestParam("clubTypeId") Integer clubTypeId,
-            @RequestParam("page") Integer page,
-            Model model
-    ) {
-        List<ClubType> clubTypeList = clubTypeService.getAll();
-        List<Club> clubList = clubService.getAllByType(clubTypeId);
-        model.addAttribute("clubTypeList", clubTypeList);
-        model.addAttribute("clubList", clubList);
-        model.addAttribute("page", page);
-        return "fpt-university";
-    }
-    @GetMapping("/fpt-university-club/detail")
-    public String getFptUniversityClubDetail(
-            @RequestParam("clubTypeId") Integer clubTypeId,
-            @RequestParam("clubId") Integer clubId,
-            @RequestParam("page") Integer page,
-            Model model
-    ) {
-        List<ClubType> clubTypeList = clubTypeService.getAll();
-        List<Club> clubList = clubService.getAllByType(clubTypeId);
-        Club club = clubService.getOne(clubId);
-        model.addAttribute("clubTypeList", clubTypeList);
-        model.addAttribute("clubList", clubList);
-        model.addAttribute("club", club);
-        model.addAttribute("page", page);
-        return "fpt-university";
-    }
 }
