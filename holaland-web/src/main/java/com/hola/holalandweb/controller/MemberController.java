@@ -1,13 +1,9 @@
 package com.hola.holalandweb.controller;
 
-import com.hola.holalandcore.service.AccountService;
-import com.hola.holalandfptu.service.ClubService;
-import com.hola.holalandfptu.service.ClubTypeService;
 import com.hola.holalandtraffic.entity.Member;
-import com.hola.holalandtraffic.service.BusService;
 import com.hola.holalandtraffic.service.MemberService;
-import com.hola.holalandtraffic.service.MotorbikeTaxiDriversService;
 import com.hola.holalandweb.util.SendEmailService;
+import com.hola.holalandwork.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,36 +18,74 @@ import java.util.List;
 @Controller
 public class MemberController {
 
-    // call MemberService from module traffic
     private final MemberService memberService;
-    // call AccountService from module core
-    private final AccountService accountService;
     private final SendEmailService sendEmailService;
-    private final BusService busService;
-    private final ClubService clubService;
-    private final ClubTypeService clubTypeService;
-
+    //call WorkService from module holaland-work
+    private final SttWorkReportService sttWorkReportService;
+    private final SttWorkRequestFindJobService sttWorkRequestFindJobService;
+    private final SttWorkRequestRecruitmentService sttWorkRequestRecruitmentService;
+    private final WorkCommentService workCommentService;
+    private final WorkJobTypeService  workJobTypeService;
+    private final WorkReportService workReportService;
+    private final WorkRequestApplyService workRequestApplyService;
+    private final WorkRequestBookService workRequestBookService;
+    private final WorkRequestFindJobService workRequestFindJobService;
+    private final WorkRequestRecruitmentService workRequestRecruitmentService;
+    private final WorkSalaryTypeService workSalaryTypeService;
+    private final WorkTimeService workTimeService;
     @Autowired
-    public MemberController(MemberService memberService, AccountService accountService, SendEmailService sendEmailService, BusService busService, MotorbikeTaxiDriversService motorbikeTaxiDriversService,
-                            ClubService clubService, ClubTypeService clubTypeService) {
+    public MemberController(MemberService memberService, SendEmailService sendEmailService, SttWorkReportService sttWorkReportService, SttWorkRequestFindJobService
+            sttWorkRequestFindJobService, SttWorkRequestRecruitmentService sttWorkRequestRecruitmentService,
+                            WorkCommentService workCommentService, WorkJobTypeService workJobTypeService,
+                            WorkReportService workReportService, WorkRequestApplyService workRequestApplyService,
+                            WorkRequestBookService workRequestBookService, WorkRequestFindJobService
+                                        workRequestFindJobService, WorkRequestRecruitmentService
+                                        workRequestRecruitmentService, WorkSalaryTypeService workSalaryTypeService,
+                            WorkTimeService workTimeService) {
         this.memberService = memberService;
-        this.accountService = accountService;
         this.sendEmailService = sendEmailService;
-        this.busService = busService;
-        this.clubService = clubService;
-        this.clubTypeService = clubTypeService;
+        this.sttWorkReportService = sttWorkReportService;
+        this.sttWorkRequestFindJobService = sttWorkRequestFindJobService;
+        this.sttWorkRequestRecruitmentService = sttWorkRequestRecruitmentService;
+        this.workCommentService = workCommentService;
+        this.workJobTypeService = workJobTypeService;
+        this.workReportService = workReportService;
+        this.workRequestApplyService = workRequestApplyService;
+        this.workRequestBookService = workRequestBookService;
+        this.workRequestFindJobService = workRequestFindJobService;
+        this.workRequestRecruitmentService = workRequestRecruitmentService;
+        this.workSalaryTypeService = workSalaryTypeService;
+        this.workTimeService = workTimeService;
     }
 
     @GetMapping("/members")
     public String members(Model model) {
-        backToMembers(model);
-        List listBus = busService.getAll();
-        List listClub = clubService.getAllByType(1);
-        List listCLubType = clubTypeService.getAll();
+        List listSttWorkReportService = sttWorkReportService.getAll();
+        List listSttWorkRequestFindJobService = sttWorkRequestFindJobService.getAll();
+        List listSttWorkRequestRecruitmentService = sttWorkRequestRecruitmentService.getAll();
+        List listWorkCommentService = workCommentService.getAll();
+        List listWorkJobTypeService = workJobTypeService.getAll();
+        List listWorkReportService = workReportService.getAll();
+        List listWorkRequestApplyService = workRequestApplyService.getAll();
+        List listWorkRequestBookService = workRequestBookService.getAll();
+        List listWorkRequestFindJobService = workRequestFindJobService.getAll();
+        List listWorkRequestRecruitmentService = workRequestRecruitmentService.getAll();
+        List listWorkSalaryTypeService = workSalaryTypeService.getAll();
+        List listWorkTimeService = workTimeService.getAll();
 
-        model.addAttribute("listBus", listBus);
-        model.addAttribute("listClub", listClub);
-        model.addAttribute("listClubType", listCLubType);
+        model.addAttribute("listSttWorkReport", listSttWorkReportService);
+        model.addAttribute("listSttWorkRequestFindJob", listSttWorkRequestFindJobService);
+        model.addAttribute("listSttWorkRequestRecruitment", listSttWorkRequestRecruitmentService);
+        model.addAttribute("listWorkComment", listWorkCommentService);
+        model.addAttribute("listWorkJobType", listWorkJobTypeService);
+        model.addAttribute("listWorkReport", listWorkReportService);
+        model.addAttribute("listWorkRequestApply", listWorkRequestApplyService);
+        model.addAttribute("listWorkRequestBook", listWorkRequestBookService);
+        model.addAttribute("listWorkRequestFindJob", listWorkRequestFindJobService);
+        model.addAttribute("listWorkRequestRecruitment", listWorkRequestRecruitmentService);
+        model.addAttribute("listWorkSalaryType", listWorkSalaryTypeService);
+        model.addAttribute("listWorkTime", listWorkTimeService);
+
         return "members";
     }
 
@@ -64,7 +98,6 @@ public class MemberController {
                 member.getMemberEmail()
         );
         model.addAttribute("send", "- Gửi email thành công!");
-        backToMembers(model);
         return "members";
     }
     //add member
@@ -79,7 +112,6 @@ public class MemberController {
 
         int memberId = memberService.save(addMember);
         if (memberId > 0) {
-            backToMembers(model);
             return "members";
         } else {
             return "error";
@@ -89,14 +121,9 @@ public class MemberController {
     @GetMapping("/confirm-delete-member")
     public String deleteMember(@RequestParam("id") Integer id, Model model) {
         memberService.delete(id);
-        backToMembers(model);
         return "members";
     }
 
-    private void backToMembers(Model model) {
-        List<Member> members = memberService.getAll();
-        model.addAttribute("addMember", Member.builder().build());
-        model.addAttribute("members", members);
-    }
+
 
 }
