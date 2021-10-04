@@ -90,110 +90,358 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-12 mb-3">
-        <h3>Danh sách xe bus</h3>
-        <div class="datatable bg-dark-ui border-ui" th:if="${listBus.size() != 0}">
-          <table cellspacing="0" class="table" id="listBus" width="100%">
-            <thead>
-            <tr>
-              <th class="text-center" scope="col">STT</th>
-              <th class="text-center" scope="col">Name</th>
-              <th class="text-center" scope="col">Giờ khởi hành</th>
-              <th class="text-center" scope="col">Giờ nghỉ</th>
-              <th class="text-center" scope="col">Thông tin tuyến</th>
-              <th class="text-center" scope="col">Giá</th>
-              <th class="text-center" scope="col">Điểm dừng</th>
-              <th class="text-center" scope="col">Trạng thái</th>
-              <th class="text-center" scope="col">Xóa</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="bus, index : ${listBus}">
-              <td class="text-center" th:text="*{index.count}"></td>
-              <td class="text-center" th:text="*{bus.tfBusName}"></td>
-              <td class="text-center" th:text="*{bus.tfBusStartTime}"></td>
-              <td class="text-center" th:text="*{bus.tfBusEndTime}"></td>
-              <td class="text-center" th:text="*{bus.tfBusInfo}"></td>
-              <td class="text-center" th:text="*{bus.tfBusPrice}"></td>
-              <td class="text-center">OK</td>
-              <td class="text-center" th:text="*{bus.tfBusStatus}"></td>
-              <td class="text-center" th:text="*{bus.tfBusDeleted} ? 'Đã xóa' : 'Chưa xóa'"></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <div th:if="${listBus.size() == 0}">
-          <h5 class="alert-info bg-dark-ui border-ui">Không có bus nào!</h5>
+    <div class="right mb-5">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <h3>Danh sách công nhân</h3>
+          <div class="datatable bg-dark-ui border-ui" th:if="${.size() != 0}">
+            <table cellspacing="0" class="table" id="ListWorker" width="100%">
+              <thead>
+              <tr>
+                <th class="text-center" scope="col">STT</th>
+                <th class="text-center" scope="col">Tiêu đề</th>
+                <th class="text-center" scope="col">Ngày bắt đầu</th>
+                <th class="text-center" scope="col">Ngày kết thúc</th>
+                <th class="text-center" scope="col">Mô tả</th>
+                <th class="text-center" scope="col">Kinh nghiệm</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="worker, index : ${}">
+                <td class="text-center" th:text="*{index.count}"></td>
+                <td class="text-center" th:text="*{worker.workRequestFindJobTitle}"></td>
+                <td class="text-center" th:text="*{worker.workRequestFindJobStartDateTime}"></td>
+                <td class="text-center" th:text="${worker.workRequestFindJobEndDateTime}"></td>
+                <td class="text-center" th:text="*{worker.workRequestFindJobDescription}"></td>
+                <td class="text-center" th:text="*{worker.workRequestFindJobPersonalExperience}"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div th:if="${.size() == 0}">
+            <h5 class="alert-info bg-dark-ui border-ui">Không có công nhân nào!</h5>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-12 mb-3">
-        <h3>Danh sách câu lạc bộ</h3>
-        <div class="datatable bg-dark-ui border-ui" th:if="${listClub.size() != 0}">
-          <table cellspacing="0" class="table" id="listClub" width="100%">
-            <thead>
-            <tr>
-              <th class="text-center" scope="col">STT</th>
-              <th class="text-center" scope="col">Name</th>
-              <th class="text-center" scope="col">Logo</th>
-              <th class="text-center" scope="col">Loại CLB</th>
-              <th class="text-center" scope="col">Số lượng thành viên</th>
-              <th class="text-center" scope="col">Tên người liên lạc</th>
-              <th class="text-center" scope="col">Email người liên lạc</th>
-              <th class="text-center" scope="col">Số điện thoại người liên lạc</th>
-              <th class="text-center" scope="col">Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="f, index : ${listClub}">
-              <td class="text-center" th:text="*{index.count}"></td>
-              <td class="text-center" th:text="*{f.fptuClubName}"></td>
-              <td class="text-center">
-                <img class="media-object" th:src="|data:image/png;base64,*{f.fptuClubLogo}|" width="60"/>
-              </td>
-              <td class="text-center" th:text="*{f.fptuClubTypeId}"></td>
-              <td class="text-center" th:text="*{f.fptuClubMemberQuantity}"></td>
-              <td class="text-center" th:text="*{f.fptuClubContactName}"></td>
-              <td class="text-center" th:text="*{f.fptuClubContactEmail}"></td>
-              <td class="text-center" th:text="*{f.fptuClubContactPhoneNumber}"></td>
-              <td class="text-center" th:text="*{f.fptuClubDeleted}"></td>
-            </tr>
-            </tbody>
-          </table>
+      <div class="right mb-5">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <h3>Danh sách công việc</h3>
+            <div class="datatable bg-dark-ui border-ui" th:if="${.size() != 0}">
+              <table cellspacing="0" class="table" id="ListJob" width="100%">
+                <thead>
+                <tr>
+                  <th class="text-center" scope="col">STT</th>
+                  <th class="text-center" scope="col">Tiêu đề</th>
+                  <th class="text-center" scope="col">Ngày bắt đầu</th>
+                  <th class="text-center" scope="col">Ngày kết thúc</th>
+                  <th class="text-center" scope="col">Mô tả</th>
+                  <th class="text-center" scope="col">Yêu cầu</th>
+                  <th class="text-center" scope="col">Quyền lợi</th>
+                  <th class="text-center" scope="col">Mức lương</th>
+                  <th class="text-center" scope="col">Yêu cầu kinh nghiệm</th>
+                  <th class="text-center" scope="col">Địa điểm làm việc</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="job, index : ${}">
+                  <td class="text-center" th:text="*{index.count}"></td>
+                  <td class="text-center" th:text="*{job.workRequestRecruitmentTitle}"></td>
+                  <td class="text-center" th:text="*{job.workRequestRecruitmentStartDateTime}"></td>
+                  <td class="text-center" th:text="${job.workRequestRecruitmentEndDateTime}"></td>
+                  <td class="text-center" th:text="*{job.workRequestRecruitmentDescription}"></td>
+                  <td class="text-center" th:text="*{job.workRequestRecruitmentRequirement}"></td>
+                  <td class="text-center" th:text="*{job.workRequestRecruitmentBenefit}"></td>
+                  <td class="text-center" th:text="*{job.workRequestRecruitmentWage}"></td>
+                  <td class="text-center" th:text="*{job.workRequestRecruitmentExperienceRequirement}"></td>
+                  <td class="text-center" th:text="*{job.workRequestRecruitmentWorkLocation}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div th:if="${.size() == 0}">
+              <h5 class="alert-info bg-dark-ui border-ui">Không có công việc nào!</h5>
+            </div>
+          </div>
         </div>
-        <div th:if="${listClub.size() == 0}">
-          <h5 class="alert-info bg-dark-ui border-ui">Không có câu lạc bộ!</h5>
-        </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-12 mb-3">
-        <h3>Danh sách câu lạc bộ</h3>
-        <div class="datatable bg-dark-ui border-ui" th:if="${listClubType.size() != 0}">
-          <table cellspacing="0" class="table" id="listClubType" width="100%">
-            <thead>
-            <tr>
-              <th class="text-center" scope="col">STT</th>
-              <th class="text-center" scope="col">Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="f, index : ${listClubType}">
-              <td class="text-center" th:text="*{index.count}"></td>
-              <td class="text-center" th:text="*{f.fptuClubTypeName}"></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <div th:if="${listClub.size() == 0}">
-          <h5 class="alert-info bg-dark-ui border-ui">Không có câu lạc bộ!</h5>
-        </div>
-      </div>
-    </div>
+        <div class="right mb-5">
+          <div class="row">
+            <div class="col-12 mb-3">
+              <h3>Danh sách kiểu lương</h3>
+              <div class="datatable bg-dark-ui border-ui" th:if="${.size() != 0}">
+                <table cellspacing="0" class="table" id="ListSalary" width="100%">
+                  <thead>
+                  <tr>
+                    <th class="text-center" scope="col">STT</th>
+                    <th class="text-center" scope="col">Tên</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="salary, index : ${}">
+                    <td class="text-center" th:text="*{index.count}"></td>
+                    <td class="text-center" th:text="*{salary.workSalaryTypeName}"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div th:if="${.size() == 0}">
+                <h5 class="alert-info bg-dark-ui border-ui">Không có kiểu lương nào!</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="right mb-5">
+            <div class="row">
+              <div class="col-12 mb-3">
+                <h3>Danh sách thời gian làm việc</h3>
+                <div class="datatable bg-dark-ui border-ui" th:if="${.size() != 0}">
+                  <table cellspacing="0" class="table" id="ListTime" width="100%">
+                    <thead>
+                    <tr>
+                      <th class="text-center" scope="col">STT</th>
+                      <th class="text-center" scope="col">Tên</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="time, index : ${}">
+                      <td class="text-center" th:text="*{index.count}"></td>
+                      <td class="text-center" th:text="*{time.workTimeName}"></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div th:if="${.size() == 0}">
+                  <h5 class="alert-info bg-dark-ui border-ui">Không có thời gian nào!</h5>
+                </div>
+              </div>
+            </div>
+
+            <div class="right mb-5">
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <h3>Danh sách người thuê</h3>
+                  <div class="datatable bg-dark-ui border-ui" th:if="${.size() != 0}">
+                    <table cellspacing="0" class="table" id="ListBook" width="100%">
+                      <thead>
+                      <tr>
+                        <th class="text-center" scope="col">STT</th>
+                        <th class="text-center" scope="col">Mã số bài đăng</th>
+                        <th class="text-center" scope="col">Mã số tình trạng</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="book, index : ${}">
+                        <td class="text-center" th:text="*{index.count}"></td>
+                        <td class="text-center" th:text="*{book.workRequestFindJobId}"></td>
+                        <td class="text-center" th:text="*{book.workRequestBookSttId}"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div th:if="${.size() == 0}">
+                    <h5 class="alert-info bg-dark-ui border-ui">Không có người thuê nào!</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="right mb-5">
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <h3>Danh sách người ứng tuyển</h3>
+                  <div class="datatable bg-dark-ui border-ui" th:if="${.size() != 0}">
+                    <table cellspacing="0" class="table" id="ListAppy" width="100%">
+                      <thead>
+                      <tr>
+                        <th class="text-center" scope="col">STT</th>
+                        <th class="text-center" scope="col">Mã số bài đăng</th>
+                        <th class="text-center" scope="col">Mã số tình trạng</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="apply, index : ${}">
+                        <td class="text-center" th:text="*{index.count}"></td>
+                        <td class="text-center" th:text="*{apply.workRequestRecruitmentId}"></td>
+                        <td class="text-center" th:text="*{apply.workRequestApplySttId}"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div th:if="${.size() == 0}">
+                    <h5 class="alert-info bg-dark-ui border-ui">Không có người ứng tuyển nào!</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="right mb-5">
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <h3>Danh sách Report</h3>
+                  <div class="datatable bg-dark-ui border-ui" th:if="${.size() != 0}">
+                    <table cellspacing="0" class="table" id="ListReport" width="100%">
+                      <thead>
+                      <tr>
+                        <th class="text-center" scope="col">STT</th>
+                        <th class="text-center" scope="col">Lý do</th>
+                        <th class="text-center" scope="col">Mô tả</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="report, index : ${}">
+                        <td class="text-center" th:text="*{index.count}"></td>
+                        <td class="text-center" th:text="*{report.workReportReason}"></td>
+                        <td class="text-center" th:text="*{apply.workReportDescription}"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div th:if="${.size() == 0}">
+                    <h5 class="alert-info bg-dark-ui border-ui">Không có report nào!</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="right mb-5">
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <h3>Danh sách các loại công việc</h3>
+                  <div class="datatable bg-dark-ui border-ui" th:if="${.size() != 0}">
+                    <table cellspacing="0" class="table" id="ListJobType" width="100%">
+                      <thead>
+                      <tr>
+                        <th class="text-center" scope="col">STT</th>
+                        <th class="text-center" scope="col">Tên</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="type, index : ${}">
+                        <td class="text-center" th:text="*{index.count}"></td>
+                        <td class="text-center" th:text="*{type.workJobTypeName}"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div th:if="${.size() == 0}">
+                    <h5 class="alert-info bg-dark-ui border-ui">Không có loại công việc nào!</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="right mb-5">
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <h3>Danh sách comment</h3>
+                  <div class="datatable bg-dark-ui border-ui" th:if="${.size() != 0}">
+                    <table cellspacing="0" class="table" id="ListComment" width="100%">
+                      <thead>
+                      <tr>
+                        <th class="text-center" scope="col">STT</th>
+                        <th class="text-center" scope="col">Mã bài</th>
+                        <th class="text-center" scope="col">Nội dung</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="comment, index : ${}">
+                        <td class="text-center" th:text="*{index.count}"></td>
+                        <td class="text-center" th:text="*{comment.workRequestRecruitmentId}"></td>
+                        <td class="text-center" th:text="*{comment.workCommentContent}"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div th:if="${.size() == 0}">
+                    <h5 class="alert-info bg-dark-ui border-ui">Không có comment nào!</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="right mb-5">
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <h3>Danh sách tình trạng bài tìm công việc</h3>
+                  <div class="datatable bg-dark-ui border-ui" th:if="${.size() != 0}">
+                    <table cellspacing="0" class="table" id="ListSttFind" width="100%">
+                      <thead>
+                      <tr>
+                        <th class="text-center" scope="col">STT</th>
+                        <th class="text-center" scope="col">Tên</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="stt, index : ${}">
+                        <td class="text-center" th:text="*{index.count}"></td>
+                        <td class="text-center" th:text="*{stt.sttWorkRequestFindJobName}"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div th:if="${.size() == 0}">
+                    <h5 class="alert-info bg-dark-ui border-ui">Không có tình trạng nào!</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="right mb-5">
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <h3>Danh sách tình trạng bài tìm công nhân</h3>
+                  <div class="datatable bg-dark-ui border-ui" th:if="${.size() != 0}">
+                    <table cellspacing="0" class="table" id="ListSttRecruitment" width="100%">
+                      <thead>
+                      <tr>
+                        <th class="text-center" scope="col">STT</th>
+                        <th class="text-center" scope="col">Tên</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="stt, index : ${}">
+                        <td class="text-center" th:text="*{index.count}"></td>
+                        <td class="text-center" th:text="*{stt.sttWorkRequestRecruitmentName}"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div th:if="${.size() == 0}">
+                    <h5 class="alert-info bg-dark-ui border-ui">Không có tình trạng nào!</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="right mb-5">
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <h3>Danh sách tình trạng bài Report</h3>
+                  <div class="datatable bg-dark-ui border-ui" th:if="${.size() != 0}">
+                    <table cellspacing="0" class="table" id="ListSttReport" width="100%">
+                      <thead>
+                      <tr>
+                        <th class="text-center" scope="col">STT</th>
+                        <th class="text-center" scope="col">Tên</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="stt, index : ${}">
+                        <td class="text-center" th:text="*{index.count}"></td>
+                        <td class="text-center" th:text="*{stt.sttWorkReportContent}"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div th:if="${.size() == 0}">
+                    <h5 class="alert-info bg-dark-ui border-ui">Không có tình trạng nào!</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
 
   </div>
 </div>
