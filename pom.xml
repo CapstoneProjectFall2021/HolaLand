@@ -25,6 +25,7 @@
         <module>holaland-core</module>
         <module>holaland-traffic</module>
         <module>holaland-fptu</module>
+        <module>holaland-work</module>
     </modules>
     <dependencies>
         <dependency>
