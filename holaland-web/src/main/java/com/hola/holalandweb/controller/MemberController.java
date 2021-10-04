@@ -45,13 +45,6 @@ public class MemberController {
     @GetMapping("/members")
     public String members(Model model) {
         backToMembers(model);
-        List listBus = busService.getAll();
-        List listClub = clubService.getAllByType(1);
-        List listCLubType = clubTypeService.getAll();
-
-        model.addAttribute("listBus", listBus);
-        model.addAttribute("listClub", listClub);
-        model.addAttribute("listClubType", listCLubType);
         return "members";
     }
 
@@ -86,6 +79,14 @@ public class MemberController {
         }
     }
 
+    @GetMapping("/get-one-member")
+    public String getOneMember(@RequestParam("id") Integer id, Model model) {
+        Member member = memberService.getOne(id);
+        backToMembers(model);
+        model.addAttribute("oneMember",member);
+        return "members";
+    }
+
     @GetMapping("/confirm-delete-member")
     public String deleteMember(@RequestParam("id") Integer id, Model model) {
         memberService.delete(id);
@@ -95,8 +96,15 @@ public class MemberController {
 
     private void backToMembers(Model model) {
         List<Member> members = memberService.getAll();
+        List listBus = busService.getAll();
+        List listClub = clubService.getAllByType(1);
+        List listCLubType = clubTypeService.getAll();
+
         model.addAttribute("addMember", Member.builder().build());
         model.addAttribute("members", members);
+        model.addAttribute("listBus", listBus);
+        model.addAttribute("listClub", listClub);
+        model.addAttribute("listClubType", listCLubType);
     }
 
 }
