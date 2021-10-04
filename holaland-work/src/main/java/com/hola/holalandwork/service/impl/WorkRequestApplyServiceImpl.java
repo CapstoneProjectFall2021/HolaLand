@@ -4,9 +4,11 @@ import com.hola.holalandwork.entity.WorkRequestApply;
 import com.hola.holalandwork.repository.WorkRequestApplyRepository;
 import com.hola.holalandwork.service.WorkRequestApplyService;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class WorkRequestApplyServiceImpl implements WorkRequestApplyService {
 
     private final WorkRequestApplyRepository workRequestApplyRepository;
