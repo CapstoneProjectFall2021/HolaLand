@@ -1,9 +1,10 @@
 package com.hola.holalandwork.service;
 
+import com.hola.holalandwork.entity.SttWorkRequestFindJob;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
 public interface SttWorkRequestFindJobService {
-    List<SttWorkRequestFindJobService> getAll() throws DataAccessException;
+    List<SttWorkRequestFindJob> getAll() throws DataAccessException;
 }
