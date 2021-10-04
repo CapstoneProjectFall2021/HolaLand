@@ -91,7 +91,7 @@
     </div>
 
     <div th:if="${oneMember != null}">
-      <form th:action="@{''}" th:object="${oneMember}" method="post">
+      <form th:action="@{/update-member}" th:object="${oneMember}" method="post">
         <table cellspacing="0" class="table" id="fixmember" width="100%">
           <tr>
             <td class="text-center">Name</td>
