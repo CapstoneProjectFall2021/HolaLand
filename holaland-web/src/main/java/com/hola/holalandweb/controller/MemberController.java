@@ -95,8 +95,16 @@ public class MemberController {
 
     private void backToMembers(Model model) {
         List<Member> members = memberService.getAll();
+        List listBus = busService.getAll();
+        List listClub = clubService.getAllByType(1);
+        List listCLubType = clubTypeService.getAll();
+
         model.addAttribute("addMember", Member.builder().build());
         model.addAttribute("members", members);
+
+        model.addAttribute("listBus", listBus);
+        model.addAttribute("listClub", listClub);
+        model.addAttribute("listClubType", listCLubType);
     }
 
 }

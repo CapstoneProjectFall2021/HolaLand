@@ -21,13 +21,13 @@
       <tr>
         <td class="text-center">Gender</td>
         <td>
-          <input type="radio" th:field="*{memberGender}" th:value="0"> Male
-          <input type="radio" th:field="*{memberGender}" th:value="1"> Female
+          <input type="radio" th:field="*{memberGender}" th:value="1"> Male
+          <input type="radio" th:field="*{memberGender}" th:value="0"> Female
         </td>
       </tr>
       <tr>
         <td class="text-center">DOB</td>
-        <td><input th:field="*{memberDob}"></td>
+        <td><input type="date" th:field="*{memberDob}"></td>
       </tr>
       <tr>
         <td class="text-center">Mobile</td>
