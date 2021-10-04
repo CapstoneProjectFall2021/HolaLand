@@ -1,4 +1,4 @@
-package mapper;
+package com.hola.holalandwork.mapper;
 
 import com.hola.holalandwork.entity.SttWorkRequestRecruitment;
 import org.springframework.jdbc.core.RowMapper;

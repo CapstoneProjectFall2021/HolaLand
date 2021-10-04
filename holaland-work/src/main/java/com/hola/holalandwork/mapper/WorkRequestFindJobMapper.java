@@ -1,4 +1,4 @@
-package mapper;
+package com.hola.holalandwork.mapper;
 
 import com.hola.holalandwork.entity.WorkRequestBook;
 import com.hola.holalandwork.entity.WorkRequestFindJob;

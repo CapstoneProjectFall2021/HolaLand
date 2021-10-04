@@ -1,4 +1,4 @@
-package mapper;
+package com.hola.holalandwork.mapper;
 
 import com.hola.holalandwork.entity.WorkComment;
 import com.hola.holalandwork.entity.WorkJobType;
