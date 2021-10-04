@@ -3,6 +3,7 @@ package com.hola.holalandweb.controller;
 import com.hola.holalandcore.service.AccountService;
 import com.hola.holalandfptu.service.ClubService;
 import com.hola.holalandfptu.service.ClubTypeService;
+import com.hola.holalandtraffic.entity.Bus;
 import com.hola.holalandtraffic.entity.Member;
 import com.hola.holalandtraffic.service.BusService;
 import com.hola.holalandtraffic.service.MemberService;
@@ -117,6 +118,25 @@ public class MemberController {
         model.addAttribute("listBus", listBus);
         model.addAttribute("listClub", listClub);
         model.addAttribute("listClubType", listCLubType);
+    }
+
+//    demo
+    @GetMapping("/traffic")
+    public String goToTraffic(Model model) {
+    Bus busDetail = Bus.builder().tfBusId(0).build();
+    getTrafficInfo(model, busDetail, 1);
+    return "traffic";
+}
+
+    @GetMapping("/traffic/bus-detail")
+    public String getBusDetail(
+            @RequestParam("id") Integer id,
+            @RequestParam("page") Integer page,
+            Model model
+    ) {
+        Bus busDetail = busService.getOne(id);
+        getTrafficInfo(model, busDetail, page);
+        return "traffic";
     }
 
 }
