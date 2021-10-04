@@ -61,7 +61,27 @@
               <th class="text-center" scope="col" style="width: 80px;">Thêm</th>
             </tr>
             </thead>
-            
+            <tbody>
+            <tr th:each="member, index : ${members}">
+              <td class="text-center" th:text="*{index.count}"></td>
+              <td class="text-center" th:text="*{member.memberName}"></td>
+              <td class="text-center" th:text="*{member.memberGender} ? 'Nam' : 'Nữ'"></td>
+              <td class="text-center" th:text="${#calendars.format(member.memberDob, 'dd-MM-yyyy')}"></td>
+              <td class="text-center" th:text="*{member.memberMobile}"></td>
+              <td class="text-center" th:text="*{member.memberEmail}"></td>
+              <td class="text-center">
+                <a class="text-success action me-2" data-bs-placement="top"
+                   data-bs-toggle="tooltip" th:href="@{/send-email(id=*{member.memberId})}" title="Chỉnh sửa">
+                  Sửa
+                </a>
+                <a class="text-danger action" data-bs-placement="top"
+                   data-bs-toggle="tooltip" th:href="@{/confirm-delete-member(id=*{member.memberId})}"
+                   title="Xoá thành viên">
+                  Xoá
+                </a>
+              </td>
+            </tr>
+            </tbody>
           </table>
         </div>
         <div th:if="${members.size() == 0}">
