@@ -90,6 +90,39 @@
       </div>
     </div>
 
+    <div>
+      <form th:action="@{/update-member}" th:object="${updateMember}" method="post">
+        <table cellspacing="0" class="table" id="fixmember" width="100%">
+          <tr>
+            <td class="text-center">Name</td>
+            <td><input th:field="*{memberName}"></td>
+          </tr>
+          <tr>
+            <td class="text-center">Gender</td>
+            <td>
+              <input type="radio" th:field="*{memberGender}" th:value="1"> Male
+              <input type="radio" th:field="*{memberGender}" th:value="0"> Female
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center">DOB</td>
+            <td><input type="date" th:field="*{memberDob}"></td>
+          </tr>
+          <tr>
+            <td class="text-center">Mobile</td>
+            <td><input th:field="*{memberMobile}"></td>
+          </tr>
+          <tr>
+            <td class="text-center">Email</td>
+            <td><input th:field="*{memberEmail}"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="text-center"><input type="submit" value="Sửa"></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
     <div class="row">
       <div class="col-12 mb-3">
         <h3>Danh sách xe bus</h3>
