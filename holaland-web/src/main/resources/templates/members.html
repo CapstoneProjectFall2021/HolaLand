@@ -91,11 +91,11 @@
     </div>
 
     <div th:if="${oneMember != null}">
-      <form th:action="@{/update-member}" th:object="${oneMember}" method="post">
+      <form th:action="@{/update-member}" th:object="${updateMember}" method="post">
         <table cellspacing="0" class="table" id="fixmember" width="100%">
           <tr>
             <td class="text-center">Name</td>
-            <td><input type="text" th:name="name" th:field="${oneMember.memberName}"></td>
+            <td><input type="text" th:field="${oneMember.memberName}"></td>
           </tr>
           <tr>
             <td class="text-center">Gender</td>
@@ -119,9 +119,9 @@
           <tr>
             <td colspan="2" class="text-center"><input type="submit" value="Sửa"></td>
           </tr>
-          <input type="hidden" th:value="${oneMember.memberRankId}">
-          <input type="hidden" th:value="${oneMember.memberStatusId}">
-          <input type="hidden" th:value="${oneMember.memberId}">
+          <input type="hidden" th:field="${oneMember.memberRankId}">
+          <input type="hidden" th:field="${oneMember.memberStatusId}">
+          <input type="hidden" th:field="${oneMember.memberId}">
         </table>
       </form>
     </div>
