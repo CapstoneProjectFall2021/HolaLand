@@ -49,7 +49,7 @@ public class MemberRepositoryImpl implements MemberRepository, IRepositoryQuery 
             ps.setObject(7, obj.getMemberStatusId());
             return ps;
         }, keyHolder);
-        return keyHolder.getKey();
+        return keyHolder.getKey().intValue();
     }
 
     @Override
