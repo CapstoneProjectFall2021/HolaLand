@@ -15,6 +15,6 @@ public interface MemberRepository{
 
     boolean update(Member obj) throws DataAccessException;
 
+    
     boolean delete(int id) throws DataAccessException;
-
 }
