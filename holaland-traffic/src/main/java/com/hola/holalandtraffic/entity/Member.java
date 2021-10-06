@@ -10,13 +10,6 @@ import java.sql.Date;
 @Getter
 @Setter
 public class Member {
-    private int memberId;
-    private String memberName;
-    private boolean memberGender;
-    private Date memberDob;
-    private String memberMobile;
-    private String memberEmail;
-    private int memberRankId;
-    private int memberStatusId;
+
 
 }
