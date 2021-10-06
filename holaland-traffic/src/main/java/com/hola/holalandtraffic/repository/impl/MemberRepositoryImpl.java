@@ -54,6 +54,17 @@ public class MemberRepositoryImpl implements MemberRepository, IRepositoryQuery 
 
     @Override
     public boolean update(Member obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                MEMBER_UPDATE_ONE,
+                obj.getMemberName(),
+                obj.isMemberGender(),
+                obj.getMemberDob(),
+                obj.getMemberMobile(),
+                obj.getMemberEmail(),
+                obj.getMemberRankId(),
+                obj.getMemberStatusId(),
+                obj.getMemberId()
+        ) > 0;
     }
 
     @Override
