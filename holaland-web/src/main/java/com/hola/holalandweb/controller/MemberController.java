@@ -106,24 +106,6 @@ public class MemberController {
         return "members";
     }
 
-    @GetMapping("/confirm-delete-member")
-    public String delete(@RequestParam("id") Integer id, Model model) {
-        memberService.delete(id);
-        backToMembers(model);
-        return "members";
-    }
-
-    @PostMapping("/update-member")
-    public String update (@ModelAttribute("updateMember") Member updateMember, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            System.out.println("There was a error " + bindingResult);
-            return "error";
-        }
-        memberService.update(updateMember);
-        backToMembers(model);
-        return "members";
-    }
-
     private void backToMembers(Model model) {
         List<Member> members = memberService.getAll();
         List listBus = busService.getAll();
