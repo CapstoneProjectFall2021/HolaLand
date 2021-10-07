@@ -1,6 +1,5 @@
 package com.hola.holalandwork.mapper;
 
-import com.hola.holalandwork.entity.WorkReport;
 import com.hola.holalandwork.entity.WorkRequestApply;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -8,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class WorkRequestApplyMapper implements RowMapper<WorkRequestApply> {
+
     @Override
     public WorkRequestApply mapRow(ResultSet resultSet, int i) throws SQLException {
         return WorkRequestApply.builder()

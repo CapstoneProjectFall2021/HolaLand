@@ -6,5 +6,6 @@ import org.springframework.dao.DataAccessException;
 import java.util.List;
 
 public interface WorkReportService {
+
     List<WorkReport> getAll() throws DataAccessException;
 }

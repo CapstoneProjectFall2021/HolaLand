@@ -12,5 +12,4 @@ public interface WorkRequestFindJobRepository {
     List<WorkRequestFindJob> getAllByType(int typeId) throws DataAccessException;
 
     WorkRequestFindJob getOne(int id) throws DataAccessException;
-
 }

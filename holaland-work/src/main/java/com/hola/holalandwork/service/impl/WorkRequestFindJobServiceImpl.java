@@ -13,6 +13,7 @@ import java.util.List;
 public class WorkRequestFindJobServiceImpl implements WorkRequestFindJobService {
 
     private final WorkRequestFindJobRepository workRequestFindJobRepository;
+
     @Autowired
     public WorkRequestFindJobServiceImpl(WorkRequestFindJobRepository workRequestFindJobRepository) {
         this.workRequestFindJobRepository = workRequestFindJobRepository;

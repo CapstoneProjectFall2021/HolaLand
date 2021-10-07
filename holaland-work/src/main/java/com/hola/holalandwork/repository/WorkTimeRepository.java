@@ -10,5 +10,4 @@ public interface WorkTimeRepository {
     List<WorkTime> getAll() throws DataAccessException;
 
     WorkTime getOne(int id) throws DataAccessException;
-
 }

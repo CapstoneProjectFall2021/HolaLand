@@ -39,5 +39,4 @@ public interface IRepositoryQuery {
 
     String STT_WORK_REPORT_GET_ALL = "SELECT * FROM stt_work_report";
     String STT_WORK_REPORT_GET_ONE = "SELECT * FROM stt_work_report WHERE stt_work_report_id = ?";
-
 }

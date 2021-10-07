@@ -10,5 +10,4 @@ public interface WorkRequestApplyRepository {
     List<WorkRequestApply> getAll() throws DataAccessException;
 
     WorkRequestApply getOne(int id) throws DataAccessException;
-
 }

@@ -10,5 +10,4 @@ public interface WorkReportRepository {
     List<WorkReport> getAll() throws DataAccessException;
 
     WorkReport getOne(int id) throws DataAccessException;
-
 }

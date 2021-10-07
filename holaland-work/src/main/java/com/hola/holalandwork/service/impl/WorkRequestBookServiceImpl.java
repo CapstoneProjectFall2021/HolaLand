@@ -12,7 +12,8 @@ import java.util.List;
 @Service
 public class WorkRequestBookServiceImpl implements WorkRequestBookService {
 
-    private  final WorkRequestBookRepository workRequestBookRepository;
+    private final WorkRequestBookRepository workRequestBookRepository;
+
     @Autowired
     public WorkRequestBookServiceImpl(WorkRequestBookRepository workRequestBookRepository) {
         this.workRequestBookRepository = workRequestBookRepository;

@@ -1,6 +1,5 @@
 package com.hola.holalandwork.mapper;
 
-import com.hola.holalandwork.entity.WorkComment;
 import com.hola.holalandwork.entity.WorkJobType;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -8,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class WorkJobTypeMapper implements RowMapper<WorkJobType> {
+
     @Override
     public WorkJobType mapRow(ResultSet resultSet, int i) throws SQLException {
         return WorkJobType.builder()

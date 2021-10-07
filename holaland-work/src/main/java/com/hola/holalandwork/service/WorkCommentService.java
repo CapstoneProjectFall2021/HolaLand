@@ -6,5 +6,6 @@ import org.springframework.dao.DataAccessException;
 import java.util.List;
 
 public interface WorkCommentService {
+
     List<WorkComment> getAll() throws DataAccessException;
 }

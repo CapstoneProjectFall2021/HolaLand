@@ -10,5 +10,4 @@ public interface WorkSalaryTypeRepository {
     List<WorkSalaryType> getAll() throws DataAccessException;
 
     WorkSalaryType getOne(int id) throws DataAccessException;
-
 }

@@ -8,10 +8,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class WorkTimeServiceImpl implements WorkTimeService {
 
-    private  final WorkTimeRepository workTimeRepository;
+    private final WorkTimeRepository workTimeRepository;
 
     @Autowired
     public WorkTimeServiceImpl(WorkTimeRepository workTimeRepository) {

@@ -10,5 +10,4 @@ public interface WorkRequestBookRepository {
     List<WorkRequestBook> getAll() throws DataAccessException;
 
     WorkRequestBook getOne(int id) throws DataAccessException;
-
 }

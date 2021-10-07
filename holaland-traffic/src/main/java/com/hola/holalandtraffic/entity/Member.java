@@ -1,6 +1,10 @@
 package com.hola.holalandtraffic.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Date;
 
@@ -10,6 +14,7 @@ import java.sql.Date;
 @Getter
 @Setter
 public class Member {
+
     private int memberId;
     private String memberName;
     private boolean memberGender;
@@ -18,5 +23,4 @@ public class Member {
     private String memberEmail;
     private int memberRankId;
     private int memberStatusId;
-
 }

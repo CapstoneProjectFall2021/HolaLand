@@ -10,5 +10,4 @@ public interface SttWorkRequestFindJobRepository {
     List<SttWorkRequestFindJob> getAll() throws DataAccessException;
 
     SttWorkRequestFindJob getOne(int id) throws DataAccessException;
-
 }

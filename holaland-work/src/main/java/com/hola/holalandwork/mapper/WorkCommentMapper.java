@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class WorkCommentMapper implements RowMapper<WorkComment> {
+
     @Override
     public WorkComment mapRow(ResultSet resultSet, int i) throws SQLException {
         return WorkComment.builder()

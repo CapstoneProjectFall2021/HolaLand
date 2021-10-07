@@ -10,5 +10,4 @@ public interface WorkCommentRepository {
     List<WorkComment> getAll() throws DataAccessException;
 
     WorkComment getOne(int id) throws DataAccessException;
-
 }

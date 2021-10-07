@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SttWorkReportMapper implements RowMapper<SttWorkReport> {
+
     @Override
     public SttWorkReport mapRow(ResultSet resultSet, int i) throws SQLException {
 
