@@ -14,88 +14,36 @@
 html {
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   /* headers and titles ------------------------------ */
-  --font-weight-2: 200;
-  --font-weight-3: 300;
   --font-weight-4: 400;
   --font-weight-5: 500;
 }
 
 html[data-theme='light'] {
-  --switch-color: #198653;
   /* background-color -------------------------------- */
   --body-background: #F0F2F5;
-  --primary-background: #FFFFFF;
-  --secondary-background: #F0F2F5;
-  /* border-color ------------------------------------ */
-  --primary-border-color: transparent;
-  --secondary-border-color: #E4E6EB;
   /* text-color -------------------------------------- */
-  --main-text: #1BA80E;
   --accent-text: #1BA80E;
   --danger-text: #E25563;
   --primary-text: #050505;
-  --secondary-text: #65676B;
+  --secondary-text: #B0B3B8;
   /* button-background-color ------------------------- */
-  --navbar-button-background: #DCDFE6;
-  --primary-button-background: #FFFFFF;
-  --secondary-button-background: #E4E6EB;
-  --third-button-background: #D5D6DB;
   --label-button-background: #DCDFE6;
-  /* sidebar-link-background-hover-color ------------- */
-  --link-primary-button-background: #F2F2F2;
-  --link-secondary-button-background: #F2F2F2;
-  --icon-button-background: #E4E6EB;
-  /* icon-color -------------------------------------- */
-  --primary-icon: #B0B3B8;
-  --secondary-icon: #E4E6EB;
   /* shadow-color ------------------------------------ */
-  --shadow-1: rgb(0 0 0 / 10%);
-  --shadow-2: rgb(0 0 0 / 20%);
-  --shadow-inset: rgb(255 255 255 / 50%);
   --shadow-button: rgb(228 230 235 / 55%);
-  /* border-radius ------------------------------------ */
-  --primary-border-radius: 12px;
-  --secondary-border-radius: 10px;
-  --third-border-radius: 8px;
 }
 
 html[data-theme='dark'] {
-  --switch-color: #FFC107;
   /* background-color -------------------------------- */
   --body-background: #18191A;
-  --primary-background: #242526;
-  --secondary-background: #3A3B3C;
-  /* border-color ------------------------------------ */
-  --primary-border-color: transparent;
-  --secondary-border-color: #3A3B3C;
   /* text-color -------------------------------------- */
-  --main-text: #1ba80e;
   --accent-text: #FFC107;
   --danger-text: #B02F3B;
   --primary-text: #E4E6EB;
   --secondary-text: #B0B3B8;
   /* button-background-color ------------------------- */
-  --navbar-button-background: #3A3B3C;
-  --primary-button-background: #242526;
-  --secondary-button-background: #3A3B3C;
-  --third-button-background: #4E4F50;
   --label-button-background: #3A3B3C;
-  /* sidebar-link-background-hover-color ------------- */
-  --link-primary-button-background: #242526;
-  --link-secondary-button-background: #3A3B3C;
-  --icon-button-background: #4E4F50;
-  /* icon-color -------------------------------------- */
-  --primary-icon: #B0B3B8;
-  --secondary-icon: #E4E6EB;
   /* shadow-color ------------------------------------ */
-  --shadow-1: rgb(0 0 0 / 10%);
-  --shadow-2: rgb(0 0 0 / 20%);
-  --shadow-inset: rgb(255 255 255 / 5%);
   --shadow-button: rgb(58 59 60 / 55%);
-  /* border-radius ------------------------------------ */
-  --primary-border-radius: 12px;
-  --secondary-border-radius: 10px;
-  --third-border-radius: 8px;
 }
 
 body,
@@ -303,8 +251,8 @@ form.sign-in-form {
 }
 
 .panel .content {
-  color: #fff;
-  transition: transform 0.9s ease-in-out;
+  color: #FFF;
+  transition: transform 0.8s ease-in-out;
   transition-delay: 0.6s;
   width: 100%;
 }
@@ -323,7 +271,7 @@ form.sign-in-form {
 .btn.transparent {
   margin: 0;
   background: none;
-  border: 2px solid #fff;
+  border: 2px solid #FFF;
   height: 40px;
   width: 150px;
   font-weight: var(--font-weight-5);

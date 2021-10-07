@@ -2,24 +2,11 @@
 
 /* List jobs */
 
-.list-jobs .label-info .flex {
+.list-job .label-info .flex {
   justify-content: start;
 }
 
-
-/* .label-info .flex .content-body h4 {
-  white-space: nowrap!important;
-  overflow: hidden!important;
-  text-overflow: ellipsis!important;
-  width: 80%;
-} */
-
-.list-jobs .label-info .flex .content-body .job-info {
-  display: flex;
-  justify-content: space-between;
-}
-
-.list-jobs .panel .flex .content-body .job-info {
+.list-job .label-info .flex .content-body .job-info {
   display: flex;
   justify-content: space-between;
 }
@@ -61,9 +48,6 @@
   justify-content: space-between;
   color: var(--secondary-text);
 }
-
-
-/* Job save */
 
 
 /* Responsive ========================================================================================================*/
