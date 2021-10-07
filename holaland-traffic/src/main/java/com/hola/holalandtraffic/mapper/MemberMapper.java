@@ -10,7 +10,6 @@ public class MemberMapper implements RowMapper<Member> {
 
     @Override
     public Member mapRow(ResultSet resultSet, int i) throws SQLException {
-
         return Member.builder()
                 .memberId(resultSet.getInt("member_id"))
                 .memberName(resultSet.getString("member_name"))
