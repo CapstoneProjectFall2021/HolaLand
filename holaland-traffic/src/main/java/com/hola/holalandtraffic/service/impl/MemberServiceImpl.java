@@ -35,8 +35,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public boolean update(int id) throws DataAccessException {
-        return memberRepository.update(id);
+    public boolean update(Member obj) throws DataAccessException {
+        return memberRepository.update(obj);
     }
 
     @Override
