@@ -48,7 +48,7 @@ public class MemberRepositoryImpl implements MemberRepository, IRepositoryQuery 
             ps.setObject(6, obj.getMemberRankId());
             ps.setObject(7, obj.getMemberStatusId());
             return ps;
-        });
+        }, keyHolder);
         return keyHolder.getKey().intValue();
     }
 
