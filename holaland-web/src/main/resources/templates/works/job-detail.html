@@ -11,9 +11,9 @@
         <div class="panel job-title">
           <div class="row">
             <div class="col-md-12 col-lg-12 col-xl-9">
-              <h3>Giáo Viên Tiếng Anh Online/Offline</h3>
-              <p><i class="far fa-clock fa-fw"></i>Hạn nộp hồ sơ: 23/12/2021</p>
-              <p><i class="fas fa-map-marker-alt fa-fw"></i>Địa điểm: 27 Thái Thịnh, Đống Đa, Hà Nội</p>
+              <h3 th:text="${jobDetail.workRequestRecruitmentTitle}"></h3>
+              <p><i class="far fa-clock fa-fw"></i>Hạn nộp hồ sơ: <span th:text="${jobDetail.workRequestRecruitmentEndDateTime}"></span></p>
+              <p><i class="fas fa-map-marker-alt fa-fw"></i>Địa điểm: <span th:text="${jobDetail.workRequestRecruitmentWorkLocation}"></span></p>
             </div>
             <div class="col-md-12 col-lg-12 col-xl-3 apply-area">
               <div class="apply-area-btn">
@@ -37,50 +37,36 @@
         <div class="panel-text">
           <div class="row-info">
             <div><i class="fas fa-coins fa-fw"></i>Mức lương</div>
-            <div>12,000,000 - 20,000,000 VND</div>
+            <div th:text="${jobDetail.workRequestRecruitmentWage}"></div>
           </div>
           <div class="row-info">
             <div><i class="fas fa-user-clock fa-fw"></i>Hình thức làm việc</div>
-            <div>Bán thời gian</div>
+            <div th:text="${jobTypeDetail.workJobTypeName}"></div>
           </div>
           <div class="row-info">
             <div><i class="fas fa-user-friends fa-fw"></i>Số lượng cần tuyển</div>
-            <div>2 người</div>
+            <div th:text="${jobDetail.workRequestRecruitmentQuantity}"> người</div>
           </div>
           <div class="row-info">
             <div><i class="fas fa-user-plus fa-fw"></i>Yêu cầu kinh nghiệm</div>
-            <div>Không yêu cầu</div>
+            <div th:text="${jobDetail.workRequestRecruitmentExperienceRequirement}"></div>
           </div>
           <div class="row-info">
             <div><i class="fas fa-venus-mars fa-fw"></i>Yêu cầu giới tính</div>
-            <div>Không yêu cầu</div>
+            <div th:text="${jobDetail.workRequestRecruitmentGenderRequirement}"></div>
           </div>
         </div>
         <h2 class="sub-title">Mô tả công việc</h2>
         <div class="panel-text">
-                  <pre>
-- Giảng dạy các khóa học của hệ thống: TOEIC 4 kỹ năng; Luyện Thi IELTS; Tiếng Anh Giao tiếp theo hình thức online/offline.
-- Giảng dạy các dự án lớn chuẩn đầu ra TOEIC, IELTS cho các Tổng công ty, Tập đoàn là khách hàng, đối tác của Công ty.
-- Giảng dạy theo ca từ thứ Hai đến thứ Bảy hàng tuần trên hệ thống trực tuyến E Bomb của Công ty.</pre>
+                  <pre th:text="${jobDetail.workRequestRecruitmentDescription}"></pre>
         </div>
         <h2 class="sub-title">Yêu cầu</h2>
         <div class="panel-text">
-                  <pre>
-- ĐÃ TỐT NGHIỆP ĐẠI HỌC (KHÔNG NHẬN ỨNG VIÊN CHƯA TỐT NGHIỆP), ưu tiên tốt nghiệp chuyên ngành tiếng Anh hoặc theo học các chương trình giảng dạy bằng tiếng Anh hoặc các du học sinh nước ngoài
-- Đã có chứng chỉ Tiếng Anh: 7.0 IELTS hoặc 800 TOEIC trở lên. Ưu tiên chứng chỉ còn thời hạn.
-- Kĩ năng tiếng Anh tốt, phát âm chuẩn, ngữ điệu tự nhiên, có khả năng truyền "Lửa" đến học viên.
-- Kỹ năng giao tiếp, kỹ năng truyền đạt tốt.
-- Nhiệt huyết, tận tâm, yêu thích công việc giảng dạy.
-- Vui vẻ, thân thiện, cởi mở và ham học hỏi.</pre>
+                  <pre th:text="${jobDetail.workRequestRecruitmentRequirement}"></pre>
         </div>
         <h2 class="sub-title">Quyền lợi được hưởng</h2>
         <div class="panel-text">
-                  <pre>
-- Mức thu nhập hấp dẫn: 12-20 triệu/tháng.
-- Được làm việc trong môi trường giáo dục và đào tạo chuyên nghiệp, có thể phát huy được tối đa khả năng của bản thân.
-- Được đào tạo, hướng dẫn và thực hành trực tiếp các kỹ năng quản lý, giảng dạy từ bộ phận chuyên môn.
-- Cơ hội được thăng tiến và trải nghiệm các mảng công việc khác nhau theo nguyện vọng và năng lực của ứng viên.
-- Được hưởng các chế độ du lịch, nghỉ mát hàng năm.</pre>
+                  <pre th:text="${jobDetail.workRequestRecruitmentBenefit}"></pre>
         </div>
       </div>
     </div>

@@ -21,4 +21,9 @@ public class WorkJobTypeServiceImpl implements WorkJobTypeService {
     public List<WorkJobType> getAll() throws DataAccessException {
         return workJobTypeRepository.getAll();
     }
+
+    @Override
+    public WorkJobType getOne(int id) throws DataAccessException {
+        return workJobTypeRepository.getOne(id);
+    }
 }
