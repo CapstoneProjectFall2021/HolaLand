@@ -18,6 +18,7 @@ public class MemberMapper implements RowMapper<Member> {
                 .memberEmail(resultSet.getString("member_email"))
                 .memberRankId(resultSet.getInt("member_rank_id"))
                 .memberStatusId(resultSet.getInt("member_status_id"))
+                .memberDelete(resultSet.getBoolean("member_delete"))
                 .build();
     }
 }
