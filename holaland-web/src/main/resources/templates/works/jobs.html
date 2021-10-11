@@ -6,18 +6,18 @@
         <h1 class="title fix-mb-title">Loại việc làm</h1>
       </div>
     </div>
-    <div class="row" th:each="jobtypes : ${jobTypes}">
-      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+    <div class="row">
+      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="jobType : ${jobTypeList}">
         <a href="jobs.html" class="label-info m-mb-20">
           <div class="flex">
             <div class="icon">
-              <i class="fas fa-bars"></i>
+              <i th:classappend="*{jobType.workJobTypeIcon}"></i>
             </div>
             <div class="number">
-              <h4 th:text="*{jobtypes.workJobTypeCount}"></h4>
+              <h4 th:text="*{jobType.workJobTypeCount}"></h4>
             </div>
           </div>
-          <div class="description club-type" th:text="*{jobtypes.workJobTypeName}">
+          <div class="description club-type" th:text="*{jobType.workJobTypeName}">
           </div>
         </a>
       </div>
@@ -31,17 +31,18 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12" th:each="listjobs : ${listjobs}">
-        <a th:href="@{/job-detail(id=${listjobs.workRequestRecruitmentId}, jobTypeId=${listjobs.workJobTypeId})}" class="label-info m-mb-15">
+      <div class="col-md-12" th:each="job : ${jobList}">
+        <a th:href="@{/job-detail(id=${job.workRequestRecruitmentId}, jobTypeId=${job.workJobTypeId})}"
+           class="label-info m-mb-15">
           <div class="flex">
             <div class="icon">
               <img class="media-object" src="../images/system/v.png" alt="">
             </div>
             <div class="content-body">
-              <h4 th:text="*{listjobs.workRequestRecruitmentTitle}"></h4>
+              <h4 th:text="*{job.workRequestRecruitmentTitle}"></h4>
               <div class="job-info">
-                <p>Lương: <span th:text="*{listjobs.workRequestRecruitmentWage}"></span></p>
-                <p>Thời hạn: <span th:text="*{listjobs.workRequestRecruitmentEndDateTime}"></span></p>
+                <p>Lương: <span th:text="*{job.workRequestRecruitmentWage}"></span></p>
+                <p>Thời hạn: <span th:text="*{job.workRequestRecruitmentEndDateTime}"></span></p>
               </div>
             </div>
           </div>

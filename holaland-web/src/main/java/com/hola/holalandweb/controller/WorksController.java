@@ -1,10 +1,8 @@
 package com.hola.holalandweb.controller;
 
 import com.hola.holalandwork.entity.WorkJobType;
-import com.hola.holalandwork.entity.WorkRequestFindJob;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import com.hola.holalandwork.service.WorkJobTypeService;
-import com.hola.holalandwork.service.WorkRequestFindJobService;
 import com.hola.holalandwork.service.WorkRequestRecruitmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,10 +26,10 @@ public class WorksController {
 
     @GetMapping("/works")
     public String goToWorks(Model model) {
-        List<WorkJobType> jobTypes = workJobTypeService.getAll();
-        List<WorkRequestRecruitment> listjobs = workRequestRecruitmentService.getAllByType(jobTypes.get(0).getWorkJobTypeId());
-        model.addAttribute("jobTypes",jobTypes);
-        model.addAttribute("listjobs", listjobs);
+        List<WorkJobType> jobTypeList = workJobTypeService.getAll();
+        List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(jobTypeList.get(0).getWorkJobTypeId());
+        model.addAttribute("jobTypeList", jobTypeList);
+        model.addAttribute("jobList", jobList);
         model.addAttribute("page", 1);
         return "works";
     }
@@ -44,7 +42,7 @@ public class WorksController {
         List<WorkRequestRecruitment> listjobs = workRequestRecruitmentService.getAllByType(jobTypeId);
         WorkRequestRecruitment jobDetail = workRequestRecruitmentService.getOne(id);
         WorkJobType jobTypeDetail = workJobTypeService.getOne(jobDetail.getWorkJobTypeId());
-        model.addAttribute("jobTypes",jobTypes);
+        model.addAttribute("jobTypes", jobTypes);
         model.addAttribute("listjobs", listjobs);
         model.addAttribute("jobDetail", jobDetail);
         model.addAttribute("jobTypeDetail", jobTypeDetail);
