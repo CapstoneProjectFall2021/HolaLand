@@ -34,6 +34,18 @@ public class WorksController {
         return "works";
     }
 
+    @GetMapping("/works/type")
+    public String getWorkJobType(@RequestParam("workJobTypeId") Integer workJobTypeId,
+                                 @RequestParam("page") Integer page,
+                                 Model model) {
+        List<WorkJobType> jobTypeList = workJobTypeService.getAll();
+        List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(workJobTypeId);
+        model.addAttribute("jobTypeList", jobTypeList);
+        model.addAttribute("jobList", jobList);
+        model.addAttribute("page", page);
+        return "works";
+    }
+
     @GetMapping("/job-detail")
     public String getJobDetail(@RequestParam("id") Integer id,
                                @RequestParam("jobTypeId") Integer jobTypeId,
