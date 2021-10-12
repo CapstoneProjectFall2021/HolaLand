@@ -9,8 +9,8 @@
     <div class="row">
       <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="clubType : ${clubTypeList}">
         <a class="label-info m-mb-20"
-           th:href="@{/fpt-university-club/type(clubTypeId=*{clubType.fptuClubTypeId}, page=2)}"
-           th:classappend="${clubType.fptuClubTypeId == clubList.get(0).fptuClubTypeId ? 'active' : ''}">
+           th:href="@{/fpt-university/club/type(page=2, clubTypeId=*{clubType.fptuClubTypeId})}"
+           th:classappend="${clubType.fptuClubTypeId == clubTypeId ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
               <i th:classappend="*{clubType.fptuClubTypeIcon}"></i>
@@ -27,7 +27,7 @@
     </div>
   </div>
   <!-- List club -->
-  <div class="list-club" th:if="${clubList.get(0).fptuClubTypeId != 0}">
+  <div class="list-club" th:if="${clubList != null}">
     <div class="row">
       <div class="col-12">
         <h1 class="title fix-mt-title fix-mb-title">Danh sách câu lạc bộ</h1>
@@ -36,7 +36,7 @@
     <div class="row">
       <div class="col-md-12 col-lg-12 col-xl-6 col-xxl-6" th:each="club : ${clubList}">
         <a class="label-info m-mb-20"
-           th:href="@{/fpt-university-club/detail(clubTypeId=*{club.fptuClubTypeId}, clubId=*{club.fptuClubId}, page=2)}">
+           th:href="@{/fpt-university/club/detail(page=2, clubTypeId=*{club.fptuClubTypeId}, clubId=*{club.fptuClubId})}">
           <div class="flex">
             <div class="icon">
               <img class="media-object" th:src="|data:image/png;base64,*{club.fptuClubLogo}|" width="64"/>
@@ -47,6 +47,13 @@
             </div>
           </div>
         </a>
+      </div>
+    </div>
+  </div>
+  <div class="list-club" th:if="${clubList == null}">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mt-title fix-mb-title">Không có danh sách câu lạc bộ.</h1>
       </div>
     </div>
   </div>

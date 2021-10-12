@@ -14,8 +14,8 @@ import lombok.Setter;
 public class WorkJobType {
 
     private int workJobTypeId;
-    private String workJobTypeName;
     private String workJobTypeIcon;
+    private String workJobTypeName;
     private int workJobTypeCount;
     private boolean workJobTypeDeleted;
 }

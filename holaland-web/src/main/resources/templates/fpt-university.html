@@ -39,17 +39,17 @@
             </a>
           </li>
           <li>
-            <a th:href="@{/fpt-university-club}" th:classappend="${page == 2 ? 'active' : ''}">
+            <a th:href="@{/fpt-university/club}" th:classappend="${page == 2 ? 'active' : ''}">
               <i class="fas fa-users fa-fw"></i>Câu lạc bộ
             </a>
           </li>
           <li>
-            <a th:href="@{/fpt-university-department}" th:classappend="${page == 3 ? 'active' : ''}">
+            <a th:href="@{/fpt-university/department}" th:classappend="${page == 3 ? 'active' : ''}">
               <i class="fas fa-headset fa-fw"></i>Phòng ban
             </a>
           </li>
           <li>
-            <a th:href="@{/fpt-university-lecturers}" th:classappend="${page == 4 ? 'active' : ''}">
+            <a th:href="@{/fpt-university/lecturers}" th:classappend="${page == 4 ? 'active' : ''}">
               <i class="far fa-address-book fa-fw"></i>Giảng viên
             </a>
           </li>
@@ -105,10 +105,16 @@
 </th:block>
 
 <th:block th:replace="~{common/script :: script/script}"></th:block>
+<th:block th:replace="~{common/toast-error :: toast-error}"></th:block>
 <script crossorigin="anonymous" th:inline="javascript">
   /*[# th:if="${club} != null"]*/
   const myModal = new bootstrap.Modal(document.getElementById('clubInfoModal'));
   myModal.show();
+  /*[/]*/
+
+  /*[# th:if="${club} == null"]*/
+  const toast = new bootstrap.Toast(document.getElementById('toast-error'));
+  toast.show();
   /*[/]*/
 </script>
 </body>

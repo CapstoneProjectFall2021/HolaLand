@@ -25,7 +25,7 @@ public class WorkRequestRecruitment {
     private String workRequestRecruitmentDescription;
     private String workRequestRecruitmentRequirement;
     private String workRequestRecruitmentBenefit;
-    private String workRequestRecruitmentWage;
+    private String workRequestRecruitmentSalary;
     private int workRequestRecruitmentQuantity;
     private String workRequestRecruitmentExperienceRequirement;
     private String workRequestRecruitmentGenderRequirement;

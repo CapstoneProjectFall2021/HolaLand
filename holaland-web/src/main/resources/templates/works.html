@@ -39,12 +39,12 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a th:href="@{/works/jobs-apply}" th:classappend="${page == 2 ? 'active' : ''}">
               <i class="fas fa-tasks fa-fw"></i>Danh sách ứng tuyển
             </a>
           </li>
           <li>
-            <a href="#">
+            <a th:href="@{/works/jobs-save}" th:classappend="${page == 3 ? 'active' : ''}">
               <i class="far fa-bookmark fa-fw"></i>Việc làm đã lưu
             </a>
           </li>
@@ -82,11 +82,11 @@
       </th:block>
       <!-- 2 -->
       <th:block th:if="${page == 2}">
-
+        <div th:replace="works/jobs-apply :: jobs-apply"></div>
       </th:block>
       <!-- 3 -->
       <th:block th:if="${page == 3}">
-
+        <div th:replace="works/jobs-save :: jobs-save"></div>
       </th:block>
       <!-- Job detail -->
       <th:block th:if="${page == 4}">
@@ -96,14 +96,19 @@
   </div>
 </div>
 
+<!-- Import modal confirm apply job -->
+<div th:replace="works/modal-confirm-apply-job :: confirmApplyJobModal"></div>
+<!-- Import modal confirm remove job save -->
+<div th:replace="works/modal-confirm-remove-job-save :: confirmRemoveJobSaveModal"></div>
+
 <th:block th:replace="~{common/script :: script/script}"></th:block>
 <script>
   function showToast() {
-    const toast = new bootstrap.Toast(document.getElementById('test-toast'));
+    const toast = new bootstrap.Toast(document.getElementById('toast-success'));
     toast.show();
   }
 </script>
-<th:block th:replace="~{common/toast :: toast-success}"></th:block>
+<th:block th:replace="~{common/toast-success :: toast-success}"></th:block>
 
 </body>
 

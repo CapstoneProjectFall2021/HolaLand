@@ -12,8 +12,8 @@ public class WorkJobTypeMapper implements RowMapper<WorkJobType> {
     public WorkJobType mapRow(ResultSet resultSet, int i) throws SQLException {
         return WorkJobType.builder()
                 .workJobTypeId(resultSet.getInt("work_job_type_id"))
-                .workJobTypeName(resultSet.getString("work_job_type_name"))
                 .workJobTypeIcon(resultSet.getString("work_job_type_icon"))
+                .workJobTypeName(resultSet.getString("work_job_type_name"))
                 .workJobTypeCount(resultSet.getInt("work_job_type_count"))
                 .workJobTypeDeleted(resultSet.getBoolean("work_job_type_deleted"))
                 .build();
