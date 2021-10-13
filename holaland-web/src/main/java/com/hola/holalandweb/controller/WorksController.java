@@ -1,15 +1,14 @@
 package com.hola.holalandweb.controller;
 
-import com.hola.holalandwork.entity.WorkJobType;
-import com.hola.holalandwork.entity.WorkRequestRecruitment;
-import com.hola.holalandwork.service.WorkJobTypeService;
-import com.hola.holalandwork.service.WorkRequestRecruitmentService;
+import com.hola.holalandwork.entity.*;
+import com.hola.holalandwork.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -17,11 +16,19 @@ public class WorksController {
 
     private final WorkRequestRecruitmentService workRequestRecruitmentService;
     private final WorkJobTypeService workJobTypeService;
+    private final WorkRequestApplyService workRequestApplyService;
+    private final SttWorkRequestRecruitmentService sttWorkRequestRecruitmentService;
+    private final WorkRequestJobSaveService workRequestJobSaveService;
 
-    @Autowired
-    public WorksController(WorkRequestRecruitmentService workRequestRecruitmentService, WorkJobTypeService workJobTypeService) {
+    public WorksController(WorkRequestRecruitmentService workRequestRecruitmentService
+            , WorkJobTypeService workJobTypeService, WorkRequestApplyService workRequestApplyService
+            , SttWorkRequestRecruitmentService sttWorkRequestRecruitmentService
+            , WorkRequestJobSaveService workRequestJobSaveService) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.workJobTypeService = workJobTypeService;
+        this.workRequestApplyService = workRequestApplyService;
+        this.sttWorkRequestRecruitmentService = sttWorkRequestRecruitmentService;
+        this.workRequestJobSaveService = workRequestJobSaveService;
     }
 
     @GetMapping("/works")
@@ -70,12 +77,24 @@ public class WorksController {
 
     @GetMapping("/works/jobs-apply")
     public String getJobsApply(Model model) {
+        List<WorkRequestRecruitment> jobList = new ArrayList<WorkRequestRecruitment>();
+        List<WorkRequestApply> jobApplyList = workRequestApplyService.getAll();
+        for (WorkRequestApply jobApply : jobApplyList) {
+            jobList.add(workRequestRecruitmentService.getOne(jobApply.getWorkRequestRecruitmentId()));
+        }
+        model.addAttribute("jobList", jobList);
         model.addAttribute("page", 2);
         return "works";
     }
 
     @GetMapping("/works/jobs-save")
     public String getJobsSave(Model model) {
+        List<WorkRequestRecruitment> jobList = new ArrayList<WorkRequestRecruitment>();
+        List<WorkRequestJobSave> jobSaveList = workRequestJobSaveService.getAll();
+        for(WorkRequestJobSave jobSave : jobSaveList){
+            jobList.add(workRequestRecruitmentService.getOne(jobSave.getWorkRequestRecruitmentId()));
+        }
+        model.addAttribute("jobList", jobList);
         model.addAttribute("page", 3);
         return "works";
     }
