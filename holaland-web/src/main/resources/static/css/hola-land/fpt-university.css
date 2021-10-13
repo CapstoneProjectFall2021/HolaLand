@@ -38,3 +38,11 @@
   color: var(--secondary-text);
   margin-top: 4px;
 }
+
+@media (max-width: 575.98px) {
+  .club-info .modal-content .modal-body .description p,
+  .club-info .modal-content .modal-body .description .pre,
+  .club-info .modal-content .modal-body .description .contact {
+    padding: 10px 15px;
+  }
+}

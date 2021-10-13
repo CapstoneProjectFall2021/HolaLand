@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+/**/
+
+.profile-info .gender-radio {
+  display: flex;
+  height: 26px;
+}
+
+.profile-info .gender-radio .form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.profile-info .gender-radio .form-check label {
+  height: 24px;
+  color: var(--secondary-text);
+}
+
+.profile-info .gender-radio .form-check .form-check-input {
+  background-color: var(--secondary-background);
+  border: 1px solid var(--secondary-border-color);
+}
+
+.profile-info .gender-radio .form-check .form-check-input:checked {
+  background-color: var(--accent-text);
+  border: 1px solid var(--accent-text);
+}

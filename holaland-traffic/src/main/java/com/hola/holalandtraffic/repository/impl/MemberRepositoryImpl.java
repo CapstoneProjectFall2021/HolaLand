@@ -67,6 +67,7 @@ public class MemberRepositoryImpl implements MemberRepository, IRepositoryQuery 
         ) > 0;
     }
 
+
     @Override
     public boolean delete(int id) throws DataAccessException {
         return jdbcTemplate.update(MEMBER_DELETE_ONE, id) > 0;
