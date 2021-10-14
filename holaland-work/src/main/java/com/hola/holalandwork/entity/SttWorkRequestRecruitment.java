@@ -14,5 +14,6 @@ import lombok.Setter;
 public class SttWorkRequestRecruitment {
 
     private int sttWorkRequestRecruitmentId;
-    private String sttWorkRequestRecruitmentName;
+    private String sttWorkRequestRecruitmentStatus;
+
 }

@@ -15,4 +15,5 @@ public class SttWorkReport {
 
     private int sttWorkReportId;
     private String sttWorkReportContent;
+
 }

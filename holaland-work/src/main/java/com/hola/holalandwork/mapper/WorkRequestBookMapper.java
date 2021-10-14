@@ -14,7 +14,7 @@ public class WorkRequestBookMapper implements RowMapper<WorkRequestBook> {
                 .workRequestBookId(resultSet.getInt("work_request_book_id"))
                 .accountId(resultSet.getInt("account_id"))
                 .workRequestFindJobId(resultSet.getInt("work_request_find_job_id"))
-                .workRequestBookSttId(resultSet.getInt("work_request_book_stt_id"))
+                .sttWorkRequestBookId(resultSet.getInt("stt_work_request_book_id"))
                 .workRequestBookDeleted(resultSet.getBoolean("work_request_book_deleted"))
                 .build();
     }

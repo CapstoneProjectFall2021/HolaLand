@@ -31,4 +31,5 @@ public class WorkRequestRecruitment {
     private String workRequestRecruitmentGenderRequirement;
     private String workRequestRecruitmentWorkLocation;
     private boolean workRequestRecruitmentDeleted;
+
 }

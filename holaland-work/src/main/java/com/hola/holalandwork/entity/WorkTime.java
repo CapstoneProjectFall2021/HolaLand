@@ -15,4 +15,6 @@ public class WorkTime {
 
     private int workTimeId;
     private String workTimeName;
+    private boolean workTimeDeleted;
+
 }

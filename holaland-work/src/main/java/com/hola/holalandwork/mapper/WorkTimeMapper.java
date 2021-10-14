@@ -13,6 +13,7 @@ public class WorkTimeMapper implements RowMapper<WorkTime> {
         return WorkTime.builder()
                 .workTimeId(resultSet.getInt("work_time_id"))
                 .workTimeName(resultSet.getString("work_time_name"))
+                .workTimeDeleted(resultSet.getBoolean("work_time_deleted"))
                 .build();
     }
 }

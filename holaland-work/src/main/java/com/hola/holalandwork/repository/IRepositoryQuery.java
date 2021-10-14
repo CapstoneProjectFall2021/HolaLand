@@ -22,8 +22,8 @@ public interface IRepositoryQuery {
     String WORK_SALARY_TYPE_GET_ALL = "SELECT * FROM work_salary_type WHERE work_salary_type_deleted = 0";
     String WORK_SALARY_TYPE_GET_ONE = "SELECT * FROM work_salary_type WHERE work_salary_type_id = ? AND work_salary_type_deleted = 0";
 
-    String WORK_TIME_GET_ALL = "SELECT * FROM work_time";
-    String WORK_TIME_GET_ONE = "SELECT * FROM work_time WHERE work_time_id = ?";
+    String WORK_TIME_GET_ALL = "SELECT * FROM work_time WHERE work_time_deleted = 0";
+    String WORK_TIME_GET_ONE = "SELECT * FROM work_time WHERE work_time_id = ? AND work_time_deleted = 0";
 
     String WORK_REPORT_GET_ALL = "SELECT * FROM work_report";
     String WORK_REPORT_GET_ONE = "SELECT * FROM work_report WHERE work_report_id = ?";
@@ -42,4 +42,13 @@ public interface IRepositoryQuery {
 
     String STT_WORK_REPORT_GET_ALL = "SELECT * FROM stt_work_report";
     String STT_WORK_REPORT_GET_ONE = "SELECT * FROM stt_work_report WHERE stt_work_report_id = ?";
+
+    String STT_WORK_REQUEST_APPLY_GET_ALL = "SELECT * FROM stt_work_request_apply";
+    String STT_WORK_REQUEST_APPLY_GET_ONE = "SELECT * FROM stt_work_request_apply WHERE stt_work_request_apply_id = ?";
+
+    String STT_WORK_REQUEST_BOOK_GET_ALL = "SELECT * FROM stt_work_request_book";
+    String STT_WORK_REQUEST_BOOK_GET_ONE = "SELECT * FROM stt_work_request_book WHERE stt_work_request_book_id = ?";
+
+    String WORK_REPORT_REASON_GET_ALL = "SELECT * FROM work_report_reason";
+    String WORK_REPORT_REASON_GET_ONE = "SELECT * FROM work_report_reason WHERE work_report_reason_id = ?";
 }

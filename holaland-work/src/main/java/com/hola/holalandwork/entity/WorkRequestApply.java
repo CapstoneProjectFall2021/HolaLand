@@ -16,6 +16,7 @@ public class WorkRequestApply {
     private int workRequestApplyId;
     private int accountId;
     private int workRequestRecruitmentId;
-    private int workRequestApplySttId;
+    private int sttWorkRequestApplyId;
     private boolean workRequestApplyDeleted;
+
 }

@@ -14,7 +14,7 @@ public class WorkRequestApplyMapper implements RowMapper<WorkRequestApply> {
                 .workRequestApplyId(resultSet.getInt("work_request_apply_id"))
                 .accountId(resultSet.getInt("account_id"))
                 .workRequestRecruitmentId(resultSet.getInt("work_request_recruitment_id"))
-                .workRequestApplySttId(resultSet.getInt("work_request_apply_stt_id"))
+                .sttWorkRequestApplyId(resultSet.getInt("stt_work_request_apply_id"))
                 .workRequestApplyDeleted(resultSet.getBoolean("work_request_apply_deleted"))
                 .build();
     }

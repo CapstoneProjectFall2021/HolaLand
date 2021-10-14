@@ -16,4 +16,5 @@ public class WorkSalaryType {
     private int workSalaryTypeId;
     private String workSalaryTypeName;
     private boolean workSalaryTypeDeleted;
+
 }

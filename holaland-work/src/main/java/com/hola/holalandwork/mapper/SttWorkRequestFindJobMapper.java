@@ -13,7 +13,7 @@ public class SttWorkRequestFindJobMapper implements RowMapper<SttWorkRequestFind
     public SttWorkRequestFindJob mapRow(ResultSet resultSet, int i) throws SQLException {
         return SttWorkRequestFindJob.builder()
                 .sttWorkRequestFindJobId(resultSet.getInt("stt_work_request_find_job_id"))
-                .sttWorkRequestFindJobName(resultSet.getString("stt_work_request_find_job_status"))
+                .sttWorkRequestFindJobStatus(resultSet.getString("stt_work_request_find_job_status"))
                 .build();
     }
 }
