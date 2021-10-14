@@ -1,7 +1,6 @@
 package com.hola.holalandwork.repository.impl;
 
 import com.hola.holalandwork.entity.WorkRequestJobSave;
-import com.hola.holalandwork.mapper.WorkRequestApplyMapper;
 import com.hola.holalandwork.mapper.WorkRequestJobSaveMapper;
 import com.hola.holalandwork.repository.IRepositoryQuery;
 import com.hola.holalandwork.repository.WorkRequestJobSaveRepository;
