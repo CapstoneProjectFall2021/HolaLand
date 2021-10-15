@@ -70,7 +70,7 @@ public class FptUniversityController {
         try {
             club = clubService.getOne(clubId);
         } catch (EmptyResultDataAccessException ex) {
-            club = null;
+            return "error";
         }
         System.out.println(club);
         model.addAttribute("clubTypeList", clubTypeList);

@@ -68,3 +68,29 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 option {
   color: #050505;
 }
+
+.custom-radio {
+  display: flex;
+  height: 26px;
+}
+
+.custom-radio .form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.custom-radio .form-check label {
+  height: 24px;
+  color: var(--secondary-text);
+}
+
+.custom-radio .form-check .form-check-input {
+  background-color: var(--secondary-background);
+  border: 1px solid var(--secondary-border-color);
+}
+
+.custom-radio .form-check .form-check-input:checked {
+  background-color: var(--accent-text);
+  border: 1px solid var(--accent-text);
+}

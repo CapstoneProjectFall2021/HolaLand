@@ -24,6 +24,8 @@ html[data-theme='light'] {
   --main-text: #1BA80E;
   --accent-text: #2271FF;
   --danger-text: #E25563;
+  --warning-color: #FFC107;
+  --start-color: #DCDFE6;
   --primary-text: #050505;
   --secondary-text: #65676B;
   /* button-background-color ------------------------- */
@@ -62,9 +64,11 @@ html[data-theme='dark'] {
   --primary-border-color: transparent;
   --secondary-border-color: #3A3B3C;
   /* text-color -------------------------------------- */
-  --main-text: #1ba80e;
+  --main-text: #1BA80E;
   --accent-text: #2271FF;
   --danger-text: #B02F3B;
+  --warning-color: #FFC107;
+  --start-color: #B0B3B8;
   --primary-text: #E4E6EB;
   --secondary-text: #B0B3B8;
   /* button-background-color ------------------------- */
@@ -100,7 +104,7 @@ body {
   justify-items: center;
   height: 100%;
   font-size: 16px;
-  line-height: 1.75;
+  line-height: 1.65;
 }
 
 h1,
@@ -109,7 +113,7 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: 1.5;
+  line-height: 1.65;
 }
 
 a,
