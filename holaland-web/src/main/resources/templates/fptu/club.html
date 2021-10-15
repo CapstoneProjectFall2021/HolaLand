@@ -27,7 +27,7 @@
     </div>
   </div>
   <!-- List club -->
-  <div class="list-club" th:if="${clubList != null}">
+  <div class="list-club" th:if="${clubList != null && clubList.size > 0}">
     <div class="row">
       <div class="col-12">
         <h1 class="title fix-mt-title fix-mb-title">Danh sách câu lạc bộ</h1>
@@ -35,7 +35,7 @@
     </div>
     <div class="row">
       <div class="col-md-12 col-lg-12 col-xl-6 col-xxl-6" th:each="club : ${clubList}">
-        <a class="label-info m-mb-20"
+        <a class="label-info m-mb-15"
            th:href="@{/fpt-university/club/detail(page=2, clubTypeId=*{club.fptuClubTypeId}, clubId=*{club.fptuClubId})}">
           <div class="flex">
             <div class="icon">
@@ -50,7 +50,7 @@
       </div>
     </div>
   </div>
-  <div class="list-club" th:if="${clubList == null}">
+  <div class="list-club" th:if="${clubList == null || clubList.size == 0}">
     <div class="row">
       <div class="col-12">
         <h1 class="title fix-mt-title fix-mb-title">Không có danh sách câu lạc bộ.</h1>

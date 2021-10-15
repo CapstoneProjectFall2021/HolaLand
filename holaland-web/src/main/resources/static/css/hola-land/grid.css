@@ -9,12 +9,13 @@
   padding-top: 120px;
   padding-bottom: 50px;
   min-height: 100vh;
+  height: 100%;
 }
 
 .col-left {
   position: relative;
-  padding-left: 50px !important;
-  padding-right: 20px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
 }
 
 .col-left:before {
@@ -33,7 +34,7 @@
 
 .col-right {
   position: relative;
-  padding-left: 40px !important;
+  padding-left: 30px !important;
 }
 
 .col-right:before {
@@ -41,7 +42,7 @@
   display: block;
   position: absolute;
   z-index: -1;
-  left: 0;
+  left: -10px;
   top: 0;
   bottom: 0;
   height: 100%;
@@ -103,21 +104,19 @@
   .col-right {
     padding-top: 30px;
     padding-bottom: 30px;
-    padding-left: 15px !important;
-    padding-right: 15px !important;
   }
   .container-fluid {
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 16px;
+    padding-left: 16px;
     display: block !important;
   }
   .container {
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 16px;
+    padding-left: 16px;
   }
   .row {
-    margin-right: -15px;
-    margin-left: -15px;
+    margin-right: -8px;
+    margin-left: -8px;
   }
 }
 
@@ -294,7 +293,7 @@
   .col-xxl-11,
   .col-xxl-12,
   .col-xxl-auto {
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 8px;
+    padding-left: 8px;
   }
 }

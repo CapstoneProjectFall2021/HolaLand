@@ -15,7 +15,7 @@
 /* Job detail */
 
 .job-detail .job-title h3 {
-  font-size: 24px;
+  font-size: 22px;
   margin-bottom: 12px;
   font-weight: var(--font-weight-4);
 }
@@ -29,6 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: end;
+  height: 100%;
 }
 
 .job-detail .job-title .apply-area .apply-area-btn {

@@ -20,25 +20,29 @@
 }
 
 .title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: var(--font-weight-4);
   margin-bottom: 0;
 }
 
 .sub-title {
   font-size: 20px;
-  margin: 0 20px 15px 20px;
+  margin: 0 20px 14px 20px;
   font-weight: var(--font-weight-4);
 }
 
 .sub-title-small {
   font-size: 18px;
-  margin: 0 20px 15px 20px;
+  margin: 0 20px 14px 20px;
   font-weight: var(--font-weight-4);
 }
 
 .highlight {
-  color: var(--main-text);
+  color: var(--main-text) !important;
+}
+
+.checked {
+  color: var(--warning-color) !important;
 }
 
 @media (max-width: 575.98px) {
@@ -237,13 +241,14 @@
 }
 
 .navbar .navbar-btn-group .navbar-btn ul.dropdown-menu.notification-dropdown .dropdown-item a .media .media-heading {
-  font-weight: var(--font-weight-5);
-  font-size: 15px;
-  margin-bottom: 2px !important;
+  font-weight: var(--font-weight-4);
+  font-size: 14px;
+  margin-bottom: 0 !important;
 }
 
 .navbar .navbar-btn-group .navbar-btn ul.dropdown-menu.notification-dropdown .dropdown-item a .media .text-small {
   font-size: 13px;
+  margin-bottom: 0 !important;
 }
 
 .navbar .navbar-btn-group .navbar-btn ul.dropdown-menu.notification-dropdown .dropdown-item a .media .text {
@@ -454,7 +459,6 @@
 .sidebar>ul>li>div.switch-theme .label-theme {
   font-weight: 400;
   font-size: 16px;
-  letter-spacing: 1px;
   transition: 0.2s;
   color: var(--primary-text);
   display: flex;
@@ -531,7 +535,6 @@
   font-weight: var(--font-weight-4);
   font-size: 16px;
   padding: 8px 10px;
-  letter-spacing: 1px;
   transition: 0.2s;
   display: block;
   color: var(--primary-text);
@@ -579,7 +582,6 @@
   font-weight: var(--font-weight-4);
   font-size: 16px;
   padding: 8px 10px;
-  letter-spacing: 1px;
   transition: 0.2s;
   display: block;
   color: var(--primary-text);
@@ -630,6 +632,17 @@
 }
 
 
+/* Colors ==============================================================================================================*/
+
+.main-text {
+  color: var(--main-text);
+}
+
+.accent-text {
+  color: var(--accent-text);
+}
+
+
 /* Util ==============================================================================================================*/
 
 .text-ellipsis {
@@ -671,27 +684,30 @@
   margin-bottom: 30px;
 }
 
-@media (max-width: 992px) {
-  .m-mb-30 {
-    margin-bottom: 15px;
-  }
-}
 
-@media (max-width: 575.98px) {
-  .m-mb-20 {
-    margin-bottom: 15px;
-  }
+/* Tags ==============================================================================================================*/
+
+.list-tag .tags .tag {
+  padding: 8px 20px;
+  background-color: var(--primary-button-background);
+  border-radius: 30px;
+  color: var(--primary-text);
+  display: inline-block;
+  line-height: 1.5;
+  margin-right: 8px;
+  transition: 0.4s;
+  font-size: 16px;
 }
 
 .tags .tag {
-  padding: 5px 12px;
-  background-color: var(--secondary-background);
-  border-radius: var(--third-border-radius);
+  padding: 6px 12px;
+  background-color: var(--secondary-button-background);
+  border-radius: 30px;
   color: var(--secondary-text);
   display: inline-block;
   font-size: 14px;
   line-height: 1.5;
-  margin-right: 6px;
+  margin-right: 4px;
   transition: 0.4s;
 }
 
@@ -701,8 +717,46 @@
 
 @media (max-width: 992px) {
   .tags .tag {
-    margin-right: 2px;
-    margin-bottom: 6px;
+    margin-right: 3px;
+    margin-bottom: 8px;
+  }
+  .list-tag .tags .tag {
+    margin-bottom: 12px;
+  }
+}
+
+
+/* Tabs - Pills ================================================================================================*/
+
+
+/*----- Sub menu pills -----*/
+
+.menu .nav-link {
+  padding: 8px 12px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: var(--primary-text);
+  border: 1px solid var(--primary-border-color);
+  background-color: var(--primary-button-background);
+  border-radius: var(--primary-border-radius);
+  font-weight: var(--font-weight-4);
+  border: 1px solid var(--primary-border-color);
+}
+
+.menu .nav-pills .nav-link:hover {
+  background-color: var(--secondary-button-background);
+}
+
+.menu .nav-pills .nav-link.active,
+.menu .nav-pills .show>.nav-link {
+  color: var(--primary-text);
+  background-color: var(--secondary-button-background);
+}
+
+@media (max-width: 767.98px) {
+  .menu .nav-link {
+    margin-bottom: 16px;
   }
 }
 
@@ -713,7 +767,7 @@
 /* For link a */
 
 .label-info {
-  padding: 18px 20px 12px;
+  padding: 16px 20px 10px;
   display: block;
   border-radius: var(--primary-border-radius);
   background-color: var(--primary-button-background);
@@ -739,6 +793,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 100%;
 }
 
 @media (max-width: 575.98px) {
@@ -765,23 +820,6 @@
   margin-top: 3.5px;
   color: var(--secondary-text);
   font-size: 14px;
-}
-
-.label-info .btn-remove {
-  position: absolute;
-  right: 20px;
-  top: 12px;
-}
-
-.label-info .btn-remove a,
-.label-info .btn-remove i {
-  font-size: 16px;
-  color: var(--danger-text);
-  transition: 0.3s;
-}
-
-.label-info .btn-remove a:hover i {
-  color: #DC3545;
 }
 
 
@@ -813,6 +851,7 @@
   margin-bottom: 0;
   line-height: 1.5;
   display: block;
+  padding-right: 25px;
 }
 
 .label-info .flex .content-body a:hover {
@@ -837,8 +876,8 @@
   color: var(--primary-text);
   position: relative;
   transition: 0.4s;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
 }
 
 .panel-text {
@@ -846,8 +885,8 @@
   background-color: var(--primary-background);
   border: 1px solid var(--primary-border-color);
   color: var(--primary-text);
-  padding: 15px 20px;
-  margin-bottom: 20px;
+  padding: 14px 20px;
+  margin-bottom: 16px;
 }
 
 @media (max-width: 575.98px) {
@@ -873,7 +912,7 @@
 @media (max-width: 575.98px) {
   /* For form */
   .panel-form {
-    padding: 15px 0 5px;
+    padding: 15px 8px 5px;
   }
   .panel-form .btn-md {
     width: 100%;
@@ -922,7 +961,7 @@
 
 .modal-content .modal-header {
   border-bottom: 1px solid transparent;
-  padding: 20px;
+  padding: 16px 20px;
 }
 
 .modal-content .modal-header .modal-title {
@@ -1039,6 +1078,35 @@
 .btn-facebook:hover {
   color: #FFFFFF !important;
   box-shadow: 0 0 0 4px rgb(66 103 178 / 40%);
+}
+
+.btn-remove,
+.btn-action {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+}
+
+.btn-remove a,
+.btn-remove i {
+  font-size: 16px;
+  color: var(--danger-text);
+  transition: 0.3s;
+}
+
+.btn-remove a:hover i {
+  color: #DC3545;
+}
+
+.btn-action a,
+.btn-action i {
+  font-size: 16px;
+  color: var(--main-text);
+  transition: 0.3s;
+}
+
+.btn-action a:hover i {
+  color: #27D016;
 }
 
 

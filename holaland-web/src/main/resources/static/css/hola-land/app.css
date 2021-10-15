@@ -47,7 +47,9 @@ html[data-theme='dark'] {
 }
 
 body,
-input {
+input,
+select,
+select option {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
@@ -140,7 +142,22 @@ form.sign-in-form {
 
 .input-field input::placeholder {
   color: var(--secondary-text);
-  font-weight: var(--font-weight-5);
+  font-weight: var(--font-weight-4);
+}
+
+.input-field select {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: var(--font-weight-4);
+  font-size: 16px;
+  color: var(--primary-text);
+  width: 95%;
+}
+
+.input-field select option {
+  color: #050505;
 }
 
 .text-field {
