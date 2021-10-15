@@ -13,8 +13,8 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_APPLY_GET_ALL = "SELECT * FROM work_request_apply WHERE work_request_apply_deleted = 0";
     String WORK_REQUEST_APPLY_GET_ONE = "SELECT * FROM work_request_apply WHERE work_request_apply_id = ? AND work_request_apply_deleted = 0";
 
-    String WORK_JOBS_SAVE_GET_ALL = "SELECT * FROM work_jobs_save WHERE work_jobs_save_deleted = 0";
-    String WORK_JOBS_SAVE_GET_ONE = "SELECT * FROM work_jobs_save WHERE work_jobs_save_id = ? AND work_jobs_save_deleted = 0";
+    String WORK_JOB_SAVE_GET_ALL = "SELECT * FROM work_job_save WHERE work_job_save_deleted = 0";
+    String WORK_JOB_SAVE_GET_ONE = "SELECT * FROM work_job_save WHERE work_job_save_id = ? AND work_job_save_deleted = 0";
 
     String WORK_REQUEST_BOOK_GET_ALL = "SELECT * FROM work_request_book WHERE work_request_book_deleted = 0";
     String WORK_REQUEST_BOOK_GET_ONE = "SELECT * FROM work_request_book WHERE work_request_book_id = ? AND work_request_book_deleted = 0";

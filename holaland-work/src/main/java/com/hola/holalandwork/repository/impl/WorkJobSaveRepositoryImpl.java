@@ -22,11 +22,11 @@ public class WorkJobSaveRepositoryImpl implements WorkJobSaveRepository, IReposi
 
     @Override
     public List<WorkJobSave> getAll() throws DataAccessException {
-        return jdbcTemplate.query(WORK_JOBS_SAVE_GET_ALL, new WorkJobSaveMapper());
+        return jdbcTemplate.query(WORK_JOB_SAVE_GET_ALL, new WorkJobSaveMapper());
     }
 
     @Override
     public WorkJobSave getOne(int id) throws DataAccessException {
-        return jdbcTemplate.queryForObject(WORK_JOBS_SAVE_GET_ONE, new WorkJobSaveMapper(), id);
+        return jdbcTemplate.queryForObject(WORK_JOB_SAVE_GET_ONE, new WorkJobSaveMapper(), id);
     }
 }
