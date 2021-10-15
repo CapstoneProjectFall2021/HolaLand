@@ -25,7 +25,7 @@ public class WorkRequestApplyRepositoryImpl implements WorkRequestApplyRepositor
 
     @Override
     public List<WorkRequestApply> getAll() throws DataAccessException {
-        return jdbcTemplate.query(WORK_REQUEST_APPLY_GET_ALL_BY_ACCOUNT_ID, new WorkRequestApplyMapper());
+        return jdbcTemplate.query(WORK_REQUEST_APPLY_GET_ALL, new WorkRequestApplyMapper());
     }
 
     @Override
