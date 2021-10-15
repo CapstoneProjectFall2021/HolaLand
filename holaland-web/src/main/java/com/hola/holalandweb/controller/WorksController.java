@@ -18,17 +18,18 @@ public class WorksController {
     private final WorkJobTypeService workJobTypeService;
     private final WorkRequestApplyService workRequestApplyService;
     private final SttWorkRequestRecruitmentService sttWorkRequestRecruitmentService;
-    private final WorkRequestJobSaveService workRequestJobSaveService;
+    private final WorkJobSaveService workJobSaveService;
 
+    @Autowired
     public WorksController(WorkRequestRecruitmentService workRequestRecruitmentService
             , WorkJobTypeService workJobTypeService, WorkRequestApplyService workRequestApplyService
             , SttWorkRequestRecruitmentService sttWorkRequestRecruitmentService
-            , WorkRequestJobSaveService workRequestJobSaveService) {
+            , WorkJobSaveService workJobSaveService) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.workJobTypeService = workJobTypeService;
         this.workRequestApplyService = workRequestApplyService;
         this.sttWorkRequestRecruitmentService = sttWorkRequestRecruitmentService;
-        this.workRequestJobSaveService = workRequestJobSaveService;
+        this.workJobSaveService = workJobSaveService;
     }
 
     @GetMapping("/works")
@@ -90,8 +91,8 @@ public class WorksController {
     @GetMapping("/works/jobs-save")
     public String getJobsSave(Model model) {
         List<WorkRequestRecruitment> jobList = new ArrayList<WorkRequestRecruitment>();
-        List<WorkRequestJobSave> jobSaveList = workRequestJobSaveService.getAll();
-        for(WorkRequestJobSave jobSave : jobSaveList){
+        List<WorkJobSave> jobSaveList = workJobSaveService.getAll();
+        for(WorkJobSave jobSave : jobSaveList){
             jobList.add(workRequestRecruitmentService.getOne(jobSave.getWorkRequestRecruitmentId()));
         }
         model.addAttribute("jobList", jobList);
