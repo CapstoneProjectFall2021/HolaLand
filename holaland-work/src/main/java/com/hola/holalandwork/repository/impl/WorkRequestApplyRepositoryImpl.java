@@ -1,7 +1,9 @@
 package com.hola.holalandwork.repository.impl;
 
 import com.hola.holalandwork.entity.WorkRequestApply;
+import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import com.hola.holalandwork.mapper.WorkRequestApplyMapper;
+import com.hola.holalandwork.mapper.WorkRequestRecruitmentMapper;
 import com.hola.holalandwork.repository.IRepositoryQuery;
 import com.hola.holalandwork.repository.WorkRequestApplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,12 @@ public class WorkRequestApplyRepositoryImpl implements WorkRequestApplyRepositor
 
     @Override
     public List<WorkRequestApply> getAll() throws DataAccessException {
-        return jdbcTemplate.query(WORK_REQUEST_APPLY_GET_ALL, new WorkRequestApplyMapper());
+        return jdbcTemplate.query(WORK_REQUEST_APPLY_GET_ALL_BY_ACCOUNT_ID, new WorkRequestApplyMapper());
+    }
+
+    @Override
+    public List<WorkRequestRecruitment> getAllByAccountId(int accountId) throws DataAccessException {
+        return jdbcTemplate.query(WORK_REQUEST_APPLY_GET_ALL_BY_ACCOUNT_ID, new WorkRequestRecruitmentMapper(), accountId);
     }
 
     @Override

@@ -78,24 +78,16 @@ public class WorksController {
 
     @GetMapping("/works/jobs-apply")
     public String getJobsApply(Model model) {
-        List<WorkRequestRecruitment> jobList = new ArrayList<WorkRequestRecruitment>();
-        List<WorkRequestApply> jobApplyList = workRequestApplyService.getAll();
-        for (WorkRequestApply jobApply : jobApplyList) {
-            jobList.add(workRequestRecruitmentService.getOne(jobApply.getWorkRequestRecruitmentId()));
-        }
-        model.addAttribute("jobList", jobList);
+        List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
+        model.addAttribute("jobApplyList", jobApplyList);
         model.addAttribute("page", 2);
         return "works";
     }
 
     @GetMapping("/works/jobs-save")
     public String getJobsSave(Model model) {
-        List<WorkRequestRecruitment> jobList = new ArrayList<WorkRequestRecruitment>();
-        List<WorkJobSave> jobSaveList = workJobSaveService.getAll();
-        for(WorkJobSave jobSave : jobSaveList){
-            jobList.add(workRequestRecruitmentService.getOne(jobSave.getWorkRequestRecruitmentId()));
-        }
-        model.addAttribute("jobList", jobList);
+        List<WorkRequestRecruitment> jobSaveList = workJobSaveService.getAllByAccountId(1);
+        model.addAttribute("jobSaveList", jobSaveList);
         model.addAttribute("page", 3);
         return "works";
     }

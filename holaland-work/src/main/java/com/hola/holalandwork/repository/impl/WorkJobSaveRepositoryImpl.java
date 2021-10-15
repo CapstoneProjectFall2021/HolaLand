@@ -1,7 +1,9 @@
 package com.hola.holalandwork.repository.impl;
 
 import com.hola.holalandwork.entity.WorkJobSave;
+import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import com.hola.holalandwork.mapper.WorkJobSaveMapper;
+import com.hola.holalandwork.mapper.WorkRequestRecruitmentMapper;
 import com.hola.holalandwork.repository.IRepositoryQuery;
 import com.hola.holalandwork.repository.WorkJobSaveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,11 @@ public class WorkJobSaveRepositoryImpl implements WorkJobSaveRepository, IReposi
     @Override
     public List<WorkJobSave> getAll() throws DataAccessException {
         return jdbcTemplate.query(WORK_JOB_SAVE_GET_ALL, new WorkJobSaveMapper());
+    }
+
+    @Override
+    public List<WorkRequestRecruitment> getAllByAccountId(int accountId) throws DataAccessException {
+        return jdbcTemplate.query(WORK_JOB_SAVE_GET_ALL_BY_ACCOUNT_ID, new WorkRequestRecruitmentMapper(), accountId);
     }
 
     @Override
