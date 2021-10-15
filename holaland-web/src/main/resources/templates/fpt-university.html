@@ -25,76 +25,80 @@
 <div style="overflow: hidden;">
   <div class="container">
     <div class="row">
-      <!-- Sub menu -->
-      <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3 col-left">
-        <div class="row">
-          <div class="col-12">
-            <h1 class="title fix-pd fix-mb-title">Menu</h1>
+      <!-- Left side -->
+      <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3">
+        <div class="col-left">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="title fix-pd fix-mb-title">Menu</h1>
+            </div>
           </div>
+          <ul class="nav navbar-nav sub-menu">
+            <li>
+              <a th:href="@{/fpt-university}" th:classappend="${page == 1 ? 'active' : ''}">
+                <i class="fas fa-map-marked-alt fa-fw"></i>Campus Hoà Lạc
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/fpt-university/club}" th:classappend="${page == 2 ? 'active' : ''}">
+                <i class="fas fa-users fa-fw"></i>Câu lạc bộ
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/fpt-university/department}" th:classappend="${page == 3 ? 'active' : ''}">
+                <i class="fas fa-headset fa-fw"></i>Phòng ban
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/fpt-university/lecturers}" th:classappend="${page == 4 ? 'active' : ''}">
+                <i class="far fa-address-book fa-fw"></i>Giảng viên
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/}">
+                <i class="fas fa-chevron-left fa-fw"></i>Quay lại
+              </a>
+            </li>
+          </ul>
         </div>
-        <ul class="nav navbar-nav sub-menu">
-          <li>
-            <a th:href="@{/fpt-university}" th:classappend="${page == 1 ? 'active' : ''}">
-              <i class="fas fa-map-marked-alt fa-fw"></i>Campus Hoà Lạc
-            </a>
-          </li>
-          <li>
-            <a th:href="@{/fpt-university/club}" th:classappend="${page == 2 ? 'active' : ''}">
-              <i class="fas fa-users fa-fw"></i>Câu lạc bộ
-            </a>
-          </li>
-          <li>
-            <a th:href="@{/fpt-university/department}" th:classappend="${page == 3 ? 'active' : ''}">
-              <i class="fas fa-headset fa-fw"></i>Phòng ban
-            </a>
-          </li>
-          <li>
-            <a th:href="@{/fpt-university/lecturers}" th:classappend="${page == 4 ? 'active' : ''}">
-              <i class="far fa-address-book fa-fw"></i>Giảng viên
-            </a>
-          </li>
-          <li>
-            <a th:href="@{/}">
-              <i class="fas fa-chevron-left fa-fw"></i>Quay lại
-            </a>
-          </li>
-        </ul>
       </div>
-      <!-- Right content -->
-      <!-- 1 -->
-      <th:block th:if="${page == 1}">
-        <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right">
-          <div class="row">
-            <div class="col-12">
-              <h1 class="title fix-mb-title">Campus Hoà Lạc</h1>
+      <!-- Right side -->
+      <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
+        <!-- 1 -->
+        <th:block th:if="${page == 1}">
+          <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="title fix-mb-title">Campus Hoà Lạc</h1>
+              </div>
             </div>
           </div>
-        </div>
-      </th:block>
-      <!-- List club -->
-      <th:block th:if="${page == 2}">
-        <div th:replace="fptu/club :: club"></div>
-      </th:block>
-      <!-- 3 -->
-      <th:block th:if="${page == 3}">
-        <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right">
-          <div class="row">
-            <div class="col-12">
-              <h1 class="title fix-mb-title">Phòng ban</h1>
+        </th:block>
+        <!-- Club -->
+        <th:block th:if="${page == 2}">
+          <div th:replace="fptu/club :: club"></div>
+        </th:block>
+        <!-- 3 -->
+        <th:block th:if="${page == 3}">
+          <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="title fix-mb-title">Phòng ban</h1>
+              </div>
             </div>
           </div>
-        </div>
-      </th:block>
-      <!-- 4 -->
-      <th:block th:if="${page == 4}">
-        <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right">
-          <div class="row">
-            <div class="col-12">
-              <h1 class="title fix-mb-title">Giảng viên</h1>
+        </th:block>
+        <!-- 4 -->
+        <th:block th:if="${page == 4}">
+          <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="title fix-mb-title">Giảng viên</h1>
+              </div>
             </div>
           </div>
-        </div>
-      </th:block>
+        </th:block>
+      </div>
     </div>
   </div>
 </div>

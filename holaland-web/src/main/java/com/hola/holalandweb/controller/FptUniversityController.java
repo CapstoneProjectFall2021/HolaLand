@@ -72,7 +72,6 @@ public class FptUniversityController {
         } catch (EmptyResultDataAccessException ex) {
             return "error";
         }
-        System.out.println(club);
         model.addAttribute("clubTypeList", clubTypeList);
         model.addAttribute("clubList", clubList);
         model.addAttribute("club", club);
@@ -91,5 +90,4 @@ public class FptUniversityController {
         model.addAttribute("page", 4);
         return "fpt-university";
     }
-
 }
