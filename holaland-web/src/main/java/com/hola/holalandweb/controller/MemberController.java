@@ -1,6 +1,5 @@
 package com.hola.holalandweb.controller;
 
-import com.hola.holalandcore.service.AccountService;
 import com.hola.holalandfptu.service.ClubService;
 import com.hola.holalandfptu.service.ClubTypeService;
 import com.hola.holalandtraffic.entity.Member;
@@ -25,17 +24,15 @@ public class MemberController {
     // call MemberService from module traffic
     private final MemberService memberService;
     // call AccountService from module core
-    private final AccountService accountService;
     private final SendEmailService sendEmailService;
     private final BusService busService;
     private final ClubService clubService;
     private final ClubTypeService clubTypeService;
 
     @Autowired
-    public MemberController(MemberService memberService, AccountService accountService, SendEmailService sendEmailService, BusService busService, MotorbikeTaxiDriversService motorbikeTaxiDriversService,
+    public MemberController(MemberService memberService, SendEmailService sendEmailService, BusService busService, MotorbikeTaxiDriversService motorbikeTaxiDriversService,
                             ClubService clubService, ClubTypeService clubTypeService) {
         this.memberService = memberService;
-        this.accountService = accountService;
         this.sendEmailService = sendEmailService;
         this.busService = busService;
         this.clubService = clubService;

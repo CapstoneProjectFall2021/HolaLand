@@ -9,16 +9,13 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @NoArgsConstructor
+
 @AllArgsConstructor
 @Builder
 @Getter
 @Setter
-public class User implements Serializable {
+public class Role implements Serializable {
 
-    private int userId;
-    private String userEmail;
-    private String userPassword;
-    private long userCreateTime;
-    private int userStatusId;
-    private boolean userDeleted;
+    private int roleId;
+    private String roleName;
 }

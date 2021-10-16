@@ -39,27 +39,27 @@
                 <i class="fas fa-list-ul fa-fw"></i>Danh sách việc làm
               </a>
             </li>
-            <li>
+            <li sec:authorize="hasRole('MEMBER')">
               <a th:href="@{/works/jobs-apply}" th:classappend="${page == 2 ? 'active' : ''}">
                 <i class="fas fa-tasks fa-fw"></i>Danh sách ứng tuyển
               </a>
             </li>
-            <li>
+            <li sec:authorize="hasRole('MEMBER')">
               <a th:href="@{/works/jobs-save}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="far fa-bookmark fa-fw"></i>Việc làm đã lưu
               </a>
             </li>
-            <li>
-              <a href="#">
-                <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
-              </a>
-            </li>
-            <li>
+            <li sec:authorize="hasRole('MEMBER')">
               <a href="#">
                 <i class="far fa-file-alt fa-fw"></i>Bài viết đã đăng
               </a>
             </li>
-            <li>
+            <li sec:authorize="hasRole('MEMBER')">
+              <a href="#">
+                <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
+              </a>
+            </li>
+            <li sec:authorize="hasRole('RECRUITER')">
               <a href="#">
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tuyển dụng
               </a>
@@ -104,6 +104,8 @@
 <div th:replace="works/modal-confirm-apply-job :: confirmApplyJobModal"></div>
 <!-- Import modal confirm remove job save -->
 <div th:replace="works/modal-confirm-remove-job-save :: confirmRemoveJobSaveModal"></div>
+<!-- Import modal confirm cancel apply job -->
+<div th:replace="works/modal-confirm-cancel-apply-job :: confirmCancelApplyJobModal"></div>
 
 <th:block th:replace="~{common/script :: script/script}"></th:block>
 <script>

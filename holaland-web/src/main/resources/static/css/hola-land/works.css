@@ -16,8 +16,9 @@
 
 .job-detail .job-title h3 {
   font-size: 22px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   font-weight: var(--font-weight-4);
+  line-height: 1;
 }
 
 .job-detail .job-title p {

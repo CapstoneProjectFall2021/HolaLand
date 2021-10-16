@@ -2,6 +2,7 @@
   <div class="container-fluid">
     <!-- Logo -->
     <a class="navbar-brand mr-auto" th:href="@{/}">Hola Land</a>
+    <!-- Navbar -->
     <div class="navbar-btn-group">
       <ul class="m-0 p-0">
         <li class="navbar-search">
@@ -11,7 +12,7 @@
             <button class="btn-search" id="search" type="submit"><i class="bi bi-search"></i></button>
           </form>
         </li>
-        <li class="navbar-btn dropdown">
+        <li sec:authorize="isAuthenticated()" class="navbar-btn dropdown">
           <a aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0)"
              id="language"
              role="button">
@@ -70,7 +71,7 @@
           </ul>
           <!-- End: Notification dropdown -->
         </li>
-        <li class="navbar-btn dropdown pointer-events-none">
+        <li sec:authorize="isAuthenticated()" class="navbar-btn dropdown pointer-events-none">
           <a aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0)"
              id="userDropdown"
              role="button">
@@ -83,7 +84,7 @@
                 <i class="far fa-user fa-fw"></i>
               </div>
               <div>
-                <span>Đinh Tuấn Anh</span>
+                <span sec:authentication="name"></span>
               </div>
             </div>
             <div class="dropdown-divider"></div>
@@ -92,17 +93,17 @@
             <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Đóng góp ý kiến</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#"><i class="far fa-question-circle fa-fw"></i>Trợ giúp & hỗ trợ</a>
-            <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-fw"></i>Đăng xuất</a>
+            <a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt fa-fw"></i>Đăng xuất</a>
           </ul>
         </li>
-        <li class="navbar-btn dropdown pointer-events-none">
+        <li sec:authorize="!isAuthenticated()" class="navbar-btn dropdown pointer-events-none">
           <a aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0)"
              id="funtionDropdown" role="button">
             <i class="fas fa-caret-down m-0 fa-fw"></i>
           </a>
           <ul aria-labelledby="funtionDropdown" class="dropdown-menu navbar-dropdown">
-            <a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt fa-fw"></i>Đăng nhập</a>
-            <a class="dropdown-item" href="#"><i class="far fa-edit fa-fw"></i>Đăng ký tài khoản</a>
+            <a class="dropdown-item" th:href="@{/login}"><i class="fas fa-sign-in-alt fa-fw"></i>Đăng nhập</a>
+            <a class="dropdown-item" th:href="@{/login}"><i class="far fa-edit fa-fw"></i>Đăng ký tài khoản</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Liên hệ & hỗ trợ</a>
           </ul>
@@ -117,7 +118,7 @@
         </li>
       </ul>
     </div>
-    <!-- Start: Sidebar -->
+    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
       <ul class="nav navbar-nav menu">
         <li>
@@ -142,6 +143,5 @@
         <li><a href="#"><i class="fas fa-bars fa-fw"></i>Khác</a></li>
       </ul>
     </div>
-    <!-- End: Sidebar -->
   </div>
 </nav>

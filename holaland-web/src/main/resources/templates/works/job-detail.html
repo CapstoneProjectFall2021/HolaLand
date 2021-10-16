@@ -12,24 +12,42 @@
           <div class="row">
             <div class="col-md-12 col-lg-12 col-xl-9">
               <h3 th:text="${jobDetail.workRequestRecruitmentTitle}"></h3>
-              <p><i class="far fa-clock fa-fw"></i>Hạn nộp hồ sơ: <span
-                  th:text="${jobDetail.workRequestRecruitmentEndDateTime}"></span></p>
-              <p><i class="fas fa-map-marker-alt fa-fw"></i>Địa điểm: <span
-                  th:text="${jobDetail.workRequestRecruitmentWorkLocation}"></span></p>
+              <p>
+                <i class="far fa-clock fa-fw"></i>Hạn nộp hồ sơ:
+                <span th:text="${jobDetail.workRequestRecruitmentEndDateTime}"></span>
+              </p>
+              <p>
+                <i class="fas fa-map-marker-alt fa-fw"></i>Địa điểm:
+                <span th:text="${jobDetail.workRequestRecruitmentWorkLocation}"></span>
+              </p>
             </div>
-            <div class="col-md-12 col-lg-12 col-xl-3 apply-area">
-              <div class="apply-area-btn">
-                <div class="btn-apply">
-                  <a href="javascript:void(0)" class="btn btn-md btn-success" data-bs-toggle="modal"
-                     data-bs-target="#confirmApplyJobModal">
-                    ỨNG TUYỂN NGAY
-                  </a>
+            <div class="col-md-12 col-lg-12 col-xl-3">
+              <div class="apply-area">
+                <div class="apply-area-btn" sec:authorize="hasRole('MEMBER')">
+                  <div class="btn-apply">
+                    <a href="javascript:void(0)" class="btn btn-md btn-success" data-bs-toggle="modal"
+                       data-bs-target="#confirmApplyJobModal">
+                      ỨNG TUYỂN NGAY
+                    </a>
+                  </div>
+                  <div class="btn-save-job">
+                    <a id="btn-save-job" href="javascript:void(0)" class="btn btn-md btn-secondary m-mt-15"
+                       onclick="save()">
+                      <i id="icon-save-job" class="far fa-bookmark fa-fw"></i><span id="label-save-job">LƯU TIN</span>
+                    </a>
+                  </div>
                 </div>
-                <div class="btn-save-job">
-                  <a id="btn-save-job" href="javascript:void(0)" class="btn btn-md btn-secondary m-mt-15"
-                     onclick="save()">
-                    <i id="icon-save-job" class="far fa-bookmark fa-fw"></i><span id="label-save-job">LƯU TIN</span>
-                  </a>
+                <div class="apply-area-btn" sec:authorize="!isAuthenticated()">
+                  <div class="btn-apply">
+                    <a th:href="@{/login}" class="btn btn-md btn-success">
+                      ỨNG TUYỂN NGAY
+                    </a>
+                  </div>
+                  <div class="btn-save-job">
+                    <a th:href="@{/login}" class="btn btn-md btn-secondary m-mt-15">
+                      <i id="icon-save-job" class="far fa-bookmark fa-fw"></i><span id="label-save-job">LƯU TIN</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -39,7 +57,7 @@
         <div class="panel-text">
           <div class="row-info">
             <div><i class="fas fa-coins fa-fw"></i>Mức lương</div>
-            <div0><span th:text="${jobDetail.workRequestRecruitmentSalary}"></span> VNĐ</div0>
+            <div><span th:text="${jobDetail.workRequestRecruitmentSalary}"></span></div>
           </div>
           <div class="row-info">
             <div><i class="fas fa-user-clock fa-fw"></i>Hình thức làm việc</div>
