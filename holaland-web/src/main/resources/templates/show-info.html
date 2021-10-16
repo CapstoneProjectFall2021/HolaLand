@@ -10,14 +10,16 @@
 <a th:href="@{/}">Home</a><br/>
 <a th:href="@{/logout}">Logout</a>
 <p>Spring Security Thymeleaf tutorial</p>
-<div sec:authorize="hasRole('MEMBER')">Text visible to user.</div>
-<div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+<div sec:authorize="hasRole('MEMBER')">Text visible to MEMBER.</div>
+<div sec:authorize="hasRole('RECRUITER')">Text visible to RECRUITER.</div>
+<div sec:authorize="hasRole('SELLER')">Text visible to SELLER.</div>
+<br/>
 <div sec:authorize="isAuthenticated()">
   Text visible only to authenticated users.
 </div>
 <br/>
-<div sec:authorize="hasAnyRole('MEMBER', 'ADMIN')">
-  Text visible to MEMBER or ADMIN.
+<div sec:authorize="hasAnyRole('MEMBER', 'RECRUITER', 'SELLER')">
+  Text visible to MEMBER, RECRUITER or SELLER.
 </div>
 <br/>
 Authenticated username: <span sec:authentication="name"></span><br/>

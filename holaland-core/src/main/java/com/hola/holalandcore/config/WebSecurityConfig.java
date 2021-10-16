@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //http.authorizeRequests().anyRequest().authenticated();
 
         //http.authorizeRequests().antMatchers("/works").hasAnyRole("MEMBER");
-        http.authorizeRequests().antMatchers("/admin").hasAnyRole("MEMBER");
+        http.authorizeRequests().antMatchers("/show-info").hasAnyRole("MEMBER", "RECRUITER", "SELLER");
 
         // Login Form.
         http.authorizeRequests().and().formLogin()//
@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/login?logout");
 
         // Permission
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");

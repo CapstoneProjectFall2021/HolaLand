@@ -27,12 +27,12 @@ public class MainController {
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "index";
+        return "login";
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/show-info")
     public String admin() {
-        return "admin";
+        return "show-info";
     }
 
 //    @GetMapping("/works")

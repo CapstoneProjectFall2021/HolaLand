@@ -19,7 +19,6 @@
     <div class="signin-signup">
       <form class="sign-in-form" name='f' th:action="@{/j_spring_security_check}" method='POST'>
         <h2 class="title">Đăng nhập</h2>
-        <p th:if="${param.error}" class="error">Invalid email or password</p>
         <div class="input-field">
           <i class="fas fa-envelope"></i>
           <input type="text" placeholder="Email" name="email"/>
@@ -69,7 +68,7 @@
             <label>Chế độ tối</label>
           </div>
           <div>
-            <a href="javascript:void(0)">&nbsp;</a>
+            <a th:href="@{/}"><i class="fas fa-home"></i>Trang chủ</a>
           </div>
         </div>
       </form>
@@ -100,7 +99,26 @@
   </div>
 </div>
 
+<div id="toast-info">Đăng xuất thành công.</div>
+<div id="toast-error">Email hoặc mật khẩu không chính xác.</div>
+
 <script crossorigin="anonymous" th:src="@{/js/hola-land/app.js}"></script>
+
+<script th:if="${param.logout}">
+  const toastInfo = document.getElementById("toast-info");
+  toastInfo.className = "show success";
+  setTimeout(function () {
+    toastInfo.className = toastInfo.className.replace("show", "");
+  }, 2800);
+</script>
+
+<script th:if="${param.error}">
+  const toastError = document.getElementById("toast-error");
+  toastError.className = "show danger";
+  setTimeout(function () {
+    toastError.className = toastError.className.replace("show", "");
+  }, 2800);
+</script>
 </body>
 
 </html>

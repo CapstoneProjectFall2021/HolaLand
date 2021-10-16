@@ -109,17 +109,17 @@
 </th:block>
 
 <th:block th:replace="~{common/script :: script/script}"></th:block>
+<!-- Import toast -->
 <th:block th:replace="~{common/toast-error :: toast-error}"></th:block>
-<script crossorigin="anonymous" th:inline="javascript">
-  /*[# th:if="${club != null}"]*/
+
+<script th:if="${club != null}">
   const myModal = new bootstrap.Modal(document.getElementById('clubInfoModal'));
   myModal.show();
-  /*[/]*/
+</script>
 
-  /*[# th:if="${club == null && page == 2}"]*/
+<script th:if="${club == null && page == 2}">
   const toast = new bootstrap.Toast(document.getElementById('toast-error'));
   toast.show();
-  /*[/]*/
 </script>
 </body>
 
