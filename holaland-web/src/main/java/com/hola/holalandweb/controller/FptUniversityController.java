@@ -45,7 +45,6 @@ public class FptUniversityController {
     @GetMapping("/fpt-university/club/type")
     public String getFptUniversityClubType(
             @RequestParam("clubTypeId") Integer clubTypeId,
-            @RequestParam("page") Integer page,
             Model model
     ) {
         List<ClubType> clubTypeList = clubTypeService.getAll();
@@ -53,7 +52,7 @@ public class FptUniversityController {
         model.addAttribute("clubTypeId", clubTypeId);
         model.addAttribute("clubTypeList", clubTypeList);
         model.addAttribute("clubList", clubList);
-        model.addAttribute("page", page);
+        model.addAttribute("page", 2);
         return "fpt-university";
     }
 
@@ -72,7 +71,6 @@ public class FptUniversityController {
         } catch (EmptyResultDataAccessException ex) {
             return "error";
         }
-        System.out.println(club);
         model.addAttribute("clubTypeList", clubTypeList);
         model.addAttribute("clubList", clubList);
         model.addAttribute("club", club);
@@ -91,5 +89,4 @@ public class FptUniversityController {
         model.addAttribute("page", 4);
         return "fpt-university";
     }
-
 }

@@ -25,73 +25,77 @@
 <div style="overflow: hidden;">
   <div class="container">
     <div class="row">
-      <!-- Sub menu -->
-      <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3 col-left">
-        <div class="row">
-          <div class="col-12">
-            <h1 class="title fix-pd fix-mb-title">Menu</h1>
+      <!-- Left side -->
+      <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3">
+        <div class="col-left">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="title fix-pd fix-mb-title">Menu</h1>
+            </div>
           </div>
+          <ul class="nav navbar-nav sub-menu">
+            <li>
+              <a th:href="@{/works}" th:classappend="${page == 1 ? 'active' : ''}">
+                <i class="fas fa-list-ul fa-fw"></i>Danh sách việc làm
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/works/jobs-apply}" th:classappend="${page == 2 ? 'active' : ''}">
+                <i class="fas fa-tasks fa-fw"></i>Danh sách ứng tuyển
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/works/jobs-save}" th:classappend="${page == 3 ? 'active' : ''}">
+                <i class="far fa-bookmark fa-fw"></i>Việc làm đã lưu
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="far fa-file-alt fa-fw"></i>Bài viết đã đăng
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tuyển dụng
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showToast()">
+                <i class="fas fa-pencil-alt fa-fw"></i>Test Toast
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/}">
+                <i class="fas fa-chevron-left fa-fw"></i>Quay lại
+              </a>
+            </li>
+          </ul>
         </div>
-        <ul class="nav navbar-nav sub-menu">
-          <li>
-            <a th:href="@{/works}" th:classappend="${page == 1 ? 'active' : ''}">
-              <i class="fas fa-list-ul fa-fw"></i>Danh sách việc làm
-            </a>
-          </li>
-          <li>
-            <a th:href="@{/works/jobs-apply}" th:classappend="${page == 2 ? 'active' : ''}">
-              <i class="fas fa-tasks fa-fw"></i>Danh sách ứng tuyển
-            </a>
-          </li>
-          <li>
-            <a th:href="@{/works/jobs-save}" th:classappend="${page == 3 ? 'active' : ''}">
-              <i class="far fa-bookmark fa-fw"></i>Việc làm đã lưu
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="far fa-file-alt fa-fw"></i>Bài viết đã đăng
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tuyển dụng
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)" onclick="showToast()">
-              <i class="fas fa-pencil-alt fa-fw"></i>Test Toast
-            </a>
-          </li>
-          <li>
-            <a th:href="@{/}">
-              <i class="fas fa-chevron-left fa-fw"></i>Quay lại
-            </a>
-          </li>
-        </ul>
       </div>
-      <!-- Right content -->
-      <!-- List job -->
-      <th:block th:if="${page == 1}">
-        <div th:replace="works/jobs :: jobs"></div>
-      </th:block>
-      <!-- 2 -->
-      <th:block th:if="${page == 2}">
-        <div th:replace="works/jobs-apply :: jobs-apply"></div>
-      </th:block>
-      <!-- 3 -->
-      <th:block th:if="${page == 3}">
-        <div th:replace="works/jobs-save :: jobs-save"></div>
-      </th:block>
-      <!-- Job detail -->
-      <th:block th:if="${page == 4}">
-        <div th:replace="works/job-detail :: job-detail"></div>
-      </th:block>
+      <!-- Right side -->
+      <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
+        <!-- Jobs -->
+        <th:block th:if="${page == 1}">
+          <div th:replace="works/jobs :: jobs"></div>
+        </th:block>
+        <!-- 2 -->
+        <th:block th:if="${page == 2}">
+          <div th:replace="works/jobs-apply :: jobs-apply"></div>
+        </th:block>
+        <!-- 3 -->
+        <th:block th:if="${page == 3}">
+          <div th:replace="works/jobs-save :: jobs-save"></div>
+        </th:block>
+        <!-- Job detail -->
+        <th:block th:if="${page == 4}">
+          <div th:replace="works/job-detail :: job-detail"></div>
+        </th:block>
+      </div>
     </div>
   </div>
 </div>

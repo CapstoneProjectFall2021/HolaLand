@@ -84,7 +84,7 @@ public class MemberController {
     public String getOneMember(@RequestParam("id") Integer id, Model model) {
         Member member = memberService.getOne(id);
         backToMembers(model);
-        model.addAttribute("oneMember",member);
+        model.addAttribute("oneMember", member);
         return "members";
     }
 
@@ -96,7 +96,7 @@ public class MemberController {
     }
 
     @PostMapping("/update-member")
-    public String updateMember (@ModelAttribute("updateMember") Member updateMember, BindingResult bindingResult, Model model) {
+    public String updateMember(@ModelAttribute("updateMember") Member updateMember, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             System.out.println("There was a error " + bindingResult);
             return "error";
@@ -113,11 +113,10 @@ public class MemberController {
         List listCLubType = clubTypeService.getAll();
 
         model.addAttribute("addMember", Member.builder().build());
-        model.addAttribute("oneMember",null);
+        model.addAttribute("oneMember", null);
         model.addAttribute("members", members);
         model.addAttribute("listBus", listBus);
         model.addAttribute("listClub", listClub);
         model.addAttribute("listClubType", listCLubType);
     }
-
 }
