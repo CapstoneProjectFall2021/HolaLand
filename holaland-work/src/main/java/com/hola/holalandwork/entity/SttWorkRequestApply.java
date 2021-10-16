@@ -11,5 +11,4 @@ public class SttWorkRequestApply {
 
     private int sttWorkRequestApplyId;
     private String sttWorkRequestApplyStatus;
-
 }

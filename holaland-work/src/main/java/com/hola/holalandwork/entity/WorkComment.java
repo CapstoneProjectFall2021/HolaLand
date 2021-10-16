@@ -18,5 +18,4 @@ public class WorkComment {
     private int accountId;
     private String workCommentContent;
     private boolean workCommentDeleted;
-
 }

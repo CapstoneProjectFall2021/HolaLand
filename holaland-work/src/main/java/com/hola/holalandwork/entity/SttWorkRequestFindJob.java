@@ -15,5 +15,4 @@ public class SttWorkRequestFindJob {
 
     private int sttWorkRequestFindJobId;
     private String sttWorkRequestFindJobStatus;
-
 }

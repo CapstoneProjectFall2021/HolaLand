@@ -18,5 +18,4 @@ public class WorkReport {
     private int workReportReasonId;
     private String workReportDescription;
     private boolean workReportDeleted;
-
 }

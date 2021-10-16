@@ -15,5 +15,4 @@ public class SttWorkRequestRecruitment {
 
     private int sttWorkRequestRecruitmentId;
     private String sttWorkRequestRecruitmentStatus;
-
 }

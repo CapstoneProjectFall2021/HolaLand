@@ -11,5 +11,4 @@ public class SttWorkRequestBook {
 
     private int sttWorkRequestBookId;
     private String sttWorkRequestBookStatus;
-
 }

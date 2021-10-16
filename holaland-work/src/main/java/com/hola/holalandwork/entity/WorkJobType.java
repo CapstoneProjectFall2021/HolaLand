@@ -18,5 +18,4 @@ public class WorkJobType {
     private String workJobTypeName;
     private int workJobTypeCount;
     private boolean workJobTypeDeleted;
-
 }

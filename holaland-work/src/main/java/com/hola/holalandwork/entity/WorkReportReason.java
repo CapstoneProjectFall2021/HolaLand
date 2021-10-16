@@ -11,5 +11,4 @@ public class WorkReportReason {
 
     private int workReportReasonId;
     private String workReportReasonName;
-
 }

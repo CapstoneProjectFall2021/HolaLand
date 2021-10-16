@@ -25,5 +25,4 @@ public class WorkRequestFindJob {
     private String workRequestFindJobDescription;
     private String workRequestFindJobPersonalExperience;
     private boolean workRequestFindJobDeleted;
-
 }

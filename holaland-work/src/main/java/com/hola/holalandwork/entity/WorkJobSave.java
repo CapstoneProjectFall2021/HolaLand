@@ -13,5 +13,4 @@ public class WorkJobSave {
     private int accountId;
     private int workRequestRecruitmentId;
     private boolean workJobsSaveDeleted;
-
 }

@@ -18,5 +18,4 @@ public class WorkRequestApply {
     private int workRequestRecruitmentId;
     private int sttWorkRequestApplyId;
     private boolean workRequestApplyDeleted;
-
 }

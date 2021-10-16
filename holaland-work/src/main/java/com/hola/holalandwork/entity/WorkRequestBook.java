@@ -18,5 +18,4 @@ public class WorkRequestBook {
     private int workRequestFindJobId;
     private int sttWorkRequestBookId;
     private boolean workRequestBookDeleted;
-
 }
