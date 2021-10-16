@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="jobType : ${jobTypeList}">
         <a href="jobs.html" class="label-info m-mb-20"
-           th:href="@{/works/type(workJobTypeId=*{jobType.workJobTypeId}, page=1)}"
+           th:href="@{/works/type(workJobTypeId=*{jobType.workJobTypeId})}"
            th:classappend="${jobType.workJobTypeId == workJobTypeId ? 'active' : ''}">
           <div class="flex">
             <div class="icon">

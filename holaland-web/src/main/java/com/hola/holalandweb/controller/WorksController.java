@@ -38,7 +38,7 @@ public class WorksController {
     @GetMapping("/works")
     public String goToWorks(Model model) {
         List<WorkJobType> jobTypeList = workJobTypeService.getAll();
-        List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAll();
+        List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(jobTypeList.get(0).getWorkJobTypeId());
         model.addAttribute("workJobTypeId", 1);
         model.addAttribute("jobTypeList", jobTypeList);
         model.addAttribute("jobList", jobList);
@@ -49,7 +49,6 @@ public class WorksController {
     @GetMapping("/works/type")
     public String getWorkJobType(
             @RequestParam("workJobTypeId") Integer workJobTypeId,
-            @RequestParam("page") Integer page,
             Model model
     ) {
         List<WorkJobType> jobTypeList = workJobTypeService.getAll();
@@ -57,7 +56,7 @@ public class WorksController {
         model.addAttribute("workJobTypeId", workJobTypeId);
         model.addAttribute("jobTypeList", jobTypeList);
         model.addAttribute("jobList", jobList);
-        model.addAttribute("page", page);
+        model.addAttribute("page", 1);
         return "works";
     }
 
