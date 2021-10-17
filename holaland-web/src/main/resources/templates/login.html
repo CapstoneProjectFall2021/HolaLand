@@ -27,13 +27,20 @@
           <i class="fas fa-lock"></i>
           <input type="password" placeholder="Mật khẩu" name="password"/>
         </div>
-        <input type="submit" value="Đăng nhập" class="btn solid"/>
+        <input type="submit" class="btn" value="Đăng nhập"/>
         <div class="text-field">
-          <div class="switch-theme">
-            <input type="checkbox" id="switch-sign-in">
-            <label>Chế độ tối</label>
-          </div>
           <div>
+            <div class="switch-theme">
+              <input type="checkbox" id="switch-sign-in">
+              <label>Chế độ tối</label>
+            </div>
+            <div class="switch-theme">
+              <input type="checkbox" name="remember-me"/>
+              <label>Ghi nhớ tài khoản</label>
+            </div>
+          </div>
+          <div style="text-align: right">
+            <a th:href="@{/}"><i class="fas fa-home"></i>Trang chủ</a>
             <a href="#">Quên mật khẩu?</a>
           </div>
         </div>
@@ -99,11 +106,11 @@
   </div>
 </div>
 
-<div id="toast-info">Đăng xuất thành công.</div>
-<div id="toast-error">Email hoặc mật khẩu không chính xác.</div>
+<div th:if="${param.logout}" id="toast-info">Đăng xuất thành công.</div>
+<div th:if="${param.error}" id="toast-error">Email hoặc mật khẩu không chính xác.</div>
 
+<!-- Javascript -->
 <script crossorigin="anonymous" th:src="@{/js/hola-land/app.js}"></script>
-
 <script th:if="${param.logout}">
   const toastInfo = document.getElementById("toast-info");
   toastInfo.className = "show success";
@@ -111,7 +118,6 @@
     toastInfo.className = toastInfo.className.replace("show", "");
   }, 2800);
 </script>
-
 <script th:if="${param.error}">
   const toastError = document.getElementById("toast-error");
   toastError.className = "show danger";

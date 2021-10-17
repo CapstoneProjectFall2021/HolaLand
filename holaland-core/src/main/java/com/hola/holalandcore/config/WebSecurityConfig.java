@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //http.authorizeRequests().anyRequest().authenticated();
 
         //http.authorizeRequests().antMatchers("/works").hasAnyRole("MEMBER");
+        http.authorizeRequests().antMatchers("/js/templates/**").hasAnyRole("MEMBER", "RECRUITER", "SELLER");
         http.authorizeRequests().antMatchers("/show-info").hasAnyRole("MEMBER", "RECRUITER", "SELLER");
 
         // Login Form.
@@ -52,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Logout Page
                 .and()
                 .logout()
+                .deleteCookies("JSESSIONID")
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout");
 
@@ -59,9 +61,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
         // Remember Me
-        http.authorizeRequests()
-                .and()
-                .rememberMe().tokenRepository(this.persistentTokenRepository())
+        http.rememberMe()
+                .key("uniqueAndSecret")
+                .tokenRepository(this.persistentTokenRepository())
                 .tokenValiditySeconds(1 * 24 * 60 * 60); // 24h
     }
 

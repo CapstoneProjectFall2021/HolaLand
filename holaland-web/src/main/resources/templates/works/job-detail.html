@@ -57,7 +57,10 @@
         <div class="panel-text">
           <div class="row-info">
             <div><i class="fas fa-coins fa-fw"></i>Mức lương</div>
-            <div><span th:text="${jobDetail.workRequestRecruitmentSalary}"></span></div>
+            <div>
+              <span sec:authorize="isAuthenticated()" th:text="${jobDetail.workRequestRecruitmentSalary}"></span>
+              <span sec:authorize="!isAuthenticated()">Đăng nhập để xem lương</span>
+            </div>
           </div>
           <div class="row-info">
             <div><i class="fas fa-user-clock fa-fw"></i>Hình thức làm việc</div>

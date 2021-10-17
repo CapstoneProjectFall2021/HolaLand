@@ -43,7 +43,10 @@
             <div class="content-body">
               <h4 th:text="*{job.workRequestRecruitmentTitle}"></h4>
               <div class="job-info">
-                <p>Lương: <span th:text="*{job.workRequestRecruitmentSalary}"></span></p>
+                <p sec:authorize="isAuthenticated()">
+                  Lương: <span th:text="*{job.workRequestRecruitmentSalary}"></span>
+                </p>
+                <p sec:authorize="!isAuthenticated()">Đăng nhập để xem lương</p>
                 <p>Thời hạn: <span th:text="*{job.workRequestRecruitmentEndDateTime}"></span></p>
               </div>
             </div>

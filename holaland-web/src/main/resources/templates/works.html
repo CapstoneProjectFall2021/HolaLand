@@ -56,7 +56,22 @@
             </li>
             <li sec:authorize="hasRole('MEMBER')">
               <a href="#">
+                <i class="fas fa-download fa-fw"></i>Bài viết lưu nháp
+              </a>
+            </li>
+            <li sec:authorize="hasRole('MEMBER')">
+              <a href="#">
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
+              </a>
+            </li>
+            <li sec:authorize="hasRole('RECRUITER')">
+              <a href="#">
+                <i class="fas fa-search fa-fw"></i>Danh sách tìm việc
+              </a>
+            </li>
+            <li sec:authorize="hasRole('RECRUITER')">
+              <a href="#">
+                <i class="fas fa-download fa-fw"></i>Bài viết lưu nháp
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
@@ -100,13 +115,20 @@
   </div>
 </div>
 
-<!-- Import modal confirm apply job -->
-<div th:replace="works/modal-confirm-apply-job :: confirmApplyJobModal"></div>
-<!-- Import modal confirm remove job save -->
-<div th:replace="works/modal-confirm-remove-job-save :: confirmRemoveJobSaveModal"></div>
-<!-- Import modal confirm cancel apply job -->
-<div th:replace="works/modal-confirm-cancel-apply-job :: confirmCancelApplyJobModal"></div>
+<th:block th:if="${page == 2}">
+  <!-- Import modal confirm cancel apply job -->
+  <div th:replace="works/modal/modal-confirm-cancel-apply-job :: confirmCancelApplyJobModal"></div>
+</th:block>
+<th:block th:if="${page == 3}">
+  <!-- Import modal confirm remove job save -->
+  <div th:replace="works/modal/modal-confirm-remove-job-save :: confirmRemoveJobSaveModal"></div>
+</th:block>
+<th:block th:if="${page == 4}">
+  <!-- Import modal confirm apply job -->
+  <div th:replace="works/modal/modal-confirm-apply-job :: confirmApplyJobModal"></div>
+</th:block>
 
+<!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
 <script>
   function showToast() {
@@ -114,6 +136,8 @@
     toast.show();
   }
 </script>
+
+<!-- Import toast -->
 <th:block th:replace="~{common/toast-success :: toast-success}"></th:block>
 
 </body>

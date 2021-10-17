@@ -44,12 +44,12 @@
                 <i class="fas fa-users fa-fw"></i>Câu lạc bộ
               </a>
             </li>
-            <li>
+            <li sec:authorize="hasRole('MEMBER')">
               <a th:href="@{/fpt-university/department}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-headset fa-fw"></i>Phòng ban
               </a>
             </li>
-            <li>
+            <li sec:authorize="hasRole('MEMBER')">
               <a th:href="@{/fpt-university/lecturers}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="far fa-address-book fa-fw"></i>Giảng viên
               </a>
@@ -105,22 +105,22 @@
 
 <!-- Import modal club detail -->
 <th:block th:if="${club != null}">
-  <div th:replace="fptu/modal-club-info :: clubInfoModal"></div>
+  <div th:replace="fptu/modal/modal-club-info :: clubInfoModal"></div>
 </th:block>
 
+<!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
-<!-- Import toast -->
-<th:block th:replace="~{common/toast-error :: toast-error}"></th:block>
-
 <script th:if="${club != null}">
   const myModal = new bootstrap.Modal(document.getElementById('clubInfoModal'));
   myModal.show();
 </script>
-
 <script th:if="${club == null && page == 2}">
   const toast = new bootstrap.Toast(document.getElementById('toast-error'));
   toast.show();
 </script>
+
+<!-- Import toast -->
+<th:block th:replace="~{common/toast-error :: toast-error}"></th:block>
 </body>
 
 </html>

@@ -178,7 +178,7 @@ select:-webkit-autofill:focus {
 .text-field {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   max-width: 360px;
   width: 100%;
   margin: 5px 0;
@@ -191,6 +191,7 @@ select:-webkit-autofill:focus {
 .text-field .switch-theme {
   display: flex;
   align-items: center;
+  margin: 10px 0;
 }
 
 .text-field .switch-theme input {
