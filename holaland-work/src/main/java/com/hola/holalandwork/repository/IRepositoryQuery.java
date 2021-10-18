@@ -100,4 +100,6 @@ public interface IRepositoryQuery {
     String WORK_REPORT_REASON_GET_ALL = "SELECT * FROM work_report_reason";
     String WORK_REPORT_REASON_GET_ONE = "SELECT * FROM work_report_reason WHERE work_report_reason_id = ?";
 
+    String WORK_SALARY_UNIT_GET_ALL = "SELECT * FROM work_salary_unit";
+    String WORK_SALARY_UNIT_GET_ONE = "SELECT * FROM work_salary_unit WHERE work_salary_unit_id = ?";
 }
