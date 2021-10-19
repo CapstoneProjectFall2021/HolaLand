@@ -8,7 +8,7 @@
     </div>
     <div class="row">
       <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="clubType : ${clubTypeList}">
-        <a class="label-info m-mb-20"
+        <a class="label-info m-mb-16"
            th:href="@{/fpt-university/club/type(clubTypeId=*{clubType.fptuClubTypeId})}"
            th:classappend="${clubType.fptuClubTypeId == clubTypeId ? 'active' : ''}">
           <div class="flex">
@@ -35,7 +35,7 @@
     </div>
     <div class="row">
       <div class="col-md-12 col-lg-12 col-xl-6 col-xxl-6" th:each="club : ${clubList}">
-        <a class="label-info m-mb-15"
+        <a class="label-info m-mb-16"
            th:href="@{/fpt-university/club/detail(page=2, clubTypeId=*{club.fptuClubTypeId}, clubId=*{club.fptuClubId})}">
           <div class="flex">
             <div class="icon">
