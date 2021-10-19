@@ -11,8 +11,8 @@
 }
 
 .list-online-store .label-info .flex .icon img {
-  width: 140px;
-  height: 140px;
+  width: 136px;
+  height: 136px;
   transition: 0.4s;
 }
 
@@ -33,9 +33,9 @@
 }
 
 .list-online-store .label-info .flex .content-body .panel-small {
-  padding: 8px 12px;
-  margin-top: 12px;
-  margin-bottom: 12px;
+  padding: 6px 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   background-color: var(--secondary-background);
   border-radius: var(--third-border-radius);
   transition: 0.4s;
@@ -74,7 +74,10 @@
     width: 60px;
     height: 60px;
   }
-  .label-info .flex .icon img {
+  .list-online-store .label-info {
+    padding: 8px 16px 2px;
+  }
+  .list-online-store .label-info .flex .icon img {
     margin-right: 12px;
   }
 }
@@ -301,6 +304,6 @@
   margin: 0;
 }
 
-.fieldset-rate {
-  padding: 0 20px 12px;
+.fieldset-rate .custom-radio {
+  padding: 0 6px;
 }

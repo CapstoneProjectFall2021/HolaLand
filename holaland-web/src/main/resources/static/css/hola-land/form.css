@@ -8,6 +8,7 @@ form fieldset {
   border: 2px solid var(--secondary-border-color);
   border-radius: var(--secondary-border-radius);
   padding: 0 12px 12px;
+  position: relative;
 }
 
 form fieldset legend {
@@ -43,6 +44,14 @@ form fieldset .form-control:focus {
 
 label.custom-control-label {
   font-weight: normal;
+}
+
+fieldset label.unit {
+  position: absolute;
+  right: 16px;
+  top: 0;
+  font-size: 16px;
+  color: var(--secondary-text);
 }
 
 
