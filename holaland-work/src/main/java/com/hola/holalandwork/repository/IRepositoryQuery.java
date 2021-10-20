@@ -13,7 +13,7 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_APPLY_GET_ALL = "SELECT * FROM work_request_apply WHERE work_request_apply_deleted = 0";
     String WORK_REQUEST_APPLY_GET_ALL_BY_ACCOUNT_ID = "SELECT\n" +
             "       T1.work_request_recruitment_id,\n" +
-            "       T1.account_id,\n" +
+            "       T1.user_id,\n" +
             "       T1.work_salary_type_id,\n" +
             "       T1.work_job_type_id,\n" +
             "       T1.stt_work_request_recruitment_id,\n" +
@@ -41,7 +41,7 @@ public interface IRepositoryQuery {
     String WORK_JOB_SAVE_GET_ALL = "SELECT * FROM work_job_save WHERE work_job_save_deleted = 0";
     String WORK_JOB_SAVE_GET_ALL_BY_ACCOUNT_ID = "SELECT\n" +
             "       T1.work_request_recruitment_id,\n" +
-            "       T1.account_id,\n" +
+            "       T1.user_id,\n" +
             "       T1.work_salary_type_id,\n" +
             "       T1.work_job_type_id,\n" +
             "       T1.stt_work_request_recruitment_id,\n" +
