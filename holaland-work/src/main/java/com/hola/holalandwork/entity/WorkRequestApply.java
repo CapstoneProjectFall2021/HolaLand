@@ -14,7 +14,7 @@ import lombok.Setter;
 public class WorkRequestApply {
 
     private int workRequestApplyId;
-    private int accountId;
+    private int userId;
     private int workRequestRecruitmentId;
     private int sttWorkRequestApplyId;
     private boolean workRequestApplyDeleted;

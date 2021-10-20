@@ -34,7 +34,7 @@ public interface IRepositoryQuery {
             "FROM work_request_recruitment T1\n" +
             "LEFT OUTER JOIN work_request_apply T2\n" +
             "ON T1.work_request_recruitment_id = T2.work_request_recruitment_id\n" +
-            "WHERE T2.account_id = ?\n" +
+            "WHERE T2.user_id = ?\n" +
             "AND T1.work_request_recruitment_deleted = 0";
     String WORK_REQUEST_APPLY_GET_ONE = "SELECT * FROM work_request_apply WHERE work_request_apply_id = ? AND work_request_apply_deleted = 0";
 
@@ -62,7 +62,7 @@ public interface IRepositoryQuery {
             "FROM work_request_recruitment T1\n" +
             "LEFT OUTER JOIN work_job_save T2\n" +
             "ON T1.work_request_recruitment_id = T2.work_request_recruitment_id\n" +
-            "WHERE T2.account_id = ?\n" +
+            "WHERE T2.user_id = ?\n" +
             "AND T1.work_request_recruitment_deleted = 0";
     String WORK_JOB_SAVE_GET_ONE = "SELECT * FROM work_job_save WHERE work_job_save_id = ? AND work_job_save_deleted = 0";
 

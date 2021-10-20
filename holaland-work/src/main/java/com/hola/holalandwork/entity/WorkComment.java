@@ -15,7 +15,7 @@ public class WorkComment {
 
     private int workCommentId;
     private int workRequestRecruitmentId;
-    private int accountId;
+    private int userId;
     private String workCommentContent;
     private boolean workCommentDeleted;
 }

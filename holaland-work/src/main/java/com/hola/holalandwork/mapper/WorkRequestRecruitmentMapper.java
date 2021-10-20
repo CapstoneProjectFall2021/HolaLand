@@ -12,7 +12,7 @@ public class WorkRequestRecruitmentMapper implements RowMapper<WorkRequestRecrui
     public WorkRequestRecruitment mapRow(ResultSet resultSet, int i) throws SQLException {
         return WorkRequestRecruitment.builder()
                 .workRequestRecruitmentId(resultSet.getInt("work_request_recruitment_id"))
-                .accountId(resultSet.getInt("account_id"))
+                .userId(resultSet.getInt("user_id"))
                 .workSalaryTypeId(resultSet.getInt("work_salary_type_id"))
                 .workJobTypeId(resultSet.getInt("work_job_type_id"))
                 .sttWorkRequestRecruitmentId(resultSet.getInt("stt_work_request_recruitment_id"))

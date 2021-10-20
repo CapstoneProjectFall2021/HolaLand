@@ -10,7 +10,7 @@ import lombok.*;
 public class WorkJobSave {
 
     private int workJobSaveId;
-    private int accountId;
+    private int userId;
     private int workRequestRecruitmentId;
     private boolean workJobsSaveDeleted;
 }

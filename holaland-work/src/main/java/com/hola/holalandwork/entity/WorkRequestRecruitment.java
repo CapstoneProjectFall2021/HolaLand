@@ -14,7 +14,7 @@ import lombok.Setter;
 public class WorkRequestRecruitment {
 
     private int workRequestRecruitmentId;
-    private int accountId;
+    private int userId;
     private int workSalaryTypeId;
     private int workJobTypeId;
     private int sttWorkRequestRecruitmentId;

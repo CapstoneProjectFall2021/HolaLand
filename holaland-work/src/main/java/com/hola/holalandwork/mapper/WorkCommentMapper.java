@@ -13,7 +13,7 @@ public class WorkCommentMapper implements RowMapper<WorkComment> {
         return WorkComment.builder()
                 .workCommentId(resultSet.getInt("work_comment_id"))
                 .workRequestRecruitmentId(resultSet.getInt("work_request_recruitment_id"))
-                .accountId(resultSet.getInt("account_id"))
+                .userId(resultSet.getInt("user_id"))
                 .workCommentContent(resultSet.getString("work_comment_content"))
                 .workCommentDeleted(resultSet.getBoolean("work_comment_deleted"))
                 .build();
