@@ -17,6 +17,7 @@ public interface IRepositoryQuery {
             "       T1.work_salary_type_id,\n" +
             "       T1.work_job_type_id,\n" +
             "       T1.stt_work_request_recruitment_id,\n" +
+            "       T1.work_salary_unit_id,\n" +
             "       T1.work_request_recruitment_title,\n" +
             "       T1.work_request_recruitment_start_date_time,\n" +
             "       T1.work_request_recruitment_end_date_time,\n" +
@@ -44,6 +45,7 @@ public interface IRepositoryQuery {
             "       T1.work_salary_type_id,\n" +
             "       T1.work_job_type_id,\n" +
             "       T1.stt_work_request_recruitment_id,\n" +
+            "       T1.work_salary_unit_id,\n" +
             "       T1.work_request_recruitment_title,\n" +
             "       T1.work_request_recruitment_start_date_time,\n" +
             "       T1.work_request_recruitment_end_date_time,\n" +
