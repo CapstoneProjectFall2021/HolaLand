@@ -16,6 +16,7 @@ public class WorkJobType {
     private int workJobTypeId;
     private String workJobTypeIcon;
     private String workJobTypeName;
-    private int workJobTypeCount;
+    private int workJobTypeCountRequestRecruitment;
+    private int workJobTypeCountRequestFindJob;
     private boolean workJobTypeDeleted;
 }

@@ -6,7 +6,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,15 +49,13 @@ public class MainController {
 //    }
 
     @GetMapping("/403")
-    public String accessDenied(Model model, Principal principal) {
+    public String accessDenied(Principal principal) {
         if (principal != null) {
             User loginedUser = (User) ((Authentication) principal).getPrincipal();
             String userInfo = WebUtils.toString(loginedUser);
-            model.addAttribute("userInfo", userInfo);
-            String message = "Hi " + principal.getName()
-                    + "<br> You do not have permission to access this page!";
-            model.addAttribute("message", message);
-            System.out.println(message);
+            String message = "Hi " + principal.getName() + "<br> You do not have permission to access this page!";
+            System.err.println(userInfo);
+            System.err.println(message);
         }
         return "403";
     }

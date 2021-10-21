@@ -14,7 +14,8 @@ public class WorkJobTypeMapper implements RowMapper<WorkJobType> {
                 .workJobTypeId(resultSet.getInt("work_job_type_id"))
                 .workJobTypeIcon(resultSet.getString("work_job_type_icon"))
                 .workJobTypeName(resultSet.getString("work_job_type_name"))
-                .workJobTypeCount(resultSet.getInt("work_job_type_count"))
+                .workJobTypeCountRequestRecruitment(resultSet.getInt("work_job_type_count_request_recruitment"))
+                .workJobTypeCountRequestFindJob(resultSet.getInt("work_job_type_count_request_find_job"))
                 .workJobTypeDeleted(resultSet.getBoolean("work_job_type_deleted"))
                 .build();
     }
