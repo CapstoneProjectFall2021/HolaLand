@@ -47,7 +47,9 @@ html[data-theme='dark'] {
 }
 
 body,
-input {
+input,
+select,
+select option {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
@@ -102,9 +104,14 @@ form.sign-in-form {
 
 .title {
   font-size: 30px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   color: var(--primary-text);
   font-weight: var(--font-weight-4);
+}
+
+.error-message {
+  color: #dc3545;
+  margin-bottom: 10px;
 }
 
 .input-field {
@@ -136,25 +143,55 @@ form.sign-in-form {
   font-weight: var(--font-weight-4);
   font-size: 16px;
   color: var(--primary-text);
+  border-radius: 0 50px 50px 0;
 }
 
-.input-field input::placeholder {
-  color: var(--secondary-text);
-  font-weight: var(--font-weight-5);
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--primary-text);
+  -webkit-box-shadow: 0 0 0px 1000px var(--primary-background) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.input-field select {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: var(--font-weight-4);
+  font-size: 16px;
+  color: var(--primary-text);
+  width: 95%;
+}
+
+.input-field select option {
+  color: #050505;
 }
 
 .text-field {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   max-width: 360px;
   width: 100%;
   margin: 5px 0;
 }
 
+.text-field i {
+  margin-right: 8px;
+}
+
 .text-field .switch-theme {
   display: flex;
   align-items: center;
+  margin: 10px 0;
 }
 
 .text-field .switch-theme input {
@@ -323,6 +360,84 @@ form.sign-in-form {
   pointer-events: all;
 }
 
+
+/**/
+
+#toast-info,
+#toast-error {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 16px;
+}
+
+#toast-info.show,
+#toast-error.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#toast-error.danger {
+  background-color: #dc3545;
+}
+
+#toast-info.success {
+  background-color: #198754;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
 @media (max-width: 870px) {
   .container {
     min-height: 800px;
@@ -405,7 +520,7 @@ form.sign-in-form {
     transform: translateY(300px);
   }
   .container.sign-up-mode .signin-signup {
-    top: 15%;
+    top: 12%;
     transform: translate(-50%, 0);
   }
 }

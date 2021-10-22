@@ -1,4 +1,4 @@
-<div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9 col-right" th:fragment="bus">
+<div class="col-right" th:fragment="bus">
   <!-- List bus -->
   <div class="list-bus">
     <div class="row">
@@ -8,7 +8,7 @@
     </div>
     <div class="row">
       <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="bus : ${busList}">
-        <a class="label-info m-mb-20" th:href="@{/traffic/bus-detail(id=*{bus.tfBusId}, page=1)}"
+        <a class="label-info m-mb-16" th:href="@{/traffic/bus-detail(id=*{bus.tfBusId}, page=1)}"
            th:classappend="${bus.tfBusId == busDetail.tfBusId ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
@@ -19,7 +19,8 @@
             </div>
           </div>
           <div class="description">
-            Giá vé: <span class="highlight" th:text="${#numbers.formatInteger(bus.tfBusPrice, 3, 'POINT')}"></span><sup>đ</sup>
+            Giá vé: <span class="highlight"
+                          th:text="${#numbers.formatInteger(bus.tfBusPrice, 3, 'POINT')}"></span><sup>đ</sup>
           </div>
         </a>
       </div>

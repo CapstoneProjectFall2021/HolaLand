@@ -8,6 +8,7 @@ form fieldset {
   border: 2px solid var(--secondary-border-color);
   border-radius: var(--secondary-border-radius);
   padding: 0 12px 12px;
+  position: relative;
 }
 
 form fieldset legend {
@@ -45,6 +46,14 @@ label.custom-control-label {
   font-weight: normal;
 }
 
+fieldset label.unit {
+  position: absolute;
+  right: 16px;
+  top: 0;
+  font-size: 16px;
+  color: var(--secondary-text);
+}
+
 
 /* .custom-control-label::before {
   background-color: #3a3b3c;
@@ -67,4 +76,30 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 option {
   color: #050505;
+}
+
+.custom-radio {
+  display: flex;
+  height: 26px;
+}
+
+.custom-radio .form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.custom-radio .form-check label {
+  height: 24px;
+  color: var(--secondary-text);
+}
+
+.custom-radio .form-check .form-check-input {
+  background-color: var(--secondary-background);
+  border: 1px solid var(--secondary-border-color);
+}
+
+.custom-radio .form-check .form-check-input:checked {
+  background-color: var(--accent-text);
+  border: 1px solid var(--accent-text);
 }

@@ -1,0 +1,65 @@
+<div class="col-right" th:fragment="jobs">
+  <!-- List job type -->
+  <div class="list-job-type">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Loại việc làm</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="jobType : ${jobTypeList}">
+        <a href="jobs.html" class="label-info m-mb-16"
+           th:href="@{/works/type(workJobTypeId=*{jobType.workJobTypeId})}"
+           th:classappend="${jobType.workJobTypeId == workJobTypeId ? 'active' : ''}">
+          <div class="flex">
+            <div class="icon">
+              <i th:classappend="*{jobType.workJobTypeIcon}"></i>
+            </div>
+            <div class="number">
+              <h4 th:text="*{jobType.workJobTypeCountRequestRecruitment}"></h4>
+            </div>
+          </div>
+          <div class="description club-type" th:text="*{jobType.workJobTypeName}">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- List jobs -->
+  <div class="list-job" th:if="${jobList.size != 0}">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mt-title fix-mb-title">Danh sách việc làm</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" th:each="job : ${jobList}">
+        <a th:href="@{/works/job-detail(id=${job.workRequestRecruitmentId}, jobTypeId=${job.workJobTypeId})}"
+           class="label-info m-mb-16">
+          <div class="flex">
+            <div class="icon">
+              <img class="media-object" src="../images/system/v.png" alt="">
+            </div>
+            <div class="content-body">
+              <h4 th:text="*{job.workRequestRecruitmentTitle}"></h4>
+              <div class="job-info">
+                <p sec:authorize="isAuthenticated()">
+                  Lương: <span th:text="*{job.workRequestRecruitmentSalary}"></span>
+                </p>
+                <p sec:authorize="!isAuthenticated()">Đăng nhập để xem lương</p>
+                <p>Thời hạn: <span th:text="*{job.workRequestRecruitmentEndDateTime}"></span></p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="list-job" th:if="${jobList.size == 0}">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mt-title fix-mb-title">Không có danh sách việc làm.</h1>
+      </div>
+    </div>
+  </div>
+</div>

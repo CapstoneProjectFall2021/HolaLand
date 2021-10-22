@@ -1,14 +1,18 @@
 @charset "utf-8";
 
-/* List online story */
+/* List online story =========================================================================*/
+
+.list-online-store .label-info:hover {
+  transform: scale(1.02, 1.02);
+}
 
 .list-online-store .label-info .flex {
   justify-content: start;
 }
 
 .list-online-store .label-info .flex .icon img {
-  width: 160px;
-  height: 160px;
+  width: 136px;
+  height: 136px;
   transition: 0.4s;
 }
 
@@ -16,32 +20,22 @@
   font-size: 18px;
 }
 
-.list-online-store .label-info .flex .content-body .online-store-info {
+.list-online-store .label-info .flex .content-body .row-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.list-online-store .label-info .flex .content-body .online-store-info .start-rate i {
+.list-online-store .label-info .flex .content-body .row-info .star-rate i {
   margin-right: 0;
   color: #FFC107;
   font-size: 12px;
 }
 
-.list-online-store .label-info .flex .content-body .online-store-info .comment-icon i {
-  margin-right: 6px;
-  font-size: 16px;
-}
-
-.list-online-store .label-info .flex .content-body .online-store-info .time i {
-  margin-right: 3px;
-  font-size: 15px;
-}
-
 .list-online-store .label-info .flex .content-body .panel-small {
-  padding: 8px 12px;
-  margin-top: 12px;
-  margin-bottom: 12px;
+  padding: 6px 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   background-color: var(--secondary-background);
   border-radius: var(--third-border-radius);
   transition: 0.4s;
@@ -56,7 +50,7 @@
     width: 120px;
     height: 120px;
   }
-  .list-online-store .label-info .flex .content-body .online-store-info .note {
+  .list-online-store .label-info .flex .content-body .row-info .note {
     display: none;
   }
 }
@@ -80,7 +74,236 @@
     width: 60px;
     height: 60px;
   }
-  .label-info .flex .icon img {
+  .list-online-store .label-info {
+    padding: 8px 16px 2px;
+  }
+  .list-online-store .label-info .flex .icon img {
     margin-right: 12px;
   }
+}
+
+
+/* Online story info =========================================================================*/
+
+
+/* Title area */
+
+.online-store .label-info:hover {
+  transform: none;
+  background-color: var(--primary-background);
+}
+
+.online-store .label-info.online-store-title {
+  margin-bottom: 20px;
+}
+
+.online-store .label-info.online-store-title .flex .icon img {
+  border-radius: 50%;
+  margin-right: 20px;
+  margin-bottom: 6px;
+  width: 100px;
+  height: 100px;
+}
+
+.online-store .online-store-title h3 {
+  font-size: 20px;
+  margin-bottom: 0;
+  font-weight: var(--font-weight-4);
+}
+
+.online-store .online-store-title .description {
+  margin-top: 0;
+  font-size: 16px;
+  color: var(--secondary-text);
+  font-style: italic;
+}
+
+.online-store .online-store-title .rate-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: calc(100% - 6px);
+  padding: 12px;
+  margin-right: -2px;
+  border-radius: var(--secondary-border-radius);
+  border: 2px solid var(--secondary-border-color);
+}
+
+.online-store .online-store-title .rate-area h1 {
+  line-height: 1;
+  margin-bottom: 4px;
+  font-size: 32px;
+  font-weight: var(--font-weight-4);
+}
+
+.online-store .online-store-title .rate-area .star-rate i {
+  margin-right: 3px;
+  color: var(--start-color);
+  font-size: 14px;
+}
+
+.online-store .online-store-title .rate-area .reviews {
+  font-size: 14px;
+  color: var(--secondary-text);
+  margin-top: 0;
+}
+
+@media (max-width: 1200px) {
+  .online-store .online-store-title .rate-area {
+    margin-top: 12px;
+    height: auto;
+    margin-bottom: 6px;
+    margin-right: 0;
+  }
+}
+
+
+/* Tabs - Pills */
+
+.tab-content {
+  margin-top: 20px;
+}
+
+@media (max-width: 767.98px) {
+  .tab-content {
+    margin-top: 0;
+  }
+}
+
+
+/* List tag */
+
+.list-tag .tags {
+  padding: 16px 0;
+  border-top: 2px solid var(--primary-background);
+  border-bottom: 2px solid var(--primary-background);
+}
+
+.list-tag .tags .tag:hover {
+  background-color: var(--label-button-background);
+}
+
+@media (max-width: 992px) {
+  .list-tag .tags {
+    padding-bottom: 4px;
+  }
+}
+
+
+/* List food */
+
+.online-store .list-food .label-info:hover {
+  transform: scale(1.02, 1.05);
+  background-color: var(--label-button-background);
+}
+
+.online-store .list-food .label-info .flex {
+  justify-content: start;
+}
+
+.online-store .list-food .label-info .flex .content-body .food-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* Food detail modal */
+
+#foodDetailModal .modal-body {
+  margin: 5px 0;
+}
+
+#foodDetailModal .modal-body .flex {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+#foodDetailModal .modal-body .flex .icon img {
+  border-radius: var(--primary-border-radius);
+  margin-right: 20px;
+  width: 220px;
+}
+
+#foodDetailModal .modal-body .flex .content-body h3 {
+  font-size: 22px;
+  margin-bottom: 4px;
+  font-weight: var(--font-weight-4);
+}
+
+#foodDetailModal .modal-body .flex .content-body p {
+  font-size: 16px;
+  color: var(--secondary-text);
+  margin-bottom: 0;
+}
+
+
+/* Comment */
+
+.list-comment .comment.flex {
+  display: flex;
+  justify-content: start;
+}
+
+.list-comment .comment.flex .icon img {
+  border-radius: 50%;
+  margin-right: 16px;
+  width: 62px;
+  height: 62px;
+}
+
+.list-comment .comment.flex .icon .star-rate {
+  line-height: 1.5;
+}
+
+.list-comment .comment.flex .icon .star-rate i {
+  margin-right: -3px;
+  font-size: 10px;
+  color: var(--start-color);
+}
+
+.list-comment .comment.flex .comment-area .comment-content {
+  padding: 8px 16px;
+  background-color: var(--secondary-background);
+  border-radius: var(--secondary-border-radius);
+}
+
+.list-comment .comment.flex .comment-area .comment-content h3 {
+  font-size: 14px;
+  margin-bottom: 0;
+  font-weight: var(--font-weight-5);
+}
+
+.list-comment .comment.flex .comment-area .comment-content p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--secondary-text);
+}
+
+.list-comment .comment.flex .comment-area .time {
+  margin-bottom: 8px;
+  padding-left: 12px;
+}
+
+.list-comment .comment.flex .comment-area .time p {
+  margin-top: 3px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: var(--secondary-text);
+}
+
+
+/* Rate modal*/
+
+.custom-radio {
+  justify-content: space-between;
+}
+
+.custom-radio label i {
+  margin: 0;
+}
+
+.fieldset-rate .custom-radio {
+  padding: 0 6px;
 }

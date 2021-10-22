@@ -25,43 +25,49 @@
 <div style="overflow: hidden;">
   <div class="container">
     <div class="row">
-      <!-- Sub menu -->
-      <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3 col-left">
-        <div class="row">
-          <div class="col-12">
-            <h1 class="title fix-pd fix-mb-title">Menu</h1>
+      <!-- Left side -->
+      <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3">
+        <div class="col-left">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="title fix-pd fix-mb-title">Menu</h1>
+            </div>
           </div>
+          <ul class="nav navbar-nav sub-menu">
+            <li>
+              <a th:href="@{/traffic}" th:classappend="${page == 1 ? 'active' : ''}">
+                <i class="fas fa-bus-alt fa-fw"></i>Danh sách xe bus
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/traffic/motorbike-taxi-drivers(page=2)}" th:classappend="${page == 2 ? 'active' : ''}">
+                <i class="fas fa-motorcycle fa-fw"></i>Danh sách xe ôm
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/}">
+                <i class="fas fa-chevron-left fa-fw"></i>Quay lại
+              </a>
+            </li>
+          </ul>
         </div>
-        <ul class="nav navbar-nav sub-menu">
-          <li>
-            <a th:href="@{/traffic}" th:classappend="${page == 1 ? 'active' : ''}">
-              <i class="fas fa-bus-alt fa-fw"></i>Danh sách xe bus
-            </a>
-          </li>
-          <li>
-            <a th:href="@{/traffic/motorbike-taxi-drivers(page=2)}" th:classappend="${page == 2 ? 'active' : ''}">
-              <i class="fas fa-motorcycle fa-fw"></i>Danh sách xe ôm
-            </a>
-          </li>
-          <li>
-            <a th:href="@{/}">
-              <i class="fas fa-chevron-left fa-fw"></i>Quay lại
-            </a>
-          </li>
-        </ul>
       </div>
-      <!-- Bus list -->
-      <th:block th:if="${page == 1}">
-        <div th:replace="traffic/bus-list :: bus"></div>
-      </th:block>
-      <!-- Motorbike taxi drivers list -->
-      <th:block th:if="${page == 2}">
-        <div th:replace="traffic/motorbike-taxi-drivers-list :: motorbikeTaxiDrivers"></div>
-      </th:block>
+      <!-- Right side  -->
+      <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
+        <!-- Bus -->
+        <th:block th:if="${page == 1}">
+          <div th:replace="traffic/bus-list :: bus"></div>
+        </th:block>
+        <!-- Motorbike taxi drivers -->
+        <th:block th:if="${page == 2}">
+          <div th:replace="traffic/motorbike-taxi-drivers-list :: motorbikeTaxiDrivers"></div>
+        </th:block>
+      </div>
     </div>
   </div>
 </div>
 
+<!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
 </body>
 

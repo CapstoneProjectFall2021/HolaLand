@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hola Land</title>
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" th:href="@{/css/all.css}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.css}"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/hola-land/main.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/common.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/grid.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/works.css}"/>
+</head>
+
+<body>
+<div th:replace="~{common/navbar :: navbar}"></div>
+
+<div style="overflow: hidden;">
+  <div class="container">
+    <div class="row">
+      <!-- Left side -->
+      <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3">
+        <div class="col-left">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="title fix-pd fix-mb-title">Menu</h1>
+            </div>
+          </div>
+          <ul class="nav navbar-nav sub-menu">
+            <li>
+              <a th:href="@{/works}" th:classappend="${page == 1 ? 'active' : ''}">
+                <i class="fas fa-list-ul fa-fw"></i>Danh sách việc làm
+              </a>
+            </li>
+            <li sec:authorize="hasRole('MEMBER')">
+              <a th:href="@{/works/jobs-apply}" th:classappend="${page == 2 ? 'active' : ''}">
+                <i class="fas fa-tasks fa-fw"></i>Danh sách ứng tuyển
+              </a>
+            </li>
+            <li sec:authorize="hasRole('MEMBER')">
+              <a th:href="@{/works/jobs-save}" th:classappend="${page == 3 ? 'active' : ''}">
+                <i class="far fa-bookmark fa-fw"></i>Việc làm đã lưu
+              </a>
+            </li>
+            <li sec:authorize="hasRole('MEMBER')">
+              <a href="#">
+                <i class="far fa-file-alt fa-fw"></i>Bài viết đã đăng
+              </a>
+            </li>
+            <li sec:authorize="hasRole('MEMBER')">
+              <a href="#">
+                <i class="fas fa-download fa-fw"></i>Bài viết lưu nháp
+              </a>
+            </li>
+            <li sec:authorize="hasRole('MEMBER')">
+              <a href="#">
+                <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
+              </a>
+            </li>
+            <li sec:authorize="hasRole('RECRUITER')">
+              <a href="#">
+                <i class="fas fa-search fa-fw"></i>Danh sách tìm việc
+              </a>
+            </li>
+            <li sec:authorize="hasRole('RECRUITER')">
+              <a href="#">
+                <i class="fas fa-download fa-fw"></i>Bài viết lưu nháp
+              </a>
+            </li>
+            <li sec:authorize="hasRole('RECRUITER')">
+              <a href="#">
+                <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tuyển dụng
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showToast()">
+                <i class="fas fa-pencil-alt fa-fw"></i>Test Toast
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/}">
+                <i class="fas fa-chevron-left fa-fw"></i>Quay lại
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Right side -->
+      <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
+        <!-- Jobs -->
+        <th:block th:if="${page == 1}">
+          <div th:replace="works/jobs :: jobs"></div>
+        </th:block>
+        <!-- 2 -->
+        <th:block th:if="${page == 2}">
+          <div th:replace="works/jobs-apply :: jobs-apply"></div>
+        </th:block>
+        <!-- 3 -->
+        <th:block th:if="${page == 3}">
+          <div th:replace="works/jobs-save :: jobs-save"></div>
+        </th:block>
+        <!-- Job detail -->
+        <th:block th:if="${page == 4}">
+          <div th:replace="works/job-detail :: job-detail"></div>
+        </th:block>
+      </div>
+    </div>
+  </div>
+</div>
+
+<th:block th:if="${page == 2}">
+  <!-- Import modal confirm cancel apply job -->
+  <div th:replace="works/modal/modal-confirm-cancel-apply-job :: confirmCancelApplyJobModal"></div>
+</th:block>
+<th:block th:if="${page == 3}">
+  <!-- Import modal confirm remove job save -->
+  <div th:replace="works/modal/modal-confirm-remove-job-save :: confirmRemoveJobSaveModal"></div>
+</th:block>
+<th:block th:if="${page == 4}">
+  <!-- Import modal confirm apply job -->
+  <div th:replace="works/modal/modal-confirm-apply-job :: confirmApplyJobModal"></div>
+</th:block>
+
+<!-- Javascript -->
+<th:block th:replace="~{common/script :: script/script}"></th:block>
+<script>
+  function showToast() {
+    const toast = new bootstrap.Toast(document.getElementById('toast-success'));
+    toast.show();
+  }
+</script>
+
+<!-- Import toast -->
+<th:block th:replace="~{common/toast-success :: toast-success}"></th:block>
+
+</body>
+
+</html>

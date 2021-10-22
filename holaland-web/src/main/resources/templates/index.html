@@ -103,7 +103,7 @@
     <!--      </a>-->
     <!--    </div>-->
     <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-      <a th:href="@{/work}" class="card-feature m-mb-20">
+      <a th:href="@{/works}" class="card-feature m-mb-20">
         <div class="card-feature-content">
           <i class="far fa-address-card fa-fw"></i>
           <div class="card-feature-title">
@@ -114,11 +114,11 @@
       </a>
     </div>
     <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-      <a href="#" class="card-feature m-mb-20">
+      <a th:href="@{/show-info}" class="card-feature m-mb-20">
         <div class="card-feature-content">
           <i class="fas fa-cart-plus fa-fw"></i>
           <div class="card-feature-title">
-            <h4>Mua sắm</h4>
+            <h4>Mua sắm - TEST</h4>
             <p>Siêu thị - Tạp hoá</p>
           </div>
         </div>
@@ -172,6 +172,7 @@
 </div>
 
 <th:block th:replace="~{common/script :: script/script}"></th:block>
+<script crossorigin="anonymous" th:src="@{/js/templates/test.js}"></script>
 </body>
 
 </html>
