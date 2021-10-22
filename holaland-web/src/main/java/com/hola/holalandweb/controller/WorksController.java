@@ -91,7 +91,7 @@ public class WorksController {
 
     @GetMapping("/works/jobs-posted")
     public String getJobsPosted(Model model) {
-        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllPostedByUserId(1);
+        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllPostedByUserId(2);
         model.addAttribute("jobPostedList", workRequestFindJobs);
         model.addAttribute("page", 4);
         return "works";
@@ -99,7 +99,7 @@ public class WorksController {
 
     @GetMapping("/works/jobs-save-draft")
     public String getJobsSaveDraft(Model model) {
-        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllSaveDraftByUserId(1);
+        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllSaveDraftByUserId(2);
         model.addAttribute("jobSaveDraftList", workRequestFindJobs);
         model.addAttribute("page", 5);
         return "works";
