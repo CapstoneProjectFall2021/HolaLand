@@ -12,7 +12,7 @@ public class WorkReportMapper implements RowMapper<WorkReport> {
     public WorkReport mapRow(ResultSet resultSet, int i) throws SQLException {
         return WorkReport.builder()
                 .workReportId(resultSet.getInt("work_report_id"))
-                .sttWorkReportId(resultSet.getInt("stt_work_report_id"))
+                .sttWorkCode(resultSet.getInt("stt_work_code"))
                 .workReportReasonId(resultSet.getInt("work_report_reason_id"))
                 .workReportDescription(resultSet.getString("work_report_description"))
                 .workReportDeleted(resultSet.getBoolean("work_report_deleted"))

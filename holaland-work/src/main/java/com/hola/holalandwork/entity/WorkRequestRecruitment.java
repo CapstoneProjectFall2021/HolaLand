@@ -17,7 +17,7 @@ public class WorkRequestRecruitment {
     private int userId;
     private int workSalaryTypeId;
     private int workJobTypeId;
-    private int sttWorkRequestRecruitmentId;
+    private int sttWorkCode;
     private int workSalaryUnitId;
     private String workRequestRecruitmentTitle;
     private String workRequestRecruitmentStartDateTime;

@@ -11,8 +11,10 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class SttWorkReport {
+public class SttWork {
 
-    private int sttWorkReportId;
-    private String sttWorkReportContent;
+    private int sttWorkId;
+    private String sttWorkName;
+    private int sttWorkCode;
+    private String sttWorkValue;
 }
