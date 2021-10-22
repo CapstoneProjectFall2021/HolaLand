@@ -16,8 +16,6 @@ public class MemberMapper implements RowMapper<Member> {
                 .memberDob(resultSet.getDate("member_dob"))
                 .memberMobile(resultSet.getString("member_mobile"))
                 .memberEmail(resultSet.getString("member_email"))
-                .memberRankId(resultSet.getInt("member_rank_id"))
-                .memberStatusId(resultSet.getInt("member_status_id"))
                 .build();
     }
 }
