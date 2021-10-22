@@ -1,13 +1,13 @@
-<div class="col-right" th:fragment="jobs-save">
+<div class="col-right" th:fragment="jobs-posted">
   <!-- List job save -->
-  <div class="list-job" th:if="${jobSaveList.size != 0}">
+  <div class="list-job" th:if="${jobPostedList.size != 0}">
     <div class="row">
       <div class="col-12">
-        <h1 class="title fix-mb-title">Việc làm đã lưu</h1>
+        <h1 class="title fix-mb-title">Bài viết đã đăng</h1>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12" th:each="job: ${jobSaveList}">
+      <div class="col-md-12" th:each="job: ${jobPostedList}">
         <div class="label-info m-mb-16">
           <div class="btn-remove">
             <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmRemoveJobSaveModal">
@@ -19,12 +19,12 @@
               <img class="media-object" src="../../images/system/v.png" alt="">
             </div>
             <div class="content-body">
-              <a th:href="@{/works/job-detail(id=${job.workRequestRecruitmentId})}">
-                <span th:text="*{job.workRequestRecruitmentTitle}"></span>
+              <a th:href="@{/works/job-detail(id=${job.workRequestFindJobId})}">
+                <span th:text="*{job.workRequestFindJobTitle}"></span>
               </a>
               <div class="job-info">
-                <p>Lương: <span th:text="*{job.workRequestRecruitmentSalary}"></span></p>
-                <p>Thời hạn: <span th:text="*{job.workRequestRecruitmentEndDateTime}"></span></p>
+                <p></p>
+                <p>Thời hạn: <span th:text="*{job.workRequestFindJobEndDateTime}"></span></p>
               </div>
             </div>
           </div>
@@ -32,10 +32,10 @@
       </div>
     </div>
   </div>
-  <div class="list-job" th:if="${jobSaveList.size == 0}">
+  <div class="list-job" th:if="${jobPostedList.size == 0}">
     <div class="row">
       <div class="col-12">
-        <h1 class="title fix-mb-title">Không có việc làm đã lưu</h1>
+        <h1 class="title fix-mb-title">Không có bài viết đã đăng nào</h1>
       </div>
     </div>
   </div>

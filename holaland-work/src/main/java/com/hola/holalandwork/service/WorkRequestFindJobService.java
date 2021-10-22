@@ -12,4 +12,8 @@ public interface WorkRequestFindJobService {
     WorkRequestFindJob getOne(int id) throws DataAccessException;
 
     List<WorkRequestFindJob> getAllByType(int typeId) throws DataAccessException;
+
+    List<WorkRequestFindJob> getAllSaveDraftByUserId(int id) throws DataAccessException;
+
+    List<WorkRequestFindJob> getAllPostedByUserId(int id) throws DataAccessException;
 }

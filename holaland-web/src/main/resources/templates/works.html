@@ -50,12 +50,12 @@
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a href="#">
+              <a th:href= "@{/works/jobs-posted}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="far fa-file-alt fa-fw"></i>Bài viết đã đăng
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a href="#">
+              <a th:href= "@{/works/jobs-save-draft}" th:classappend="${page == 5 ? 'active' : ''}">
                 <i class="fas fa-download fa-fw"></i>Bài viết lưu nháp
               </a>
             </li>
@@ -98,16 +98,24 @@
         <th:block th:if="${page == 1}">
           <div th:replace="works/jobs :: jobs"></div>
         </th:block>
-        <!-- 2 -->
+        <!-- Jobs-apply -->
         <th:block th:if="${page == 2}">
           <div th:replace="works/jobs-apply :: jobs-apply"></div>
         </th:block>
-        <!-- 3 -->
+        <!-- Jobs-save -->
         <th:block th:if="${page == 3}">
           <div th:replace="works/jobs-save :: jobs-save"></div>
         </th:block>
-        <!-- Job detail -->
+        <!-- Jobs-ported -->
         <th:block th:if="${page == 4}">
+          <div th:replace="works/jobs-posted :: jobs-posted"></div>
+        </th:block>
+        <!-- Jobs-save-draft -->
+        <th:block th:if="${page == 5}">
+          <div th:replace="works/jobs-save-draft :: jobs-save-draft"></div>
+        </th:block>
+        <!-- Job detail -->
+        <th:block th:if="${page == 7}">
           <div th:replace="works/job-detail :: job-detail"></div>
         </th:block>
       </div>

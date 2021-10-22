@@ -6,6 +6,9 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_FIND_JOB_GET_ALL_BY_TYPE = "SELECT * FROM work_request_find_job WHERE work_job_type_id = ? AND work_request_find_job_deleted = 0";
     String WORK_REQUEST_FIND_JOB_GET_ONE = "SELECT * FROM work_request_find_job WHERE work_request_find_job_id = ? AND work_request_find_job_deleted = 0";
 
+    String WORK_JOB_SAVE_DRAFT_GET_ALL_BY_USER_ID = "SELECT * FROM work_request_find_job WHERE user_id = ? AND work_request_find_job_deleted = 0 and stt_work_code = 6";
+    String WORK_JOB_POSTED_GET_ALL_BY_USER_ID = "SELECT * FROM work_request_find_job WHERE user_id = ? AND work_request_find_job_deleted = 0 and stt_work_code in (3,4,5)";
+
     String WORK_REQUEST_RECRUITMENT_GET_ALL = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_deleted = 0";
     String WORK_REQUEST_RECRUITMENT_GET_ALL_BY_TYPE = "SELECT * FROM work_request_recruitment WHERE work_job_type_id = ? AND work_request_recruitment_deleted = 0";
     String WORK_REQUEST_RECRUITMENT_GET_ONE = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_id = ? AND work_request_recruitment_deleted = 0";
@@ -16,7 +19,7 @@ public interface IRepositoryQuery {
             "       T1.user_id,\n" +
             "       T1.work_salary_type_id,\n" +
             "       T1.work_job_type_id,\n" +
-            "       T1.stt_work_request_recruitment_id,\n" +
+            "       T1.stt_work_code,\n" +
             "       T1.work_salary_unit_id,\n" +
             "       T1.work_request_recruitment_title,\n" +
             "       T1.work_request_recruitment_start_date_time,\n" +
@@ -44,7 +47,7 @@ public interface IRepositoryQuery {
             "       T1.user_id,\n" +
             "       T1.work_salary_type_id,\n" +
             "       T1.work_job_type_id,\n" +
-            "       T1.stt_work_request_recruitment_id,\n" +
+            "       T1.stt_work_code,\n" +
             "       T1.work_salary_unit_id,\n" +
             "       T1.work_request_recruitment_title,\n" +
             "       T1.work_request_recruitment_start_date_time,\n" +
