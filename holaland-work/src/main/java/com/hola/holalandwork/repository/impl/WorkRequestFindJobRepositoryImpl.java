@@ -35,4 +35,14 @@ public class WorkRequestFindJobRepositoryImpl implements WorkRequestFindJobRepos
     public WorkRequestFindJob getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(WORK_REQUEST_FIND_JOB_GET_ONE, new WorkRequestFindJobMapper(), id);
     }
+
+    @Override
+    public List<WorkRequestFindJob> getAllSaveDraftByUserId(int id) throws DataAccessException {
+        return jdbcTemplate.query(WORK_JOB_SAVE_DRAFT_GET_ALL_BY_USER_ID, new WorkRequestFindJobMapper(), id, 6);
+    }
+
+    @Override
+    public List<WorkRequestFindJob> getAllPostedByUserId(int id) throws DataAccessException {
+        return jdbcTemplate.query(WORK_JOB_POSTED_GET_ALL_BY_USER_ID, new WorkRequestFindJobMapper(), id, 3, 4, 5);
+    }
 }

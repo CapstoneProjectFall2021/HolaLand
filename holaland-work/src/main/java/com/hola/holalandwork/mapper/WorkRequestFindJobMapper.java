@@ -15,7 +15,7 @@ public class WorkRequestFindJobMapper implements RowMapper<WorkRequestFindJob> {
                 .userId(resultSet.getInt("user_id"))
                 .workJobTypeId(resultSet.getInt("work_job_type_id"))
                 .workTimeId(resultSet.getInt("work_time_id"))
-                .sttWorkRequestFindJobId(resultSet.getInt("stt_work_request_find_job_id"))
+                .sttWorkCode(resultSet.getInt("stt_work_code"))
                 .workSalaryUnitId(resultSet.getInt("work_salary_unit_id"))
                 .workRequestFindJobTitle(resultSet.getString("work_request_find_job_title"))
                 .workRequestFindJobStartDateTime(resultSet.getString("work_request_find_job_start_date_time"))

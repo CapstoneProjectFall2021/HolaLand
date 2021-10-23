@@ -14,7 +14,7 @@ import lombok.Setter;
 public class WorkReport {
 
     private int workReportId;
-    private int sttWorkReportId;
+    private int sttWorkCode;
     private int workReportReasonId;
     private String workReportDescription;
     private boolean workReportDeleted;

@@ -1,10 +1,12 @@
 package com.hola.holalandweb.controller;
 
 import com.hola.holalandwork.entity.WorkJobType;
+import com.hola.holalandwork.entity.WorkRequestFindJob;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import com.hola.holalandwork.service.WorkJobSaveService;
 import com.hola.holalandwork.service.WorkJobTypeService;
 import com.hola.holalandwork.service.WorkRequestApplyService;
+import com.hola.holalandwork.service.WorkRequestFindJobService;
 import com.hola.holalandwork.service.WorkRequestRecruitmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,19 +23,21 @@ public class WorksController {
     private final WorkJobTypeService workJobTypeService;
     private final WorkRequestApplyService workRequestApplyService;
     private final WorkJobSaveService workJobSaveService;
+    private final WorkRequestFindJobService workRequestFindJobService;
 
     @Autowired
-    public WorksController(
-            WorkRequestRecruitmentService workRequestRecruitmentService,
-            WorkJobTypeService workJobTypeService,
-            WorkRequestApplyService workRequestApplyService,
-            WorkJobSaveService workJobSaveService
-    ) {
+    public WorksController(WorkRequestRecruitmentService workRequestRecruitmentService,
+                           WorkJobTypeService workJobTypeService,
+                           WorkRequestApplyService workRequestApplyService,
+                           WorkJobSaveService workJobSaveService,
+                           WorkRequestFindJobService workRequestFindJobService) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.workJobTypeService = workJobTypeService;
         this.workRequestApplyService = workRequestApplyService;
         this.workJobSaveService = workJobSaveService;
+        this.workRequestFindJobService = workRequestFindJobService;
     }
+
 
     @GetMapping("/works")
     public String goToWorks(Model model) {
@@ -60,19 +64,6 @@ public class WorksController {
         return "works";
     }
 
-    @GetMapping("/works/job-detail")
-    public String getJobDetail(
-            @RequestParam("id") Integer id,
-            Model model
-    ) {
-        WorkRequestRecruitment jobDetail = workRequestRecruitmentService.getOne(id);
-        WorkJobType jobType = workJobTypeService.getOne(jobDetail.getWorkJobTypeId());
-        model.addAttribute("jobDetail", jobDetail);
-        model.addAttribute("jobType", jobType);
-        model.addAttribute("page", 4);
-        return "works";
-    }
-
     @GetMapping("/works/jobs-apply")
     public String getJobsApply(Model model) {
         List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
@@ -86,6 +77,35 @@ public class WorksController {
         List<WorkRequestRecruitment> jobSaveList = workJobSaveService.getAllByAccountId(1);
         model.addAttribute("jobSaveList", jobSaveList);
         model.addAttribute("page", 3);
+        return "works";
+    }
+
+    @GetMapping("/works/jobs-posted")
+    public String getJobsPosted(Model model) {
+        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllPostedByUserId(2);
+        model.addAttribute("jobPostedList", workRequestFindJobs);
+        model.addAttribute("page", 4);
+        return "works";
+    }
+
+    @GetMapping("/works/jobs-save-draft")
+    public String getJobsSaveDraft(Model model) {
+        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllSaveDraftByUserId(2);
+        model.addAttribute("jobSaveDraftList", workRequestFindJobs);
+        model.addAttribute("page", 5);
+        return "works";
+    }
+
+    @GetMapping("/works/job-detail")
+    public String getJobDetail(
+            @RequestParam("id") Integer id,
+            Model model
+    ) {
+        WorkRequestRecruitment jobDetail = workRequestRecruitmentService.getOne(id);
+        WorkJobType jobType = workJobTypeService.getOne(jobDetail.getWorkJobTypeId());
+        model.addAttribute("jobDetail", jobDetail);
+        model.addAttribute("jobType", jobType);
+        model.addAttribute("page", 7);
         return "works";
     }
 }

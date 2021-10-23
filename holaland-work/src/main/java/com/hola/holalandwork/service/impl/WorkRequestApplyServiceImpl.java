@@ -4,6 +4,7 @@ import com.hola.holalandwork.entity.WorkRequestApply;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import com.hola.holalandwork.repository.WorkRequestApplyRepository;
 import com.hola.holalandwork.service.WorkRequestApplyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ public class WorkRequestApplyServiceImpl implements WorkRequestApplyService {
 
     private final WorkRequestApplyRepository workRequestApplyRepository;
 
+    @Autowired
     public WorkRequestApplyServiceImpl(WorkRequestApplyRepository workRequestApplyRepository) {
         this.workRequestApplyRepository = workRequestApplyRepository;
     }

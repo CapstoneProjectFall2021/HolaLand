@@ -6,6 +6,9 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_FIND_JOB_GET_ALL_BY_TYPE = "SELECT * FROM work_request_find_job WHERE work_job_type_id = ? AND work_request_find_job_deleted = 0";
     String WORK_REQUEST_FIND_JOB_GET_ONE = "SELECT * FROM work_request_find_job WHERE work_request_find_job_id = ? AND work_request_find_job_deleted = 0";
 
+    String WORK_JOB_SAVE_DRAFT_GET_ALL_BY_USER_ID = "SELECT * FROM work_request_find_job WHERE user_id = ? AND stt_work_code = ? AND work_request_find_job_deleted = 0";
+    String WORK_JOB_POSTED_GET_ALL_BY_USER_ID = "SELECT * FROM work_request_find_job WHERE user_id = ? AND stt_work_code in (?, ?, ?) AND work_request_find_job_deleted = 0";
+
     String WORK_REQUEST_RECRUITMENT_GET_ALL = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_deleted = 0";
     String WORK_REQUEST_RECRUITMENT_GET_ALL_BY_TYPE = "SELECT * FROM work_request_recruitment WHERE work_job_type_id = ? AND work_request_recruitment_deleted = 0";
     String WORK_REQUEST_RECRUITMENT_GET_ONE = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_id = ? AND work_request_recruitment_deleted = 0";
@@ -16,7 +19,7 @@ public interface IRepositoryQuery {
             "       T1.user_id,\n" +
             "       T1.work_salary_type_id,\n" +
             "       T1.work_job_type_id,\n" +
-            "       T1.stt_work_request_recruitment_id,\n" +
+            "       T1.stt_work_code,\n" +
             "       T1.work_salary_unit_id,\n" +
             "       T1.work_request_recruitment_title,\n" +
             "       T1.work_request_recruitment_start_date_time,\n" +
@@ -44,7 +47,7 @@ public interface IRepositoryQuery {
             "       T1.user_id,\n" +
             "       T1.work_salary_type_id,\n" +
             "       T1.work_job_type_id,\n" +
-            "       T1.stt_work_request_recruitment_id,\n" +
+            "       T1.stt_work_code,\n" +
             "       T1.work_salary_unit_id,\n" +
             "       T1.work_request_recruitment_title,\n" +
             "       T1.work_request_recruitment_start_date_time,\n" +
@@ -84,20 +87,8 @@ public interface IRepositoryQuery {
     String WORK_COMMENT_GET_ALL = "SELECT * FROM work_comment WHERE work_comment_deleted = 0";
     String WORK_COMMENT_GET_ONE = "SELECT * FROM work_comment WHERE work_comment_id = ? AND work_comment_deleted = 0";
 
-    String STT_WORK_REQUEST_FIND_JOB_GET_ALL = "SELECT * FROM stt_work_request_find_job";
-    String STT_WORK_REQUEST_FIND_JOB_GET_ONE = "SELECT * FROM stt_work_request_find_job WHERE stt_work_request_find_job_id = ?";
-
-    String STT_WORK_REQUEST_RECRUITMENT_GET_ALL = "SELECT * FROM stt_work_request_recruitment";
-    String STT_WORK_REQUEST_RECRUITMENT_GET_ONE = "SELECT * FROM stt_work_request_recruitment WHERE stt_work_request_recruitment_id = ?";
-
-    String STT_WORK_REPORT_GET_ALL = "SELECT * FROM stt_work_report";
-    String STT_WORK_REPORT_GET_ONE = "SELECT * FROM stt_work_report WHERE stt_work_report_id = ?";
-
-    String STT_WORK_REQUEST_APPLY_GET_ALL = "SELECT * FROM stt_work_request_apply";
-    String STT_WORK_REQUEST_APPLY_GET_ONE = "SELECT * FROM stt_work_request_apply WHERE stt_work_request_apply_id = ?";
-
-    String STT_WORK_REQUEST_BOOK_GET_ALL = "SELECT * FROM stt_work_request_book";
-    String STT_WORK_REQUEST_BOOK_GET_ONE = "SELECT * FROM stt_work_request_book WHERE stt_work_request_book_id = ?";
+    String STT_WORK_GET_ALL = "SELECT * FROM stt_work";
+    String STT_WORK_GET_ONE = "SELECT * FROM stt_work WHERE stt_work_id = ?";
 
     String WORK_REPORT_REASON_GET_ALL = "SELECT * FROM work_report_reason";
     String WORK_REPORT_REASON_GET_ONE = "SELECT * FROM work_report_reason WHERE work_report_reason_id = ?";

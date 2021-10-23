@@ -11,11 +11,10 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class WorkRequestApply {
+public class SttWork {
 
-    private int workRequestApplyId;
-    private int userId;
-    private int workRequestRecruitmentId;
+    private int sttWorkId;
+    private String sttWorkName;
     private int sttWorkCode;
-    private boolean workRequestApplyDeleted;
+    private String sttWorkValue;
 }
