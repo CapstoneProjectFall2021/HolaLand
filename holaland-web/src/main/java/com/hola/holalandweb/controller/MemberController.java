@@ -63,7 +63,7 @@ public class MemberController {
     public String addMember(@ModelAttribute("addMember") Member addMember, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             System.out.println("There was a error " + bindingResult);
-            return "error";
+            return "404";
         }
         addMember.setMemberRankId(1);
         addMember.setMemberStatusId(1);
@@ -73,7 +73,7 @@ public class MemberController {
             backToMembers(model);
             return "members";
         } else {
-            return "error";
+            return "404";
         }
     }
 
@@ -96,7 +96,7 @@ public class MemberController {
     public String updateMember(@ModelAttribute("updateMember") Member updateMember, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             System.out.println("There was a error " + bindingResult);
-            return "error";
+            return "404";
         }
         memberService.update(updateMember);
         backToMembers(model);

@@ -47,7 +47,7 @@ public class WorksController {
         model.addAttribute("jobTypeList", jobTypeList);
         model.addAttribute("jobList", jobList);
         model.addAttribute("page", 1);
-        return "works";
+        return "module-works";
     }
 
     @GetMapping("/works/type")
@@ -61,7 +61,7 @@ public class WorksController {
         model.addAttribute("jobTypeList", jobTypeList);
         model.addAttribute("jobList", jobList);
         model.addAttribute("page", 1);
-        return "works";
+        return "module-works";
     }
 
     @GetMapping("/works/jobs-apply")
@@ -69,7 +69,7 @@ public class WorksController {
         List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
         model.addAttribute("jobApplyList", jobApplyList);
         model.addAttribute("page", 2);
-        return "works";
+        return "module-works";
     }
 
     @GetMapping("/works/jobs-save")
@@ -77,7 +77,7 @@ public class WorksController {
         List<WorkRequestRecruitment> jobSaveList = workJobSaveService.getAllByAccountId(1);
         model.addAttribute("jobSaveList", jobSaveList);
         model.addAttribute("page", 3);
-        return "works";
+        return "module-works";
     }
 
     @GetMapping("/works/jobs-posted")
@@ -85,7 +85,7 @@ public class WorksController {
         List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllPostedByUserId(2);
         model.addAttribute("jobPostedList", workRequestFindJobs);
         model.addAttribute("page", 4);
-        return "works";
+        return "module-works";
     }
 
     @GetMapping("/works/jobs-save-draft")
@@ -93,7 +93,7 @@ public class WorksController {
         List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllSaveDraftByUserId(2);
         model.addAttribute("jobSaveDraftList", workRequestFindJobs);
         model.addAttribute("page", 5);
-        return "works";
+        return "module-works";
     }
 
     @GetMapping("/works/job-detail")
@@ -106,6 +106,6 @@ public class WorksController {
         model.addAttribute("jobDetail", jobDetail);
         model.addAttribute("jobType", jobType);
         model.addAttribute("page", 7);
-        return "works";
+        return "module-works";
     }
 }
