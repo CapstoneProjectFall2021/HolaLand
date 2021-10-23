@@ -3,7 +3,6 @@ package com.hola.holalandwork.repository;
 public interface IRepositoryQuery {
 
     String WORK_REQUEST_FIND_JOB_GET_ALL = "SELECT * FROM work_request_find_job WHERE work_request_find_job_deleted = 0";
-
     String WORK_REQUEST_FIND_JOB_GET_ALL_BY_TYPE = "SELECT * FROM work_request_find_job WHERE work_job_type_id = ? AND work_request_find_job_deleted = 0";
     String WORK_REQUEST_FIND_JOB_GET_ONE = "SELECT * FROM work_request_find_job WHERE work_request_find_job_id = ? AND work_request_find_job_deleted = 0";
 
@@ -12,6 +11,7 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_RECRUITMENT_GET_ONE = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_id = ? AND work_request_recruitment_deleted = 0";
 
     String WORK_REQUEST_APPLY_GET_ALL = "SELECT * FROM work_request_apply WHERE work_request_apply_deleted = 0";
+    String WORK_REQUEST_APPLY_GET_ONE = "SELECT * FROM work_request_apply WHERE work_request_apply_id = ? AND work_request_apply_deleted = 0";
     String WORK_REQUEST_APPLY_GET_ALL_BY_ACCOUNT_ID = "SELECT\n" +
             "       T1.work_request_recruitment_id,\n" +
             "       T1.user_id,\n" +
@@ -37,9 +37,9 @@ public interface IRepositoryQuery {
             "ON T1.work_request_recruitment_id = T2.work_request_recruitment_id\n" +
             "WHERE T2.user_id = ?\n" +
             "AND T1.work_request_recruitment_deleted = 0";
-    String WORK_REQUEST_APPLY_GET_ONE = "SELECT * FROM work_request_apply WHERE work_request_apply_id = ? AND work_request_apply_deleted = 0";
 
     String WORK_JOB_SAVE_GET_ALL = "SELECT * FROM work_job_save WHERE work_job_save_deleted = 0";
+    String WORK_JOB_SAVE_GET_ONE = "SELECT * FROM work_job_save WHERE work_job_save_id = ? AND work_job_save_deleted = 0";
     String WORK_JOB_SAVE_GET_ALL_BY_ACCOUNT_ID = "SELECT\n" +
             "       T1.work_request_recruitment_id,\n" +
             "       T1.user_id,\n" +
@@ -65,7 +65,6 @@ public interface IRepositoryQuery {
             "ON T1.work_request_recruitment_id = T2.work_request_recruitment_id\n" +
             "WHERE T2.user_id = ?\n" +
             "AND T1.work_request_recruitment_deleted = 0";
-    String WORK_JOB_SAVE_GET_ONE = "SELECT * FROM work_job_save WHERE work_job_save_id = ? AND work_job_save_deleted = 0";
 
     String WORK_REQUEST_BOOK_GET_ALL = "SELECT * FROM work_request_book WHERE work_request_book_deleted = 0";
     String WORK_REQUEST_BOOK_GET_ONE = "SELECT * FROM work_request_book WHERE work_request_book_id = ? AND work_request_book_deleted = 0";

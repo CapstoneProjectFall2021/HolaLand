@@ -1,5 +1,6 @@
 package com.hola.holalandweb.controller;
 
+import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandwork.entity.WorkJobType;
 import com.hola.holalandwork.entity.WorkRequestFindJob;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
@@ -82,7 +83,12 @@ public class WorksController {
 
     @GetMapping("/works/jobs-posted")
     public String getJobsPosted(Model model) {
-        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(2, 3, 4, 5);
+        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(
+                2,
+                Constants.STT_WORK_CODE_COMPLETE,
+                Constants.STT_WORK_CODE_APPROVED,
+                Constants.STT_WORK_CODE_EXPIRED
+        );
         model.addAttribute("jobPostedList", workRequestFindJobs);
         model.addAttribute("page", 4);
         return "module-works";
@@ -90,7 +96,7 @@ public class WorksController {
 
     @GetMapping("/works/jobs-save-draft")
     public String getJobsSaveDraft(Model model) {
-        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(2, 6);
+        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(2, Constants.STT_WORK_CODE_SAVE_DRAFT);
         model.addAttribute("jobSaveDraftList", workRequestFindJobs);
         model.addAttribute("page", 5);
         return "module-works";
