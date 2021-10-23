@@ -30,7 +30,7 @@ public class FptUniversityController {
     public String goToFptUniversity(Model model, HttpSession session) {
         session.setAttribute("Test", "123456");
         model.addAttribute("page", 1);
-        return "module-fptu";
+        return "module-fpt-university";
     }
 
     @GetMapping("/fpt-university/club")
@@ -43,7 +43,7 @@ public class FptUniversityController {
         model.addAttribute("page", 2);
         String s = (String) session.getAttribute("Test");
         System.out.println(s);
-        return "module-fptu";
+        return "module-fpt-university";
     }
 
     @GetMapping("/fpt-university/club/type")
@@ -57,7 +57,7 @@ public class FptUniversityController {
         model.addAttribute("clubTypeList", clubTypeList);
         model.addAttribute("clubList", clubList);
         model.addAttribute("page", 2);
-        return "module-fptu";
+        return "module-fpt-university";
     }
 
     @GetMapping("/fpt-university/club/detail")
@@ -79,18 +79,18 @@ public class FptUniversityController {
         model.addAttribute("clubList", clubList);
         model.addAttribute("club", club);
         model.addAttribute("page", page);
-        return "module-fptu";
+        return "module-fpt-university";
     }
 
     @GetMapping("/fpt-university/department")
     public String goToFptUniversityDepartment(Model model) {
         model.addAttribute("page", 3);
-        return "module-fptu";
+        return "module-fpt-university";
     }
 
     @GetMapping("/fpt-university/lecturers")
     public String goToFptUniversityLecturers(Model model) {
         model.addAttribute("page", 4);
-        return "module-fptu";
+        return "module-fpt-university";
     }
 }
