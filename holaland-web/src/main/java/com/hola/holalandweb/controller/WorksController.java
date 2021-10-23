@@ -3,7 +3,11 @@ package com.hola.holalandweb.controller;
 import com.hola.holalandwork.entity.WorkJobType;
 import com.hola.holalandwork.entity.WorkRequestFindJob;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
-import com.hola.holalandwork.service.*;
+import com.hola.holalandwork.service.WorkJobSaveService;
+import com.hola.holalandwork.service.WorkJobTypeService;
+import com.hola.holalandwork.service.WorkRequestApplyService;
+import com.hola.holalandwork.service.WorkRequestFindJobService;
+import com.hola.holalandwork.service.WorkRequestRecruitmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,19 +64,6 @@ public class WorksController {
         return "works";
     }
 
-    @GetMapping("/works/job-detail")
-    public String getJobDetail(
-            @RequestParam("id") Integer id,
-            Model model
-    ) {
-        WorkRequestRecruitment jobDetail = workRequestRecruitmentService.getOne(id);
-        WorkJobType jobType = workJobTypeService.getOne(jobDetail.getWorkJobTypeId());
-        model.addAttribute("jobDetail", jobDetail);
-        model.addAttribute("jobType", jobType);
-        model.addAttribute("page", 7);
-        return "works";
-    }
-
     @GetMapping("/works/jobs-apply")
     public String getJobsApply(Model model) {
         List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
@@ -105,4 +96,16 @@ public class WorksController {
         return "works";
     }
 
+    @GetMapping("/works/job-detail")
+    public String getJobDetail(
+            @RequestParam("id") Integer id,
+            Model model
+    ) {
+        WorkRequestRecruitment jobDetail = workRequestRecruitmentService.getOne(id);
+        WorkJobType jobType = workJobTypeService.getOne(jobDetail.getWorkJobTypeId());
+        model.addAttribute("jobDetail", jobDetail);
+        model.addAttribute("jobType", jobType);
+        model.addAttribute("page", 7);
+        return "works";
+    }
 }

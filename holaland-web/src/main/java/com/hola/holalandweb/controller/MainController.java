@@ -15,6 +15,11 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";

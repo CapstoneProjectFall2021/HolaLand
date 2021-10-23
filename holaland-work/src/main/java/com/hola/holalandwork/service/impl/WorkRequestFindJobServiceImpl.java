@@ -43,6 +43,4 @@ public class WorkRequestFindJobServiceImpl implements WorkRequestFindJobService 
     public List<WorkRequestFindJob> getAllPostedByUserId(int id) throws DataAccessException {
         return workRequestFindJobRepository.getAllPostedByUserId(id);
     }
-
-
 }
