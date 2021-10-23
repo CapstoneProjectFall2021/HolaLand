@@ -41,7 +41,7 @@
             </li>
             <li sec:authorize="hasRole('MEMBER')">
               <a th:href="@{/works/jobs-apply}" th:classappend="${page == 2 ? 'active' : ''}">
-                <i class="fas fa-tasks fa-fw"></i>Danh sách ứng tuyển
+                <i class="fas fa-tasks fa-fw"></i>Việc làm đã ứng tuyển
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
@@ -50,18 +50,18 @@
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href= "@{/works/jobs-posted}" th:classappend="${page == 4 ? 'active' : ''}">
+              <a href="#">
+                <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
+              </a>
+            </li>
+            <li sec:authorize="hasRole('MEMBER')">
+              <a th:href="@{/works/jobs-posted}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="far fa-file-alt fa-fw"></i>Bài viết đã đăng
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href= "@{/works/jobs-save-draft}" th:classappend="${page == 5 ? 'active' : ''}">
+              <a th:href="@{/works/jobs-save-draft}" th:classappend="${page == 5 ? 'active' : ''}">
                 <i class="fas fa-download fa-fw"></i>Bài viết lưu nháp
-              </a>
-            </li>
-            <li sec:authorize="hasRole('MEMBER')">
-              <a href="#">
-                <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
@@ -80,13 +80,16 @@
               </a>
             </li>
             <li>
-              <a href="javascript:void(0)" onclick="showToast()">
-                <i class="fas fa-pencil-alt fa-fw"></i>Test Toast
+              <a th:href="@{/}">
+                <i class="fas fa-chevron-left fa-fw"></i>Quay lại
               </a>
             </li>
             <li>
-              <a th:href="@{/}">
-                <i class="fas fa-chevron-left fa-fw"></i>Quay lại
+              <hr/>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showToast()">
+                <i class="fas fa-pencil-alt fa-fw"></i>Test Toast
               </a>
             </li>
           </ul>

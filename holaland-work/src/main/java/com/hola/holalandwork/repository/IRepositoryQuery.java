@@ -3,11 +3,9 @@ package com.hola.holalandwork.repository;
 public interface IRepositoryQuery {
 
     String WORK_REQUEST_FIND_JOB_GET_ALL = "SELECT * FROM work_request_find_job WHERE work_request_find_job_deleted = 0";
+
     String WORK_REQUEST_FIND_JOB_GET_ALL_BY_TYPE = "SELECT * FROM work_request_find_job WHERE work_job_type_id = ? AND work_request_find_job_deleted = 0";
     String WORK_REQUEST_FIND_JOB_GET_ONE = "SELECT * FROM work_request_find_job WHERE work_request_find_job_id = ? AND work_request_find_job_deleted = 0";
-
-    String WORK_JOB_SAVE_DRAFT_GET_ALL_BY_USER_ID = "SELECT * FROM work_request_find_job WHERE user_id = ? AND stt_work_code = ? AND work_request_find_job_deleted = 0";
-    String WORK_JOB_POSTED_GET_ALL_BY_USER_ID = "SELECT * FROM work_request_find_job WHERE user_id = ? AND stt_work_code in (?, ?, ?) AND work_request_find_job_deleted = 0";
 
     String WORK_REQUEST_RECRUITMENT_GET_ALL = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_deleted = 0";
     String WORK_REQUEST_RECRUITMENT_GET_ALL_BY_TYPE = "SELECT * FROM work_request_recruitment WHERE work_job_type_id = ? AND work_request_recruitment_deleted = 0";

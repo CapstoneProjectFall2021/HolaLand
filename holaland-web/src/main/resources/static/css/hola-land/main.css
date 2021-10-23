@@ -157,3 +157,7 @@ thead,
 tr {
   border-color: var(--secondary-border-color) !important;
 }
+
+hr {
+  margin: 8px 0 12px 0;
+}

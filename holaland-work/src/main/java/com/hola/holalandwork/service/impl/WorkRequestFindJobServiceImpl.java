@@ -35,12 +35,7 @@ public class WorkRequestFindJobServiceImpl implements WorkRequestFindJobService 
     }
 
     @Override
-    public List<WorkRequestFindJob> getAllSaveDraftByUserId(int id) throws DataAccessException {
-        return workRequestFindJobRepository.getAllSaveDraftByUserId(id);
-    }
-
-    @Override
-    public List<WorkRequestFindJob> getAllPostedByUserId(int id) throws DataAccessException {
-        return workRequestFindJobRepository.getAllPostedByUserId(id);
+    public List<WorkRequestFindJob> getAllByUserIdAndTypeId(int id, Integer... typeId) throws DataAccessException {
+        return workRequestFindJobRepository.getAllByUserIdAndTypeId(id, typeId);
     }
 }
