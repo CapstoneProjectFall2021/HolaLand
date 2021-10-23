@@ -27,6 +27,8 @@
         <module>holaland-fptu</module>
         <module>holaland-work</module>
         <module>holaland-food</module>
+        <module>holaland-shopping</module>
+        <module>holaland-entertainment</module>
     </modules>
     <dependencies>
         <dependency>
