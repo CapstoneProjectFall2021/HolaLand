@@ -26,8 +26,9 @@ public class TrafficController {
 
     @GetMapping("/traffic")
     public String goToTraffic(Model model) {
+        List<Bus> busList = busService.getAll();
         Bus busDetail = Bus.builder().tfBusId(0).build();
-        getTrafficInfo(model, busDetail, 1);
+        setBusModel(model, busList, busDetail, 1);
         return "module-traffic";
     }
 
@@ -37,8 +38,9 @@ public class TrafficController {
             @RequestParam("page") Integer page,
             Model model
     ) {
+        List<Bus> busList = busService.getAll();
         Bus busDetail = busService.getOne(id);
-        getTrafficInfo(model, busDetail, page);
+        setBusModel(model, busList, busDetail, page);
         return "module-traffic";
     }
 
@@ -50,8 +52,7 @@ public class TrafficController {
         return "module-traffic";
     }
 
-    private void getTrafficInfo(Model model, Bus busDetail, int page) {
-        List<Bus> busList = busService.getAll();
+    private void setBusModel(Model model, List<Bus> busList, Bus busDetail, int page) {
         model.addAttribute("busList", busList);
         model.addAttribute("busDetail", busDetail);
         model.addAttribute("page", page);

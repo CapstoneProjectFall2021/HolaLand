@@ -1,10 +1,194 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hola Land</title>
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" th:href="@{/css/all.css}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.css}"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/hola-land/main.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/common.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/grid.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/form.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/profile.css}"/>
+</head>
+
+<body>
+<div th:replace="~{common/navbar :: navbar}"></div>
+
+<div style="overflow: hidden;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3">
+        <div class="col-left">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="title fix-pd fix-mb-title">Menu</h1>
+            </div>
+          </div>
+          <ul class="nav navbar-nav sub-menu">
+            <li>
+              <a href="profile.html">
+                <i class="fas fa-user fa-fw"></i>Trang cá nhân
+              </a>
+            </li>
+            <li>
+              <a href="profile-update.html">
+                <i class="fas fa-user-edit fa-fw"></i>Chỉnh sửa thông tin
+              </a>
+            </li>
+            <li>
+              <a href="profile-notification.html">
+                <i class="far fa-bell fa-fw"></i>Thông báo
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-chevron-left fa-fw"></i>Quay lại
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
+        <div class="col-right">
+          <!-- Account info -->
+          <div class="account-info">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="title fix-mb-title">Thông tin tài khoản</h1>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+                <a href="jobs.html" class="label-info m-mb-16">
+                  <div class="flex">
+                    <div class="icon">
+                      <i class="far fa-check-square"></i>
+                    </div>
+                    <div class="number">
+                      <h4>20</h4>
+                    </div>
+                  </div>
+                  <div class="description club-type">
+                    Đơn hàng đã đặt
+                  </div>
+                </a>
+              </div>
+              <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+                <a href="jobs.html" class="label-info m-mb-16">
+                  <div class="flex">
+                    <div class="icon">
+                      <i class="far fa-file-alt"></i>
+                    </div>
+                    <div class="number">
+                      <h4>20</h4>
+                    </div>
+                  </div>
+                  <div class="description club-type">
+                    Bài tìm việc đã đăng
+                  </div>
+                </a>
+              </div>
+              <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+                <a href="#" class="label-info m-mb-16">
+                  <div class="flex">
+                    <div class="icon">
+                      <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="number">
+                      <h4>3</h4>
+                    </div>
+                  </div>
+                  <div class="description club-type">
+                    Việc đã ứng tuyển
+                  </div>
+                </a>
+              </div>
+              <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+                <a href="#" class="label-info m-mb-16">
+                  <div class="flex">
+                    <div class="icon">
+                      <i class="far fa-bookmark"></i>
+                    </div>
+                    <div class="number">
+                      <h4>5</h4>
+                    </div>
+                  </div>
+                  <div class="description club-type">
+                    Việc làm đã lưu
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Profile info -->
+          <div class="profile-info">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="title fix-mb-title fix-mt-title">Thông tin cá nhân</h1>
+              </div>
+            </div>
+            <form class="row panel-form mx-0">
+              <div class="form-group col-12 col-md-6 col-lg-4">
+                <fieldset>
+                  <legend>Họ và tên</legend>
+                  <input type="text" class="form-control" value="Nguyễn Văn A" readonly>
+                </fieldset>
+              </div>
+              <div class="form-group col-12 col-md-6 col-lg-4">
+                <fieldset>
+                  <legend>Ngày sinh</legend>
+                  <input type="text" class="form-control" value="11/11/1994" readonly>
+                </fieldset>
+              </div>
+              <div class="form-group col-12 col-md-6 col-lg-4">
+                <fieldset>
+                  <legend>Giới tính</legend>
+                  <input type="text" class="form-control" value="Nam" readonly>
+                </fieldset>
+              </div>
+              <div class="form-group col-12 col-md-6 col-lg-4">
+                <fieldset>
+                  <legend>Số điện thoại</legend>
+                  <input type="text" class="form-control" value="0123 456 789" readonly>
+                </fieldset>
+              </div>
+              <div class="form-group col-12 col-md-6 col-lg-4">
+                <fieldset>
+                  <legend>Email</legend>
+                  <input type="text" class="form-control" value="nguyenvana@gmail.com" readonly>
+                </fieldset>
+              </div>
+              <div class="form-group col-12 col-md-6 col-lg-4">
+                <fieldset>
+                  <legend>Vai trò</legend>
+                  <input type="text" class="form-control" value="Thành viên" readonly>
+                </fieldset>
+              </div>
+              <div class="form-group mb-0 col-12 col-md-12 col-lg-12">
+                <fieldset>
+                  <legend>Địa chỉ</legend>
+                  <input type="text" class="form-control" value="Thôn 8, Thạch Hoà, Thạch Thất, Hà Nội" readonly>
+                </fieldset>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Javascript -->
+<th:block th:replace="~{common/script :: script/script}"></th:block>
 </body>
+
 </html>
