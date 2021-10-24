@@ -17,4 +17,6 @@ public class SttWork {
     private String sttWorkName;
     private int sttWorkCode;
     private String sttWorkValue;
+    private String sttWorkIcon;
+    private int sttWorkCount;
 }
