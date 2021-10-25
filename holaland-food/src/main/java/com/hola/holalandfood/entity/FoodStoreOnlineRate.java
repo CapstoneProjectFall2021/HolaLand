@@ -11,6 +11,6 @@ public class FoodStoreOnlineRate {
 
     private int foodRateId;
     private int foodStoreOnlineId;
-    private int foodStoreOnlinePoint;
+    private int foodRatePoint;
     private String foodRateComment;
 }
