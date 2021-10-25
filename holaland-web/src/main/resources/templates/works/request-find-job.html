@@ -1,4 +1,4 @@
-<div class="col-right" th:fragment="jobs">
+<div class="col-right" th:fragment="request-find-job">
   <!-- List job type -->
   <div class="list-job-type">
     <div class="row">
@@ -8,7 +8,7 @@
     </div>
     <div class="row">
       <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="jobType : ${jobTypeList}">
-        <a href="jobs.html" class="label-info m-mb-16"
+        <a href="request-find-job.html" class="label-info m-mb-16"
            th:href="@{/works/type(workJobTypeId=*{jobType.workJobTypeId})}"
            th:classappend="${jobType.workJobTypeId == workJobTypeId ? 'active' : ''}">
           <div class="flex">
@@ -37,8 +37,8 @@
         <a th:href="@{/works/job-detail(id=${job.workRequestRecruitmentId})}"
            class="label-info m-mb-16">
           <div class="flex">
-            <div class="icon">
-              <img class="media-object" src="../images/system/v.png" alt="">
+            <div class="icon-s">
+              <img class="media-object" src="../images/system/job.png" alt="">
             </div>
             <div class="content-body">
               <h4 th:text="*{job.workRequestRecruitmentTitle}"></h4>

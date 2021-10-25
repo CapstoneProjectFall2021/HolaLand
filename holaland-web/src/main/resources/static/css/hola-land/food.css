@@ -10,7 +10,7 @@
   justify-content: start;
 }
 
-.list-online-store .label-info .flex .icon img {
+.list-online-store .label-info .flex .icon-circle img {
   width: 136px;
   height: 136px;
   transition: 0.4s;
@@ -46,7 +46,7 @@
 }
 
 @media (max-width: 1200px) {
-  .list-online-store .label-info .flex .icon img {
+  .list-online-store .label-info .flex .icon-circle img {
     width: 120px;
     height: 120px;
   }
@@ -56,28 +56,28 @@
 }
 
 @media (max-width: 992px) {
-  .list-online-store .label-info .flex .icon img {
+  .list-online-store .label-info .flex .icon-circle img {
     width: 100px;
     height: 100px;
   }
 }
 
 @media (max-width: 768px) {
-  .list-online-store .label-info .flex .icon img {
+  .list-online-store .label-info .flex .icon-circle img {
     width: 80px;
     height: 80px;
   }
 }
 
 @media (max-width: 575.98px) {
-  .list-online-store .label-info .flex .icon img {
+  .list-online-store .label-info .flex .icon-circle img {
     width: 60px;
     height: 60px;
   }
   .list-online-store .label-info {
     padding: 8px 16px 2px;
   }
-  .list-online-store .label-info .flex .icon img {
+  .list-online-store .label-info .flex .icon-circle img {
     margin-right: 12px;
   }
 }
@@ -97,7 +97,7 @@
   margin-bottom: 20px;
 }
 
-.online-store .label-info.online-store-title .flex .icon img {
+.online-store .label-info.online-store-title .flex .icon-circle img {
   border-radius: 50%;
   margin-right: 20px;
   margin-bottom: 6px;
@@ -220,7 +220,7 @@
   justify-content: start;
 }
 
-#foodDetailModal .modal-body .flex .icon img {
+#foodDetailModal .modal-body .flex .icon-circle img {
   border-radius: var(--primary-border-radius);
   margin-right: 20px;
   width: 220px;
@@ -246,18 +246,18 @@
   justify-content: start;
 }
 
-.list-comment .comment.flex .icon img {
+.list-comment .comment.flex .icon-circle img {
   border-radius: 50%;
   margin-right: 16px;
   width: 62px;
   height: 62px;
 }
 
-.list-comment .comment.flex .icon .star-rate {
+.list-comment .comment.flex .icon-circle .star-rate {
   line-height: 1.5;
 }
 
-.list-comment .comment.flex .icon .star-rate i {
+.list-comment .comment.flex .icon-circle .star-rate i {
   margin-right: -3px;
   font-size: 10px;
   color: var(--start-color);

@@ -81,7 +81,7 @@ public class WorksController {
         return "module-works";
     }
 
-    @GetMapping("/works/jobs-posted")
+    @GetMapping("/works/request-manage")
     public String getJobsPosted(Model model) {
         List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(
                 2,
@@ -94,10 +94,8 @@ public class WorksController {
         return "module-works";
     }
 
-    @GetMapping("/works/jobs-save-draft")
-    public String getJobsSaveDraft(Model model) {
-        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(2, Constants.STT_WORK_CODE_SAVE_DRAFT);
-        model.addAttribute("jobSaveDraftList", workRequestFindJobs);
+    @GetMapping("/works/create-request-find-job")
+    public String getFormCreateRequestFindJob(Model model) {
         model.addAttribute("page", 5);
         return "module-works";
     }
