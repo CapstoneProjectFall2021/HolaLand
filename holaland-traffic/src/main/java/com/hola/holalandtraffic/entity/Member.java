@@ -23,4 +23,5 @@ public class Member {
     private String memberEmail;
     private int memberRankId;
     private int memberStatusId;
+    
 }
