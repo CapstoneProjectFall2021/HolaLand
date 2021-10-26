@@ -25,5 +25,6 @@ public class WorkRequestFindJob {
     private long workRequestFindJobLastUpdateDateTime;
     private String workRequestFindJobDescription;
     private String workRequestFindJobPersonalExperience;
+    private int workRequestFindJobExpectedSalary;
     private boolean workRequestFindJobDeleted;
 }

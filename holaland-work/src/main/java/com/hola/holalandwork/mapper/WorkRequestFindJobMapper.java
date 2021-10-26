@@ -23,6 +23,7 @@ public class WorkRequestFindJobMapper implements RowMapper<WorkRequestFindJob> {
                 .workRequestFindJobLastUpdateDateTime(resultSet.getLong("work_request_find_job_last_update_date_time"))
                 .workRequestFindJobDescription(resultSet.getString("work_request_find_job_description"))
                 .workRequestFindJobPersonalExperience(resultSet.getString("work_request_find_job_personal_experience"))
+                .workRequestFindJobExpectedSalary(resultSet.getInt("work_request_find_job_expected_salary"))
                 .workRequestFindJobDeleted(resultSet.getBoolean("work_request_find_job_deleted"))
                 .build();
     }
