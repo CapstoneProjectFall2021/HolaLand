@@ -18,6 +18,7 @@ public class WorkRequestFindJob {
     private int workJobTypeId;
     private int workTimeId;
     private int sttWorkCode;
+    private int workSalaryTypeId;
     private int workSalaryUnitId;
     private String workRequestFindJobTitle;
     private long workRequestFindJobStartDateTime;
