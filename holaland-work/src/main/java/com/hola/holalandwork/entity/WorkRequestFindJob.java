@@ -20,9 +20,9 @@ public class WorkRequestFindJob {
     private int sttWorkCode;
     private int workSalaryUnitId;
     private String workRequestFindJobTitle;
-    private String workRequestFindJobStartDateTime;
-    private String workRequestFindJobEndDateTime;
-    private String workRequestFindJobLastUpdateDateTime;
+    private long workRequestFindJobStartDateTime;
+    private long workRequestFindJobEndDateTime;
+    private long workRequestFindJobLastUpdateDateTime;
     private String workRequestFindJobDescription;
     private String workRequestFindJobPersonalExperience;
     private boolean workRequestFindJobDeleted;
