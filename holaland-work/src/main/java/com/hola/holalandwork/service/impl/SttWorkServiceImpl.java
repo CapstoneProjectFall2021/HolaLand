@@ -25,6 +25,11 @@ public class SttWorkServiceImpl implements SttWorkService {
     }
 
     @Override
+    public List<SttWork> getAllByName(String name) throws DataAccessException {
+        return sttWorkRepository.getAllByName(name);
+    }
+
+    @Override
     public SttWork getOne(int id) throws DataAccessException {
         return sttWorkRepository.getOne(id);
     }

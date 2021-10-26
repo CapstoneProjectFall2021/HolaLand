@@ -27,8 +27,8 @@ public class WorkRequestFindJobRepositoryImpl implements WorkRequestFindJobRepos
     }
 
     @Override
-    public List<WorkRequestFindJob> getAllByType(int typeId) throws DataAccessException {
-        return jdbcTemplate.query(WORK_REQUEST_FIND_JOB_GET_ALL_BY_TYPE, new WorkRequestFindJobMapper(), typeId);
+    public List<WorkRequestFindJob> getAllByType(int typeId, int code) throws DataAccessException {
+        return jdbcTemplate.query(WORK_REQUEST_FIND_JOB_GET_ALL_BY_TYPE, new WorkRequestFindJobMapper(), typeId, code);
     }
 
     @Override

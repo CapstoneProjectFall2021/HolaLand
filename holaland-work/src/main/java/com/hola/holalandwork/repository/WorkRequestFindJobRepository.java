@@ -9,7 +9,7 @@ public interface WorkRequestFindJobRepository {
 
     List<WorkRequestFindJob> getAll() throws DataAccessException;
 
-    List<WorkRequestFindJob> getAllByType(int typeId) throws DataAccessException;
+    List<WorkRequestFindJob> getAllByType(int typeId, int code) throws DataAccessException;
 
     WorkRequestFindJob getOne(int id) throws DataAccessException;
 

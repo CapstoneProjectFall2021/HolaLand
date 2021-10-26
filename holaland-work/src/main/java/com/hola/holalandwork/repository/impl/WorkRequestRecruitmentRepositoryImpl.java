@@ -27,8 +27,8 @@ public class WorkRequestRecruitmentRepositoryImpl implements WorkRequestRecruitm
     }
 
     @Override
-    public List<WorkRequestRecruitment> getAllByType(int typeId) throws DataAccessException {
-        return jdbcTemplate.query(WORK_REQUEST_RECRUITMENT_GET_ALL_BY_TYPE, new WorkRequestRecruitmentMapper(), typeId);
+    public List<WorkRequestRecruitment> getAllByType(int typeId, int code) throws DataAccessException {
+        return jdbcTemplate.query(WORK_REQUEST_RECRUITMENT_GET_ALL_BY_TYPE, new WorkRequestRecruitmentMapper(), typeId, code);
     }
 
     @Override
