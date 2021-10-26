@@ -3,7 +3,7 @@ package com.hola.holalandwork.repository;
 public interface IRepositoryQuery {
 
     String WORK_REQUEST_FIND_JOB_GET_ALL = "SELECT * FROM work_request_find_job WHERE work_request_find_job_deleted = 0";
-    String WORK_REQUEST_FIND_JOB_GET_ALL_BY_TYPE = "SELECT * FROM work_request_find_job WHERE work_job_type_id = ? AND work_request_find_job_deleted = 0";
+    String WORK_REQUEST_FIND_JOB_GET_ALL_BY_TYPE = "SELECT * FROM work_request_find_job WHERE work_job_type_id = ? AND stt_work_code = ? AND work_request_find_job_deleted = 0";
     String WORK_REQUEST_FIND_JOB_GET_ONE = "SELECT * FROM work_request_find_job WHERE work_request_find_job_id = ? AND work_request_find_job_deleted = 0";
 
     String WORK_REQUEST_RECRUITMENT_GET_ALL = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_deleted = 0";
@@ -85,6 +85,7 @@ public interface IRepositoryQuery {
     String WORK_COMMENT_GET_ONE = "SELECT * FROM work_comment WHERE work_comment_id = ? AND work_comment_deleted = 0";
 
     String STT_WORK_GET_ALL = "SELECT * FROM stt_work";
+    String STT_WORK_GET_ALL_BY_NAME = "SELECT * FROM stt_work WHERE stt_work_name = ?";
     String STT_WORK_GET_ONE = "SELECT * FROM stt_work WHERE stt_work_id = ?";
 
     String WORK_REPORT_REASON_GET_ALL = "SELECT * FROM work_report_reason";
