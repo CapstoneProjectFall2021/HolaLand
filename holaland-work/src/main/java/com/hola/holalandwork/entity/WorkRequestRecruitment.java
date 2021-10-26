@@ -20,9 +20,9 @@ public class WorkRequestRecruitment {
     private int sttWorkCode;
     private int workSalaryUnitId;
     private String workRequestRecruitmentTitle;
-    private String workRequestRecruitmentStartDateTime;
-    private String workRequestRecruitmentEndDateTime;
-    private String workRequestRecruitmentLastUpdateDateTime;
+    private long workRequestRecruitmentStartDateTime;
+    private long workRequestRecruitmentEndDateTime;
+    private long workRequestRecruitmentLastUpdateDateTime;
     private String workRequestRecruitmentDescription;
     private String workRequestRecruitmentRequirement;
     private String workRequestRecruitmentBenefit;
