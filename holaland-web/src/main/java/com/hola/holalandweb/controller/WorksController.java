@@ -51,7 +51,10 @@ public class WorksController {
     @GetMapping("/works")
     public String goToWorks(Model model) {
         List<WorkJobType> jobTypeList = workJobTypeService.getAll();
-        List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(jobTypeList.get(0).getWorkJobTypeId());
+        List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(
+                jobTypeList.get(0).getWorkJobTypeId(),
+                Constants.STT_WORK_CODE_APPROVED
+        );
         model.addAttribute("workJobTypeId", 1);
         model.addAttribute("jobTypeList", jobTypeList);
         model.addAttribute("jobList", jobList);
@@ -65,7 +68,7 @@ public class WorksController {
             Model model
     ) {
         List<WorkJobType> jobTypeList = workJobTypeService.getAll();
-        List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(workJobTypeId);
+        List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(workJobTypeId, Constants.STT_WORK_CODE_APPROVED);
         model.addAttribute("workJobTypeId", workJobTypeId);
         model.addAttribute("jobTypeList", jobTypeList);
         model.addAttribute("jobList", jobList);

@@ -11,5 +11,5 @@ public interface WorkRequestRecruitmentService {
 
     WorkRequestRecruitment getOne(int id) throws DataAccessException;
 
-    List<WorkRequestRecruitment> getAllByType(int typeId) throws DataAccessException;
+    List<WorkRequestRecruitment> getAllByType(int typeId, int sttWorkCode) throws DataAccessException;
 }
