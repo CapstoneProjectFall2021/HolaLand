@@ -16,7 +16,7 @@ public class WorkRequestFindJobMapper implements RowMapper<WorkRequestFindJob> {
                 .workJobTypeId(resultSet.getInt("work_job_type_id"))
                 .workTimeId(resultSet.getInt("work_time_id"))
                 .sttWorkCode(resultSet.getInt("stt_work_code"))
-                .workSalaryTypeId(resultSet.getInt("work_salary_type_id"))
+                .workPaymentMethodId(resultSet.getInt("work_payment_method_id"))
                 .workSalaryUnitId(resultSet.getInt("work_salary_unit_id"))
                 .workRequestFindJobTitle(resultSet.getString("work_request_find_job_title"))
                 .workRequestFindJobStartDateTime(resultSet.getLong("work_request_find_job_start_date_time"))
@@ -24,6 +24,7 @@ public class WorkRequestFindJobMapper implements RowMapper<WorkRequestFindJob> {
                 .workRequestFindJobLastUpdateDateTime(resultSet.getLong("work_request_find_job_last_update_date_time"))
                 .workRequestFindJobDescription(resultSet.getString("work_request_find_job_description"))
                 .workRequestFindJobPersonalExperience(resultSet.getString("work_request_find_job_personal_experience"))
+                .workRequestFindJobExpectedLocation(resultSet.getString("work_request_find_job_expected_location"))
                 .workRequestFindJobExpectedSalary(resultSet.getInt("work_request_find_job_expected_salary"))
                 .workRequestFindJobDeleted(resultSet.getBoolean("work_request_find_job_deleted"))
                 .build();

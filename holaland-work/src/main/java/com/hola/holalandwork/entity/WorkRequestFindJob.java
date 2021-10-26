@@ -18,7 +18,7 @@ public class WorkRequestFindJob {
     private int workJobTypeId;
     private int workTimeId;
     private int sttWorkCode;
-    private int workSalaryTypeId;
+    private int workPaymentMethodId;
     private int workSalaryUnitId;
     private String workRequestFindJobTitle;
     private long workRequestFindJobStartDateTime;
@@ -26,6 +26,7 @@ public class WorkRequestFindJob {
     private long workRequestFindJobLastUpdateDateTime;
     private String workRequestFindJobDescription;
     private String workRequestFindJobPersonalExperience;
+    private String workRequestFindJobExpectedLocation;
     private int workRequestFindJobExpectedSalary;
     private boolean workRequestFindJobDeleted;
 }

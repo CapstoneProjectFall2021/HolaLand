@@ -15,7 +15,7 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_APPLY_GET_ALL_BY_ACCOUNT_ID = "SELECT\n" +
             "       T1.work_request_recruitment_id,\n" +
             "       T1.user_id,\n" +
-            "       T1.work_salary_type_id,\n" +
+            "       T1.work_payment_method_id,\n" +
             "       T1.work_job_type_id,\n" +
             "       T1.stt_work_code,\n" +
             "       T1.work_salary_unit_id,\n" +
@@ -43,7 +43,7 @@ public interface IRepositoryQuery {
     String WORK_JOB_SAVE_GET_ALL_BY_ACCOUNT_ID = "SELECT\n" +
             "       T1.work_request_recruitment_id,\n" +
             "       T1.user_id,\n" +
-            "       T1.work_salary_type_id,\n" +
+            "       T1.work_payment_method_id,\n" +
             "       T1.work_job_type_id,\n" +
             "       T1.stt_work_code,\n" +
             "       T1.work_salary_unit_id,\n" +
@@ -69,8 +69,8 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_BOOK_GET_ALL = "SELECT * FROM work_request_book WHERE work_request_book_deleted = 0";
     String WORK_REQUEST_BOOK_GET_ONE = "SELECT * FROM work_request_book WHERE work_request_book_id = ? AND work_request_book_deleted = 0";
 
-    String WORK_SALARY_TYPE_GET_ALL = "SELECT * FROM work_salary_type WHERE work_salary_type_deleted = 0";
-    String WORK_SALARY_TYPE_GET_ONE = "SELECT * FROM work_salary_type WHERE work_salary_type_id = ? AND work_salary_type_deleted = 0";
+    String WORK_PAYMENT_METHOD_GET_ALL = "SELECT * FROM work_payment_method WHERE work_payment_method_deleted = 0";
+    String WORK_PAYMENT_METHOD_GET_ONE = "SELECT * FROM work_payment_method WHERE work_payment_method_id = ? AND work_payment_method_deleted = 0";
 
     String WORK_TIME_GET_ALL = "SELECT * FROM work_time WHERE work_time_deleted = 0";
     String WORK_TIME_GET_ONE = "SELECT * FROM work_time WHERE work_time_id = ? AND work_time_deleted = 0";

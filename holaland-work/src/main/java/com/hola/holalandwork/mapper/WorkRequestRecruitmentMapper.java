@@ -13,7 +13,7 @@ public class WorkRequestRecruitmentMapper implements RowMapper<WorkRequestRecrui
         return WorkRequestRecruitment.builder()
                 .workRequestRecruitmentId(resultSet.getInt("work_request_recruitment_id"))
                 .userId(resultSet.getInt("user_id"))
-                .workSalaryTypeId(resultSet.getInt("work_salary_type_id"))
+                .workPaymentMethodId(resultSet.getInt("work_payment_method_id"))
                 .workJobTypeId(resultSet.getInt("work_job_type_id"))
                 .workSalaryUnitId(resultSet.getInt("work_salary_unit_id"))
                 .workRequestRecruitmentTitle(resultSet.getString("work_request_recruitment_title"))
