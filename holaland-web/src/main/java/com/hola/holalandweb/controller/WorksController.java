@@ -1,14 +1,11 @@
 package com.hola.holalandweb.controller;
 
 import com.hola.holalandweb.constant.Constants;
-import com.hola.holalandwork.entity.WorkJobType;
+import com.hola.holalandwork.entity.SttWork;
 import com.hola.holalandwork.entity.WorkRequestFindJob;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
-import com.hola.holalandwork.service.WorkJobSaveService;
-import com.hola.holalandwork.service.WorkJobTypeService;
-import com.hola.holalandwork.service.WorkRequestApplyService;
-import com.hola.holalandwork.service.WorkRequestFindJobService;
-import com.hola.holalandwork.service.WorkRequestRecruitmentService;
+import com.hola.holalandwork.entity.WorkRequestType;
+import com.hola.holalandwork.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -29,30 +26,33 @@ import java.util.List;
 public class WorksController {
 
     private final WorkRequestRecruitmentService workRequestRecruitmentService;
-    private final WorkJobTypeService workJobTypeService;
+    private final WorkRequestTypeService workRequestTypeService;
     private final WorkRequestApplyService workRequestApplyService;
-    private final WorkJobSaveService workJobSaveService;
+    private final WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService;
     private final WorkRequestFindJobService workRequestFindJobService;
+    private final SttWorkService sttWorkService;
 
     @Autowired
     public WorksController(WorkRequestRecruitmentService workRequestRecruitmentService,
-                           WorkJobTypeService workJobTypeService,
+                           WorkRequestTypeService workRequestTypeService,
                            WorkRequestApplyService workRequestApplyService,
-                           WorkJobSaveService workJobSaveService,
-                           WorkRequestFindJobService workRequestFindJobService) {
+                           WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
+                           WorkRequestFindJobService workRequestFindJobService,
+                           SttWorkService sttWorkService) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
-        this.workJobTypeService = workJobTypeService;
+        this.workRequestTypeService = workRequestTypeService;
         this.workRequestApplyService = workRequestApplyService;
-        this.workJobSaveService = workJobSaveService;
+        this.workRequestRecruitmentSavedService = workRequestRecruitmentSavedService;
         this.workRequestFindJobService = workRequestFindJobService;
+        this.sttWorkService = sttWorkService;
     }
 
 
     @GetMapping("/works")
     public String goToWorks(Model model) {
-        List<WorkJobType> jobTypeList = workJobTypeService.getAll();
+        List<WorkRequestType> jobTypeList = workRequestTypeService.getAll();
         List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(
-                jobTypeList.get(0).getWorkJobTypeId(),
+                jobTypeList.get(0).getWorkRequestTypeId(),
                 Constants.STT_WORK_CODE_APPROVED
         );
         model.addAttribute("workJobTypeId", 1);
@@ -67,7 +67,7 @@ public class WorksController {
             @RequestParam("workJobTypeId") Integer workJobTypeId,
             Model model
     ) {
-        List<WorkJobType> jobTypeList = workJobTypeService.getAll();
+        List<WorkRequestType> jobTypeList = workRequestTypeService.getAll();
         List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(workJobTypeId, Constants.STT_WORK_CODE_APPROVED);
         model.addAttribute("workJobTypeId", workJobTypeId);
         model.addAttribute("jobTypeList", jobTypeList);
@@ -86,7 +86,7 @@ public class WorksController {
 
     @GetMapping("/works/jobs-save")
     public String getJobsSave(Model model) {
-        List<WorkRequestRecruitment> jobSaveList = workJobSaveService.getAllByAccountId(1);
+        List<WorkRequestRecruitment> jobSaveList = workRequestRecruitmentSavedService.getAllByAccountId(1);
         model.addAttribute("jobSaveList", jobSaveList);
         model.addAttribute("page", 3);
         return "module-works";
@@ -94,12 +94,30 @@ public class WorksController {
 
     @GetMapping("/works/request-manage")
     public String getJobsPosted(Model model) {
+        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
         List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(
                 2,
-                Constants.STT_WORK_CODE_COMPLETE,
-                Constants.STT_WORK_CODE_APPROVED,
-                Constants.STT_WORK_CODE_EXPIRED
+                sttWorkList.get(0).getSttWorkCode()
         );
+        model.addAttribute("sttWorkCode", Constants.STT_WORK_CODE_PENDING_APPROVAL);
+        model.addAttribute("sttWorkList", sttWorkList);
+        model.addAttribute("jobPostedList", workRequestFindJobs);
+        model.addAttribute("page", 4);
+        return "module-works";
+    }
+
+    @GetMapping("/works/request-manage/code")
+    public String getJobsPostedCode(
+            @RequestParam("sttWorkCode") Integer sttWorkCode,
+            Model model
+    ) {
+        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
+        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(
+                2,
+                sttWorkCode
+        );
+        model.addAttribute("sttWorkCode", sttWorkCode);
+        model.addAttribute("sttWorkList", sttWorkList);
         model.addAttribute("jobPostedList", workRequestFindJobs);
         model.addAttribute("page", 4);
         return "module-works";
@@ -117,7 +135,7 @@ public class WorksController {
             Model model
     ) {
         WorkRequestRecruitment jobDetail = workRequestRecruitmentService.getOne(id);
-        WorkJobType jobType = workJobTypeService.getOne(jobDetail.getWorkJobTypeId());
+        WorkRequestType jobType = workRequestTypeService.getOne(jobDetail.getWorkRequestTypeId());
         model.addAttribute("jobDetail", jobDetail);
         model.addAttribute("jobType", jobType);
         model.addAttribute("page", 7);

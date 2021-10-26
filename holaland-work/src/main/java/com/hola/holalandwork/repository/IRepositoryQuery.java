@@ -3,11 +3,11 @@ package com.hola.holalandwork.repository;
 public interface IRepositoryQuery {
 
     String WORK_REQUEST_FIND_JOB_GET_ALL = "SELECT * FROM work_request_find_job WHERE work_request_find_job_deleted = 0";
-    String WORK_REQUEST_FIND_JOB_GET_ALL_BY_TYPE = "SELECT * FROM work_request_find_job WHERE work_job_type_id = ? AND stt_work_code = ? AND work_request_find_job_deleted = 0";
+    String WORK_REQUEST_FIND_JOB_GET_ALL_BY_TYPE = "SELECT * FROM work_request_find_job WHERE work_request_type_id = ? AND stt_work_code = ? AND work_request_find_job_deleted = 0";
     String WORK_REQUEST_FIND_JOB_GET_ONE = "SELECT * FROM work_request_find_job WHERE work_request_find_job_id = ? AND work_request_find_job_deleted = 0";
 
     String WORK_REQUEST_RECRUITMENT_GET_ALL = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_deleted = 0";
-    String WORK_REQUEST_RECRUITMENT_GET_ALL_BY_TYPE = "SELECT * FROM work_request_recruitment WHERE work_job_type_id = ? AND stt_work_code = ? AND work_request_recruitment_deleted = 0";
+    String WORK_REQUEST_RECRUITMENT_GET_ALL_BY_TYPE = "SELECT * FROM work_request_recruitment WHERE work_request_type_id = ? AND stt_work_code = ? AND work_request_recruitment_deleted = 0";
     String WORK_REQUEST_RECRUITMENT_GET_ONE = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_id = ? AND work_request_recruitment_deleted = 0";
 
     String WORK_REQUEST_APPLY_GET_ALL = "SELECT * FROM work_request_apply WHERE work_request_apply_deleted = 0";
@@ -16,7 +16,7 @@ public interface IRepositoryQuery {
             "       T1.work_request_recruitment_id,\n" +
             "       T1.user_id,\n" +
             "       T1.work_payment_method_id,\n" +
-            "       T1.work_job_type_id,\n" +
+            "       T1.work_request_type_id,\n" +
             "       T1.stt_work_code,\n" +
             "       T1.work_salary_unit_id,\n" +
             "       T1.work_request_recruitment_title,\n" +
@@ -38,13 +38,13 @@ public interface IRepositoryQuery {
             "WHERE T2.user_id = ?\n" +
             "AND T1.work_request_recruitment_deleted = 0";
 
-    String WORK_JOB_SAVE_GET_ALL = "SELECT * FROM work_job_save WHERE work_job_save_deleted = 0";
-    String WORK_JOB_SAVE_GET_ONE = "SELECT * FROM work_job_save WHERE work_job_save_id = ? AND work_job_save_deleted = 0";
-    String WORK_JOB_SAVE_GET_ALL_BY_ACCOUNT_ID = "SELECT\n" +
+    String WORK_REQUEST_RECRUITMENT_SAVED_GET_ALL = "SELECT * FROM work_request_recruitment_saved WHERE work_request_recruitment_saved_deleted = 0";
+    String WORK_REQUEST_RECRUITMENT_SAVED_GET_ONE = "SELECT * FROM work_request_recruitment_saved WHERE work_request_recruitment_saved_id = ? AND work_request_recruitment_saved_deleted = 0";
+    String WORK_REQUEST_RECRUITMENT_SAVED_GET_ALL_BY_ACCOUNT_ID = "SELECT\n" +
             "       T1.work_request_recruitment_id,\n" +
             "       T1.user_id,\n" +
             "       T1.work_payment_method_id,\n" +
-            "       T1.work_job_type_id,\n" +
+            "       T1.work_request_type_id,\n" +
             "       T1.stt_work_code,\n" +
             "       T1.work_salary_unit_id,\n" +
             "       T1.work_request_recruitment_title,\n" +
@@ -61,7 +61,7 @@ public interface IRepositoryQuery {
             "       T1.work_request_recruitment_work_location,\n" +
             "       T1.work_request_recruitment_deleted\n" +
             "FROM work_request_recruitment T1\n" +
-            "LEFT OUTER JOIN work_job_save T2\n" +
+            "LEFT OUTER JOIN work_request_recruitment_saved T2\n" +
             "ON T1.work_request_recruitment_id = T2.work_request_recruitment_id\n" +
             "WHERE T2.user_id = ?\n" +
             "AND T1.work_request_recruitment_deleted = 0";
@@ -78,8 +78,8 @@ public interface IRepositoryQuery {
     String WORK_REPORT_GET_ALL = "SELECT * FROM work_report";
     String WORK_REPORT_GET_ONE = "SELECT * FROM work_report WHERE work_report_id = ?";
 
-    String WORK_JOB_TYPE_GET_ALL = "SELECT * FROM work_job_type WHERE work_job_type_deleted = 0";
-    String WORK_JOB_TYPE_GET_ONE = "SELECT * FROM work_job_type WHERE work_job_type_id = ? AND work_job_type_deleted = 0";
+    String WORK_REQUEST_TYPE_GET_ALL = "SELECT * FROM work_request_type WHERE work_request_type_deleted = 0";
+    String WORK_REQUEST_TYPE_GET_ONE = "SELECT * FROM work_request_type WHERE work_request_type_id = ? AND work_request_type_deleted = 0";
 
     String WORK_COMMENT_GET_ALL = "SELECT * FROM work_comment WHERE work_comment_deleted = 0";
     String WORK_COMMENT_GET_ONE = "SELECT * FROM work_comment WHERE work_comment_id = ? AND work_comment_deleted = 0";

@@ -13,7 +13,7 @@ public class WorkRequestFindJobMapper implements RowMapper<WorkRequestFindJob> {
         return WorkRequestFindJob.builder()
                 .workRequestFindJobId(resultSet.getInt("work_request_find_job_id"))
                 .userId(resultSet.getInt("user_id"))
-                .workJobTypeId(resultSet.getInt("work_job_type_id"))
+                .workRequestTypeId(resultSet.getInt("work_request_type_id"))
                 .workTimeId(resultSet.getInt("work_time_id"))
                 .sttWorkCode(resultSet.getInt("stt_work_code"))
                 .workPaymentMethodId(resultSet.getInt("work_payment_method_id"))
