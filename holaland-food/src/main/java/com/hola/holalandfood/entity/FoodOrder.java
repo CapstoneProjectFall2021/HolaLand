@@ -14,7 +14,7 @@ public class FoodOrder {
     private int foodStoreOnlineId;
     private int sttFoodCode;
     private int foodOrderTotalPrice;
-    private String foodOrderCreatedDate;
+    private long foodOrderCreatedDate;
     private String foodOrderNote;
     private boolean foodOrderDeleted;
 }
