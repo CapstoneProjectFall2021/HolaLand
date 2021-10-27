@@ -1,11 +1,17 @@
 package com.hola.holalandweb.controller;
 
+import com.hola.holalandcore.util.Calendars;
 import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandwork.entity.SttWork;
 import com.hola.holalandwork.entity.WorkRequestFindJob;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import com.hola.holalandwork.entity.WorkRequestType;
-import com.hola.holalandwork.service.*;
+import com.hola.holalandwork.service.SttWorkService;
+import com.hola.holalandwork.service.WorkRequestApplyService;
+import com.hola.holalandwork.service.WorkRequestFindJobService;
+import com.hola.holalandwork.service.WorkRequestRecruitmentSavedService;
+import com.hola.holalandwork.service.WorkRequestRecruitmentService;
+import com.hola.holalandwork.service.WorkRequestTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -123,12 +129,6 @@ public class WorksController {
         return "module-works";
     }
 
-    @GetMapping("/works/create-request-find-job")
-    public String getFormCreateRequestFindJob(Model model) {
-        model.addAttribute("page", 5);
-        return "module-works";
-    }
-
     @GetMapping("/works/job-detail")
     public String getJobDetail(
             @RequestParam("id") Integer id,
@@ -142,12 +142,22 @@ public class WorksController {
         return "module-works";
     }
 
+    @GetMapping("/works/create-request-find-job")
+    public String getFormCreateRequestFindJob(Model model) {
+        WorkRequestFindJob newRequestFindJob = WorkRequestFindJob.builder().build();
+        model.addAttribute("newRequestFindJob", newRequestFindJob);
+        model.addAttribute("page", 5);
+        return "module-works";
+    }
+
     @PostMapping("/create-request-find-job")
-    public String addMember(@ModelAttribute("newRequestFindJob") WorkRequestFindJob newRequestFindJob, BindingResult bindingResult, Model model) {
+    public String createRequestFindJob(@ModelAttribute("newRequestFindJob") WorkRequestFindJob newRequestFindJob, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             System.out.println("There was a error " + bindingResult);
             return "error";
         }
+        System.out.println("\n\n" + newRequestFindJob);
+        System.out.println(Calendars.dateToTimestamp(newRequestFindJob.getWorkRequestFindJobEndDateTime()) + "\n\n");
         return "module-works";
     }
 
