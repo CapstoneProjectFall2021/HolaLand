@@ -7,10 +7,10 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-public class WorkJobSave {
+public class WorkRequestRecruitmentSaved {
 
-    private int workJobSaveId;
+    private int workRequestRecruitmentSavedId;
     private int userId;
     private int workRequestRecruitmentId;
-    private boolean workJobsSaveDeleted;
+    private boolean workRequestRecruitmentSavedDeleted;
 }

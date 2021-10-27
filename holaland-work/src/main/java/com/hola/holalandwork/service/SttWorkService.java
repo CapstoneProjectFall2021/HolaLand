@@ -9,5 +9,7 @@ public interface SttWorkService {
 
     List<SttWork> getAll() throws DataAccessException;
 
+    List<SttWork> getAllByName(String name) throws DataAccessException;
+
     SttWork getOne(int id) throws DataAccessException;
 }

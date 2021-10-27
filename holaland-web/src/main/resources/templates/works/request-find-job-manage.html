@@ -1,0 +1,65 @@
+<div class="col-right" th:fragment="request-find-job-manage">
+  <!-- List request type -->
+  <div class="list-request-type">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Loại bài viết</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="sttWork : ${sttWorkList}">
+        <a th:href="@{/works/request-manage/code(sttWorkCode=*{sttWork.sttWorkCode})}" class="label-info m-mb-16"
+           th:classappend="${sttWork.sttWorkCode == sttWorkCode ? 'active' : ''}">
+          <div class="flex">
+            <div class="icon">
+              <i class="far fa-dot-circle"></i>
+            </div>
+            <div class="number">
+              <h4>3</h4>
+            </div>
+          </div>
+          <div class="description club-type" th:text="*{sttWork.sttWorkValue}">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- List request -->
+  <div class="list-request" th:if="${jobPostedList.size != 0}">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mt-title fix-mb-title">Danh sách bài viết</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" th:each="job : ${jobPostedList}">
+        <div class="label-info m-mb-16">
+          <div class="btn-remove">
+            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmRemoveFindJobModal">
+              <i class="far fa-trash-alt m-0"></i>
+            </a>
+          </div>
+          <div class="flex">
+            <div class="icon-s">
+              <img class="media-object" src="../../images/system/job.png" alt="">
+            </div>
+            <div class="content-body">
+              <a href="#" th:text="*{job.workRequestFindJobTitle}"></a>
+              <div class="job-info">
+                <p>Lương mong muốn: <span th:text="*{job.workRequestFindJobExpectedSalary}"></span></p>
+                <p>Thời hạn: <span th:text="*{job.workRequestFindJobEndDateTime}"></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="list-request" th:if="${jobPostedList.size == 0}">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mt-title fix-mb-title">Không có bài viết nào</h1>
+      </div>
+    </div>
+  </div>
+</div>

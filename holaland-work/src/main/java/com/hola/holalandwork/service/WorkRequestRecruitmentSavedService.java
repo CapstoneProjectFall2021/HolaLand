@@ -1,16 +1,16 @@
 package com.hola.holalandwork.service;
 
-import com.hola.holalandwork.entity.WorkJobSave;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
+import com.hola.holalandwork.entity.WorkRequestRecruitmentSaved;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
-public interface WorkJobSaveService {
+public interface WorkRequestRecruitmentSavedService {
 
-    List<WorkJobSave> getAll() throws DataAccessException;
+    List<WorkRequestRecruitmentSaved> getAll() throws DataAccessException;
 
     List<WorkRequestRecruitment> getAllByAccountId(int accountId) throws DataAccessException;
 
-    WorkJobSave getOne(int id) throws DataAccessException;
+    WorkRequestRecruitmentSaved getOne(int id) throws DataAccessException;
 }

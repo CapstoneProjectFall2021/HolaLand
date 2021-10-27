@@ -16,6 +16,7 @@
   <link rel="stylesheet" th:href="@{/css/hola-land/main.css}"/>
   <link rel="stylesheet" th:href="@{/css/hola-land/common.css}"/>
   <link rel="stylesheet" th:href="@{/css/hola-land/grid.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/form.css}"/>
   <link rel="stylesheet" th:href="@{/css/hola-land/works.css}"/>
 </head>
 
@@ -50,18 +51,13 @@
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a href="#">
+              <a th:href="@{/works/request-manage}" th:classappend="${page == 4 ? 'active' : ''}">
+                <i class="far fa-file-alt fa-fw"></i>Quản lý bài viết
+              </a>
+            </li>
+            <li sec:authorize="hasRole('MEMBER')">
+              <a th:href="@{/works/create-request-find-job}" th:classappend="${page == 5 ? 'active' : ''}">
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
-              </a>
-            </li>
-            <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/jobs-posted}" th:classappend="${page == 4 ? 'active' : ''}">
-                <i class="far fa-file-alt fa-fw"></i>Bài viết đã đăng
-              </a>
-            </li>
-            <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/jobs-save-draft}" th:classappend="${page == 5 ? 'active' : ''}">
-                <i class="fas fa-download fa-fw"></i>Bài viết lưu nháp
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
@@ -78,6 +74,9 @@
               <a href="#">
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tuyển dụng
               </a>
+            </li>
+            <li>
+              <hr/>
             </li>
             <li>
               <a th:href="@{/}">
@@ -97,29 +96,29 @@
       </div>
       <!-- Right side -->
       <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
-        <!-- Jobs -->
+        <!-- Request -->
         <th:block th:if="${page == 1}">
-          <div th:replace="works/jobs :: jobs"></div>
+          <div th:replace="works/request-find-job :: request-find-job"></div>
         </th:block>
-        <!-- Jobs-apply -->
+        <!-- Request recruitment applied -->
         <th:block th:if="${page == 2}">
-          <div th:replace="works/jobs-apply :: jobs-apply"></div>
+          <div th:replace="works/request-recruitment-applied :: request-recruitment-applied"></div>
         </th:block>
-        <!-- Jobs-save -->
+        <!-- Request recruitment saved -->
         <th:block th:if="${page == 3}">
-          <div th:replace="works/jobs-save :: jobs-save"></div>
+          <div th:replace="works/request-recruitment-saved :: request-recruitment-saved"></div>
         </th:block>
-        <!-- Jobs-ported -->
+        <!-- Request manage -->
         <th:block th:if="${page == 4}">
-          <div th:replace="works/request-find-job-posted :: request-find-job-posted"></div>
+          <div th:replace="works/request-find-job-manage :: request-find-job-manage"></div>
         </th:block>
-        <!-- Jobs-save-draft -->
+        <!-- Create request find job -->
         <th:block th:if="${page == 5}">
-          <div th:replace="works/request-find-job-save-draft :: request-find-job-save-draft"></div>
+          <div th:replace="works/create-request-find-job :: create-request-find-job"></div>
         </th:block>
-        <!-- Job detail -->
+        <!-- Request detail -->
         <th:block th:if="${page == 7}">
-          <div th:replace="works/job-detail :: job-detail"></div>
+          <div th:replace="works/request-recruitment-detail :: request-recruitment-detail"></div>
         </th:block>
       </div>
     </div>
@@ -137,6 +136,10 @@
 <th:block th:if="${page == 4}">
   <!-- Import modal confirm apply job -->
   <div th:replace="works/modal/modal-confirm-apply-job :: confirmApplyJobModal"></div>
+</th:block>
+<th:block th:if="${page == 5}">
+  <!-- Import modal request find job preview -->
+  <div th:replace="works/modal/modal-request-find-job-preview :: findJobPreviewModal"></div>
 </th:block>
 
 <!-- Javascript -->

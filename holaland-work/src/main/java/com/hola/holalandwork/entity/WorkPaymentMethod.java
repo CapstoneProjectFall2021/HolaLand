@@ -11,9 +11,9 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class WorkSalaryType {
+public class WorkPaymentMethod {
 
-    private int workSalaryTypeId;
-    private String workSalaryTypeName;
-    private boolean workSalaryTypeDeleted;
+    private int workPaymentMethodId;
+    private String workPaymentMethodName;
+    private boolean workPaymentMethodDeleted;
 }

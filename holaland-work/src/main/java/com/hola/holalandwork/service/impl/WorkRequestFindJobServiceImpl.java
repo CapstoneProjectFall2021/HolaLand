@@ -30,8 +30,8 @@ public class WorkRequestFindJobServiceImpl implements WorkRequestFindJobService 
     }
 
     @Override
-    public List<WorkRequestFindJob> getAllByType(int typeId) throws DataAccessException {
-        return workRequestFindJobRepository.getAllByType(typeId);
+    public List<WorkRequestFindJob> getAllByType(int typeId, int code) throws DataAccessException {
+        return workRequestFindJobRepository.getAllByType(typeId, code);
     }
 
     @Override

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -15,14 +17,14 @@ public class WorkRequestRecruitment {
 
     private int workRequestRecruitmentId;
     private int userId;
-    private int workSalaryTypeId;
-    private int workJobTypeId;
+    private int workPaymentMethodId;
+    private int workRequestTypeId;
     private int sttWorkCode;
     private int workSalaryUnitId;
     private String workRequestRecruitmentTitle;
-    private String workRequestRecruitmentStartDateTime;
-    private String workRequestRecruitmentEndDateTime;
-    private String workRequestRecruitmentLastUpdateDateTime;
+    private Date workRequestRecruitmentStartDateTime;
+    private Date workRequestRecruitmentEndDateTime;
+    private Date workRequestRecruitmentLastUpdateDateTime;
     private String workRequestRecruitmentDescription;
     private String workRequestRecruitmentRequirement;
     private String workRequestRecruitmentBenefit;

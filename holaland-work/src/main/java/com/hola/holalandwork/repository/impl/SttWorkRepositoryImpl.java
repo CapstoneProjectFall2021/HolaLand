@@ -27,6 +27,11 @@ public class SttWorkRepositoryImpl implements SttWorkRepository, IRepositoryQuer
     }
 
     @Override
+    public List<SttWork> getAllByName(String name) throws DataAccessException {
+        return jdbcTemplate.query(STT_WORK_GET_ALL_BY_NAME, new SttWorkMapper(), name);
+    }
+
+    @Override
     public SttWork getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(STT_WORK_GET_ONE, new SttWorkMapper(), id);
     }
