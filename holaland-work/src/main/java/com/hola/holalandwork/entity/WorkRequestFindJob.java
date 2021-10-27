@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -21,9 +23,9 @@ public class WorkRequestFindJob {
     private int workPaymentMethodId;
     private int workSalaryUnitId;
     private String workRequestFindJobTitle;
-    private long workRequestFindJobStartDateTime;
-    private long workRequestFindJobEndDateTime;
-    private long workRequestFindJobLastUpdateDateTime;
+    private Date workRequestFindJobStartDateTime;
+    private Date workRequestFindJobEndDateTime;
+    private Date workRequestFindJobLastUpdateDateTime;
     private String workRequestFindJobDescription;
     private String workRequestFindJobPersonalExperience;
     private String workRequestFindJobExpectedLocation;

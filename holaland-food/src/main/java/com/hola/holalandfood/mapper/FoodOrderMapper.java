@@ -15,7 +15,7 @@ public class FoodOrderMapper implements RowMapper<FoodOrder> {
                 .foodStoreOnlineId(rs.getInt("food_store_online_id"))
                 .sttFoodCode(rs.getInt("stt_food_code"))
                 .foodOrderTotalPrice(rs.getInt("food_order_total_price"))
-                .foodOrderCreatedDate(rs.getString("food_order_created_date"))
+                .foodOrderCreatedDate(rs.getDate("food_order_created_date"))
                 .foodOrderNote(rs.getString("food_order_note"))
                 .foodOrderDeleted(rs.getBoolean("food_order_deleted"))
                 .build();
