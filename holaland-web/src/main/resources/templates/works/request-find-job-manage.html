@@ -12,10 +12,10 @@
            th:classappend="${sttWork.sttWorkCode == sttWorkCode ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
-              <i class="far fa-dot-circle"></i>
+              <i th:classappend="*{sttWork.sttWorkIcon}"></i>
             </div>
             <div class="number">
-              <h4>3</h4>
+              <h4 th:text="*{sttWork.sttWorkCount}"></h4>
             </div>
           </div>
           <div class="description club-type" th:text="*{sttWork.sttWorkValue}">

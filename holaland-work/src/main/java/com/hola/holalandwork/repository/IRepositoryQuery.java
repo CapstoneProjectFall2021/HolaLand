@@ -93,4 +93,10 @@ public interface IRepositoryQuery {
 
     String WORK_SALARY_UNIT_GET_ALL = "SELECT * FROM work_salary_unit";
     String WORK_SALARY_UNIT_GET_ONE = "SELECT * FROM work_salary_unit WHERE work_salary_unit_id = ?";
+
+    String INSERT_REQUEST_FIND_JOB = "INSERT INTO work_request_find_job (user_id, stt_work_code, work_request_type_id, work_salary_unit_id, " +
+            "work_payment_method_id, work_time_id, work_request_find_job_expected_salary, work_request_find_job_expected_location, work_request_find_job_title, " +
+            "work_request_find_job_start_date_time, work_request_find_job_end_date_time, work_request_find_job_last_update_date_time, work_request_find_job_description, " +
+            "work_request_find_job_personal_experience, work_request_find_job_deleted) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 }

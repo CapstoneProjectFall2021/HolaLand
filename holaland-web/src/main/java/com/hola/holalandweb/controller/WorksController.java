@@ -1,6 +1,5 @@
 package com.hola.holalandweb.controller;
 
-import com.hola.holalandcore.util.Calendars;
 import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandwork.entity.SttWork;
 import com.hola.holalandwork.entity.WorkRequestFindJob;
@@ -13,19 +12,16 @@ import com.hola.holalandwork.service.WorkRequestRecruitmentSavedService;
 import com.hola.holalandwork.service.WorkRequestRecruitmentService;
 import com.hola.holalandwork.service.WorkRequestTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -150,24 +146,55 @@ public class WorksController {
         return "module-works";
     }
 
-    @PostMapping("/create-request-find-job")
-    public String createRequestFindJob(@ModelAttribute("newRequestFindJob") WorkRequestFindJob newRequestFindJob, BindingResult bindingResult, Model model) {
+    @PostMapping(value = "/create-request-find-job", params = "save")
+    public String createRequestFindJob(
+            @ModelAttribute("newRequestFindJob") WorkRequestFindJob newRequestFindJob,
+            BindingResult bindingResult
+    ) {
         if (bindingResult.hasErrors()) {
             System.out.println("There was a error " + bindingResult);
-            return "error";
+            return "404";
         }
-        System.out.println("\n\n" + newRequestFindJob);
-        System.out.println(Calendars.dateToTimestamp(newRequestFindJob.getWorkRequestFindJobEndDateTime()) + "\n\n");
-        return "module-works";
+
+        Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        // set attribute
+        newRequestFindJob.setUserId(2);
+        newRequestFindJob.setSttWorkCode(1);
+        newRequestFindJob.setWorkRequestFindJobStartDateTime(currentDate);
+        newRequestFindJob.setWorkRequestFindJobLastUpdateDateTime(currentDate);
+        newRequestFindJob.setWorkRequestFindJobDeleted(false);
+
+        boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
+        if (isCheck) {
+            return "redirect:" + "/works/request-manage";
+        } else {
+            return "404";
+        }
     }
 
-    @InitBinder
-    private void dateBinder(WebDataBinder binder) {
-        //The date format to parse or output your dates
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        //Create a new CustomDateEditor
-        CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-        //Register it as custom editor for the Date type
-        binder.registerCustomEditor(Timestamp.class, editor);
+    @PostMapping(value = "/create-request-find-job", params = "saveDraft")
+    public String createRequestFindJobSaveDraft(
+            @ModelAttribute("newRequestFindJob") WorkRequestFindJob newRequestFindJob,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+
+        Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        // set attribute
+        newRequestFindJob.setUserId(2);
+        newRequestFindJob.setSttWorkCode(6);
+        newRequestFindJob.setWorkRequestFindJobStartDateTime(currentDate);
+        newRequestFindJob.setWorkRequestFindJobLastUpdateDateTime(currentDate);
+        newRequestFindJob.setWorkRequestFindJobDeleted(false);
+
+        boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
+        if (isCheck) {
+            return "redirect:" + "/works/request-manage/code?sttWorkCode=6";
+        } else {
+            return "404";
+        }
     }
 }
