@@ -6,7 +6,10 @@ import com.hola.holalandtraffic.entity.Member;
 import com.hola.holalandtraffic.service.BusService;
 import com.hola.holalandtraffic.service.MemberService;
 import com.hola.holalandtraffic.service.MotorbikeTaxiDriversService;
+import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandweb.util.SendEmailService;
+import com.hola.holalandwork.entity.WorkRequestRecruitment;
+import com.hola.holalandwork.entity.WorkRequestType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -101,6 +104,36 @@ public class MemberController {
         memberService.update(updateMember);
         backToMembers(model);
         return "members";
+    }
+
+    @GetMapping("/works/type")
+    public String getWorkJobType(
+            @RequestParam("workJobTypeId") Integer workJobTypeId,
+            Model model
+    ) {
+        List<WorkRequestType> jobTypeList = workRequestTypeService.getAll();
+        List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(workJobTypeId, Constants.STT_WORK_CODE_APPROVED);
+        model.addAttribute("workJobTypeId", workJobTypeId);
+        model.addAttribute("jobTypeList", jobTypeList);
+        model.addAttribute("jobList", jobList);
+        model.addAttribute("page", 1);
+        return "module-works";
+    }
+
+    @GetMapping("/works/jobs-apply")
+    public String getJobsApply(Model model) {
+        List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
+        model.addAttribute("jobApplyList", jobApplyList);
+        model.addAttribute("page", 2);
+        return "module-works";
+    }
+
+    @GetMapping("/works/jobs-save")
+    public String getJobsSave(Model model) {
+        List<WorkRequestRecruitment> jobSaveList = workRequestRecruitmentSavedService.getAllByAccountId(1);
+        model.addAttribute("jobSaveList", jobSaveList);
+        model.addAttribute("page", 3);
+        return "module-works";
     }
 
     private void backToMembers(Model model) {
