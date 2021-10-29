@@ -102,7 +102,7 @@ public class MemberController {
         backToMembers(model);
         return "members";
     }
-    
+
 
     private void backToMembers(Model model) {
         List<Member> members = memberService.getAll();
