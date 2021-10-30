@@ -8,7 +8,7 @@
     </div>
     <div class="row">
       <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="sttWork : ${sttWorkList}">
-        <a th:href="@{/works/request-manage/code(sttWorkCode=*{sttWork.sttWorkCode})}" class="label-info m-mb-16"
+        <a th:href="@{/works/request-manage/status(code=*{sttWork.sttWorkCode})}" class="label-info m-mb-16"
            th:classappend="${sttWork.sttWorkCode == sttWorkCode ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
@@ -44,7 +44,7 @@
               <img class="media-object" src="../../images/system/job.png" alt="">
             </div>
             <div class="content-body">
-              <a href="#" th:text="*{job.workRequestFindJobTitle}"></a>
+              <a th:href="@{/works/worker-detail}" th:text="*{job.workRequestFindJobTitle}"></a>
               <div class="job-info">
                 <p>Lương mong muốn: <span th:text="*{job.workRequestFindJobExpectedSalary}"></span></p>
                 <p>Thời hạn: <span th:text="*{job.workRequestFindJobEndDateTime}"></span></p>

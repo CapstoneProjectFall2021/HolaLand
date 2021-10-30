@@ -1,0 +1,65 @@
+<div class="col-right" th:fragment="request-recruitment-manage">
+    <!-- List request type -->
+    <div class="list-request-type">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="title fix-mb-title">Loại bài viết</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="sttWork : ${sttWorkList}">
+                <a th:href="" class="label-info m-mb-16"
+                   th:classappend="${sttWork.sttWorkCode == sttWorkCode ? 'active' : ''}">
+                    <div class="flex">
+                        <div class="icon">
+                            <i th:classappend="*{sttWork.sttWorkIcon}"></i>
+                        </div>
+                        <div class="number">
+                            <h4 th:text="*{sttWork.sttWorkCount}"></h4>
+                        </div>
+                    </div>
+                    <div class="description club-type" th:text="*{sttWork.sttWorkValue}">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- List request -->
+    <div class="list-request" th:if="${}">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="title fix-mt-title fix-mb-title">Danh sách bài viết</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" th:each="job : ${}">
+                <div class="label-info m-mb-16">
+                    <div class="btn-remove">
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmRemoveFindJobModal">
+                            <i class="far fa-trash-alt m-0"></i>
+                        </a>
+                    </div>
+                    <div class="flex">
+                        <div class="icon-s">
+                            <img class="media-object" src="../../images/system/job.png" alt="">
+                        </div>
+                        <div class="content-body">
+                            <a th:href="" th:text="*{}"></a>
+                            <div class="job-info">
+                                <p>Lương: <span th:text="*{}"></span></p>
+                                <p>Thời hạn: <span th:text="*{}"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-request" th:if="${}">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="title fix-mt-title fix-mb-title">Không có bài viết nào</h1>
+            </div>
+        </div>
+    </div>
+</div>

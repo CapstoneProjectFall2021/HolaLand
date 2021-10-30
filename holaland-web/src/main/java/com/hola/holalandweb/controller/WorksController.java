@@ -108,9 +108,9 @@ public class WorksController {
         return "module-works";
     }
 
-    @GetMapping("/works/request-manage/code")
+    @GetMapping("/works/request-manage/status")
     public String getJobsPostedCode(
-            @RequestParam("sttWorkCode") Integer sttWorkCode,
+            @RequestParam("code") Integer sttWorkCode,
             Model model
     ) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
@@ -125,6 +125,12 @@ public class WorksController {
         return "module-works";
     }
 
+    @GetMapping("/works/request-recruitment-manage")
+    public String getRecruitmentsPosted(Model model) {
+        model.addAttribute("page", 7);
+        return "module-works";
+    }
+
     @GetMapping("/works/job-detail")
     public String getJobDetail(
             @RequestParam("id") Integer id,
@@ -134,7 +140,15 @@ public class WorksController {
         WorkRequestType jobType = workRequestTypeService.getOne(jobDetail.getWorkRequestTypeId());
         model.addAttribute("jobDetail", jobDetail);
         model.addAttribute("jobType", jobType);
-        model.addAttribute("page", 7);
+        model.addAttribute("page", 9);
+        return "module-works";
+    }
+
+    @GetMapping("/works/worker-detail")
+    public String getWorkerDetail(
+            Model model
+    ) {
+        model.addAttribute("page", 10);
         return "module-works";
     }
 
@@ -192,9 +206,15 @@ public class WorksController {
 
         boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
         if (isCheck) {
-            return "redirect:" + "/works/request-manage/code?sttWorkCode=6";
+            return "redirect:" + "/works/request-manage/code?Code=6";
         } else {
             return "404";
         }
+    }
+
+    @GetMapping("/works/create-request-recruitment")
+    public String getFormCreateRequestRecruitment(Model model) {
+        model.addAttribute("page", 8);
+        return "module-works";
     }
 }
