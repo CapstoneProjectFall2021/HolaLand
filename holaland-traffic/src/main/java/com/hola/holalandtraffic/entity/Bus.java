@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Bus {
-//
+
     private int tfBusId;
     private String tfBusName;
     private String tfBusStartTime;
