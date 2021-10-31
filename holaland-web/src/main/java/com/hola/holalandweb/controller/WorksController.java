@@ -126,14 +126,14 @@ public class WorksController {
     @GetMapping("/works/request-recruitment-manage")
     public String getRecruitmentsPosted(Model model) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        List<WorkRequestRecruitment> WorkRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
+        List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
                 1,
                 sttWorkList.get(0).getSttWorkCode()
         );
         model.addAttribute("sttWorkCode", Constants.STT_WORK_CODE_PENDING_APPROVAL);
         model.addAttribute("page", 7);
         model.addAttribute("sttWorkList", sttWorkList);
-        model.addAttribute("RecruitmentPostedList", WorkRequestRecruitments);
+        model.addAttribute("RecruitmentPostedList", workRequestRecruitments);
         return "module-works";
     }
 
@@ -142,14 +142,14 @@ public class WorksController {
             @RequestParam("code") Integer sttWorkCode,
             Model model) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        List<WorkRequestRecruitment> WorkRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
+        List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
                 1,
                 sttWorkCode
         );
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("page", 7);
         model.addAttribute("sttWorkList", sttWorkList);
-        model.addAttribute("RecruitmentPostedList", WorkRequestRecruitments);
+        model.addAttribute("RecruitmentPostedList", workRequestRecruitments);
         return "module-works";
     }
 
