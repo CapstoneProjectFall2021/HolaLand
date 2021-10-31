@@ -99,4 +99,13 @@ public interface IRepositoryQuery {
             "work_request_find_job_start_date_time, work_request_find_job_end_date_time, work_request_find_job_last_update_date_time, work_request_find_job_description, " +
             "work_request_find_job_personal_experience, work_request_find_job_deleted) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String INSERT_REQUEST_RECRUITMENT = "INSERT INTO holaland.work_request_recruitment (work_request_recruitment_id," +
+            " user_id, stt_work_code, work_request_type_id, work_salary_unit_id, work_payment_method_id," +
+            " work_request_recruitment_title, work_request_recruitment_start_date_time, work_request_recruitment_end_date_time," +
+            " work_request_recruitment_last_update_date_time, work_request_recruitment_description, work_request_recruitment_requirements," +
+            " work_request_recruitment_benefits, work_request_recruitment_salary, work_request_recruitment_quantity," +
+            " work_request_recruitment_experience_required, work_request_recruitment_gender_required, work_request_recruitment_work_location," +
+            " work_request_recruitment_deleted)" +
+            "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
 }

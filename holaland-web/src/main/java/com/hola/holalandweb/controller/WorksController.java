@@ -1,16 +1,8 @@
 package com.hola.holalandweb.controller;
 
 import com.hola.holalandweb.constant.Constants;
-import com.hola.holalandwork.entity.SttWork;
-import com.hola.holalandwork.entity.WorkRequestFindJob;
-import com.hola.holalandwork.entity.WorkRequestRecruitment;
-import com.hola.holalandwork.entity.WorkRequestType;
-import com.hola.holalandwork.service.SttWorkService;
-import com.hola.holalandwork.service.WorkRequestApplyService;
-import com.hola.holalandwork.service.WorkRequestFindJobService;
-import com.hola.holalandwork.service.WorkRequestRecruitmentSavedService;
-import com.hola.holalandwork.service.WorkRequestRecruitmentService;
-import com.hola.holalandwork.service.WorkRequestTypeService;
+import com.hola.holalandwork.entity.*;
+import com.hola.holalandwork.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +24,8 @@ public class WorksController {
     private final WorkRequestApplyService workRequestApplyService;
     private final WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService;
     private final WorkRequestFindJobService workRequestFindJobService;
+    private final WorkPaymentMethodService workPaymentMethodService;
+    private final WorkTimeService workTimeService;
     private final SttWorkService sttWorkService;
 
     @Autowired
@@ -40,12 +34,16 @@ public class WorksController {
                            WorkRequestApplyService workRequestApplyService,
                            WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
                            WorkRequestFindJobService workRequestFindJobService,
+                           WorkPaymentMethodService workPaymentMethodService,
+                           WorkTimeService workTimeService,
                            SttWorkService sttWorkService) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.workRequestTypeService = workRequestTypeService;
         this.workRequestApplyService = workRequestApplyService;
         this.workRequestRecruitmentSavedService = workRequestRecruitmentSavedService;
         this.workRequestFindJobService = workRequestFindJobService;
+        this.workPaymentMethodService = workPaymentMethodService;
+        this.workTimeService = workTimeService;
         this.sttWorkService = sttWorkService;
     }
 
@@ -131,8 +129,8 @@ public class WorksController {
         return "module-works";
     }
 
-    @GetMapping("/works/job-detail")
-    public String getJobDetail(
+    @GetMapping("/works/request-recruitment-detail")
+    public String getRequestRecruitmentDetail(
             @RequestParam("id") Integer id,
             Model model
     ) {
@@ -144,10 +142,20 @@ public class WorksController {
         return "module-works";
     }
 
-    @GetMapping("/works/worker-detail")
-    public String getWorkerDetail(
+    @GetMapping("/works/request-find-job-detail")
+    public String getRequestFindJobDetail(
+            @RequestParam("id") Integer id,
             Model model
     ) {
+        WorkRequestFindJob jobDetail = workRequestFindJobService.getOne(id);
+        WorkRequestType jobType = workRequestTypeService.getOne(jobDetail.getWorkRequestTypeId());
+        WorkPaymentMethod jobPaymentMethod = workPaymentMethodService.getOne(jobDetail.getWorkPaymentMethodId());
+        WorkTime jobTime = workTimeService.getOne((jobDetail.getWorkTimeId()));
+
+        model.addAttribute("jobPaymentMethod",jobPaymentMethod);
+        model.addAttribute("jobTime",jobTime);
+        model.addAttribute("jobType", jobType);
+        model.addAttribute("jobDetail", jobDetail);
         model.addAttribute("page", 10);
         return "module-works";
     }
@@ -206,15 +214,61 @@ public class WorksController {
 
         boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
         if (isCheck) {
-            return "redirect:" + "/works/request-manage/code?Code=6";
+            return "redirect:" + "/works/request-manage/status?Code=6";
         } else {
             return "404";
         }
     }
 
-    @GetMapping("/works/create-request-recruitment")
-    public String getFormCreateRequestRecruitment(Model model) {
-        model.addAttribute("page", 8);
-        return "module-works";
+    @PostMapping(value = "/create-request-recruitment", params = "saveDraft")
+    public String createRequestRecruitmentSaveDraft(
+            @ModelAttribute("newRequestRecruiment") WorkRequestRecruitment newRequestRecruitment,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+
+        Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        // set attribute
+        newRequestRecruitment.setUserId(2);
+        newRequestRecruitment.setSttWorkCode(6);
+        newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
+        newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
+        newRequestRecruitment.setWorkRequestRecruitmentDeleted(false);
+
+        boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
+        if (isCheck) {
+            return "redirect:" + "/works/request-recruiment-manage/code?Code=6";
+        } else {
+            return "404";
+        }
+    }
+
+    @PostMapping(value = "/create-request-recruitment", params = "save")
+    public String createRequestRecruitmentSave(
+            @ModelAttribute("newRequestRecruiment") WorkRequestRecruitment newRequestRecruitment,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+
+        Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        // set attribute
+        newRequestRecruitment.setUserId(2);
+        newRequestRecruitment.setSttWorkCode(6);
+        newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
+        newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
+        newRequestRecruitment.setWorkRequestRecruitmentDeleted(false);
+
+        boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
+        if (isCheck) {
+            return "redirect:" + "/works/request-recruitment-manage/code?Code=6";
+        } else {
+            return "404";
+        }
     }
 }

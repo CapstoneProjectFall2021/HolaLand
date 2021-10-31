@@ -35,4 +35,29 @@ public class WorkRequestRecruitmentRepositoryImpl implements WorkRequestRecruitm
     public WorkRequestRecruitment getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(WORK_REQUEST_RECRUITMENT_GET_ONE, new WorkRequestRecruitmentMapper(), id);
     }
+
+    @Override
+    public boolean save(WorkRequestRecruitment obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                INSERT_REQUEST_RECRUITMENT,
+                obj.getUserId(),
+                obj.getWorkPaymentMethodId(),
+                obj.getWorkRequestTypeId(),
+                obj.getSttWorkCode(),
+                obj.getWorkSalaryUnitId(),
+                obj.getWorkRequestRecruitmentTitle(),
+                obj.getWorkRequestRecruitmentStartDateTime(),
+                obj.getWorkRequestRecruitmentEndDateTime(),
+                obj.getWorkRequestRecruitmentLastUpdateDateTime(),
+                obj.getWorkRequestRecruitmentDescription(),
+                obj.getWorkRequestRecruitmentRequirement(),
+                obj.getWorkRequestRecruitmentBenefit(),
+                obj.getWorkRequestRecruitmentSalary(),
+                obj.getWorkRequestRecruitmentQuantity(),
+                obj.getWorkRequestRecruitmentExperienceRequirement(),
+                obj.getWorkRequestRecruitmentGenderRequirement(),
+                obj.getWorkRequestRecruitmentWorkLocation(),
+                obj.isWorkRequestRecruitmentDeleted()
+        ) > 0;
+    }
 }
