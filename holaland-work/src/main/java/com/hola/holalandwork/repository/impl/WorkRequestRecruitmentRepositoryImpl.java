@@ -37,14 +37,26 @@ public class WorkRequestRecruitmentRepositoryImpl implements WorkRequestRecruitm
     }
 
     @Override
+    public List<WorkRequestRecruitment> getAllByUserIdAndTypeId(int id, Integer... typeId) throws DataAccessException {
+        StringBuilder s = new StringBuilder("(");
+        for (int i = 0; i < typeId.length; i++) {
+            s.append((i != typeId.length - 1) ? typeId[i] + "," : typeId[i] + ")");
+        }
+        String sql = "SELECT * FROM work_request_recruitment WHERE user_id = ? AND stt_work_code in "
+                + s
+                + " AND work_request_recruitment_deleted = 0";
+        return jdbcTemplate.query(sql, new WorkRequestRecruitmentMapper(), id);
+    }
+
+    @Override
     public boolean save(WorkRequestRecruitment obj) throws DataAccessException {
         return jdbcTemplate.update(
                 INSERT_REQUEST_RECRUITMENT,
                 obj.getUserId(),
-                obj.getWorkPaymentMethodId(),
-                obj.getWorkRequestTypeId(),
                 obj.getSttWorkCode(),
+                obj.getWorkRequestTypeId(),
                 obj.getWorkSalaryUnitId(),
+                obj.getWorkPaymentMethodId(),
                 obj.getWorkRequestRecruitmentTitle(),
                 obj.getWorkRequestRecruitmentStartDateTime(),
                 obj.getWorkRequestRecruitmentEndDateTime(),

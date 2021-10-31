@@ -92,7 +92,7 @@ public class WorksController {
         return "module-works";
     }
 
-    @GetMapping("/works/request-manage")
+    @GetMapping("/works/request-find-job-manage")
     public String getJobsPosted(Model model) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
         List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(
@@ -106,7 +106,7 @@ public class WorksController {
         return "module-works";
     }
 
-    @GetMapping("/works/request-manage/status")
+    @GetMapping("/works/request-find-job-manage/status")
     public String getJobsPostedCode(
             @RequestParam("code") Integer sttWorkCode,
             Model model
@@ -125,7 +125,31 @@ public class WorksController {
 
     @GetMapping("/works/request-recruitment-manage")
     public String getRecruitmentsPosted(Model model) {
+        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
+        List<WorkRequestRecruitment> WorkRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
+                1,
+                sttWorkList.get(0).getSttWorkCode()
+        );
+        model.addAttribute("sttWorkCode", Constants.STT_WORK_CODE_PENDING_APPROVAL);
         model.addAttribute("page", 7);
+        model.addAttribute("sttWorkList", sttWorkList);
+        model.addAttribute("RecruitmentPostedList", WorkRequestRecruitments);
+        return "module-works";
+    }
+
+    @GetMapping("/works/request-recruitment-manage/status")
+    public String getRecruitmentsPostedCode(
+            @RequestParam("code") Integer sttWorkCode,
+            Model model) {
+        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
+        List<WorkRequestRecruitment> WorkRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
+                1,
+                sttWorkCode
+        );
+        model.addAttribute("sttWorkCode", sttWorkCode);
+        model.addAttribute("page", 7);
+        model.addAttribute("sttWorkList", sttWorkList);
+        model.addAttribute("RecruitmentPostedList", WorkRequestRecruitments);
         return "module-works";
     }
 
@@ -181,7 +205,7 @@ public class WorksController {
         Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
         // set attribute
         newRequestFindJob.setUserId(2);
-        newRequestFindJob.setSttWorkCode(1);
+        newRequestFindJob.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
         newRequestFindJob.setWorkRequestFindJobStartDateTime(currentDate);
         newRequestFindJob.setWorkRequestFindJobLastUpdateDateTime(currentDate);
         newRequestFindJob.setWorkRequestFindJobDeleted(false);
@@ -207,22 +231,30 @@ public class WorksController {
         Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
         // set attribute
         newRequestFindJob.setUserId(2);
-        newRequestFindJob.setSttWorkCode(6);
+        newRequestFindJob.setSttWorkCode(Constants.STT_WORK_CODE_SAVE_DRAFT);
         newRequestFindJob.setWorkRequestFindJobStartDateTime(currentDate);
         newRequestFindJob.setWorkRequestFindJobLastUpdateDateTime(currentDate);
         newRequestFindJob.setWorkRequestFindJobDeleted(false);
 
         boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
         if (isCheck) {
-            return "redirect:" + "/works/request-find-job-manage/status?Code=6";
+            return "redirect:" + "/works/request-find-job-manage/status?code=6";
         } else {
             return "404";
         }
     }
 
+    @GetMapping("/works/create-request-recruitment")
+    public String getFormCreateRequestRecruitment(Model model) {
+        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
+        model.addAttribute("newRequestRecruitment", newRequestRecruitment);
+        model.addAttribute("page", 8);
+        return "module-works";
+    }
+
     @PostMapping(value = "/create-request-recruitment", params = "saveDraft")
     public String createRequestRecruitmentSaveDraft(
-            @ModelAttribute("newRequestRecruiment") WorkRequestRecruitment newRequestRecruitment,
+            @ModelAttribute("newRequestRecruitment") WorkRequestRecruitment newRequestRecruitment,
             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
@@ -232,15 +264,15 @@ public class WorksController {
 
         Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
         // set attribute
-        newRequestRecruitment.setUserId(2);
-        newRequestRecruitment.setSttWorkCode(6);
+        newRequestRecruitment.setUserId(1);
+        newRequestRecruitment.setSttWorkCode(Constants.STT_WORK_CODE_SAVE_DRAFT);
         newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentDeleted(false);
 
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
         if (isCheck) {
-            return "redirect:" + "/works/request-recruiment-manage/code?Code=6";
+            return "redirect:" + "/works/request-recruiment-manage/status?code=6";
         } else {
             return "404";
         }
@@ -248,7 +280,7 @@ public class WorksController {
 
     @PostMapping(value = "/create-request-recruitment", params = "save")
     public String createRequestRecruitmentSave(
-            @ModelAttribute("newRequestRecruiment") WorkRequestRecruitment newRequestRecruitment,
+            @ModelAttribute("newRequestRecruitment") WorkRequestRecruitment newRequestRecruitment,
             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
@@ -258,15 +290,15 @@ public class WorksController {
 
         Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
         // set attribute
-        newRequestRecruitment.setUserId(2);
-        newRequestRecruitment.setSttWorkCode(6);
+        newRequestRecruitment.setUserId(1);
+        newRequestRecruitment.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
         newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentDeleted(false);
 
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
         if (isCheck) {
-            return "redirect:" + "/works/request-recruitment-manage/code?Code=6";
+            return "redirect:" + "/works/request-recruitment-manage";
         } else {
             return "404";
         }

@@ -6,8 +6,8 @@
                 <h1 class="title fix-mb-title">Viết bài tuyển dụng</h1>
             </div>
         </div>
-        <form class="row panel-form mx-0" method="post" th:action="@{/create-request-find-job}"
-              th:object="${newRequestFindJob}">
+        <form class="row panel-form mx-0" method="post" th:action="@{/create-request-recruitment}"
+              th:object="${newRequestRecruitment}">
             <div class="form-group col-12 col-md-6 col-lg-4">
                 <fieldset class="bg-dark-ui">
                     <legend>Yêu cầu kinh nghiệm</legend>
@@ -20,7 +20,7 @@
             <div class="form-group col-12 col-md-6 col-lg-4">
                 <fieldset class="bg-dark-ui">
                     <legend>Yêu cầu giới tính</legend>
-                    <select class="form-control form-select" th:field="*{workRequestRecruitmentGenderRequirement}>
+                    <select class="form-control form-select" th:field="*{workRequestRecruitmentGenderRequirement}">
                         <option value="-1" selected="selected">Không yêu cầu</option>
                         <option value="1">Nam</option>
                         <option value="0">Nữ</option>
@@ -45,7 +45,7 @@
             <div class="form-group col-12 col-md-6 col-lg-4">
                 <fieldset class="bg-dark-ui">
                     <legend>Hình thức thanh toán</legend>
-                    <select class="form-control form-select" th:field="*{workRequestTypeId}">
+                    <select class="form-control form-select" th:field="*{workPaymentMethodId}">
                         <option value="1" selected="selected">Thanh toán theo ngày</option>
                         <option value="2">Thanh toán 1 tuần / lần</option>
                         <option value="3">Thanh toán 2 tuần / lần</option>

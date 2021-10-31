@@ -77,7 +77,8 @@
           </div>
           <div class="row-info">
             <div><i class="fas fa-venus-mars fa-fw"></i>Yêu cầu giới tính</div>
-            <div th:text="${jobDetail.workRequestRecruitmentGenderRequirement ? 'Có yêu cầu' : 'Không yêu cầu'}"></div>
+            <div th:text="${jobDetail.workRequestRecruitmentGenderRequirement == -1 ? 'Không yêu cầu' :
+            (jobDetail.workRequestRecruitmentGenderRequirement == 0 ? 'Nữ' : 'Nam')}"></div>
           </div>
         </div>
         <h2 class="sub-title">Mô tả công việc</h2>

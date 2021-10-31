@@ -14,5 +14,7 @@ public interface WorkRequestRecruitmentRepository {
 
     WorkRequestRecruitment getOne(int id) throws DataAccessException;
 
+    List<WorkRequestRecruitment> getAllByUserIdAndTypeId(int id, Integer... typeId) throws DataAccessException;
+
     boolean save(WorkRequestRecruitment obj) throws DataAccessException;
 }
