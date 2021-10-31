@@ -188,7 +188,7 @@ public class WorksController {
 
         boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
         if (isCheck) {
-            return "redirect:" + "/works/request-manage";
+            return "redirect:" + "/works/request-find-job-manage";
         } else {
             return "404";
         }
@@ -214,7 +214,7 @@ public class WorksController {
 
         boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
         if (isCheck) {
-            return "redirect:" + "/works/request-manage/status?Code=6";
+            return "redirect:" + "/works/request-find-job-manage/status?Code=6";
         } else {
             return "404";
         }
