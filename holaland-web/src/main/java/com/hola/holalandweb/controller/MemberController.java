@@ -118,14 +118,4 @@ public class MemberController {
         model.addAttribute("listClub", listClub);
         model.addAttribute("listClubType", listCLubType);
     }
-
-    @InitBinder
-    private void dateBinder(WebDataBinder binder) {
-        //The date format to parse or output your dates
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        //Create a new CustomDateEditor
-        CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-        //Register it as custom editor for the Date type
-        binder.registerCustomEditor(Timestamp.class, editor);
-    }
 }
