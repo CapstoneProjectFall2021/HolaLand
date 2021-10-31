@@ -69,7 +69,12 @@ public class MemberController {
         addMember.setMemberStatusId(1);
 
         int memberId = memberService.save(addMember);
-
+        if (memberId > 0) {
+            backToMembers(model);
+            return "members";
+        } else {
+            return "404";
+        }
     }
 
     @GetMapping("/get-one-member")
@@ -93,7 +98,9 @@ public class MemberController {
             System.out.println("There was a error " + bindingResult);
             return "404";
         }
-        
+        memberService.update(updateMember);
+        backToMembers(model);
+        return "members";
     }
 
     private void backToMembers(Model model) {
