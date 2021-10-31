@@ -54,7 +54,41 @@ public class WorksController {
     }
 
 
-    
+    @GetMapping("/works")
+    public String goToWorks(Model model) {
+        List<WorkRequestType> jobTypeList = workRequestTypeService.getAll();
+        List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(
+                jobTypeList.get(0).getWorkRequestTypeId(),
+                Constants.STT_WORK_CODE_APPROVED
+        );
+        model.addAttribute("workJobTypeId", 1);
+        model.addAttribute("jobTypeList", jobTypeList);
+        model.addAttribute("jobList", jobList);
+        model.addAttribute("page", 1);
+        return "module-works";
+    }
+
+    @GetMapping("/works/type")
+    public String getWorkJobType(
+            @RequestParam("workJobTypeId") Integer workJobTypeId,
+            Model model
+    ) {
+        List<WorkRequestType> jobTypeList = workRequestTypeService.getAll();
+        List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(workJobTypeId, Constants.STT_WORK_CODE_APPROVED);
+        model.addAttribute("workJobTypeId", workJobTypeId);
+        model.addAttribute("jobTypeList", jobTypeList);
+        model.addAttribute("jobList", jobList);
+        model.addAttribute("page", 1);
+        return "module-works";
+    }
+
+    @GetMapping("/works/jobs-apply")
+    public String getJobsApply(Model model) {
+        List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
+        model.addAttribute("jobApplyList", jobApplyList);
+        model.addAttribute("page", 2);
+        return "module-works";
+    }
 
     @GetMapping("/works/jobs-save")
     public String getJobsSave(Model model) {
