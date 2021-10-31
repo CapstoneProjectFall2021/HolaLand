@@ -7,6 +7,7 @@ import com.hola.holalandtraffic.service.BusService;
 import com.hola.holalandtraffic.service.MemberService;
 import com.hola.holalandtraffic.service.MotorbikeTaxiDriversService;
 import com.hola.holalandweb.util.SendEmailService;
+import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,6 +84,21 @@ public class MemberController {
         backToMembers(model);
         model.addAttribute("oneMember", member);
         return "members";
+    }
+    @GetMapping("/works/jobs-apply")
+    public String getJobsApply(Model model) {
+        List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
+        model.addAttribute("jobApplyList", jobApplyList);
+        model.addAttribute("page", 2);
+        return "module-works";
+    }
+
+    @GetMapping("/works/jobs-save")
+    public String getJobsSave(Model model) {
+        List<WorkRequestRecruitment> jobSaveList = workRequestRecruitmentSavedService.getAllByAccountId(1);
+        model.addAttribute("jobSaveList", jobSaveList);
+        model.addAttribute("page", 3);
+        return "module-works";
     }
 
     @GetMapping("/confirm-delete-member")
