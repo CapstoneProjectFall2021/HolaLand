@@ -284,13 +284,13 @@ public class WorksController {
         newRequestRecruitment.setWorkRequestRecruitmentDeleted(false);
 
         if(newRequestRecruitment.getWorkSalaryUnitId() == 1){
-            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + "VNĐ/h");
-        }if(newRequestRecruitment.getWorkSalaryUnitId() == 2){
-            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + "VNĐ/ngày");
-        }if(newRequestRecruitment.getWorkSalaryUnitId() == 3){
-            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + "VNĐ/tuần");
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + " VNĐ/h");
+        } else if(newRequestRecruitment.getWorkSalaryUnitId() == 2){
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + " VNĐ/ngày");
+        } else if(newRequestRecruitment.getWorkSalaryUnitId() == 3){
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + " VNĐ/tuần");
         }else{
-            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + "VNĐ/tháng");
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + " VNĐ/tháng");
         }
 
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
