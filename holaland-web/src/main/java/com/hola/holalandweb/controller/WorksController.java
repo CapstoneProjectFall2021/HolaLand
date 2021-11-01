@@ -270,6 +270,16 @@ public class WorksController {
         newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentDeleted(false);
 
+        if(newRequestRecruitment.getWorkSalaryUnitId() == 1){
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + "VNĐ/h");
+        }if(newRequestRecruitment.getWorkSalaryUnitId() == 2){
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + "VNĐ/ngày");
+        }if(newRequestRecruitment.getWorkSalaryUnitId() == 3){
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + "VNĐ/tuần");
+        }else{
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + "VNĐ/tháng");
+        }
+
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
         if (isCheck) {
             return "redirect:" + "/works/request-recruiment-manage/status?code=6";
