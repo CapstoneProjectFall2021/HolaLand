@@ -1,6 +1,6 @@
 <div class="col-right" th:fragment="request-recruitment-saved">
   <!-- List job save -->
-  <div class="list-job" th:if="${jobSaveList.size != 0}">
+  <div class="list-request" th:if="${jobSaveList.size != 0}">
     <div class="row">
       <div class="col-12">
         <h1 class="title fix-mb-title">Việc làm đã lưu</h1>
@@ -22,7 +22,7 @@
               <a th:href="@{/works/request-recruitment-detail(id=${job.workRequestRecruitmentId})}">
                 <span th:text="*{job.workRequestRecruitmentTitle}"></span>
               </a>
-              <div class="job-info">
+              <div class="request-info">
                 <p>Lương: <span th:text="*{job.workRequestRecruitmentSalary}"></span></p>
                 <p>Thời hạn: <span th:text="*{job.workRequestRecruitmentEndDateTime}"></span></p>
               </div>

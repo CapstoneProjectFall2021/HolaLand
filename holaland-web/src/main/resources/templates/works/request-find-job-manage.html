@@ -44,8 +44,9 @@
               <img class="media-object" src="../../images/system/job.png" alt="">
             </div>
             <div class="content-body">
-              <a th:href="@{/works/request-find-job-detail(id=*{job.workRequestFindJobId})}" th:text="*{job.workRequestFindJobTitle}"></a>
-              <div class="job-info">
+              <a th:href="@{/works/request-find-job-detail(id=*{job.workRequestFindJobId})}"
+                 th:text="*{job.workRequestFindJobTitle}"></a>
+              <div class="request-info">
                 <p>Lương mong muốn: <span th:text="*{job.workRequestFindJobExpectedSalary}">
                 </span>/<span th:text="*{job.workSalaryUnitId == 1 ? 'h' : (job.workSalaryUnitId == 2 ? 'ngày' :
                   (job.workSalaryUnitId == 3 ? 'tuần' : 'tháng'))}"></span></p>
