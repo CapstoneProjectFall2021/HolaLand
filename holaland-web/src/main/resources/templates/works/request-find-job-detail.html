@@ -1,85 +1,87 @@
 <div class="col-right" th:fragment="request-find-job-detail">
-    <!-- Request find job detail -->
-    <div class="request-detail">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="title fix-mb-title">Chi tiết tìm việc</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-                <div class="panel request-title">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12 col-xl-9">
-                            <h3 th:text="${jobDetail.workRequestFindJobTitle}">
-                            </h3>
-                            <p><i class="far fa-calendar-alt fa-fw"></i>Ngày hết hạn:
-                                <span th:text = "${jobDetail.workRequestFindJobEndDateTime}"></span>
-                            </p>
-                        </div>
-                        <div class="col-md-12 col-lg-12 col-xl-3">
-                            <div class="apply-area">
-                                <div class="apply-area-btn">
-                                    <div class="btn-apply">
-                                        <a href="javascript:void(0)" class="btn btn-md btn-success" data-bs-toggle="modal" data-bs-target="#confirmHireModal">
-                                            THUÊ NGAY
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h2 class="sub-title">Thông tin yêu cầu</h2>
-                <div class="panel-text">
-                    <div class="row-info">
-                        <div><i class="fas fa-coins fa-fw"></i>Mức lương mong muốn</div>
-                        <div>
-                            <spanp th:text = "${jobDetail.workRequestFindJobExpectedSalary}">
-                            </spanp>/<span th:text="*{jobDetail.workSalaryUnitId == 1 ? 'h' :
-                            (jobDetail.workSalaryUnitId == 2 ? 'ngày' : (jobDetail.workSalaryUnitId == 3 ? 'tuần' : 'tháng'))}">
-                        </span>
-                        </div>
-                    </div>
-                    <div class="row-info">
-                        <div><i class="fas fa-exchange-alt fa-fw"></i>Hình thức thanh toán</div>
-                        <div>
-                            <spanp th:text = "${jobPaymentMethod.workPaymentMethodName}"></spanp>
-                        </div>
-                    </div>
-                    <div class="row-info">
-                        <div><i class="fas fa-user-clock fa-fw"></i>Hình thức làm việc</div>
-                        <div>
-                            <span th:text = "${jobType.workRequestTypeName}"></span>
-                        </div>
-                    </div>
-                    <div class="row-info">
-                        <div><i class="far fa-clock fa-fw"></i>Thời gian làm việc</div>
-                        <div>
-                            <span th:text = "${jobTime.workTimeName}"></span>
-                        </div>
-                    </div>
-                    <div class="row-info">
-                        <div><i class="fas fa-map-marker-alt fa-fw"></i>Địa điểm làm việc mong muốn</div>
-                        <div>
-                            <span th:text = "${jobDetail.workRequestFindJobExpectedLocation}"></span>
-                        </div>
-                    </div>
-                </div>
-                <h2 class="sub-title">Mô tả</h2>
-                <div class="panel-text">
-                    <pre>
-                        <span th:text = "${jobDetail.workRequestFindJobDescription}"></span>
-                    </pre>
-                </div>
-                <h2 class="sub-title">Kinh nghiệm</h2>
-                <div class="panel-text">
-                    <pre>
-                         <span th:text = "${jobDetail.workRequestFindJobPersonalExperience}"></span>
-                    </pre>
-                </div>
-            </div>
-        </div>
+  <!-- Request find job detail -->
+  <div class="request-detail">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Chi tiết tìm việc</h1>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+        <div class="panel request-title">
+          <div class="row">
+            <div class="col-md-12 col-lg-12 col-xl-9">
+              <h3 th:text="${jobDetail.workRequestFindJobTitle}">
+              </h3>
+              <p><i class="far fa-calendar-alt fa-fw"></i>Ngày hết hạn:
+                <span th:text="${jobDetail.workRequestFindJobEndDateTime}"></span>
+              </p>
+            </div>
+            <div class="col-md-12 col-lg-12 col-xl-3">
+              <div class="apply-area">
+                <div class="apply-area-btn">
+                  <div class="btn-apply">
+                    <a href="javascript:void(0)" class="btn btn-md btn-success" data-bs-toggle="modal"
+                       data-bs-target="#confirmHireModal">
+                      THUÊ NGAY
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 class="sub-title">Thông tin yêu cầu</h2>
+        <div class="panel-text">
+          <div class="row-info">
+            <div><i class="fas fa-coins fa-fw"></i>Mức lương mong muốn</div>
+            <div>
+              <span th:text="${jobDetail.workRequestFindJobExpectedSalary}"></span>/
+              <span th:text="*{
+                            jobDetail.workSalaryUnitId == 1 ? 'h' :
+                            (jobDetail.workSalaryUnitId == 2 ? 'ngày' :
+                            (jobDetail.workSalaryUnitId == 3 ? 'tuần' : 'tháng'))}"
+              >
+                        </span>
+            </div>
+          </div>
+          <div class="row-info">
+            <div><i class="fas fa-exchange-alt fa-fw"></i>Hình thức thanh toán</div>
+            <div>
+              <spanp th:text="${jobPaymentMethod.workPaymentMethodName}"></spanp>
+            </div>
+          </div>
+          <div class="row-info">
+            <div><i class="fas fa-user-clock fa-fw"></i>Hình thức làm việc</div>
+            <div>
+              <span th:text="${jobType.workRequestTypeName}"></span>
+            </div>
+          </div>
+          <div class="row-info">
+            <div><i class="far fa-clock fa-fw"></i>Thời gian làm việc</div>
+            <div>
+              <span th:text="${jobTime.workTimeName}"></span>
+            </div>
+          </div>
+          <div class="row-info">
+            <div><i class="fas fa-map-marker-alt fa-fw"></i>Địa điểm làm việc mong muốn</div>
+            <div>
+              <span th:text="${jobDetail.workRequestFindJobExpectedLocation}"></span>
+            </div>
+          </div>
+        </div>
+        <h2 class="sub-title">Mô tả</h2>
+        <div class="panel-text">
+          <pre th:text="${jobDetail.workRequestFindJobDescription}">
+          </pre>
+        </div>
+        <h2 class="sub-title">Kinh nghiệm</h2>
+        <div class="panel-text">
+          <pre th:text="${jobDetail.workRequestFindJobPersonalExperience}">
+          </pre>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
