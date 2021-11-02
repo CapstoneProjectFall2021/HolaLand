@@ -60,23 +60,7 @@ public class MemberController {
     }
 
     //add member
-    @PostMapping("/add-member")
-    public String addMember(@ModelAttribute("addMember") Member addMember, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            System.out.println("There was a error " + bindingResult);
-            return "404";
-        }
-        addMember.setMemberRankId(1);
-        addMember.setMemberStatusId(1);
 
-        int memberId = memberService.save(addMember);
-        if (memberId > 0) {
-            backToMembers(model);
-            return "members";
-        } else {
-            return "404";
-        }
-    }
 
     @GetMapping("/get-one-member")
     public String getOneMember(@RequestParam("id") Integer id, Model model) {
@@ -94,16 +78,7 @@ public class MemberController {
     }
 
 
-    @PostMapping("/update-member")
-    public String updateMember(@ModelAttribute("updateMember") Member updateMember, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            System.out.println("There was a error " + bindingResult);
-            return "404";
-        }
-        memberService.update(updateMember);
-        backToMembers(model);
-        return "members";
-    }
+    
 
     private void backToMembers(Model model) {
         List<Member> members = memberService.getAll();
