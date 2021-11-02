@@ -1,8 +1,22 @@
 package com.hola.holalandweb.controller;
 
 import com.hola.holalandweb.constant.Constants;
-import com.hola.holalandwork.entity.*;
-import com.hola.holalandwork.service.*;
+import com.hola.holalandwork.entity.SttWork;
+import com.hola.holalandwork.entity.SttWorkRequestRecruitmentFindJobCount;
+import com.hola.holalandwork.entity.WorkPaymentMethod;
+import com.hola.holalandwork.entity.WorkRequestFindJob;
+import com.hola.holalandwork.entity.WorkRequestRecruitment;
+import com.hola.holalandwork.entity.WorkRequestType;
+import com.hola.holalandwork.entity.WorkTime;
+import com.hola.holalandwork.service.SttWorkRequestRecruitmentFindJobCountService;
+import com.hola.holalandwork.service.SttWorkService;
+import com.hola.holalandwork.service.WorkPaymentMethodService;
+import com.hola.holalandwork.service.WorkRequestApplyService;
+import com.hola.holalandwork.service.WorkRequestFindJobService;
+import com.hola.holalandwork.service.WorkRequestRecruitmentSavedService;
+import com.hola.holalandwork.service.WorkRequestRecruitmentService;
+import com.hola.holalandwork.service.WorkRequestTypeService;
+import com.hola.holalandwork.service.WorkTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +30,7 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class WorksController {
@@ -99,21 +114,14 @@ public class WorksController {
     @GetMapping("/works/request-find-job-manage")
     public String getJobsPosted(Model model) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        SttWorkRequestRecruitmentFindJobCount sttCount = sttWorkRequestRecruitmentFindJobCountService.getOneByUserId(2);
-        LinkedHashMap<SttWork, Integer> sttCountList = new LinkedHashMap<SttWork, Integer>();
-        sttCountList.put(sttWorkList.get(0),sttCount.getSttWorkRequestRecruitmentFindJobCountPending());
-        sttCountList.put(sttWorkList.get(1),sttCount.getSttWorkRequestRecruitmentFindJobCountDisclaimer());
-        sttCountList.put(sttWorkList.get(2),sttCount.getSttWorkRequestRecruitmentFindJobCountApproved());
-        sttCountList.put(sttWorkList.get(3),sttCount.getSttWorkRequestRecruitmentFindJobCountComplete());
-        sttCountList.put(sttWorkList.get(4),sttCount.getSttWorkRequestRecruitmentFindJobCountExpired());
-        sttCountList.put(sttWorkList.get(5),sttCount.getSttWorkRequestRecruitmentFindJobCountSaveDraft());
-        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 2);
+        List<WorkRequestFindJob> requestFindJobList = workRequestFindJobService.getAllByUserIdAndTypeId(
                 2,
                 sttWorkList.get(0).getSttWorkCode()
         );
-        model.addAttribute("sttWorkCode", Constants.STT_WORK_CODE_PENDING_APPROVAL);
-        model.addAttribute("sttWorkList", sttCountList);
-        model.addAttribute("jobPostedList", workRequestFindJobs);
+        model.addAttribute("sttWorkCode", sttWorkList.get(0).getSttWorkCode());
+        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
+        model.addAttribute("requestFindJobList", requestFindJobList);
         model.addAttribute("page", 4);
         return "module-works";
     }
@@ -124,21 +132,14 @@ public class WorksController {
             Model model
     ) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        SttWorkRequestRecruitmentFindJobCount sttCount = sttWorkRequestRecruitmentFindJobCountService.getOneByUserId(2);
-        LinkedHashMap<SttWork, Integer> sttCountList = new LinkedHashMap<SttWork, Integer>();
-        sttCountList.put(sttWorkList.get(0),sttCount.getSttWorkRequestRecruitmentFindJobCountPending());
-        sttCountList.put(sttWorkList.get(1),sttCount.getSttWorkRequestRecruitmentFindJobCountDisclaimer());
-        sttCountList.put(sttWorkList.get(2),sttCount.getSttWorkRequestRecruitmentFindJobCountApproved());
-        sttCountList.put(sttWorkList.get(3),sttCount.getSttWorkRequestRecruitmentFindJobCountComplete());
-        sttCountList.put(sttWorkList.get(4),sttCount.getSttWorkRequestRecruitmentFindJobCountExpired());
-        sttCountList.put(sttWorkList.get(5),sttCount.getSttWorkRequestRecruitmentFindJobCountSaveDraft());
-        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 2);
+        List<WorkRequestFindJob> requestFindJobList = workRequestFindJobService.getAllByUserIdAndTypeId(
                 2,
                 sttWorkCode
         );
         model.addAttribute("sttWorkCode", sttWorkCode);
-        model.addAttribute("sttWorkList", sttCountList);
-        model.addAttribute("jobPostedList", workRequestFindJobs);
+        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
+        model.addAttribute("requestFindJobList", requestFindJobList);
         model.addAttribute("page", 4);
         return "module-works";
     }
@@ -146,22 +147,15 @@ public class WorksController {
     @GetMapping("/works/request-recruitment-manage")
     public String getRecruitmentsPosted(Model model) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        SttWorkRequestRecruitmentFindJobCount sttCount = sttWorkRequestRecruitmentFindJobCountService.getOneByUserId(1);
-        LinkedHashMap<SttWork, Integer> sttCountList = new LinkedHashMap<SttWork, Integer>();
-        sttCountList.put(sttWorkList.get(0),sttCount.getSttWorkRequestRecruitmentFindJobCountPending());
-        sttCountList.put(sttWorkList.get(1),sttCount.getSttWorkRequestRecruitmentFindJobCountDisclaimer());
-        sttCountList.put(sttWorkList.get(2),sttCount.getSttWorkRequestRecruitmentFindJobCountApproved());
-        sttCountList.put(sttWorkList.get(3),sttCount.getSttWorkRequestRecruitmentFindJobCountComplete());
-        sttCountList.put(sttWorkList.get(4),sttCount.getSttWorkRequestRecruitmentFindJobCountExpired());
-        sttCountList.put(sttWorkList.get(5),sttCount.getSttWorkRequestRecruitmentFindJobCountSaveDraft());
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
         List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
                 1,
                 sttWorkList.get(0).getSttWorkCode()
         );
-        model.addAttribute("sttWorkCode", Constants.STT_WORK_CODE_PENDING_APPROVAL);
+        model.addAttribute("sttWorkCode", sttWorkList.get(0).getSttWorkCode());
+        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
+        model.addAttribute("requestRecruitmentList", workRequestRecruitments);
         model.addAttribute("page", 7);
-        model.addAttribute("sttWorkList", sttCountList);
-        model.addAttribute("RecruitmentPostedList", workRequestRecruitments);
         return "module-works";
     }
 
@@ -171,23 +165,29 @@ public class WorksController {
             Model model
     ) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        SttWorkRequestRecruitmentFindJobCount sttCount = sttWorkRequestRecruitmentFindJobCountService.getOneByUserId(1);
-        LinkedHashMap<SttWork, Integer> sttCountList = new LinkedHashMap<SttWork, Integer>();
-        sttCountList.put(sttWorkList.get(0),sttCount.getSttWorkRequestRecruitmentFindJobCountPending());
-        sttCountList.put(sttWorkList.get(1),sttCount.getSttWorkRequestRecruitmentFindJobCountDisclaimer());
-        sttCountList.put(sttWorkList.get(2),sttCount.getSttWorkRequestRecruitmentFindJobCountApproved());
-        sttCountList.put(sttWorkList.get(3),sttCount.getSttWorkRequestRecruitmentFindJobCountComplete());
-        sttCountList.put(sttWorkList.get(4),sttCount.getSttWorkRequestRecruitmentFindJobCountExpired());
-        sttCountList.put(sttWorkList.get(5),sttCount.getSttWorkRequestRecruitmentFindJobCountSaveDraft());
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
         List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
                 1,
                 sttWorkCode
         );
         model.addAttribute("sttWorkCode", sttWorkCode);
+        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
+        model.addAttribute("requestRecruitmentList", workRequestRecruitments);
         model.addAttribute("page", 7);
-        model.addAttribute("sttWorkList", sttCountList);
-        model.addAttribute("RecruitmentPostedList", workRequestRecruitments);
         return "module-works";
+    }
+
+    private Map getSttCountMap(List<SttWork> sttWorkList, int userId) {
+        SttWorkRequestRecruitmentFindJobCount sttCount = sttWorkRequestRecruitmentFindJobCountService.getOneByUserId(userId);
+
+        Map<SttWork, Integer> sttWorkCountMap = new LinkedHashMap<>();
+        sttWorkCountMap.put(sttWorkList.get(0), sttCount.getSttWorkRequestRecruitmentFindJobCountPending());
+        sttWorkCountMap.put(sttWorkList.get(1), sttCount.getSttWorkRequestRecruitmentFindJobCountDisclaimer());
+        sttWorkCountMap.put(sttWorkList.get(2), sttCount.getSttWorkRequestRecruitmentFindJobCountApproved());
+        sttWorkCountMap.put(sttWorkList.get(3), sttCount.getSttWorkRequestRecruitmentFindJobCountComplete());
+        sttWorkCountMap.put(sttWorkList.get(4), sttCount.getSttWorkRequestRecruitmentFindJobCountExpired());
+        sttWorkCountMap.put(sttWorkList.get(5), sttCount.getSttWorkRequestRecruitmentFindJobCountSaveDraft());
+        return sttWorkCountMap;
     }
 
     @GetMapping("/works/request-recruitment-detail")
@@ -307,14 +307,14 @@ public class WorksController {
         newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentDeleted(false);
 
-        if(newRequestRecruitment.getWorkSalaryUnitId() == 1){
-            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + " VNĐ/h");
-        } else if(newRequestRecruitment.getWorkSalaryUnitId() == 2){
-            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + " VNĐ/ngày");
-        } else if(newRequestRecruitment.getWorkSalaryUnitId() == 3){
-            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + " VNĐ/tuần");
-        }else{
-            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary()  + " VNĐ/tháng");
+        if (newRequestRecruitment.getWorkSalaryUnitId() == 1) {
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/h");
+        } else if (newRequestRecruitment.getWorkSalaryUnitId() == 2) {
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/ngày");
+        } else if (newRequestRecruitment.getWorkSalaryUnitId() == 3) {
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/tuần");
+        } else {
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/tháng");
         }
 
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);

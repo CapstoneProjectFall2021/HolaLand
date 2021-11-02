@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="sttWork : ${sttWorkList}">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="sttWork : ${sttWorkCountMap}">
         <a th:href="@{/works/request-recruitment-manage/status(code=*{sttWork.key.sttWorkCode})}"
            class="label-info m-mb-16"
            th:classappend="${sttWork.key.sttWorkCode == sttWorkCode ? 'active' : ''}">
@@ -25,15 +25,15 @@
       </div>
     </div>
   </div>
-  <!-- List request -->
-  <div class="list-request" th:if="${RecruitmentPostedList != 0}">
+  <!-- List request Recruitment -->
+  <div class="list-request" th:if="${requestRecruitmentList.size != 0}">
     <div class="row">
       <div class="col-12">
         <h1 class="title fix-mt-title fix-mb-title">Danh sách bài viết</h1>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12" th:each="job : ${RecruitmentPostedList}">
+      <div class="col-md-12" th:each="requestRecruitment : ${requestRecruitmentList}">
         <div class="label-info m-mb-16">
           <div class="btn-remove">
             <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmRemoveFindJobModal">
@@ -45,11 +45,11 @@
               <img class="media-object" src="../../images/system/job.png" alt="">
             </div>
             <div class="content-body">
-              <a th:href="@{/works/request-recruitment-detail(id=${job.workRequestRecruitmentId})}"
-                 th:text="*{job.workRequestRecruitmentTitle}"></a>
-              <div class="job-info">
-                <p>Lương: <span th:text="*{job.workRequestRecruitmentSalary}"></span></p>
-                <p>Thời hạn: <span th:text="*{job.workRequestRecruitmentEndDateTime}"></span></p>
+              <a th:href="@{/works/request-recruitment-detail(id=${requestRecruitment.workRequestRecruitmentId})}"
+                 th:text="*{requestRecruitment.workRequestRecruitmentTitle}"></a>
+              <div class="request-info">
+                <p>Lương: <span th:text="*{requestRecruitment.workRequestRecruitmentSalary}"></span></p>
+                <p>Thời hạn: <span th:text="*{requestRecruitment.workRequestRecruitmentEndDateTime}"></span></p>
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@
       </div>
     </div>
   </div>
-  <div class="list-request" th:if="${RecruitmentPostedList == 0}">
+  <div class="list-request" th:if="${requestRecruitmentList.size == 0}">
     <div class="row">
       <div class="col-12">
         <h1 class="title fix-mt-title fix-mb-title">Không có bài viết nào</h1>

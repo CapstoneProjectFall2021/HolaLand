@@ -36,12 +36,12 @@
           <div class="row-info">
             <div><i class="fas fa-coins fa-fw"></i>Mức lương mong muốn</div>
             <div>
-              <span th:text="${jobDetail.workRequestFindJobExpectedSalary}"></span>/
-              <span th:text="${
-                            jobDetail.workSalaryUnitId == 1 ? 'h' :
-                            (jobDetail.workSalaryUnitId == 2 ? 'ngày' :
-                            (jobDetail.workSalaryUnitId == 3 ? 'tuần' : 'tháng'))}"
-              ></span>
+              <span th:text="${jobDetail.workRequestFindJobExpectedSalary}"></span>/<span
+                th:text="${
+                  jobDetail.workSalaryUnitId == 1 ? 'h' :
+                  (jobDetail.workSalaryUnitId == 2 ? 'ngày' :
+                  (jobDetail.workSalaryUnitId == 3 ? 'tuần' : 'tháng'))}"
+            ></span>
             </div>
           </div>
           <div class="row-info">
