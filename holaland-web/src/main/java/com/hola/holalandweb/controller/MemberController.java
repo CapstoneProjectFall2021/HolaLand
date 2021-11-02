@@ -111,6 +111,10 @@ public class MemberController {
         List listClub = clubService.getAllByType(1);
         List listCLubType = clubTypeService.getAll();
 
-       
+        model.addAttribute("addMember", Member.builder().build());
+        model.addAttribute("oneMember", null);
+        model.addAttribute("members", members);
+        model.addAttribute("listBus", listBus);
+        model.addAttribute("listClub", listClub);
     }
 }
