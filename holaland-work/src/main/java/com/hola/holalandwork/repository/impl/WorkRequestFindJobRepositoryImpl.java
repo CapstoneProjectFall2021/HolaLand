@@ -47,4 +47,26 @@ public class WorkRequestFindJobRepositoryImpl implements WorkRequestFindJobRepos
                 + " AND work_request_find_job_deleted = 0";
         return jdbcTemplate.query(sql, new WorkRequestFindJobMapper(), id);
     }
+
+    @Override
+    public boolean save(WorkRequestFindJob obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                INSERT_REQUEST_FIND_JOB,
+                obj.getUserId(),
+                obj.getSttWorkCode(),
+                obj.getWorkRequestTypeId(),
+                obj.getWorkSalaryUnitId(),
+                obj.getWorkPaymentMethodId(),
+                obj.getWorkTimeId(),
+                obj.getWorkRequestFindJobExpectedSalary(),
+                obj.getWorkRequestFindJobExpectedLocation(),
+                obj.getWorkRequestFindJobTitle(),
+                obj.getWorkRequestFindJobStartDateTime(),
+                obj.getWorkRequestFindJobEndDateTime(),
+                obj.getWorkRequestFindJobLastUpdateDateTime(),
+                obj.getWorkRequestFindJobDescription(),
+                obj.getWorkRequestFindJobPersonalExperience(),
+                obj.isWorkRequestFindJobDeleted()
+        ) > 0;
+    }
 }

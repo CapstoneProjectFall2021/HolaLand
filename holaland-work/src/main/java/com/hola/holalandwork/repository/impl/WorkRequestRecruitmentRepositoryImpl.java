@@ -35,4 +35,41 @@ public class WorkRequestRecruitmentRepositoryImpl implements WorkRequestRecruitm
     public WorkRequestRecruitment getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(WORK_REQUEST_RECRUITMENT_GET_ONE, new WorkRequestRecruitmentMapper(), id);
     }
+
+    @Override
+    public List<WorkRequestRecruitment> getAllByUserIdAndTypeId(int id, Integer... typeId) throws DataAccessException {
+        StringBuilder s = new StringBuilder("(");
+        for (int i = 0; i < typeId.length; i++) {
+            s.append((i != typeId.length - 1) ? typeId[i] + "," : typeId[i] + ")");
+        }
+        String sql = "SELECT * FROM work_request_recruitment WHERE user_id = ? AND stt_work_code in "
+                + s
+                + " AND work_request_recruitment_deleted = 0";
+        return jdbcTemplate.query(sql, new WorkRequestRecruitmentMapper(), id);
+    }
+
+    @Override
+    public boolean save(WorkRequestRecruitment obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                INSERT_REQUEST_RECRUITMENT,
+                obj.getUserId(),
+                obj.getSttWorkCode(),
+                obj.getWorkRequestTypeId(),
+                obj.getWorkSalaryUnitId(),
+                obj.getWorkPaymentMethodId(),
+                obj.getWorkRequestRecruitmentTitle(),
+                obj.getWorkRequestRecruitmentStartDateTime(),
+                obj.getWorkRequestRecruitmentEndDateTime(),
+                obj.getWorkRequestRecruitmentLastUpdateDateTime(),
+                obj.getWorkRequestRecruitmentDescription(),
+                obj.getWorkRequestRecruitmentRequirement(),
+                obj.getWorkRequestRecruitmentBenefit(),
+                obj.getWorkRequestRecruitmentSalary(),
+                obj.getWorkRequestRecruitmentQuantity(),
+                obj.isWorkRequestRecruitmentExperienceRequirement(),
+                obj.isWorkRequestRecruitmentGenderRequirement(),
+                obj.getWorkRequestRecruitmentWorkLocation(),
+                obj.isWorkRequestRecruitmentDeleted()
+        ) > 0;
+    }
 }

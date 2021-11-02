@@ -25,8 +25,8 @@ public class WorkRequestRecruitmentMapper implements RowMapper<WorkRequestRecrui
                 .workRequestRecruitmentBenefit(resultSet.getString("work_request_recruitment_benefits"))
                 .workRequestRecruitmentSalary(resultSet.getString("work_request_recruitment_salary"))
                 .workRequestRecruitmentQuantity(resultSet.getInt("work_request_recruitment_quantity"))
-                .workRequestRecruitmentExperienceRequirement(resultSet.getString("work_request_recruitment_experience_required"))
-                .workRequestRecruitmentGenderRequirement(resultSet.getString("work_request_recruitment_gender_required"))
+                .workRequestRecruitmentExperienceRequirement(resultSet.getBoolean("work_request_recruitment_experience_required"))
+                .workRequestRecruitmentGenderRequirement(resultSet.getBoolean("work_request_recruitment_gender_required"))
                 .workRequestRecruitmentWorkLocation(resultSet.getString("work_request_recruitment_work_location"))
                 .workRequestRecruitmentDeleted(resultSet.getBoolean("work_request_recruitment_deleted"))
                 .build();

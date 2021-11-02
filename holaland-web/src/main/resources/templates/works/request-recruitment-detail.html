@@ -30,7 +30,7 @@
                       ỨNG TUYỂN NGAY
                     </a>
                   </div>
-                  <div class="btn-save-job">
+                  <div class="btn-save-request">
                     <a id="btn-save-job" href="javascript:void(0)" class="btn btn-md btn-secondary m-mt-16"
                        onclick="save()">
                       <i id="icon-save-job" class="far fa-bookmark fa-fw"></i><span id="label-save-job">LƯU TIN</span>
@@ -43,7 +43,7 @@
                       ỨNG TUYỂN NGAY
                     </a>
                   </div>
-                  <div class="btn-save-job">
+                  <div class="btn-save-request">
                     <a th:href="@{/login}" class="btn btn-md btn-secondary m-mt-16">
                       <i id="icon-save-job" class="far fa-bookmark fa-fw"></i><span id="label-save-job">LƯU TIN</span>
                     </a>
@@ -73,7 +73,8 @@
           <div class="row-info">
             <div><i class="fas fa-user-plus fa-fw"></i>Yêu cầu kinh nghiệm</div>
             <div
-                th:text="${jobDetail.workRequestRecruitmentExperienceRequirement ? 'Có yêu cầu' : 'Không yêu cầu'}"></div>
+                th:text="${jobDetail.workRequestRecruitmentExperienceRequirement ? 'Có yêu cầu' : 'Không yêu cầu'}">
+            </div>
           </div>
           <div class="row-info">
             <div><i class="fas fa-venus-mars fa-fw"></i>Yêu cầu giới tính</div>

@@ -34,4 +34,5 @@ public class WorkRequestRecruitmentSavedServiceImpl implements WorkRequestRecrui
     public WorkRequestRecruitmentSaved getOne(int id) throws DataAccessException {
         return workRequestRecruitmentSavedRepository.getOne(id);
     }
+
 }
