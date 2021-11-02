@@ -108,4 +108,5 @@ public interface IRepositoryQuery {
             " work_request_recruitment_deleted)" +
             "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+    String STT_WORK_REQUEST_RECRUITMENT_FIND_JOB_COUNT_GET_ONE_BY_USER_ID = "SELECT * FROM stt_work_request_recruitment_find_job_count WHERE user_id = ?";
 }

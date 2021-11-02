@@ -8,17 +8,17 @@
     </div>
     <div class="row">
       <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="sttWork : ${sttWorkList}">
-        <a th:href="@{/works/request-find-job-manage/status(code=*{sttWork.sttWorkCode})}" class="label-info m-mb-16"
-           th:classappend="${sttWork.sttWorkCode == sttWorkCode ? 'active' : ''}">
+        <a th:href="@{/works/request-find-job-manage/status(code=*{sttWork.key.sttWorkCode})}" class="label-info m-mb-16"
+           th:classappend="${sttWork.key.sttWorkCode == sttWorkCode ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
-              <i th:classappend="*{sttWork.sttWorkIcon}"></i>
+              <i th:classappend="*{sttWork.key.sttWorkIcon}"></i>
             </div>
             <div class="number">
-              <h4 th:text="*{sttWork.sttWorkCount}"></h4>
+              <h4 th:text="*{sttWork.value}"></h4>
             </div>
           </div>
-          <div class="description club-type" th:text="*{sttWork.sttWorkValue}">
+          <div class="description club-type" th:text="*{sttWork.key.sttWorkValue}">
           </div>
         </a>
       </div>
