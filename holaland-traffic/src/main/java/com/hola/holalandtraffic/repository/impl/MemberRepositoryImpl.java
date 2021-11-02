@@ -66,7 +66,22 @@ public class MemberRepositoryImpl implements MemberRepository, IRepositoryQuery 
                 obj.getMemberId()
         ) > 0;
     }
-
+    @Override
+    public int save(Member obj) throws DataAccessException {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(MEMBER_ADD_ONE, Statement.RETURN_GENERATED_KEYS);
+            ps.setObject(1, obj.getMemberName());
+            ps.setObject(2, obj.isMemberGender());
+            ps.setObject(3, obj.getMemberDob());
+            ps.setObject(4, obj.getMemberMobile());
+            ps.setObject(5, obj.getMemberEmail());
+            ps.setObject(6, obj.getMemberRankId());
+            ps.setObject(7, obj.getMemberStatusId());
+            return ps;
+        }, keyHolder);
+        return keyHolder.getKey().intValue();
+    }
 
     @Override
     public boolean delete(int id) throws DataAccessException {
