@@ -78,7 +78,16 @@ public class MemberController {
     }
 
 
-    
+    @PostMapping("/update-member")
+    public String updateMember(@ModelAttribute("updateMember") Member updateMember, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+        memberService.update(updateMember);
+        backToMembers(model);
+        return "members";
+    }
 
     private void backToMembers(Model model) {
         List<Member> members = memberService.getAll();
