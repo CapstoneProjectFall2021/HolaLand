@@ -13,7 +13,7 @@ public class SttWorkRequestRecruitmentFindJobCountMapper implements RowMapper<St
                 .sttWorkRequestRecruitmentFindJobCountId(resultSet.getInt("stt_work_request_recruitment_find_job_count_id"))
                 .userId(resultSet.getInt("user_id"))
                 .sttWorkRequestRecruitmentFindJobCountPending(resultSet.getInt("stt_work_request_recruitment_find_job_count_pending"))
-                .sttWorkRequestRecruitmentFindJobCountDisclaimer(resultSet.getInt("stt_work_request_recruitment_find_job_count_disclaimer"))
+                .sttWorkRequestRecruitmentFindJobCountReject(resultSet.getInt("stt_work_request_recruitment_find_job_count_reject"))
                 .sttWorkRequestRecruitmentFindJobCountApproved(resultSet.getInt("stt_work_request_recruitment_find_job_count_approved"))
                 .sttWorkRequestRecruitmentFindJobCountComplete(resultSet.getInt("stt_work_request_recruitment_find_job_count_complete"))
                 .sttWorkRequestRecruitmentFindJobCountExpired(resultSet.getInt("stt_work_request_recruitment_find_job_count_expired"))

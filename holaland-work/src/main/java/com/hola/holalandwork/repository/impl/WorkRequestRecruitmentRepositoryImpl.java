@@ -66,8 +66,8 @@ public class WorkRequestRecruitmentRepositoryImpl implements WorkRequestRecruitm
                 obj.getWorkRequestRecruitmentBenefit(),
                 obj.getWorkRequestRecruitmentSalary(),
                 obj.getWorkRequestRecruitmentQuantity(),
-                obj.getWorkRequestRecruitmentExperienceRequirement(),
-                obj.getWorkRequestRecruitmentGenderRequirement(),
+                obj.isWorkRequestRecruitmentExperienceRequirement(),
+                obj.isWorkRequestRecruitmentGenderRequirement(),
                 obj.getWorkRequestRecruitmentWorkLocation(),
                 obj.isWorkRequestRecruitmentDeleted()
         ) > 0;

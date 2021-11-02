@@ -182,7 +182,7 @@ public class WorksController {
 
         Map<SttWork, Integer> sttWorkCountMap = new LinkedHashMap<>();
         sttWorkCountMap.put(sttWorkList.get(0), sttCount.getSttWorkRequestRecruitmentFindJobCountPending());
-        sttWorkCountMap.put(sttWorkList.get(1), sttCount.getSttWorkRequestRecruitmentFindJobCountDisclaimer());
+        sttWorkCountMap.put(sttWorkList.get(1), sttCount.getSttWorkRequestRecruitmentFindJobCountReject());
         sttWorkCountMap.put(sttWorkList.get(2), sttCount.getSttWorkRequestRecruitmentFindJobCountApproved());
         sttWorkCountMap.put(sttWorkList.get(3), sttCount.getSttWorkRequestRecruitmentFindJobCountComplete());
         sttWorkCountMap.put(sttWorkList.get(4), sttCount.getSttWorkRequestRecruitmentFindJobCountExpired());
