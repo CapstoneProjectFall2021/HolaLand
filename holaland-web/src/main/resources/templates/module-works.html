@@ -115,31 +115,31 @@
           <div th:replace="works/request-recruitment-applied :: request-recruitment-applied"></div>
         </th:block>
         <!-- Request recruitment saved -->
-        <th:block th:if="${page == 3}">
+        <th:block th:if="${page == 4}">
           <div th:replace="works/request-recruitment-saved :: request-recruitment-saved"></div>
         </th:block>
         <!-- Request manage -->
-        <th:block th:if="${page == 4}">
+        <th:block th:if="${page == 5}">
           <div th:replace="works/request-find-job-manage :: request-find-job-manage"></div>
         </th:block>
         <!-- Create request find job -->
-        <th:block th:if="${page == 5}">
+        <th:block th:if="${page == 6}">
           <div th:replace="works/create-request-find-job :: create-request-find-job"></div>
         </th:block>
         <!-- Request recruitment manage -->
-        <th:block th:if="${page == 7}">
+        <th:block th:if="${page == 9}">
           <div th:replace="works/request-recruitment-manage :: request-recruitment-manage"></div>
         </th:block>
         <!-- Create request recruitment -->
-        <th:block th:if="${page == 8}">
+        <th:block th:if="${page == 10}">
           <div th:replace="works/create-request-recruitment :: create-request-recruitment"></div>
         </th:block>
         <!-- Request recruitment detail -->
-        <th:block th:if="${page == 9}">
+        <th:block th:if="${page == 11}">
           <div th:replace="works/request-recruitment-detail :: request-recruitment-detail"></div>
         </th:block>
         <!-- Request find job detail -->
-        <th:block th:if="${page == 10}">
+        <th:block th:if="${page == 12}">
           <div th:replace="works/request-find-job-detail :: request-find-job-detail"></div>
         </th:block>
       </div>
@@ -163,7 +163,7 @@
   <!-- Import modal request find job preview -->
   <div th:replace="works/modal/modal-request-find-job-preview :: findJobPreviewModal"></div>
 </th:block>
-<th:block th:if="${page == 10}">
+<th:block th:if="${page == 12}">
   <!-- Import modal confirm hire -->
   <div th:replace="works/modal/modal-confirm-hire :: confirmHireModal"></div>
 </th:block>

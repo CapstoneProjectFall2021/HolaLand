@@ -107,7 +107,7 @@ public class WorksController {
     public String getJobsSave(Model model) {
         List<WorkRequestRecruitment> jobSaveList = workRequestRecruitmentSavedService.getAllByAccountId(1);
         model.addAttribute("jobSaveList", jobSaveList);
-        model.addAttribute("page", 3);
+        model.addAttribute("page", 4);
         return "module-works";
     }
 
@@ -122,7 +122,7 @@ public class WorksController {
         model.addAttribute("sttWorkCode", sttWorkList.get(0).getSttWorkCode());
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestFindJobList", requestFindJobList);
-        model.addAttribute("page", 4);
+        model.addAttribute("page", 5);
         return "module-works";
     }
 
@@ -140,7 +140,7 @@ public class WorksController {
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestFindJobList", requestFindJobList);
-        model.addAttribute("page", 4);
+        model.addAttribute("page", 5);
         return "module-works";
     }
 
@@ -155,7 +155,7 @@ public class WorksController {
         model.addAttribute("sttWorkCode", sttWorkList.get(0).getSttWorkCode());
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
-        model.addAttribute("page", 7);
+        model.addAttribute("page", 9);
         return "module-works";
     }
 
@@ -173,7 +173,7 @@ public class WorksController {
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
-        model.addAttribute("page", 7);
+        model.addAttribute("page", 9);
         return "module-works";
     }
 
@@ -199,7 +199,7 @@ public class WorksController {
         WorkRequestType jobType = workRequestTypeService.getOne(jobDetail.getWorkRequestTypeId());
         model.addAttribute("jobDetail", jobDetail);
         model.addAttribute("jobType", jobType);
-        model.addAttribute("page", 9);
+        model.addAttribute("page", 11);
         return "module-works";
     }
 
@@ -217,7 +217,7 @@ public class WorksController {
         model.addAttribute("jobTime", jobTime);
         model.addAttribute("jobType", jobType);
         model.addAttribute("jobDetail", jobDetail);
-        model.addAttribute("page", 10);
+        model.addAttribute("page", 12);
         return "module-works";
     }
 
@@ -225,7 +225,7 @@ public class WorksController {
     public String getFormCreateRequestFindJob(Model model) {
         WorkRequestFindJob newRequestFindJob = WorkRequestFindJob.builder().build();
         model.addAttribute("newRequestFindJob", newRequestFindJob);
-        model.addAttribute("page", 5);
+        model.addAttribute("page", 6);
         return "module-works";
     }
 
@@ -285,7 +285,7 @@ public class WorksController {
     public String getFormCreateRequestRecruitment(Model model) {
         WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
         model.addAttribute("newRequestRecruitment", newRequestRecruitment);
-        model.addAttribute("page", 8);
+        model.addAttribute("page", 10);
         return "module-works";
     }
 
