@@ -15,7 +15,29 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
-    
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "login";
+    }
+
+    @GetMapping("/show-info")
+    public String admin() {
+        return "show-info";
+    }
 
 //    @GetMapping("/works")
 //    public String loginOK(Model model, Principal principal) {
