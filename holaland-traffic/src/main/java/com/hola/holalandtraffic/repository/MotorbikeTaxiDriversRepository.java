@@ -10,6 +10,5 @@ public interface MotorbikeTaxiDriversRepository {
     List<MotorbikeTaxiDrivers> getAll() throws DataAccessException;
 
     MotorbikeTaxiDrivers getOne(int id) throws DataAccessException;
-
-    List<MotorbikeTaxiDrivers> getAllByType(int id) throws DataAccessException;
+    
 }
