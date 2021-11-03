@@ -111,6 +111,38 @@ public class WorksController {
         return "module-works";
     }
 
+    @GetMapping("/works/request-find-job")
+    public String getWorkerList(Model model) {
+        List<WorkRequestType> requestTypeList = workRequestTypeService.getAll();
+        List<WorkRequestFindJob> workerList = workRequestFindJobService.getAllByType(
+                requestTypeList.get(0).getWorkRequestTypeId(),
+                Constants.STT_WORK_CODE_APPROVED
+        );
+
+        model.addAttribute("workRequestTypeId", 1);
+        model.addAttribute("requestTypeList", requestTypeList);
+        model.addAttribute("workerList", workerList);
+        model.addAttribute("page", 6);
+        return "module-works";
+    }
+
+    @GetMapping("/works/request-find-job/type")
+    public String getWorkerRequestType(
+            @RequestParam("workRequestTypeId") Integer workRequestTypeId,
+            Model model
+    ) {
+        List<WorkRequestType> requestTypeList = workRequestTypeService.getAll();
+        List<WorkRequestFindJob> workerList = workRequestFindJobService.getAllByType(
+                workRequestTypeId,
+                Constants.STT_WORK_CODE_APPROVED
+        );
+        model.addAttribute("workRequestTypeId", workRequestTypeId);
+        model.addAttribute("requestTypeList", requestTypeList);
+        model.addAttribute("workerList", workerList);
+        model.addAttribute("page", 6);
+        return "module-works";
+    }
+
     @GetMapping("/works/request-find-job-manage")
     public String getJobsPosted(Model model) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
