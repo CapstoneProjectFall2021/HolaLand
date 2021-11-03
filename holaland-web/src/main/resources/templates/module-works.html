@@ -71,7 +71,7 @@
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a th:href="@{/}" th:classappend="${page == 8 ? 'active' : ''}">
+              <a th:href="@{/works/list-applied}" th:classappend="${page == 8 ? 'active' : ''}">
                 <i class="fas fa-tasks fa-fw"></i>Danh sách ứng tuyển
               </a>
             </li>
@@ -126,6 +126,10 @@
         <th:block th:if="${page == 6}">
           <div th:replace="works/create-request-find-job :: create-request-find-job"></div>
         </th:block>
+        <!-- Work list applied -->
+        <th:block th:if="${page == 8}">
+          <div th:replace="works/list-applied :: list-applied"></div>
+        </th:block>
         <!-- Request recruitment manage -->
         <th:block th:if="${page == 9}">
           <div th:replace="works/request-recruitment-manage :: request-recruitment-manage"></div>
@@ -151,17 +155,29 @@
   <!-- Import modal confirm cancel apply job -->
   <div th:replace="works/modal/modal-confirm-cancel-apply-job :: confirmCancelApplyJobModal"></div>
 </th:block>
-<th:block th:if="${page == 3}">
+<th:block th:if="${page == 4}">
   <!-- Import modal confirm remove job save -->
   <div th:replace="works/modal/modal-confirm-remove-job-save :: confirmRemoveJobSaveModal"></div>
 </th:block>
-<th:block th:if="${page == 4}">
+<th:block th:if="${page == 2}">
   <!-- Import modal confirm apply job -->
   <div th:replace="works/modal/modal-confirm-apply-job :: confirmApplyJobModal"></div>
 </th:block>
-<th:block th:if="${page == 5}">
+<th:block th:if="${page == 6}">
   <!-- Import modal request find job preview -->
   <div th:replace="works/modal/modal-request-find-job-preview :: findJobPreviewModal"></div>
+</th:block>
+<th:block th:if="${page == 8}">
+  <!-- Import modal list applied -->
+  <div th:replace="works/modal/modal-list-applied :: listAppliedModal"></div>
+</th:block>
+<th:block th:if="${page == 10}">
+  <!-- Import modal request find job preview -->
+  <div th:replace="works/modal/modal-request-recruitment-preview :: recruitmentPreviewModal"></div>
+</th:block>
+<th:block th:if="${page == 11}">
+  <!-- Import modal confirm apply request -->
+  <div th:replace="works/modal/modal-confirm-apply-request :: confirmApplyRequestModal"></div>
 </th:block>
 <th:block th:if="${page == 12}">
   <!-- Import modal confirm hire -->

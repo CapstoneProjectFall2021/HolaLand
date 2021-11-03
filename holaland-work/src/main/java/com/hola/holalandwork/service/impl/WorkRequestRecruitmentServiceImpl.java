@@ -41,6 +41,11 @@ public class WorkRequestRecruitmentServiceImpl implements WorkRequestRecruitment
     }
 
     @Override
+    public List<WorkRequestRecruitment> getAllListAppliedByUserId(int userId, int sttWorkCode) throws DataAccessException {
+        return workRequestRecruitmentRepository.getAllListAppliedByUserId(userId, sttWorkCode);
+    }
+
+    @Override
     public boolean save(WorkRequestRecruitment obj) throws DataAccessException {
         return workRequestRecruitmentRepository.save(obj);
     }

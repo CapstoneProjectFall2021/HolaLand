@@ -49,6 +49,11 @@ public class WorkRequestRecruitmentRepositoryImpl implements WorkRequestRecruitm
     }
 
     @Override
+    public List<WorkRequestRecruitment> getAllListAppliedByUserId(int userId, int sttWorkCode) throws DataAccessException {
+        return jdbcTemplate.query(WORK_LIST_APPLIED_GET_ALL_BY_USER_ID, new WorkRequestRecruitmentMapper(), userId, sttWorkCode);
+    }
+
+    @Override
     public boolean save(WorkRequestRecruitment obj) throws DataAccessException {
         return jdbcTemplate.update(
                 INSERT_REQUEST_RECRUITMENT,

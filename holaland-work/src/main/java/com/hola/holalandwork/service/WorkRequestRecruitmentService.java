@@ -15,5 +15,7 @@ public interface WorkRequestRecruitmentService {
 
     List<WorkRequestRecruitment> getAllByUserIdAndTypeId(int id, Integer... typeId) throws DataAccessException;
 
+    List<WorkRequestRecruitment> getAllListAppliedByUserId (int userId, int sttWorkCode) throws DataAccessException;
+
     boolean save(WorkRequestRecruitment obj) throws DataAccessException;
 }
