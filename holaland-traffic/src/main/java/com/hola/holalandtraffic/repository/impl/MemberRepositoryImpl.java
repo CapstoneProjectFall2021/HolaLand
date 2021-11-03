@@ -35,22 +35,6 @@ public class MemberRepositoryImpl implements MemberRepository, IRepositoryQuery 
         return jdbcTemplate.queryForObject(MEMBER_GET_ONE, new MemberMapper(), id);
     }
 
-
-
-    @Override
-    public boolean update(Member obj) throws DataAccessException {
-        return jdbcTemplate.update(
-                MEMBER_UPDATE_ONE,
-                obj.getMemberName(),
-                obj.isMemberGender(),
-                obj.getMemberDob(),
-                obj.getMemberMobile(),
-                obj.getMemberEmail(),
-                obj.getMemberRankId(),
-                obj.getMemberStatusId(),
-                obj.getMemberId()
-        ) > 0;
-    }
     @Override
     public int save(Member obj) throws DataAccessException {
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -67,6 +51,22 @@ public class MemberRepositoryImpl implements MemberRepository, IRepositoryQuery 
         }, keyHolder);
         return keyHolder.getKey().intValue();
     }
+
+    @Override
+    public boolean update(Member obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                MEMBER_UPDATE_ONE,
+                obj.getMemberName(),
+                obj.isMemberGender(),
+                obj.getMemberDob(),
+                obj.getMemberMobile(),
+                obj.getMemberEmail(),
+                obj.getMemberRankId(),
+                obj.getMemberStatusId(),
+                obj.getMemberId()
+        ) > 0;
+    }
+
 
     @Override
     public boolean delete(int id) throws DataAccessException {
