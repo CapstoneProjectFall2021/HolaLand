@@ -66,7 +66,7 @@
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a th:href="@{/}" th:classappend="${page == 7 ? 'active' : ''}">
+              <a th:href="@{/works/request-find-job}" th:classappend="${page == 7 ? 'active' : ''}">
                 <i class="fas fa-search fa-fw"></i>Danh sách tìm việc
               </a>
             </li>
@@ -125,6 +125,10 @@
         <!-- Create request find job -->
         <th:block th:if="${page == 6}">
           <div th:replace="works/create-request-find-job :: create-request-find-job"></div>
+        </th:block>
+        <!-- Request find job -->
+        <th:block th:if="${page == 7}">
+          <div th:replace="works/request-find-job :: request-find-job"></div>
         </th:block>
         <!-- Work list applied -->
         <th:block th:if="${page == 8}">

@@ -122,7 +122,7 @@ public class WorksController {
         model.addAttribute("workRequestTypeId", 1);
         model.addAttribute("requestTypeList", requestTypeList);
         model.addAttribute("workerList", workerList);
-        model.addAttribute("page", 6);
+        model.addAttribute("page", 7);
         return "module-works";
     }
 
@@ -139,7 +139,7 @@ public class WorksController {
         model.addAttribute("workRequestTypeId", workRequestTypeId);
         model.addAttribute("requestTypeList", requestTypeList);
         model.addAttribute("workerList", workerList);
-        model.addAttribute("page", 6);
+        model.addAttribute("page", 7);
         return "module-works";
     }
 
@@ -374,6 +374,16 @@ public class WorksController {
         newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentDeleted(false);
+
+        if (newRequestRecruitment.getWorkSalaryUnitId() == 1) {
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/h");
+        } else if (newRequestRecruitment.getWorkSalaryUnitId() == 2) {
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/ngày");
+        } else if (newRequestRecruitment.getWorkSalaryUnitId() == 3) {
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/tuần");
+        } else {
+            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/tháng");
+        }
 
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
         if (isCheck) {
