@@ -14,7 +14,7 @@ import java.sql.Date;
 @Getter
 @Setter
 public class Member {
-
+//
     private int memberId;
     private String memberName;
     private boolean memberGender;
