@@ -25,7 +25,30 @@ public class FptUniversityController {
         this.clubService = clubService;
     }
 
-    
+    @GetMapping("/fpt-university")
+    public String goToFptUniversity(Model model) {
+        model.addAttribute("page", 1);
+        return "module-fpt-university";
+    }
+
+    @GetMapping("/fpt-university/club")
+    public String goToFptUniversityClub(Model model) {
+        List<ClubType> clubTypeList = clubTypeService.getAll();
+        List<Club> clubList = clubService.getAllByType(clubTypeList.get(0).getFptuClubTypeId());
+        setClubModel(model, clubTypeList.get(0).getFptuClubTypeId(), clubTypeList, clubList, 2);
+        return "module-fpt-university";
+    }
+
+    @GetMapping("/fpt-university/club/type")
+    public String getFptUniversityClubType(
+            @RequestParam("clubTypeId") Integer clubTypeId,
+            Model model
+    ) {
+        List<ClubType> clubTypeList = clubTypeService.getAll();
+        List<Club> clubList = clubService.getAllByType(clubTypeId);
+        setClubModel(model, clubTypeId, clubTypeList, clubList, 2);
+        return "module-fpt-university";
+    }
 
     @GetMapping("/fpt-university/club/detail")
     public String getFptUniversityClubDetail(
