@@ -38,20 +38,7 @@ public class WorksController {
     private final WorkRequestFindJobService workRequestFindJobService;
     private final SttWorkService sttWorkService;
 
-    @Autowired
-    public WorksController(WorkRequestRecruitmentService workRequestRecruitmentService,
-                           WorkRequestTypeService workRequestTypeService,
-                           WorkRequestApplyService workRequestApplyService,
-                           WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
-                           WorkRequestFindJobService workRequestFindJobService,
-                           SttWorkService sttWorkService) {
-        this.workRequestRecruitmentService = workRequestRecruitmentService;
-        this.workRequestTypeService = workRequestTypeService;
-        this.workRequestApplyService = workRequestApplyService;
-        this.workRequestRecruitmentSavedService = workRequestRecruitmentSavedService;
-        this.workRequestFindJobService = workRequestFindJobService;
-        this.sttWorkService = sttWorkService;
-    }
+    
 
 
     @GetMapping("/works")
