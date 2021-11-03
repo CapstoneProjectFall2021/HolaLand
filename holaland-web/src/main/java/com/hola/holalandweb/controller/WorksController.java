@@ -103,6 +103,29 @@ public class WorksController {
         return "module-works";
     }
 
+    @GetMapping("works/jobs-apply/get-request-id")
+    public String getRequestId(
+            @RequestParam("requestId") Integer requestId,
+            @RequestParam("modal") String modal,
+            Model model
+    ) {
+        List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
+        model.addAttribute("jobApplyList", jobApplyList);
+        model.addAttribute("requestId", requestId);
+        model.addAttribute("modal", modal);
+        model.addAttribute("page", 2);
+        return "module-works";
+    }
+
+    @GetMapping("/works/jobs-apply/delete")
+    public String getJobsApplyDeleteRequest(@RequestParam("requestId") Integer requestId, Model model) {
+        // code delete
+        List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
+        model.addAttribute("jobApplyList", jobApplyList);
+        model.addAttribute("page", 2);
+        return "module-works";
+    }
+
     @GetMapping("/works/jobs-save")
     public String getJobsSave(Model model) {
         List<WorkRequestRecruitment> jobSaveList = workRequestRecruitmentSavedService.getAllByAccountId(1);
@@ -330,12 +353,7 @@ public class WorksController {
             System.out.println("There was a error " + bindingResult);
             return "404";
         }
-
-        Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-        // set attribute
-        newRequestRecruitment.setUserId(1);
-        newRequestRecruitment.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
-        insertNewRequestRecruitment(newRequestRecruitment, currentDate);
+        setAttrNewRequestRecruitment(newRequestRecruitment, 1, Constants.STT_WORK_CODE_PENDING_APPROVAL);
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
         if (isCheck) {
             return "redirect:" + "/works/request-recruitment-manage";
@@ -353,12 +371,7 @@ public class WorksController {
             System.out.println("There was a error " + bindingResult);
             return "404";
         }
-
-        Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-        // set attribute
-        newRequestRecruitment.setUserId(1);
-        newRequestRecruitment.setSttWorkCode(Constants.STT_WORK_CODE_SAVE_DRAFT);
-        insertNewRequestRecruitment(newRequestRecruitment, currentDate);
+        setAttrNewRequestRecruitment(newRequestRecruitment, 1, Constants.STT_WORK_CODE_SAVE_DRAFT);
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
         if (isCheck) {
             return "redirect:" + "/works/request-recruitment-manage/status?code=6";
@@ -367,7 +380,11 @@ public class WorksController {
         }
     }
 
-    private void insertNewRequestRecruitment(@ModelAttribute("newRequestRecruitment") WorkRequestRecruitment newRequestRecruitment, Date currentDate) {
+    private void setAttrNewRequestRecruitment(WorkRequestRecruitment newRequestRecruitment, int userId, int sttWork) {
+        Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+
+        newRequestRecruitment.setUserId(userId);
+        newRequestRecruitment.setSttWorkCode(sttWork);
         newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentDeleted(false);
@@ -381,7 +398,6 @@ public class WorksController {
         } else {
             newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/tháng");
         }
-
     }
 
     @GetMapping("works/list-applied")

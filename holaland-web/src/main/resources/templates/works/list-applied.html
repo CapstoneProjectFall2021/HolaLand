@@ -1,35 +1,35 @@
 <div class="col-right" th:fragment="list-applied">
-    <!-- List applied -->
-    <div class="list-request">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="title fix-mb-title">Danh sách ứng tuyển</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12" th:each="jobApplied : ${listApplied}">
-                <div class="label-info m-mb-16">
-                    <div class="btn-action">
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#listAppliedModal">
-                            2 <i class="fas fa-user-friends m-0"></i>
-                        </a>
-                    </div>
-                    <div class="flex">
-                        <div class="icon-v">
-                            <i class="fas fa-user-check fa-fw"></i>
-                        </div>
-                        <div class="content-body">
-                            <a th:href="@{/works/request-recruitment-detail(id=${jobApplied.workRequestRecruitmentId})}">
-                                <span th:text="*{jobApplied.workRequestRecruitmentTitle}"></span>
-                            </a>
-                            <div class="request-info">
-                                <p>Lương: <span th:text="*{jobApplied.workRequestRecruitmentSalary}"></span></p>
-                                <p>Thời hạn: <span th:text="*{jobApplied.workRequestRecruitmentEndDateTime}"></span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- List applied -->
+  <div class="list-request">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Danh sách ứng tuyển</h1>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-md-12" th:each="jobApplied : ${listApplied}">
+        <div class="label-info m-mb-16">
+          <div class="btn-action">
+            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#listAppliedModal">
+              2 <i class="fas fa-user-friends m-0"></i>
+            </a>
+          </div>
+          <div class="flex">
+            <div class="icon-v">
+              <i class="fas fa-user-check fa-fw"></i>
+            </div>
+            <div class="content-body">
+              <a th:href="@{/works/request-recruitment-detail(id=${jobApplied.workRequestRecruitmentId})}">
+                <span th:text="*{jobApplied.workRequestRecruitmentTitle}"></span>
+              </a>
+              <div class="request-info">
+                <p>Lương: <span th:text="*{jobApplied.workRequestRecruitmentSalary}"></span></p>
+                <p>Thời hạn: <span th:text="*{jobApplied.workRequestRecruitmentEndDateTime}"></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

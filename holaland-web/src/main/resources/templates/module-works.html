@@ -157,16 +157,16 @@
 
 <th:block th:if="${page == 2}">
   <!-- Import modal confirm cancel apply job -->
-  <div th:replace="works/modal/modal-confirm-cancel-apply-job :: confirmCancelApplyJobModal"></div>
+  <div th:replace="works/modal/modal-confirm-cancel-apply-job :: confirmCancelApplyJobModal(${requestId})"></div>
 </th:block>
 <th:block th:if="${page == 4}">
   <!-- Import modal confirm remove job save -->
   <div th:replace="works/modal/modal-confirm-remove-job-save :: confirmRemoveJobSaveModal"></div>
 </th:block>
-<th:block th:if="${page == 2}">
-  <!-- Import modal confirm apply job -->
-  <div th:replace="works/modal/modal-confirm-apply-job :: confirmApplyJobModal"></div>
-</th:block>
+<!--<th:block th:if="${page == 2}">-->
+<!--  &lt;!&ndash; Import modal confirm apply job &ndash;&gt;-->
+<!--  <div th:replace="works/modal/modal-confirm-apply-job :: confirmApplyJobModal"></div>-->
+<!--</th:block>-->
 <th:block th:if="${page == 6}">
   <!-- Import modal request find job preview -->
   <div th:replace="works/modal/modal-request-find-job-preview :: findJobPreviewModal"></div>
@@ -190,6 +190,14 @@
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
+<script crossorigin="anonymous" th:src="@{/js/templates/work.js}"></script>
+<script th:inline="javascript" th:if="${requestId != null && modal != null}">
+  /*<![CDATA[*/
+  const modal = /*[[${modal}]]*/;
+  /*]]>*/
+  const myModal = new bootstrap.Modal(document.getElementById(modal));
+  myModal.show();
+</script>
 <script>
   function showToast() {
     const toast = new bootstrap.Toast(document.getElementById('toast-success'));

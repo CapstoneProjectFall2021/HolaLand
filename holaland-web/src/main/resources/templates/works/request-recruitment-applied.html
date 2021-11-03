@@ -10,7 +10,7 @@
       <div class="col-md-12" th:each="job : ${jobApplyList}">
         <div class="label-info m-mb-16">
           <div class="btn-remove">
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmApplyJobModal">
+            <a th:href="@{/works/jobs-apply/get-request-id(requestId=${job.workRequestRecruitmentId}, modal='confirmCancelApplyJobModal')}">
               <i class="fas fa-ban m-0"></i>
             </a>
           </div>
