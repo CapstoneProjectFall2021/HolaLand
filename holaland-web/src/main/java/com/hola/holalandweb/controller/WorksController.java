@@ -335,20 +335,7 @@ public class WorksController {
         // set attribute
         newRequestRecruitment.setUserId(1);
         newRequestRecruitment.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
-        newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
-        newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
-        newRequestRecruitment.setWorkRequestRecruitmentDeleted(false);
-
-        if (newRequestRecruitment.getWorkSalaryUnitId() == 1) {
-            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/h");
-        } else if (newRequestRecruitment.getWorkSalaryUnitId() == 2) {
-            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/ngày");
-        } else if (newRequestRecruitment.getWorkSalaryUnitId() == 3) {
-            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/tuần");
-        } else {
-            newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/tháng");
-        }
-
+        insertNewRequestRecruitment(newRequestRecruitment, currentDate);
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
         if (isCheck) {
             return "redirect:" + "/works/request-recruitment-manage";
@@ -371,6 +358,16 @@ public class WorksController {
         // set attribute
         newRequestRecruitment.setUserId(1);
         newRequestRecruitment.setSttWorkCode(Constants.STT_WORK_CODE_SAVE_DRAFT);
+        insertNewRequestRecruitment(newRequestRecruitment, currentDate);
+        boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
+        if (isCheck) {
+            return "redirect:" + "/works/request-recruitment-manage/status?code=6";
+        } else {
+            return "404";
+        }
+    }
+
+    private void insertNewRequestRecruitment(@ModelAttribute("newRequestRecruitment") WorkRequestRecruitment newRequestRecruitment, Date currentDate) {
         newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentDeleted(false);
@@ -385,12 +382,6 @@ public class WorksController {
             newRequestRecruitment.setWorkRequestRecruitmentSalary(newRequestRecruitment.getWorkRequestRecruitmentSalary() + " VNĐ/tháng");
         }
 
-        boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
-        if (isCheck) {
-            return "redirect:" + "/works/request-recruiment-manage/status?code=6";
-        } else {
-            return "404";
-        }
     }
 
     @GetMapping("works/list-applied")
