@@ -25,8 +25,9 @@
               <div class="apply-area">
                 <div class="apply-area-btn" sec:authorize="hasRole('MEMBER')">
                   <div class="btn-apply">
-                    <a href="javascript:void(0)" class="btn btn-md btn-success" data-bs-toggle="modal"
-                       data-bs-target="#confirmApplyJobModal">
+                    <a th:href="@{/works/apply-request-recruitment}" class="btn btn-md btn-success"
+                       data-bs-toggle="modal"
+                       data-bs-target="#confirmApplyRequestModal">
                       ỨNG TUYỂN NGAY
                     </a>
                   </div>

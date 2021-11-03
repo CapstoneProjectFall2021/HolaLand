@@ -109,4 +109,31 @@ public interface IRepositoryQuery {
             "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     String STT_WORK_REQUEST_RECRUITMENT_FIND_JOB_COUNT_GET_ONE_BY_USER_ID = "SELECT * FROM stt_work_request_recruitment_find_job_count WHERE user_id = ?";
+
+    String WORK_LIST_APPLIED_GET_ALL_BY_USER_ID = "SELECT\n" +
+            "T1.work_request_recruitment_id,\n" +
+            "T1.user_id,\n" +
+            "T1.work_payment_method_id,\n" +
+            "T1.work_request_type_id,\n" +
+            "T1.stt_work_code,\n" +
+            "T1.work_salary_unit_id,\n" +
+            "T1.work_request_recruitment_title,\n" +
+            "T1.work_request_recruitment_start_date_time,\n" +
+            "T1.work_request_recruitment_end_date_time,\n" +
+            "T1.work_request_recruitment_last_update_date_time,\n" +
+            "T1.work_request_recruitment_description,\n" +
+            "T1.work_request_recruitment_requirements,\n" +
+            "T1.work_request_recruitment_benefits,\n" +
+            "T1.work_request_recruitment_salary,\n" +
+            "T1.work_request_recruitment_quantity,\n" +
+            "T1.work_request_recruitment_experience_required,\n" +
+            "T1.work_request_recruitment_gender_required,\n" +
+            "T1.work_request_recruitment_work_location,\n" +
+            "T1.work_request_recruitment_deleted\n" +
+            "FROM work_request_recruitment T1\n" +
+            "INNER JOIN work_request_apply T2\n" +
+            "ON T1.work_request_recruitment_id = T2.work_request_recruitment_id\n" +
+            "WHERE T1.user_id = ? AND T1.stt_work_code = ?\n" +
+            "AND T1.work_request_recruitment_deleted = 0\n" +
+            "GROUP BY T1.work_request_recruitment_id";
 }

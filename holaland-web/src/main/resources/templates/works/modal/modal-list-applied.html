@@ -1,0 +1,62 @@
+<!-- Modal list applied -->
+<div class="modal fade" id="listAppliedModal" tabindex="-1" aria-labelledby="listAppliedModalLabel" aria-hidden="true" th:fragment="listAppliedModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="listAppliedModalLabel">Danh sách ứng tuyển</h5>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Họ và tên</th>
+                        <th scope="col">Ngày sinh</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">Giới tính</th>
+                        <th scope="col" class="text-end">Hành động</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Phạm Ngọc Thanh</td>
+                        <td>11/11/1994</td>
+                        <td>0983 875 125</td>
+                        <td>Nam</td>
+                        <td class="text-end">
+                            <a href="javascript:void(0)" class="me-2">
+                                <i class="fas fa-check text-success"></i>
+                            </a>
+                            <a href="javascript:void(0)">
+                                <i class="fas fa-ban text-danger"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Trần Minh Ngọc</td>
+                        <td>11/11/1999</td>
+                        <td>0983 875 999</td>
+                        <td>Nữ</td>
+                        <td class="text-end">
+                            <a href="javascript:void(0)" class="me-2">
+                                <i class="fas fa-check text-success"></i>
+                            </a>
+                            <a href="javascript:void(0)">
+                                <i class="fas fa-ban text-danger"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0)" class="btn btn-sm btn-secondary me-2">
+                    <i class="fas fa-check text-success mr-2"></i>Xác nhận
+                </a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+            </div>
+        </div>
+    </div>
+</div>

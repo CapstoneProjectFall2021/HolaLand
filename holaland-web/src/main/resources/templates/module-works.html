@@ -46,32 +46,42 @@
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/jobs-save}" th:classappend="${page == 3 ? 'active' : ''}">
+              <a th:href="@{/}" th:classappend="${page == 3 ? 'active' : ''}">
+                <i class="fas fa-list fa-fw"></i>Danh sách thuê
+              </a>
+            </li>
+            <li sec:authorize="hasRole('MEMBER')">
+              <a th:href="@{/works/jobs-save}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="far fa-bookmark fa-fw"></i>Việc làm đã lưu
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/request-find-job-manage}" th:classappend="${page == 4 ? 'active' : ''}">
+              <a th:href="@{/works/request-find-job-manage}" th:classappend="${page == 5 ? 'active' : ''}">
                 <i class="far fa-file-alt fa-fw"></i>Quản lý bài viết
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/create-request-find-job}" th:classappend="${page == 5 ? 'active' : ''}">
+              <a th:href="@{/works/create-request-find-job}" th:classappend="${page == 6 ? 'active' : ''}">
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a th:href="@{/works/request-find-job}" th:classappend="${page == 6 ? 'active' : ''}">
+              <a th:href="@{/}" th:classappend="${page == 7 ? 'active' : ''}">
                 <i class="fas fa-search fa-fw"></i>Danh sách tìm việc
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a th:href="@{/works/request-recruitment-manage}" th:classappend="${page == 7 ? 'active' : ''}">
+              <a th:href="@{/works/list-applied}" th:classappend="${page == 8 ? 'active' : ''}">
+                <i class="fas fa-tasks fa-fw"></i>Danh sách ứng tuyển
+              </a>
+            </li>
+            <li sec:authorize="hasRole('RECRUITER')">
+              <a th:href="@{/works/request-recruitment-manage}" th:classappend="${page == 9 ? 'active' : ''}">
                 <i class="far fa-file-alt fa-fw"></i>Quản lý bài viết
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a th:href="@{/works/create-request-recruitment}" th:classappend="${page == 8 ? 'active' : ''}">
+              <a th:href="@{/works/create-request-recruitment}" th:classappend="${page == 10 ? 'active' : ''}">
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tuyển dụng
               </a>
             </li>
@@ -105,35 +115,35 @@
           <div th:replace="works/request-recruitment-applied :: request-recruitment-applied"></div>
         </th:block>
         <!-- Request recruitment saved -->
-        <th:block th:if="${page == 3}">
+        <th:block th:if="${page == 4}">
           <div th:replace="works/request-recruitment-saved :: request-recruitment-saved"></div>
         </th:block>
         <!-- Request manage -->
-        <th:block th:if="${page == 4}">
+        <th:block th:if="${page == 5}">
           <div th:replace="works/request-find-job-manage :: request-find-job-manage"></div>
         </th:block>
         <!-- Create request find job -->
-        <th:block th:if="${page == 5}">
+        <th:block th:if="${page == 6}">
           <div th:replace="works/create-request-find-job :: create-request-find-job"></div>
         </th:block>
-        <!-- Request find job detail -->
-        <th:block th:if="${page == 6}">
-          <div th:replace="works/request-find-job :: request-find-job"></div>
+        <!-- Work list applied -->
+        <th:block th:if="${page == 8}">
+          <div th:replace="works/list-applied :: list-applied"></div>
         </th:block>
         <!-- Request recruitment manage -->
-        <th:block th:if="${page == 7}">
+        <th:block th:if="${page == 9}">
           <div th:replace="works/request-recruitment-manage :: request-recruitment-manage"></div>
         </th:block>
         <!-- Create request recruitment -->
-        <th:block th:if="${page == 8}">
+        <th:block th:if="${page == 10}">
           <div th:replace="works/create-request-recruitment :: create-request-recruitment"></div>
         </th:block>
         <!-- Request recruitment detail -->
-        <th:block th:if="${page == 9}">
+        <th:block th:if="${page == 11}">
           <div th:replace="works/request-recruitment-detail :: request-recruitment-detail"></div>
         </th:block>
         <!-- Request find job detail -->
-        <th:block th:if="${page == 10}">
+        <th:block th:if="${page == 12}">
           <div th:replace="works/request-find-job-detail :: request-find-job-detail"></div>
         </th:block>
       </div>
@@ -145,19 +155,31 @@
   <!-- Import modal confirm cancel apply job -->
   <div th:replace="works/modal/modal-confirm-cancel-apply-job :: confirmCancelApplyJobModal"></div>
 </th:block>
-<th:block th:if="${page == 3}">
+<th:block th:if="${page == 4}">
   <!-- Import modal confirm remove job save -->
   <div th:replace="works/modal/modal-confirm-remove-job-save :: confirmRemoveJobSaveModal"></div>
 </th:block>
-<th:block th:if="${page == 4}">
+<th:block th:if="${page == 2}">
   <!-- Import modal confirm apply job -->
   <div th:replace="works/modal/modal-confirm-apply-job :: confirmApplyJobModal"></div>
 </th:block>
-<th:block th:if="${page == 5}">
+<th:block th:if="${page == 6}">
   <!-- Import modal request find job preview -->
   <div th:replace="works/modal/modal-request-find-job-preview :: findJobPreviewModal"></div>
 </th:block>
-<th:block th:if="${page == 6}">
+<th:block th:if="${page == 8}">
+  <!-- Import modal list applied -->
+  <div th:replace="works/modal/modal-list-applied :: listAppliedModal"></div>
+</th:block>
+<th:block th:if="${page == 10}">
+  <!-- Import modal request find job preview -->
+  <div th:replace="works/modal/modal-request-recruitment-preview :: recruitmentPreviewModal"></div>
+</th:block>
+<th:block th:if="${page == 11}">
+  <!-- Import modal confirm apply request -->
+  <div th:replace="works/modal/modal-confirm-apply-request :: confirmApplyRequestModal"></div>
+</th:block>
+<th:block th:if="${page == 12}">
   <!-- Import modal confirm hire -->
   <div th:replace="works/modal/modal-confirm-hire :: confirmHireModal"></div>
 </th:block>
