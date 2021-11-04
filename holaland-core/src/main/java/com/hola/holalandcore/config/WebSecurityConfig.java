@@ -38,9 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //http.authorizeRequests().anyRequest().authenticated();
 
         //http.authorizeRequests().antMatchers("/works").hasAnyRole("MEMBER");
-        http.authorizeRequests().antMatchers("/js/templates/**").hasAnyRole("MEMBER", "RECRUITER", "SELLER");
         http.authorizeRequests().antMatchers("/fpt-university/department/**", "/fpt-university/lecturers/**", "/works/create-request-find-job", "/works/request-find-job-manage/**", "/works/jobs-save", "/works/jobs-apply").hasAnyRole("MEMBER");
         http.authorizeRequests().antMatchers("/show-info").hasAnyRole("MEMBER", "RECRUITER", "SELLER");
+        http.authorizeRequests().antMatchers("/js/templates/**").hasAnyRole("MEMBER", "RECRUITER", "SELLER");
 
         // Login Form
         http.authorizeRequests().and().formLogin()//
