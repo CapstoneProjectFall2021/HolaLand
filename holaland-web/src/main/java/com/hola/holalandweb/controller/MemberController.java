@@ -83,7 +83,7 @@ public class MemberController {
         Member member = memberService.getOne(id);
         backToMembers(model);
         model.addAttribute("oneMember", member);
-        
+        return "members";
     }
 
     @GetMapping("/confirm-delete-member")
