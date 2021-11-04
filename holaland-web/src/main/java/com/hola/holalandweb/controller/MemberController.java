@@ -104,20 +104,7 @@ public class MemberController {
         backToMembers(model);
         return "members";
     }
-    @GetMapping("/get-one-member")
-    public String getOneMember(@RequestParam("id") Integer id, Model model) {
-        Member member = memberService.getOne(id);
-        backToMembers(model);
-        model.addAttribute("oneMember", member);
-        return "members";
-    }
 
-    @GetMapping("/confirm-delete-member")
-    public String deleteMember(@RequestParam("id") Integer id, Model model) {
-        memberService.delete(id);
-        backToMembers(model);
-        return "members";
-    }
     private void backToMembers(Model model) {
         List<Member> members = memberService.getAll();
         List listBus = busService.getAll();
