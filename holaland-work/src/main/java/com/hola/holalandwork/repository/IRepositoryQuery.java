@@ -133,7 +133,8 @@ public interface IRepositoryQuery {
             "FROM work_request_recruitment T1\n" +
             "INNER JOIN work_request_apply T2\n" +
             "ON T1.work_request_recruitment_id = T2.work_request_recruitment_id\n" +
-            "WHERE T1.user_id = ? AND T1.stt_work_code = ?\n" +
+            "WHERE T1.user_id = ?\n" +
+            "AND T2.stt_work_code = ?\n" +
             "AND T1.work_request_recruitment_deleted = 0\n" +
             "GROUP BY T1.work_request_recruitment_id";
 
@@ -158,7 +159,8 @@ public interface IRepositoryQuery {
             "INNER JOIN work_request_book T2\n" +
             "ON T1.work_request_find_job_id = T2.work_request_find_job_id\n" +
             "WHERE T1.user_id = ?\n" +
-            "AND T1.work_request_find_job_deleted = 0 AND T1.stt_work_code = ?\n" +
+            "AND T2.stt_work_code = ?\n" +
+            "AND T1.work_request_find_job_deleted = 0\n" +
             "GROUP BY T1.work_request_find_job_id\n";
 
 }

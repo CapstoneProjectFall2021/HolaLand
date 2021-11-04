@@ -29,7 +29,7 @@
   <div class="list-request" th:if="${requestFindJobList.size != 0}">
     <div class="row">
       <div class="col-12">
-        <h1 class="title fix-mt-title fix-mb-title">Danh sách bài viết</h1>
+        <h1 class="title fix-mt-title fix-mb-title" onclick="x(event)">Danh sách bài viết</h1>
       </div>
     </div>
     <div class="row">
@@ -57,7 +57,7 @@
           </div>
           <div class="flex">
             <div class="icon-s">
-              <img class="media-object" src="../../images/system/job.png" alt="">
+              <img class="media-object" th:src="@{'/images/system/job.png'}" alt="">
             </div>
             <div class="content-body">
               <a th:href="@{/works/request-find-job-detail(id=*{requestFindJob.workRequestFindJobId})}"
