@@ -77,7 +77,7 @@ public class MemberController {
             return "404";
         }
     }
-//
+
     @GetMapping("/get-one-member")
     public String getOneMember(@RequestParam("id") Integer id, Model model) {
         Member member = memberService.getOne(id);
