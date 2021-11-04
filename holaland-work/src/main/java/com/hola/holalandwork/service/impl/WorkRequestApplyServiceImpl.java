@@ -34,4 +34,9 @@ public class WorkRequestApplyServiceImpl implements WorkRequestApplyService {
     public WorkRequestApply getOne(int id) throws DataAccessException {
         return workRequestApplyRepository.getOne(id);
     }
+
+    @Override
+    public boolean delete(int id) throws DataAccessException {
+        return workRequestApplyRepository.delete(id);
+    }
 }

@@ -104,12 +104,16 @@ public class WorksController {
     }
 
     @GetMapping("/works/jobs-apply/delete")
-    public String getJobsApplyDeleteRequest(@RequestParam("requestId") Integer requestId, Model model) {
-        // code delete
-        List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
-        model.addAttribute("jobApplyList", jobApplyList);
-        model.addAttribute("page", 2);
-        return "module-works";
+    public String deleteJobsApplyRequest(@RequestParam("requestId") Integer requestId, Model model) {
+        boolean isCheck = workRequestApplyService.delete(requestId);
+        if (isCheck) {
+            List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
+            model.addAttribute("jobApplyList", jobApplyList);
+            model.addAttribute("page", 2);
+            return "module-works";
+        } else {
+            return "404";
+        }
     }
 
     @GetMapping("/works/jobs-save")
@@ -118,6 +122,19 @@ public class WorksController {
         model.addAttribute("jobSaveList", jobSaveList);
         model.addAttribute("page", 4);
         return "module-works";
+    }
+
+    @GetMapping("/works/jobs-save/delete")
+    public String deleteJobsSaveRequest(@RequestParam("requestId") Integer requestId, Model model) {
+        boolean isCheck = workRequestRecruitmentSavedService.delete(requestId);
+        if (isCheck) {
+            List<WorkRequestRecruitment> jobSaveList = workRequestRecruitmentSavedService.getAllByAccountId(1);
+            model.addAttribute("jobSaveList", jobSaveList);
+            model.addAttribute("page", 4);
+            return "module-works";
+        } else {
+            return "404";
+        }
     }
 
     @GetMapping("/works/request-find-job")

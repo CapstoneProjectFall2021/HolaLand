@@ -14,4 +14,6 @@ public interface WorkRequestRecruitmentSavedService {
 
     WorkRequestRecruitmentSaved getOne(int id) throws DataAccessException;
 
+    boolean delete(int id) throws DataAccessException;
+
 }

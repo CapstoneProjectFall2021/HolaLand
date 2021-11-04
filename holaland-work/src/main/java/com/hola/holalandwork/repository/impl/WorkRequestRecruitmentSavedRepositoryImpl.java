@@ -36,4 +36,9 @@ public class WorkRequestRecruitmentSavedRepositoryImpl implements WorkRequestRec
     public WorkRequestRecruitmentSaved getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(WORK_REQUEST_RECRUITMENT_SAVED_GET_ONE, new WorkRequestRecruitmentSavedMapper(), id);
     }
+
+    @Override
+    public boolean delete(int id) throws DataAccessException {
+        return jdbcTemplate.update(DELETE_WORK_REQUEST_SAVE, id) > 0;
+    }
 }
