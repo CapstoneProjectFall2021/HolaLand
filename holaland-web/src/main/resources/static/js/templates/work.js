@@ -8,8 +8,7 @@ function openModal(modal) {
 }
 
 function confirmDeleteRequestApply(e) {
-  console.log(e);
-  const requestId = e.target.lastElementChild.innerHTML;
+  const requestId = e.target.firstElementChild.innerHTML;
   openModal("confirmCancelApplyJobModal");
   document.getElementById("btn-delete-request-apply").href = "/works/jobs-apply/delete?requestId=" + requestId;
 }

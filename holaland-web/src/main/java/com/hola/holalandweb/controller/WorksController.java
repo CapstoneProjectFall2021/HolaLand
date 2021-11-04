@@ -103,20 +103,6 @@ public class WorksController {
         return "module-works";
     }
 
-    @GetMapping("works/jobs-apply/get-request-id")
-    public String getRequestId(
-            @RequestParam("requestId") Integer requestId,
-            @RequestParam("modal") String modal,
-            Model model
-    ) {
-        List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
-        model.addAttribute("jobApplyList", jobApplyList);
-        model.addAttribute("requestId", requestId);
-        model.addAttribute("modal", modal);
-        model.addAttribute("page", 2);
-        return "module-works";
-    }
-
     @GetMapping("/works/jobs-apply/delete")
     public String getJobsApplyDeleteRequest(@RequestParam("requestId") Integer requestId, Model model) {
         // code delete

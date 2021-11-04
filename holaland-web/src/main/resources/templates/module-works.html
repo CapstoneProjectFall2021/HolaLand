@@ -157,7 +157,7 @@
 
 <th:block th:if="${page == 2}">
   <!-- Import modal confirm cancel apply job -->
-  <div th:replace="works/modal/modal-confirm-cancel-apply-job :: confirmCancelApplyJobModal(${requestId})"></div>
+  <div th:replace="works/modal/modal-confirm-cancel-apply-job :: confirmCancelApplyJobModal"></div>
 </th:block>
 <th:block th:if="${page == 4}">
   <!-- Import modal confirm remove job save -->
@@ -191,13 +191,13 @@
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
 <script crossorigin="anonymous" th:src="@{/js/templates/work.js}"></script>
-<script th:inline="javascript" th:if="${requestId != null && modal != null}">
-  /*<![CDATA[*/
-  const modal = /*[[${modal}]]*/;
-  /*]]>*/
-  const myModal = new bootstrap.Modal(document.getElementById(modal));
-  myModal.show();
-</script>
+<!--<script th:inline="javascript" th:if="${requestId != null && modal != null}">-->
+<!--  /*<![CDATA[*/-->
+<!--  const modal = /*[[${modal}]]*/;-->
+<!--  /*]]>*/-->
+<!--  const myModal = new bootstrap.Modal(document.getElementById(modal));-->
+<!--  myModal.show();-->
+<!--</script>-->
 <script>
   function showToast() {
     const toast = new bootstrap.Toast(document.getElementById('toast-success'));
