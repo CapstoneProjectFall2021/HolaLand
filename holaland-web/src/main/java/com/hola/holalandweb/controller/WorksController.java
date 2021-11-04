@@ -396,7 +396,7 @@ public class WorksController {
 
     @GetMapping("works/list-recruitment")
     public String getListRecruitment(Model model) {
-        List<WorkRequestFindJob> listRecruitment = workRequestFindJobService.getAllListRecruitmentByUserId(1, Constants.STT_WORK_CODE_APPROVED);
+        List<WorkRequestFindJob> listRecruitment = workRequestFindJobService.getAllListRecruitmentByUserId(2, Constants.STT_WORK_CODE_APPROVED);
         model.addAttribute("listRecruitment", listRecruitment);
         model.addAttribute("page", 3);
         return "module-works";
