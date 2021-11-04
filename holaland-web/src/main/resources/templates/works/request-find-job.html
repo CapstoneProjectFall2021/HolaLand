@@ -37,7 +37,7 @@
                 <a th:href="@{/works/request-find-job-detail(id=${worker.workRequestFindJobId})}" class="label-info m-mb-16">
                     <div class="flex">
                         <div class="icon-s">
-                            <img class="media-object" src="../../images/system/v.png" alt="">
+                            <img class="media-object" th:src="@{'/images/system/job.png'}" alt="">
                         </div>
                         <div class="content-body">
                             <h4 th:text="*{worker.workRequestFindJobTitle}"></h4>
