@@ -10,8 +10,10 @@
       <div class="col-md-12" th:each="job: ${jobSaveList}">
         <div class="label-info m-mb-16">
           <div class="btn-remove">
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmRemoveJobSaveModal">
-              <i class="far fa-trash-alt m-0"></i>
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmDeleteRequestSave(event)">
+                <span th:text="${job.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="flex">

@@ -36,7 +36,8 @@ public interface IRepositoryQuery {
             "LEFT OUTER JOIN work_request_apply T2\n" +
             "ON T1.work_request_recruitment_id = T2.work_request_recruitment_id\n" +
             "WHERE T2.user_id = ?\n" +
-            "AND T1.work_request_recruitment_deleted = 0";
+            "AND T1.work_request_recruitment_deleted = 0\n"+
+            "AND T2.work_request_apply_deleted = 0";
 
     String WORK_REQUEST_RECRUITMENT_SAVED_GET_ALL = "SELECT * FROM work_request_recruitment_saved WHERE work_request_recruitment_saved_deleted = 0";
     String WORK_REQUEST_RECRUITMENT_SAVED_GET_ONE = "SELECT * FROM work_request_recruitment_saved WHERE work_request_recruitment_saved_id = ? AND work_request_recruitment_saved_deleted = 0";
@@ -64,7 +65,8 @@ public interface IRepositoryQuery {
             "LEFT OUTER JOIN work_request_recruitment_saved T2\n" +
             "ON T1.work_request_recruitment_id = T2.work_request_recruitment_id\n" +
             "WHERE T2.user_id = ?\n" +
-            "AND T1.work_request_recruitment_deleted = 0";
+            "AND T1.work_request_recruitment_deleted = 0\n" +
+            "AND T2.work_request_recruitment_saved_deleted = 0";
 
     String WORK_REQUEST_BOOK_GET_ALL = "SELECT * FROM work_request_book WHERE work_request_book_deleted = 0";
     String WORK_REQUEST_BOOK_GET_ONE = "SELECT * FROM work_request_book WHERE work_request_book_id = ? AND work_request_book_deleted = 0";
@@ -160,5 +162,13 @@ public interface IRepositoryQuery {
             "WHERE T1.user_id = ?\n" +
             "AND T1.work_request_find_job_deleted = 0 AND T1.stt_work_code = ?\n" +
             "GROUP BY T1.work_request_find_job_id\n";
+
+    String DELETE_WORK_REQUEST_APPLY = "UPDATE work_request_apply\n" +
+            "SET work_request_apply_deleted = 1\n" +
+            "WHERE work_request_apply_id = ?";
+
+    String DELETE_WORK_REQUEST_SAVE = "UPDATE work_request_recruitment_saved\n" +
+            "SET work_request_recruitment_saved_deleted = 1\n" +
+            "WHERE work_request_recruitment_saved_id = ?";
 
 }
