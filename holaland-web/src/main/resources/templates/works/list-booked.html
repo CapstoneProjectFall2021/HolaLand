@@ -1,4 +1,4 @@
-<div class="col-right" th:fragment="list-recruitment">
+<div class="col-right" th:fragment="list-booked">
   <!-- List recruitment -->
   <div class="list-request">
     <div class="row">
@@ -7,10 +7,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12" th:each="work : ${listRecruitment}">
+      <div class="col-md-12" th:each="work : ${listBooked}">
         <div class="label-info m-mb-16">
           <div class="btn-action">
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#listRecruitmentModal">
+            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#listBookedModal">
               2 <i class="fas fa-user-friends m-0"></i>
             </a>
           </div>

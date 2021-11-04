@@ -46,7 +46,7 @@
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/list-recruitment}" th:classappend="${page == 3 ? 'active' : ''}">
+              <a th:href="@{/works/list-booked}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-list fa-fw"></i>Danh sách thuê
               </a>
             </li>
@@ -114,9 +114,9 @@
         <th:block th:if="${page == 2}">
           <div th:replace="works/request-recruitment-applied :: request-recruitment-applied"></div>
         </th:block>
-        <!-- List recruitment -->
+        <!-- List booked -->
         <th:block th:if="${page == 3}">
-          <div th:replace="works/list-recruitment :: list-recruitment"></div>
+          <div th:replace="works/list-booked :: list-booked"></div>
         </th:block>
         <!-- Request recruitment saved -->
         <th:block th:if="${page == 4}">
@@ -165,7 +165,7 @@
 </th:block>
 <th:block th:if="${page == 3}">
   <!-- Import modal list recruitment -->
-  <div th:replace="works/modal/modal-list-recruitment :: listRecruitmentModal"></div>
+  <div th:replace="works/modal/modal-list-booked :: listBookedModal"></div>
 </th:block>
 <th:block th:if="${page == 4}">
   <!-- Import modal confirm remove job save -->

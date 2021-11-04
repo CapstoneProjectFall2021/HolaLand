@@ -140,7 +140,7 @@ public interface IRepositoryQuery {
             "AND T1.work_request_recruitment_deleted = 0\n" +
             "GROUP BY T1.work_request_recruitment_id";
 
-    String WORK_LIST_RECRUITMENT_GET_ALL_BY_USER_ID = "SELECT\n" +
+    String WORK_LIST_BOOKED_GET_ALL_BY_USER_ID = "SELECT\n" +
             "T1.work_request_find_job_id,\n" +
             "T1.user_id,\n" +
             "T1.stt_work_code,\n" +

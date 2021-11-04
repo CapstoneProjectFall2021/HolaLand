@@ -51,7 +51,7 @@ public class WorkRequestFindJobRepositoryImpl implements WorkRequestFindJobRepos
 
     @Override
     public List<WorkRequestFindJob> getAllListRecruitmentByUserId(int userId, int sttWorkCode) throws DataAccessException {
-        return jdbcTemplate.query(WORK_LIST_RECRUITMENT_GET_ALL_BY_USER_ID, new WorkRequestFindJobMapper(), userId, sttWorkCode);
+        return jdbcTemplate.query(WORK_LIST_BOOKED_GET_ALL_BY_USER_ID, new WorkRequestFindJobMapper(), userId, sttWorkCode);
     }
 
     @Override
