@@ -2,6 +2,7 @@ package com.hola.holalandwork.repository.impl;
 
 import com.hola.holalandwork.entity.WorkRequestFindJob;
 import com.hola.holalandwork.mapper.WorkRequestFindJobMapper;
+import com.hola.holalandwork.mapper.WorkRequestRecruitmentMapper;
 import com.hola.holalandwork.repository.IRepositoryQuery;
 import com.hola.holalandwork.repository.WorkRequestFindJobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,11 @@ public class WorkRequestFindJobRepositoryImpl implements WorkRequestFindJobRepos
                 + s
                 + " AND work_request_find_job_deleted = 0";
         return jdbcTemplate.query(sql, new WorkRequestFindJobMapper(), id);
+    }
+
+    @Override
+    public List<WorkRequestFindJob> getAllListRecruitmentByUserId(int userId, int sttWorkCode) throws DataAccessException {
+        return jdbcTemplate.query(WORK_LIST_RECRUITMENT_GET_ALL_BY_USER_ID, new WorkRequestFindJobMapper(), userId, sttWorkCode);
     }
 
     @Override

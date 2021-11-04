@@ -136,4 +136,29 @@ public interface IRepositoryQuery {
             "WHERE T1.user_id = ? AND T1.stt_work_code = ?\n" +
             "AND T1.work_request_recruitment_deleted = 0\n" +
             "GROUP BY T1.work_request_recruitment_id";
+
+    String WORK_LIST_RECRUITMENT_GET_ALL_BY_USER_ID = "SELECT\n" +
+            "T1.work_request_find_job_id,\n" +
+            "T1.user_id,\n" +
+            "T1.stt_work_code,\n" +
+            "T1.work_request_type_id,\n" +
+            "T1.work_salary_unit_id,\n" +
+            "T1.work_payment_method_id,\n" +
+            "T1.work_time_id,\n" +
+            "T1.work_request_find_job_title,\n" +
+            "T1.work_request_find_job_start_date_time,\n" +
+            "T1.work_request_find_job_end_date_time,\n" +
+            "T1.work_request_find_job_last_update_date_time,\n" +
+            "T1.work_request_find_job_description,\n" +
+            "T1.work_request_find_job_personal_experience,\n" +
+            "T1.work_request_find_job_expected_location,\n" +
+            "T1.work_request_find_job_expected_salary,\n" +
+            "T1.work_request_find_job_deleted\n" +
+            "FROM work_request_find_job T1\n" +
+            "INNER JOIN work_request_book T2\n" +
+            "ON T1.work_request_find_job_id = T2.work_request_find_job_id\n" +
+            "WHERE T2.user_id = ?\n" +
+            "AND T1.work_request_find_job_deleted = 0 AND T1.stt_work_code = ?\n" +
+            "GROUP BY T1.work_request_find_job_id\n";
+
 }
