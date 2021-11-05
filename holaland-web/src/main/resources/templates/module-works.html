@@ -195,6 +195,30 @@
   <!-- Import modal confirm hire -->
   <div th:replace="works/modal/modal-confirm-hire :: confirmHireModal"></div>
 </th:block>
+<th:block th:if="${page == 13}">
+  <!-- Import modal confirm remove request recruitment approved -->
+  <div th:replace="works/modal/modalRequestRecruitmentManage/modal-confirm-remove-request-recruitment-approved :: confirmRemoveRequestRecruitmentApprovesModal"></div>
+</th:block>
+<th:block th:if="${page == 14}">
+  <!-- Import modal confirm remove request recruitment complete-->
+  <div th:replace="works/modal/modalRequestRecruitmentManage/modal-confirm-remove-request-recruitment-complete :: confirmRemoveRequestRecruitmentCompleteModal"></div>
+</th:block>
+<th:block th:if="${page == 15}">
+  <!-- Import modal confirm remove request recruitment expried-->
+  <div th:replace="works/modal/modalRequestRecruitmentManage/modal-confirm-remove-request-recruitment-expired :: confirmRemoveRequestRecruitmentExpiredModal"></div>
+</th:block>
+<th:block th:if="${page == 16}">
+  <!-- Import modal confirm remove request recruitment pending approval-->
+  <div th:replace="works/modal/modalRequestRecruitmentManage/modal-confirm-remove-request-recruitment-pending-approval :: confirmRemoveRequestRecruitmentPendingApprovalModal"></div>
+</th:block>
+<th:block th:if="${page == 17}">
+  <!-- Import modal confirm remove request recruitment reject-->
+  <div th:replace="works/modal/modalRequestRecruitmentManage/modal-confirm-remove-request-recruitment-reject :: confirmRemoveRequestRecruitmentRejectModal"></div>
+</th:block>
+<th:block th:if="${page == 18}">
+  <!-- Import modal confirm remove request recruitment save draft-->
+  <div th:replace="works/modal/modalRequestRecruitmentManage/modal-confirm-remove-request-recruitment-save-draft :: confirmRemoveRequestRecruitmentSaveDraftModal"></div>
+</th:block>
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>

@@ -35,23 +35,63 @@
     <div class="row">
       <div class="col-md-12" th:each="requestFindJob : ${requestFindJobList}">
         <div class="label-info m-mb-16">
-          <div class="btn-action" style="margin-right: 62px;" th:if="${sttWorkCode == 2}">
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#reasonRejectModal">
-              <i class="far fa-comment-dots text-warning m-0"></i>
+          <div class="btn-remove">
+            <a href="javascript:void(0)" th:if="${sttWorkCode == 3}">
+              <i class="far fa-trash-alt m-0"></i>
             </a>
           </div>
           <div class="btn-action me-4">
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmRemoveFindJobModal"
-               th:if="${sttWorkCode == 1 or sttWorkCode == 2 or sttWorkCode == 6}">
-              <i class="far fa-edit m-0"></i>
-            </a>
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmRepostModal"
-               th:if="${sttWorkCode == 4 or sttWorkCode == 5}">
+            <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 1}">
               <i class="fas fa-undo-alt m-0"></i>
             </a>
           </div>
           <div class="btn-remove">
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmRemoveFindJobModal">
+            <a href="javascript:void(0)" th:if="${sttWorkCode == 1}">
+              <i class="far fa-trash-alt m-0"></i>
+            </a>
+          </div>
+          <div class="btn-action me-4">
+            <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 4}">
+              <i class="fas fa-undo-alt m-0"></i>
+            </a>
+          </div>
+          <div class="btn-remove">
+            <a href="javascript:void(0)" th:if="${sttWorkCode == 4}">
+              <i class="far fa-trash-alt m-0"></i>
+            </a>
+          </div>
+          <div class="btn-action me-4">
+            <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 5}">
+              <i class="fas fa-undo-alt m-0"></i>
+            </a>
+          </div>
+          <div class="btn-remove">
+            <a href="javascript:void(0)" th:if="${sttWorkCode == 5}">
+              <i class="far fa-trash-alt m-0"></i>
+            </a>
+          </div>
+          <div class="btn-action" style="margin-right: 62px;">
+            <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 2}">
+              <i class="far fa-comment-dots text-warning m-0"></i>
+            </a>
+          </div>
+          <div class="btn-action me-4">
+            <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 2}">
+              <i class="far fa-edit m-0"></i>
+            </a>
+          </div>
+          <div class="btn-remove">
+            <a href="javascript:void(0)" th:if="${sttWorkCode == 2}">
+              <i class="far fa-trash-alt m-0"></i>
+            </a>
+          </div>
+          <div class="btn-action me-4">
+            <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 6}">
+              <i class="far fa-edit m-0"></i>
+            </a>
+          </div>
+          <div class="btn-remove">
+            <a href="javascript:void(0)" th:if="${sttWorkCode == 6}">
               <i class="far fa-trash-alt m-0"></i>
             </a>
           </div>
