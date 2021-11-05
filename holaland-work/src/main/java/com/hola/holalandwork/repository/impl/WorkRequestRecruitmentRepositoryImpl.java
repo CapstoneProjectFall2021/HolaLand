@@ -77,4 +77,12 @@ public class WorkRequestRecruitmentRepositoryImpl implements WorkRequestRecruitm
                 obj.isWorkRequestRecruitmentDeleted()
         ) > 0;
     }
+
+    @Override
+    public boolean delete(int id) throws DataAccessException {
+        return jdbcTemplate.update(
+                WORK_REQUEST_RECRUITMENT_DELETED_ONE,
+                id
+        ) > 0;
+    }
 }

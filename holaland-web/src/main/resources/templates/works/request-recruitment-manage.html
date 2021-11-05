@@ -37,74 +37,87 @@
         <div class="label-info m-mb-16">
           <div class="btn-remove">
             <a href="javascript:void(0)" th:if="${sttWorkCode == 3}">
-              <i class="far fa-trash-alt m-0" onclick="confirmDeleteRequestRecruitmentApproved(event)"></i>
-              <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveRecruitmentRequest(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="btn-action me-4">
             <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 1}">
-              <i class="fas fa-undo-alt m-0" onclick="confirmUndoRequestRecruitmentPendingApproval(event)"></i>
-              <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="fas fa-undo-alt m-0" onclick="confirmUndoRequestRecruitmentPendingApproval(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="btn-remove">
             <a href="javascript:void(0)" th:if="${sttWorkCode == 1}">
-              <i class="far fa-trash-alt m-0" onclick="confirmDeleteRequestRecruitmentPendingApproval(event)"></i>
-              <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveRecruitmentRequest(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="btn-action me-4">
             <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 4}">
-              <i class="fas fa-undo-alt m-0" onclick="confirmUndoRequestRecruitmentComplete(event)"></i>
-              <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="fas fa-undo-alt m-0" onclick="confirmUndoRequestRecruitmentComplete(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="btn-remove">
             <a href="javascript:void(0)" th:if="${sttWorkCode == 4}">
-              <i class="far fa-trash-alt m-0" onclick="confirmDeleteRequestRecruitmentComplete(event)"></i>
-              <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveRecruitmentRequest(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="btn-action me-4">
             <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 5}">
-              <i class="fas fa-undo-alt m-0" onclick="confirmUndoRequestRecruitmentExpired(event)"></i>
-              <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="fas fa-undo-alt m-0" onclick="confirmUndoRequestRecruitmentExpired(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="btn-remove">
             <a href="javascript:void(0)" th:if="${sttWorkCode == 5}">
-              <i class="far fa-trash-alt m-0" onclick="confirmDeleteRequestRecruitmentExpired(event)"></i>
-              <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveRecruitmentRequest(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="btn-action" style="margin-right: 62px;">
             <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 2}">
-              <i class="far fa-comment-dots text-warning m-0" onclick="confirmReasonRequestRecruitmentReject(event)"></i>
-              <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="far fa-comment-dots text-warning m-0"
+                 onclick="confirmReasonRequestRecruitmentReject(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="btn-action me-4">
             <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 2}">
-              <i class="far fa-edit m-0" onclick="confirmEditRequestRecruitmentReject(event)"></i>
-              <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="far fa-edit m-0" onclick="confirmEditRequestRecruitmentReject(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="btn-remove">
             <a href="javascript:void(0)" th:if="${sttWorkCode == 2}">
-              <i class="far fa-trash-alt m-0" onclick="confirmDeleteRequestRecruitmentReject(event)"></i>
-              <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveRecruitmentRequest(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="btn-action me-4">
             <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 6}">
-              <i class="far fa-edit m-0" onclick="confirmEditRequestRecruitmentSaveDraft(event)"></i>
-              <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="far fa-edit m-0" onclick="confirmEditRequestRecruitmentSaveDraft(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="btn-remove">
             <a href="javascript:void(0)" th:if="${sttWorkCode == 6}">
-              <i class="far fa-trash-alt m-0" onclick="confirmDeleteRequestRecruitmentSaveDraft(event)"></i>
-              <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveRecruitmentRequest(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="flex">

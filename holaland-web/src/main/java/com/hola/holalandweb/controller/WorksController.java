@@ -27,10 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
-import java.util.Calendar;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class WorksController {
@@ -97,7 +94,7 @@ public class WorksController {
 
     @GetMapping("/works/jobs-apply")
     public String getJobsApply(Model model) {
-        List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
+        List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(2);
         model.addAttribute("jobApplyList", jobApplyList);
         model.addAttribute("page", 2);
         return "module-works";
@@ -222,6 +219,26 @@ public class WorksController {
             @RequestParam("code") Integer sttWorkCode,
             Model model
     ) {
+        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
+        List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
+                1,
+                sttWorkCode
+        );
+        model.addAttribute("sttWorkCode", sttWorkCode);
+        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
+        model.addAttribute("requestRecruitmentList", workRequestRecruitments);
+        model.addAttribute("page", 9);
+        return "module-works";
+    }
+
+    @GetMapping("/works/request-recruitment-manage/delete")
+    public String getRecruitmentDeleteRequest(
+            @RequestParam("requestId") Integer requestId,
+            @RequestParam("code") Integer sttWorkCode,
+            Model model) {
+        // code delete
+        workRequestRecruitmentService.delete(requestId);
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
         Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
         List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(

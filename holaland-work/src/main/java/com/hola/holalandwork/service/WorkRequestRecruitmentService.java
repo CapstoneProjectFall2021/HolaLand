@@ -18,4 +18,6 @@ public interface WorkRequestRecruitmentService {
     List<WorkRequestRecruitment> getAllListAppliedByUserId (int userId, int sttWorkCode) throws DataAccessException;
 
     boolean save(WorkRequestRecruitment obj) throws DataAccessException;
+
+    boolean delete(int id) throws DataAccessException;
 }

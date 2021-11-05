@@ -175,6 +175,10 @@
 <!--  &lt;!&ndash; Import modal confirm apply job &ndash;&gt;-->
 <!--  <div th:replace="works/modal/modal-confirm-apply-job :: confirmApplyJobModal"></div>-->
 <!--</th:block>-->
+<th:block th:if="${page == 5}">
+  <!-- Import modal confirm remove recruitment request -->
+  <div th:replace="works/modal/modal-confirm-remove-find-request :: confirmRemoveFindRequest"></div>
+</th:block>
 <th:block th:if="${page == 6}">
   <!-- Import modal request find job preview -->
   <div th:replace="works/modal/modal-request-find-job-preview :: findJobPreviewModal"></div>
@@ -182,6 +186,10 @@
 <th:block th:if="${page == 8}">
   <!-- Import modal list applied -->
   <div th:replace="works/modal/modal-list-applied :: listAppliedModal"></div>
+</th:block>
+<th:block th:if="${page == 9}">
+  <!-- Import modal confirm remove recruitment request -->
+  <div th:replace="works/modal/modal-confirm-remove-recruitment-request :: confirmRemoveRecruitmentRequest"></div>
 </th:block>
 <th:block th:if="${page == 10}">
   <!-- Import modal request find job preview -->

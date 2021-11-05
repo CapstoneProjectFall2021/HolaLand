@@ -104,14 +104,15 @@ function confirmDeleteRequestSave(e) {
   document.getElementById("btn-delete-request-save").href = "/works/jobs-save/delete?requestId=" + requestId;
 }
 
-function x(e) {
-  //const requestId = e.target.firstElementChild.innerHTML;
+function confirmRemoveRecruitmentRequest(e) {
+  const requestId = e.target.firstElementChild.innerHTML;
+  let url = new URL(window.location.href);
+  let sttWorkCode = 1;
+  if(url.searchParams.has("code")) {
+    sttWorkCode = url.searchParams.get("code");
+  }
+  openModal("confirmRemoveRecruitmentRequestModal");
 
-  //
-  var url = new URL(window.location.href);
-  const sttWorkCode = url.searchParams.get("code");
-
-  //openModal("confirmCancelApplyJobModal");
-
-  //document.getElementById("btn-delete-request-apply").href = "/works/jobs-apply/delete?requestId=" + requestId + "&sttWorkCode=" + sttWorkCode;
+  document.getElementById("btn-delete-recruitment-request").href =
+      "/works/request-recruitment-manage/delete?requestId=" + requestId + "&code=" + sttWorkCode;
 }
