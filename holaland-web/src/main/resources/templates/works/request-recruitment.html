@@ -41,7 +41,7 @@
               <img class="media-object" th:src="@{'/images/system/job.png'}" alt="">
             </div>
             <div class="content-body">
-              <h4 th:text="*{job.workRequestRecruitmentTitle}"></h4>
+              <h4 class="accent" th:text="*{job.workRequestRecruitmentTitle}"></h4>
               <div class="request-info">
                 <p sec:authorize="isAuthenticated()">
                   Lương: <span th:text="*{job.workRequestRecruitmentSalary}"></span>
