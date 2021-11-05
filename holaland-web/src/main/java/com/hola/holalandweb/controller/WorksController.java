@@ -449,8 +449,8 @@ public class WorksController {
     }
 
     @GetMapping("works/list-booked")
-    public String getListRecruitment(Model model) {
-        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, 3);
+    public String getListBooked(Model model) {
+        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, 1);
         model.addAttribute("listBooked", listBooked);
         model.addAttribute("page", 3);
         return "module-works";
