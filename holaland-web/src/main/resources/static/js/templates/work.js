@@ -8,12 +8,6 @@ function openModal(modal) {
 }
 
 //Recruitment manage
-function confirmDeleteRequestRecruitmentPendingApproval(e) {
-  const requestId = e.target.firstElementChild.innerHTML;
-  openModal("confirmRemoveRequestRecruitmentPendingApprovalModal");
-  document.getElementById("btn-delete-request-recruitment-pending-approval")
-      .href = "/works/request-recruitment-manage/delete?requestId=" + requestId + "&sttWorkCode=" + sttWorkCode;
-}
 
 function confirmUndoRequestRecruitmentPendingApproval(e) {
   const requestId = e.target.firstElementChild.innerHTML;
@@ -22,11 +16,8 @@ function confirmUndoRequestRecruitmentPendingApproval(e) {
       .href = "/works/request-recruitment-manage/Undo?requestId=" + requestId + "&sttWorkCode=" + sttWorkCode;
 }
 
-function confirmReasonRequestRecruitmentReject(e) {
-  const requestId = e.target.firstElementChild.innerHTML;
-  openModal("confirmRemoveJobSaveModal");
-  document.getElementById("btn-reason-request-recruitment-reject")
-      .href = "/works/request-recruitment-manage/Reason?requestId=" + requestId + "&sttWorkCode=" + sttWorkCode;
+function confirmReasonRequestRecruitmentReject() {
+  openModal("reasonRejectModal");
 }
 
 function confirmEditRequestRecruitmentReject(e) {
