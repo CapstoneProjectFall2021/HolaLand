@@ -12,7 +12,7 @@
            class="label-info m-mb-16"
            th:classappend="${sttWork.key.sttWorkCode == sttWorkCode ? 'active' : ''}">
           <div class="flex">
-            <div class="icon">
+            <div th:text="*{sttWork.sttWorkIcon}">
               <i th:classappend="*{sttWork.key.sttWorkIcon}"></i>
             </div>
             <div class="number">
