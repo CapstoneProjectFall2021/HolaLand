@@ -35,64 +35,87 @@
     <div class="row">
       <div class="col-md-12" th:each="requestFindJob : ${requestFindJobList}">
         <div class="label-info m-mb-16">
-          <div class="btn-remove">
-            <a href="javascript:void(0)" th:if="${sttWorkCode == 3}">
-              <i class="far fa-trash-alt m-0"></i>
+          <div class="btn-remove" th:if="${sttWorkCode == 3}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveFindRequest(event)">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
             </a>
           </div>
-          <div class="btn-action me-4">
-            <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 1}">
-              <i class="fas fa-undo-alt m-0"></i>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 1}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="far fa-edit m-0" onclick="">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
             </a>
           </div>
-          <div class="btn-remove">
-            <a href="javascript:void(0)" th:if="${sttWorkCode == 1}">
-              <i class="far fa-trash-alt m-0"></i>
+          <div class="btn-remove" th:if="${sttWorkCode == 1}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveFindRequest(event)">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
             </a>
           </div>
-          <div class="btn-action me-4">
-            <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 4}">
-              <i class="fas fa-undo-alt m-0"></i>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 4}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="fas fa-undo-alt m-0" onclick="">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
             </a>
           </div>
-          <div class="btn-remove">
-            <a href="javascript:void(0)" th:if="${sttWorkCode == 4}">
-              <i class="far fa-trash-alt m-0"></i>
+          <div class="btn-remove" th:if="${sttWorkCode == 4}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveFindRequest(event)">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
             </a>
           </div>
-          <div class="btn-action me-4">
-            <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 5}">
-              <i class="fas fa-undo-alt m-0"></i>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 5}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="fas fa-undo-alt m-0" onclick="">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
             </a>
           </div>
-          <div class="btn-remove">
-            <a href="javascript:void(0)" th:if="${sttWorkCode == 5}">
-              <i class="far fa-trash-alt m-0"></i>
+          <div class="btn-remove" th:if="${sttWorkCode == 5}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveFindRequest(event)">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
             </a>
           </div>
-          <div class="btn-action" style="margin-right: 62px;">
-            <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 2}">
-              <i class="far fa-comment-dots text-warning m-0"></i>
+          <div class="btn-action" style="margin-right: 62px;" th:if="${sttWorkCode == 2}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="far fa-comment-dots text-warning m-0" onclick=""></i>
+              <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
             </a>
           </div>
-          <div class="btn-action me-4">
-            <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 2}">
-              <i class="far fa-edit m-0"></i>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 2}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="far fa-edit m-0" onclick="">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
             </a>
           </div>
-          <div class="btn-remove">
-            <a href="javascript:void(0)" th:if="${sttWorkCode == 2}">
-              <i class="far fa-trash-alt m-0"></i>
+          <div class="btn-remove" th:if="${sttWorkCode == 2}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveFindRequest(event)">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
             </a>
           </div>
-          <div class="btn-action me-4">
-            <a class="me-2" href="javascript:void(0)" th:if="${sttWorkCode == 6}">
-              <i class="far fa-edit m-0"></i>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 6}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="far fa-edit m-0" onclick="">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
             </a>
           </div>
-          <div class="btn-remove">
-            <a href="javascript:void(0)" th:if="${sttWorkCode == 6}">
-              <i class="far fa-trash-alt m-0"></i>
+          <div class="btn-remove" th:if="${sttWorkCode == 6}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveFindRequest(event">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="flex">

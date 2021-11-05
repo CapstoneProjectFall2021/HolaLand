@@ -75,4 +75,9 @@ public class WorkRequestFindJobRepositoryImpl implements WorkRequestFindJobRepos
                 obj.isWorkRequestFindJobDeleted()
         ) > 0;
     }
+
+    @Override
+    public boolean delete(int id) throws DataAccessException {
+        return jdbcTemplate.update(WORK_REQUEST_FIND_JOB_DELETED_ONE, id) > 0;
+    }
 }
