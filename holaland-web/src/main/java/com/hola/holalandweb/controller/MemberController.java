@@ -100,7 +100,8 @@ public class MemberController {
             System.out.println("There was a error " + bindingResult);
             return "404";
         }
-        
+        memberService.update(updateMember);
+        backToMembers(model);
         return "members";
     }
 
