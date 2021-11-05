@@ -94,5 +94,28 @@ public class MemberController {
     }
 
 //
+    @PostMapping("/update-member")
+    public String updateMember(@ModelAttribute("updateMember") Member updateMember, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+        memberService.update(updateMember);
+        backToMembers(model);
+        return "members";
+    }
+
+    private void backToMembers(Model model) {
+        List<Member> members = memberService.getAll();
+        List listBus = busService.getAll();
+        List listClub = clubService.getAllByType(1);
+        List listCLubType = clubTypeService.getAll();
+
+        model.addAttribute("addMember", Member.builder().build());
+        model.addAttribute("oneMember", null);
+        model.addAttribute("members", members);
+        model.addAttribute("listBus", listBus);
+        model.addAttribute("listClub", listClub);
+        model.addAttribute("listClubType", listCLubType);
     }
 }
