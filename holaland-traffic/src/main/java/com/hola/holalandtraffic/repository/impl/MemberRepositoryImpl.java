@@ -25,15 +25,7 @@ public class MemberRepositoryImpl implements MemberRepository, IRepositoryQuery 
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
-    public List<Member> getAll() throws DataAccessException {
-        return jdbcTemplate.query(MEMBER_GET_ALL, new MemberMapper());
-    }
-
-    @Override
-    public Member getOne(int id) throws DataAccessException {
-        return jdbcTemplate.queryForObject(MEMBER_GET_ONE, new MemberMapper(), id);
-    }
+    
 
     @Override
     public int save(Member obj) throws DataAccessException {
@@ -52,20 +44,7 @@ public class MemberRepositoryImpl implements MemberRepository, IRepositoryQuery 
         return keyHolder.getKey().intValue();
     }
 
-    @Override
-    public boolean update(Member obj) throws DataAccessException {
-        return jdbcTemplate.update(
-                MEMBER_UPDATE_ONE,
-                obj.getMemberName(),
-                obj.isMemberGender(),
-                obj.getMemberDob(),
-                obj.getMemberMobile(),
-                obj.getMemberEmail(),
-                obj.getMemberRankId(),
-                obj.getMemberStatusId(),
-                obj.getMemberId()
-        ) > 0;
-    }
+
 
 
     @Override
