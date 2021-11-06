@@ -20,5 +20,4 @@ public class SttWork {
     private int sttWorkCode;
     private String sttWorkValue;
     private String sttWorkIcon;
-    private int sttWorkCount;
 }
