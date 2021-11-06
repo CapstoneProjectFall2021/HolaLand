@@ -59,39 +59,7 @@ public class MemberController {
         return "members";
     }
 
-    //add member
-    @PostMapping("/add-member")
-    public String addMember(@ModelAttribute("addMember") Member addMember, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            System.out.println("There was a error " + bindingResult);
-            return "404";
-        }
-        addMember.setMemberRankId(1);
-        addMember.setMemberStatusId(1);
-
-        int memberId = memberService.save(addMember);
-        if (memberId > 0) {
-            backToMembers(model);
-            return "members";
-        } else {
-            return "404";
-        }
-    }
-
-    @GetMapping("/get-one-member")
-    public String getOneMember(@RequestParam("id") Integer id, Model model) {
-        Member member = memberService.getOne(id);
-        backToMembers(model);
-        model.addAttribute("oneMember", member);
-        return "members";
-    }
-
-    @GetMapping("/confirm-delete-member")
-    public String deleteMember(@RequestParam("id") Integer id, Model model) {
-        memberService.delete(id);
-        backToMembers(model);
-        return "members";
-    }
+    
 
 //
     @PostMapping("/update-member")
