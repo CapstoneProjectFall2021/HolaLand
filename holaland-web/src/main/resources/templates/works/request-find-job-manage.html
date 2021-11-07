@@ -126,7 +126,7 @@
               <a th:href="@{/works/request-find-job-detail(id=*{requestFindJob.workRequestFindJobId})}"
                  th:text="*{requestFindJob.workRequestFindJobTitle}"></a>
               <div class="request-info">
-                <p>Lương mong muốn: <span th:text="*{requestFindJob.workRequestFindJobExpectedSalary}"></span>/<span
+                <p>Lương mong muốn: <span th:text="*{requestFindJob.workRequestFindJobExpectedSalary}"></span>VNĐ/<span
                     th:text="*{
                       requestFindJob.workSalaryUnitId == 1 ? 'h' :
                       requestFindJob.workSalaryUnitId == 2 ? 'ngày' :
