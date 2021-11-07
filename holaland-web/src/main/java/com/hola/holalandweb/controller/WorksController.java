@@ -104,7 +104,7 @@ public class WorksController {
     public String deleteJobsApplyRequest(@RequestParam("requestId") Integer requestId, Model model) {
         boolean isCheck = workRequestApplyService.delete(requestId);
         if (isCheck) {
-            List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
+            List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(2);
             model.addAttribute("jobApplyList", jobApplyList);
             model.addAttribute("page", 2);
             return "module-works";
@@ -260,15 +260,15 @@ public class WorksController {
         // code delete
         workRequestFindJobService.delete(requestId);
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
-        List<WorkRequestFindJob> workRequestFindJobJob = workRequestFindJobService.getAllByUserIdAndTypeId(
-                1,
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 2);
+        List<WorkRequestFindJob> workRequestFindJob = workRequestFindJobService.getAllByUserIdAndTypeId(
+                2,
                 sttWorkCode
         );
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
-        model.addAttribute("requestFindJobList", workRequestFindJobJob);
-        model.addAttribute("page", 9);
+        model.addAttribute("requestFindJobList", workRequestFindJob);
+        model.addAttribute("page", 5);
         return "module-works";
     }
 
