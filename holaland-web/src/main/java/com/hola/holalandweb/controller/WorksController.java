@@ -199,6 +199,26 @@ public class WorksController {
         return "module-works";
     }
 
+    @GetMapping("/works/request-find-job-manage/delete")
+    public String getFindJobDeleteRequest(
+            @RequestParam("requestId") Integer requestId,
+            @RequestParam("code") Integer sttWorkCode,
+            Model model) {
+        // code delete
+        workRequestFindJobService.delete(requestId);
+        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 2);
+        List<WorkRequestFindJob> workRequestFindJob = workRequestFindJobService.getAllByUserIdAndTypeId(
+                2,
+                sttWorkCode
+        );
+        model.addAttribute("sttWorkCode", sttWorkCode);
+        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
+        model.addAttribute("requestFindJobList", workRequestFindJob);
+        model.addAttribute("page", 5);
+        return "module-works";
+    }
+
     @GetMapping("/works/request-recruitment-manage")
     public String getRecruitmentsPosted(Model model) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
@@ -252,25 +272,6 @@ public class WorksController {
         return "module-works";
     }
 
-    @GetMapping("/works/request-find-job-manage/delete")
-    public String getFindJobDeleteRequest(
-            @RequestParam("requestId") Integer requestId,
-            @RequestParam("code") Integer sttWorkCode,
-            Model model) {
-        // code delete
-        workRequestFindJobService.delete(requestId);
-        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 2);
-        List<WorkRequestFindJob> workRequestFindJob = workRequestFindJobService.getAllByUserIdAndTypeId(
-                2,
-                sttWorkCode
-        );
-        model.addAttribute("sttWorkCode", sttWorkCode);
-        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
-        model.addAttribute("requestFindJobList", workRequestFindJob);
-        model.addAttribute("page", 5);
-        return "module-works";
-    }
 
     private Map getSttCountMap(List<SttWork> sttWorkList, int userId) {
         SttWorkRequestRecruitmentFindJobCount sttCount = sttWorkRequestRecruitmentFindJobCountService.getOneByUserId(userId);
