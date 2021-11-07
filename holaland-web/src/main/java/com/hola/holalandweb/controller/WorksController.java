@@ -27,7 +27,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
-import java.util.*;
+import java.util.Calendar;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class WorksController {
@@ -182,7 +185,7 @@ public class WorksController {
     }
 
     @GetMapping("/works/request-find-job-manage/status")
-    public String getJobsPostedCode(
+    public String getJobsPostedStatus(
             @RequestParam("code") Integer sttWorkCode,
             Model model
     ) {
@@ -235,7 +238,7 @@ public class WorksController {
     }
 
     @GetMapping("/works/request-recruitment-manage/status")
-    public String getRecruitmentsPostedCode(
+    public String getRecruitmentsPostedStatus(
             @RequestParam("code") Integer sttWorkCode,
             Model model
     ) {
@@ -271,7 +274,6 @@ public class WorksController {
         model.addAttribute("page", 9);
         return "module-works";
     }
-
 
     private Map getSttCountMap(List<SttWork> sttWorkList, int userId) {
         SttWorkRequestRecruitmentFindJobCount sttCount = sttWorkRequestRecruitmentFindJobCountService.getOneByUserId(userId);

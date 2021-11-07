@@ -1,0 +1,258 @@
+<div class="col-right" th:fragment="online-store">
+  <!-- Online store -->
+  <div class="online-store">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Thông tin cửa hàng</h1>
+      </div>
+    </div>
+    <!-- Online store info -->
+    <div class="row">
+      <div class="col-12">
+        <div class="label-info online-store-title">
+          <div class="row">
+            <div class="col-lg-12 col-xl-9">
+              <div class="flex">
+                <div class="icon-circle">
+                  <img class="media-object" th:src="@{'/images/system/v.png'}" alt="">
+                </div>
+                <div class="content-body">
+                  <h3>Quán cơm Phương Nguyễn</h3>
+                  <div class="description">
+                    Chuyên cơm - bún - phở và đồ ăn vặt.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 col-xl-3">
+              <div class="rate-area">
+                <div>
+                  <h1>4.5</h1>
+                  <div class="star-rate">
+                    <i class="fas fa-star checked"></i>
+                    <i class="fas fa-star checked"></i>
+                    <i class="fas fa-star checked"></i>
+                    <i class="fas fa-star checked"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <div class="reviews">132 đánh giá</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Tabs - Pills -->
+        <div class="menu">
+          <ul class="row nav nav-pills" id="pills-tab" role="tablist">
+            <li class="nav-item col-sm-12 col-md-4" role="presentation">
+              <a class="nav-link active" id="pills-food-tab" data-bs-toggle="pill" data-bs-target="#pills-food"
+                 type="button" role="tab" aria-controls="pills-food" aria-selected="true">Thực đơn<sup
+                  class="ms-2 main-text">8</sup></a>
+            </li>
+            <li class="nav-item col-sm-12 col-md-4" role="presentation">
+              <a class="nav-link" id="pills-comment-tab" data-bs-toggle="pill" data-bs-target="#pills-comment"
+                 type="button" role="tab" aria-controls="pills-comment" aria-selected="false">Bình luận<sup
+                  class="ms-2 main-text">23</sup></a>
+            </li>
+            <li class="nav-item col-sm-12 col-md-4" role="presentation">
+              <a href="javascript:void(0)" class="nav-link" data-bs-toggle="modal" data-bs-target="#rateFoodModal">Đánh
+                giá<sup class="ms-2 main-text">4.5</sup></a>
+            </li>
+          </ul>
+        </div>
+        <!-- Tab content -->
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-food" role="tabpanel" aria-labelledby="pills-food-tab">
+            <div class="row m-mb-16">
+              <div class="col-md-12">
+                <div class="list-tag">
+                  <div class="tags">
+                    <a href="#" class="tag">Cơm</a>
+                    <a href="#" class="tag">Bánh mỳ</a>
+                    <a href="#" class="tag">Đồ ăn vặt</a>
+                    <a href="#" class="tag">Đồ ăn nhanh</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="list-food">
+              <div class="row">
+                <div class="col-lg-12 col-xl-6 col-xxl-6">
+                  <div class="food label-info m-mb-16">
+                    <div class="btn-action">
+                      <a href="javascript:void(0)" onclick="showToast()">
+                        <i class="fas fa-plus m-0"></i>
+                      </a>
+                    </div>
+                    <div class="flex">
+                      <div class="icon-circle">
+                        <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
+                      </div>
+                      <div class="content-body">
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal">
+                          Cơm hến Xào
+                        </a>
+                        <div class="food-info">
+                          <p>Giá: 35.000<sup>đ</sup></p>
+                          <p>Đã bán: 50</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-xl-6 col-xxl-6">
+                  <div class="food label-info m-mb-16">
+                    <div class="btn-action">
+                      <a href="javascript:void(0)" onclick="showToast()">
+                        <i class="fas fa-plus m-0"></i>
+                      </a>
+                    </div>
+                    <div class="flex">
+                      <div class="icon-circle">
+                        <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
+                      </div>
+                      <div class="content-body">
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal">
+                          Cơm gà vị Thái
+                        </a>
+                        <div class="food-info">
+                          <p>Giá: 35.000<sup>đ</sup></p>
+                          <p>Đã bán: 123</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-xl-6 col-xxl-6">
+                  <div class="food label-info m-mb-16">
+                    <div class="btn-action">
+                      <a href="javascript:void(0)" onclick="showToast()">
+                        <i class="fas fa-plus m-0"></i>
+                      </a>
+                    </div>
+                    <div class="flex">
+                      <div class="icon-circle">
+                        <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
+                      </div>
+                      <div class="content-body">
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal">
+                          Cơm hến Xào
+                        </a>
+                        <div class="food-info">
+                          <p>Giá: 35.000<sup>đ</sup></p>
+                          <p>Đã bán: 50</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-xl-6 col-xxl-6">
+                  <div class="food label-info m-mb-16">
+                    <div class="btn-action">
+                      <a href="javascript:void(0)" onclick="showToast()">
+                        <i class="fas fa-plus m-0"></i>
+                      </a>
+                    </div>
+                    <div class="flex">
+                      <div class="icon-circle">
+                        <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
+                      </div>
+                      <div class="content-body">
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal">
+                          Cơm hến Xào
+                        </a>
+                        <div class="food-info">
+                          <p>Giá: 35.000<sup>đ</sup></p>
+                          <p>Đã bán: 50</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-comment" role="tabpanel" aria-labelledby="pills-comment-tab">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="list-comment">
+                  <div class="panel pb-1">
+                    <div class="comment flex">
+                      <div class="icon-circle">
+                        <img class="media-object" th:src="@{'/images/system/v.png'}" alt="">
+                        <div class="star-rate">
+                          <i class="fas fa-star checked"></i>
+                          <i class="fas fa-star checked"></i>
+                          <i class="fas fa-star checked"></i>
+                          <i class="fas fa-star checked"></i>
+                          <i class="fas fa-star"></i>
+                        </div>
+                      </div>
+                      <div class="comment-area">
+                        <div class="comment-content">
+                          <h3>Nguyễn Văn A</h3>
+                          <p>Giống thiệt, một giọt nước đóng chai và một giọt nước ao :)))))))</p>
+                        </div>
+                        <div class="time">
+                          <p>14 giờ trước</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="comment flex">
+                      <div class="icon-circle">
+                        <img class="media-object" th:src="@{'/images/system/v.png'}" alt="">
+                        <div class="star-rate">
+                          <i class="fas fa-star checked"></i>
+                          <i class="fas fa-star checked"></i>
+                          <i class="fas fa-star checked"></i>
+                          <i class="fas fa-star checked"></i>
+                          <i class="fas fa-star"></i>
+                        </div>
+                      </div>
+                      <div class="comment-area">
+                        <div class="comment-content">
+                          <h3>Nguyễn Văn Vinh</h3>
+                          <p>Giống thiệt, một giọt nước đóng chai và một giọt nước ao :))))))). Giống thiệt , một giọt
+                            nước đóng chai và một giọt nước ao :)))))))</p>
+                        </div>
+                        <div class="time">
+                          <p>23 giờ trước</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="comment flex">
+                      <div class="icon-circle">
+                        <img class="media-object" th:src="@{'/images/system/v2.png'}" alt="">
+                        <div class="star-rate">
+                          <i class="fas fa-star checked"></i>
+                          <i class="fas fa-star checked"></i>
+                          <i class="fas fa-star checked"></i>
+                          <i class="fas fa-star checked"></i>
+                          <i class="fas fa-star checked"></i>
+                        </div>
+                      </div>
+                      <div class="comment-area">
+                        <div class="comment-content">
+                          <h3>Nguyễn Ngọc Minh Anh</h3>
+                          <p>Giống thiệt, một giọt nước đóng chai và một giọt nước ao :))))))). Giống thiệt , một giọt
+                            nước đóng chai.</p>
+                        </div>
+                        <div class="time">
+                          <p>22/09/2021</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
