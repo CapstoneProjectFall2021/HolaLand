@@ -47,3 +47,7 @@ function confirmRemoveFindRequest(e) {
   document.getElementById("btn-delete-find-request").href =
       "/works/request-find-job-manage/delete?requestId=" + requestId + "&code=" + sttWorkCode;
 }
+
+function reasonRejectRequest() {
+  openModal("reasonRejectModal");
+}
