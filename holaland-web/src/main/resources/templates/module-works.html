@@ -179,7 +179,10 @@
   <!-- Import modal confirm remove recruitment request -->
   <div th:replace="works/modal/modal-confirm-remove-find-request :: confirmRemoveFindRequest"></div>
 </th:block>
-
+<th:block th:if="${page == 5}">
+  <!-- Import modal reason reject -->
+  <div th:replace="works/modal/modal-reason-reject :: reasonReject"></div>
+</th:block>
 <th:block th:if="${page == 6}">
   <!-- Import modal request find job preview -->
   <div th:replace="works/modal/modal-request-find-job-preview :: findJobPreviewModal"></div>
