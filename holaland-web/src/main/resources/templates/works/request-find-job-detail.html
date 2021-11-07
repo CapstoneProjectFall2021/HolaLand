@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-12 col-lg-12 col-xl-3">
               <div class="apply-area">
-                <div class="apply-area-btn">
+                <div class="apply-area-btn" sec:authorize="hasRole('RECRUITER')">
                   <div class="btn-apply">
                     <a href="javascript:void(0)" class="btn btn-md btn-success" data-bs-toggle="modal"
                        data-bs-target="#confirmHireModal">

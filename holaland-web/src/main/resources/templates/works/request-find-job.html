@@ -16,7 +16,7 @@
                             <i th:classappend="*{requestType.workRequestTypeIcon}"></i>
                         </div>
                         <div class="number">
-                            <h4 class="accent" th:text="*{requestType.workRequestTypeCountRequestFindJob}"></h4>
+                            <h4 th:text="*{requestType.workRequestTypeCountRequestFindJob}"></h4>
                         </div>
                     </div>
                     <div class="description club-type" th:text="*{requestType.workRequestTypeName}">
@@ -40,7 +40,7 @@
                             <img class="media-object" th:src="@{'/images/system/job.png'}" alt="">
                         </div>
                         <div class="content-body">
-                            <h4 th:text="*{worker.workRequestFindJobTitle}"></h4>
+                            <h4 class="accent" th:text="*{worker.workRequestFindJobTitle}"></h4>
                             <div class="request-info">
                                 <p>Lương mong muốn: <span th:text="*{worker.workRequestFindJobExpectedSalary}"></span>/<span
                                         th:text="*{

@@ -104,7 +104,7 @@ public class WorksController {
     public String deleteJobsApplyRequest(@RequestParam("requestId") Integer requestId, Model model) {
         boolean isCheck = workRequestApplyService.delete(requestId);
         if (isCheck) {
-            List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(1);
+            List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(2);
             model.addAttribute("jobApplyList", jobApplyList);
             model.addAttribute("page", 2);
             return "module-works";
@@ -115,7 +115,7 @@ public class WorksController {
 
     @GetMapping("/works/jobs-save")
     public String getJobsSave(Model model) {
-        List<WorkRequestRecruitment> jobSaveList = workRequestRecruitmentSavedService.getAllByAccountId(1);
+        List<WorkRequestRecruitment> jobSaveList = workRequestRecruitmentSavedService.getAllByAccountId(2);
         model.addAttribute("jobSaveList", jobSaveList);
         model.addAttribute("page", 4);
         return "module-works";
@@ -125,7 +125,7 @@ public class WorksController {
     public String deleteJobsSaveRequest(@RequestParam("requestId") Integer requestId, Model model) {
         boolean isCheck = workRequestRecruitmentSavedService.delete(requestId);
         if (isCheck) {
-            List<WorkRequestRecruitment> jobSaveList = workRequestRecruitmentSavedService.getAllByAccountId(1);
+            List<WorkRequestRecruitment> jobSaveList = workRequestRecruitmentSavedService.getAllByAccountId(2);
             model.addAttribute("jobSaveList", jobSaveList);
             model.addAttribute("page", 4);
             return "module-works";
