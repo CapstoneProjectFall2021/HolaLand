@@ -52,7 +52,7 @@ public class MemberController {
         sendEmailService.send(
                 "HolaLand",
                 "Mã kích hoạt của bạn là: 123456xxx",
-                
+                member.getMemberEmail()
         );
         model.addAttribute("send", "- Gửi email thành công!");
         backToMembers(model);
