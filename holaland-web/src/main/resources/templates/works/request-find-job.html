@@ -42,12 +42,13 @@
                         <div class="content-body">
                             <h4 class="accent" th:text="*{worker.workRequestFindJobTitle}"></h4>
                             <div class="request-info">
-                                <p>Lương mong muốn: <span th:text="*{worker.workRequestFindJobExpectedSalary}"></span>/<span
+                                <p>Lương mong muốn: <span th:text="*{worker.workRequestFindJobExpectedSalary}"></span>
+                                    <span
                                         th:text="*{
-                                        worker.workSalaryUnitId == 1 ? 'h' :
-                                        worker.workSalaryUnitId == 2 ? 'ngày' :
-                                        worker.workSalaryUnitId == 3 ? 'tuần' : 'tháng'
-                                    }"></span>
+                                        worker.workSalaryUnitId == 1 ? 'VNĐ/h' :
+                                        worker.workSalaryUnitId == 2 ? 'VNĐ/Ngày' :
+                                        worker.workSalaryUnitId == 3 ? 'VNĐ/Tuần' : 'VNĐ/Tháng'}"
+                                    ></span>
                                 </p>
                                 <p>Thời hạn: <span th:text="*{worker.workRequestFindJobEndDateTime}"></span></p>
                             </div>
