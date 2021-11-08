@@ -1,5 +1,7 @@
 package com.hola.holalandweb.controller;
 
+import com.hola.holalandcore.entity.UserDetail;
+import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandwork.entity.SttWork;
 import com.hola.holalandwork.entity.SttWorkRequestRecruitmentFindJobCount;
@@ -42,6 +44,7 @@ public class WorksController {
     private final WorkRequestFindJobService workRequestFindJobService;
     private final WorkPaymentMethodService workPaymentMethodService;
     private final WorkTimeService workTimeService;
+    private final UserDetailService userDetailService;
     private final SttWorkService sttWorkService;
     private final SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService;
 
@@ -53,6 +56,7 @@ public class WorksController {
                            WorkRequestFindJobService workRequestFindJobService,
                            WorkPaymentMethodService workPaymentMethodService,
                            WorkTimeService workTimeService,
+                           UserDetailService userDetailService,
                            SttWorkService sttWorkService,
                            SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
@@ -62,6 +66,7 @@ public class WorksController {
         this.workRequestFindJobService = workRequestFindJobService;
         this.workPaymentMethodService = workPaymentMethodService;
         this.workTimeService = workTimeService;
+        this.userDetailService = userDetailService;
         this.sttWorkService = sttWorkService;
         this.sttWorkRequestRecruitmentFindJobCountService = sttWorkRequestRecruitmentFindJobCountService;
     }
@@ -521,5 +526,29 @@ public class WorksController {
         } else {
             return "404";
         }
+    }
+
+    @GetMapping("works/booked/show")
+    public String getListUserBooked(
+            @RequestParam("bookedId") Integer bookedId,
+            Model model) {
+        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, 1);
+        List<UserDetail> listBookedModal = userDetailService.getAllUserBookedByUserId(bookedId);
+        model.addAttribute("listBooked", listBooked);
+        model.addAttribute("page", 3);
+        model.addAttribute("listBookedModal", listBookedModal);
+        return "module-works";
+    }
+
+    @GetMapping("works/applied/show")
+    public String getListUserApplied(
+            @RequestParam("appliedId") Integer appliedId,
+            Model model) {
+        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, 1);
+        List<UserDetail> listAppliedModal = userDetailService.getAllUserAppliedByUserId(appliedId);
+        model.addAttribute("listApplied", listApplied);
+        model.addAttribute("page", 8);
+        model.addAttribute("listAppliedModal", listAppliedModal);
+        return "module-works";
     }
 }

@@ -22,6 +22,18 @@ function confirmDeleteRequestSave(e) {
   document.getElementById("btn-delete-request-save").href = "/works/jobs-save/delete?requestId=" + requestId;
 }
 
+function getIdOfRequestBooked(e) {
+  const bookedId = e.target.firstElementChild.innerHTML;
+  openModal("listBookedModal");
+  document.getElementById("btn-show-list-booked").href = "/works/booked/show?bookedId=" + bookedId;
+}
+
+function getIdOfRequestApplied(e) {
+  const appliedId = e.target.firstElementChild.innerHTML;
+  openModal("listAppliedModal");
+  document.getElementById("btn-show-list-user-applied").href = "/works/applied/show?appliedId=" + appliedId;
+}
+
 function confirmRemoveRecruitmentRequest(e) {
   const requestId = e.target.firstElementChild.innerHTML;
   let url = new URL(window.location.href);

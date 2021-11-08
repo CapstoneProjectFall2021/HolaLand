@@ -230,6 +230,17 @@
     const myModal = new bootstrap.Modal(document.getElementById('confirmRepostModal'));
     myModal.show();
 </script>
+
+<script th:if="${listBookedModal != null && listBookedModal.size() !=0}">
+  const myModal = new bootstrap.Modal(document.getElementById('listBookedModal'));
+  myModal.show();
+</script>
+
+<script th:if="${listAppliedModal != null && listAppliedModal.size() !=0}">
+  const myModal = new bootstrap.Modal(document.getElementById('listAppliedModal'));
+  myModal.show();
+</script>
+
 <script>
   function showToast() {
     const toast = new bootstrap.Toast(document.getElementById('toast-success'));

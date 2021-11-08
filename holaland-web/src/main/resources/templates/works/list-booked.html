@@ -10,8 +10,10 @@
       <div class="col-md-12" th:each="work : ${listBooked}">
         <div class="label-info m-mb-16">
           <div class="btn-action">
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#listBookedModal">
-              2 <i class="fas fa-user-friends m-0"></i>
+            <a id="btn-show-list-booked" href="javascript:void(0)">2
+              <i class="fas fa-user-friends m-0" onclick="getIdOfRequestBooked(event)">
+              <span th:text="${work.workRequestFindJobId}"></span>
+            </i>
             </a>
           </div>
           <div class="flex">

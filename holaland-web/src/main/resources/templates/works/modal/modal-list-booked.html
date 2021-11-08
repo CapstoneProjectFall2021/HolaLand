@@ -19,27 +19,12 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
+          <tr th:each="userDetail : ${listBookedModal}">
             <td>1</td>
-            <td>Phạm Ngọc</td>
-            <td>11/11/1994</td>
-            <td>0983 875 125</td>
-            <td>Nam</td>
-            <td class="text-end">
-              <a href="javascript:void(0)" class="me-2">
-                <i class="fas fa-check text-success"></i>
-              </a>
-              <a href="javascript:void(0)">
-                <i class="fas fa-ban text-danger"></i>
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Trần Minh</td>
-            <td>11/11/1999</td>
-            <td>0983 875 999</td>
-            <td>Nữ</td>
+            <td><span th:text="*{userDetail.userDetailName}"></span></td>
+            <td><span th:text="*{userDetail.userDetailDob}"></span></td>
+            <td><span th:text="*{userDetail.userDetailPhone}"></span></td>
+            <td><span th:text="*{userDetail.userDetailGender == 1 ? 'Nam' : 'Nữ' }"></span></td>
             <td class="text-end">
               <a href="javascript:void(0)" class="me-2">
                 <i class="fas fa-check text-success"></i>
