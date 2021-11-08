@@ -37,6 +37,7 @@ public interface IRepositoryQuery {
             "       T1.work_request_recruitment_experience_required,\n" +
             "       T1.work_request_recruitment_gender_required,\n" +
             "       T1.work_request_recruitment_work_location,\n" +
+            "       T1.work_request_recruitment_note,\n" +
             "       T1.work_request_recruitment_deleted\n" +
             "FROM work_request_recruitment T1\n" +
             "LEFT OUTER JOIN work_request_apply T2\n" +
@@ -68,6 +69,7 @@ public interface IRepositoryQuery {
             "       T1.work_request_recruitment_experience_required,\n" +
             "       T1.work_request_recruitment_gender_required,\n" +
             "       T1.work_request_recruitment_work_location,\n" +
+            "       T1.work_request_recruitment_note,\n" +
             "       T1.work_request_recruitment_deleted\n" +
             "FROM work_request_recruitment T1\n" +
             "LEFT OUTER JOIN work_request_recruitment_saved T2\n" +
@@ -143,6 +145,7 @@ public interface IRepositoryQuery {
             "T1.work_request_recruitment_experience_required,\n" +
             "T1.work_request_recruitment_gender_required,\n" +
             "T1.work_request_recruitment_work_location,\n" +
+            "T1.work_request_recruitment_note,\n" +
             "T1.work_request_recruitment_deleted\n" +
             "FROM work_request_recruitment T1\n" +
             "INNER JOIN work_request_apply T2\n" +
@@ -168,6 +171,7 @@ public interface IRepositoryQuery {
             "T1.work_request_find_job_personal_experience,\n" +
             "T1.work_request_find_job_expected_location,\n" +
             "T1.work_request_find_job_expected_salary,\n" +
+            "T1.work_request_find_job_note,\n" +
             "T1.work_request_find_job_deleted\n" +
             "FROM work_request_find_job T1\n" +
             "INNER JOIN work_request_book T2\n" +
