@@ -78,13 +78,7 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/get-one-member")
-    public String getOneMember(@RequestParam("id") Integer id, Model model) {
-        Member member = memberService.getOne(id);
-        backToMembers(model);
-        model.addAttribute("oneMember", member);
-        return "members";
-    }
+    
 
     @GetMapping("/confirm-delete-member")
     public String deleteMember(@RequestParam("id") Integer id, Model model) {
