@@ -89,7 +89,7 @@
               <hr/>
             </li>
             <li>
-              <a th:href="@{/}">
+              <a href="javascript:void(0)" onclick="goBack()">
                 <i class="fas fa-chevron-left fa-fw"></i>Quay lại
               </a>
             </li>
@@ -199,6 +199,10 @@
   <!-- Import modal reason reject -->
   <div th:replace="works/modal/modal-reason-reject :: reasonReject"></div>
 </th:block>
+<th:block th:if="${page == 9}">
+  <!-- Import modal confirm repost -->
+  <div th:replace="works/modal/modal-confirm-repost :: confirmRepost"></div>
+</th:block>
 <th:block th:if="${page == 10}">
   <!-- Import modal request find job preview -->
   <div th:replace="works/modal/modal-request-recruitment-preview :: recruitmentPreviewModal"></div>
@@ -222,10 +226,22 @@
 <!--  const myModal = new bootstrap.Modal(document.getElementById(modal));-->
 <!--  myModal.show();-->
 <!--</script>-->
+<script th:if="${listUserApplied != null && listUserApplied.size() != 0}">
+    const myModal = new bootstrap.Modal(document.getElementById('listAppliedModal'));
+    myModal.show();
+</script>
+<script th:if="${requestId != null}">
+    const myModal = new bootstrap.Modal(document.getElementById('confirmRepostModal'));
+    myModal.show();
+</script>
 <script>
   function showToast() {
     const toast = new bootstrap.Toast(document.getElementById('toast-success'));
     toast.show();
+  }
+  function goBack()
+  {
+      window.history.back();
   }
 </script>
 

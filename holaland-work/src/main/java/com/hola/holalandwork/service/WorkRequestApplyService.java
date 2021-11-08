@@ -1,5 +1,6 @@
 package com.hola.holalandwork.service;
 
+import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandwork.entity.WorkRequestApply;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import org.springframework.dao.DataAccessException;
@@ -13,6 +14,8 @@ public interface WorkRequestApplyService {
     List<WorkRequestRecruitment> getAllAccountId(int accountId) throws DataAccessException;
 
     WorkRequestApply getOne(int id) throws DataAccessException;
+
+    List<UserDetail> getAllUserApplied(int id, int status) throws DataAccessException;
 
     boolean save(WorkRequestApply obj) throws DataAccessException;
 

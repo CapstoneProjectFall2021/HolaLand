@@ -19,27 +19,12 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>1</td>
-            <td>Phạm Ngọc Thanh</td>
-            <td>11/11/1994</td>
-            <td>0983 875 125</td>
-            <td>Nam</td>
-            <td class="text-end">
-              <a href="javascript:void(0)" class="me-2">
-                <i class="fas fa-check text-success"></i>
-              </a>
-              <a href="javascript:void(0)">
-                <i class="fas fa-ban text-danger"></i>
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Trần Minh Ngọc</td>
-            <td>11/11/1999</td>
-            <td>0983 875 999</td>
-            <td>Nữ</td>
+          <tr th:each="user, index : ${listUserApplied}">
+            <td th:text="*{index.count}"></td>
+            <td th:text="*{user.userDetailName}"></td>
+            <td th:text="*{user.userDetailDob}"></td>
+            <td th:text="*{user.userDetailPhone}"></td>
+            <td th:text="*{user.userDetailGender ? 'Nam' : 'Nữ'}"></td>
             <td class="text-end">
               <a href="javascript:void(0)" class="me-2">
                 <i class="fas fa-check text-success"></i>
