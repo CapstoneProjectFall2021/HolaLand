@@ -1,7 +1,5 @@
 package com.hola.holalandwork.repository.impl;
 
-import com.hola.holalandcore.entity.UserDetail;
-import com.hola.holalandcore.mapper.UserDetailMapper;
 import com.hola.holalandwork.entity.WorkRequestApply;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import com.hola.holalandwork.mapper.WorkRequestApplyMapper;
@@ -38,11 +36,6 @@ public class WorkRequestApplyRepositoryImpl implements WorkRequestApplyRepositor
     @Override
     public WorkRequestApply getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(WORK_REQUEST_APPLY_GET_ONE, new WorkRequestApplyMapper(), id);
-    }
-
-    @Override
-    public List<UserDetail> getAllUserApplied(int id, int status) throws DataAccessException {
-        return jdbcTemplate.query(WORK_REQUEST_APPLY_GET_ALL_USER_APPLIED_BY_REQUEST_RECRUITMENT_ID, new UserDetailMapper(), id, status);
     }
 
     @Override

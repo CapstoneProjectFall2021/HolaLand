@@ -1,6 +1,5 @@
 package com.hola.holalandwork.service.impl;
 
-import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandwork.entity.WorkRequestApply;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import com.hola.holalandwork.repository.WorkRequestApplyRepository;
@@ -34,11 +33,6 @@ public class WorkRequestApplyServiceImpl implements WorkRequestApplyService {
     @Override
     public WorkRequestApply getOne(int id) throws DataAccessException {
         return workRequestApplyRepository.getOne(id);
-    }
-
-    @Override
-    public List<UserDetail> getAllUserApplied(int id, int status) throws DataAccessException {
-        return workRequestApplyRepository.getAllUserApplied(id, status);
     }
 
     @Override

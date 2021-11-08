@@ -12,11 +12,4 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>holaland-work</name>
     <description>holaland-work</description>
-    <dependencies>
-        <dependency>
-            <groupId>com.hola</groupId>
-            <artifactId>holaland-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 </project>
