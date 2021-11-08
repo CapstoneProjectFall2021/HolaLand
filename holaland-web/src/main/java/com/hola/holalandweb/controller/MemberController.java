@@ -47,7 +47,13 @@ public class MemberController {
     }
 
     @GetMapping("/send-email")
-    
+    public String sendEmail(@RequestParam("id") Integer id, Model model) {
+        Member member = memberService.getOne(id);
+        sendEmailService.send(
+                "HolaLand",
+                "Mã kích hoạt của bạn là: 123456xxx",
+                
+        );
         model.addAttribute("send", "- Gửi email thành công!");
         backToMembers(model);
         return "members";
