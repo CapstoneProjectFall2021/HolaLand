@@ -1,6 +1,5 @@
 package com.hola.holalandweb.controller;
 
-import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandwork.entity.SttWork;
 import com.hola.holalandwork.entity.SttWorkRequestRecruitmentFindJobCount;
@@ -231,8 +230,6 @@ public class WorksController {
                 1,
                 sttWorkList.get(0).getSttWorkCode()
         );
-        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
-        model.addAttribute("newRequestRecruitment", newRequestRecruitment);
         model.addAttribute("sttWorkCode", sttWorkList.get(0).getSttWorkCode());
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
@@ -251,8 +248,6 @@ public class WorksController {
                 1,
                 sttWorkCode
         );
-        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
-        model.addAttribute("newRequestRecruitment", newRequestRecruitment);
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
@@ -273,8 +268,6 @@ public class WorksController {
                 1,
                 sttWorkCode
         );
-        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
-        model.addAttribute("newRequestRecruitment", newRequestRecruitment);
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
@@ -464,75 +457,5 @@ public class WorksController {
         model.addAttribute("listBooked", listBooked);
         model.addAttribute("page", 3);
         return "module-works";
-    }
-
-    @GetMapping("works/list-applied/users-applied")
-    public String getListUserApplied(
-            @RequestParam("requestId") Integer requestId,
-            Model model) {
-        List<UserDetail> listUserApplied = workRequestApplyService.getAllUserApplied(requestId, Constants.STT_WORK_CODE_WAITING_REPOSITORY);
-        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, Constants.STT_WORK_CODE_WAITING_REPOSITORY);
-        model.addAttribute("listUserApplied", listUserApplied);
-        model.addAttribute("listApplied", listApplied);
-        model.addAttribute("page", 8);
-        return "module-works";
-    }
-
-    @GetMapping("/works/request-recruitment-manage/repost-request-recruitment")
-    public String getFormRepostRequestRecruitment(
-            @RequestParam("requestId") Integer requestId,
-            @RequestParam("code") Integer sttWorkCode,
-            Model model
-    ) {
-        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
-        List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
-                1,
-                sttWorkCode
-        );
-        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
-        model.addAttribute("requestId",requestId);
-        model.addAttribute("newRequestRecruitment", newRequestRecruitment);
-        model.addAttribute("sttWorkCode", sttWorkCode);
-        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
-        model.addAttribute("requestRecruitmentList", workRequestRecruitments);
-        model.addAttribute("page", 9);
-        return "module-works";
-    }
-
-    @PostMapping("/repost-request-recruitment")
-    public String repostRequestRecruitment(
-            @ModelAttribute("newRequestRecruitment") WorkRequestRecruitment newRequestRecruitment,
-            BindingResult bindingResult
-    ) {
-        if (bindingResult.hasErrors()) {
-            System.out.println("There was a error " + bindingResult);
-            return "404";
-        }
-        Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-        WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(newRequestRecruitment.getWorkRequestRecruitmentId());
-        newRequestRecruitment.setUserId(requestRecruitment.getUserId());
-        newRequestRecruitment.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
-        newRequestRecruitment.setWorkRequestTypeId(requestRecruitment.getWorkRequestTypeId());
-        newRequestRecruitment.setWorkSalaryUnitId(requestRecruitment.getWorkSalaryUnitId());
-        newRequestRecruitment.setWorkPaymentMethodId(requestRecruitment.getWorkPaymentMethodId());
-        newRequestRecruitment.setWorkRequestRecruitmentTitle(requestRecruitment.getWorkRequestRecruitmentTitle());
-        newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
-        newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
-        newRequestRecruitment.setWorkRequestRecruitmentDescription(requestRecruitment.getWorkRequestRecruitmentDescription());
-        newRequestRecruitment.setWorkRequestRecruitmentRequirement(requestRecruitment.getWorkRequestRecruitmentRequirement());
-        newRequestRecruitment.setWorkRequestRecruitmentBenefit(requestRecruitment.getWorkRequestRecruitmentBenefit());
-        newRequestRecruitment.setWorkRequestRecruitmentSalary(requestRecruitment.getWorkRequestRecruitmentSalary());
-        newRequestRecruitment.setWorkRequestRecruitmentQuantity(requestRecruitment.getWorkRequestRecruitmentQuantity());
-        newRequestRecruitment.setWorkRequestRecruitmentExperienceRequirement(requestRecruitment.isWorkRequestRecruitmentExperienceRequirement());
-        newRequestRecruitment.setWorkRequestRecruitmentGenderRequirement(requestRecruitment.isWorkRequestRecruitmentGenderRequirement());
-        newRequestRecruitment.setWorkRequestRecruitmentWorkLocation(requestRecruitment.getWorkRequestRecruitmentWorkLocation());
-        newRequestRecruitment.setWorkRequestRecruitmentDeleted(requestRecruitment.isWorkRequestRecruitmentDeleted());
-        boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
-        if (isCheck) {
-            return "redirect:" + "/works/request-recruitment-manage";
-        } else {
-            return "404";
-        }
     }
 }

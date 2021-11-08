@@ -189,18 +189,4 @@ public interface IRepositoryQuery {
             "SET work_request_recruitment_saved_deleted = 1\n" +
             "WHERE work_request_recruitment_saved_id = ?";
 
-    String WORK_REQUEST_APPLY_GET_ALL_USER_APPLIED_BY_REQUEST_RECRUITMENT_ID = "SELECT\n" +
-            "       T1.user_detail_id,\n" +
-            "       T1.user_id,\n" +
-            "       T1.user_name,\n" +
-            "       T1.user_dob,\n" +
-            "       T1.user_gender,\n" +
-            "       T1.user_phone,\n" +
-            "       T1.user_email\n" +
-            "FROM user_detail T1\n" +
-            "INNER JOIN work_request_apply T2\n" +
-            "ON T1.user_id = T2.user_id\n" +
-            "WHERE T2.work_request_recruitment_id = ?\n" +
-            "AND T2.stt_work_code = ?\n" +
-            "AND T2.work_request_apply_deleted = 0";
 }
