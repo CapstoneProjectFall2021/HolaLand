@@ -28,4 +28,9 @@ public class WorkRequestBookServiceImpl implements WorkRequestBookService {
     public WorkRequestBook getOne(int id) throws DataAccessException {
         return workRequestBookRepository.getOne(id);
     }
+
+    @Override
+    public boolean save(WorkRequestBook obj) throws DataAccessException {
+        return workRequestBookRepository.save(obj);
+    }
 }

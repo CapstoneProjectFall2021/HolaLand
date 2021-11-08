@@ -44,6 +44,8 @@ public interface IRepositoryQuery {
             "WHERE T2.user_id = ?\n" +
             "AND T1.work_request_recruitment_deleted = 0\n"+
             "AND T2.work_request_apply_deleted = 0";
+    String INSERT_WORK_REQUEST_APPLY = "INSERT INTO work_request_apply (user_id, work_request_recruitment_id," +
+            " stt_work_code, work_request_apply_deleted) VALUES(?, ?, ?, ?)";
 
     String WORK_REQUEST_RECRUITMENT_SAVED_GET_ALL = "SELECT * FROM work_request_recruitment_saved WHERE work_request_recruitment_saved_deleted = 0";
     String WORK_REQUEST_RECRUITMENT_SAVED_GET_ONE = "SELECT * FROM work_request_recruitment_saved WHERE work_request_recruitment_saved_id = ? AND work_request_recruitment_saved_deleted = 0";
@@ -73,9 +75,13 @@ public interface IRepositoryQuery {
             "WHERE T2.user_id = ?\n" +
             "AND T1.work_request_recruitment_deleted = 0\n" +
             "AND T2.work_request_recruitment_saved_deleted = 0";
+    String INSERT_WORK_REQUEST_SAVED = "INSERT INTO work_request_recruitment_saved (user_id," +
+            " work_request_recruitment_id, work_request_recruitment_saved_deleted) VALUES(?, ?, ?)";
 
     String WORK_REQUEST_BOOK_GET_ALL = "SELECT * FROM work_request_book WHERE work_request_book_deleted = 0";
     String WORK_REQUEST_BOOK_GET_ONE = "SELECT * FROM work_request_book WHERE work_request_book_id = ? AND work_request_book_deleted = 0";
+    String INSERT_WORK_REQUEST_BOOK = "INSERT INTO work_request_book (user_id, work_request_find_job_id," +
+            " stt_work_code, work_request_book_deleted) VALUES(?, ?, ?, ?)";
 
     String WORK_PAYMENT_METHOD_GET_ALL = "SELECT * FROM work_payment_method WHERE work_payment_method_deleted = 0";
     String WORK_PAYMENT_METHOD_GET_ONE = "SELECT * FROM work_payment_method WHERE work_payment_method_id = ? AND work_payment_method_deleted = 0";

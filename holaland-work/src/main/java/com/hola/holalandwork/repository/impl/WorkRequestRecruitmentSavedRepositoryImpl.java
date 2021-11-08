@@ -38,6 +38,16 @@ public class WorkRequestRecruitmentSavedRepositoryImpl implements WorkRequestRec
     }
 
     @Override
+    public boolean save(WorkRequestRecruitmentSaved obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                INSERT_WORK_REQUEST_SAVED,
+                obj.getUserId(),
+                obj.getWorkRequestRecruitmentId(),
+                obj.isWorkRequestRecruitmentSavedDeleted()
+        ) > 0;
+    }
+
+    @Override
     public boolean delete(int id) throws DataAccessException {
         return jdbcTemplate.update(DELETE_WORK_REQUEST_SAVE, id) > 0;
     }
