@@ -33,5 +33,6 @@ public class WorkRequestRecruitment {
     private boolean workRequestRecruitmentExperienceRequirement;
     private boolean workRequestRecruitmentGenderRequirement;
     private String workRequestRecruitmentWorkLocation;
+    private String workRequestRecruitmentNote;
     private boolean workRequestRecruitmentDeleted;
 }

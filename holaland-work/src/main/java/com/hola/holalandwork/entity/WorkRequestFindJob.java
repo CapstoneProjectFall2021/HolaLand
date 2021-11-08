@@ -32,5 +32,6 @@ public class WorkRequestFindJob {
     private String workRequestFindJobPersonalExperience;
     private String workRequestFindJobExpectedLocation;
     private int workRequestFindJobExpectedSalary;
+    private String workRequestFindJobNote;
     private boolean workRequestFindJobDeleted;
 }
