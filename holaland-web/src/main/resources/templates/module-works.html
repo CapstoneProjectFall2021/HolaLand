@@ -97,7 +97,7 @@
               <hr/>
             </li>
             <li>
-              <a href="javascript:void(0)" onclick="showToast()">
+              <a href="javascript:void(0)" onclick="showToast('toast-success')">
                 <i class="fas fa-pencil-alt fa-fw"></i>Test Toast
               </a>
             </li>
@@ -106,23 +106,23 @@
       </div>
       <!-- Right side -->
       <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
-        <!-- Request -->
+        <!-- List request recruitment -->
         <th:block th:if="${page == 1}">
           <div th:replace="works/request-recruitment :: request-recruitment"></div>
         </th:block>
-        <!-- Request recruitment applied -->
+        <!-- List request recruitment applied -->
         <th:block th:if="${page == 2}">
           <div th:replace="works/request-recruitment-applied :: request-recruitment-applied"></div>
         </th:block>
-        <!-- List booked -->
+        <!-- List recruiter booked -->
         <th:block th:if="${page == 3}">
           <div th:replace="works/list-booked :: list-booked"></div>
         </th:block>
-        <!-- Request recruitment saved -->
+        <!-- List request recruitment saved -->
         <th:block th:if="${page == 4}">
           <div th:replace="works/request-recruitment-saved :: request-recruitment-saved"></div>
         </th:block>
-        <!-- Request manage -->
+        <!-- Request find job manage -->
         <th:block th:if="${page == 5}">
           <div th:replace="works/request-find-job-manage :: request-find-job-manage"></div>
         </th:block>
@@ -130,11 +130,11 @@
         <th:block th:if="${page == 6}">
           <div th:replace="works/create-request-find-job :: create-request-find-job"></div>
         </th:block>
-        <!-- Request find job -->
+        <!-- List request find job -->
         <th:block th:if="${page == 7}">
           <div th:replace="works/request-find-job :: request-find-job"></div>
         </th:block>
-        <!-- Work list applied -->
+        <!-- List user applied -->
         <th:block th:if="${page == 8}">
           <div th:replace="works/list-applied :: list-applied"></div>
         </th:block>
@@ -171,17 +171,11 @@
   <!-- Import modal confirm remove job save -->
   <div th:replace="works/modal/modal-confirm-remove-job-save :: confirmRemoveJobSaveModal"></div>
 </th:block>
-<!--<th:block th:if="${page == 2}">-->
-<!--  &lt;!&ndash; Import modal confirm apply job &ndash;&gt;-->
-<!--  <div th:replace="works/modal/modal-confirm-apply-job :: confirmApplyJobModal"></div>-->
-<!--</th:block>-->
 <th:block th:if="${page == 5}">
-  <!-- Import modal confirm remove recruitment request -->
-  <div th:replace="works/modal/modal-confirm-remove-find-request :: confirmRemoveFindRequest"></div>
-</th:block>
-<th:block th:if="${page == 5}">
+  <!-- Import modal confirm remove find job request -->
+  <div th:replace="works/modal/modal-confirm-remove-find-job-request :: confirmRemoveFindJobRequestModal"></div>
   <!-- Import modal reason reject -->
-  <div th:replace="works/modal/modal-reason-reject :: reasonReject"></div>
+  <div th:replace="works/modal/modal-reason-reject :: reasonRejectModal"></div>
 </th:block>
 <th:block th:if="${page == 6}">
   <!-- Import modal request find job preview -->
@@ -193,11 +187,9 @@
 </th:block>
 <th:block th:if="${page == 9}">
   <!-- Import modal confirm remove recruitment request -->
-  <div th:replace="works/modal/modal-confirm-remove-recruitment-request :: confirmRemoveRecruitmentRequest"></div>
-</th:block>
-<th:block th:if="${page == 9}">
+  <div th:replace="works/modal/modal-confirm-remove-recruitment-request :: confirmRemoveRecruitmentRequestModal"></div>
   <!-- Import modal reason reject -->
-  <div th:replace="works/modal/modal-reason-reject :: reasonReject"></div>
+  <div th:replace="works/modal/modal-reason-reject :: reasonRejectModal"></div>
 </th:block>
 <th:block th:if="${page == 10}">
   <!-- Import modal request find job preview -->
@@ -215,6 +207,7 @@
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
 <script crossorigin="anonymous" th:src="@{/js/templates/work.js}"></script>
+
 <!--<script th:inline="javascript" th:if="${requestId != null && modal != null}">-->
 <!--  /*<![CDATA[*/-->
 <!--  const modal = /*[[${modal}]]*/;-->
@@ -222,12 +215,6 @@
 <!--  const myModal = new bootstrap.Modal(document.getElementById(modal));-->
 <!--  myModal.show();-->
 <!--</script>-->
-<script>
-  function showToast() {
-    const toast = new bootstrap.Toast(document.getElementById('toast-success'));
-    toast.show();
-  }
-</script>
 
 <!-- Import toast -->
 <th:block th:replace="~{common/toast-success :: toast-success}"></th:block>
