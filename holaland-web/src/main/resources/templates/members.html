@@ -11,38 +11,7 @@
 <body>
 <div class="container">
 
-  <div>
-    <form th:action="@{/add-member}" th:object="${addMember}" method="post">
-    <table cellspacing="0" class="table" id="member" width="100%">
-      <tr>
-        <td class="text-center">Name</td>
-        <td><input th:field="*{memberName}"></td>
-      </tr>
-      <tr>
-        <td class="text-center">Gender</td>
-        <td>
-          <input type="radio" th:field="*{memberGender}" th:value="1"> Male
-          <input type="radio" th:field="*{memberGender}" th:value="0"> Female
-        </td>
-      </tr>
-      <tr>
-        <td class="text-center">DOB</td>
-        <td><input type="date" th:field="*{memberDob}"></td>
-      </tr>
-      <tr>
-        <td class="text-center">Mobile</td>
-        <td><input th:field="*{memberMobile}"></td>
-      </tr>
-      <tr>
-        <td class="text-center">Email</td>
-        <td><input th:field="*{memberEmail}"></td>
-      </tr>
-      <tr>
-        <td colspan="2" class="text-center"><input type="submit" value="Submit"></td>
-      </tr>
-    </table>
-    </form>
-  </div>
+  
 
   <div class="right mb-5">
     <div class="row">
