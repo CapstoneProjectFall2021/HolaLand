@@ -235,8 +235,6 @@ public class WorksController {
                 1,
                 sttWorkList.get(0).getSttWorkCode()
         );
-        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
-        model.addAttribute("newRequestRecruitment", newRequestRecruitment);
         model.addAttribute("sttWorkCode", sttWorkList.get(0).getSttWorkCode());
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
@@ -255,8 +253,6 @@ public class WorksController {
                 1,
                 sttWorkCode
         );
-        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
-        model.addAttribute("newRequestRecruitment", newRequestRecruitment);
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
@@ -277,8 +273,6 @@ public class WorksController {
                 1,
                 sttWorkCode
         );
-        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
-        model.addAttribute("newRequestRecruitment", newRequestRecruitment);
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
@@ -549,6 +543,27 @@ public class WorksController {
         model.addAttribute("listApplied", listApplied);
         model.addAttribute("page", 8);
         model.addAttribute("listAppliedModal", listAppliedModal);
+        return "module-works";
+    }
+
+    @GetMapping("works/request-recruitment-manage/reason-reject")
+    public String getReasonRejectRequest(
+            @RequestParam("requestId") Integer requestId,
+            @RequestParam("code") Integer sttWorkCode,
+            Model model
+    ) {
+        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
+        List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
+                1,
+                sttWorkCode
+        );
+        WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(requestId);
+        model.addAttribute("reasonReject", requestRecruitment.getWorkRequestRecruitmentNote());
+        model.addAttribute("sttWorkCode", sttWorkCode);
+        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
+        model.addAttribute("requestRecruitmentList", workRequestRecruitments);
+        model.addAttribute("page", 9);
         return "module-works";
     }
 }

@@ -189,9 +189,9 @@
   <!-- Import modal confirm remove recruitment request -->
   <div th:replace="works/modal/modal-confirm-remove-recruitment-request :: confirmRemoveRecruitmentRequestModal"></div>
   <!-- Import modal reason reject -->
-  <div th:replace="works/modal/modal-reason-reject :: reasonRejectModal"></div>
+  <div th:replace="works/modal/modal-reason-reject :: reasonRejectModal(reason=${reasonReject})"></div>
 </th:block>
-<th:block th:if="${page == 9}">
+<th:block th:if="${page == 9 && requestId != null}">
   <!-- Import modal confirm repost -->
   <div th:replace="works/modal/modal-confirm-repost :: confirmRepost"></div>
 </th:block>
@@ -223,6 +223,11 @@
 <script th:if="${requestId != null}">
   const myModal = new bootstrap.Modal(document.getElementById('confirmRepostModal'));
   myModal.show();
+</script>
+
+<script th:if="${reasonReject != null}">
+    const myModal = new bootstrap.Modal(document.getElementById('reasonRejectModal'));
+    myModal.show();
 </script>
 
 <script th:if="${listBookedModal != null && listBookedModal.size() != 0}">

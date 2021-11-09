@@ -65,11 +65,6 @@ function confirmRemoveFindJobRequest(e) {
     "/works/request-find-job-manage/delete?requestId=" + requestId + "&code=" + sttWorkCode;
 }
 
-function reasonRejectRequest() {
-  openModal("reasonRejectModal");
-}
-
-
 /*
  * Recruitment manage
  */
