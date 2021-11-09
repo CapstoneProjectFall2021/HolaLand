@@ -104,7 +104,7 @@ public class WorksController {
     public String getJobsApply(Model model) {
         List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(2);
         model.addAttribute("jobApplyList", jobApplyList);
-        model.addAttribute("page", 2);
+        model.addAttribute("page", 3);
         return "module-works";
     }
 
@@ -114,7 +114,7 @@ public class WorksController {
         if (isCheck) {
             List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(2);
             model.addAttribute("jobApplyList", jobApplyList);
-            model.addAttribute("page", 2);
+            model.addAttribute("page", 3);
             return "module-works";
         } else {
             return "404";
@@ -460,7 +460,7 @@ public class WorksController {
     public String getListBooked(Model model) {
         List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, 1);
         model.addAttribute("listBooked", listBooked);
-        model.addAttribute("page", 3);
+        model.addAttribute("page", 2);
         return "module-works";
     }
 
@@ -529,7 +529,7 @@ public class WorksController {
         List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, 1);
         List<UserDetail> listBookedModal = userDetailService.getAllUserBookedByUserId(bookedId);
         model.addAttribute("listBooked", listBooked);
-        model.addAttribute("page", 3);
+        model.addAttribute("page", 2);
         model.addAttribute("listBookedModal", listBookedModal);
         return "module-works";
     }

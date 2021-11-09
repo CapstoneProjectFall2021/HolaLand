@@ -41,13 +41,13 @@
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/jobs-apply}" th:classappend="${page == 2 ? 'active' : ''}">
-                <i class="fas fa-tasks fa-fw"></i>Việc làm đã ứng tuyển
+              <a th:href="@{/works/list-booked}" th:classappend="${page == 2 ? 'active' : ''}">
+                <i class="fas fa-list fa-fw"></i>Danh sách thuê
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/list-booked}" th:classappend="${page == 3 ? 'active' : ''}">
-                <i class="fas fa-list fa-fw"></i>Danh sách thuê
+              <a th:href="@{/works/jobs-apply}" th:classappend="${page == 3 ? 'active' : ''}">
+                <i class="fas fa-tasks fa-fw"></i>Việc làm đã ứng tuyển
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
@@ -110,13 +110,13 @@
         <th:block th:if="${page == 1}">
           <div th:replace="works/request-recruitment :: request-recruitment"></div>
         </th:block>
-        <!-- List request recruitment applied -->
-        <th:block th:if="${page == 2}">
-          <div th:replace="works/request-recruitment-applied :: request-recruitment-applied"></div>
-        </th:block>
         <!-- List recruiter booked -->
-        <th:block th:if="${page == 3}">
+        <th:block th:if="${page == 2}">
           <div th:replace="works/list-booked :: list-booked"></div>
+        </th:block>
+        <!-- List request recruitment applied -->
+        <th:block th:if="${page == 3}">
+          <div th:replace="works/request-recruitment-applied :: request-recruitment-applied"></div>
         </th:block>
         <!-- List request recruitment saved -->
         <th:block th:if="${page == 4}">
@@ -160,12 +160,12 @@
 </div>
 
 <th:block th:if="${page == 2}">
-  <!-- Import modal confirm cancel apply job -->
-  <div th:replace="works/modal/modal-confirm-cancel-apply-job :: confirmCancelApplyJobModal"></div>
-</th:block>
-<th:block th:if="${page == 3}">
   <!-- Import modal list recruitment -->
   <div th:replace="works/modal/modal-list-booked :: listBookedModal"></div>
+</th:block>
+<th:block th:if="${page == 3}">
+  <!-- Import modal confirm cancel apply job -->
+  <div th:replace="works/modal/modal-confirm-cancel-apply-job :: confirmCancelApplyJobModal"></div>
 </th:block>
 <th:block th:if="${page == 4}">
   <!-- Import modal confirm remove job save -->
