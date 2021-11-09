@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDetailMapper implements RowMapper<UserDetail> {
+
     @Override
     public UserDetail mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         return UserDetail.builder()

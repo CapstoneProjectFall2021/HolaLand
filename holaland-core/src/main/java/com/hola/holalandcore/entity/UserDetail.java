@@ -1,10 +1,18 @@
 package com.hola.holalandcore.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@Getter
+@Setter
 public class UserDetail {
+
     private int userDetailId;
     private int userId;
     private String userDetailName;
