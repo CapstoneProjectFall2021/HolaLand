@@ -543,7 +543,7 @@ public class WorksController {
     }
 
     @GetMapping("works/request-recruitment-manage/reason-reject")
-    public String getReasonRejectRequest(
+    public String getReasonRejectRecruitmentRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,
             Model model
