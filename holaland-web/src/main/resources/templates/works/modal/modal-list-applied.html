@@ -19,8 +19,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr th:each="userDetail : ${listAppliedModal}">
-            <td>1</td>
+          <tr th:each="userDetail, order : ${listAppliedModal}">
+            <td><span th:text="*{(order.index) + 1}"></span></td>
             <td><span th:text="*{userDetail.userDetailName}"></span></td>
             <td><span th:text="*{userDetail.userDetailDob}"></span></td>
             <td><span th:text="*{userDetail.userDetailPhone}"></span></td>
@@ -38,9 +38,6 @@
         </table>
       </div>
       <div class="modal-footer">
-        <a href="javascript:void(0)" class="btn btn-sm btn-secondary me-2">
-          <i class="fas fa-check text-success mr-2"></i>Xác nhận
-        </a>
         <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
       </div>
     </div>

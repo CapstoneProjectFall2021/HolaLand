@@ -29,14 +29,12 @@ function confirmDeleteRequestSave(e) {
 
 function getIdOfRequestBooked(e) {
   const bookedId = e.target.firstElementChild.innerHTML;
-  openModal("listBookedModal");
-  document.getElementById("btn-show-list-booked").href = "/works/booked/show?bookedId=" + bookedId;
+  document.getElementById("btn-show-list-booked" + bookedId).href = "/works/booked/show?bookedId=" + bookedId;
 }
 
 function getIdOfRequestApplied(e) {
   const appliedId = e.target.firstElementChild.innerHTML;
-  openModal("listAppliedModal");
-  document.getElementById("btn-show-list-user-applied").href = "/works/applied/show?appliedId=" + appliedId;
+  document.getElementById("btn-show-list-user-applied" + appliedId).href = "/works/applied/show?appliedId=" + appliedId;
 }
 
 function confirmRemoveRecruitmentRequest(e) {
