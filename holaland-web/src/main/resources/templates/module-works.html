@@ -89,7 +89,7 @@
               <hr/>
             </li>
             <li>
-              <a href="javascript:void(0)" onclick="goBack()">
+              <a id="btn-back-page" href="javascript:void(0)" onclick="goBack()">
                 <i class="fas fa-chevron-left fa-fw"></i>Quay lại
               </a>
             </li>
@@ -190,8 +190,6 @@
   <div th:replace="works/modal/modal-confirm-remove-recruitment-request :: confirmRemoveRecruitmentRequestModal"></div>
   <!-- Import modal reason reject -->
   <div th:replace="works/modal/modal-reason-reject :: reasonRejectModal(reason=${reasonReject})"></div>
-</th:block>
-<th:block th:if="${page == 9 && requestId != null}">
   <!-- Import modal confirm repost -->
   <div th:replace="works/modal/modal-confirm-repost :: confirmRepost"></div>
 </th:block>
@@ -240,14 +238,18 @@
   myModal.show();
 </script>
 
-<script>
+<script th:inline="javascript">
   function showToast() {
     const toast = new bootstrap.Toast(document.getElementById('toast-success'));
     toast.show();
   }
 
   function goBack() {
-    window.history.back();
+      if([[${page}]] == 11 || [[${page}]] == 12) {
+          window.history.back();
+      }else {
+          document.getElementById("btn-back-page").href = "/";
+      }
   }
 </script>
 

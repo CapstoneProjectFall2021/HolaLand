@@ -450,7 +450,7 @@ public class WorksController {
 
     @GetMapping("works/list-applied")
     public String getListApplied(Model model) {
-        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, 1);
+        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, Constants.STT_WORK_CODE_WAITING_REPOSITORY);
         model.addAttribute("listApplied", listApplied);
         model.addAttribute("page", 8);
         return "module-works";
@@ -458,7 +458,7 @@ public class WorksController {
 
     @GetMapping("works/list-booked")
     public String getListBooked(Model model) {
-        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, 1);
+        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, Constants.STT_WORK_CODE_WAITING_REPOSITORY);
         model.addAttribute("listBooked", listBooked);
         model.addAttribute("page", 2);
         return "module-works";
@@ -522,7 +522,7 @@ public class WorksController {
     public String getListUserBooked(
             @RequestParam("bookedId") Integer bookedId,
             Model model) {
-        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, 1);
+        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, Constants.STT_WORK_CODE_WAITING_REPOSITORY);
         List<UserDetail> listBookedModal = userDetailService.getAllUserBookedByUserId(bookedId);
         model.addAttribute("listBooked", listBooked);
         model.addAttribute("page", 2);
@@ -534,7 +534,7 @@ public class WorksController {
     public String getListUserApplied(
             @RequestParam("appliedId") Integer appliedId,
             Model model) {
-        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, 1);
+        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, Constants.STT_WORK_CODE_WAITING_REPOSITORY);
         List<UserDetail> listAppliedModal = userDetailService.getAllUserAppliedByUserId(appliedId);
         model.addAttribute("listApplied", listApplied);
         model.addAttribute("page", 8);

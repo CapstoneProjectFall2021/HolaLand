@@ -25,8 +25,10 @@
                 <span th:text="*{job.workRequestRecruitmentTitle}"></span>
               </a>
               <div class="request-info">
-                <p>Lương: <span th:text="*{job.workRequestRecruitmentSalary}"></span></p>
-                <p>Thời hạn: <span th:text="*{job.workRequestRecruitmentEndDateTime}"></span></p>
+                <p>Lương: <span th:text="*{job.workRequestRecruitmentSalary}"></span> &nbsp;&#8226;&nbsp;
+                  Thời hạn: <span th:text="*{job.workRequestRecruitmentEndDateTime}"></span></p>
+                <p th:classappend="*{job.sttWorkCode == 3 ? 'text-success' : 'text-danger'}"
+                   th:text="*{job.sttWorkCode == 3 ? 'Đang tuyển dụng' : 'Hết hạn tuyển dụng'}"></p>
               </div>
             </div>
           </div>
