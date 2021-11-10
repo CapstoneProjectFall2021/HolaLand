@@ -6,13 +6,12 @@
         <h5 class="modal-title" id="confirmRepostModalLabel">Thông báo</h5>
       </div>
       <div class="modal-body">
-        <form id="repostForm" class="row panel-form m-0 p-0" method="post" th:action="@{/repost-request-recruitment}"
-              th:object="${newRequestRecruitment}">
+        <form id="repostForm" class="row panel-form m-0 p-0" method="post" th:action="@{/repost-request-recruitment}">
           <div class="form-group col-12 p-0">
             <fieldset>
               <legend>Ngày hết hạn</legend>
-              <input type="date" class="form-control" th:field="*{workRequestRecruitmentEndDateTime}">
-              <input type="hidden" class="form-control" th:name="workRequestRecruitmentId" th:value="${requestId}">
+              <input type="date" class="form-control" th:name="endDate">
+              <input type="hidden" class="form-control" th:name="id" th:value="${requestId}">
             </fieldset>
           </div>
         </form>

@@ -476,9 +476,7 @@ public class WorksController {
                 1,
                 sttWorkCode
         );
-        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
         model.addAttribute("requestId",requestId);
-        model.addAttribute("newRequestRecruitment", newRequestRecruitment);
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
@@ -488,15 +486,12 @@ public class WorksController {
 
     @PostMapping("/repost-request-recruitment")
     public String repostRequestRecruitment(
-            @ModelAttribute("newRequestRecruitment") WorkRequestRecruitment newRequestRecruitment,
-            BindingResult bindingResult
+            @RequestParam("endDate") Date endDate,
+            @RequestParam("id") Integer id
     ) {
-        if (bindingResult.hasErrors()) {
-            System.out.println("There was a error " + bindingResult);
-            return "404";
-        }
         Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-        WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(newRequestRecruitment.getWorkRequestRecruitmentId());
+        WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(id);
+        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
         newRequestRecruitment.setUserId(requestRecruitment.getUserId());
         newRequestRecruitment.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
         newRequestRecruitment.setWorkRequestTypeId(requestRecruitment.getWorkRequestTypeId());
@@ -504,6 +499,7 @@ public class WorksController {
         newRequestRecruitment.setWorkPaymentMethodId(requestRecruitment.getWorkPaymentMethodId());
         newRequestRecruitment.setWorkRequestRecruitmentTitle(requestRecruitment.getWorkRequestRecruitmentTitle());
         newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
+        newRequestRecruitment.setWorkRequestRecruitmentEndDateTime(endDate);
         newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentDescription(requestRecruitment.getWorkRequestRecruitmentDescription());
         newRequestRecruitment.setWorkRequestRecruitmentRequirement(requestRecruitment.getWorkRequestRecruitmentRequirement());
