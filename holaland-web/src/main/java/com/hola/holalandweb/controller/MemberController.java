@@ -87,10 +87,7 @@ public class MemberController {
     }
 
     @GetMapping("/confirm-delete-member")
-    public String deleteMember(@RequestParam("id") Integer id, Model model) {
-        memberService.delete(id);
-        backToMembers(model);
-        return "members";
+    
     }
 
     @PostMapping("/update-member")
