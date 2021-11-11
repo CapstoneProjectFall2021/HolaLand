@@ -7,201 +7,73 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6 col-md-6 col-lg-4 col-xl-3 col-xxl-3">
-        <a href="#" class="label-info m-mb-16">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-3 col-xxl-3" th:each="foodType : ${foodTypeList}">
+        <a th:href="@{/food/type(typeId=*{foodType.foodTypeId})}" class="label-info m-mb-16"
+           th:classappend="${foodType.foodTypeId == typeId ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
-              <i class="fas fa-hamburger"></i>
+              <i th:classappend="*{foodType.foodTypeIcon}"></i>
             </div>
             <div class="number">
-              <h4>10</h4>
+              <h4 th:text="*{foodType.foodTypeCount}"></h4>
             </div>
           </div>
-          <div class="description">
-            Đồ ăn chính
-          </div>
-        </a>
-      </div>
-      <div class="col-6 col-md-6 col-lg-4 col-xl-3 col-xxl-3">
-        <a href="#" class="label-info m-mb-16">
-          <div class="flex">
-            <div class="icon">
-              <i class="fas fa-pizza-slice"></i>
-            </div>
-            <div class="number">
-              <h4>10</h4>
-            </div>
-          </div>
-          <div class="description">
-            Đồ ăn nhẹ
+          <div class="description" th:text="*{foodType.foodTypeName}">
           </div>
         </a>
       </div>
-      <div class="col-6 col-md-6 col-lg-4 col-xl-3 col-xxl-3">
-        <a href="#" class="label-info m-mb-16">
-          <div class="flex">
-            <div class="icon">
-              <i class="fas fa-ice-cream"></i>
-            </div>
-            <div class="number">
-              <h4>25</h4>
-            </div>
+      <!-- List online story -->
+      <div class="list-online-store">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="title fix-mb-title fix-mt-title">Danh sách cửa hàng</h1>
           </div>
-          <div class="description">
-            Đồ ăn vặt
-          </div>
-        </a>
-      </div>
-      <div class="col-6 col-md-6 col-lg-4 col-xl-3 col-xxl-3">
-        <a href="#" class="label-info m-mb-16">
-          <div class="flex">
-            <div class="icon">
-              <i class="fas fa-cocktail"></i>
-            </div>
-            <div class="number">
-              <h4>25</h4>
-            </div>
-          </div>
-          <div class="description">
-            Đồ uống
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-  <!-- List online story -->
-  <div class="list-online-store">
-    <div class="row">
-      <div class="col-12">
-        <h1 class="title fix-mb-title fix-mt-title">Danh sách cửa hàng</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <a th:href="@{/food/online-store}" class="label-info m-mb-16">
-          <div class="flex">
-            <div class="icon-circle">
-              <img class="media-object" th:src="@{'/images/system/v.png'}" alt="">
-            </div>
-            <div class="content-body">
-              <h4>Quán cơm con Gà</h4>
-              <div class="row-info">
-                <p class="star-rate">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
-                </p>
-                <p class="price">
-                  Giá: 25,000<sup>đ</sup> - 55,000<sup>đ</sup>
-                </p>
-              </div>
-              <div class="row-info panel-small">
-                <p class="description m-0">
-                  Chuyên cơm - bún - phở và đồ ăn vặt.
-                </p>
-              </div>
-              <div class="row-info">
-                <div class="tags">
-                  <span class="tag">Cơm</span>
-                  <span class="tag">Bánh mỳ</span>
-                  <span class="tag">Đồ ăn vặt</span>
-                  <span class="tag">Đồ ăn nhanh</span>
+        </div>
+        <div class="row">
+          <div class="col-md-12" th:each="foodStoreOnline : ${foodStoreOnlineList}">
+            <a th:href="@{/food/online-store}" class="label-info m-mb-16">
+              <div class="flex">
+                <div class="icon-circle">
+                  <img class="media-object" th:src="@{'/images/system/v.png'}" alt="">
                 </div>
-                <div class="note">
-                  <p class="m-0">
-                    Chỉ bán online
-                  </p>
+                <div class="content-body">
+                  <h4 th:text="*{foodStoreOnline.foodStoreOnlineName}"></h4>
+                  <div class="row-info">
+                    <p class="star-rate">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="far fa-star"></i>
+                    </p>
+                    <p class="price">
+                      Giá: <span th:text="*{foodStoreOnline.foodStoreOnlineMinPrice}"></span><sup>đ</sup> -
+                      <span th:text="*{foodStoreOnline.foodStoreOnlineMaxPrice}"></span><sup>đ</sup>
+                </p>
+              </div>
+              <div class=" row-info panel-small">
+                    <p class="description m-0" th:text="*{foodStoreOnline.foodStoreOnlineDescription}">
+                    </p>
+                  </div>
+                  <div class="row-info">
+                    <div class="tags">
+                      <span class="tag" th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}"
+                      th:if="${foodStoreOnlineTag.foodStoreOnlineId == foodStoreOnline.foodStoreOnlineId}"
+                      th:text="*{foodStoreOnlineTag.foodTagId == 1 ? 'Cơm' :
+                      (foodStoreOnlineTag.foodTagId == 2 ? 'Bánh mỳ' :
+                      (foodStoreOnlineTag.foodTagId == 3 ? 'Đồ ăn vặt' : 'Đồ ăn nhanh'))}"></span>
+                    </div>
+                    <div class="note">
+                      <p class="m-0" th:text="*{foodStoreOnline.foodStoreTypeId == 1 ? 'Chỉ bán online' :
+                      (foodStoreOnline.foodStoreTypeId == 2 ? 'Nhà hàng' : 'Quán ăn')}">
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
-        </a>
-      </div>
-      <div class="col-md-12">
-        <a th:href="@{/food/online-store}" class="label-info m-mb-16">
-          <div class="flex">
-            <div class="icon-circle">
-              <img class="media-object" th:src="@{'/images/system/v.png'}" alt="">
-            </div>
-            <div class="content-body">
-              <h4>Thế giới đồ ăn vặt</h4>
-              <div class="row-info">
-                <p class="star-rate">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
-                </p>
-                <p class="price">
-                  Giá: 25,000<sup>đ</sup> - 55,000<sup>đ</sup>
-                </p>
-              </div>
-              <div class="row-info panel-small">
-                <p class="description m-0">
-                  Thế giới đồ ăn vặt.
-                </p>
-              </div>
-              <div class="row-info">
-                <div class="tags">
-                  <span class="tag">Cơm</span>
-                  <span class="tag">Bánh mỳ</span>
-                  <span class="tag">Đồ ăn vặt</span>
-                  <span class="tag">Đồ ăn nhanh</span>
-                </div>
-                <div class="note">
-                  <p class="m-0">
-                    Nhà hàng
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-12">
-        <a th:href="@{/food/online-store}" class="label-info m-mb-16">
-          <div class="flex">
-            <div class="icon-circle">
-              <img class="media-object" th:src="@{'/images/system/v.png'}" alt="">
-            </div>
-            <div class="content-body">
-              <h4>Quán cơm Phương Nguyễn</h4>
-              <div class="row-info">
-                <p class="star-rate">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
-                </p>
-                <p class="price">
-                  Giá: 25,000<sup>đ</sup> - 55,000<sup>đ</sup>
-                </p>
-              </div>
-              <div class="row-info panel-small">
-                <p class="description m-0">
-                  Chuyên cơm - bún - phở và đồ ăn vặt.
-                </p>
-              </div>
-              <div class="row-info">
-                <div class="tags">
-                  <span class="tag">Cơm</span>
-                  <span class="tag">Bánh mỳ</span>
-                  <span class="tag">Đồ ăn vặt</span>
-                  <span class="tag">Đồ ăn nhanh</span>
-                </div>
-                <div class="note">
-                  <p class="m-0">
-                    Quán ăn
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
+        </div>
       </div>
     </div>
   </div>
