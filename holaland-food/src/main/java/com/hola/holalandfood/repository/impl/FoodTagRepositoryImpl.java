@@ -27,6 +27,11 @@ public class FoodTagRepositoryImpl implements FoodTagRepository, IRepositoryQuer
     }
 
     @Override
+    public List<FoodTag> getAllByStoreOnlineId(int id) throws DataAccessException {
+        return jdbcTemplate.query(FOOD_TAG_GET_ALL_BY_STORE_ONLINE_ID, new FoodTagMapper(), id);
+    }
+
+    @Override
     public FoodTag getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(FOOD_TAG_GET_ONE, new FoodTagMapper(), id);
     }

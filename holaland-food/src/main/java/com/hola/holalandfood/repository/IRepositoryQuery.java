@@ -4,6 +4,23 @@ public interface IRepositoryQuery {
 
     String FOOD_ITEM_GET_ALL = "SELECT * FROM food_item";
     String FOOD_ITEM_GET_ONE = "SELECT * FROM food_item WHERE food_item_id = ?";
+    String FOOD_ITEM_GET_ALL_BY_STORE_ONLINE_ID = "SELECT\n" +
+            "       T1.food_item_id,\n" +
+            "       T1.food_store_online_id,\n" +
+            "       T1.food_tag_id,\n" +
+            "       T1.food_type_id,\n" +
+            "       T1.food_item_image,\n" +
+            "       T1.food_item_name,\n" +
+            "       T1.food_item_price,\n" +
+            "       T1.food_item_sold_number,\n" +
+            "       T1.food_item_is_active,\n" +
+            "       T1.food_item_deleted\n" +
+            "FROM food_item T1\n" +
+            "LEFT JOIN food_store_online T2\n" +
+            "ON T1.food_store_online_id = T2.food_store_online_id\n" +
+            "WHERE T2.food_store_online_id = ?\n" +
+            "AND T1.food_item_is_active = 1\n" +
+            "AND T1.food_item_deleted = 0";
 
     String FOOD_ORDER_DETAIL_GET_ALL = "SELECT * FROM food_order_detail";
     String FOOD_ORDER_DETAIL_GET_ONE = "SELECT * FROM food_order_detail WHERE food_order_detail_id = ?";
@@ -35,6 +52,7 @@ public interface IRepositoryQuery {
 
     String FOOD_STORE_ONLINE_RATE_GET_ALL = "SELECT * FROM food_store_online_rate";
     String FOOD_STORE_ONLINE_RATE_GET_ONE = "SELECT * FROM food_store_online_rate WHERE food_store_online_rate_id = ?";
+    String FOOD_STORE_ONLINE_RATE_GET_ALL_BY_STORE_ONLINE_ID = "SELECT * FROM food_store_online_rate WHERE food_store_online_id = ?";
 
     String FOOD_STORE_ONLINE_TAG_GET_ALL = "SELECT * FROM food_store_online_tag";
     String FOOD_STORE_ONLINE_TAG_GET_ONE = "SELECT * FROM food_store_online_tag WHERE food_store_online_tag_id = ?";
@@ -47,6 +65,13 @@ public interface IRepositoryQuery {
 
     String FOOD_TAG_GET_ALL = "SELECT * FROM food_tag";
     String FOOD_TAG_GET_ONE = "SELECT * FROM food_tag WHERE food_tag_id = ?";
+    String FOOD_TAG_GET_ALL_BY_STORE_ONLINE_ID = "SELECT\n" +
+            "       T1.food_tag_id,\n" +
+            "       T1.food_tag_name\n" +
+            "FROM food_tag T1\n" +
+            "LEFT JOIN food_store_online_tag T2\n" +
+            "ON T1.food_tag_id = T2.food_tag_id\n" +
+            "WHERE T2.food_store_online_id = ?";
 
     String FOOD_TYPE_GET_ALL = "SELECT * FROM food_type WHERE food_type_deleted = 0";
     String FOOD_TYPE_GET_ONE = "SELECT * FROM food_type WHERE food_type_id = ? AND food_type_deleted = 0";

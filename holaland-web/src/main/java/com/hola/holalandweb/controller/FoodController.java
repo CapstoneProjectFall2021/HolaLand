@@ -1,11 +1,7 @@
 package com.hola.holalandweb.controller;
 
-import com.hola.holalandfood.entity.FoodStoreOnline;
-import com.hola.holalandfood.entity.FoodStoreOnlineTag;
-import com.hola.holalandfood.entity.FoodType;
-import com.hola.holalandfood.service.FoodStoreOnlineService;
-import com.hola.holalandfood.service.FoodStoreOnlineTagService;
-import com.hola.holalandfood.service.FoodTypeService;
+import com.hola.holalandfood.entity.*;
+import com.hola.holalandfood.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,14 +16,23 @@ public class FoodController {
     private final FoodStoreOnlineService foodStoreOnlineService;
     private final FoodTypeService foodTypeService;
     private final FoodStoreOnlineTagService foodStoreOnlineTagService;
+    private final FoodTagService foodTagService;
+    private final FoodItemService foodItemService;
+    private final FoodStoreOnlineRateService foodStoreOnlineRateService;
 
     @Autowired
     public FoodController(FoodStoreOnlineService foodStoreOnlineService,
                           FoodTypeService foodTypeService,
-                          FoodStoreOnlineTagService foodStoreOnlineTagService) {
+                          FoodStoreOnlineTagService foodStoreOnlineTagService,
+                          FoodTagService foodTagService,
+                          FoodItemService foodItemService,
+                          FoodStoreOnlineRateService foodStoreOnlineRateService) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTypeService = foodTypeService;
         this.foodStoreOnlineTagService = foodStoreOnlineTagService;
+        this.foodTagService = foodTagService;
+        this.foodItemService = foodItemService;
+        this.foodStoreOnlineRateService = foodStoreOnlineRateService;
     }
 
     @GetMapping("/food")
@@ -63,7 +68,17 @@ public class FoodController {
     }
 
     @GetMapping("/food/online-store")
-    public String goToOnlineStore(Model model) {
+    public String goToOnlineStore(
+            @RequestParam("id") Integer id,
+            Model model) {
+        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
+        List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
+        List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineId(id);
+        List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
+        model.addAttribute("foodStoreOnline", foodStoreOnline);
+        model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
+        model.addAttribute("foodItemList", foodItemList);
+        model.addAttribute("listComment", listComment);
         model.addAttribute("page", 9);
         return "module-food";
     }
