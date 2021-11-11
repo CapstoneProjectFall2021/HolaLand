@@ -40,7 +40,11 @@ public class MemberController {
         this.clubTypeService = clubTypeService;
     }
 
-    
+    @GetMapping("/members")
+    public String members(Model model) {
+        backToMembers(model);
+        return "members";
+    }
 
     @GetMapping("/send-email")
     public String sendEmail(@RequestParam("id") Integer id, Model model) {
