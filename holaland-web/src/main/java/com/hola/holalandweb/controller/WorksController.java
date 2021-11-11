@@ -79,7 +79,7 @@ public class WorksController {
                 jobTypeList.get(0).getWorkRequestTypeId(),
                 Constants.STT_WORK_CODE_APPROVED
         );
-        model.addAttribute("workJobTypeId", 1);
+        model.addAttribute("workJobTypeId", jobTypeList.get(0).getWorkRequestTypeId());
         model.addAttribute("jobTypeList", jobTypeList);
         model.addAttribute("jobList", jobList);
         model.addAttribute("page", 1);
@@ -150,7 +150,7 @@ public class WorksController {
                 Constants.STT_WORK_CODE_APPROVED
         );
 
-        model.addAttribute("workRequestTypeId", 1);
+        model.addAttribute("workRequestTypeId", requestTypeList.get(0).getWorkRequestTypeId());
         model.addAttribute("requestTypeList", requestTypeList);
         model.addAttribute("workerList", workerList);
         model.addAttribute("page", 7);
