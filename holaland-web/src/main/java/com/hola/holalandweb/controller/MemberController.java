@@ -73,6 +73,8 @@ public class MemberController {
         if (memberId > 0) {
             backToMembers(model);
             return "members";
+        } else {
+            return "404";
         }
     }
 
