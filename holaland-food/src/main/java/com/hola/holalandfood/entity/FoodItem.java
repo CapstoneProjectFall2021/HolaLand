@@ -16,7 +16,7 @@ public class FoodItem {
     private String foodItemImage;
     private String foodItemName;
     private int foodItemPrice;
-    private int foodSoldNumber;
-    private boolean foodIsActive;
+    private int foodItemSoldNumber;
+    private boolean foodItemIsActive;
     private boolean foodItemDeleted;
 }

@@ -25,6 +25,11 @@ public class FoodStoreOnlineServiceImpl implements FoodStoreOnlineService {
     }
 
     @Override
+    public List<FoodStoreOnline> getAllByType(int typeId, int code) throws DataAccessException {
+        return foodStoreOnlineRepository.getAllByType(typeId, code);
+    }
+
+    @Override
     public FoodStoreOnline getOne(int id) throws DataAccessException {
         return foodStoreOnlineRepository.getOne(id);
     }
