@@ -10,10 +10,10 @@ public class FoodStoreOnlineRateMapper implements RowMapper<FoodStoreOnlineRate>
     @Override
     public FoodStoreOnlineRate mapRow(ResultSet rs, int rowNum) throws SQLException {
         return FoodStoreOnlineRate.builder()
-                .foodRateId(rs.getInt("food_rate_id"))
+                .foodStoreOnlineRateId(rs.getInt("food_store_online_rate_id"))
                 .foodStoreOnlineId(rs.getInt("food_store_online_id"))
-                .foodRatePoint(rs.getInt("food_rate_point"))
-                .foodRateComment(rs.getString("food_rate_comment"))
+                .foodStoreOnlineRatePoint(rs.getInt("food_store_online_rate_point"))
+                .foodStoreOnlineRateComment(rs.getString("food_store_online_rate_comment"))
                 .build();
     }
 }

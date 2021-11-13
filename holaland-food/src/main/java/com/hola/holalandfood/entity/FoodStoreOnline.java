@@ -15,9 +15,9 @@ public class FoodStoreOnline {
     private int sttFoodCode;
     private String foodStoreOnlineImage;
     private String foodStoreOnlineName;
-    private double foodStoreRate;
-    private int foodStoreMinPrice;
-    private int foodStoreMaxPrice;
-    private String foodStoreDescription;
+    private double foodStoreOnlineRate;
+    private int foodStoreOnlineMinPrice;
+    private int foodStoreOnlineMaxPrice;
+    private String foodStoreOnlineDescription;
     private boolean foodStoreOnlineDeleted;
 }
