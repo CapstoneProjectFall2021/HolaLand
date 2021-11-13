@@ -12,8 +12,8 @@
           <div class="btn-action">
             <a th:id="'btn-show-list-booked' + ${work.workRequestFindJobId}" href="javascript:void(0)">
               <i class="fas fa-user-friends m-0" onclick="getIdOfRequestBooked(event)">
-              <span th:text="${work.workRequestFindJobId}" class="d-none"></span>
-            </i>
+                <span th:text="${work.workRequestFindJobId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="flex">
@@ -25,8 +25,9 @@
                 <span th:text="*{work.workRequestFindJobTitle}"></span>
               </a>
               <div class="request-info">
-                <p>Lương mong muốn: <span th:text="*{work.workRequestFindJobExpectedSalary}"></span>VND/<span
-                    th:text="*{
+                <p>Lương mong muốn:
+                  <span th:text="${#numbers.formatInteger(work.workRequestFindJobExpectedSalary, 3, 'POINT')}"></span>
+                  VND/<span th:text="*{
                                         work.workSalaryUnitId == 1 ? 'h' :
                                         work.workSalaryUnitId == 2 ? 'ngày' :
                                         work.workSalaryUnitId == 3 ? 'tuần' : 'tháng'

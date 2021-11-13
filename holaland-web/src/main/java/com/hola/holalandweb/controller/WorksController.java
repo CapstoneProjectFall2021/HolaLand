@@ -82,7 +82,7 @@ public class WorksController {
     @GetMapping("/works")
     public String goToWorks(Model model, Principal principal) {
         // Get user info
-        this.user = userRepository.findByEmail(principal.getName());
+        //this.user = userRepository.findByEmail(principal.getName());
 
         List<WorkRequestType> jobTypeList = workRequestTypeService.getAll();
         List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(

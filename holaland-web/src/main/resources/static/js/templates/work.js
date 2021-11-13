@@ -11,7 +11,6 @@ function showToast(id) {
   toast.show();
 }
 
-
 /*
  * Recruitment manage
  */
@@ -64,7 +63,7 @@ function confirmRemoveFindJobRequest(e) {
 }
 
 /*
- * Recruitment manage
+ * Request recruitment save
  */
 function saveRequestRecruitment() {
   const request = new XMLHttpRequest();
