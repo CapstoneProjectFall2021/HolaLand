@@ -47,7 +47,8 @@
                   Lương: <span th:text="*{job.workRequestRecruitmentSalary}"></span>
                 </p>
                 <p sec:authorize="!isAuthenticated()">Đăng nhập để xem lương</p>
-                <p>Thời hạn: <span th:text="*{job.workRequestRecruitmentEndDateTime}"></span></p>
+                <p>Thời hạn: <span
+                    th:text="${#dates.format(job.workRequestRecruitmentEndDateTime, 'dd-MM-yyyy')}"></span></p>
               </div>
             </div>
           </div>

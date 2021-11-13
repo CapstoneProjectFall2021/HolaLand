@@ -1,6 +1,8 @@
 package com.hola.holalandweb.controller;
 
+import com.hola.holalandcore.entity.User;
 import com.hola.holalandcore.entity.UserDetail;
+import com.hola.holalandcore.repository.UserRepository;
 import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandwork.entity.SttWork;
@@ -28,6 +30,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
@@ -47,6 +50,9 @@ public class WorksController {
     private final UserDetailService userDetailService;
     private final SttWorkService sttWorkService;
     private final SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService;
+    private final UserRepository userRepository;
+
+    private User user;
 
     @Autowired
     public WorksController(WorkRequestRecruitmentService workRequestRecruitmentService,
@@ -58,7 +64,8 @@ public class WorksController {
                            WorkTimeService workTimeService,
                            UserDetailService userDetailService,
                            SttWorkService sttWorkService,
-                           SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService) {
+                           SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService,
+                           UserRepository userRepository) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.workRequestTypeService = workRequestTypeService;
         this.workRequestApplyService = workRequestApplyService;
@@ -69,17 +76,20 @@ public class WorksController {
         this.userDetailService = userDetailService;
         this.sttWorkService = sttWorkService;
         this.sttWorkRequestRecruitmentFindJobCountService = sttWorkRequestRecruitmentFindJobCountService;
+        this.userRepository = userRepository;
     }
 
-
     @GetMapping("/works")
-    public String goToWorks(Model model) {
+    public String goToWorks(Model model, Principal principal) {
+        // Get user info
+        this.user = userRepository.findByEmail(principal.getName());
+
         List<WorkRequestType> jobTypeList = workRequestTypeService.getAll();
         List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(
                 jobTypeList.get(0).getWorkRequestTypeId(),
                 Constants.STT_WORK_CODE_APPROVED
         );
-        model.addAttribute("workJobTypeId", jobTypeList.get(0).getWorkRequestTypeId());
+        model.addAttribute("workJobTypeId", 1);
         model.addAttribute("jobTypeList", jobTypeList);
         model.addAttribute("jobList", jobList);
         model.addAttribute("page", 1);
@@ -150,7 +160,7 @@ public class WorksController {
                 Constants.STT_WORK_CODE_APPROVED
         );
 
-        model.addAttribute("workRequestTypeId", requestTypeList.get(0).getWorkRequestTypeId());
+        model.addAttribute("workRequestTypeId", 1);
         model.addAttribute("requestTypeList", requestTypeList);
         model.addAttribute("workerList", workerList);
         model.addAttribute("page", 7);
@@ -211,7 +221,8 @@ public class WorksController {
     public String getFindJobDeleteRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,
-            Model model) {
+            Model model
+    ) {
         // code delete
         workRequestFindJobService.delete(requestId);
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
@@ -450,7 +461,7 @@ public class WorksController {
 
     @GetMapping("works/list-applied")
     public String getListApplied(Model model) {
-        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, Constants.STT_WORK_CODE_WAITING_REPOSITORY);
+        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, 1);
         model.addAttribute("listApplied", listApplied);
         model.addAttribute("page", 8);
         return "module-works";
@@ -458,7 +469,7 @@ public class WorksController {
 
     @GetMapping("works/list-booked")
     public String getListBooked(Model model) {
-        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, Constants.STT_WORK_CODE_WAITING_REPOSITORY);
+        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, 1);
         model.addAttribute("listBooked", listBooked);
         model.addAttribute("page", 2);
         return "module-works";
@@ -476,7 +487,9 @@ public class WorksController {
                 1,
                 sttWorkCode
         );
-        model.addAttribute("requestId",requestId);
+        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
+        model.addAttribute("requestId", requestId);
+        model.addAttribute("newRequestRecruitment", newRequestRecruitment);
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
@@ -486,12 +499,15 @@ public class WorksController {
 
     @PostMapping("/repost-request-recruitment")
     public String repostRequestRecruitment(
-            @RequestParam("endDate") Date endDate,
-            @RequestParam("id") Integer id
+            @ModelAttribute("newRequestRecruitment") WorkRequestRecruitment newRequestRecruitment,
+            BindingResult bindingResult
     ) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
         Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-        WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(id);
-        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
+        WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(newRequestRecruitment.getWorkRequestRecruitmentId());
         newRequestRecruitment.setUserId(requestRecruitment.getUserId());
         newRequestRecruitment.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
         newRequestRecruitment.setWorkRequestTypeId(requestRecruitment.getWorkRequestTypeId());
@@ -499,7 +515,6 @@ public class WorksController {
         newRequestRecruitment.setWorkPaymentMethodId(requestRecruitment.getWorkPaymentMethodId());
         newRequestRecruitment.setWorkRequestRecruitmentTitle(requestRecruitment.getWorkRequestRecruitmentTitle());
         newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
-        newRequestRecruitment.setWorkRequestRecruitmentEndDateTime(endDate);
         newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentDescription(requestRecruitment.getWorkRequestRecruitmentDescription());
         newRequestRecruitment.setWorkRequestRecruitmentRequirement(requestRecruitment.getWorkRequestRecruitmentRequirement());
@@ -521,8 +536,9 @@ public class WorksController {
     @GetMapping("works/booked/show")
     public String getListUserBooked(
             @RequestParam("bookedId") Integer bookedId,
-            Model model) {
-        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, Constants.STT_WORK_CODE_WAITING_REPOSITORY);
+            Model model
+    ) {
+        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, 1);
         List<UserDetail> listBookedModal = userDetailService.getAllUserBookedByUserId(bookedId);
         model.addAttribute("listBooked", listBooked);
         model.addAttribute("page", 2);
@@ -533,8 +549,9 @@ public class WorksController {
     @GetMapping("works/applied/show")
     public String getListUserApplied(
             @RequestParam("appliedId") Integer appliedId,
-            Model model) {
-        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, Constants.STT_WORK_CODE_WAITING_REPOSITORY);
+            Model model
+    ) {
+        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, 1);
         List<UserDetail> listAppliedModal = userDetailService.getAllUserAppliedByUserId(appliedId);
         model.addAttribute("listApplied", listApplied);
         model.addAttribute("page", 8);
@@ -543,7 +560,7 @@ public class WorksController {
     }
 
     @GetMapping("works/request-recruitment-manage/reason-reject")
-    public String getReasonRejectRecruitmentRequest(
+    public String getReasonRejectRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,
             Model model

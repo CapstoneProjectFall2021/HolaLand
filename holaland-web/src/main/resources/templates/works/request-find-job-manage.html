@@ -126,14 +126,20 @@
               <a th:href="@{/works/request-find-job-detail(id=*{requestFindJob.workRequestFindJobId})}"
                  th:text="*{requestFindJob.workRequestFindJobTitle}"></a>
               <div class="request-info">
-                <p>Lương mong muốn: <span th:text="*{requestFindJob.workRequestFindJobExpectedSalary}"></span>VNĐ/<span
-                    th:text="*{
+                <p>Lương mong muốn:
+                  <span
+                      th:text="${#numbers.formatInteger(requestFindJob.workRequestFindJobExpectedSalary, 3, 'POINT')}">
+                  </span>
+                  VNĐ/<span
+                      th:text="*{
                       requestFindJob.workSalaryUnitId == 1 ? 'h' :
                       requestFindJob.workSalaryUnitId == 2 ? 'ngày' :
                       requestFindJob.workSalaryUnitId == 3 ? 'tuần' : 'tháng'
                   }"></span>
                 </p>
-                <p>Thời hạn: <span th:text="*{requestFindJob.workRequestFindJobEndDateTime}"></span></p>
+                <p>Thời hạn:
+                  <span th:text="${#dates.format(requestFindJob.workRequestFindJobEndDateTime, 'dd-MM-yyyy')}"></span>
+                </p>
               </div>
             </div>
           </div>
