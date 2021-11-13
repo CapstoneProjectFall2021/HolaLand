@@ -1,6 +1,8 @@
 package com.hola.holalandweb.controller;
 
+import com.hola.holalandcore.entity.User;
 import com.hola.holalandcore.entity.UserDetail;
+import com.hola.holalandcore.repository.UserRepository;
 import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandwork.entity.SttWork;
@@ -28,6 +30,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
@@ -47,6 +50,9 @@ public class WorksController {
     private final UserDetailService userDetailService;
     private final SttWorkService sttWorkService;
     private final SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService;
+    private final UserRepository userRepository;
+
+    private User user;
 
     @Autowired
     public WorksController(WorkRequestRecruitmentService workRequestRecruitmentService,
@@ -58,7 +64,8 @@ public class WorksController {
                            WorkTimeService workTimeService,
                            UserDetailService userDetailService,
                            SttWorkService sttWorkService,
-                           SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService) {
+                           SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService,
+                           UserRepository userRepository) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.workRequestTypeService = workRequestTypeService;
         this.workRequestApplyService = workRequestApplyService;
@@ -69,11 +76,14 @@ public class WorksController {
         this.userDetailService = userDetailService;
         this.sttWorkService = sttWorkService;
         this.sttWorkRequestRecruitmentFindJobCountService = sttWorkRequestRecruitmentFindJobCountService;
+        this.userRepository = userRepository;
     }
 
-
     @GetMapping("/works")
-    public String goToWorks(Model model) {
+    public String goToWorks(Model model, Principal principal) {
+        // Get user info
+        this.user = userRepository.findByEmail(principal.getName());
+
         List<WorkRequestType> jobTypeList = workRequestTypeService.getAll();
         List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(
                 jobTypeList.get(0).getWorkRequestTypeId(),
@@ -211,7 +221,8 @@ public class WorksController {
     public String getFindJobDeleteRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,
-            Model model) {
+            Model model
+    ) {
         // code delete
         workRequestFindJobService.delete(requestId);
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
@@ -477,7 +488,7 @@ public class WorksController {
                 sttWorkCode
         );
         WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
-        model.addAttribute("requestId",requestId);
+        model.addAttribute("requestId", requestId);
         model.addAttribute("newRequestRecruitment", newRequestRecruitment);
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
@@ -525,7 +536,8 @@ public class WorksController {
     @GetMapping("works/booked/show")
     public String getListUserBooked(
             @RequestParam("bookedId") Integer bookedId,
-            Model model) {
+            Model model
+    ) {
         List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, 1);
         List<UserDetail> listBookedModal = userDetailService.getAllUserBookedByUserId(bookedId);
         model.addAttribute("listBooked", listBooked);
@@ -537,7 +549,8 @@ public class WorksController {
     @GetMapping("works/applied/show")
     public String getListUserApplied(
             @RequestParam("appliedId") Integer appliedId,
-            Model model) {
+            Model model
+    ) {
         List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, 1);
         List<UserDetail> listAppliedModal = userDetailService.getAllUserAppliedByUserId(appliedId);
         model.addAttribute("listApplied", listApplied);
