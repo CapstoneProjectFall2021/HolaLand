@@ -16,7 +16,7 @@ public class FoodStoreOnlineMapper implements RowMapper<FoodStoreOnline> {
                 .sttFoodCode(rs.getInt("stt_food_code"))
                 .foodStoreOnlineImage(rs.getString("food_store_online_image"))
                 .foodStoreOnlineName(rs.getString("food_store_online_name"))
-                .foodStoreOnlineRate(rs.getInt("food_store_online_rate"))
+                .foodStoreOnlineRate(rs.getDouble("food_store_online_rate"))
                 .foodStoreOnlineMinPrice(rs.getInt("food_store_online_min_price"))
                 .foodStoreOnlineMaxPrice(rs.getInt("food_store_online_max_price"))
                 .foodStoreOnlineDescription(rs.getString("food_store_online_description"))

@@ -30,6 +30,11 @@ public class FoodItemServiceImpl implements FoodItemService {
     }
 
     @Override
+    public List<FoodItem> getAllByStoreOnlineIdAndTagId(int id, int tagId) throws DataAccessException {
+        return foodItemRepository.getAllByStoreOnlineIdAndTagId(id,tagId);
+    }
+
+    @Override
     public FoodItem getOne(int id) throws DataAccessException {
         return foodItemRepository.getOne(id);
     }

@@ -40,11 +40,11 @@
                   <h4 th:text="*{foodStoreOnline.foodStoreOnlineName}"></h4>
                   <div class="row-info">
                     <p class="star-rate">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="far fa-star"></i>
+                      <i th:classappend="*{(foodStoreOnline.foodStoreOnlineRate >= 1)  ? 'fas fa-star' : 'far fa-star'}"></i>
+                      <i th:classappend="*{(foodStoreOnline.foodStoreOnlineRate >= 2)  ? 'fas fa-star' : 'far fa-star'}"></i>
+                      <i th:classappend="*{(foodStoreOnline.foodStoreOnlineRate >= 3)  ? 'fas fa-star' : 'far fa-star'}"></i>
+                      <i th:classappend="*{(foodStoreOnline.foodStoreOnlineRate >= 4)  ? 'fas fa-star' : 'far fa-star'}"></i>
+                      <i th:classappend="*{(foodStoreOnline.foodStoreOnlineRate >= 5)  ? 'fas fa-star' : 'far fa-star'}"></i>
                     </p>
                     <p class="price">
                       Giá: <span th:text="*{foodStoreOnline.foodStoreOnlineMinPrice}"></span><sup>đ</sup> -

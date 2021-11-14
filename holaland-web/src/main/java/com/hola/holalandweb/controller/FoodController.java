@@ -83,6 +83,23 @@ public class FoodController {
         return "module-food";
     }
 
+    @GetMapping("/food/online-store/tag")
+    public String getFoodOnlineStoreByTag(
+            @RequestParam("tagId") Integer tagId,
+            @RequestParam("id") Integer id,
+            Model model) {
+        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
+        List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
+        List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
+        List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);
+        model.addAttribute("foodStoreOnline", foodStoreOnline);
+        model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
+        model.addAttribute("foodItemList", foodItemList);
+        model.addAttribute("listComment", listComment);
+        model.addAttribute("page", 9);
+        return "module-food";
+    }
+
     @GetMapping("/food/list-offline-store")
     public String goToOfflineStore(Model model) {
         model.addAttribute("page", 2);
