@@ -20,6 +20,11 @@ public class UserDetailServiceImpl implements UserDetailService {
     }
 
     @Override
+    public List<UserDetail> getAll() throws DataAccessException {
+        return userDetailRepository.getAll();
+    }
+
+    @Override
     public List<UserDetail> getAllUserBookedByUserId(int id) throws DataAccessException {
         return userDetailRepository.getAllUserBookedByUserId(id);
     }

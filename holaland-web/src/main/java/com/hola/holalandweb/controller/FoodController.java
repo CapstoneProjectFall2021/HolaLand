@@ -1,5 +1,7 @@
 package com.hola.holalandweb.controller;
 
+import com.hola.holalandcore.entity.UserDetail;
+import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandfood.entity.*;
 import com.hola.holalandfood.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ public class FoodController {
     private final FoodTagService foodTagService;
     private final FoodItemService foodItemService;
     private final FoodStoreOnlineRateService foodStoreOnlineRateService;
+    private final UserDetailService userDetailService;
 
     @Autowired
     public FoodController(FoodStoreOnlineService foodStoreOnlineService,
@@ -26,13 +29,15 @@ public class FoodController {
                           FoodStoreOnlineTagService foodStoreOnlineTagService,
                           FoodTagService foodTagService,
                           FoodItemService foodItemService,
-                          FoodStoreOnlineRateService foodStoreOnlineRateService) {
+                          FoodStoreOnlineRateService foodStoreOnlineRateService,
+                          UserDetailService userDetailService) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTypeService = foodTypeService;
         this.foodStoreOnlineTagService = foodStoreOnlineTagService;
         this.foodTagService = foodTagService;
         this.foodItemService = foodItemService;
         this.foodStoreOnlineRateService = foodStoreOnlineRateService;
+        this.userDetailService = userDetailService;
     }
 
     @GetMapping("/food")
@@ -77,11 +82,13 @@ public class FoodController {
                 id,
                 foodStoreOnlineTagList.get(0).getFoodTagId());
         List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
+        List<UserDetail> userList = userDetailService.getAll();
         model.addAttribute("tagId",foodStoreOnlineTagList.get(0).getFoodTagId());
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
         model.addAttribute("foodItemList", foodItemList);
         model.addAttribute("listComment", listComment);
+        model.addAttribute("userList", userList);
         model.addAttribute("page", 9);
         return "module-food";
     }
@@ -95,11 +102,13 @@ public class FoodController {
         List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
         List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
         List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);
+        List<UserDetail> userList = userDetailService.getAll();
         model.addAttribute("tagId",tagId);
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
         model.addAttribute("foodItemList", foodItemList);
         model.addAttribute("listComment", listComment);
+        model.addAttribute("userList", userList);
         model.addAttribute("page", 9);
         return "module-food";
     }
@@ -114,6 +123,7 @@ public class FoodController {
         List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
         List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
         List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);
+        List<UserDetail> userList = userDetailService.getAll();
         FoodItem item = foodItemService.getOne(itemId);
         model.addAttribute("tagId",tagId);
         model.addAttribute("item", item);
@@ -121,6 +131,7 @@ public class FoodController {
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
         model.addAttribute("foodItemList", foodItemList);
         model.addAttribute("listComment", listComment);
+        model.addAttribute("userList", userList);
         model.addAttribute("page", 9);
         return "module-food";
     }

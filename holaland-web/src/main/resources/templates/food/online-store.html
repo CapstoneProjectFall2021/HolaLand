@@ -124,11 +124,11 @@
                       </div>
                       <div class="comment-area">
                         <div class="comment-content">
-                          <h3>Nguyễn Văn A</h3>
+                          <h3 th:text="${userList.get(comment.userId - 1).userDetailName}"></h3>
                           <p th:text="*{comment.foodStoreOnlineRateComment}"></p>
                         </div>
                         <div class="time">
-                          <p>14 giờ trước</p>
+                          <p th:text="*{comment.foodStoreOnlineRateCreateTime}">
                         </div>
                       </div>
                     </div>
