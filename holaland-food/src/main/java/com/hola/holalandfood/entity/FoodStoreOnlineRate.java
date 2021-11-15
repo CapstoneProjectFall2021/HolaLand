@@ -2,6 +2,8 @@ package com.hola.holalandfood.entity;
 
 import lombok.*;
 
+import java.sql.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -13,4 +15,7 @@ public class FoodStoreOnlineRate {
     private int foodStoreOnlineId;
     private int foodStoreOnlineRatePoint;
     private String foodStoreOnlineRateComment;
+    private int userId;
+    private Date foodStoreOnlineRateCreateTime;
+    private Date foodStoreOnlineRateUpdateTime;
 }

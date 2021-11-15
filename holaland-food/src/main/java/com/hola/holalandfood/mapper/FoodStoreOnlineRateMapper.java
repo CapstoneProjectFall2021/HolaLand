@@ -14,6 +14,9 @@ public class FoodStoreOnlineRateMapper implements RowMapper<FoodStoreOnlineRate>
                 .foodStoreOnlineId(rs.getInt("food_store_online_id"))
                 .foodStoreOnlineRatePoint(rs.getInt("food_store_online_rate_point"))
                 .foodStoreOnlineRateComment(rs.getString("food_store_online_rate_comment"))
+                .userId(rs.getInt("user_id"))
+                .foodStoreOnlineRateCreateTime(rs.getDate("food_store_online_rate_create_time"))
+                .foodStoreOnlineRateUpdateTime(rs.getDate("food_store_online_rate_update_time"))
                 .build();
     }
 }
