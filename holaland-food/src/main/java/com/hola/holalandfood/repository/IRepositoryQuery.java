@@ -4,23 +4,6 @@ public interface IRepositoryQuery {
 
     String FOOD_ITEM_GET_ALL = "SELECT * FROM food_item";
     String FOOD_ITEM_GET_ONE = "SELECT * FROM food_item WHERE food_item_id = ?";
-    String FOOD_ITEM_GET_ALL_BY_STORE_ONLINE_ID = "SELECT\n" +
-            "       T1.food_item_id,\n" +
-            "       T1.food_store_online_id,\n" +
-            "       T1.food_tag_id,\n" +
-            "       T1.food_type_id,\n" +
-            "       T1.food_item_image,\n" +
-            "       T1.food_item_name,\n" +
-            "       T1.food_item_price,\n" +
-            "       T1.food_item_sold_number,\n" +
-            "       T1.food_item_is_active,\n" +
-            "       T1.food_item_deleted\n" +
-            "FROM food_item T1\n" +
-            "LEFT JOIN food_store_online T2\n" +
-            "ON T1.food_store_online_id = T2.food_store_online_id\n" +
-            "WHERE T2.food_store_online_id = ?\n" +
-            "AND T1.food_item_is_active = 1\n" +
-            "AND T1.food_item_deleted = 0";
     String FOOD_ITEM_GET_ALL_BY_STORE_ONLINE_ID_AND_TAG_ID = "SELECT\n" +
             "       T1.food_item_id,\n" +
             "       T1.food_store_online_id,\n" +

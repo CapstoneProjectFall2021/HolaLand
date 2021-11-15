@@ -91,7 +91,8 @@
                         <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
                       </div>
                       <div class="content-body">
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal"
+                        <a th:href="@{/food/online-store/detail(id=${foodStoreOnline.foodStoreOnlineId},
+                        itemId=*{foodItem.foodItemId}, tagId=*{foodItem.foodTagId})}"
                         th:text="*{foodItem.foodItemName}">
                         </a>
                         <div class="food-info">

@@ -73,8 +73,11 @@ public class FoodController {
             Model model) {
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
         List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
-        List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineId(id);
+        List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(
+                id,
+                foodStoreOnlineTagList.get(0).getFoodTagId());
         List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
+        model.addAttribute("tagId",foodStoreOnlineTagList.get(0).getFoodTagId());
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
         model.addAttribute("foodItemList", foodItemList);
@@ -92,6 +95,28 @@ public class FoodController {
         List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
         List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
         List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);
+        model.addAttribute("tagId",tagId);
+        model.addAttribute("foodStoreOnline", foodStoreOnline);
+        model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
+        model.addAttribute("foodItemList", foodItemList);
+        model.addAttribute("listComment", listComment);
+        model.addAttribute("page", 9);
+        return "module-food";
+    }
+
+    @GetMapping("/food/online-store/detail")
+    public String getFoodDetail(
+            @RequestParam("id") Integer id,
+            @RequestParam("itemId") Integer itemId,
+            @RequestParam("tagId") Integer tagId,
+            Model model) {
+        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
+        List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
+        List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
+        List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);
+        FoodItem item = foodItemService.getOne(itemId);
+        model.addAttribute("tagId",tagId);
+        model.addAttribute("item", item);
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
         model.addAttribute("foodItemList", foodItemList);
