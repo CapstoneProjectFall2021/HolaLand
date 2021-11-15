@@ -2,8 +2,17 @@ package com.hola.holalandweb.controller;
 
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.service.UserDetailService;
-import com.hola.holalandfood.entity.*;
-import com.hola.holalandfood.service.*;
+import com.hola.holalandfood.entity.FoodItem;
+import com.hola.holalandfood.entity.FoodStoreOnline;
+import com.hola.holalandfood.entity.FoodStoreOnlineRate;
+import com.hola.holalandfood.entity.FoodTag;
+import com.hola.holalandfood.entity.FoodType;
+import com.hola.holalandfood.service.FoodItemService;
+import com.hola.holalandfood.service.FoodStoreOnlineRateService;
+import com.hola.holalandfood.service.FoodStoreOnlineService;
+import com.hola.holalandfood.service.FoodStoreOnlineTagService;
+import com.hola.holalandfood.service.FoodTagService;
+import com.hola.holalandfood.service.FoodTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,45 +54,42 @@ public class FoodController {
         List<FoodType> foodTypeList = foodTypeService.getAll();
         List<FoodStoreOnline> foodStoreOnlineList = foodStoreOnlineService.getAllByType(
                 foodTypeList.get(0).getFoodTypeId(),
-                1);
-        List<FoodStoreOnlineTag> foodStoreOnlineTagList = foodStoreOnlineTagService.getAll();
-        model.addAttribute("typeId", foodTypeList.get(0).getFoodTypeId());
-        model.addAttribute("foodTypeList",foodTypeList);
+                1
+        );
+        model.addAttribute("foodTypeId", foodTypeList.get(0).getFoodTypeId());
+        model.addAttribute("foodTypeList", foodTypeList);
         model.addAttribute("foodStoreOnlineList", foodStoreOnlineList);
-        model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
+        model.addAttribute("foodTagService", foodTagService);
         model.addAttribute("page", 1);
         return "module-food";
     }
 
     @GetMapping("/food/type")
-    public String getFoodsByType(
-            @RequestParam("typeId") Integer typeId,
-            Model model) {
+    public String getFoodsByType(@RequestParam("typeId") Integer typeId, Model model) {
         List<FoodType> foodTypeList = foodTypeService.getAll();
         List<FoodStoreOnline> foodStoreOnlineList = foodStoreOnlineService.getAllByType(
                 typeId,
-                1);
-        List<FoodStoreOnlineTag> foodStoreOnlineTagList = foodStoreOnlineTagService.getAll();
-        model.addAttribute("typeId", typeId);
-        model.addAttribute("foodTypeList",foodTypeList);
+                1
+        );
+        model.addAttribute("foodTypeId", typeId);
+        model.addAttribute("foodTypeList", foodTypeList);
         model.addAttribute("foodStoreOnlineList", foodStoreOnlineList);
-        model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
+        model.addAttribute("foodTagService", foodTagService);
         model.addAttribute("page", 1);
         return "module-food";
     }
 
     @GetMapping("/food/online-store")
-    public String goToOnlineStore(
-            @RequestParam("id") Integer id,
-            Model model) {
+    public String goToOnlineStore(@RequestParam("id") Integer id, Model model) {
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
         List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
         List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(
                 id,
-                foodStoreOnlineTagList.get(0).getFoodTagId());
+                foodStoreOnlineTagList.get(0).getFoodTagId()
+        );
         List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
         List<UserDetail> userList = userDetailService.getAll();
-        model.addAttribute("tagId",foodStoreOnlineTagList.get(0).getFoodTagId());
+        model.addAttribute("tagId", foodStoreOnlineTagList.get(0).getFoodTagId());
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
         model.addAttribute("foodItemList", foodItemList);
@@ -97,13 +103,14 @@ public class FoodController {
     public String getFoodOnlineStoreByTag(
             @RequestParam("tagId") Integer tagId,
             @RequestParam("id") Integer id,
-            Model model) {
+            Model model
+    ) {
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
         List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
         List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
         List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);
         List<UserDetail> userList = userDetailService.getAll();
-        model.addAttribute("tagId",tagId);
+        model.addAttribute("tagId", tagId);
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
         model.addAttribute("foodItemList", foodItemList);
@@ -118,14 +125,15 @@ public class FoodController {
             @RequestParam("id") Integer id,
             @RequestParam("itemId") Integer itemId,
             @RequestParam("tagId") Integer tagId,
-            Model model) {
+            Model model
+    ) {
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
         List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
         List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
         List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);
         List<UserDetail> userList = userDetailService.getAll();
         FoodItem item = foodItemService.getOne(itemId);
-        model.addAttribute("tagId",tagId);
+        model.addAttribute("tagId", tagId);
         model.addAttribute("item", item);
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);

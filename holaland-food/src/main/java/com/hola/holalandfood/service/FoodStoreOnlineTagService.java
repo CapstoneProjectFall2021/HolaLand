@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 import java.util.List;
 
 public interface FoodStoreOnlineTagService {
+
     List<FoodStoreOnlineTag> getAll() throws DataAccessException;
 
     FoodStoreOnlineTag getOne(int id) throws DataAccessException;
