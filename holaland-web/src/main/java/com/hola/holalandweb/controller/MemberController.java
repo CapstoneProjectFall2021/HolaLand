@@ -70,7 +70,12 @@ public class MemberController {
         addMember.setMemberStatusId(1);
 
         int memberId = memberService.save(addMember);
-        
+        if (memberId > 0) {
+            backToMembers(model);
+            return "members";
+        } else {
+            return "404";
+        }
     }
 
     @GetMapping("/get-one-member")
