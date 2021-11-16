@@ -12,4 +12,6 @@ public interface UserDetailService {
     List<UserDetail> getAllUserBookedByUserId(int id) throws DataAccessException;
 
     List<UserDetail> getAllUserAppliedByUserId(int id) throws DataAccessException;
+
+    UserDetail getOneByUserId(int userId) throws DataAccessException;
 }

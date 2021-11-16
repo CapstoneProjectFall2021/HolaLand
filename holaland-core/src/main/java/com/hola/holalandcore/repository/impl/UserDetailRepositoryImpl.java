@@ -35,4 +35,9 @@ public class UserDetailRepositoryImpl implements UserDetailRepository, IReposito
     public List<UserDetail> getAllUserAppliedByUserId(int id) throws DataAccessException {
         return jdbcTemplate.query(GET_LIST_USER_APPLIED_BY_USER_ID, new UserDetailMapper(), id);
     }
+
+    @Override
+    public UserDetail getOneByUserId(int userId) throws DataAccessException {
+        return jdbcTemplate.queryForObject(USER_DETAIL_GET_ONE_BY_USER_ID, new UserDetailMapper(), userId);
+    }
 }

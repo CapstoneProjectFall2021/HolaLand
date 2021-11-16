@@ -79,23 +79,11 @@ public class FoodController {
         return "module-food";
     }
 
+
+
     @GetMapping("/food/online-store")
     public String goToOnlineStore(@RequestParam("id") Integer id, Model model) {
-        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
-        List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
-        List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(
-                id,
-                foodStoreOnlineTagList.get(0).getFoodTagId()
-        );
-        List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
-        List<UserDetail> userList = userDetailService.getAll();
-        model.addAttribute("tagId", foodStoreOnlineTagList.get(0).getFoodTagId());
-        model.addAttribute("foodStoreOnline", foodStoreOnline);
-        model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
-        model.addAttribute("foodItemList", foodItemList);
-        model.addAttribute("listComment", listComment);
-        model.addAttribute("userList", userList);
-        model.addAttribute("page", 9);
+        addAttrStoreOnline(id, 0, 9, model);
         return "module-food";
     }
 
@@ -105,43 +93,40 @@ public class FoodController {
             @RequestParam("id") Integer id,
             Model model
     ) {
-        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
-        List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
-        List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
-        List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);
-        List<UserDetail> userList = userDetailService.getAll();
-        model.addAttribute("tagId", tagId);
-        model.addAttribute("foodStoreOnline", foodStoreOnline);
-        model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
-        model.addAttribute("foodItemList", foodItemList);
-        model.addAttribute("listComment", listComment);
-        model.addAttribute("userList", userList);
-        model.addAttribute("page", 9);
+        addAttrStoreOnline(id, tagId, 9, model);
         return "module-food";
     }
 
-    @GetMapping("/food/online-store/detail")
+    @GetMapping("/food/online-store/food-detail")
     public String getFoodDetail(
             @RequestParam("id") Integer id,
             @RequestParam("itemId") Integer itemId,
             @RequestParam("tagId") Integer tagId,
             Model model
     ) {
+        addAttrStoreOnline(id, tagId, 9, model);
+        FoodItem item = foodItemService.getOne(itemId);
+        model.addAttribute("item", item);
+        return "module-food";
+    }
+
+    private void addAttrStoreOnline(int id, int tagId, int page,Model model) {
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
         List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
         List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
-        List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);
-        List<UserDetail> userList = userDetailService.getAll();
-        FoodItem item = foodItemService.getOne(itemId);
+        List<FoodItem> foodItemList;
+        if(tagId == 0) {
+            foodItemList = foodItemService.getAllByStoreOnlineId(id);
+        }else {
+            foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);
+        }
         model.addAttribute("tagId", tagId);
-        model.addAttribute("item", item);
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
         model.addAttribute("foodItemList", foodItemList);
         model.addAttribute("listComment", listComment);
-        model.addAttribute("userList", userList);
-        model.addAttribute("page", 9);
-        return "module-food";
+        model.addAttribute("userDetailService", userDetailService);
+        model.addAttribute("page", page);
     }
 
     @GetMapping("/food/list-offline-store")

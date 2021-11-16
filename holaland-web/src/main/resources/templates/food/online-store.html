@@ -70,6 +70,7 @@
               <div class="col-md-12">
                 <div class="list-tag">
                   <div class="tags">
+                    <a class="tag" th:href="@{/food/online-store(id=${foodStoreOnline.foodStoreOnlineId})}">Tất cả</a>
                     <a th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}" class="tag"
                        th:href="@{/food/online-store/tag(tagId=*{foodStoreOnlineTag.foodTagId}, id=${foodStoreOnline.foodStoreOnlineId})}"
                        th:text="*{foodStoreOnlineTag.foodTagName}"></a>
@@ -91,8 +92,8 @@
                         <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
                       </div>
                       <div class="content-body">
-                        <a th:href="@{/food/online-store/detail(id=${foodStoreOnline.foodStoreOnlineId},
-                        itemId=*{foodItem.foodItemId}, tagId=*{foodItem.foodTagId})}"
+                        <a th:href="@{/food/online-store/food-detail(id=${foodStoreOnline.foodStoreOnlineId},
+                        itemId=*{foodItem.foodItemId}, tagId=${tagId})}"
                         th:text="*{foodItem.foodItemName}">
                         </a>
                         <div class="food-info">
@@ -123,8 +124,8 @@
                         </div>
                       </div>
                       <div class="comment-area">
-                        <div class="comment-content">
-                          <h3 th:text="${userList.get(comment.userId - 1).userDetailName}"></h3>
+                        <div class="comment-content" th:with="user=${userDetailService.getOneByUserId(comment.userId)}">
+                          <h3 th:text="${user.userDetailName}"></h3>
                           <p th:text="*{comment.foodStoreOnlineRateComment}"></p>
                         </div>
                         <div class="time">

@@ -27,6 +27,11 @@ public class FoodItemRepositoryImpl implements FoodItemRepository, IRepositoryQu
     }
 
     @Override
+    public List<FoodItem> getAllByStoreOnlineId(int id) throws DataAccessException {
+        return jdbcTemplate.query(FOOD_ITEM_GET_ALL_BY_STORE_ONLINE_ID, new FoodItemMapper(), id);
+    }
+
+    @Override
     public List<FoodItem> getAllByStoreOnlineIdAndTagId(int id, int tagId) throws DataAccessException {
         return jdbcTemplate.query(FOOD_ITEM_GET_ALL_BY_STORE_ONLINE_ID_AND_TAG_ID, new FoodItemMapper(), id, tagId);
     }
