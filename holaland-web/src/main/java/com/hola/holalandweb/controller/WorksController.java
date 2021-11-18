@@ -487,9 +487,7 @@ public class WorksController {
                 1,
                 sttWorkCode
         );
-        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
         model.addAttribute("requestId", requestId);
-        model.addAttribute("newRequestRecruitment", newRequestRecruitment);
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
@@ -499,15 +497,12 @@ public class WorksController {
 
     @PostMapping("/repost-request-recruitment")
     public String repostRequestRecruitment(
-            @ModelAttribute("newRequestRecruitment") WorkRequestRecruitment newRequestRecruitment,
-            BindingResult bindingResult
+            @RequestParam("endDate") Date endDate,
+            @RequestParam("id") Integer id
     ) {
-        if (bindingResult.hasErrors()) {
-            System.out.println("There was a error " + bindingResult);
-            return "404";
-        }
         Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-        WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(newRequestRecruitment.getWorkRequestRecruitmentId());
+        WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(id);
+        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
         newRequestRecruitment.setUserId(requestRecruitment.getUserId());
         newRequestRecruitment.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
         newRequestRecruitment.setWorkRequestTypeId(requestRecruitment.getWorkRequestTypeId());
@@ -515,6 +510,7 @@ public class WorksController {
         newRequestRecruitment.setWorkPaymentMethodId(requestRecruitment.getWorkPaymentMethodId());
         newRequestRecruitment.setWorkRequestRecruitmentTitle(requestRecruitment.getWorkRequestRecruitmentTitle());
         newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
+        newRequestRecruitment.setWorkRequestRecruitmentEndDateTime(endDate);
         newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentDescription(requestRecruitment.getWorkRequestRecruitmentDescription());
         newRequestRecruitment.setWorkRequestRecruitmentRequirement(requestRecruitment.getWorkRequestRecruitmentRequirement());
@@ -560,15 +556,15 @@ public class WorksController {
     }
 
     @GetMapping("works/request-recruitment-manage/reason-reject")
-    public String getReasonRejectRequestRecruitment(
+    public String getReasonRejectRecruitmentRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,
             Model model
     ) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 2);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
         List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
-                2,
+                1,
                 sttWorkCode
         );
         WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(requestId);
@@ -577,27 +573,6 @@ public class WorksController {
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
         model.addAttribute("page", 9);
-        return "module-works";
-    }
-
-    @GetMapping("works/request-find-job-manage/reason-reject")
-    public String getReasonRejectRequestFindJob(
-            @RequestParam("requestId") Integer requestId,
-            @RequestParam("code") Integer sttWorkCode,
-            Model model
-    ) {
-        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
-        List<WorkRequestFindJob> requestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(
-                1,
-                sttWorkCode
-        );
-        WorkRequestFindJob requestFindJob = workRequestFindJobService.getOne(requestId);
-        model.addAttribute("reasonReject", requestFindJob.getWorkRequestFindJobId());
-        model.addAttribute("sttWorkCode", sttWorkCode);
-        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
-        model.addAttribute("requestFindJobList", requestFindJobs);
-        model.addAttribute("page", 5);
         return "module-works";
     }
 }
