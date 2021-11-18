@@ -58,8 +58,7 @@
           </div>
           <div class="btn-action me-4" th:if="${sttWorkCode == 4}">
             <a class="me-2" href="javascript:void(0)">
-              <a class="me-2" th:href=
-                  "@{/works/request-recruitment-manage/repost-request-recruitment
+              <a class="me-2" th:href="@{/works/request-recruitment-manage/repost-request-recruitment
                 (requestId=${requestRecruitment.workRequestRecruitmentId},
                 code=${requestRecruitment.sttWorkCode})}">
                 <i class="fas fa-undo-alt m-0" onclick="confirmRepostRequest()"></i>

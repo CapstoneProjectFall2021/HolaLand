@@ -560,15 +560,15 @@ public class WorksController {
     }
 
     @GetMapping("works/request-recruitment-manage/reason-reject")
-    public String getReasonRejectRequest(
+    public String getReasonRejectRequestRecruitment(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,
             Model model
     ) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 2);
         List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
-                1,
+                2,
                 sttWorkCode
         );
         WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(requestId);
@@ -577,6 +577,27 @@ public class WorksController {
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
         model.addAttribute("page", 9);
+        return "module-works";
+    }
+
+    @GetMapping("works/request-find-job-manage/reason-reject")
+    public String getReasonRejectRequestFindJob(
+            @RequestParam("requestId") Integer requestId,
+            @RequestParam("code") Integer sttWorkCode,
+            Model model
+    ) {
+        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
+        List<WorkRequestFindJob> requestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(
+                1,
+                sttWorkCode
+        );
+        WorkRequestFindJob requestFindJob = workRequestFindJobService.getOne(requestId);
+        model.addAttribute("reasonReject", requestFindJob.getWorkRequestFindJobId());
+        model.addAttribute("sttWorkCode", sttWorkCode);
+        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
+        model.addAttribute("requestFindJobList", requestFindJobs);
+        model.addAttribute("page", 5);
         return "module-works";
     }
 }

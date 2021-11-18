@@ -175,7 +175,7 @@
   <!-- Import modal confirm remove find job request -->
   <div th:replace="works/modal/modal-confirm-remove-find-job-request :: confirmRemoveFindJobRequestModal"></div>
   <!-- Import modal reason reject -->
-  <div th:replace="works/modal/modal-reason-reject :: reasonRejectModal"></div>
+  <div th:replace="works/modal/modal-reason-reject :: reasonRejectModal(reason=${reasonReject})"></div>
 </th:block>
 <th:block th:if="${page == 6}">
   <!-- Import modal request find job preview -->
