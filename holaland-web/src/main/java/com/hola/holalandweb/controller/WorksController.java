@@ -575,4 +575,25 @@ public class WorksController {
         model.addAttribute("page", 9);
         return "module-works";
     }
+
+    @GetMapping("works/request-find-job-manage/reason-reject")
+    public String getReasonRejectFindJobRequest(
+            @RequestParam("requestId") Integer requestId,
+            @RequestParam("code") Integer sttWorkCode,
+            Model model
+    ) {
+        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 2);
+        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(
+                2,
+                sttWorkCode
+        );
+        WorkRequestFindJob requestFindJob = workRequestFindJobService.getOne(requestId);
+        model.addAttribute("reasonReject", requestFindJob.getWorkRequestFindJobNote());
+        model.addAttribute("sttWorkCode", sttWorkCode);
+        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
+        model.addAttribute("requestFindJobList", workRequestFindJobs);
+        model.addAttribute("page", 5);
+        return "module-works";
+    }
 }
