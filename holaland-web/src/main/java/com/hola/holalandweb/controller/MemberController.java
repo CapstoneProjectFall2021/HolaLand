@@ -113,7 +113,7 @@ public class MemberController {
         model.addAttribute("addMember", Member.builder().build());
         model.addAttribute("oneMember", null);
         model.addAttribute("members", members);
-        
+        model.addAttribute("listBus", listBus);
         model.addAttribute("listClub", listClub);
         model.addAttribute("listClubType", listCLubType);
     }
