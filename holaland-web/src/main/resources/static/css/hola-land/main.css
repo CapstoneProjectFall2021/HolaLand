@@ -138,11 +138,16 @@ pre {
 .table {
   color: var(--primary-text);
   border-color: var(--secondary-border-color);
-  margin-bottom: 0;
+}
+
+.table i.far,
+.table i.fas,
+.table i.fab {
+  margin-right: 0;
 }
 
 th {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 td {
@@ -160,4 +165,12 @@ tr {
 
 hr {
   margin: 8px 0 12px 0;
+}
+
+.color-success {
+  color: var(--main-text) !important;
+}
+
+.color-danger {
+  color: var(--danger-text) !important;
 }
