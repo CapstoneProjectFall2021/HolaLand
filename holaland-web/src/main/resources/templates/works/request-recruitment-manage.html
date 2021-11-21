@@ -1,0 +1,149 @@
+<div class="col-right" th:fragment="request-recruitment-manage">
+  <!-- List request type -->
+  <div class="list-request-type">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Loại bài viết</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="sttWork : ${sttWorkCountMap}">
+        <a th:href="@{/works/request-recruitment-manage/status(code=*{sttWork.key.sttWorkCode})}"
+           class="label-info m-mb-16"
+           th:classappend="${sttWork.key.sttWorkCode == sttWorkCode ? 'active' : ''}">
+          <div class="flex">
+            <div class="icon">
+              <i th:classappend="*{sttWork.key.sttWorkIcon}"></i>
+            </div>
+            <div class="number">
+              <h4 th:text="*{sttWork.value}"></h4>
+            </div>
+          </div>
+          <div class="description club-type" th:text="*{sttWork.key.sttWorkValue}">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- List request Recruitment -->
+  <div class="list-request" th:if="${requestRecruitmentList.size != 0}">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mt-title fix-mb-title">Danh sách bài viết</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" th:each="requestRecruitment : ${requestRecruitmentList}">
+        <div class="label-info m-mb-16">
+          <div class="btn-remove" th:if="${sttWorkCode == 3}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveRecruitmentRequest(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 1}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="far fa-edit m-0" onclick="">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-remove" th:if="${sttWorkCode == 1}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveRecruitmentRequest(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 4}">
+            <a class="me-2" href="javascript:void(0)">
+              <a class="me-2" th:href="@{/works/request-recruitment-manage/repost-request-recruitment
+                (requestId=${requestRecruitment.workRequestRecruitmentId},
+                code=${requestRecruitment.sttWorkCode})}">
+                <i class="fas fa-undo-alt m-0" onclick="confirmRepostRequest()"></i>
+              </i>
+            </a>
+          </div>
+          <div class="btn-remove" th:if="${sttWorkCode == 4}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveRecruitmentRequest(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 5}">
+            <a class="me-2" th:href=
+                "@{/works/request-recruitment-manage/repost-request-recruitment
+                (requestId=${requestRecruitment.workRequestRecruitmentId},
+                code=${requestRecruitment.sttWorkCode})}">
+              <i class="fas fa-undo-alt m-0" onclick="confirmRepostRequest()"></i>
+            </a>
+          </div>
+          <div class="btn-remove" th:if="${sttWorkCode == 5}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveRecruitmentRequest(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-action" style="margin-right: 62px;" th:if="${sttWorkCode == 2}">
+            <a class="me-2" th:href="@{/works/request-recruitment-manage/reason-reject
+            (requestId=${requestRecruitment.workRequestRecruitmentId},
+                code=${requestRecruitment.sttWorkCode})}">
+              <i class="far fa-comment-dots text-warning m-0"></i>
+            </a>
+          </div>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 2}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="far fa-edit m-0" onclick="">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-remove" th:if="${sttWorkCode == 2}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveRecruitmentRequest(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 6}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="far fa-edit m-0" onclick="confirmEditRequestRecruitmentSaveDraft(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-remove" th:if="${sttWorkCode == 6}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveRecruitmentRequest(event)">
+                <span th:text="${requestRecruitment.workRequestRecruitmentId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="flex">
+            <div class="icon-s">
+              <img class="media-object" th:src="@{'/images/system/job.png'}" alt="">
+            </div>
+            <div class="content-body">
+              <a th:href="@{/works/request-recruitment-detail(id=${requestRecruitment.workRequestRecruitmentId})}"
+                 th:text="*{requestRecruitment.workRequestRecruitmentTitle}"></a>
+              <div class="request-info">
+                <p>Lương: <span th:text="*{requestRecruitment.workRequestRecruitmentSalary}"></span></p>
+                <p>Thời hạn: <span th:text="*{requestRecruitment.workRequestRecruitmentEndDateTime}"></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="list-request" th:if="${requestRecruitmentList.size == 0}">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mt-title fix-mb-title">Không có bài viết nào</h1>
+      </div>
+    </div>
+  </div>
+</div>

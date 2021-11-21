@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hola Land - Food</title>
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" th:href="@{/css/all.css}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.css}"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/hola-land/main.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/common.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/grid.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/form.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/food.css}"/>
+</head>
+
+<body>
+<div th:replace="~{common/navbar :: navbar}"></div>
+
+<div style="overflow: hidden;">
+  <div class="container">
+    <div class="row">
+      <!-- Left side -->
+      <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3">
+        <div class="col-left">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="title fix-pd fix-mb-title">Menu</h1>
+            </div>
+          </div>
+          <ul class="nav navbar-nav sub-menu">
+            <li>
+              <a th:href="@{/food}" th:classappend="${page == 1 ? 'active' : ''}">
+                <i class="fas fa-pizza-slice fa-fw"></i>Đặt đồ online
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/food/list-offline-store}" th:classappend="${page == 2 ? 'active' : ''}">
+                <i class="fas fa-store fa-fw"></i>Danh sách nhà hàng
+              </a>
+            </li>
+            <li>
+              <hr/>
+            </li>
+            <li>
+              <a th:href="@{/food/user-order}" th:classappend="${page == 3 ? 'active' : ''}">
+                <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
+              </a>
+            </li>
+            <li>
+              <hr/>
+            </li>
+            <li>
+              <a th:href="@{/food/manage-store}" th:classappend="${page == 4 ? 'active' : ''}">
+                <i class="fas fa-chart-bar fa-fw"></i>Quản lý cửa hàng
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/}" th:classappend="${page == 5 ? 'active' : ''}">
+                <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
+              </a>
+            </li>
+            <li>
+              <hr/>
+            </li>
+            <li>
+              <a th:href="@{/}">
+                <i class="fas fa-chevron-left fa-fw"></i>Quay lại
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Right side  -->
+      <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
+        <!-- List online store -->
+        <th:block th:if="${page == 1}">
+          <div th:replace="food/list-online-store :: list-online-store"></div>
+        </th:block>
+        <!-- List offline store -->
+        <th:block th:if="${page == 2}">
+          <div th:replace="food/list-offline-store :: list-offline-store"></div>
+        </th:block>
+        <!-- User order -->
+        <th:block th:if="${page == 3}">
+          <div th:replace="food/user-order :: user-order"></div>
+        </th:block>
+        <!-- Online store info -->
+        <th:block th:if="${page == 9}">
+          <div th:replace="food/online-store :: online-store"></div>
+        </th:block>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Javascript -->
+<th:block th:replace="~{common/script :: script/script}"></th:block>
+
+<!-- Modal food detail -->
+<div class="modal fade" id="foodDetailModal" tabindex="-1" aria-labelledby="foodDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="foodDetailModalLabel">Thông tin</h5>
+      </div>
+      <div class="modal-body">
+        <div class="flex">
+          <div class="icon-circle">
+            <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
+          </div>
+          <div class="content-body">
+            <h3>Cơm hến xào</h3>
+            <p class="price">Giá: 40.000<sup>đ</sup></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" onclick="showToast()" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal">
+          <i class="fas fa-plus"></i>Thêm vào giỏ hàng
+        </a>
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal rate -->
+<div class="modal fade" id="rateFoodModal" tabindex="-1" aria-labelledby="rateFoodModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="rateFoodModalLabel">Đánh giá</h5>
+      </div>
+      <div class="modal-body">
+        <form class="row">
+          <div class="form-group col-md-12">
+            <fieldset class="fieldset-rate">
+              <legend>Điểm đánh giá</legend>
+              <div class="custom-radio">
+                <div class="form-check">
+                  <input class="form-check-input me-2" type="radio" name="rate" id="one-star" value="1">
+                  <label class="form-check-label" for="one-star">1<i class="fas fa-star ms-1 checked"></i></label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input me-2" type="radio" name="rate" id="two-star" value="2">
+                  <label class="form-check-label" for="two-star">2<i class="fas fa-star ms-1 checked"></i></label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input me-2" type="radio" name="rate" id="three-star" value="3">
+                  <label class="form-check-label" for="three-star">3<i class="fas fa-star ms-1 checked"></i></label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input me-2" type="radio" name="rate" id="four-star" value="4">
+                  <label class="form-check-label" for="four-star">4<i class="fas fa-star ms-1 checked"></i></label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input me-2" type="radio" name="rate" id="five-star" value="5">
+                  <label class="form-check-label" for="five-star">5<i class="fas fa-star ms-1 checked"></i></label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="form-group col-md-12 m-0">
+            <fieldset>
+              <legend>Ý kiến đánh giá</legend>
+              <textarea class="form-control" rows="3"></textarea>
+            </fieldset>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary me-2">
+          <i class="fas fa-check text-success mr-2"></i>Xác nhận
+        </a>
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

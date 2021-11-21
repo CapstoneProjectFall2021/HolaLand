@@ -13,4 +13,8 @@ public interface WorkRequestApplyService {
     List<WorkRequestRecruitment> getAllAccountId(int accountId) throws DataAccessException;
 
     WorkRequestApply getOne(int id) throws DataAccessException;
+
+    boolean save(WorkRequestApply obj) throws DataAccessException;
+
+    boolean delete(int id) throws DataAccessException;
 }

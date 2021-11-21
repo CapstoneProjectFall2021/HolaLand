@@ -1,0 +1,80 @@
+<div class="col-right" th:fragment="list-online-store">
+  <!-- List food type -->
+  <div class="list-food-type">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Loại cửa hàng</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-3 col-xxl-3" th:each="foodType : ${foodTypeList}">
+        <a th:href="@{/food/type(typeId=*{foodType.foodTypeId})}" class="label-info m-mb-16"
+           th:classappend="${foodType.foodTypeId == typeId ? 'active' : ''}">
+          <div class="flex">
+            <div class="icon">
+              <i th:classappend="*{foodType.foodTypeIcon}"></i>
+            </div>
+            <div class="number">
+              <h4 th:text="*{foodType.foodTypeCount}"></h4>
+            </div>
+          </div>
+          <div class="description" th:text="*{foodType.foodTypeName}">
+          </div>
+        </a>
+      </div>
+      <!-- List online story -->
+      <div class="list-online-store">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="title fix-mb-title fix-mt-title">Danh sách cửa hàng</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" th:each="foodStoreOnline : ${foodStoreOnlineList}">
+            <a th:href="@{/food/online-store(id=*{foodStoreOnline.foodStoreOnlineId})}" class="label-info m-mb-16">
+              <div class="flex">
+                <div class="icon-circle">
+                  <img class="media-object" th:src="@{'/images/system/v.png'}" alt="">
+                </div>
+                <div class="content-body">
+                  <h4 th:text="*{foodStoreOnline.foodStoreOnlineName}"></h4>
+                  <div class="row-info">
+                    <p class="star-rate">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="far fa-star"></i>
+                    </p>
+                    <p class="price">
+                      Giá: <span th:text="*{foodStoreOnline.foodStoreOnlineMinPrice}"></span><sup>đ</sup> -
+                      <span th:text="*{foodStoreOnline.foodStoreOnlineMaxPrice}"></span><sup>đ</sup>
+                </p>
+              </div>
+              <div class=" row-info panel-small">
+                    <p class="description m-0" th:text="*{foodStoreOnline.foodStoreOnlineDescription}">
+                    </p>
+                  </div>
+                  <div class="row-info">
+                    <div class="tags">
+                      <span class="tag" th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}"
+                      th:if="${foodStoreOnlineTag.foodStoreOnlineId == foodStoreOnline.foodStoreOnlineId}"
+                      th:text="*{foodStoreOnlineTag.foodTagId == 1 ? 'Cơm' :
+                      (foodStoreOnlineTag.foodTagId == 2 ? 'Bánh mỳ' :
+                      (foodStoreOnlineTag.foodTagId == 3 ? 'Đồ ăn vặt' : 'Đồ ăn nhanh'))}"></span>
+                    </div>
+                    <div class="note">
+                      <p class="m-0" th:text="*{foodStoreOnline.foodStoreTypeId == 1 ? 'Chỉ bán online' :
+                      (foodStoreOnline.foodStoreTypeId == 2 ? 'Nhà hàng' : 'Quán ăn')}">
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

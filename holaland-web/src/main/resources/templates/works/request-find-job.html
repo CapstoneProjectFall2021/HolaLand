@@ -1,65 +1,68 @@
 <div class="col-right" th:fragment="request-find-job">
-  <!-- List job type -->
-  <div class="list-job-type">
-    <div class="row">
-      <div class="col-12">
-        <h1 class="title fix-mb-title">Loại việc làm</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="jobType : ${jobTypeList}">
-        <a href="request-find-job.html" class="label-info m-mb-16"
-           th:href="@{/works/type(workJobTypeId=*{jobType.workRequestTypeId})}"
-           th:classappend="${jobType.workRequestTypeId == workJobTypeId ? 'active' : ''}">
-          <div class="flex">
-            <div class="icon">
-              <i th:classappend="*{jobType.workRequestTypeIcon}"></i>
+    <!-- List request type -->
+    <div class="list-request-type">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="title fix-mb-title">Loại việc làm</h1>
             </div>
-            <div class="number">
-              <h4 th:text="*{jobType.workRequestTypeCountRequestRecruitment}"></h4>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="requestType : ${requestTypeList}">
+                <a href="request-recruitment.html" class="label-info m-mb-16"
+                   th:href="@{/works/request-find-job/type(workRequestTypeId=*{requestType.workRequestTypeId})}"
+                   th:classappend="${requestType.workRequestTypeId == workRequestTypeId ? 'active' : ''}">
+                    <div class="flex">
+                        <div class="icon">
+                            <i th:classappend="*{requestType.workRequestTypeIcon}"></i>
+                        </div>
+                        <div class="number">
+                            <h4 th:text="*{requestType.workRequestTypeCountRequestFindJob}"></h4>
+                        </div>
+                    </div>
+                    <div class="description club-type" th:text="*{requestType.workRequestTypeName}">
+                    </div>
+                </a>
             </div>
-          </div>
-          <div class="description club-type" th:text="*{jobType.workRequestTypeName}">
-          </div>
-        </a>
-      </div>
+        </div>
     </div>
-  </div>
-  <!-- List jobs -->
-  <div class="list-job" th:if="${jobList.size != 0}">
-    <div class="row">
-      <div class="col-12">
-        <h1 class="title fix-mt-title fix-mb-title">Danh sách việc làm</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12" th:each="job : ${jobList}">
-        <a th:href="@{/works/job-detail(id=${job.workRequestRecruitmentId})}"
-           class="label-info m-mb-16">
-          <div class="flex">
-            <div class="icon-s">
-              <img class="media-object" src="../images/system/job.png" alt="">
+    <!-- List request -->
+    <div class="list-request" th:if="${workerList.size != 0}">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="title fix-mt-title fix-mb-title">Danh sách tìm việc</h1>
             </div>
-            <div class="content-body">
-              <h4 th:text="*{job.workRequestRecruitmentTitle}"></h4>
-              <div class="job-info">
-                <p sec:authorize="isAuthenticated()">
-                  Lương: <span th:text="*{job.workRequestRecruitmentSalary}"></span>
-                </p>
-                <p sec:authorize="!isAuthenticated()">Đăng nhập để xem lương</p>
-                <p>Thời hạn: <span th:text="*{job.workRequestRecruitmentEndDateTime}"></span></p>
-              </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" th:each="worker : ${workerList}">
+                <a th:href="@{/works/request-find-job-detail(id=${worker.workRequestFindJobId})}" class="label-info m-mb-16">
+                    <div class="flex">
+                        <div class="icon-s">
+                            <img class="media-object" th:src="@{'/images/system/job.png'}" alt="">
+                        </div>
+                        <div class="content-body">
+                            <h4 class="accent" th:text="*{worker.workRequestFindJobTitle}"></h4>
+                            <div class="request-info">
+                                <p>Lương mong muốn: <span th:text="*{worker.workRequestFindJobExpectedSalary}"></span>
+                                    <span
+                                        th:text="*{
+                                        worker.workSalaryUnitId == 1 ? 'VNĐ/h' :
+                                        worker.workSalaryUnitId == 2 ? 'VNĐ/Ngày' :
+                                        worker.workSalaryUnitId == 3 ? 'VNĐ/Tuần' : 'VNĐ/Tháng'}"
+                                    ></span>
+                                </p>
+                                <p>Thời hạn: <span th:text="*{worker.workRequestFindJobEndDateTime}"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
-          </div>
-        </a>
-      </div>
+        </div>
     </div>
-  </div>
-  <div class="list-job" th:if="${jobList.size == 0}">
-    <div class="row">
-      <div class="col-12">
-        <h1 class="title fix-mt-title fix-mb-title">Không có danh sách việc làm.</h1>
-      </div>
+    <div class="list-job" th:if="${workerList.size == 0}">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="title fix-mt-title fix-mb-title">Không có danh sách việc làm.</h1>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

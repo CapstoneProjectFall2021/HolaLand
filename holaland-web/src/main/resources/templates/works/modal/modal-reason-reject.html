@@ -1,0 +1,15 @@
+<!-- Modal reason reject -->
+<div class="modal fade" id="reasonRejectModal" tabindex="-1" aria-labelledby="reasonRejectModalLabel" aria-hidden="true"
+     th:fragment="reasonRejectModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reasonRejectModalLabel">Lý do từ chối duyệt yêu cầu</h5>
+      </div>
+      <div class="modal-body" th:text="${reason}"></div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+      </div>
+    </div>
+  </div>
+</div>

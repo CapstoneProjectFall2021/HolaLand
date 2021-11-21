@@ -9,8 +9,8 @@ import lombok.*;
 @Setter
 public class FoodStoreOnlineRate {
 
-    private int foodRateId;
+    private int foodStoreOnlineRateId;
     private int foodStoreOnlineId;
-    private int foodRatePoint;
-    private String foodRateComment;
+    private int foodStoreOnlineRatePoint;
+    private String foodStoreOnlineRateComment;
 }

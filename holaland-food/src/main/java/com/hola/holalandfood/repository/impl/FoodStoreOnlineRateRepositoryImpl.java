@@ -27,6 +27,11 @@ public class FoodStoreOnlineRateRepositoryImpl implements FoodStoreOnlineRateRep
     }
 
     @Override
+    public List<FoodStoreOnlineRate> getAllCommentByStoreOnlineId(int id) throws DataAccessException {
+        return jdbcTemplate.query(FOOD_STORE_ONLINE_RATE_GET_ALL_BY_STORE_ONLINE_ID, new FoodStoreOnlineRateMapper(), id);
+    }
+
+    @Override
     public FoodStoreOnlineRate getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(FOOD_STORE_ONLINE_RATE_GET_ONE,new FoodStoreOnlineRateMapper(),id);
     }

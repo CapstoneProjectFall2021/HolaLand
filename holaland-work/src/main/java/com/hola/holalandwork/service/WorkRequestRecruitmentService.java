@@ -12,4 +12,12 @@ public interface WorkRequestRecruitmentService {
     WorkRequestRecruitment getOne(int id) throws DataAccessException;
 
     List<WorkRequestRecruitment> getAllByType(int typeId, int sttWorkCode) throws DataAccessException;
+
+    List<WorkRequestRecruitment> getAllByUserIdAndTypeId(int id, Integer... typeId) throws DataAccessException;
+
+    List<WorkRequestRecruitment> getAllListAppliedByUserId (int userId, int sttWorkCode) throws DataAccessException;
+
+    boolean save(WorkRequestRecruitment obj) throws DataAccessException;
+
+    boolean delete(int id) throws DataAccessException;
 }

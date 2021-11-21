@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hola Land - Manage Store</title>
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" th:href="@{/css/all.css}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.css}"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/hola-land/main.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/common.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/grid.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/form.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/food.css}"/>
+</head>
+
+<body>
+<div th:replace="~{common/navbar :: navbar}"></div>
+
+<div style="overflow: hidden;">
+  <div class="container">
+    <div class="row">
+      <!-- Left side -->
+      <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3">
+        <div class="col-left">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="title fix-pd fix-mb-title">Menu</h1>
+            </div>
+          </div>
+          <ul class="nav navbar-nav sub-menu">
+            <li>
+              <a href="#">
+                <i class="fas fa-tachometer-alt fa-fw"></i>Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-info fa-fw"></i>Thông tin cửa hàng
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-list-ul fa-fw"></i>Quản lý đơn hàng
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-tasks fa-fw"></i>Quản lý đồ ăn
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-chart-line fa-fw"></i>Dữ liệu - Thống kê
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/food}">
+                <i class="fas fa-chevron-left fa-fw"></i>Quay lại
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Right side  -->
+      <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
+        <!-- List online store -->
+        <th:block th:if="${page == 1}">
+          <div class="col-right">
+            <!-- Manage store -->
+            <div class="manage-store">
+              <div class="row">
+                <div class="col-12">
+                  <h1 class="title fix-mb-title">Dashboard</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </th:block>
+        <!-- List offline store -->
+        <th:block th:if="${page == 2}">
+
+        </th:block>
+        <!-- User order -->
+        <th:block th:if="${page == 3}">
+
+        </th:block>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Javascript -->
+<th:block th:replace="~{common/script :: script/script}"></th:block>
+</body>
+
+</html>

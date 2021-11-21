@@ -7,47 +7,141 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="sttWork : ${sttWorkList}">
-        <a th:href="@{/works/request-manage/code(sttWorkCode=*{sttWork.sttWorkCode})}" class="label-info m-mb-16"
-           th:classappend="${sttWork.sttWorkCode == sttWorkCode ? 'active' : ''}">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="sttWork : ${sttWorkCountMap}">
+        <a th:href="@{/works/request-find-job-manage/status(code=*{sttWork.key.sttWorkCode})}"
+           class="label-info m-mb-16"
+           th:classappend="${sttWork.key.sttWorkCode == sttWorkCode ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
-              <i class="far fa-dot-circle"></i>
+              <i th:classappend="*{sttWork.key.sttWorkIcon}"></i>
             </div>
             <div class="number">
-              <h4>3</h4>
+              <h4 th:text="*{sttWork.value}"></h4>
             </div>
           </div>
-          <div class="description club-type" th:text="*{sttWork.sttWorkValue}">
+          <div class="description club-type" th:text="*{sttWork.key.sttWorkValue}">
           </div>
         </a>
       </div>
     </div>
   </div>
-  <!-- List request -->
-  <div class="list-request" th:if="${jobPostedList.size != 0}">
+  <!-- List request find job-->
+  <div class="list-request" th:if="${requestFindJobList.size != 0}">
     <div class="row">
       <div class="col-12">
         <h1 class="title fix-mt-title fix-mb-title">Danh sách bài viết</h1>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12" th:each="job : ${jobPostedList}">
+      <div class="col-md-12" th:each="requestFindJob : ${requestFindJobList}">
         <div class="label-info m-mb-16">
-          <div class="btn-remove">
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmRemoveFindJobModal">
-              <i class="far fa-trash-alt m-0"></i>
+          <div class="btn-remove" th:if="${sttWorkCode == 3}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveFindJobRequest(event)">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 1}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="far fa-edit m-0" onclick="">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-remove" th:if="${sttWorkCode == 1}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveFindJobRequest(event)">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 4}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="fas fa-undo-alt m-0" onclick="">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-remove" th:if="${sttWorkCode == 4}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveFindJobRequest(event)">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 5}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="fas fa-undo-alt m-0" onclick="">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-remove" th:if="${sttWorkCode == 5}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveFindJobRequest(event)">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-action" style="margin-right: 62px;" th:if="${sttWorkCode == 2}">
+            <a class="me-2" th:href="@{/works/request-find-job-manage/reason-reject
+            (requestId=${requestFindJob.workRequestFindJobId},
+                code=${requestFindJob.sttWorkCode})}">
+              <i class="far fa-comment-dots text-warning m-0" onclick="reasonRejectRequest()"></i>
+              <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+            </a>
+          </div>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 2}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="far fa-edit m-0" onclick="">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-remove" th:if="${sttWorkCode == 2}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveFindJobRequest(event)">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-action me-4" th:if="${sttWorkCode == 6}">
+            <a class="me-2" href="javascript:void(0)">
+              <i class="far fa-edit m-0" onclick="">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
+            </a>
+          </div>
+          <div class="btn-remove" th:if="${sttWorkCode == 6}">
+            <a href="javascript:void(0)">
+              <i class="far fa-trash-alt m-0" onclick="confirmRemoveFindJobRequest(event)">
+                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              </i>
             </a>
           </div>
           <div class="flex">
             <div class="icon-s">
-              <img class="media-object" src="../../images/system/job.png" alt="">
+              <img class="media-object" th:src="@{'/images/system/job.png'}" alt="">
             </div>
             <div class="content-body">
-              <a href="#" th:text="*{job.workRequestFindJobTitle}"></a>
-              <div class="job-info">
-                <p>Lương mong muốn: <span th:text="*{job.workRequestFindJobExpectedSalary}"></span></p>
-                <p>Thời hạn: <span th:text="*{job.workRequestFindJobEndDateTime}"></span></p>
+              <a th:href="@{/works/request-find-job-detail(id=*{requestFindJob.workRequestFindJobId})}"
+                 th:text="*{requestFindJob.workRequestFindJobTitle}"></a>
+              <div class="request-info">
+                <p>Lương mong muốn:
+                  <span
+                      th:text="${#numbers.formatInteger(requestFindJob.workRequestFindJobExpectedSalary, 3, 'POINT')}">
+                  </span>
+                  VNĐ/<span
+                      th:text="*{
+                      requestFindJob.workSalaryUnitId == 1 ? 'h' :
+                      requestFindJob.workSalaryUnitId == 2 ? 'ngày' :
+                      requestFindJob.workSalaryUnitId == 3 ? 'tuần' : 'tháng'
+                  }"></span>
+                </p>
+                <p>Thời hạn:
+                  <span th:text="${#dates.format(requestFindJob.workRequestFindJobEndDateTime, 'dd-MM-yyyy')}"></span>
+                </p>
               </div>
             </div>
           </div>
@@ -55,7 +149,7 @@
       </div>
     </div>
   </div>
-  <div class="list-request" th:if="${jobPostedList.size == 0}">
+  <div class="list-request" th:if="${requestFindJobList.size == 0}">
     <div class="row">
       <div class="col-12">
         <h1 class="title fix-mt-title fix-mb-title">Không có bài viết nào</h1>

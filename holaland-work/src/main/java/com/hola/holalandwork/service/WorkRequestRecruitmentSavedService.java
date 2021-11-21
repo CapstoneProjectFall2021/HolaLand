@@ -13,4 +13,8 @@ public interface WorkRequestRecruitmentSavedService {
     List<WorkRequestRecruitment> getAllByAccountId(int accountId) throws DataAccessException;
 
     WorkRequestRecruitmentSaved getOne(int id) throws DataAccessException;
+
+    boolean save(WorkRequestRecruitmentSaved obj) throws DataAccessException;
+
+    boolean delete(int id) throws DataAccessException;
 }

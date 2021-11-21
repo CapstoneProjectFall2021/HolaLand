@@ -1,0 +1,39 @@
+<div class="col-right" th:fragment="list-applied">
+  <!-- List applied -->
+  <div class="list-request">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Danh sách ứng tuyển</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" th:each="jobApplied : ${listApplied}">
+        <div class="label-info m-mb-16">
+          <div class="btn-action">
+            <a th:id="'btn-show-list-user-applied' + ${jobApplied.workRequestRecruitmentId}" href="javascript:void(0)">
+              <i class="fas fa-user-friends m-0" onclick="getIdOfRequestApplied(event)">
+              <span th:text="${jobApplied.workRequestRecruitmentId}" class="d-none"></span>
+            </i>
+            </a>
+          </div>
+          <div class="flex">
+            <div class="icon-v">
+              <i class="fas fa-user-check fa-fw"></i>
+            </div>
+            <div class="content-body">
+              <a th:href="@{/works/request-recruitment-detail(id=${jobApplied.workRequestRecruitmentId})}">
+                <span th:text="*{jobApplied.workRequestRecruitmentTitle}"></span>
+              </a>
+              <div class="request-info">
+                <p>Lương: <span th:text="*{jobApplied.workRequestRecruitmentSalary}"></span> &nbsp;&#8226;&nbsp;
+                  Thời hạn: <span th:text="*{jobApplied.workRequestRecruitmentEndDateTime}"></span></p>
+                <p th:classappend="*{jobApplied.sttWorkCode == 3 ? 'text-success' : 'text-danger'}"
+                   th:text="*{jobApplied.sttWorkCode == 3 ? 'Đang tuyển dụng' : 'Hết hạn tuyển dụng'}"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

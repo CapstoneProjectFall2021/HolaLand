@@ -1,0 +1,66 @@
+<div class="col-right" th:fragment="request-recruitment">
+  <!-- List request type -->
+  <div class="list-request-type">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Loại việc làm</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="jobType : ${jobTypeList}">
+        <a href="request-recruitment.html" class="label-info m-mb-16"
+           th:href="@{/works/type(workJobTypeId=*{jobType.workRequestTypeId})}"
+           th:classappend="${jobType.workRequestTypeId == workJobTypeId ? 'active' : ''}">
+          <div class="flex">
+            <div class="icon">
+              <i th:classappend="*{jobType.workRequestTypeIcon}"></i>
+            </div>
+            <div class="number">
+              <h4 th:text="*{jobType.workRequestTypeCountRequestRecruitment}"></h4>
+            </div>
+          </div>
+          <div class="description club-type" th:text="*{jobType.workRequestTypeName}">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- List request -->
+  <div class="list-request" th:if="${jobList.size != 0}">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mt-title fix-mb-title">Danh sách việc làm</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" th:each="job : ${jobList}">
+        <a th:href="@{/works/request-recruitment-detail(id=${job.workRequestRecruitmentId})}"
+           class="label-info m-mb-16">
+          <div class="flex">
+            <div class="icon-s">
+              <img class="media-object" th:src="@{'/images/system/job.png'}" alt="">
+            </div>
+            <div class="content-body">
+              <h4 class="accent" th:text="*{job.workRequestRecruitmentTitle}"></h4>
+              <div class="request-info">
+                <p sec:authorize="isAuthenticated()">
+                  Lương: <span th:text="*{job.workRequestRecruitmentSalary}"></span>
+                </p>
+                <p sec:authorize="!isAuthenticated()">Đăng nhập để xem lương</p>
+                <p>Thời hạn: <span
+                    th:text="${#dates.format(job.workRequestRecruitmentEndDateTime, 'dd-MM-yyyy')}"></span></p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="list-job" th:if="${jobList.size == 0}">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mt-title fix-mb-title">Không có danh sách việc làm.</h1>
+      </div>
+    </div>
+  </div>
+</div>

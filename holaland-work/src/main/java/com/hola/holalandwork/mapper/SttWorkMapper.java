@@ -17,7 +17,6 @@ public class SttWorkMapper implements RowMapper<SttWork> {
                 .sttWorkCode(resultSet.getInt("stt_work_code"))
                 .sttWorkValue(resultSet.getString("stt_work_value"))
                 .sttWorkIcon(resultSet.getString("stt_work_icon"))
-                .sttWorkCount(resultSet.getInt("stt_work_count"))
                 .build();
     }
 }

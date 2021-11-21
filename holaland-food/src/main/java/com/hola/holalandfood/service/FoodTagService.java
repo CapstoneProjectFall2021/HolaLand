@@ -9,5 +9,7 @@ public interface FoodTagService {
 
     List<FoodTag> getAll() throws DataAccessException;
 
+    List<FoodTag> getAllByStoreOnlineId(int id) throws DataAccessException;
+
     FoodTag getOne(int id) throws DataAccessException;
 }

@@ -34,4 +34,15 @@ public class WorkRequestRecruitmentSavedServiceImpl implements WorkRequestRecrui
     public WorkRequestRecruitmentSaved getOne(int id) throws DataAccessException {
         return workRequestRecruitmentSavedRepository.getOne(id);
     }
+
+    @Override
+    public boolean save(WorkRequestRecruitmentSaved obj) throws DataAccessException {
+        return workRequestRecruitmentSavedRepository.save(obj);
+    }
+
+    @Override
+    public boolean delete(int id) throws DataAccessException {
+        return workRequestRecruitmentSavedRepository.delete(id);
+    }
+
 }
