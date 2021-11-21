@@ -41,37 +41,47 @@
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/jobs-apply}" th:classappend="${page == 2 ? 'active' : ''}">
+              <a th:href="@{/works/list-booked}" th:classappend="${page == 2 ? 'active' : ''}">
+                <i class="fas fa-list fa-fw"></i>Danh sách thuê
+              </a>
+            </li>
+            <li sec:authorize="hasRole('MEMBER')">
+              <a th:href="@{/works/jobs-apply}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-tasks fa-fw"></i>Việc làm đã ứng tuyển
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/jobs-save}" th:classappend="${page == 3 ? 'active' : ''}">
+              <a th:href="@{/works/jobs-save}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="far fa-bookmark fa-fw"></i>Việc làm đã lưu
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/request-manage}" th:classappend="${page == 4 ? 'active' : ''}">
+              <a th:href="@{/works/request-find-job-manage}" th:classappend="${page == 5 ? 'active' : ''}">
                 <i class="far fa-file-alt fa-fw"></i>Quản lý bài viết
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/create-request-find-job}" th:classappend="${page == 5 ? 'active' : ''}">
+              <a th:href="@{/works/create-request-find-job}" th:classappend="${page == 6 ? 'active' : ''}">
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a href="#">
+              <a th:href="@{/works/request-find-job}" th:classappend="${page == 7 ? 'active' : ''}">
                 <i class="fas fa-search fa-fw"></i>Danh sách tìm việc
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a href="#">
-                <i class="fas fa-download fa-fw"></i>Bài viết lưu nháp
+              <a th:href="@{/works/list-applied}" th:classappend="${page == 8 ? 'active' : ''}">
+                <i class="fas fa-tasks fa-fw"></i>Danh sách ứng tuyển
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a href="#">
+              <a th:href="@{/works/request-recruitment-manage}" th:classappend="${page == 9 ? 'active' : ''}">
+                <i class="far fa-file-alt fa-fw"></i>Quản lý bài viết
+              </a>
+            </li>
+            <li sec:authorize="hasRole('RECRUITER')">
+              <a th:href="@{/works/create-request-recruitment}" th:classappend="${page == 10 ? 'active' : ''}">
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tuyển dụng
               </a>
             </li>
@@ -79,7 +89,7 @@
               <hr/>
             </li>
             <li>
-              <a th:href="@{/}">
+              <a id="btn-back-page" href="javascript:void(0)" onclick="goBack()">
                 <i class="fas fa-chevron-left fa-fw"></i>Quay lại
               </a>
             </li>
@@ -87,7 +97,7 @@
               <hr/>
             </li>
             <li>
-              <a href="javascript:void(0)" onclick="showToast()">
+              <a href="javascript:void(0)" onclick="showToast('toast-success')">
                 <i class="fas fa-pencil-alt fa-fw"></i>Test Toast
               </a>
             </li>
@@ -96,29 +106,53 @@
       </div>
       <!-- Right side -->
       <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
-        <!-- Request -->
+        <!-- List request recruitment -->
         <th:block th:if="${page == 1}">
-          <div th:replace="works/request-find-job :: request-find-job"></div>
+          <div th:replace="works/request-recruitment :: request-recruitment"></div>
         </th:block>
-        <!-- Request recruitment applied -->
+        <!-- List recruiter booked -->
         <th:block th:if="${page == 2}">
+          <div th:replace="works/list-booked :: list-booked"></div>
+        </th:block>
+        <!-- List request recruitment applied -->
+        <th:block th:if="${page == 3}">
           <div th:replace="works/request-recruitment-applied :: request-recruitment-applied"></div>
         </th:block>
-        <!-- Request recruitment saved -->
-        <th:block th:if="${page == 3}">
+        <!-- List request recruitment saved -->
+        <th:block th:if="${page == 4}">
           <div th:replace="works/request-recruitment-saved :: request-recruitment-saved"></div>
         </th:block>
-        <!-- Request manage -->
-        <th:block th:if="${page == 4}">
+        <!-- Request find job manage -->
+        <th:block th:if="${page == 5}">
           <div th:replace="works/request-find-job-manage :: request-find-job-manage"></div>
         </th:block>
         <!-- Create request find job -->
-        <th:block th:if="${page == 5}">
+        <th:block th:if="${page == 6}">
           <div th:replace="works/create-request-find-job :: create-request-find-job"></div>
         </th:block>
-        <!-- Request detail -->
+        <!-- List request find job -->
         <th:block th:if="${page == 7}">
+          <div th:replace="works/request-find-job :: request-find-job"></div>
+        </th:block>
+        <!-- List user applied -->
+        <th:block th:if="${page == 8}">
+          <div th:replace="works/list-applied :: list-applied"></div>
+        </th:block>
+        <!-- Request recruitment manage -->
+        <th:block th:if="${page == 9}">
+          <div th:replace="works/request-recruitment-manage :: request-recruitment-manage"></div>
+        </th:block>
+        <!-- Create request recruitment -->
+        <th:block th:if="${page == 10}">
+          <div th:replace="works/create-request-recruitment :: create-request-recruitment"></div>
+        </th:block>
+        <!-- Request recruitment detail -->
+        <th:block th:if="${page == 11}">
           <div th:replace="works/request-recruitment-detail :: request-recruitment-detail"></div>
+        </th:block>
+        <!-- Request find job detail -->
+        <th:block th:if="${page == 12}">
+          <div th:replace="works/request-find-job-detail :: request-find-job-detail"></div>
         </th:block>
       </div>
     </div>
@@ -126,28 +160,96 @@
 </div>
 
 <th:block th:if="${page == 2}">
+  <!-- Import modal list recruitment -->
+  <div th:replace="works/modal/modal-list-booked :: listBookedModal"></div>
+</th:block>
+<th:block th:if="${page == 3}">
   <!-- Import modal confirm cancel apply job -->
   <div th:replace="works/modal/modal-confirm-cancel-apply-job :: confirmCancelApplyJobModal"></div>
 </th:block>
-<th:block th:if="${page == 3}">
+<th:block th:if="${page == 4}">
   <!-- Import modal confirm remove job save -->
   <div th:replace="works/modal/modal-confirm-remove-job-save :: confirmRemoveJobSaveModal"></div>
 </th:block>
-<th:block th:if="${page == 4}">
-  <!-- Import modal confirm apply job -->
-  <div th:replace="works/modal/modal-confirm-apply-job :: confirmApplyJobModal"></div>
-</th:block>
 <th:block th:if="${page == 5}">
+  <!-- Import modal confirm remove find job request -->
+  <div th:replace="works/modal/modal-confirm-remove-find-job-request :: confirmRemoveFindJobRequestModal"></div>
+  <!-- Import modal reason reject -->
+  <div th:replace="works/modal/modal-reason-reject :: reasonRejectModal(reason=${reasonReject})"></div>
+</th:block>
+<th:block th:if="${page == 6}">
   <!-- Import modal request find job preview -->
   <div th:replace="works/modal/modal-request-find-job-preview :: findJobPreviewModal"></div>
+</th:block>
+<th:block th:if="${page == 8}">
+  <!-- Import modal list applied -->
+  <div th:replace="works/modal/modal-list-applied :: listAppliedModal"></div>
+</th:block>
+<th:block th:if="${page == 9}">
+  <!-- Import modal confirm remove recruitment request -->
+  <div th:replace="works/modal/modal-confirm-remove-recruitment-request :: confirmRemoveRecruitmentRequestModal"></div>
+  <!-- Import modal reason reject -->
+  <div th:replace="works/modal/modal-reason-reject :: reasonRejectModal(reason=${reasonReject})"></div>
+  <!-- Import modal confirm repost -->
+  <div th:replace="works/modal/modal-confirm-repost :: confirmRepost"></div>
+</th:block>
+<th:block th:if="${page == 10}">
+  <!-- Import modal request find job preview -->
+  <div th:replace="works/modal/modal-request-recruitment-preview :: recruitmentPreviewModal"></div>
+</th:block>
+<th:block th:if="${page == 11}">
+  <!-- Import modal confirm apply request -->
+  <div th:replace="works/modal/modal-confirm-apply-request :: confirmApplyRequestModal"></div>
+</th:block>
+<th:block th:if="${page == 12}">
+  <!-- Import modal confirm hire -->
+  <div th:replace="works/modal/modal-confirm-hire :: confirmHireModal"></div>
 </th:block>
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
-<script>
+<script crossorigin="anonymous" th:src="@{/js/templates/work.js}"></script>
+
+<!--<script th:inline="javascript" th:if="${requestId != null && modal != null}">-->
+<!--  /*<![CDATA[*/-->
+<!--  const modal = /*[[${modal}]]*/;-->
+<!--  /*]]>*/-->
+<!--  const myModal = new bootstrap.Modal(document.getElementById(modal));-->
+<!--  myModal.show();-->
+<!--</script>-->
+
+<script th:if="${requestId != null}">
+  const myModal = new bootstrap.Modal(document.getElementById('confirmRepostModal'));
+  myModal.show();
+</script>
+
+<script th:if="${reasonReject != null}">
+    const myModal = new bootstrap.Modal(document.getElementById('reasonRejectModal'));
+    myModal.show();
+</script>
+
+<script th:if="${listBookedModal != null && listBookedModal.size() != 0}">
+  const myModal = new bootstrap.Modal(document.getElementById('listBookedModal'));
+  myModal.show();
+</script>
+
+<script th:if="${listAppliedModal != null && listAppliedModal.size() != 0}">
+  const myModal = new bootstrap.Modal(document.getElementById('listAppliedModal'));
+  myModal.show();
+</script>
+
+<script th:inline="javascript">
   function showToast() {
     const toast = new bootstrap.Toast(document.getElementById('toast-success'));
     toast.show();
+  }
+
+  function goBack() {
+      if([[${page}]] == 11 || [[${page}]] == 12) {
+          window.history.back();
+      }else {
+          document.getElementById("btn-back-page").href = "/";
+      }
   }
 </script>
 

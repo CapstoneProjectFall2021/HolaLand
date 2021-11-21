@@ -12,6 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class WorkSalaryUnit {
+
     private int workSalaryUnitId;
-    private String  workSalaryUnitName;
+    private String workSalaryUnitName;
 }

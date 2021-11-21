@@ -38,4 +38,19 @@ public class WorkRequestFindJobServiceImpl implements WorkRequestFindJobService 
     public List<WorkRequestFindJob> getAllByUserIdAndTypeId(int id, Integer... typeId) throws DataAccessException {
         return workRequestFindJobRepository.getAllByUserIdAndTypeId(id, typeId);
     }
+
+    @Override
+    public List<WorkRequestFindJob> getAllListRecruitmentByUserId(int userId, int sttWorkCode) throws DataAccessException {
+        return workRequestFindJobRepository.getAllListRecruitmentByUserId(userId, sttWorkCode);
+    }
+
+    @Override
+    public boolean save(WorkRequestFindJob obj) throws DataAccessException {
+        return workRequestFindJobRepository.save(obj);
+    }
+
+    @Override
+    public boolean delete(int id) throws DataAccessException {
+        return workRequestFindJobRepository.delete(id);
+    }
 }

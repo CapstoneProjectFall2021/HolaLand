@@ -27,6 +27,11 @@ public class FoodStoreOnlineRepositoryImpl implements FoodStoreOnlineRepository,
     }
 
     @Override
+    public List<FoodStoreOnline> getAllByType(int typeId, int code) throws DataAccessException {
+        return jdbcTemplate.query(FOOD_STORE_ONLINE_GET_ALL_BY_TYPE, new FoodStoreOnlineMapper(), typeId, code);
+    }
+
+    @Override
     public FoodStoreOnline getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(FOOD_STORE_ONLINE_GET_ONE,new FoodStoreOnlineMapper(),id);
     }

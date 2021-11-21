@@ -1,0 +1,29 @@
+<div class="modal fade" id="confirmRepostModal" tabindex="-1" aria-labelledby="confirmRepostModalLabel" aria-hidden="true"
+     th:fragment="confirmRepost">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmRepostModalLabel">Thông báo</h5>
+      </div>
+      <div class="modal-body">
+        <form id="repostForm" class="row panel-form m-0 p-0" method="post" th:action="@{/repost-request-recruitment}">
+          <div class="form-group col-12 p-0">
+            <fieldset>
+              <legend>Ngày hết hạn</legend>
+              <input type="date" class="form-control" th:name="endDate">
+              <input type="hidden" class="form-control" th:name="id" th:value="${requestId}">
+            </fieldset>
+          </div>
+        </form>
+        Xác nhận đăng lại bài tìm việc này?
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" onclick="document.getElementById('repostForm').submit();"
+           class="btn btn-sm btn-secondary me-2">
+          <i class="fas fa-check text-success mr-2"></i>Xác nhận
+        </a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+      </div>
+    </div>
+  </div>
+</div>

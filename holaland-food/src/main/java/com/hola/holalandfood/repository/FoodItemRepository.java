@@ -6,7 +6,10 @@ import org.springframework.dao.DataAccessException;
 import java.util.List;
 
 public interface FoodItemRepository {
+
     List<FoodItem> getAll() throws DataAccessException;
+
+    List<FoodItem> getAllByStoreOnlineId(int id) throws DataAccessException;
 
     FoodItem getOne(int id) throws DataAccessException;
 }

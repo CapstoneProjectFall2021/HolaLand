@@ -1,0 +1,45 @@
+<!-- Modal list applied -->
+<div class="modal fade" id="listBookedModal" tabindex="-1" aria-labelledby="listBookedModalLabel" aria-hidden="true"
+     th:fragment="listBookedModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="listBookedModalLabel">Danh sách thuê</h5>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Họ và tên</th>
+            <th scope="col">Ngày sinh</th>
+            <th scope="col">Số điện thoại</th>
+            <th scope="col">Giới tính</th>
+            <th scope="col" class="text-end">Hành động</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="userDetail, order : ${listBookedModal}">
+            <td><span th:text="*{(order.index) + 1}"></span></td>
+            <td><span th:text="*{userDetail.userDetailName}"></span></td>
+            <td><span th:text="*{userDetail.userDetailDob}"></span></td>
+            <td><span th:text="*{userDetail.userDetailPhone}"></span></td>
+            <td><span th:text="*{userDetail.userDetailGender == 1 ? 'Nam' : 'Nữ' }"></span></td>
+            <td class="text-end">
+              <a href="javascript:void(0)" class="me-2">
+                <i class="fas fa-check text-success"></i>
+              </a>
+              <a href="javascript:void(0)">
+                <i class="fas fa-ban text-danger"></i>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+      </div>
+    </div>
+  </div>
+</div>

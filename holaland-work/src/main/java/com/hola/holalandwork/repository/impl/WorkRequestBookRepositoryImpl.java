@@ -30,4 +30,15 @@ public class WorkRequestBookRepositoryImpl implements WorkRequestBookRepository,
     public WorkRequestBook getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(WORK_REQUEST_BOOK_GET_ONE, new WorkRequestBookMapper(), id);
     }
+
+    @Override
+    public boolean save(WorkRequestBook obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                INSERT_WORK_REQUEST_BOOK,
+                obj.getUserId(),
+                obj.getWorkRequestFindJobId(),
+                obj.getSttWorkCode(),
+                obj.isWorkRequestBookDeleted()
+        ) > 0;
+    }
 }

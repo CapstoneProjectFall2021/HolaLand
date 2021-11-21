@@ -25,6 +25,11 @@ public class FoodStoreOnlineRateServiceImpl implements FoodStoreOnlineRateServic
     }
 
     @Override
+    public List<FoodStoreOnlineRate> getAllCommentByStoreOnlineId(int id) throws DataAccessException {
+        return foodStoreOnlineRateRepository.getAllCommentByStoreOnlineId(id);
+    }
+
+    @Override
     public FoodStoreOnlineRate getOne(int id) throws DataAccessException {
         return foodStoreOnlineRateRepository.getOne(id);
     }

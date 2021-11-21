@@ -13,4 +13,30 @@ public interface IRepositoryQuery {
             "WHERE T1.user_email = ?\n" +
             "AND T1.user_status_id = 1\n" +
             "AND T1.user_deleted = 0";
+
+    String GET_LIST_USER_BOOKED_BY_USER_ID = "SELECT\n" +
+            "T2.user_detail_id,\n" +
+            "T2.user_id,\n" +
+            "T2.user_name,\n" +
+            "T2.user_dob,\n" +
+            "T2.user_phone,\n" +
+            "T2.user_gender,\n" +
+            "T2.user_email\n" +
+            "FROM work_request_book T1\n" +
+            "INNER JOIN user_detail T2\n" +
+            "ON T1.user_id = T2.user_id\n" +
+            "WHERE T1.work_request_find_job_id = ?";
+
+    String GET_LIST_USER_APPLIED_BY_USER_ID = "SELECT\n" +
+            "T2.user_detail_id,\n" +
+            "T2.user_id,\n" +
+            "T2.user_name,\n" +
+            "T2.user_dob,\n" +
+            "T2.user_phone,\n" +
+            "T2.user_gender,\n" +
+            "T2.user_email\n" +
+            "FROM work_request_apply T1\n" +
+            "INNER JOIN user_detail T2\n" +
+            "ON T1.user_id = T2.user_id\n" +
+            "WHERE T1.work_request_recruitment_id = ?";
 }

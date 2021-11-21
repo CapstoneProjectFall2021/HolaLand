@@ -1,27 +1,18 @@
 @charset "utf-8";
 
-/* List jobs */
-
-.list-job .label-info .flex {
-  justify-content: start;
-}
-
-.list-job .label-info .flex .content-body .job-info {
-  display: flex;
-  justify-content: space-between;
-}
+/* List request */
 
 .list-request .label-info .flex {
   justify-content: start;
 }
 
-.list-request .label-info .flex .content-body .job-info {
+.list-request .label-info .flex .content-body .request-info {
   display: flex;
   justify-content: space-between;
 }
 
 
-/* Job detail */
+/* Request detail */
 
 .request-detail .request-title h3 {
   font-size: 22px;
@@ -47,7 +38,7 @@
 }
 
 .request-detail .request-title .btn-apply a,
-.request-detail .request-title .btn-save-job a {
+.request-detail .request-title .btn-save-request a {
   font-weight: var(--font-weight-5);
   font-size: 14px;
   width: 100%;

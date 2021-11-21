@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Date;
 
@@ -13,6 +14,7 @@ import java.sql.Date;
 @Builder
 @Getter
 @Setter
+@ToString
 public class WorkRequestFindJob {
 
     private int workRequestFindJobId;
@@ -30,5 +32,6 @@ public class WorkRequestFindJob {
     private String workRequestFindJobPersonalExperience;
     private String workRequestFindJobExpectedLocation;
     private int workRequestFindJobExpectedSalary;
+    private String workRequestFindJobNote;
     private boolean workRequestFindJobDeleted;
 }

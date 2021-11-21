@@ -37,4 +37,20 @@ public class WorkRequestApplyRepositoryImpl implements WorkRequestApplyRepositor
     public WorkRequestApply getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(WORK_REQUEST_APPLY_GET_ONE, new WorkRequestApplyMapper(), id);
     }
+
+    @Override
+    public boolean save(WorkRequestApply obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                INSERT_WORK_REQUEST_APPLY,
+                obj.getUserId(),
+                obj.getWorkRequestRecruitmentId(),
+                obj.getSttWorkCode(),
+                obj.isWorkRequestApplyDeleted()
+        ) > 0;
+    }
+
+    @Override
+    public boolean delete(int id) throws DataAccessException {
+        return jdbcTemplate.update(DELETE_WORK_REQUEST_APPLY, id) > 0;
+    }
 }
