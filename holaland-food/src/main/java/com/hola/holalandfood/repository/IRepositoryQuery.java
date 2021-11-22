@@ -71,6 +71,9 @@ public interface IRepositoryQuery {
     String FOOD_STORE_ONLINE_RATE_GET_ONE = "SELECT * FROM food_store_online_rate WHERE food_store_online_rate_id = ?";
     String FOOD_STORE_ONLINE_RATE_GET_ALL_BY_STORE_ONLINE_ID = "SELECT * FROM food_store_online_rate WHERE food_store_online_id = ?";
 
+    String FOOD_REPORT_GET_ALL = "SELECT * FROM food_report";
+    String FOOD_REPORT_GET_ONE = "SELECT * FROM food_report WHERE food_report_id = ?";
+
     String FOOD_STORE_ONLINE_TAG_GET_ALL = "SELECT * FROM food_store_online_tag";
     String FOOD_STORE_ONLINE_TAG_GET_ONE = "SELECT * FROM food_store_online_tag WHERE food_store_online_tag_id = ?";
 

@@ -3,6 +3,7 @@ package com.hola.holalandfood.entity;
 import lombok.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,6 +17,7 @@ public class FoodStoreOnlineRate {
     private int foodStoreOnlineRatePoint;
     private String foodStoreOnlineRateComment;
     private int userId;
-    private Date foodStoreOnlineRateCreateTime;
-    private Date foodStoreOnlineRateUpdateTime;
+    private Timestamp foodStoreOnlineRateCreateTime;
+    private Timestamp foodStoreOnlineRateUpdateTime;
+    private boolean foodStoreonlineDelete;
 }
