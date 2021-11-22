@@ -102,7 +102,7 @@
                            th:text="*{foodItem.foodItemName}">
                         </a>
                         <div class="food-info">
-                          <p>Giá: <span th:text="*{foodItem.foodItemPrice}"></span><sup>đ</sup></p>
+                          <p>Giá: <span th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup></p>
                           <p>Đã bán: <span th:text="*{foodItem.foodItemSoldNumber}"></span></p>
                         </div>
                       </div>

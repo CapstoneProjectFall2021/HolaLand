@@ -47,8 +47,8 @@
                       <i th:classappend="*{(foodStoreOnline.foodStoreOnlineRate >= 5) ? 'fas fa-star' : 'far fa-star'}"></i>
                     </p>
                     <p class="price">
-                      Giá: <span th:text="*{foodStoreOnline.foodStoreOnlineMinPrice}"></span><sup>đ</sup> -
-                      <span th:text="*{foodStoreOnline.foodStoreOnlineMaxPrice}"></span><sup>đ</sup>
+                      Giá: <span th:text="*{#numbers.formatInteger(foodStoreOnline.foodStoreOnlineMinPrice, 3, 'POINT')}"></span><sup>đ</sup> -
+                      <span th:text="*{#numbers.formatInteger(foodStoreOnline.foodStoreOnlineMinPrice, 3, 'POINT')}"></span></span><sup>đ</sup>
                     </p>
                   </div>
                   <div class=" row-info panel-small">
