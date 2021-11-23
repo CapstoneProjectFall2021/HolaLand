@@ -6,17 +6,18 @@
         <h1 class="title fix-mb-title">Chỉnh sửa thông tin</h1>
       </div>
     </div>
-    <form class="row panel-form mx-0">
+    <form id="updateInfoForm" class="row panel-form mx-0" method="post" th:action="@{/update-profile-user}"
+          th:object="${updateUser}">
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Họ và tên</legend>
-          <input type="text" class="form-control" value="Nguyễn Văn A">
+          <input type="text" class="form-control" th:field="${userDetail.userDetailName}">
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Ngày sinh</legend>
-          <input type="date" class="form-control" value="11/11/1994">
+          <input type="date" class="form-control" th:field="${userDetail.userDetailDob}">
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-6 col-lg-4">
@@ -24,11 +25,13 @@
           <legend>Giới tính</legend>
           <div class="custom-radio">
             <div class="form-check me-4">
-              <input class="form-check-input me-2" type="radio" name="gender" id="male" value="1">
+              <input class="form-check-input me-2" type="radio" th:field="${userDetail.userDetailGender}" id="male"
+                     value="1" th:checked="${userDetail.userDetailGender == 1}">
               <label class="form-check-label" for="male">Nam</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input me-2" type="radio" name="gender" id="female" value="0">
+              <input class="form-check-input me-2" type="radio" th:field="${userDetail.userDetailGender}" id="female"
+                     value="0" th:checked="${userDetail.userDetailGender == 0}">
               <label class="form-check-label" for="female">Nữ</label>
             </div>
           </div>
@@ -37,17 +40,18 @@
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Số điện thoại</legend>
-          <input type="text" class="form-control" value="0123 456 789">
+          <input type="text" class="form-control" th:field="${userDetail.userDetailPhone}">
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-12 col-lg-8">
         <fieldset>
           <legend>Email</legend>
-          <input type="email" class="form-control" value="nguyenvana@gmail.com">
+          <input type="email" class="form-control" th:field="${userDetail.userDetailEmail}">
         </fieldset>
       </div>
       <div class="col-md-12 text-end mt-2">
-        <a href="javascript:void(0)" class="btn btn-md btn-secondary m-mb-12">
+        <a href="javascript:void(0)" class="btn btn-md btn-secondary m-mb-12"
+           onclick="document.getElementById('updateInfoForm').submit();">
           <i class="fas fa-check text-success mr-2"></i>Cập nhật thông tin
         </a>
       </div>
@@ -60,27 +64,28 @@
         <h1 class="title fix-mb-title fix-mt-title">Đổi mật khẩu</h1>
       </div>
     </div>
-    <form class="row panel-form mx-0">
+    <form id="updatePasswordForm" class="row panel-form mx-0" method="post" th:action="@{/update-password-user}">
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Mật khẩu cũ</legend>
-          <input type="password" class="form-control">
+          <input type="password" class="form-control" th:name="oldPass">
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Mật khẩu mới</legend>
-          <input type="password" class="form-control">
+          <input type="password" class="form-control" th:name="newPass">
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Xác nhận mật khẩu mới</legend>
-          <input type="password" class="form-control">
+          <input type="password" class="form-control" th:name="confirmNewPass">
         </fieldset>
       </div>
       <div class="col-md-12 text-end mt-2">
-        <a href="javascript:void(0)" class="btn btn-md btn-secondary m-mb-12">
+        <a href="javascript:void(0)" class="btn btn-md btn-secondary m-mb-12"
+           onclick="document.getElementById('updatePasswordForm').submit();">
           <i class="fas fa-check text-success mr-2"></i>Xác nhận
         </a>
       </div>

@@ -28,4 +28,14 @@ public class UserDetailServiceImpl implements UserDetailService {
     public List<UserDetail> getAllUserAppliedByUserId(int id) throws DataAccessException {
         return userDetailRepository.getAllUserAppliedByUserId(id);
     }
+
+    @Override
+    public UserDetail getOneByUserId(int id) throws DataAccessException {
+        return userDetailRepository.getOneByUserId(id);
+    }
+
+    @Override
+    public boolean update(UserDetail obj) throws DataAccessException {
+        return userDetailRepository.update(obj);
+    }
 }
