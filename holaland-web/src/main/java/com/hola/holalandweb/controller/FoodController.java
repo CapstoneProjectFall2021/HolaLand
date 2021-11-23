@@ -1,6 +1,5 @@
 package com.hola.holalandweb.controller;
 
-import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandfood.entity.FoodItem;
 import com.hola.holalandfood.entity.FoodStoreOnline;
@@ -80,7 +79,6 @@ public class FoodController {
     }
 
 
-
     @GetMapping("/food/online-store")
     public String goToOnlineStore(@RequestParam("id") Integer id, Model model) {
         addAttrStoreOnline(id, 0, 9, model);
@@ -110,14 +108,14 @@ public class FoodController {
         return "module-food";
     }
 
-    private void addAttrStoreOnline(int id, int tagId, int page,Model model) {
+    private void addAttrStoreOnline(int id, int tagId, int page, Model model) {
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
         List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
         List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
         List<FoodItem> foodItemList;
-        if(tagId == 0) {
+        if (tagId == 0) {
             foodItemList = foodItemService.getAllByStoreOnlineId(id);
-        }else {
+        } else {
             foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);
         }
         model.addAttribute("tagId", tagId);
@@ -139,11 +137,5 @@ public class FoodController {
     public String goToUserOrder(Model model) {
         model.addAttribute("page", 3);
         return "module-food";
-    }
-
-    @GetMapping("/food/manage-store")
-    public String goToManageStore(Model model) {
-        model.addAttribute("page", 1);
-        return "module-food-manage-store";
     }
 }

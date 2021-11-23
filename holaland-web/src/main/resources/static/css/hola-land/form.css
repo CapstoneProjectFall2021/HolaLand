@@ -103,3 +103,7 @@ option {
   background-color: var(--accent-text);
   border: 1px solid var(--accent-text);
 }
+
+.form-check {
+  margin-bottom: 6px;
+}

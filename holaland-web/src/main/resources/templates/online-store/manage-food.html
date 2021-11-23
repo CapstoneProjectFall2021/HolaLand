@@ -1,0 +1,101 @@
+<div class="col-right" th:fragment="manage-food">
+  <!-- Tags -->
+  <div class="tags">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Danh sách thẻ</h1>
+      </div>
+    </div>
+    <form class="row panel-form mx-0 m-mb-16">
+      <div class="list-update-tag m-mt-8">
+        <div class="tags">
+          <span class="tag">Cơm</span>
+          <span class="tag">Bánh mỳ</span>
+          <span class="tag">Đồ ăn vặt</span>
+          <span class="tag">Đồ ăn nhanh</span>
+        </div>
+      </div>
+      <div class="col-md-12 text-end">
+        <a href="javascript:void(0)" class="btn btn-md btn-secondary m-mb-12" data-bs-toggle="modal"
+           data-bs-target="#updateTagModal">
+          <i class="fas fa-pencil-alt text-success"></i>Chỉnh sửa
+        </a>
+      </div>
+    </form>
+  </div>
+
+  <!-- List food -->
+  <div class="list-food">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title fix-mt-title">Danh sách đồ ăn</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 mb-3">
+        <a href="javascript:void(0)" class="btn btn-lg btn-primary m-mb-12" data-bs-toggle="modal"
+           data-bs-target="#addNewFoodModal">
+          <i class="fas fa-plus text-success"></i>Thêm sản phẩm mới
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xl-12">
+        <div class="food label-info m-mb-16">
+          <div class="flex-sb">
+            <div class="flex">
+              <div class="icon-circle">
+                <img class="media-object" src="assets/images/food/ride.jpg" alt="">
+              </div>
+              <div class="content-body">
+                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal">
+                  Cơm hến Xào
+                </a>
+                <div class="food-info">
+                  <p>Giá: 35.000<sup>đ</sup> &nbsp;&#8226;&nbsp; Đã bán: 50</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex">
+              <a href="javascript:void(0)" class="btn-more">
+                <i class="fas fa-pencil-alt text-success"></i>
+              </a>
+              <a href="javascript:void(0)" class="btn-more me-0" data-bs-toggle="modal"
+                 data-bs-target="#confirmDeleteFoodModal">
+                <i class="far fa-trash-alt text-danger"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 col-xl-12">
+        <div class="food label-info m-mb-16">
+          <div class="flex-sb">
+            <div class="flex">
+              <div class="icon-circle">
+                <img class="media-object" src="assets/images/food/ride.jpg" alt="">
+              </div>
+              <div class="content-body">
+                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal">
+                  Cơm hến Xào
+                </a>
+                <div class="food-info">
+                  <p>Giá: 35.000<sup>đ</sup> &nbsp;&#8226;&nbsp; Đã bán: 50</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex">
+              <a href="javascript:void(0)" class="btn-more">
+                <i class="fas fa-pencil-alt text-success"></i>
+              </a>
+              <a href="javascript:void(0)" class="btn-more me-0" data-bs-toggle="modal"
+                 data-bs-target="#confirmDeleteFoodModal">
+                <i class="far fa-trash-alt text-danger"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -21,7 +21,7 @@ html[data-theme='light'] {
   --primary-border-color: transparent;
   --secondary-border-color: #E4E6EB;
   /* text-color -------------------------------------- */
-  --main-text: #1BA80E;
+  --main-text: #198754;
   --accent-text: #2271FF;
   --danger-text: #E25563;
   --warning-color: #FFC107;
@@ -64,7 +64,7 @@ html[data-theme='dark'] {
   --primary-border-color: transparent;
   --secondary-border-color: #3A3B3C;
   /* text-color -------------------------------------- */
-  --main-text: #1BA80E;
+  --main-text: #198754;
   --accent-text: #2271FF;
   --danger-text: #B02F3B;
   --warning-color: #FFC107;
@@ -113,7 +113,7 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: 1.65;
+  line-height: 1.5;
 }
 
 a,
@@ -138,11 +138,16 @@ pre {
 .table {
   color: var(--primary-text);
   border-color: var(--secondary-border-color);
-  margin-bottom: 0;
+}
+
+.table i.far,
+.table i.fas,
+.table i.fab {
+  margin-right: 0;
 }
 
 th {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 td {
@@ -160,4 +165,12 @@ tr {
 
 hr {
   margin: 8px 0 12px 0;
+}
+
+.color-success {
+  color: var(--main-text) !important;
+}
+
+.color-danger {
+  color: var(--danger-text) !important;
 }

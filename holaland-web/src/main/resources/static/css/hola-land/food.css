@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-/* List online story =========================================================================*/
+/* List online store =========================================================================*/
 
 .list-online-store .label-info:hover {
   transform: scale(1.02, 1.02);
@@ -83,12 +83,12 @@
 }
 
 
-/* Online story info =========================================================================*/
+/* Online store info =========================================================================*/
 
 
 /* Title area */
 
-.online-store .label-info:hover {
+.online-store .label-info.online-store-title:hover {
   transform: none;
   background-color: var(--primary-background);
 }
@@ -193,16 +193,17 @@
 
 /* List food */
 
-.online-store .list-food .label-info:hover {
-  transform: scale(1.02, 1.05);
-  background-color: var(--label-button-background);
+.list-food .label-info .flex-sb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.online-store .list-food .label-info .flex {
+.list-food .label-info .flex {
   justify-content: start;
 }
 
-.online-store .list-food .label-info .flex .content-body .food-info {
+.list-food .label-info .flex .content-body .food-info {
   display: flex;
   justify-content: space-between;
 }
@@ -306,4 +307,15 @@
 
 .fieldset-rate .custom-radio {
   padding: 0 6px;
+}
+
+
+/* Online store manage food =========================================================================*/
+
+.list-food .label-info:hover .btn-more {
+  background-color: var(--icon-button-background);
+}
+
+.preview-img {
+  border-radius: var(--secondary-border-radius);
 }

@@ -57,13 +57,13 @@
               <hr/>
             </li>
             <li>
-              <a th:href="@{/food/manage-store}" th:classappend="${page == 4 ? 'active' : ''}">
-                <i class="fas fa-chart-bar fa-fw"></i>Quản lý cửa hàng
+              <a th:href="@{/}" th:classappend="${page == 4 ? 'active' : ''}">
+                <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
               </a>
             </li>
             <li>
-              <a th:href="@{/}" th:classappend="${page == 5 ? 'active' : ''}">
-                <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
+              <a th:href="@{/store/info}" th:classappend="${page == 5 ? 'active' : ''}">
+                <i class="fas fa-chart-bar fa-fw"></i>Quản lý cửa hàng
               </a>
             </li>
             <li>
@@ -109,8 +109,8 @@
 <th:block th:replace="~{common/script :: script/script}"></th:block>
 
 <script th:if="${item != null}">
-    const myModal = new bootstrap.Modal(document.getElementById('foodDetailModal'));
-    myModal.show();
+  const myModal = new bootstrap.Modal(document.getElementById('foodDetailModal'));
+  myModal.show();
 </script>
 
 <!-- Modal rate -->
