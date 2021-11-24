@@ -65,13 +65,13 @@
       <div class="form-group col-12 col-md-6 col-lg-12">
         <fieldset>
           <legend>Tên shop</legend>
-          <input type="text" class="form-control" value="Quán cơm Phương Nguyễn" readonly>
+          <input type="text" class="form-control" th:value="${foodStoreOnline.foodStoreOnlineName}" readonly>
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-6 col-lg-12">
         <fieldset>
           <legend>Mô tả</legend>
-          <input type="text" class="form-control" value="Chuyên cơm - bún - phở và đồ ăn vặt." readonly>
+          <input type="text" class="form-control" th:value="${foodStoreOnline.foodStoreOnlineDescription}" readonly>
         </fieldset>
       </div>
       <div class="col-md-12 text-end mt-2">

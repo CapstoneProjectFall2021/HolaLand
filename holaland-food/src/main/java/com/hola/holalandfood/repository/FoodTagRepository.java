@@ -1,5 +1,6 @@
 package com.hola.holalandfood.repository;
 
+import com.hola.holalandfood.entity.FoodStoreOnline;
 import com.hola.holalandfood.entity.FoodTag;
 import org.springframework.dao.DataAccessException;
 
@@ -12,4 +13,6 @@ public interface FoodTagRepository {
     List<FoodTag> getAllByStoreOnlineId(int id) throws DataAccessException;
 
     FoodTag getOne(int id) throws DataAccessException;
+
+    List<FoodTag> getAllByUserId(int userId) throws DataAccessException;
 }

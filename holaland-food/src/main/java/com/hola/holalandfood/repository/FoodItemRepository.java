@@ -14,4 +14,6 @@ public interface FoodItemRepository {
     List<FoodItem> getAllByStoreOnlineIdAndTagId(int id, int tagId) throws DataAccessException;
 
     FoodItem getOne(int id) throws DataAccessException;
+
+    List<FoodItem> getAllByUserId(int userId) throws DataAccessException;
 }

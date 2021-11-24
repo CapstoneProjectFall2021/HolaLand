@@ -12,4 +12,6 @@ public interface FoodStoreOnlineService {
     List<FoodStoreOnline> getAllByType(int typeId, int code) throws DataAccessException;
 
     FoodStoreOnline getOne(int id) throws DataAccessException;
+
+    FoodStoreOnline getOneByUserId(int userId) throws DataAccessException;
 }

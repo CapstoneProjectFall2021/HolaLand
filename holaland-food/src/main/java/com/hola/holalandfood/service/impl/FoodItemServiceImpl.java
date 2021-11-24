@@ -38,4 +38,9 @@ public class FoodItemServiceImpl implements FoodItemService {
     public FoodItem getOne(int id) throws DataAccessException {
         return foodItemRepository.getOne(id);
     }
+
+    @Override
+    public List<FoodItem> getAllByUserId(int userId) throws DataAccessException {
+        return foodItemRepository.getAllByUserId(userId);
+    }
 }
