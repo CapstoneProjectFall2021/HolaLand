@@ -11,13 +11,13 @@ public class FoodStoreOnlineRateMapper implements RowMapper<FoodStoreOnlineRate>
     public FoodStoreOnlineRate mapRow(ResultSet rs, int rowNum) throws SQLException {
         return FoodStoreOnlineRate.builder()
                 .foodStoreOnlineRateId(rs.getInt("food_store_online_rate_id"))
+                .userId(rs.getInt("user_id"))
                 .foodStoreOnlineId(rs.getInt("food_store_online_id"))
                 .foodStoreOnlineRatePoint(rs.getInt("food_store_online_rate_point"))
                 .foodStoreOnlineRateComment(rs.getString("food_store_online_rate_comment"))
-                .userId(rs.getInt("user_id"))
                 .foodStoreOnlineRateCreateTime(rs.getTimestamp("food_store_online_rate_create_time"))
                 .foodStoreOnlineRateUpdateTime(rs.getTimestamp("food_store_online_rate_update_time"))
-                .foodStoreonlineDelete(rs.getBoolean("food_store_online_rate_delete"))
+                .foodStoreOnlineDeleted(rs.getBoolean("food_store_online_rate_deleted"))
                 .build();
     }
 }

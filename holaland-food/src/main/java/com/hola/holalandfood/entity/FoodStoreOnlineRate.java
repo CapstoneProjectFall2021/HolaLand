@@ -13,11 +13,11 @@ import java.sql.Timestamp;
 public class FoodStoreOnlineRate {
 
     private int foodStoreOnlineRateId;
+    private int userId;
     private int foodStoreOnlineId;
     private int foodStoreOnlineRatePoint;
     private String foodStoreOnlineRateComment;
-    private int userId;
     private Timestamp foodStoreOnlineRateCreateTime;
     private Timestamp foodStoreOnlineRateUpdateTime;
-    private boolean foodStoreonlineDelete;
+    private boolean foodStoreOnlineDeleted;
 }
