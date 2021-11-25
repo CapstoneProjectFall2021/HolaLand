@@ -78,7 +78,9 @@
               <div class="col-md-12">
                 <div class="list-tag">
                   <div class="tags">
-                    <a href="#" class="tag" th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}"
+                    <a class="tag" th:href="@{/food/online-store(id=${foodStoreOnline.foodStoreOnlineId})}">Tất cả</a>
+                    <a th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}" class="tag"
+                       th:href="@{/food/online-store/tag(tagId=*{foodStoreOnlineTag.foodTagId}, id=${foodStoreOnline.foodStoreOnlineId})}"
                        th:text="*{foodStoreOnlineTag.foodTagName}"></a>
                   </div>
                 </div>
@@ -98,7 +100,8 @@
                         <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
                       </div>
                       <div class="content-body">
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal"
+                        <a th:href="@{/food/online-store/food-detail(id=${foodStoreOnline.foodStoreOnlineId},
+                        itemId=*{foodItem.foodItemId}, tagId=${tagId})}"
                            th:text="*{foodItem.foodItemName}">
                         </a>
                         <div class="food-info">
