@@ -67,6 +67,10 @@ public interface IRepositoryQuery {
     String FOOD_STORE_ONLINE_GET_ALL = "SELECT * FROM food_store_online WHERE food_store_online_deleted = 0";
     String FOOD_STORE_ONLINE_GET_ONE = "SELECT * FROM food_store_online WHERE food_store_online_id = ?";
 
+    String FOOD_STORE_ONLINE_UPDATE_INFO_ONE = "UPDATE food_store_online\n" +
+            "SET food_store_online_name = ?, food_store_online_description = ?\n" +
+            "WHERE food_store_online_id = ?";
+
     String FOOD_STORE_ONLINE_GET_ONE_BY_USER_ID = "SELECT * FROM food_store_online WHERE user_id = ? AND food_store_online_deleted = 0";
 
     String FOOD_STORE_ONLINE_GET_ALL_BY_TYPE = "SELECT\n" +

@@ -88,7 +88,8 @@
 
 <th:block th:if="${page == 1}">
   <!-- Import modal update shop info -->
-  <div th:replace="online-store/modal/modal-update-shop-info :: updateShopInfoModal"></div>
+  <div th:replace="online-store/modal/modal-update-shop-info
+  :: updateShopInfoModal(storeId=${foodStoreOnline.foodStoreOnlineId})"></div>
 </th:block>
 <th:block th:if="${page == 2}">
   <!-- Import modal update shop tag -->
@@ -99,6 +100,10 @@
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
+<script th:if="${foodTagList != null}">
+    const myModal = new bootstrap.Modal(document.getElementById('updateTagModal'));
+    myModal.show();
+</script>
 <th:block th:if="${page == 4}">
   <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>

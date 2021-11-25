@@ -9,14 +9,13 @@
     <form class="row panel-form mx-0 m-mb-16" >
       <div class="list-update-tag m-mt-8" >
         <div class="tags" >
-          <th:block th:each="foodTag: ${foodTagList}">
+          <th:block th:each="foodTag: ${foodStoreTagList}">
             <span class="tag" th:text="*{foodTag.foodTagName}"></span>
           </th:block>
         </div>
       </div>
       <div class="col-md-12 text-end">
-        <a href="javascript:void(0)" class="btn btn-md btn-secondary m-mb-12" data-bs-toggle="modal"
-           data-bs-target="#updateTagModal">
+        <a th:href="@{/store/manage-food/store-tag}" class="btn btn-md btn-secondary m-mb-12">
           <i class="fas fa-pencil-alt text-success"></i>Chỉnh sửa
         </a>
       </div>
@@ -38,7 +37,7 @@
         </a>
       </div>
     </div>
-    <div class="row" th:each="foodItem: ${foodItemList}">
+    <div class="row" th:each="foodItem: ${foodStoreItemList}">
       <div class="col-lg-12 col-xl-12">
         <div class="food label-info m-mb-16">
           <div class="flex-sb">
