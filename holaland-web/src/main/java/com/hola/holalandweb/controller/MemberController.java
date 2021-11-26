@@ -82,6 +82,7 @@ public class MemberController {
     public String getOneMember(@RequestParam("id") Integer id, Model model) {
         Member member = memberService.getOne(id);
         backToMembers(model);
+        model.addAttribute("oneMember", member);
         return "members";
     }
 
