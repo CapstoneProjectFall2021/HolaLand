@@ -12,6 +12,8 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
   <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.css}"/>
+  <!-- Data Table -->
+  <link rel="stylesheet" th:href="@{/css/datatable/table.css}">
   <!-- Custom CSS -->
   <link rel="stylesheet" th:href="@{/css/hola-land/main.css}"/>
   <link rel="stylesheet" th:href="@{/css/hola-land/common.css}"/>
@@ -45,29 +47,20 @@
                 <i class="fas fa-store fa-fw"></i>Danh sách nhà hàng
               </a>
             </li>
-            <li>
-              <hr/>
-            </li>
-            <li>
+            <li sec:authorize="hasRole('MEMBER')">
               <a th:href="@{/food/user-order}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
               </a>
             </li>
-            <li>
-              <hr/>
-            </li>
-            <li>
+            <li sec:authorize="hasRole('SELLER')">
               <a th:href="@{/}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
               </a>
             </li>
-            <li>
+            <li sec:authorize="hasRole('SELLER')">
               <a th:href="@{/store/info}" th:classappend="${page == 5 ? 'active' : ''}">
                 <i class="fas fa-chart-bar fa-fw"></i>Quản lý cửa hàng
               </a>
-            </li>
-            <li>
-              <hr/>
             </li>
             <li>
               <a th:href="@{/}">
@@ -100,6 +93,10 @@
   </div>
 </div>
 
+<th:block th:if="${page == 9}">
+  <!-- Import modal online store rate -->
+  <div th:replace="food/modal/modal-online-store-rate :: onlineStoreRateModal"></div>
+</th:block>
 <th:block th:if="${page == 9 && item != null}">
   <!-- Import modal food detail -->
   <div th:replace="food/modal/modal-food-detail :: foodDetailModal"></div>
@@ -107,65 +104,16 @@
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
+<th:block th:if="${page == 3}">
+  <script th:src="@{/js/datatables/jquery.min.js}"></script>
+  <script th:src="@{/js/datatables/jquery.dataTables.min.js}"></script>
+  <script th:src="@{/js/datatables/datatables.vietnamese.js}"></script>
+</th:block>
 
 <script th:if="${item != null}">
   const myModal = new bootstrap.Modal(document.getElementById('foodDetailModal'));
   myModal.show();
 </script>
-
-<!-- Modal rate -->
-<div class="modal fade" id="rateFoodModal" tabindex="-1" aria-labelledby="rateFoodModalLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="rateFoodModalLabel">Đánh giá</h5>
-      </div>
-      <div class="modal-body">
-        <form class="row">
-          <div class="form-group col-md-12">
-            <fieldset class="fieldset-rate">
-              <legend>Điểm đánh giá</legend>
-              <div class="custom-radio">
-                <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" name="rate" id="one-star" value="1">
-                  <label class="form-check-label" for="one-star">1<i class="fas fa-star ms-1 checked"></i></label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" name="rate" id="two-star" value="2">
-                  <label class="form-check-label" for="two-star">2<i class="fas fa-star ms-1 checked"></i></label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" name="rate" id="three-star" value="3">
-                  <label class="form-check-label" for="three-star">3<i class="fas fa-star ms-1 checked"></i></label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" name="rate" id="four-star" value="4">
-                  <label class="form-check-label" for="four-star">4<i class="fas fa-star ms-1 checked"></i></label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" name="rate" id="five-star" value="5">
-                  <label class="form-check-label" for="five-star">5<i class="fas fa-star ms-1 checked"></i></label>
-                </div>
-              </div>
-            </fieldset>
-          </div>
-          <div class="form-group col-md-12 m-0">
-            <fieldset>
-              <legend>Ý kiến đánh giá</legend>
-              <textarea class="form-control" rows="3"></textarea>
-            </fieldset>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <a href="javascript:void(0)" class="btn btn-sm btn-secondary me-2">
-          <i class="fas fa-check text-success mr-2"></i>Xác nhận
-        </a>
-        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 </body>
 

@@ -23,9 +23,9 @@
               </div>
             </div>
             <div class="col-lg-12 col-xl-3">
-              <div class="rate-area" >
+              <div class="rate-area">
                 <div>
-                  <h1><span th:text = "${foodStoreOnline.foodStoreOnlineRate}"></span></h1>
+                  <h1><span th:text="${foodStoreOnline.foodStoreOnlineRate}"></span></h1>
                   <div class="star-rate">
                     <i th:classappend="${(foodStoreOnline.foodStoreOnlineRate >= 1) ? 'fas fa-star checked' : 'far fa-star'}"></i>
                     <i th:classappend="${(foodStoreOnline.foodStoreOnlineRate >= 2) ? 'fas fa-star checked' : 'far fa-star'}"></i>
@@ -33,7 +33,8 @@
                     <i th:classappend="${(foodStoreOnline.foodStoreOnlineRate >= 4) ? 'fas fa-star checked' : 'far fa-star'}"></i>
                     <i th:classappend="${(foodStoreOnline.foodStoreOnlineRate >= 5) ? 'fas fa-star checked' : 'far fa-star'}"></i>
                   </div>
-                  <div class="reviews"><span th:text = "${foodStoreOnline.foodStoreOnlineCountRate}"></span> đánh giá</div>
+                  <div class="reviews"><span th:text="${foodStoreOnline.foodStoreOnlineCountRate}"></span> đánh giá
+                  </div>
                 </div>
               </div>
             </div>
@@ -55,7 +56,7 @@
             <li class="nav-item col-sm-12 col-md-3" role="presentation">
               <a class="nav-link" id="pills-comment-tab" data-bs-toggle="pill" data-bs-target="#pills-comment"
                  type="button" role="tab" aria-controls="pills-comment" aria-selected="false">
-                Bình luận<sup class="ms-2 main-text"><span th:text = "${foodStoreOnline.foodStoreOnlineCountRate}"></span></sup>
+                Bình luận<sup class="ms-2 main-text"><span th:text="${foodStoreOnline.foodStoreOnlineCountRate}"></span></sup>
               </a>
             </li>
             <li class="nav-item col-sm-12 col-md-3" role="presentation">
@@ -65,7 +66,11 @@
               </a>
             </li>
             <li class="nav-item col-sm-12 col-md-3" role="presentation">
-              <a href="javascript:void(0)" class="nav-link" data-bs-toggle="modal" data-bs-target="#rateFoodModal">
+              <a th:href="@{/login}" class="nav-link" sec:authorize="!isAuthenticated()">
+                Đánh giá
+              </a>
+              <a href="javascript:void(0)" class="nav-link" data-bs-toggle="modal"
+                 data-bs-target="#onlineStoreRateModal" sec:authorize="isAuthenticated()">
                 Đánh giá
               </a>
             </li>
@@ -79,9 +84,12 @@
                 <div class="list-tag">
                   <div class="tags">
                     <a class="tag" th:href="@{/food/online-store(id=${foodStoreOnline.foodStoreOnlineId})}">Tất cả</a>
-                    <a th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}" class="tag"
-                       th:href="@{/food/online-store/tag(tagId=*{foodStoreOnlineTag.foodTagId}, id=${foodStoreOnline.foodStoreOnlineId})}"
-                       th:text="*{foodStoreOnlineTag.foodTagName}"></a>
+                    <th:block th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}">
+                      <a class="tag"
+                         th:href="@{/food/online-store/tag(tagId=*{foodStoreOnlineTag.foodTagId}, id=${foodStoreOnline.foodStoreOnlineId})}"
+                         th:text="*{foodStoreOnlineTag.foodTagName}">
+                      </a>
+                    </th:block>
                   </div>
                 </div>
               </div>
@@ -90,24 +98,29 @@
               <div class="row">
                 <div class="col-lg-12 col-xl-6 col-xxl-6" th:each="foodItem : ${foodItemList}">
                   <div class="food label-info m-mb-16">
-                    <div class="btn-action">
-                      <a href="javascript:void(0)" onclick="showToast()">
-                        <i class="fas fa-plus m-0"></i>
-                      </a>
-                    </div>
-                    <div class="flex">
-                      <div class="icon-circle">
-                        <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
-                      </div>
-                      <div class="content-body">
-                        <a th:href="@{/food/online-store/food-detail(id=${foodStoreOnline.foodStoreOnlineId},
-                        itemId=*{foodItem.foodItemId}, tagId=${tagId})}"
-                           th:text="*{foodItem.foodItemName}">
-                        </a>
-                        <div class="food-info">
-                          <p>Giá: <span th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup></p>
-                          <p>Đã bán: <span th:text="*{foodItem.foodItemSoldNumber}"></span></p>
+                    <div class="flex-sb">
+                      <div class="flex">
+                        <div class="icon-circle">
+                          <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
                         </div>
+                        <div class="content-body">
+                          <a th:href="@{/food/online-store/food-detail(id=${foodStoreOnline.foodStoreOnlineId},
+                              itemId=*{foodItem.foodItemId}, tagId=${tagId})}"
+                             th:text="*{foodItem.foodItemName}">
+                          </a>
+                          <div class="food-info">
+                            <p>Giá: <span
+                                th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
+                              &nbsp;&#8226;&nbsp;
+                              Đã bán: <span th:text="*{foodItem.foodItemSoldNumber}"></span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="flex">
+                        <a href="javascript:void(0)" class="btn-more mx-0" onclick="showToast()">
+                          <i class="fas fa-plus text-success"></i>
+                        </a>
                       </div>
                     </div>
                   </div>

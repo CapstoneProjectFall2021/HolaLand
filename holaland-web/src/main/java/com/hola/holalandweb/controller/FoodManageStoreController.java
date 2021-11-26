@@ -1,13 +1,12 @@
 package com.hola.holalandweb.controller;
 
-import com.hola.holalandcore.entity.User;
+import com.hola.holalandcore.model.UserSessionInfo;
 import com.hola.holalandfood.entity.FoodItem;
 import com.hola.holalandfood.entity.FoodStoreOnline;
 import com.hola.holalandfood.entity.FoodTag;
 import com.hola.holalandfood.service.FoodItemService;
 import com.hola.holalandfood.service.FoodStoreOnlineService;
 import com.hola.holalandfood.service.FoodTagService;
-import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -23,19 +23,28 @@ public class FoodManageStoreController {
     private final FoodStoreOnlineService foodStoreOnlineService;
     private final FoodTagService foodTagService;
     private final FoodItemService foodItemService;
-
-    private User user;
+    private final UserSessionInfo userSessionInfo;
 
     @Autowired
-    public FoodManageStoreController(FoodStoreOnlineService foodStoreOnlineService, FoodTagService foodTagService,
-                                     FoodItemService foodItemService) {
+    public FoodManageStoreController(
+            FoodStoreOnlineService foodStoreOnlineService,
+            FoodTagService foodTagService,
+            FoodItemService foodItemService,
+            UserSessionInfo userSessionInfo
+    ) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTagService = foodTagService;
         this.foodItemService = foodItemService;
+        this.userSessionInfo = userSessionInfo;
     }
 
     @GetMapping("/store/info")
-    public String getShopInfo(Model model) {
+    public String getShopInfo(Model model, Principal principal) {
+        //Get user info
+//        User user = userSessionInfo.getCurrentUser();
+//
+//        System.out.println("\n\n" + user + "\n\n");
+
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByUserId(1);
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("page", 1);
@@ -47,8 +56,7 @@ public class FoodManageStoreController {
             @RequestParam("storeId") Integer shopId,
             @RequestParam("storeName") String shopName,
             @RequestParam("storeDescript") String shopDescript
-    )
-    {
+    ) {
         FoodStoreOnline newShopInfo = FoodStoreOnline.builder().build();
         newShopInfo.setFoodStoreOnlineId(shopId);
         newShopInfo.setFoodStoreOnlineName(shopName);

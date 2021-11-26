@@ -38,10 +38,9 @@ checkbox.addEventListener('change', () => {
   }
 });
 
-const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-  const tooltip = new bootstrap.Tooltip(tooltipTriggerEl);
-  tooltip.show();
+  return new bootstrap.Tooltip(tooltipTriggerEl)
 })
 
 const toastElList = [].slice.call(document.querySelectorAll('.toast'));
