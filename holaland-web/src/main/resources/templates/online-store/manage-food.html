@@ -46,7 +46,7 @@
                 <img class="media-object" src="assets/images/food/ride.jpg" alt="">
               </div>
               <div class="content-body">
-                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal">
+                <a href="javascript:void(0)" >
                   <span th:text="*{foodItem.foodItemName}" ></span>
                 </a>
                 <div class="food-info">
@@ -59,9 +59,10 @@
               <a href="javascript:void(0)" class="btn-more">
                 <i class="fas fa-pencil-alt text-success"></i>
               </a>
-              <a href="javascript:void(0)" class="btn-more me-0" data-bs-toggle="modal"
-                 data-bs-target="#confirmDeleteFoodModal">
-                <i class="far fa-trash-alt text-danger"></i>
+              <a href="javascript:void(0)" class="btn-more me-0" >
+                <i class="far fa-trash-alt text-danger" onclick="confirmDeleteFood(event)">
+                  <span th:text="${foodItem.foodItemId}" class="d-none"></span>
+                </i>
               </a>
             </div>
           </div>

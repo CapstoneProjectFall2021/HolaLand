@@ -58,6 +58,10 @@ public interface IRepositoryQuery {
             "AND T2.food_store_online_deleted = 0\n" +
             "AND T1.food_item_deleted = 0";
 
+    String FOOD_ITEM_DELETED_ONE = "UPDATE food_item\n" +
+            "SET food_item_deleted = ?\n" +
+            "WHERE food_item_id = ?";
+
     String FOOD_ORDER_DETAIL_GET_ALL = "SELECT * FROM food_order_detail";
     String FOOD_ORDER_DETAIL_GET_ONE = "SELECT * FROM food_order_detail WHERE food_order_detail_id = ?";
 

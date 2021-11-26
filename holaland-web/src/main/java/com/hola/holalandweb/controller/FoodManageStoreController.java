@@ -7,6 +7,7 @@ import com.hola.holalandfood.entity.FoodTag;
 import com.hola.holalandfood.service.FoodItemService;
 import com.hola.holalandfood.service.FoodStoreOnlineService;
 import com.hola.holalandfood.service.FoodTagService;
+import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,6 +69,19 @@ public class FoodManageStoreController {
         model.addAttribute("foodStoreTagList", foodShopTagList);
         model.addAttribute("page", 2);
         return "module-food-manage-store";
+    }
+
+    @GetMapping("/store/manage-food/delete")
+    public String deleteFoodManagerStore(@RequestParam("foodId") Integer foodId) {
+        FoodItem foodItem = FoodItem.builder().build();
+        foodItem.setFoodItemId(foodId);
+        foodItem.setFoodItemDeleted(true);
+        boolean isCheck = foodItemService.deletedOne(foodItem);
+        if (isCheck) {
+            return "redirect:" + "/store/manage-food";
+        } else {
+            return "404";
+        }
     }
 
     @GetMapping("/store/manage-food/store-tag")

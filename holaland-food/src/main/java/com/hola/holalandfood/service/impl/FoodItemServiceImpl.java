@@ -43,4 +43,9 @@ public class FoodItemServiceImpl implements FoodItemService {
     public List<FoodItem> getAllByUserId(int userId) throws DataAccessException {
         return foodItemRepository.getAllByUserId(userId);
     }
+
+    @Override
+    public boolean deletedOne(FoodItem obj) throws DataAccessException {
+        return foodItemRepository.deletedOne(obj);
+    }
 }

@@ -100,6 +100,7 @@
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
+<script crossorigin="anonymous" th:src="@{/js/templates/food.js}"></script>
 <script th:if="${foodTagList != null}">
     const myModal = new bootstrap.Modal(document.getElementById('updateTagModal'));
     myModal.show();

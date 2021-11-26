@@ -45,4 +45,13 @@ public class FoodItemRepositoryImpl implements FoodItemRepository, IRepositoryQu
     public List<FoodItem> getAllByUserId(int userId) throws DataAccessException {
         return jdbcTemplate.query(FOOD_ITEM_GET_ALL_BY_USER_ID, new FoodItemMapper(), userId);
     }
+
+    @Override
+    public boolean deletedOne(FoodItem obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                FOOD_ITEM_DELETED_ONE,
+                obj.isFoodItemDeleted(),
+                obj.getFoodItemId()
+        ) > 0;
+    }
 }
