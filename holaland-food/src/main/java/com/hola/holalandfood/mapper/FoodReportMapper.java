@@ -16,7 +16,7 @@ public class FoodReportMapper implements RowMapper<FoodReport> {
                 .foodReportContent(rs.getString("food_report_content"))
                 .foodReportCreateDate(rs.getTimestamp("food_report_create_date"))
                 .foodReportUpdateDate(rs.getTimestamp("food_report_update_date"))
-                .foodReportDelete(rs.getBoolean("food_report_delete"))
+                .foodReportDeleted(rs.getBoolean("food_report_deleted"))
                 .build();
     }
 }

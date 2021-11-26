@@ -2,7 +2,6 @@ package com.hola.holalandfood.entity;
 
 import lombok.*;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @NoArgsConstructor

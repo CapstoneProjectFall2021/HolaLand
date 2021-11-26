@@ -9,5 +9,7 @@ public interface FoodReportRepository {
 
     List<FoodReport> getAll() throws DataAccessException;
 
+    List<FoodReport> getAllByOrderId(int id) throws DataAccessException;
+
     FoodReport getOne(int id) throws DataAccessException;
 }

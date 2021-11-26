@@ -20,6 +20,7 @@ public class FoodStoreOnlineMapper implements RowMapper<FoodStoreOnline> {
                 .foodStoreOnlineMinPrice(rs.getInt("food_store_online_min_price"))
                 .foodStoreOnlineMaxPrice(rs.getInt("food_store_online_max_price"))
                 .foodStoreOnlineDescription(rs.getString("food_store_online_description"))
+                .foodStoreOnlineCountRate(rs.getInt("food_store_online_count_rate"))
                 .foodStoreOnlineDeleted(rs.getBoolean("food_store_online_deleted"))
                 .build();
     }

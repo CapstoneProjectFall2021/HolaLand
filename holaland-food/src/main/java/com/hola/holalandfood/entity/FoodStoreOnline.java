@@ -19,5 +19,6 @@ public class FoodStoreOnline {
     private int foodStoreOnlineMinPrice;
     private int foodStoreOnlineMaxPrice;
     private String foodStoreOnlineDescription;
+    private int foodStoreOnlineCountRate;
     private boolean foodStoreOnlineDeleted;
 }

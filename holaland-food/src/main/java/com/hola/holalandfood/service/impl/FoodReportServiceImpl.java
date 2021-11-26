@@ -25,6 +25,11 @@ public class FoodReportServiceImpl implements FoodReportService {
     }
 
     @Override
+    public List<FoodReport> getAllByOrderId(int id) throws DataAccessException {
+        return foodReportRepository.getAllByOrderId(id);
+    }
+
+    @Override
     public FoodReport getOne(int id) throws DataAccessException {
         return foodReportRepository.getOne(id);
     }

@@ -27,6 +27,11 @@ public class FoodReportRepositoryImpl implements FoodReportRepository, IReposito
     }
 
     @Override
+    public List<FoodReport> getAllByOrderId(int id) throws DataAccessException {
+        return jdbcTemplate.query(FOOD_REPORT_GET_ALL_BY_ORDER_ID,new FoodReportMapper(), id);
+    }
+
+    @Override
     public FoodReport getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(FOOD_REPORT_GET_ONE,new FoodReportMapper(),id);
     }

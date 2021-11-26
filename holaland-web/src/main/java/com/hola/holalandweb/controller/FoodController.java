@@ -1,17 +1,8 @@
 package com.hola.holalandweb.controller;
 
 import com.hola.holalandcore.service.UserDetailService;
-import com.hola.holalandfood.entity.FoodItem;
-import com.hola.holalandfood.entity.FoodStoreOnline;
-import com.hola.holalandfood.entity.FoodStoreOnlineRate;
-import com.hola.holalandfood.entity.FoodTag;
-import com.hola.holalandfood.entity.FoodType;
-import com.hola.holalandfood.service.FoodItemService;
-import com.hola.holalandfood.service.FoodStoreOnlineRateService;
-import com.hola.holalandfood.service.FoodStoreOnlineService;
-import com.hola.holalandfood.service.FoodStoreOnlineTagService;
-import com.hola.holalandfood.service.FoodTagService;
-import com.hola.holalandfood.service.FoodTypeService;
+import com.hola.holalandfood.entity.*;
+import com.hola.holalandfood.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +21,7 @@ public class FoodController {
     private final FoodItemService foodItemService;
     private final FoodStoreOnlineRateService foodStoreOnlineRateService;
     private final UserDetailService userDetailService;
+    private final FoodReportService foodReportService;
 
     @Autowired
     public FoodController(FoodStoreOnlineService foodStoreOnlineService,
@@ -38,7 +30,8 @@ public class FoodController {
                           FoodTagService foodTagService,
                           FoodItemService foodItemService,
                           FoodStoreOnlineRateService foodStoreOnlineRateService,
-                          UserDetailService userDetailService) {
+                          UserDetailService userDetailService,
+                          FoodReportService foodReportService) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTypeService = foodTypeService;
         this.foodStoreOnlineTagService = foodStoreOnlineTagService;
@@ -46,6 +39,7 @@ public class FoodController {
         this.foodItemService = foodItemService;
         this.foodStoreOnlineRateService = foodStoreOnlineRateService;
         this.userDetailService = userDetailService;
+        this.foodReportService = foodReportService;
     }
 
     @GetMapping("/food")
@@ -112,6 +106,7 @@ public class FoodController {
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
         List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
         List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
+        List<FoodReport> listReport = foodReportService.getAllByOrderId(id);
         List<FoodItem> foodItemList;
         if (tagId == 0) {
             foodItemList = foodItemService.getAllByStoreOnlineId(id);
@@ -123,6 +118,7 @@ public class FoodController {
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
         model.addAttribute("foodItemList", foodItemList);
         model.addAttribute("listComment", listComment);
+        model.addAttribute("listReport", listReport);
         model.addAttribute("userDetailService", userDetailService);
         model.addAttribute("page", page);
     }

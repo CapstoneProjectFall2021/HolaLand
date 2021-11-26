@@ -2,7 +2,6 @@ package com.hola.holalandfood.entity;
 
 import lombok.*;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @NoArgsConstructor
@@ -18,5 +17,5 @@ public class FoodReport {
     private String foodReportContent;
     private Timestamp foodReportCreateDate;
     private Timestamp foodReportUpdateDate;
-    private boolean foodReportDelete;
+    private boolean foodReportDeleted;
 }
