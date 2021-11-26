@@ -43,7 +43,7 @@ public class MemberController {
     @GetMapping("/members")
     public String members(Model model) {
         backToMembers(model);
-        
+        return "members";
     }
 
     @GetMapping("/send-email")
