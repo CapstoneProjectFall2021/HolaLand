@@ -1,5 +1,6 @@
 package com.hola.holalandcore.service.impl;
 
+import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.entity.Role;
 import com.hola.holalandcore.entity.User;
 import com.hola.holalandcore.repository.RoleRepository;
@@ -51,10 +52,14 @@ public class UserServiceImpl implements UserDetailsService {
         System.out.println("Authorities: " + grantedAuthorities);
 
         // return object UserDetails of Spring
-        return new org.springframework.security.core.userdetails.User(
+        return new CustomUser(
                 user.getUserEmail(),
                 user.getUserPassword(),
-                grantedAuthorities
+                grantedAuthorities,
+                user.getUserId(),
+                user.getUserCreateTime(),
+                user.getUserStatusId(),
+                user.isUserDeleted()
         );
     }
 }
