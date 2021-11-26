@@ -40,7 +40,6 @@ public class FoodManageStoreController {
         CustomUser currentUser;
         if (authentication != null) {
             currentUser = (CustomUser) authentication.getPrincipal();
-            System.out.println("\n\n\n" + currentUser + "\n\n\n");
         } else {
             return "login";
         }
