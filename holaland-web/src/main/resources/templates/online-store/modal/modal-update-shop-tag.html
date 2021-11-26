@@ -11,8 +11,8 @@
           <div class="col-6" th:each="foodTag : ${foodTagList}">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" th:name="tagId" th:value="*{foodTag.foodTagId}"
-                     id="flexCheckDefault1" th:checked="${#lists.contains(foodStoreTagList, foodTag)}">
-              <label class="form-check-label" for="flexCheckDefault1" th:text="*{foodTag.foodTagName}"></label>
+                     th:id="'tag'+ *{foodTag.foodTagId}"  th:checked="${#lists.contains(foodStoreTagList, foodTag)}">
+              <label class="form-check-label" th:for="'tag'+ *{foodTag.foodTagId} " th:text="*{foodTag.foodTagName}"></label>
             </div>
           </div>
         </form>
