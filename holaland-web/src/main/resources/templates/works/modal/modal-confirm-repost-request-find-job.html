@@ -1,17 +1,17 @@
-<div class="modal fade" id="confirmRepostModal" tabindex="-1" aria-labelledby="confirmRepostModalLabel" aria-hidden="true"
-     th:fragment="confirmRepost">
+<div class="modal fade" id="confirmRepostRequestFindJobModal" tabindex="-1" aria-labelledby="confirmRepostModalLabel"
+     aria-hidden="true" th:fragment="confirmRepostRequestFindJobModal">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="confirmRepostModalLabel">Thông báo</h5>
       </div>
       <div class="modal-body">
-        <form id="repostForm" class="row panel-form m-0 p-0" method="post" th:action="@{/repost-request-recruitment}">
+        <form id="repostForm" class="row panel-form m-0 p-0" method="post" th:action="@{/repost-request-find-job}">
           <div class="form-group col-12 p-0">
             <fieldset>
               <legend>Ngày hết hạn</legend>
               <input type="date" class="form-control" th:name="endDate">
-              <input type="hidden" class="form-control" th:name="id" th:value="${requestId}">
+              <input type="hidden" class="form-control" th:name="id" th:value="${requestFindJobId}">
             </fieldset>
           </div>
         </form>

@@ -57,10 +57,10 @@
             </a>
           </div>
           <div class="btn-action me-4" th:if="${sttWorkCode == 4}">
-            <a class="me-2" href="javascript:void(0)">
-              <i class="fas fa-undo-alt m-0" onclick="">
-                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
-              </i>
+            <a class="me-2" th:href="@{/works/request-find-job-manage/repost-request-find-job
+                (requestFindJobId=${requestFindJob.workRequestFindJobId},
+                code=${requestFindJob.sttWorkCode})}">
+              <i class="fas fa-undo-alt m-0"></i>
             </a>
           </div>
           <div class="btn-remove" th:if="${sttWorkCode == 4}">
@@ -71,10 +71,10 @@
             </a>
           </div>
           <div class="btn-action me-4" th:if="${sttWorkCode == 5}">
-            <a class="me-2" href="javascript:void(0)">
-              <i class="fas fa-undo-alt m-0" onclick="">
-                <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
-              </i>
+            <a class="me-2" th:href="@{/works/request-find-job-manage/repost-request-find-job
+                (requestFindJobId=${requestFindJob.workRequestFindJobId},
+                code=${requestFindJob.sttWorkCode})}">
+              <i class="fas fa-undo-alt m-0"></i>
             </a>
           </div>
           <div class="btn-remove" th:if="${sttWorkCode == 5}">
@@ -88,8 +88,7 @@
             <a class="me-2" th:href="@{/works/request-find-job-manage/reason-reject
             (requestId=${requestFindJob.workRequestFindJobId},
                 code=${requestFindJob.sttWorkCode})}">
-              <i class="far fa-comment-dots text-warning m-0" onclick="reasonRejectRequest()"></i>
-              <span th:text="${requestFindJob.workRequestFindJobId}" class="d-none"></span>
+              <i class="far fa-comment-dots text-warning m-0"></i>
             </a>
           </div>
           <div class="btn-action me-4" th:if="${sttWorkCode == 2}">
