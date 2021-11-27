@@ -9,4 +9,8 @@ public interface FoodStoreOnlineTagRepository {
     List<FoodStoreOnlineTag> getAll() throws DataAccessException;
 
     FoodStoreOnlineTag getOne(int id) throws DataAccessException;
+
+    boolean deleteAllTagByFoodStoreOnlineId(int userId) throws DataAccessException;
+
+    int[] insertTagForFoodStore(List<FoodStoreOnlineTag> foodStoreOnlineTags) throws DataAccessException;
 }

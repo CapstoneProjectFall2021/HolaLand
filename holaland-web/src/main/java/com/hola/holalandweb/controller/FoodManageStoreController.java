@@ -3,9 +3,11 @@ package com.hola.holalandweb.controller;
 import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandfood.entity.FoodItem;
 import com.hola.holalandfood.entity.FoodStoreOnline;
+import com.hola.holalandfood.entity.FoodStoreOnlineTag;
 import com.hola.holalandfood.entity.FoodTag;
 import com.hola.holalandfood.service.FoodItemService;
 import com.hola.holalandfood.service.FoodStoreOnlineService;
+import com.hola.holalandfood.service.FoodStoreOnlineTagService;
 import com.hola.holalandfood.service.FoodTagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,16 +26,19 @@ public class FoodManageStoreController {
     private final FoodStoreOnlineService foodStoreOnlineService;
     private final FoodTagService foodTagService;
     private final FoodItemService foodItemService;
+    private final FoodStoreOnlineTagService foodStoreOnlineTagService;
 
     @Autowired
     public FoodManageStoreController(
             FoodStoreOnlineService foodStoreOnlineService,
             FoodTagService foodTagService,
-            FoodItemService foodItemService
+            FoodItemService foodItemService,
+            FoodStoreOnlineTagService foodStoreOnlineTagService
     ) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTagService = foodTagService;
         this.foodItemService = foodItemService;
+        this.foodStoreOnlineTagService = foodStoreOnlineTagService;
     }
 
     @GetMapping("/store/info")
@@ -69,9 +75,15 @@ public class FoodManageStoreController {
     }
 
     @GetMapping("/store/manage-food")
-    public String manageFood(Model model) {
-        List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(1);
-        List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(1);
+    public String manageFood(Model model, Authentication authentication) {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(currentUser.getId());
+        List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(currentUser.getId());
         model.addAttribute("foodStoreItemList", foodShopItemList);
         model.addAttribute("foodStoreTagList", foodShopTagList);
         model.addAttribute("page", 2);
@@ -92,13 +104,50 @@ public class FoodManageStoreController {
     }
 
     @GetMapping("/store/manage-food/store-tag")
-    public String getFormUpdateTagShop(Model model) {
-        List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(1);
-        List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(1);
+    public String getFormUpdateTagShop(Model model, Authentication authentication) {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        System.out.println(currentUser.getId());
+        List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(currentUser.getId());
+        List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(currentUser.getId());
         List<FoodTag> foodTagList = foodTagService.getAll();
         model.addAttribute("foodStoreItemList", foodShopItemList);
         model.addAttribute("foodStoreTagList", foodShopTagList);
         model.addAttribute("foodTagList", foodTagList);
+        model.addAttribute("page", 2);
+        return "module-food-manage-store";
+    }
+
+    @PostMapping("/store/manage-food/update-tag")
+    public String updateFormUpdateTagShop(Model model, @RequestParam(value = "tagList") List<Integer> tagList, Authentication authentication) {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+
+        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByUserId(currentUser.getId());
+        List<FoodStoreOnlineTag> foodStoreOnlineTags = new ArrayList<>();
+        for (Integer foodTagId : tagList) {
+            FoodStoreOnlineTag foodStoreOnlineTag = new FoodStoreOnlineTag();
+            foodStoreOnlineTag.setFoodStoreOnlineId(foodStoreOnline.getFoodStoreOnlineId());
+            foodStoreOnlineTag.setFoodTagId(foodTagId);
+            foodStoreOnlineTags.add(foodStoreOnlineTag);
+        }
+        //delete all old
+        foodStoreOnlineTagService.deleteAllTagByFoodStoreOnlineId(foodStoreOnline.getFoodStoreOnlineId());
+        //insert new tag after update
+        foodStoreOnlineTagService.insertTagForFoodStore(foodStoreOnlineTags);
+        //get list tag after update
+        List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(currentUser.getId());
+        List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(currentUser.getId());
+        model.addAttribute("foodStoreTagList", foodShopTagList);
+        model.addAttribute("foodStoreItemList", foodShopItemList);
         model.addAttribute("page", 2);
         return "module-food-manage-store";
     }

@@ -152,4 +152,11 @@ public interface IRepositoryQuery {
 
     String STT_FOOD_GET_ALL = "SELECT * FROM stt_food";
     String STT_FOOD_GET_ONE = "SELECT * FROM stt_food WHERE stt_food_id = ?";
+
+    //Delete all food tag by food store online id
+    String DELETE_ALL_TAG_BY_FOOD_STORE_ONLINE_ID = "DELETE FROM food_store_online_tag WHERE food_store_online_id = ?";
+
+    //Insert all tag for food_store_online_tag table
+    String INSERT_ALL_TAG_BY_FOOD_STORE_ONLINE_ID = "INSERT INTO food_store_online_tag (food_store_online_id, food_tag_id) values(?,?)";
+
 }
