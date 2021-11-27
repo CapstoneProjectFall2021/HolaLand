@@ -101,6 +101,18 @@
   <!-- Import modal food detail -->
   <div th:replace="food/modal/modal-food-detail :: foodDetailModal"></div>
 </th:block>
+<th:block th:if="${page == 3}">
+  <!-- Import modal confirm cancel order -->
+  <div th:replace="food/modal/modal-confirm-cancel-order :: confirmCancelOrderModal"></div>
+  <!-- Import modal list order detail -->
+  <div th:replace="food/modal/modal-list-order-detail :: listOrderDetailModal"></div>
+  <!-- Import modal list ordered detail -->
+  <div th:replace="food/modal/modal-list-ordered-detail :: listOrderedDetailModal"></div>
+  <!-- Import modal reason rejection order -->
+  <div th:replace="food/modal/modal-reason-rejection-order :: reasonRejectionOrderModal"></div>
+  <!-- Import modal report order -->
+  <div th:replace="food/modal/modal-report-order :: reportOrderModal"></div>
+</th:block>
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
