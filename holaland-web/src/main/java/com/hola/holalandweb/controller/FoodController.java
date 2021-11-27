@@ -1,9 +1,12 @@
 package com.hola.holalandweb.controller;
 
+import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.service.UserDetailService;
+import com.hola.holalandcore.util.Format;
 import com.hola.holalandfood.entity.*;
 import com.hola.holalandfood.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,7 @@ public class FoodController {
     private final FoodStoreOnlineRateService foodStoreOnlineRateService;
     private final UserDetailService userDetailService;
     private final FoodReportService foodReportService;
+    private final FoodOrderService foodOrderService;
 
     @Autowired
     public FoodController(FoodStoreOnlineService foodStoreOnlineService,
@@ -31,7 +35,8 @@ public class FoodController {
                           FoodItemService foodItemService,
                           FoodStoreOnlineRateService foodStoreOnlineRateService,
                           UserDetailService userDetailService,
-                          FoodReportService foodReportService) {
+                          FoodReportService foodReportService,
+                          FoodOrderService foodOrderService) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTypeService = foodTypeService;
         this.foodStoreOnlineTagService = foodStoreOnlineTagService;
@@ -40,6 +45,7 @@ public class FoodController {
         this.foodStoreOnlineRateService = foodStoreOnlineRateService;
         this.userDetailService = userDetailService;
         this.foodReportService = foodReportService;
+        this.foodOrderService = foodOrderService;
     }
 
     @GetMapping("/food")
@@ -130,7 +136,17 @@ public class FoodController {
     }
 
     @GetMapping("/food/user-order")
-    public String goToUserOrder(Model model) {
+    public String goToUserOrder(Model model, Authentication authentication) {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(), 1,2);
+        List<FoodOrder> foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),3,4,5);
+        model.addAttribute("foodOrderList", foodOrderList);
+        model.addAttribute("foodOrderedList", foodOrderedList);
         model.addAttribute("page", 3);
         return "module-food";
     }

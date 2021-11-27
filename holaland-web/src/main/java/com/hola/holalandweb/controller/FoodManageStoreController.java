@@ -69,9 +69,15 @@ public class FoodManageStoreController {
     }
 
     @GetMapping("/store/manage-food")
-    public String manageFood(Model model) {
-        List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(1);
-        List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(1);
+    public String manageFood(Model model, Authentication authentication) {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(currentUser.getId());
+        List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(currentUser.getId());
         model.addAttribute("foodStoreItemList", foodShopItemList);
         model.addAttribute("foodStoreTagList", foodShopTagList);
         model.addAttribute("page", 2);
@@ -92,9 +98,15 @@ public class FoodManageStoreController {
     }
 
     @GetMapping("/store/manage-food/store-tag")
-    public String getFormUpdateTagShop(Model model) {
-        List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(1);
-        List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(1);
+    public String getFormUpdateTagShop(Model model, Authentication authentication) {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(currentUser.getId());
+        List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(currentUser.getId());
         List<FoodTag> foodTagList = foodTagService.getAll();
         model.addAttribute("foodStoreItemList", foodShopItemList);
         model.addAttribute("foodStoreTagList", foodShopTagList);

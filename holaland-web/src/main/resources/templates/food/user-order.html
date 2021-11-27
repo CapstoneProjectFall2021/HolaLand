@@ -13,7 +13,6 @@
             <thead>
             <tr>
               <th>Mã GD</th>
-              <th>Mặt hàng</th>
               <th class="text-center">Thời gian</th>
               <th class="text-end">Tổng tiền</th>
               <th class="text-end">Trạng thái</th>
@@ -21,14 +20,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="foodOrder : ${foodOrders}">
-              <td><a>#000001</a></td>
-              <td class="text-center" th:text="*{foodOrder.foodOrderCreatedDate}"></td>
+            <tr th:each="foodOrder : ${foodOrderList}">
+              <td><a href="">#<span th:text="*{T(com.hola.holalandcore.util.Format).orderId(foodOrder.foodOrderId)}"></span></a></td>
+              <td class="text-center" th:text="*{#dates.format(foodOrder.foodOrderCreatedDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
               <td class="text-end"><span
                   th:text="*{#numbers.formatInteger(foodOrder.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
               </td>
-              <td class="text-info text-end"
-                  th:text="*{foodOrder.sttFoodCode == 1 ? 'Chờ xác nhận' : 'Đã xác nhận')}"></td>
+              <td th:classappend="*{foodOrder.sttFoodCode == 1 ? 'text-info text-end' : 'text-warning text-end'}"
+                  th:text="*{foodOrder.sttFoodCode == 1 ? 'Chờ xác nhận' : 'Đã xác nhận'}"></td>
               <td class="text-end">
                 <a href="javascript:void(0)" class="color-danger" data-bs-toggle="modal"
                    data-bs-target="#confirmCancelOrderModal">
@@ -104,7 +103,6 @@
             <thead>
             <tr>
               <th>Mã GD<i class="fas fa-sort fa-size"></i></th>
-              <th>Mặt hàng<i class="fas fa-sort fa-size"></i></th>
               <th class="text-center">Thời gian<i class="fas fa-sort fa-size"></i></th>
               <th class="text-end">Tổng tiền<i class="fas fa-sort fa-size"></i></th>
               <th class="text-end">Trạng thái<i class="fas fa-sort fa-size"></i></th>
@@ -112,25 +110,26 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="foodOrder : ${foodOrders}">
-              <td><a>#000001</a></td>
-              <td class="text-center" th:text="*{foodOrder.foodOrderCreatedDate}"></td>
+            <tr th:each="foodOrdered : ${foodOrderedList}">
+              <td><a href="">#<span th:text="*{T(com.hola.holalandcore.util.Format).orderId(foodOrdered.foodOrderId)}"></span></a></td>
+              <td class="text-center" th:text="*{#dates.format(foodOrdered.foodOrderCreatedDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
               <td class="text-end"><span
-                  th:text="*{#numbers.formatInteger(foodOrder.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
+                  th:text="*{#numbers.formatInteger(foodOrdered.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
               </td>
-              <td class="text-info text-end" th:text="*{foodOrder.sttFoodCode == 3 ? 'Đã từ chối' :
-              (foodOrder.sttFoodCode == 5 ? 'Đã hủy' : 'Hoàn thành')}"
+              <td th:classappend="*{foodOrdered.sttFoodCode == 3 ? 'text-secondary text-end' :
+              (foodOrdered.sttFoodCode == 4 ? 'color-success text-end' : 'text-danger text-end')}"
+                  th:text="*{foodOrdered.sttFoodCode == 3 ? 'Đã từ chối' :
+              (foodOrdered.sttFoodCode == 4 ? 'Hoàn thành' : 'Đã hủy')}">
               </td>
               <td class="text-end">
-
-
-                <th:block th:if="">
+                <th:block th:if="*{foodOrdered.sttFoodCode == 3}">
                   <a href="javascript:void(0)" class="text-info" data-bs-toggle="modal"
                      data-bs-target="#reasonRejectionOrderModal">
                     <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip"
                        title="Cửa hàng hết cơm"></i>
                   </a>
                 </th:block>
+                <th:block th:if="*{foodOrdered.sttFoodCode == 4}">
                 <a href="javascript:void(0)" class="text-warning" data-bs-toggle="modal"
                    data-bs-target="#repostOrderModal">
                   <i class="bi bi-exclamation-circle" data-bs-placement="top" data-bs-toggle="tooltip"
