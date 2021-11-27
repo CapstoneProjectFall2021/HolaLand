@@ -5,6 +5,7 @@ import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandcore.util.Format;
 import com.hola.holalandfood.entity.*;
 import com.hola.holalandfood.service.*;
+import com.hola.holalandweb.constant.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -53,7 +54,7 @@ public class FoodController {
         List<FoodType> foodTypeList = foodTypeService.getAll();
         List<FoodStoreOnline> foodStoreOnlineList = foodStoreOnlineService.getAllByType(
                 foodTypeList.get(0).getFoodTypeId(),
-                1
+                Constants.STT_FOOD_CODE_PENDING_APPROVAL
         );
         model.addAttribute("foodTypeId", foodTypeList.get(0).getFoodTypeId());
         model.addAttribute("foodTypeList", foodTypeList);
@@ -68,7 +69,7 @@ public class FoodController {
         List<FoodType> foodTypeList = foodTypeService.getAll();
         List<FoodStoreOnline> foodStoreOnlineList = foodStoreOnlineService.getAllByType(
                 typeId,
-                1
+                Constants.STT_FOOD_CODE_PENDING_APPROVAL
         );
         model.addAttribute("foodTypeId", typeId);
         model.addAttribute("foodTypeList", foodTypeList);
@@ -143,8 +144,13 @@ public class FoodController {
         } else {
             return "login";
         }
-        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(), 1,2);
-        List<FoodOrder> foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),3,4,5);
+        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
+                Constants.STT_FOOD_CODE_PENDING_APPROVAL,
+                Constants.STT_FOOD_CODE_APPROVED);
+        List<FoodOrder> foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
+                Constants.STT_FOOD_CODE_REJECT,
+                Constants.STT_FOOD_CODE_COMPLETE,
+                Constants.STT_FOOD_CODE_EXPIRED);
         model.addAttribute("foodOrderList", foodOrderList);
         model.addAttribute("foodOrderedList", foodOrderedList);
         model.addAttribute("page", 3);
