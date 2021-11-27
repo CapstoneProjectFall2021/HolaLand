@@ -88,7 +88,9 @@ public interface IRepositoryQuery {
             "       T1.food_store_online_min_price,\n" +
             "       T1.food_store_online_max_price,\n" +
             "       T1.food_store_online_description,\n" +
+            "       T1.food_store_online_count_food_item,\n" +
             "       T1.food_store_online_count_rate,\n" +
+            "       T1.food_store_online_count_report,\n" +
             "       T1.food_store_online_deleted\n" +
             "FROM food_store_online T1\n" +
             "LEFT JOIN food_store_online_type T2\n" +
@@ -105,6 +107,7 @@ public interface IRepositoryQuery {
     String FOOD_REPORT_GET_ONE = "SELECT * FROM food_report WHERE food_report_id = ?";
     String FOOD_REPORT_GET_ALL_BY_ORDER_ID = "SELECT T1.food_report_id,\n" +
             "       T1.user_id,\n" +
+            "       T1.food_store_online_id,\n" +
             "       T1.food_order_id,\n" +
             "       T1.food_report_content,\n" +
             "       T1.food_report_create_date,\n" +
@@ -113,7 +116,7 @@ public interface IRepositoryQuery {
             "FROM food_report T1\n" +
             "INNER JOIN food_order T2\n" +
             "ON T1.food_order_id = T2.food_order_id\n" +
-            "WHERE food_store_online_id = ?";
+            "WHERE T2.food_store_online_id = ?";
 
     String FOOD_STORE_ONLINE_TAG_GET_ALL = "SELECT * FROM food_store_online_tag";
     String FOOD_STORE_ONLINE_TAG_GET_ONE = "SELECT * FROM food_store_online_tag WHERE food_store_online_tag_id = ?";

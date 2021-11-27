@@ -12,6 +12,7 @@ public class FoodReportMapper implements RowMapper<FoodReport> {
         return FoodReport.builder()
                 .foodReportId(rs.getInt("food_report_id"))
                 .userId(rs.getInt("user_id"))
+                .foodStoreOnlineId(rs.getInt("food_store_online_id"))
                 .foodOrderId(rs.getInt("food_order_id"))
                 .foodReportContent(rs.getString("food_report_content"))
                 .foodReportCreateDate(rs.getTimestamp("food_report_create_date"))
