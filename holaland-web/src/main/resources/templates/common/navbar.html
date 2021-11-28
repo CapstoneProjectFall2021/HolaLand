@@ -6,9 +6,9 @@
     <div class="navbar-btn-group">
       <ul class="m-0 p-0">
         <li class="navbar-search">
-          <form class="input-group">
+          <form class="input-group" th:action="@{/search}">
             <input aria-describedby="search" aria-label="Search..." class="form-control" placeholder="Search..."
-                   type="text">
+                   type="text" th:name="textSearch">
             <button class="btn-search" id="search" type="submit"><i class="bi bi-search"></i></button>
           </form>
         </li>
