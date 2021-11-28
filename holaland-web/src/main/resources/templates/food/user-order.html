@@ -50,49 +50,18 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-        <a href="" class="label-info m-mb-16">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-4" th:each="type : ${sttTypeList}">
+        <a th:href="@{/food/user-order/type(sttCODE=*{type.sttFoodId})}" class="label-info m-mb-16"
+           th:classappend="${type.sttFoodId == sttCODE ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
-              <i class="far fa-stop-circle"></i>
+              <i th:classappend="*{type.sttFoodIcon}"></i>
             </div>
             <div class="number">
               <h4>0</h4>
             </div>
           </div>
-          <div class="description">
-            Đơn hàng đã từ chối
-          </div>
-        </a>
-      </div>
-      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-        <a href="" class="label-info m-mb-16">
-          <div class="flex">
-            <div class="icon">
-              <i class="far fa-check-circle"></i>
-            </div>
-            <div class="number">
-              <h4>8</h4>
-            </div>
-          </div>
-          <div class="description">
-            Đơn hàng đã hoàn thành
-          </div>
-        </a>
-      </div>
-      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
-        <a href="" class="label-info m-mb-16">
-          <div class="flex">
-            <div class="icon">
-              <i class="far fa-times-circle"></i>
-            </div>
-            <div class="number">
-              <h4>3</h4>
-            </div>
-          </div>
-          <div class="description">
-            Đơn hàng đã huỷ
-          </div>
+          <div class="description" th:text="*{type.sttFoodValue}"></div>
         </a>
       </div>
     </div>

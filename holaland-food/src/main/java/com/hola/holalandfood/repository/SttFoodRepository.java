@@ -9,5 +9,7 @@ public interface SttFoodRepository {
 
     List<SttFood> getAll() throws DataAccessException;
 
+    List<SttFood> getAllByHistoryOrder() throws DataAccessException;
+
     SttFood getOne(int id) throws DataAccessException;
 }

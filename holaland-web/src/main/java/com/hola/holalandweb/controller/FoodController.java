@@ -2,7 +2,6 @@ package com.hola.holalandweb.controller;
 
 import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.service.UserDetailService;
-import com.hola.holalandcore.util.Format;
 import com.hola.holalandfood.entity.*;
 import com.hola.holalandfood.service.*;
 import com.hola.holalandweb.constant.Constants;
@@ -27,6 +26,7 @@ public class FoodController {
     private final UserDetailService userDetailService;
     private final FoodReportService foodReportService;
     private final FoodOrderService foodOrderService;
+    private final SttFoodService sttFoodService;
 
     @Autowired
     public FoodController(FoodStoreOnlineService foodStoreOnlineService,
@@ -37,7 +37,9 @@ public class FoodController {
                           FoodStoreOnlineRateService foodStoreOnlineRateService,
                           UserDetailService userDetailService,
                           FoodReportService foodReportService,
-                          FoodOrderService foodOrderService) {
+                          FoodOrderService foodOrderService,
+                          SttFoodService sttFoodService
+    ) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTypeService = foodTypeService;
         this.foodStoreOnlineTagService = foodStoreOnlineTagService;
@@ -47,6 +49,7 @@ public class FoodController {
         this.userDetailService = userDetailService;
         this.foodReportService = foodReportService;
         this.foodOrderService = foodOrderService;
+        this.sttFoodService = sttFoodService;
     }
 
     @GetMapping("/food")
@@ -139,6 +142,7 @@ public class FoodController {
     @GetMapping("/food/user-order")
     public String goToUserOrder(Model model, Authentication authentication) {
         CustomUser currentUser;
+
         if (authentication != null) {
             currentUser = (CustomUser) authentication.getPrincipal();
         } else {
@@ -151,6 +155,30 @@ public class FoodController {
                 Constants.STT_FOOD_CODE_REJECT,
                 Constants.STT_FOOD_CODE_COMPLETE,
                 Constants.STT_FOOD_CODE_EXPIRED);
+        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
+
+        model.addAttribute("sttTypeList", sttTypeList);
+        model.addAttribute("foodOrderList", foodOrderList);
+        model.addAttribute("foodOrderedList", foodOrderedList);
+        model.addAttribute("page", 3);
+        return "module-food";
+    }
+    @GetMapping("/food/user-order/type")
+    public String getFoodOrderedByType(@RequestParam("sttCODE") Integer sttCODE, Model model, Authentication authentication) {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
+                Constants.STT_FOOD_CODE_PENDING_APPROVAL,
+                Constants.STT_FOOD_CODE_APPROVED);
+        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
+        List<FoodOrder> foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(), sttCODE);
+
+        model.addAttribute("sttCODE", sttCODE);
+        model.addAttribute("sttTypeList", sttTypeList);
         model.addAttribute("foodOrderList", foodOrderList);
         model.addAttribute("foodOrderedList", foodOrderedList);
         model.addAttribute("page", 3);
