@@ -103,8 +103,8 @@
                   </a>
                 </th:block>
                 <th:block th:if="*{foodOrdered.sttFoodCode == 4}">
-                <a href="javascript:void(0)" class="text-warning" data-bs-toggle="modal"
-                   data-bs-target="#reportOrderModal">
+                <a th:href="@{/food/user-order/report-order(storeId=*{foodOrdered.foodStoreOnlineId},
+                orderId=*{foodOrdered.foodOrderId}, sttCODE=${sttCODE})}" class="text-warning">
                   <i class="bi bi-exclamation-circle" data-bs-placement="top" data-bs-toggle="tooltip"
                      title="Báo cáo"></i>
                 </a>

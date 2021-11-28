@@ -9,9 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -229,4 +234,65 @@ public class FoodController {
         return "module-food";
     }
 
+    @GetMapping("/food/user-order/report-order")
+    public String getFormReportOrder(
+            @RequestParam("storeId") Integer storeId,
+            @RequestParam("orderId") Integer orderId,
+            @RequestParam("sttCODE") Integer sttCODE,
+            Model model,
+            Authentication authentication
+    )
+    {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
+                Constants.STT_FOOD_CODE_PENDING_APPROVAL,
+                Constants.STT_FOOD_CODE_APPROVED);
+        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
+        List<FoodOrder> foodOrderedList;
+        if(sttCODE == 0) {
+            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
+                    Constants.STT_FOOD_CODE_REJECT,
+                    Constants.STT_FOOD_CODE_COMPLETE,
+                    Constants.STT_FOOD_CODE_EXPIRED);
+        } else {
+            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(), sttCODE);
+        }
+        FoodReport newFoodReport = FoodReport.builder().build();
+        model.addAttribute("newFoodReport", newFoodReport);
+        model.addAttribute("userId", currentUser.getId());
+        model.addAttribute("storeId", storeId);
+        model.addAttribute("orderId", orderId);
+        model.addAttribute("sttCODE", sttCODE);
+        model.addAttribute("sttTypeList", sttTypeList);
+        model.addAttribute("foodOrderList", foodOrderList);
+        model.addAttribute("foodOrderedList", foodOrderedList);
+        model.addAttribute("page", 3);
+        return "module-food";
+    }
+
+    @PostMapping("/post-report-order")
+    public String postUserReportOrder(
+            @ModelAttribute("newFoodReport") FoodReport newFoodReport,
+            BindingResult bindingResult
+    )
+    {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+        Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
+        newFoodReport.setFoodReportCreateDate(currentDate);
+        newFoodReport.setFoodReportDeleted(false);
+        boolean isCheck = foodReportService.save(newFoodReport);
+        if (isCheck) {
+            return "redirect:" + "/food/user-order";
+        } else {
+            return "404";
+        }
+    }
 }
