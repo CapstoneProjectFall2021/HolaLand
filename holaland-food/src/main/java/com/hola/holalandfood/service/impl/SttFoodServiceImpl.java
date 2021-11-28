@@ -23,6 +23,11 @@ public class SttFoodServiceImpl implements SttFoodService {
     }
 
     @Override
+    public List<SttFood> getAllByHistoryOrder() throws DataAccessException {
+        return sttFoodRepository.getAllByHistoryOrder();
+    }
+
+    @Override
     public SttFood getOne(int id) throws DataAccessException {
         return sttFoodRepository.getOne(id);
     }

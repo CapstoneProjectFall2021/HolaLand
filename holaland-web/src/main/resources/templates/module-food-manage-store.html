@@ -36,27 +36,22 @@
           </div>
           <ul class="nav navbar-nav sub-menu">
             <li>
-              <a href="#">
-                <i class="fas fa-tachometer-alt fa-fw"></i>Dashboard
+              <a th:href="@{/store/info}" th:classappend="${page == 1 ? 'active' : ''}">
+                <i class="fas fa-info fa-fw"></i>Thông tin shop
               </a>
             </li>
             <li>
-              <a href="#">
-                <i class="fas fa-info fa-fw"></i>Thông tin cửa hàng
+              <a th:href="@{/store/manage-food}" th:classappend="${page == 2 ? 'active' : ''}">
+                <i class="fas fa-tasks fa-fw"></i>Quản lý thẻ - đồ ăn
               </a>
             </li>
             <li>
-              <a href="#">
+              <a th:href="@{/store/manage-order}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-list-ul fa-fw"></i>Quản lý đơn hàng
               </a>
             </li>
             <li>
-              <a href="#">
-                <i class="fas fa-tasks fa-fw"></i>Quản lý đồ ăn
-              </a>
-            </li>
-            <li>
-              <a href="#">
+              <a th:href="@{/store/statistics}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="fas fa-chart-line fa-fw"></i>Dữ liệu - Thống kê
               </a>
             </li>
@@ -70,34 +65,92 @@
       </div>
       <!-- Right side  -->
       <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
-        <!-- List online store -->
+        <!-- Online store overview -->
         <th:block th:if="${page == 1}">
-          <div class="col-right">
-            <!-- Manage store -->
-            <div class="manage-store">
-              <div class="row">
-                <div class="col-12">
-                  <h1 class="title fix-mb-title">Dashboard</h1>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div th:replace="online-store/overview :: overview"></div>
         </th:block>
-        <!-- List offline store -->
+        <!-- Online store manage food -->
         <th:block th:if="${page == 2}">
-
+          <div th:replace="online-store/manage-food :: manage-food"></div>
         </th:block>
-        <!-- User order -->
+        <!-- Online store manage order -->
         <th:block th:if="${page == 3}">
-
+          <div th:replace="online-store/manage-order :: manage-order"></div>
+        </th:block>
+        <!-- Online store statistics -->
+        <th:block th:if="${page == 4}">
+          <div th:replace="online-store/statistics :: statistics"></div>
         </th:block>
       </div>
     </div>
   </div>
 </div>
 
+<th:block th:if="${page == 1}">
+  <!-- Import modal update shop info -->
+  <div th:replace="online-store/modal/modal-update-shop-info
+  :: updateShopInfoModal(storeId=${foodStoreOnline.foodStoreOnlineId})"></div>
+</th:block>
+<th:block th:if="${page == 2}">
+  <!-- Import modal update shop tag -->
+  <div th:replace="online-store/modal/modal-update-shop-tag :: updateShopTagModal"></div>
+  <!-- Import modal confirm delete food -->
+  <div th:replace="online-store/modal/modal-confirm-delete-food :: confirmDeleteFoodModal"></div>
+</th:block>
+
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
+<script crossorigin="anonymous" th:src="@{/js/templates/food.js}"></script>
+<script th:if="${foodTagList != null}">
+    const myModal = new bootstrap.Modal(document.getElementById('updateTagModal'));
+    myModal.show();
+</script>
+<th:block th:if="${page == 4}">
+  <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
+    const myData = [2, 5, 3, 9, 13, 6, 4, 14, 22, 12, 18, 7, 13, 13, 15, 16, 12, 18, 15, 22, 20, 28];
+    const color = 'rgb(40, 167, 69)';
+    let text = 'Tổng tiền doanh thu';
+    let type = 'bar';
+
+    const data = {
+      labels: days,
+      datasets: [{
+        label: text,
+        backgroundColor: color,
+        borderColor: color,
+        data: myData,
+      }]
+    };
+
+    const config = {
+      type: type,
+      data,
+      options: {}
+    };
+
+    let myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+    function fun() {
+      const value = document.getElementById("mySelect").value;
+      if (value == 2) {
+        config.type = 'line';
+      } else {
+        config.type = 'bar';
+      }
+
+      myChart.destroy();
+      myChart = new Chart(
+          document.getElementById('myChart'),
+          config
+      );
+    }
+  </script>
+</th:block>
 </body>
 
 </html>

@@ -33,4 +33,19 @@ public class FoodStoreOnlineServiceImpl implements FoodStoreOnlineService {
     public FoodStoreOnline getOne(int id) throws DataAccessException {
         return foodStoreOnlineRepository.getOne(id);
     }
+
+    @Override
+    public FoodStoreOnline getOneByUserId(int userId) throws DataAccessException {
+        return foodStoreOnlineRepository.getOneByUserId(userId);
+    }
+
+    @Override
+    public FoodStoreOnline getOneByOrderId(int orderId) throws DataAccessException {
+        return foodStoreOnlineRepository.getOneByOrderId(orderId);
+    }
+
+    @Override
+    public boolean updateShopInfo(FoodStoreOnline obj) throws DataAccessException {
+        return foodStoreOnlineRepository.updateShopInfo(obj);
+    }
 }

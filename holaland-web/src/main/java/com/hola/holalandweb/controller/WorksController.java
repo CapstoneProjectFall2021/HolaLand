@@ -1,6 +1,5 @@
 package com.hola.holalandweb.controller;
 
-import com.hola.holalandcore.entity.User;
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.repository.UserRepository;
 import com.hola.holalandcore.service.UserDetailService;
@@ -30,7 +29,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
@@ -52,8 +50,6 @@ public class WorksController {
     private final SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService;
     private final UserRepository userRepository;
 
-    private User user;
-
     @Autowired
     public WorksController(WorkRequestRecruitmentService workRequestRecruitmentService,
                            WorkRequestTypeService workRequestTypeService,
@@ -65,7 +61,8 @@ public class WorksController {
                            UserDetailService userDetailService,
                            SttWorkService sttWorkService,
                            SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService,
-                           UserRepository userRepository) {
+                           UserRepository userRepository
+    ) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.workRequestTypeService = workRequestTypeService;
         this.workRequestApplyService = workRequestApplyService;
@@ -80,10 +77,7 @@ public class WorksController {
     }
 
     @GetMapping("/works")
-    public String goToWorks(Model model, Principal principal) {
-        // Get user info
-        //this.user = userRepository.findByEmail(principal.getName());
-
+    public String goToWorks(Model model) {
         List<WorkRequestType> jobTypeList = workRequestTypeService.getAll();
         List<WorkRequestRecruitment> jobList = workRequestRecruitmentService.getAllByType(
                 jobTypeList.get(0).getWorkRequestTypeId(),

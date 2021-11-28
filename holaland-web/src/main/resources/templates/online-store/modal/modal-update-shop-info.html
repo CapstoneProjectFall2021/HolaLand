@@ -1,0 +1,35 @@
+<!-- Modal update shop info -->
+<div class="modal fade" id="updateShopInfoModal" tabindex="-1" aria-labelledby="updateShopInfoModalLabel"
+     aria-hidden="true" th:fragment="updateShopInfoModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateShopInfoModalLabel">Thay đổi thông tin</h5>
+      </div>
+      <div class="modal-body">
+        <form id="updateShopForm" class="row" method="post" th:action="@{/update-store-info}">
+          <input type="hidden" th:name="storeId" th:value="${storeId}">
+          <div class="form-group col-md-12">
+            <fieldset>
+              <legend>Tên shop</legend>
+              <input type="text" class="form-control" th:name="storeName">
+            </fieldset>
+          </div>
+          <div class="form-group col-md-12 mb-0">
+            <fieldset>
+              <legend>Mô tả ngắn</legend>
+              <textarea class="form-control" rows="3" th:name="storeDescript"></textarea>
+            </fieldset>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary me-2"
+           onclick="document.getElementById('updateShopForm').submit();">
+          <i class="fas fa-check text-success"></i>Xác nhận
+        </a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+      </div>
+    </div>
+  </div>
+</div>

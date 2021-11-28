@@ -1,0 +1,29 @@
+<!-- Modal Update Tag -->
+<div class="modal fade" id="updateTagModal" tabindex="-1" aria-labelledby="updateTagModalLabel" aria-hidden="true"
+     th:fragment="updateShopTagModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateTagModalLabel">Chỉnh sửa thẻ</h5>
+      </div>
+      <div class="modal-body">
+        <form id="updateTagForm" class="row" method="post" th:action="@{/store/manage-food/update-tag}">
+          <div class="col-6" th:each="foodTag : ${foodTagList}">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" th:name="tagList" th:value="*{foodTag.foodTagId}"
+                     th:id="'tag'+ *{foodTag.foodTagId}"  th:checked="${#lists.contains(foodStoreTagList, foodTag)}">
+              <label class="form-check-label" th:for="'tag'+ *{foodTag.foodTagId} " th:text="*{foodTag.foodTagName}"></label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary me-2"
+           onclick="document.getElementById('updateTagForm').submit();">
+          <i class="fas fa-check text-success"></i>Xác nhận
+        </a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+      </div>
+    </div>
+  </div>
+</div>

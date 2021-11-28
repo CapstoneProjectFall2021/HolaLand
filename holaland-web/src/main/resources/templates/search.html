@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hola Land</title>
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" th:href="@{/css/all.css}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.css}"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/hola-land/main.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/common.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/grid.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/search.css}"/>
+</head>
+
+<body>
+<div th:replace="~{common/navbar :: navbar}"></div>
+
+<div style="overflow: hidden;">
+  <div class="container">
+    <div class="row">
+      <!-- Left side -->
+      <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3">
+        <div class="col-left">
+          <div class="row">
+            <div class="col-12">
+              <h1 class="title fix-pd fix-mb-title">Menu</h1>
+            </div>
+          </div>
+          <ul class="nav navbar-nav sub-menu">
+            <li>
+              <a th:href="@{/}" th:classappend="${page == 1 ? 'active' : ''}">
+                <i class="far fa-address-card fa-fw"></i>Công việc
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/search/food}" th:classappend="${page == 2 ? 'active' : ''}">
+                <i class="fas fa-pizza-slice fa-fw"></i>Ăn - uống
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/}" th:classappend="${page == 3 ? 'active' : ''}">
+                <i class="fas fa-bus-alt fa-fw"></i>Giao thông
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/}">
+                <i class="fas fa-chevron-left fa-fw"></i>Quay lại
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Right side  -->
+      <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
+        <!-- Result search for work -->
+        <th:block th:if="${page == 1}">
+          <div class="col-right">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="title fix-mb-title">Kết quả tìm kiếm cho "Công việc"</h1>
+              </div>
+            </div>
+          </div>
+        </th:block>
+        <!-- Result search for food -->
+        <th:block th:if="${page == 2}">
+          <div th:replace="search/food :: food"></div>
+        </th:block>
+        <!-- Result search for xxx -->
+        <th:block th:if="${page == 3}">
+
+        </th:block>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Javascript -->
+<th:block th:replace="~{common/script :: script/script}"></th:block>
+</body>
+
+</html>

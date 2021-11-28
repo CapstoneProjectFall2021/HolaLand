@@ -1,0 +1,28 @@
+<!-- Modal food detail -->
+<div class="modal fade" id="foodDetailModal" tabindex="-1" aria-labelledby="foodDetailModalLabel" aria-hidden="true"
+     th:fragment="foodDetailModal">
+  <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="foodDetailModalLabel">Thông tin</h5>
+      </div>
+      <div class="modal-body">
+        <div class="flex">
+          <div class="icon-circle">
+            <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
+          </div>
+          <div class="content-body">
+            <h3 th:text="${item.foodItemName}"></h3>
+            <p class="price">Giá: <span th:text="${item.foodItemPrice}"></span><sup>đ</sup></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" onclick="showToast()" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal">
+          <i class="fas fa-plus"></i>Thêm vào giỏ hàng
+        </a>
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>

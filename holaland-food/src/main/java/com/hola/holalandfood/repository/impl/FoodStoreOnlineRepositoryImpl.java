@@ -35,4 +35,24 @@ public class FoodStoreOnlineRepositoryImpl implements FoodStoreOnlineRepository,
     public FoodStoreOnline getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(FOOD_STORE_ONLINE_GET_ONE,new FoodStoreOnlineMapper(),id);
     }
+
+    @Override
+    public FoodStoreOnline getOneByUserId(int userId) throws DataAccessException {
+        return jdbcTemplate.queryForObject(FOOD_STORE_ONLINE_GET_ONE_BY_USER_ID, new FoodStoreOnlineMapper(), userId);
+    }
+
+    @Override
+    public FoodStoreOnline getOneByOrderId(int orderId) throws DataAccessException {
+        return jdbcTemplate.queryForObject(FOOD_STORE_ONLINE_GET_ONE_BY_ORDER_ID, new FoodStoreOnlineMapper(), orderId);
+    }
+
+    @Override
+    public boolean updateShopInfo(FoodStoreOnline obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                FOOD_STORE_ONLINE_UPDATE_INFO_ONE,
+                obj.getFoodStoreOnlineName(),
+                obj.getFoodStoreOnlineDescription(),
+                obj.getFoodStoreOnlineId()
+        ) > 0;
+    }
 }

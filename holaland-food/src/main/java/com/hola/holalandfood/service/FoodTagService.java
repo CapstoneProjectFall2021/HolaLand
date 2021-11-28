@@ -12,4 +12,6 @@ public interface FoodTagService {
     List<FoodTag> getAllByStoreOnlineId(int id) throws DataAccessException;
 
     FoodTag getOne(int id) throws DataAccessException;
+
+    List<FoodTag> getAllByUserId(int userId) throws DataAccessException;
 }

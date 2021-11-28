@@ -6,9 +6,9 @@
     <div class="navbar-btn-group">
       <ul class="m-0 p-0">
         <li class="navbar-search">
-          <form class="input-group">
+          <form class="input-group" th:action="@{/search}">
             <input aria-describedby="search" aria-label="Search..." class="form-control" placeholder="Search..."
-                   type="text">
+                   type="text" th:name="textSearch">
             <button class="btn-search" id="search" type="submit"><i class="bi bi-search"></i></button>
           </form>
         </li>
@@ -133,13 +133,13 @@
             </div>
           </div>
         </li>
-        <li><a href="#"><i class="fas fa-university fa-fw"></i>FPT University</a></li>
+        <li><a th:href="@{/fpt-university}"><i class="fas fa-university fa-fw"></i>FPT University</a></li>
         <li><a href="#"><i class="fas fa-graduation-cap fa-fw"></i>Học tập</a></li>
-        <li><a href="#"><i class="fas fa-user-check fa-fw"></i>Công việc</a></li>
+        <li><a th:href="@{/works}"><i class="fas fa-user-check fa-fw"></i>Công việc</a></li>
         <li><a href="#"><i class="fas fa-cart-plus fa-fw"></i>Mua sắm</a></li>
-        <li><a href="#"><i class="fas fa-pizza-slice fa-fw"></i>Dịch vụ Ăn - Uống</a></li>
+        <li><a th:href="@{/food}"><i class="fas fa-pizza-slice fa-fw"></i>Dịch vụ Ăn - Uống</a></li>
         <li><a href="#"><i class="fab fa-xbox fa-fw"></i>Vui chơi - Giải trí</a></li>
-        <li><a href="#"><i class="fas fa-bus-alt fa-fw"></i>Giao thông</a></li>
+        <li><a th:href="@{/traffic}"><i class="fas fa-bus-alt fa-fw"></i>Giao thông</a></li>
         <li><a href="#"><i class="fas fa-bars fa-fw"></i>Khác</a></li>
       </ul>
     </div>

@@ -12,4 +12,10 @@ public interface FoodStoreOnlineService {
     List<FoodStoreOnline> getAllByType(int typeId, int code) throws DataAccessException;
 
     FoodStoreOnline getOne(int id) throws DataAccessException;
+
+    FoodStoreOnline getOneByUserId(int userId) throws DataAccessException;
+
+    FoodStoreOnline getOneByOrderId(int orderId) throws DataAccessException;
+
+    boolean updateShopInfo(FoodStoreOnline obj) throws DataAccessException;
 }

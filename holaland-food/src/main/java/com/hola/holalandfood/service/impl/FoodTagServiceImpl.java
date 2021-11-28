@@ -33,4 +33,9 @@ public class FoodTagServiceImpl implements FoodTagService {
     public FoodTag getOne(int id) throws DataAccessException {
         return foodTagRepository.getOne(id);
     }
+
+    @Override
+    public List<FoodTag> getAllByUserId(int userId) throws DataAccessException {
+        return foodTagRepository.getAllByUserId(userId);
+    }
 }

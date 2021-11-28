@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-6 col-md-6 col-lg-4 col-xl-3 col-xxl-3" th:each="foodType : ${foodTypeList}">
         <a th:href="@{/food/type(typeId=*{foodType.foodTypeId})}" class="label-info m-mb-16"
-           th:classappend="${foodType.foodTypeId == typeId ? 'active' : ''}">
+           th:classappend="${foodType.foodTypeId == foodTypeId ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
               <i th:classappend="*{foodType.foodTypeIcon}"></i>
@@ -40,32 +40,31 @@
                   <h4 th:text="*{foodStoreOnline.foodStoreOnlineName}"></h4>
                   <div class="row-info">
                     <p class="star-rate">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="far fa-star"></i>
+                      <i th:classappend="*{(foodStoreOnline.foodStoreOnlineRate >= 1) ? 'fas fa-star' : 'far fa-star'}"></i>
+                      <i th:classappend="*{(foodStoreOnline.foodStoreOnlineRate >= 2) ? 'fas fa-star' : 'far fa-star'}"></i>
+                      <i th:classappend="*{(foodStoreOnline.foodStoreOnlineRate >= 3) ? 'fas fa-star' : 'far fa-star'}"></i>
+                      <i th:classappend="*{(foodStoreOnline.foodStoreOnlineRate >= 4) ? 'fas fa-star' : 'far fa-star'}"></i>
+                      <i th:classappend="*{(foodStoreOnline.foodStoreOnlineRate >= 5) ? 'fas fa-star' : 'far fa-star'}"></i>
                     </p>
                     <p class="price">
-                      Giá: <span th:text="*{foodStoreOnline.foodStoreOnlineMinPrice}"></span><sup>đ</sup> -
-                      <span th:text="*{foodStoreOnline.foodStoreOnlineMaxPrice}"></span><sup>đ</sup>
-                </p>
-              </div>
-              <div class=" row-info panel-small">
-                    <p class="description m-0" th:text="*{foodStoreOnline.foodStoreOnlineDescription}">
+                      Giá: <span th:text="*{#numbers.formatInteger(foodStoreOnline.foodStoreOnlineMinPrice, 3, 'POINT')}"></span><sup>đ</sup> -
+                      <span th:text="*{#numbers.formatInteger(foodStoreOnline.foodStoreOnlineMinPrice, 3, 'POINT')}"></span></span><sup>đ</sup>
                     </p>
                   </div>
+                  <div class=" row-info panel-small">
+                    <p class="description m-0" th:text="*{foodStoreOnline.foodStoreOnlineDescription}"></p>
+                  </div>
                   <div class="row-info">
-                    <div class="tags">
-                      <span class="tag" th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}"
-                      th:if="${foodStoreOnlineTag.foodStoreOnlineId == foodStoreOnline.foodStoreOnlineId}"
-                      th:text="*{foodStoreOnlineTag.foodTagId == 1 ? 'Cơm' :
-                      (foodStoreOnlineTag.foodTagId == 2 ? 'Bánh mỳ' :
-                      (foodStoreOnlineTag.foodTagId == 3 ? 'Đồ ăn vặt' : 'Đồ ăn nhanh'))}"></span>
+                    <div class="tags"
+                         th:with="foodStoreOnlineTagList=${foodTagService.getAllByStoreOnlineId(foodStoreOnline.foodStoreOnlineId)}">
+                      <th:block th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}">
+                        <span class="tag" th:text="*{foodStoreOnlineTag.foodTagName}"></span>
+                      </th:block>
                     </div>
                     <div class="note">
-                      <p class="m-0" th:text="*{foodStoreOnline.foodStoreTypeId == 1 ? 'Chỉ bán online' :
-                      (foodStoreOnline.foodStoreTypeId == 2 ? 'Nhà hàng' : 'Quán ăn')}">
+                      <p class="m-0" th:text="*{foodStoreOnline.foodStoreTypeId == 1 ? 'Chỉ bán online'
+                      : (foodStoreOnline.foodStoreTypeId == 2 ? 'Nhà hàng'
+                      : 'Quán ăn')}">
                       </p>
                     </div>
                   </div>

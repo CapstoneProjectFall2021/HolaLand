@@ -12,6 +12,8 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
   <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.css}"/>
+  <!-- Data Table -->
+  <link rel="stylesheet" th:href="@{/css/datatable/table.css}">
   <!-- Custom CSS -->
   <link rel="stylesheet" th:href="@{/css/hola-land/main.css}"/>
   <link rel="stylesheet" th:href="@{/css/hola-land/common.css}"/>
@@ -45,29 +47,20 @@
                 <i class="fas fa-store fa-fw"></i>Danh sách nhà hàng
               </a>
             </li>
-            <li>
-              <hr/>
-            </li>
-            <li>
+            <li sec:authorize="hasRole('MEMBER')">
               <a th:href="@{/food/user-order}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
               </a>
             </li>
-            <li>
-              <hr/>
-            </li>
-            <li>
-              <a th:href="@{/food/manage-store}" th:classappend="${page == 4 ? 'active' : ''}">
-                <i class="fas fa-chart-bar fa-fw"></i>Quản lý cửa hàng
-              </a>
-            </li>
-            <li>
-              <a th:href="@{/}" th:classappend="${page == 5 ? 'active' : ''}">
+            <li sec:authorize="hasRole('SELLER')">
+              <a th:href="@{/}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
               </a>
             </li>
-            <li>
-              <hr/>
+            <li sec:authorize="hasRole('SELLER')">
+              <a th:href="@{/store/info}" th:classappend="${page == 5 ? 'active' : ''}">
+                <i class="fas fa-chart-bar fa-fw"></i>Quản lý cửa hàng
+              </a>
             </li>
             <li>
               <a th:href="@{/}">
@@ -100,90 +93,57 @@
   </div>
 </div>
 
+<th:block th:if="${page == 9}">
+  <!-- Import modal online store rate -->
+  <div th:replace="food/modal/modal-online-store-rate :: onlineStoreRateModal"></div>
+</th:block>
+<th:block th:if="${page == 9 && item != null}">
+  <!-- Import modal food detail -->
+  <div th:replace="food/modal/modal-food-detail :: foodDetailModal"></div>
+</th:block>
+<th:block th:if="${page == 3}">
+  <!-- Import modal confirm cancel order -->
+  <div th:replace="food/modal/modal-confirm-cancel-order :: confirmCancelOrderModal"></div>
+  <!-- Import modal reason rejection order -->
+  <div th:replace="food/modal/modal-reason-rejection-order :: reasonRejectionOrderModal"></div>
+</th:block>
+<th:block th:if="${page == 3 && foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
+  <!-- Import modal list order detail -->
+  <div th:replace="food/modal/modal-list-order-detail :: listOrderDetailModal"></div>
+</th:block>
+<th:block th:if="${page == 3 && newFoodReport != null}">
+  <!-- Import modal report order -->
+  <div th:replace="food/modal/modal-report-order :: reportOrderModal"></div>
+</th:block>
+
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
+<script crossorigin="anonymous" th:src="@{/js/templates/food.js}"></script>
+<th:block th:if="${page == 3}">
+  <script th:src="@{/js/datatables/jquery.min.js}"></script>
+  <script th:src="@{/js/datatables/jquery.dataTables.min.js}"></script>
+  <script th:src="@{/js/datatables/datatables.vietnamese.js}"></script>
+</th:block>
 
-<!-- Modal food detail -->
-<div class="modal fade" id="foodDetailModal" tabindex="-1" aria-labelledby="foodDetailModalLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="foodDetailModalLabel">Thông tin</h5>
-      </div>
-      <div class="modal-body">
-        <div class="flex">
-          <div class="icon-circle">
-            <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
-          </div>
-          <div class="content-body">
-            <h3>Cơm hến xào</h3>
-            <p class="price">Giá: 40.000<sup>đ</sup></p>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a href="javascript:void(0)" onclick="showToast()" class="btn btn-sm btn-success me-2" data-bs-dismiss="modal">
-          <i class="fas fa-plus"></i>Thêm vào giỏ hàng
-        </a>
-        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
-      </div>
-    </div>
-  </div>
-</div>
+<script th:if="${item != null}">
+  const myModal = new bootstrap.Modal(document.getElementById('foodDetailModal'));
+  myModal.show();
+</script>
 
-<!-- Modal rate -->
-<div class="modal fade" id="rateFoodModal" tabindex="-1" aria-labelledby="rateFoodModalLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="rateFoodModalLabel">Đánh giá</h5>
-      </div>
-      <div class="modal-body">
-        <form class="row">
-          <div class="form-group col-md-12">
-            <fieldset class="fieldset-rate">
-              <legend>Điểm đánh giá</legend>
-              <div class="custom-radio">
-                <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" name="rate" id="one-star" value="1">
-                  <label class="form-check-label" for="one-star">1<i class="fas fa-star ms-1 checked"></i></label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" name="rate" id="two-star" value="2">
-                  <label class="form-check-label" for="two-star">2<i class="fas fa-star ms-1 checked"></i></label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" name="rate" id="three-star" value="3">
-                  <label class="form-check-label" for="three-star">3<i class="fas fa-star ms-1 checked"></i></label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" name="rate" id="four-star" value="4">
-                  <label class="form-check-label" for="four-star">4<i class="fas fa-star ms-1 checked"></i></label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" name="rate" id="five-star" value="5">
-                  <label class="form-check-label" for="five-star">5<i class="fas fa-star ms-1 checked"></i></label>
-                </div>
-              </div>
-            </fieldset>
-          </div>
-          <div class="form-group col-md-12 m-0">
-            <fieldset>
-              <legend>Ý kiến đánh giá</legend>
-              <textarea class="form-control" rows="3"></textarea>
-            </fieldset>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <a href="javascript:void(0)" class="btn btn-sm btn-secondary me-2">
-          <i class="fas fa-check text-success mr-2"></i>Xác nhận
-        </a>
-        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>
-      </div>
-    </div>
-  </div>
-</div>
+<script th:if="${reasonReject != null}">
+    const myModal = new bootstrap.Modal(document.getElementById('reasonRejectionOrderModal'));
+    myModal.show();
+</script>
+
+<script th:if="${newFoodReport != null}">
+    const myModal = new bootstrap.Modal(document.getElementById('reportOrderModal'));
+    myModal.show();
+</script>
+
+<script th:if="${foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
+    const myModal = new bootstrap.Modal(document.getElementById('listOrderDetailModal'));
+    myModal.show();
+</script>
 
 </body>
 

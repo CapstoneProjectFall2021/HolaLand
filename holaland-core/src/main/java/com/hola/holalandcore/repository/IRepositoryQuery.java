@@ -14,6 +14,9 @@ public interface IRepositoryQuery {
             "AND T1.user_status_id = 1\n" +
             "AND T1.user_deleted = 0";
 
+    String USER_DETAIL_GET_ALL = "SELECT * FROM user_detail";
+    String USER_DETAIL_GET_ONE_BY_USER_ID = "SELECT * FROM user_detail WHERE user_id = ?";
+
     String GET_LIST_USER_BOOKED_BY_USER_ID = "SELECT\n" +
             "T2.user_detail_id,\n" +
             "T2.user_id,\n" +
