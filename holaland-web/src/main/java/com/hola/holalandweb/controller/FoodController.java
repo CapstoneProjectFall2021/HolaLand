@@ -278,6 +278,7 @@ public class FoodController {
         List<FoodOrderDetail> foodOrderDetailList = foodOrderDetailService.getAllByOrderId(orderId);
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByOrderId(orderId);
         model.addAttribute("sttCODE", sttCODE);
+        model.addAttribute("orderId", orderId);
         model.addAttribute("orderStatus", orderStatus);
         model.addAttribute("sttTypeList", sttTypeList);
         model.addAttribute("foodOrderDetailList", foodOrderDetailList);

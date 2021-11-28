@@ -31,9 +31,8 @@
               <td th:classappend="*{foodOrder.sttFoodCode == 1 ? 'text-info text-end' : 'text-warning text-end'}"
                   th:text="*{foodOrder.sttFoodCode == 1 ? 'Chờ xác nhận' : 'Đã xác nhận'}"></td>
               <td class="text-end">
-                <a href="javascript:void(0)" class="color-danger" data-bs-toggle="modal"
-                   data-bs-target="#confirmCancelOrderModal">
-                  <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip" onclick="confirmCandelOrder(event)"
+                <a href="javascript:void(0)" class="color-danger" data-bs-toggle="modal" data-bs-target="#confirmCancelOrderModal">
+                  <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip" onclick="confirmCancelOrder(event)"
                      title="Hủy đơn hàng">
                     <span th:text="${foodOrder.foodOrderId}" class="d-none"></span>
                   </i>

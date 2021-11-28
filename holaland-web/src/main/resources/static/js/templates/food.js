@@ -19,7 +19,7 @@ function confirmDeleteFood(e) {
     document.getElementById("btn-delete-food").href = "/store/manage-food/delete?foodId=" + foodId;
 }
 
-function confirmCandelOrder(e) {
+function confirmCancelOrder(e) {
     const orderId = e.target.firstElementChild.innerHTML;
     openModal("confirmCancelOrderModal");
     document.getElementById("btn-cancel-order").href = "/food/user-order/updateSttFood?orderId=" + orderId;
