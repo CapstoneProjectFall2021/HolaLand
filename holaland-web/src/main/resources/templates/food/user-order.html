@@ -21,7 +21,8 @@
             </thead>
             <tbody>
             <tr th:each="foodOrder : ${foodOrderList}">
-              <td><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#listOrderDetailModal">
+              <td><a th:href="@{/food/user-order/order-detail(orderId=*{foodOrder.foodOrderId}, sttCODE=${sttCODE},
+              orderStatus=*{foodOrder.sttFoodCode})}">
                 #<span th:text="*{T(com.hola.holalandcore.util.Format).orderId(foodOrder.foodOrderId)}"></span></a></td>
               <td class="text-center" th:text="*{#dates.format(foodOrder.foodOrderCreatedDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
               <td class="text-end"><span
@@ -81,7 +82,8 @@
             </thead>
             <tbody>
             <tr th:each="foodOrdered : ${foodOrderedList}">
-              <td><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#listOrderedDetailModal">
+              <td><a th:href="@{/food/user-order/order-detail(orderId=*{foodOrdered.foodOrderId}, sttCODE=${sttCODE},
+              orderStatus=*{foodOrdered.sttFoodCode})}">
                 #<span th:text="*{T(com.hola.holalandcore.util.Format).orderId(foodOrdered.foodOrderId)}"></span></a></td>
               <td class="text-center" th:text="*{#dates.format(foodOrdered.foodOrderCreatedDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
               <td class="text-end"><span

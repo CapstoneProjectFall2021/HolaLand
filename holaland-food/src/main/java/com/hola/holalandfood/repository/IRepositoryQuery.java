@@ -64,6 +64,7 @@ public interface IRepositoryQuery {
 
     String FOOD_ORDER_DETAIL_GET_ALL = "SELECT * FROM food_order_detail";
     String FOOD_ORDER_DETAIL_GET_ONE = "SELECT * FROM food_order_detail WHERE food_order_detail_id = ?";
+    String FOOD_ORDER_DETAIL_GET_ALL_BY_ORDER_ID = "SELECT * FROM food_order_detail WHERE food_order_id = ?";
 
     String FOOD_ORDER_GET_ALL = "SELECT * FROM food_order";
     String FOOD_ORDER_GET_ONE = "SELECT * FROM food_order WHERE food_order_id = ?";
@@ -76,6 +77,25 @@ public interface IRepositoryQuery {
             "WHERE food_store_online_id = ?";
 
     String FOOD_STORE_ONLINE_GET_ONE_BY_USER_ID = "SELECT * FROM food_store_online WHERE user_id = ? AND food_store_online_deleted = 0";
+    String FOOD_STORE_ONLINE_GET_ONE_BY_ORDER_ID = "SELECT\n" +
+            "       T1.food_store_online_id,\n" +
+            "       T1.user_id,\n" +
+            "       T1.food_store_type_id,\n" +
+            "       T1.stt_food_code,\n" +
+            "       T1.food_store_online_image,\n" +
+            "       T1.food_store_online_name,\n" +
+            "       T1.food_store_online_rate,\n" +
+            "       T1.food_store_online_min_price,\n" +
+            "       T1.food_store_online_max_price,\n" +
+            "       T1.food_store_online_description,\n" +
+            "       T1.food_store_online_count_food_item,\n" +
+            "       T1.food_store_online_count_rate,\n" +
+            "       T1.food_store_online_count_report,\n" +
+            "       T1.food_store_online_deleted\n" +
+            "FROM food_store_online T1\n" +
+            "LEFT JOIN food_order T2\n" +
+            "ON T1.food_store_online_id = T2.food_store_online_id\n" +
+            "WHERE T2.food_order_id = ?";
 
     String FOOD_STORE_ONLINE_GET_ALL_BY_TYPE = "SELECT\n" +
             "       T1.food_store_online_id,\n" +

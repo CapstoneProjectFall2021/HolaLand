@@ -27,6 +27,7 @@ public class FoodController {
     private final FoodReportService foodReportService;
     private final FoodOrderService foodOrderService;
     private final SttFoodService sttFoodService;
+    private final FoodOrderDetailService foodOrderDetailService;
 
     @Autowired
     public FoodController(FoodStoreOnlineService foodStoreOnlineService,
@@ -38,8 +39,8 @@ public class FoodController {
                           UserDetailService userDetailService,
                           FoodReportService foodReportService,
                           FoodOrderService foodOrderService,
-                          SttFoodService sttFoodService
-    ) {
+                          SttFoodService sttFoodService,
+                          FoodOrderDetailService foodOrderDetailService) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTypeService = foodTypeService;
         this.foodStoreOnlineTagService = foodStoreOnlineTagService;
@@ -50,6 +51,7 @@ public class FoodController {
         this.foodReportService = foodReportService;
         this.foodOrderService = foodOrderService;
         this.sttFoodService = sttFoodService;
+        this.foodOrderDetailService = foodOrderDetailService;
     }
 
     @GetMapping("/food")
@@ -156,7 +158,7 @@ public class FoodController {
                 Constants.STT_FOOD_CODE_COMPLETE,
                 Constants.STT_FOOD_CODE_EXPIRED);
         List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
-
+        model.addAttribute("sttCODE", 0);
         model.addAttribute("sttTypeList", sttTypeList);
         model.addAttribute("foodOrderList", foodOrderList);
         model.addAttribute("foodOrderedList", foodOrderedList);
@@ -184,4 +186,47 @@ public class FoodController {
         model.addAttribute("page", 3);
         return "module-food";
     }
+
+    @GetMapping("/food/user-order/order-detail")
+    public String getFoodOrderDetail(
+            @RequestParam("orderId") Integer orderId,
+            @RequestParam("sttCODE") Integer sttCODE,
+            @RequestParam("orderStatus") Integer orderStatus,
+            Model model,
+            Authentication authentication
+    )
+    {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
+                Constants.STT_FOOD_CODE_PENDING_APPROVAL,
+                Constants.STT_FOOD_CODE_APPROVED);
+        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
+        List<FoodOrder> foodOrderedList;
+        if(sttCODE == 0) {
+            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
+                    Constants.STT_FOOD_CODE_REJECT,
+                    Constants.STT_FOOD_CODE_COMPLETE,
+                    Constants.STT_FOOD_CODE_EXPIRED);
+        } else {
+            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(), sttCODE);
+        }
+        List<FoodOrderDetail> foodOrderDetailList = foodOrderDetailService.getAllByOrderId(orderId);
+        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByOrderId(orderId);
+        model.addAttribute("sttCODE", sttCODE);
+        model.addAttribute("orderStatus", orderStatus);
+        model.addAttribute("sttTypeList", sttTypeList);
+        model.addAttribute("foodOrderDetailList", foodOrderDetailList);
+        model.addAttribute("foodStoreOnline", foodStoreOnline);
+        model.addAttribute("foodItemService", foodItemService);
+        model.addAttribute("foodOrderList", foodOrderList);
+        model.addAttribute("foodOrderedList", foodOrderedList);
+        model.addAttribute("page", 3);
+        return "module-food";
+    }
+
 }

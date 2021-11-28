@@ -15,5 +15,7 @@ public interface FoodStoreOnlineService {
 
     FoodStoreOnline getOneByUserId(int userId) throws DataAccessException;
 
+    FoodStoreOnline getOneByOrderId(int orderId) throws DataAccessException;
+
     boolean updateShopInfo(FoodStoreOnline obj) throws DataAccessException;
 }
