@@ -118,6 +118,7 @@
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
+<script crossorigin="anonymous" th:src="@{/js/templates/food.js}"></script>
 <th:block th:if="${page == 3}">
   <script th:src="@{/js/datatables/jquery.min.js}"></script>
   <script th:src="@{/js/datatables/jquery.dataTables.min.js}"></script>
@@ -127,6 +128,11 @@
 <script th:if="${item != null}">
   const myModal = new bootstrap.Modal(document.getElementById('foodDetailModal'));
   myModal.show();
+</script>
+
+<script th:if="${reasonReject != null}">
+    const myModal = new bootstrap.Modal(document.getElementById('reasonRejectionOrderModal'));
+    myModal.show();
 </script>
 
 <script th:if="${newFoodReport != null}">

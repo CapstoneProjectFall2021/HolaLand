@@ -12,4 +12,6 @@ public interface FoodOrderService {
     List<FoodOrder> getAllByUserIdAndStatus(int userId, Integer... status) throws DataAccessException;
 
     FoodOrder getOne(int id) throws DataAccessException;
+
+    Boolean updateSttFood(FoodOrder  obj) throws DataAccessException;
 }

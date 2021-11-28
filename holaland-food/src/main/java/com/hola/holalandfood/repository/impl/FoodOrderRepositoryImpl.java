@@ -43,4 +43,14 @@ public class FoodOrderRepositoryImpl implements FoodOrderRepository, IRepository
     public FoodOrder getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(FOOD_ORDER_GET_ONE, new FoodOrderMapper(),id);
     }
+
+    @Override
+    public Boolean updateSttFood(FoodOrder obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                FOOD_ORDER_UPDATE_STT_FOOD,
+                obj.getSttFoodCode(),
+                obj.getFoodOrderId()
+        ) > 0;
+    }
+
 }

@@ -5,6 +5,8 @@ import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandfood.entity.*;
 import com.hola.holalandfood.service.*;
 import com.hola.holalandweb.constant.Constants;
+import com.hola.holalandwork.entity.SttWork;
+import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class FoodController {
@@ -170,6 +173,58 @@ public class FoodController {
         model.addAttribute("page", 3);
         return "module-food";
     }
+
+    @GetMapping("/food/user-order/updateSttFood")
+    public String updateSttFoodOrder(
+            @RequestParam("orderId") Integer foodOrderId) {
+        FoodOrder foodOrder = FoodOrder.builder().build();
+        foodOrder.setFoodOrderId(foodOrderId);
+        foodOrder.setSttFoodCode(Constants.STT_FOOD_CODE_EXPIRED);
+        boolean isCheck = foodOrderService.updateSttFood(foodOrder);
+        if (isCheck) {
+            return "redirect:" + "/food/user-order/type?sttCODE=5";
+        } else {
+            return "404";
+        }
+    }
+
+    @GetMapping("/food/user-order/reason-reject")
+    public String getReasonRejectFoodOrder(
+            @RequestParam("orderId") Integer foodOrderId,
+            @RequestParam("sttCODE") Integer sttCODE,
+            Authentication authentication,
+            Model model
+    ) {
+        CustomUser currentUser;
+
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
+        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
+                Constants.STT_FOOD_CODE_PENDING_APPROVAL,
+                Constants.STT_FOOD_CODE_APPROVED);
+        List<FoodOrder> foodOrderedList;
+        if(sttCODE == 0) {
+            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
+                    Constants.STT_FOOD_CODE_REJECT,
+                    Constants.STT_FOOD_CODE_COMPLETE,
+                    Constants.STT_FOOD_CODE_EXPIRED);
+        } else {
+            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(), sttCODE);
+        }
+        FoodOrder foodOrder = foodOrderService.getOne(foodOrderId);
+        model.addAttribute("sttTypeList", sttTypeList);
+        model.addAttribute("reasonReject", foodOrder.getFoodOrderNote());
+        model.addAttribute("sttCODE", sttCODE);
+        model.addAttribute("foodOrderList", foodOrderList);
+        model.addAttribute("foodOrderedList", foodOrderedList);
+        model.addAttribute("page", 3);
+        return "module-food";
+    }
+
     @GetMapping("/food/user-order/type")
     public String getFoodOrderedByType(@RequestParam("sttCODE") Integer sttCODE, Model model, Authentication authentication) {
         CustomUser currentUser;

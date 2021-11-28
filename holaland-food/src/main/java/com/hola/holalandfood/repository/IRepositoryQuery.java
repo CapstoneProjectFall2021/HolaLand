@@ -69,6 +69,10 @@ public interface IRepositoryQuery {
     String FOOD_ORDER_GET_ALL = "SELECT * FROM food_order";
     String FOOD_ORDER_GET_ONE = "SELECT * FROM food_order WHERE food_order_id = ?";
 
+    String FOOD_ORDER_UPDATE_STT_FOOD = "UPDATE food_order\n" +
+            "SET stt_food_code = ?\n" +
+            "WHERE food_order_id = ?";
+
     String FOOD_STORE_ONLINE_GET_ALL = "SELECT * FROM food_store_online WHERE food_store_online_deleted = 0";
     String FOOD_STORE_ONLINE_GET_ONE = "SELECT * FROM food_store_online WHERE food_store_online_id = ?";
 

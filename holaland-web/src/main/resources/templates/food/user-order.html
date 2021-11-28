@@ -33,8 +33,10 @@
               <td class="text-end">
                 <a href="javascript:void(0)" class="color-danger" data-bs-toggle="modal"
                    data-bs-target="#confirmCancelOrderModal">
-                  <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip"
-                     title="Huỷ đơn hàng"></i>
+                  <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip" onclick="confirmCandelOrder(event)"
+                     title="Hủy đơn hàng">
+                    <span th:text="${foodOrder.foodOrderId}" class="d-none"></span>
+                  </i>
                 </a>
               </td>
             </tr>
@@ -55,6 +57,7 @@
       <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-4" th:each="type : ${sttTypeList}">
         <a th:href="@{/food/user-order/type(sttCODE=*{type.sttFoodId})}" class="label-info m-mb-16"
            th:classappend="${type.sttFoodId == sttCODE ? 'active' : ''}">
+
           <div class="flex">
             <div class="icon">
               <i th:classappend="*{type.sttFoodIcon}"></i>
@@ -96,10 +99,11 @@
               </td>
               <td class="text-end">
                 <th:block th:if="*{foodOrdered.sttFoodCode == 3}">
-                  <a href="javascript:void(0)" class="text-info" data-bs-toggle="modal"
-                     data-bs-target="#reasonRejectionOrderModal">
+                  <a th:href="@{/food/user-order/reason-reject
+                  (orderId=*{foodOrdered.foodOrderId}, sttCODE=${sttCODE})}" class="text-info">
                     <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip"
-                       title="Cửa hàng hết cơm"></i>
+                       th:title= "*{foodOrdered.foodOrderNote}">
+                    </i>
                   </a>
                 </th:block>
                 <th:block th:if="*{foodOrdered.sttFoodCode == 4}">

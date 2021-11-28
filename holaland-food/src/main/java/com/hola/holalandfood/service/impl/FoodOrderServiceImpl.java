@@ -33,4 +33,9 @@ public class FoodOrderServiceImpl implements FoodOrderService {
     public FoodOrder getOne(int id) throws DataAccessException {
         return foodOrderRepository.getOne(id);
     }
+
+    @Override
+    public Boolean updateSttFood(FoodOrder obj) throws DataAccessException {
+        return foodOrderRepository.updateSttFood(obj);
+    }
 }
