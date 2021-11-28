@@ -7,10 +7,10 @@
         <h5 class="modal-title" id="updateTagModalLabel">Chỉnh sửa thẻ</h5>
       </div>
       <div class="modal-body">
-        <form id="updateTagForm" class="row" method="post">
+        <form id="updateTagForm" class="row" method="post" th:action="@{/store/manage-food/update-tag}">
           <div class="col-6" th:each="foodTag : ${foodTagList}">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" th:name="tagId" th:value="*{foodTag.foodTagId}"
+              <input class="form-check-input" type="checkbox" th:name="tagList" th:value="*{foodTag.foodTagId}"
                      th:id="'tag'+ *{foodTag.foodTagId}"  th:checked="${#lists.contains(foodStoreTagList, foodTag)}">
               <label class="form-check-label" th:for="'tag'+ *{foodTag.foodTagId} " th:text="*{foodTag.foodTagName}"></label>
             </div>

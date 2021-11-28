@@ -18,3 +18,9 @@ function confirmDeleteFood(e) {
     openModal("confirmDeleteFoodModal");
     document.getElementById("btn-delete-food").href = "/store/manage-food/delete?foodId=" + foodId;
 }
+
+function confirmCancelOrder(e) {
+    const orderId = e.target.firstElementChild.innerHTML;
+    openModal("confirmCancelOrderModal");
+    document.getElementById("btn-cancel-order").href = "/food/user-order/updateSttFood?orderId=" + orderId;
+}

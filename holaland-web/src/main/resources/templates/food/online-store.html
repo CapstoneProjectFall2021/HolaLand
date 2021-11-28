@@ -25,7 +25,7 @@
             <div class="col-lg-12 col-xl-3">
               <div class="rate-area">
                 <div>
-                  <h1><span th:text="${foodStoreOnline.foodStoreOnlineRate}"></span></h1>
+                  <h1><span th:text="${#numbers.formatDecimal(foodStoreOnline.foodStoreOnlineRate, 1, 1, 'POINT')}"></span></h1>
                   <div class="star-rate">
                     <i th:classappend="${(foodStoreOnline.foodStoreOnlineRate >= 1) ? 'fas fa-star checked' : 'far fa-star'}"></i>
                     <i th:classappend="${(foodStoreOnline.foodStoreOnlineRate >= 2) ? 'fas fa-star checked' : 'far fa-star'}"></i>
@@ -50,7 +50,7 @@
             <li class="nav-item col-sm-12 col-md-3" role="presentation">
               <a class="nav-link active" id="pills-food-tab" data-bs-toggle="pill" data-bs-target="#pills-food"
                  type="button" role="tab" aria-controls="pills-food" aria-selected="true">
-                Thực đơn<sup class="ms-2 main-text">8</sup>
+                Thực đơn<sup class="ms-2 main-text"><span th:text="${foodStoreOnline.foodStoreOnlineCountFoodItem}"></span></sup>
               </a>
             </li>
             <li class="nav-item col-sm-12 col-md-3" role="presentation">
@@ -62,7 +62,7 @@
             <li class="nav-item col-sm-12 col-md-3" role="presentation">
               <a class="nav-link" id="pills-report-tab" data-bs-toggle="pill" data-bs-target="#pills-report"
                  type="button" role="tab" aria-controls="pills-report" aria-selected="false">
-                Báo cáo<sup class="ms-2 main-text">23</sup>
+                Báo cáo<sup class="ms-2 main-text"><span th:text="${foodStoreOnline.foodStoreOnlineCountReport}"></span></sup>
               </a>
             </li>
             <li class="nav-item col-sm-12 col-md-3" role="presentation">

@@ -66,12 +66,52 @@ fieldset label.unit {
   background-color: #555;
 } */
 
+.form-control:focus {
+  color: var(--secondary-text);
+  background-color: transparent;
+  border-color: var(--secondary-border-color);
+  outline: 0;
+  box-shadow: none;
+}
+
 input[type="date"]::-webkit-calendar-picker-indicator {
   background: url(../../images/system/calendar.png) center/80% no-repeat;
 }
 
 input[type="time"]::-webkit-calendar-picker-indicator {
   background: url(../../images/system/calendar.png) center/80% no-repeat;
+}
+
+input[type=file] {
+  background-color: transparent;
+  border: 2px solid var(--secondary-border-color);
+  border-radius: var(--secondary-border-radius);
+}
+
+input[type=file]:focus {
+  background-color: transparent;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+input[type=file]::before {
+  content: '';
+  display: inline-block;
+  background: transparent;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--secondary-text);
+}
+
+input[type=file]:hover::before {
+  border-color: transparent;
+}
+
+input[type=file]:active::before {
+  background: transparent;
 }
 
 option {

@@ -42,4 +42,16 @@ public interface IRepositoryQuery {
             "INNER JOIN user_detail T2\n" +
             "ON T1.user_id = T2.user_id\n" +
             "WHERE T1.work_request_recruitment_id = ?";
+
+    String GET_USER_DETAIL_BY_USER_ID = "SELECT * FROM user_detail WHERE user_id = ?";
+
+    String GET_USER_ADDRESS_BY_USER_DETAIL_ID = "SELECT * FROM user_address WHERE user_detail_id = ?";
+
+    String USER_DETAIL_UPDATE_ONE = "UPDATE user_detail\n" +
+            "SET user_name = ?, user_dob = ?,  user_gender = ?, user_phone = ?, user_email = ?\n" +
+            "WHERE user_id = ?";
+
+    String UPDATE_USER_PASSWORD = "UPDATE user\n" +
+            "SET user_password = ?\n" +
+            "WHERE user_id = ?";
 }

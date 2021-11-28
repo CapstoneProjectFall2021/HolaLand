@@ -28,4 +28,14 @@ public class FoodStoreOnlineTagServiceImpl implements FoodStoreOnlineTagService 
     public FoodStoreOnlineTag getOne(int id) throws DataAccessException {
         return foodStoreOnlineTagRepository.getOne(id);
     }
+
+    @Override
+    public boolean deleteAllTagByFoodStoreOnlineId(int userId) throws DataAccessException {
+        return foodStoreOnlineTagRepository.deleteAllTagByFoodStoreOnlineId(userId);
+    }
+
+    @Override
+    public int[] insertTagForFoodStore(List<FoodStoreOnlineTag> foodStoreOnlineTags) throws DataAccessException {
+        return foodStoreOnlineTagRepository.insertTagForFoodStore(foodStoreOnlineTags);
+    }
 }

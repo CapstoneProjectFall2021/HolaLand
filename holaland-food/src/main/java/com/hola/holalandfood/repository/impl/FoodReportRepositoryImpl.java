@@ -35,4 +35,17 @@ public class FoodReportRepositoryImpl implements FoodReportRepository, IReposito
     public FoodReport getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(FOOD_REPORT_GET_ONE,new FoodReportMapper(),id);
     }
+
+    @Override
+    public boolean save(FoodReport obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                FOOD_REPORT_INSERT_ONE,
+                obj.getUserId(),
+                obj.getFoodStoreOnlineId(),
+                obj.getFoodOrderId(),
+                obj.getFoodReportContent(),
+                obj.getFoodReportCreateDate(),
+                obj.isFoodReportDeleted()
+        ) > 0;
+    }
 }
