@@ -22,6 +22,8 @@ public class FoodStoreOnlineMapper implements RowMapper<FoodStoreOnline> {
                 .foodStoreOnlineCountFoodItem(rs.getInt("food_store_online_count_food_item"))
                 .foodStoreOnlineCountRate(rs.getInt("food_store_online_count_rate"))
                 .foodStoreOnlineCountReport(rs.getInt("food_store_online_count_report"))
+                .foodStoreOnlinePauseSellingFlag(rs.getBoolean("food_store_online_pause_selling_flag"))
+                .foodStoreOnlineStopSellingFlag(rs.getBoolean("food_store_online_stop_selling_flag"))
                 .foodStoreOnlineDeleted(rs.getBoolean("food_store_online_deleted"))
                 .build();
     }

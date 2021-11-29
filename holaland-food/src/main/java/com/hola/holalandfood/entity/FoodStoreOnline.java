@@ -21,5 +21,7 @@ public class FoodStoreOnline {
     private int foodStoreOnlineCountFoodItem;
     private int foodStoreOnlineCountRate;
     private int foodStoreOnlineCountReport;
+    private boolean foodStoreOnlinePauseSellingFlag;
+    private boolean foodStoreOnlineStopSellingFlag;
     private boolean foodStoreOnlineDeleted;
 }

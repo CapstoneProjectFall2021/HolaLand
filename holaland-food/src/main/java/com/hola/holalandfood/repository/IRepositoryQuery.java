@@ -94,6 +94,8 @@ public interface IRepositoryQuery {
             "       T1.food_store_online_count_food_item,\n" +
             "       T1.food_store_online_count_rate,\n" +
             "       T1.food_store_online_count_report,\n" +
+            "       T1.food_store_online_pause_selling_flag,\n" +
+            "       T1.food_store_online_stop_selling_flag,\n" +
             "       T1.food_store_online_deleted\n" +
             "FROM food_store_online T1\n" +
             "LEFT JOIN food_order T2\n" +
@@ -113,6 +115,8 @@ public interface IRepositoryQuery {
             "       T1.food_store_online_count_food_item,\n" +
             "       T1.food_store_online_count_rate,\n" +
             "       T1.food_store_online_count_report,\n" +
+            "       T1.food_store_online_pause_selling_flag,\n" +
+            "       T1.food_store_online_stop_selling_flag,\n" +
             "       T1.food_store_online_deleted\n" +
             "FROM food_store_online T1\n" +
             "LEFT JOIN food_store_online_type T2\n" +
