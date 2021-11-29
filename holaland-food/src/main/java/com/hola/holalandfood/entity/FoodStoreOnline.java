@@ -11,7 +11,6 @@ public class FoodStoreOnline {
 
     private int foodStoreOnlineId;
     private int userId;
-    private int foodStoreTypeId;
     private int sttFoodCode;
     private String foodStoreOnlineImage;
     private String foodStoreOnlineName;

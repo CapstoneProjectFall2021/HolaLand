@@ -12,7 +12,6 @@ public class FoodStoreOnlineMapper implements RowMapper<FoodStoreOnline> {
         return FoodStoreOnline.builder()
                 .foodStoreOnlineId(rs.getInt("food_store_online_id"))
                 .userId(rs.getInt("user_id"))
-                .foodStoreTypeId(rs.getInt("food_store_type_id"))
                 .sttFoodCode(rs.getInt("stt_food_code"))
                 .foodStoreOnlineImage(rs.getString("food_store_online_image"))
                 .foodStoreOnlineName(rs.getString("food_store_online_name"))
