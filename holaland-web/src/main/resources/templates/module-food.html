@@ -48,7 +48,7 @@
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/food/user-order}" th:classappend="${page == 3 ? 'active' : ''}">
+              <a th:href="@{/food/order}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
               </a>
             </li>
