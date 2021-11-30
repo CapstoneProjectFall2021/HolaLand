@@ -1,613 +1,253 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <!-- Required meta tags -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hola Land - Đơn hàng</title>
-  <!-- Font Awesome CSS -->
-  <link rel="stylesheet" href="assets/css/all.css">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/bootstrap/bootstrap-icons.css">
-  <!-- Data Table -->
-  <link rel="stylesheet" href="assets/css/datatable/table.css">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/hola-land/main.css">
-  <link rel="stylesheet" href="assets/css/hola-land/common.css">
-  <link rel="stylesheet" href="assets/css/hola-land/grid.css">
-  <link rel="stylesheet" href="assets/css/hola-land/form.css">
-  <link rel="stylesheet" href="assets/css/hola-land/food.css">
-</head>
-
-<body>
-<nav class="navbar navbar-expand-lg fixed-top" id="navbar">
-  <div class="container-fluid">
-    <a class="navbar-brand mr-auto" href="index.html">Hola Land</a>
-
-    <div class="navbar-btn-group">
-      <ul class="m-0 p-0">
-        <li class="navbar-search">
-          <form class="input-group">
-            <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="search">
-            <button class="btn-search" type="submit" id="search"><i class="bi bi-search"></i></button>
-          </form>
-        </li>
-        <li class="navbar-btn dropdown">
-          <a class="dropdown-toggle" href="javascript:void(0)" id="language" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-bag-plus m-0"></i>
-          </a>
-          <span class="notification-dot">3</span>
-          <ul class="dropdown-menu notification-dropdown" aria-labelledby="language">
-            <li class="dropdown-item">
-              <a href="">
-                <div class="media">
-                    <span class="me-3">
-                      <img class="media-object" src="assets/images/system/v2.png" alt="" width="50">
-                    </span>
-                  <div class="media-body">
-                    <h6 class="media-heading">John Smith</h6>
-                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
-                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="dropdown-item notification-preview">
-              <a href="">
-                <div class="media">
-                    <span class="me-3">
-                      <img class="media-object" src="assets/images/system/v.png" alt="" width="50">
-                    </span>
-                  <div class="media-body">
-                    <h6 class="media-heading">John Smith</h6>
-                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
-                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="dropdown-item notification-preview">
-              <a href="">
-                <div class="media">
-                    <span class="me-3">
-                      <img class="media-object" src="assets/images/system/v.png" alt="" width="50">
-                    </span>
-                  <div class="media-body">
-                    <h6 class="media-heading">John Smith</h6>
-                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
-                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="dropdown-item btn-link">
-              <a href="" class="text-end">
-                Xem tất cả
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="navbar-btn dropdown">
-          <a class="dropdown-toggle" href="javascript:void(0)" id="language" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="far fa-bell m-0 fa-fw"></i>
-          </a>
-          <span class="notification-dot">8</span>
-          <ul class="dropdown-menu notification-dropdown" aria-labelledby="language">
-            <li class="dropdown-item">
-              <a href="">
-                <div class="media">
-                    <span class="me-3">
-                      <img class="media-object" src="assets/images/system/v2.png" alt="" width="50">
-                    </span>
-                  <div class="media-body">
-                    <h6 class="media-heading">John Smith</h6>
-                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
-                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="dropdown-item notification-preview">
-              <a href="">
-                <div class="media">
-                    <span class="me-3">
-                      <img class="media-object" src="assets/images/system/v.png" alt="" width="50">
-                    </span>
-                  <div class="media-body">
-                    <h6 class="media-heading">John Smith</h6>
-                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
-                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="dropdown-item notification-preview">
-              <a href="">
-                <div class="media">
-                    <span class="me-3">
-                      <img class="media-object" src="assets/images/system/v.png" alt="" width="50">
-                    </span>
-                  <div class="media-body">
-                    <h6 class="media-heading">John Smith</h6>
-                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
-                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="dropdown-item btn-link">
-              <a href="" class="text-end">
-                Xem tất cả
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="navbar-btn dropdown pointer-events-none">
-          <a class="dropdown-toggle" href="javascript:void(0)" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <!-- <i class="fas fa-caret-down m-0 fa-fw"></i> -->
-            <i class="far fa-user m-0 fa-fw"></i>
-          </a>
-          <ul class="dropdown-menu navbar-dropdown" aria-labelledby="userDropdown">
-            <div class="username">
-              <div>
-                <i class="far fa-user fa-fw"></i>
-              </div>
-              <div>
-                <span>Nguyễn Văn A</span>
-              </div>
-            </div>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="profile.html"><i class="far fa-eye fa-fw"></i>Trang cá nhân</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Đóng góp ý kiến</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#"><i class="far fa-question-circle fa-fw"></i>Trợ giúp & hỗ trợ</a>
-            <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-fw"></i>Đăng xuất</a>
-          </ul>
-        </li>
-        <li class="navbar-btn dropdown pointer-events-none">
-          <a class="dropdown-toggle" href="javascript:void(0)" id="funtionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-caret-down m-0 fa-fw"></i>
-          </a>
-          <ul class="dropdown-menu navbar-dropdown" aria-labelledby="funtionDropdown">
-            <a class="dropdown-item" href="signin.html"><i class="fas fa-sign-in-alt fa-fw"></i>Đăng nhập</a>
-            <a class="dropdown-item" href="signin.html"><i class="far fa-edit fa-fw"></i>Đăng ký tài khoản</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Liên hệ & hỗ trợ</a>
-          </ul>
-        </li>
-        <li class="navbar-btn btn-sidebar-menu">
-          <button id="btn-open-sidebar" class="navbar-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </li>
-      </ul>
-    </div>
-    <!-- Start: Sidebar -->
-    <div id="sidebar" class="sidebar">
-      <ul class="nav navbar-nav menu">
-        <li>
-          <div class="switch-theme">
-            <div>
-              <span class="label-theme"><i class="fas fa-moon fa-fw"></i>Chế độ tối</span>
-            </div>
-            <div class="btn-switch-theme">
-              <!-- <input class="form-check-input" type="checkbox" id="switch" /> -->
-              <input class="switch-button" type="checkbox" id="switch" />
-              <label for="switch"></label>
-            </div>
-          </div>
-        </li>
-        <li><a href="#"><i class="fas fa-university fa-fw"></i>FPT University</a></li>
-        <li><a href="#"><i class="fas fa-graduation-cap fa-fw"></i>Học tập</a></li>
-        <li><a href="#"><i class="fas fa-user-check fa-fw"></i>Công việc</a></li>
-        <li><a href="#"><i class="fas fa-cart-plus fa-fw"></i>Mua sắm</a></li>
-        <li><a href="#"><i class="fas fa-pizza-slice fa-fw"></i>Dịch vụ Ăn - Uống</a></li>
-        <li><a href="#"><i class="fab fa-xbox fa-fw"></i>Vui chơi - Giải trí</a></li>
-        <li><a href="#"><i class="fas fa-bus-alt fa-fw"></i>Giao thông</a></li>
-        <li><a href="#"><i class="fas fa-bars fa-fw"></i>Khác</a></li>
-      </ul>
-    </div>
-    <!-- End: Sidebar -->
-  </div>
-</nav>
-
-<div style="overflow: hidden;">
-  <div class="container">
+<div class="col-right" th:fragment="seller-order">
+  <!-- Store order -->
+  <div class="store-order">
     <div class="row">
-      <div class="col-md-4 col-lg-3 col-xl-3 col-xxl-3">
-        <div class="col-left">
-          <div class="row">
-            <div class="col-12">
-              <h1 class="title fix-pd fix-mb-title">Menu</h1>
-            </div>
-          </div>
-          <ul class="nav navbar-nav sub-menu">
-            <li>
-              <a href="food.html">
-                <i class="fas fa-chevron-left fa-fw"></i>Quay lại
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Danh sách đơn hàng</h1>
       </div>
-      <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
-        <div class="col-right">
-          <!-- Store order -->
-          <div class="store-order">
-            <div class="row">
-              <div class="col-12">
-                <h1 class="title fix-mb-title">Danh sách đơn hàng</h1>
-              </div>
-            </div>
-            <div class="panel pt-2">
-              <div class="row data-tables">
-                <div class="col-lg-12">
-                  <!-- <p class="m-mt-8 m-0">Không có đơn hàng nào cần xử lý.</p> -->
-                  <table id="order-table-no-filter" table class="table m-0" cellspacing="0" width="100%">
-                    <thead>
-                    <tr>
-                      <th class="text-center">#</th>
-                      <th>Mã đơn hàng</th>
-                      <th class="text-center">Thời gian</th>
-                      <th class="text-end">Tổng tiền</th>
-                      <th class="text-end">Trạng thái</th>
-                      <th class="text-end">Thêm</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td class="text-center">1</td>
-                      <td>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#listOrderDetailModal">#000022</a>
-                      </td>
-                      <td class="text-center">
-                        <i class="bi bi-calendar3-week me-1"></i>15-12-2020
-                        <i class="far fa-clock ms-2 me-1"></i>18:08:33
-                      </td>
-                      <td class="text-end">50.000<sup>đ</sup></td>
-                      <td class="text-info text-end">Chờ xác nhận</td>
-                      <td class="text-end">
-                        <a href="javascript:void(0)" class="text-info" data-bs-toggle="modal" data-bs-target="#noteOrderModal">
-                          <i class="far fa-comment-dots me-2" data-bs-placement="top" data-bs-toggle="tooltip" title="Ghi chú"></i>
-                        </a>
-                        <a href="javascript:void(0)" class="color-danger" data-bs-toggle="modal" data-bs-target="#rejectOrderModal">
-                          <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip" title="Từ chối đơn hàng"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">2</td>
-                      <td>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#listOrderDetailModal">#000023</a>
-                      </td>
-                      <td class="text-center">
-                        <i class="bi bi-calendar3-week me-1"></i>15-12-2020
-                        <i class="far fa-clock ms-2 me-1"></i>18:22:33
-                      </td>
-                      <td class="text-end">20.000<sup>đ</sup></td>
-                      <td class="text-warning text-end">Đã xác nhận</td>
-                      <td class="text-end">
-                        <a href="javascript:void(0)" class="text-info" data-bs-toggle="modal" data-bs-target="#noteOrderModal">
-                          <i class="far fa-comment-dots me-2" data-bs-placement="top" data-bs-toggle="tooltip" title="Ghi chú"></i>
-                        </a>
-                        <a href="javascript:void(0)" class="color-danger" data-bs-toggle="modal" data-bs-target="#rejectOrderModal">
-                          <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip" title="Từ chối đơn hàng"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Store history order -->
-          <div class="store-history-order">
-            <div class="row">
-              <div class="col-12">
-                <h1 class="title fix-mt-title fix-mb-title">Lịch sử đơn hàng</h1>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
-                <a href="" class="label-info m-mb-16">
-                  <div class="flex">
-                    <div class="icon">
-                      <i class="fas fa-list-ul"></i>
-                    </div>
-                    <div class="number">
-                      <h4>0</h4>
-                    </div>
-                  </div>
-                  <div class="description">
-                    Tất cả
-                  </div>
+    </div>
+    <div class="panel pt-2">
+      <div class="row data-tables">
+        <div class="col-lg-12">
+          <!-- <p class="m-mt-8 m-0">Không có đơn hàng nào cần xử lý.</p> -->
+          <table id="order-table-no-filter" table class="table m-0" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+              <th class="text-center">#</th>
+              <th>Mã đơn hàng</th>
+              <th class="text-center">Thời gian</th>
+              <th class="text-end">Tổng tiền</th>
+              <th class="text-end">Trạng thái</th>
+              <th class="text-end">Thêm</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="text-center">1</td>
+              <td>
+                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#listOrderDetailModal">#000022</a>
+              </td>
+              <td class="text-center">
+                <i class="bi bi-calendar3-week me-1"></i>15-12-2020
+                <i class="far fa-clock ms-2 me-1"></i>18:08:33
+              </td>
+              <td class="text-end">50.000<sup>đ</sup></td>
+              <td class="text-info text-end">Chờ xác nhận</td>
+              <td class="text-end">
+                <a href="javascript:void(0)" class="text-info" data-bs-toggle="modal" data-bs-target="#noteOrderModal">
+                  <i class="far fa-comment-dots me-2" data-bs-placement="top" data-bs-toggle="tooltip" title="Ghi chú"></i>
                 </a>
-              </div>
-              <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
-                <a href="" class="label-info m-mb-16">
-                  <div class="flex">
-                    <div class="icon">
-                      <i class="far fa-stop-circle"></i>
-                    </div>
-                    <div class="number">
-                      <h4>0</h4>
-                    </div>
-                  </div>
-                  <div class="description">
-                    Đơn hàng đã từ chối
-                  </div>
+                <a href="javascript:void(0)" class="color-danger" data-bs-toggle="modal" data-bs-target="#rejectOrderModal">
+                  <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip" title="Từ chối đơn hàng"></i>
                 </a>
-              </div>
-              <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
-                <a href="" class="label-info m-mb-16">
-                  <div class="flex">
-                    <div class="icon">
-                      <i class="far fa-check-circle"></i>
-                    </div>
-                    <div class="number">
-                      <h4>8</h4>
-                    </div>
-                  </div>
-                  <div class="description">
-                    Đơn hàng đã hoàn thành
-                  </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center">2</td>
+              <td>
+                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#listOrderDetailModal">#000023</a>
+              </td>
+              <td class="text-center">
+                <i class="bi bi-calendar3-week me-1"></i>15-12-2020
+                <i class="far fa-clock ms-2 me-1"></i>18:22:33
+              </td>
+              <td class="text-end">20.000<sup>đ</sup></td>
+              <td class="text-warning text-end">Đã xác nhận</td>
+              <td class="text-end">
+                <a href="javascript:void(0)" class="text-info" data-bs-toggle="modal" data-bs-target="#noteOrderModal">
+                  <i class="far fa-comment-dots me-2" data-bs-placement="top" data-bs-toggle="tooltip" title="Ghi chú"></i>
                 </a>
-              </div>
-              <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
-                <a href="" class="label-info m-mb-16">
-                  <div class="flex">
-                    <div class="icon">
-                      <i class="far fa-times-circle"></i>
-                    </div>
-                    <div class="number">
-                      <h4>3</h4>
-                    </div>
-                  </div>
-                  <div class="description">
-                    Đơn hàng đã huỷ
-                  </div>
+                <a href="javascript:void(0)" class="color-danger" data-bs-toggle="modal" data-bs-target="#rejectOrderModal">
+                  <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip" title="Từ chối đơn hàng"></i>
                 </a>
-              </div>
-            </div>
-            <div class="panel m-mt-20">
-              <div class="row data-tables">
-                <div class="col-lg-12">
-                  <table id="order-history-table" table class="table" cellspacing="0" width="100%">
-                    <thead>
-                    <tr>
-                      <th class="text-center">#</th>
-                      <th>Mã đơn hàng<i class="fas fa-sort fa-size"></i></th>
-                      <th class="text-center">Thời gian<i class="fas fa-sort fa-size"></i></th>
-                      <th class="text-end">Tổng tiền<i class="fas fa-sort fa-size"></i></th>
-                      <th class="text-end">Trạng thái<i class="fas fa-sort fa-size"></i></th>
-                      <th class="text-end">Thêm<i class="fas fa-sort fa-size"></i></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td class="text-center">1</td>
-                      <td><a href="">#000001</a></td>
-                      <td class="text-center">
-                        <i class="bi bi-calendar3-week me-1"></i>15-12-2020
-                        <i class="far fa-clock ms-2 me-1"></i>18:08:33
-                      </td>
-                      <td class="text-end">50.000<sup>đ</sup></td>
-                      <td class="text-secondary text-end">Đã từ chối</td>
-                      <td class="text-end">
-                        <a href="javascript:void(0)" class="text-info" data-bs-toggle="modal" data-bs-target="#reasonRejectionOrderModal">
-                          <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip" title="Lý do từ chối"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">2</td>
-                      <td><a href="">#000002</a></td>
-                      <td class="text-center">
-                        <i class="bi bi-calendar3-week me-1"></i>15-12-2020
-                        <i class="far fa-clock ms-2 me-1"></i>18:08:33
-                      </td>
-                      <td class="text-end">20.000<sup>đ</sup></td>
-                      <td class="color-success text-end">Hoàn thành</td>
-                      <td class="text-end"></td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">3</td>
-                      <td><a href="">#000003</a></td>
-                      <td class="text-center">
-                        <i class="bi bi-calendar3-week me-1"></i>15-12-2020
-                        <i class="far fa-clock ms-2 me-1"></i>18:08:33
-                      </td>
-                      <td class="text-end">50.000<sup>đ</sup></td>
-                      <td class="color-success text-end">Hoàn thành</td>
-                      <td class="text-end"></td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">4</td>
-                      <td><a href="">#000004</a></td>
-                      <td class="text-center">
-                        <i class="bi bi-calendar3-week me-1"></i>15-12-2020
-                        <i class="far fa-clock ms-2 me-1"></i>18:08:33
-                      </td>
-                      <td class="text-end">20.000<sup>đ</sup></td>
-                      <td class="color-success text-end">Hoàn thành</td>
-                      <td class="text-end"></td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">5</td>
-                      <td><a href="">#000005</a></td>
-                      <td class="text-center">
-                        <i class="bi bi-calendar3-week me-1"></i>15-12-2020
-                        <i class="far fa-clock ms-2 me-1"></i>18:08:33
-                      </td>
-                      <td class="text-end">120.000<sup>đ</sup></td>
-                      <td class="text-danger text-end">Đã huỷ</td>
-                      <td class="text-end"></td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">6</td>
-                      <td><a href="">#000006</a></td>
-                      <td class="text-center">
-                        <i class="bi bi-calendar3-week me-1"></i>15-12-2020
-                        <i class="far fa-clock ms-2 me-1"></i>18:08:33
-                      </td>
-                      <td class="text-end">50.000<sup>đ</sup></td>
-                      <td class="color-success text-end">Hoàn thành</td>
-                      <td class="text-end"></td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">7</td>
-                      <td><a href="">#000007</a></td>
-                      <td class="text-center">
-                        <i class="bi bi-calendar3-week me-1"></i>15-12-2020
-                        <i class="far fa-clock ms-2 me-1"></i>18:08:33
-                      </td>
-                      <td class="text-end">20.000<sup>đ</sup></td>
-                      <td class="color-success text-end">Hoàn thành</td>
-                      <td class="text-end"></td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">8</td>
-                      <td><a href="">#000008</a></td>
-                      <td class="text-center">
-                        <i class="bi bi-calendar3-week me-1"></i>15-12-2020
-                        <i class="far fa-clock ms-2 me-1"></i>18:08:33
-                      </td>
-                      <td class="text-end">20.000<sup>đ</sup></td>
-                      <td class="color-success text-end">Hoàn thành</td>
-                      <td class="text-end"></td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- Modal list order detail -->
-<div class="modal fade" id="listOrderDetailModal" tabindex="-1" aria-labelledby="listOrderDetailModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="listOrderDetailModalLabel">Chi tiết đơn hàng</h5>
-      </div>
-      <div class="modal-body">
-        <table class="table mb-0">
-          <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Tên đồ ăn</th>
-            <th scope="col" class="text-center">Số lượng</th>
-            <th scope="col" class="text-center">Đơn giá</th>
-            <th scope="col" class="text-end">Tổng tiền</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>1</td>
-            <td><a href="">Cơm hến xào</a></td>
-            <td class="text-center">1</td>
-            <td class="text-center">35.000<sup>đ</sup></td>
-            <td class="text-end">35.000<sup>đ</sup></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td><a href="">Trà ô long</a></td>
-            <td class="text-center">2</td>
-            <td class="text-center">25.000<sup>đ</sup></td>
-            <td class="text-end">50.000<sup>đ</sup></td>
-          </tr>
-          </tbody>
-        </table>
-        <div class="note mt-3">
-          Ghi chú: Ship nhanh giúp em trước 6h.
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+  <!-- Store history order -->
+  <div class="store-history-order">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mt-title fix-mb-title">Lịch sử đơn hàng</h1>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- Modal reject Order -->
-<div class="modal fade" id="rejectOrderModal" tabindex="-1" aria-labelledby="rejectOrderModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="rejectOrderModalLabel">Từ chối đơn hàng</h5>
-      </div>
-      <form class="row">
-        <div class="modal-body">
-          <div class="form-group col-md-12 m-0">
-            <fieldset>
-              <legend>Lý do từ chối</legend>
-              <textarea class="form-control" rows="3"></textarea>
-            </fieldset>
+    <div class="row">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="" class="label-info m-mb-16">
+          <div class="flex">
+            <div class="icon">
+              <i class="fas fa-list-ul"></i>
+            </div>
+            <div class="number">
+              <h4>0</h4>
+            </div>
           </div>
-        </div>
-      </form>
-      <div class="modal-footer">
-        <a href="javascript:void(0)" class="btn btn-sm btn-secondary me-2">
-          <i class="fas fa-check text-success"></i>Xác nhận
+          <div class="description">
+            Tất cả
+          </div>
         </a>
-        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+      </div>
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="" class="label-info m-mb-16">
+          <div class="flex">
+            <div class="icon">
+              <i class="far fa-stop-circle"></i>
+            </div>
+            <div class="number">
+              <h4>0</h4>
+            </div>
+          </div>
+          <div class="description">
+            Đơn hàng đã từ chối
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="" class="label-info m-mb-16">
+          <div class="flex">
+            <div class="icon">
+              <i class="far fa-check-circle"></i>
+            </div>
+            <div class="number">
+              <h4>8</h4>
+            </div>
+          </div>
+          <div class="description">
+            Đơn hàng đã hoàn thành
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="" class="label-info m-mb-16">
+          <div class="flex">
+            <div class="icon">
+              <i class="far fa-times-circle"></i>
+            </div>
+            <div class="number">
+              <h4>3</h4>
+            </div>
+          </div>
+          <div class="description">
+            Đơn hàng đã huỷ
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="panel m-mt-20">
+      <div class="row data-tables">
+        <div class="col-lg-12">
+          <table id="order-history-table" table class="table" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+              <th class="text-center">#</th>
+              <th>Mã đơn hàng<i class="fas fa-sort fa-size"></i></th>
+              <th class="text-center">Thời gian<i class="fas fa-sort fa-size"></i></th>
+              <th class="text-end">Tổng tiền<i class="fas fa-sort fa-size"></i></th>
+              <th class="text-end">Trạng thái<i class="fas fa-sort fa-size"></i></th>
+              <th class="text-end">Thêm<i class="fas fa-sort fa-size"></i></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="text-center">1</td>
+              <td><a href="">#000001</a></td>
+              <td class="text-center">
+                <i class="bi bi-calendar3-week me-1"></i>15-12-2020
+                <i class="far fa-clock ms-2 me-1"></i>18:08:33
+              </td>
+              <td class="text-end">50.000<sup>đ</sup></td>
+              <td class="text-secondary text-end">Đã từ chối</td>
+              <td class="text-end">
+                <a href="javascript:void(0)" class="text-info" data-bs-toggle="modal" data-bs-target="#reasonRejectionOrderModal">
+                  <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip" title="Lý do từ chối"></i>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center">2</td>
+              <td><a href="">#000002</a></td>
+              <td class="text-center">
+                <i class="bi bi-calendar3-week me-1"></i>15-12-2020
+                <i class="far fa-clock ms-2 me-1"></i>18:08:33
+              </td>
+              <td class="text-end">20.000<sup>đ</sup></td>
+              <td class="color-success text-end">Hoàn thành</td>
+              <td class="text-end"></td>
+            </tr>
+            <tr>
+              <td class="text-center">3</td>
+              <td><a href="">#000003</a></td>
+              <td class="text-center">
+                <i class="bi bi-calendar3-week me-1"></i>15-12-2020
+                <i class="far fa-clock ms-2 me-1"></i>18:08:33
+              </td>
+              <td class="text-end">50.000<sup>đ</sup></td>
+              <td class="color-success text-end">Hoàn thành</td>
+              <td class="text-end"></td>
+            </tr>
+            <tr>
+              <td class="text-center">4</td>
+              <td><a href="">#000004</a></td>
+              <td class="text-center">
+                <i class="bi bi-calendar3-week me-1"></i>15-12-2020
+                <i class="far fa-clock ms-2 me-1"></i>18:08:33
+              </td>
+              <td class="text-end">20.000<sup>đ</sup></td>
+              <td class="color-success text-end">Hoàn thành</td>
+              <td class="text-end"></td>
+            </tr>
+            <tr>
+              <td class="text-center">5</td>
+              <td><a href="">#000005</a></td>
+              <td class="text-center">
+                <i class="bi bi-calendar3-week me-1"></i>15-12-2020
+                <i class="far fa-clock ms-2 me-1"></i>18:08:33
+              </td>
+              <td class="text-end">120.000<sup>đ</sup></td>
+              <td class="text-danger text-end">Đã huỷ</td>
+              <td class="text-end"></td>
+            </tr>
+            <tr>
+              <td class="text-center">6</td>
+              <td><a href="">#000006</a></td>
+              <td class="text-center">
+                <i class="bi bi-calendar3-week me-1"></i>15-12-2020
+                <i class="far fa-clock ms-2 me-1"></i>18:08:33
+              </td>
+              <td class="text-end">50.000<sup>đ</sup></td>
+              <td class="color-success text-end">Hoàn thành</td>
+              <td class="text-end"></td>
+            </tr>
+            <tr>
+              <td class="text-center">7</td>
+              <td><a href="">#000007</a></td>
+              <td class="text-center">
+                <i class="bi bi-calendar3-week me-1"></i>15-12-2020
+                <i class="far fa-clock ms-2 me-1"></i>18:08:33
+              </td>
+              <td class="text-end">20.000<sup>đ</sup></td>
+              <td class="color-success text-end">Hoàn thành</td>
+              <td class="text-end"></td>
+            </tr>
+            <tr>
+              <td class="text-center">8</td>
+              <td><a href="">#000008</a></td>
+              <td class="text-center">
+                <i class="bi bi-calendar3-week me-1"></i>15-12-2020
+                <i class="far fa-clock ms-2 me-1"></i>18:08:33
+              </td>
+              <td class="text-end">20.000<sup>đ</sup></td>
+              <td class="color-success text-end">Hoàn thành</td>
+              <td class="text-end"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Modal note Order -->
-<div class="modal fade" id="noteOrderModal" tabindex="-1" aria-labelledby="noteOrderModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="noteOrderModalLabel">Ghi chú</h5>
-      </div>
-      <div class="modal-body">
-        Ship nhanh giúp em trước 6h.
-      </div>
-      <div class="modal-footer">
-        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal season reject Order -->
-<div class="modal fade" id="reasonRejectionOrderModal" tabindex="-1" aria-labelledby="reasonRejectionOrderModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="reasonRejectionOrderModalLabel">Lý do từ chối</h5>
-      </div>
-      <div class="modal-body">
-        Cửa hàng hết cơm.
-      </div>
-      <div class="modal-footer">
-        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="assets/js/bootstrap/bootstrap.bundle.min.js"></script>
-<script src="assets/js/hola-land/hola-land.js"></script>
-<!-- Data Tables -->
-<script src="assets/js/datatables/jquery.min.js"></script>
-<script src="assets/js/datatables/jquery.dataTables.min.js"></script>
-<script src="assets/js/datatables/datatables.vietnamese.js"></script>
-</body>
-
-</html>
