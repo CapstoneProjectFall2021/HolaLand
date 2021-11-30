@@ -7,13 +7,17 @@ import com.hola.holalandfood.service.*;
 import com.hola.holalandweb.constant.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLOutput;
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -153,20 +157,29 @@ public class FoodController {
         } else {
             return "login";
         }
-        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
+        addAttrUserOrder(currentUser.getId(), 0, 3, model);
+        return "module-food";
+    }
+
+    public void addAttrUserOrder(int userId, int sttCode, int page, Model model) {
+        List<FoodOrder> foodOrderList = foodOrderService.getAllUserOrderByUserIdAndStatus(userId,
                 Constants.STT_FOOD_CODE_PENDING_APPROVAL,
                 Constants.STT_FOOD_CODE_APPROVED);
-        List<FoodOrder> foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
-                Constants.STT_FOOD_CODE_REJECT,
-                Constants.STT_FOOD_CODE_COMPLETE,
-                Constants.STT_FOOD_CODE_EXPIRED);
         List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
-        model.addAttribute("sttCode", 0);
+        List<FoodOrder> foodOrderedList;
+        if (sttCode == 0) {
+            foodOrderedList = foodOrderService.getAllUserOrderByUserIdAndStatus(userId,
+                    Constants.STT_FOOD_CODE_REJECT,
+                    Constants.STT_FOOD_CODE_COMPLETE,
+                    Constants.STT_FOOD_CODE_EXPIRED);
+        } else {
+            foodOrderedList = foodOrderService.getAllUserOrderByUserIdAndStatus(userId, sttCode);
+        }
+        model.addAttribute("sttCode", sttCode);
         model.addAttribute("sttTypeList", sttTypeList);
         model.addAttribute("foodOrderList", foodOrderList);
         model.addAttribute("foodOrderedList", foodOrderedList);
-        model.addAttribute("page", 3);
-        return "module-food";
+        model.addAttribute("page", page);
     }
 
     @GetMapping("/order/updateSttFood")
@@ -197,26 +210,15 @@ public class FoodController {
         } else {
             return "login";
         }
-        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
-        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
-                Constants.STT_FOOD_CODE_PENDING_APPROVAL,
-                Constants.STT_FOOD_CODE_APPROVED);
-        List<FoodOrder> foodOrderedList;
-        if(sttCode == 0) {
-            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
-                    Constants.STT_FOOD_CODE_REJECT,
-                    Constants.STT_FOOD_CODE_COMPLETE,
-                    Constants.STT_FOOD_CODE_EXPIRED);
+        Collection<GrantedAuthority> authorities = currentUser.getAuthorities();
+        boolean isSeller = authorities.contains(new SimpleGrantedAuthority("ROLE_SELLER"));
+        if (isSeller) {
+            addAttrSellerOrder(currentUser.getId(), sttCode, 4, model);
         } else {
-            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(), sttCode);
+            addAttrUserOrder(currentUser.getId(), sttCode, 3, model);
         }
         FoodOrder foodOrder = foodOrderService.getOne(foodOrderId);
-        model.addAttribute("sttTypeList", sttTypeList);
-        model.addAttribute("reasonReject", foodOrder.getFoodOrderNote());
-        model.addAttribute("sttCode", sttCode);
-        model.addAttribute("foodOrderList", foodOrderList);
-        model.addAttribute("foodOrderedList", foodOrderedList);
-        model.addAttribute("page", 3);
+        model.addAttribute("reasonReject", foodOrder.getFoodOrderReasonReject());
         return "module-food";
     }
 
@@ -228,17 +230,7 @@ public class FoodController {
         } else {
             return "login";
         }
-        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
-                Constants.STT_FOOD_CODE_PENDING_APPROVAL,
-                Constants.STT_FOOD_CODE_APPROVED);
-        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
-        List<FoodOrder> foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(), sttCode);
-
-        model.addAttribute("sttCode", sttCode);
-        model.addAttribute("sttTypeList", sttTypeList);
-        model.addAttribute("foodOrderList", foodOrderList);
-        model.addAttribute("foodOrderedList", foodOrderedList);
-        model.addAttribute("page", 3);
+        addAttrUserOrder(currentUser.getId(), sttCode, 3, model);
         return "module-food";
     }
 
@@ -249,39 +241,29 @@ public class FoodController {
             @RequestParam("orderStatus") Integer orderStatus,
             Model model,
             Authentication authentication
-    )
-    {
+    ) {
         CustomUser currentUser;
         if (authentication != null) {
             currentUser = (CustomUser) authentication.getPrincipal();
         } else {
             return "login";
         }
-        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
-                Constants.STT_FOOD_CODE_PENDING_APPROVAL,
-                Constants.STT_FOOD_CODE_APPROVED);
-        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
-        List<FoodOrder> foodOrderedList;
-        if(sttCode == 0) {
-            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
-                    Constants.STT_FOOD_CODE_REJECT,
-                    Constants.STT_FOOD_CODE_COMPLETE,
-                    Constants.STT_FOOD_CODE_EXPIRED);
+        Collection<GrantedAuthority> authorities = currentUser.getAuthorities();
+        boolean isSeller = authorities.contains(new SimpleGrantedAuthority("ROLE_SELLER"));
+        if (isSeller) {
+            addAttrSellerOrder(currentUser.getId(), sttCode, 4, model);
+            FoodOrder foodOrder = foodOrderService.getOne(orderId);
+            model.addAttribute("buyerNote", foodOrder.getFoodOrderNote());
         } else {
-            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(), sttCode);
+            addAttrUserOrder(currentUser.getId(), sttCode, 3, model);
         }
         List<FoodOrderDetail> foodOrderDetailList = foodOrderDetailService.getAllByOrderId(orderId);
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByOrderId(orderId);
-        model.addAttribute("sttCode", sttCode);
         model.addAttribute("orderId", orderId);
         model.addAttribute("orderStatus", orderStatus);
-        model.addAttribute("sttTypeList", sttTypeList);
         model.addAttribute("foodOrderDetailList", foodOrderDetailList);
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodItemService", foodItemService);
-        model.addAttribute("foodOrderList", foodOrderList);
-        model.addAttribute("foodOrderedList", foodOrderedList);
-        model.addAttribute("page", 3);
         return "module-food";
     }
 
@@ -292,37 +274,19 @@ public class FoodController {
             @RequestParam("sttCode") Integer sttCode,
             Model model,
             Authentication authentication
-    )
-    {
+    ) {
         CustomUser currentUser;
         if (authentication != null) {
             currentUser = (CustomUser) authentication.getPrincipal();
         } else {
             return "login";
         }
-        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
-                Constants.STT_FOOD_CODE_PENDING_APPROVAL,
-                Constants.STT_FOOD_CODE_APPROVED);
-        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
-        List<FoodOrder> foodOrderedList;
-        if(sttCode == 0) {
-            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
-                    Constants.STT_FOOD_CODE_REJECT,
-                    Constants.STT_FOOD_CODE_COMPLETE,
-                    Constants.STT_FOOD_CODE_EXPIRED);
-        } else {
-            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(), sttCode);
-        }
+        addAttrUserOrder(currentUser.getId(), sttCode, 3, model);
         FoodReport newFoodReport = FoodReport.builder().build();
         model.addAttribute("newFoodReport", newFoodReport);
         model.addAttribute("userId", currentUser.getId());
         model.addAttribute("storeId", storeId);
         model.addAttribute("orderId", orderId);
-        model.addAttribute("sttCode", sttCode);
-        model.addAttribute("sttTypeList", sttTypeList);
-        model.addAttribute("foodOrderList", foodOrderList);
-        model.addAttribute("foodOrderedList", foodOrderedList);
-        model.addAttribute("page", 3);
         return "module-food";
     }
 
@@ -330,8 +294,7 @@ public class FoodController {
     public String postUserReportOrder(
             @ModelAttribute("newFoodReport") FoodReport newFoodReport,
             BindingResult bindingResult
-    )
-    {
+    ) {
         if (bindingResult.hasErrors()) {
             System.out.println("There was a error " + bindingResult);
             return "404";
@@ -356,38 +319,45 @@ public class FoodController {
         } else {
             return "login";
         }
-        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
-                Constants.STT_FOOD_CODE_PENDING_APPROVAL,
-                Constants.STT_FOOD_CODE_APPROVED);
-        List<FoodOrder> foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
-                Constants.STT_FOOD_CODE_REJECT,
-                Constants.STT_FOOD_CODE_COMPLETE,
-                Constants.STT_FOOD_CODE_EXPIRED);
-        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
-        model.addAttribute("sttCode", 0);
-        model.addAttribute("sttTypeList", sttTypeList);
-        model.addAttribute("foodOrderList", foodOrderList);
-        model.addAttribute("foodOrderedList", foodOrderedList);
-        model.addAttribute("page", 4);
+        addAttrSellerOrder(currentUser.getId(), 0, 4, model);
         return "module-food";
     }
 
-    @GetMapping("/seller-order/updateSttFood")
-    public String updateSttFoodSellerOrder(
-            @RequestParam("orderId") Integer foodOrderId) {
-        FoodOrder foodOrder = FoodOrder.builder().build();
-        foodOrder.setFoodOrderId(foodOrderId);
-        foodOrder.setSttFoodCode(Constants.STT_FOOD_CODE_EXPIRED);
-        boolean isCheck = foodOrderService.updateSttFood(foodOrder);
-        if (isCheck) {
-            return "redirect:" + "/food/seller-order";
+    public void addAttrSellerOrder(int userId, int sttCode, int page, Model model) {
+        List<FoodOrder> foodOrderList = foodOrderService.getAllSellerOrderByUserIdAndStatus(userId,
+                Constants.STT_FOOD_CODE_PENDING_APPROVAL,
+                Constants.STT_FOOD_CODE_APPROVED);
+        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
+        List<FoodOrder> foodOrderedList;
+        if (sttCode == 0) {
+            foodOrderedList = foodOrderService.getAllSellerOrderByUserIdAndStatus(userId,
+                    Constants.STT_FOOD_CODE_REJECT,
+                    Constants.STT_FOOD_CODE_COMPLETE,
+                    Constants.STT_FOOD_CODE_EXPIRED);
         } else {
-            return "404";
+            foodOrderedList = foodOrderService.getAllSellerOrderByUserIdAndStatus(userId, sttCode);
         }
+        model.addAttribute("sttCode", sttCode);
+        model.addAttribute("sttTypeList", sttTypeList);
+        model.addAttribute("foodOrderList", foodOrderList);
+        model.addAttribute("foodOrderedList", foodOrderedList);
+        model.addAttribute("page", page);
     }
 
-    @GetMapping("/seller-order/reason-reject")
-    public String getReasonRejectFoodSellerOrder(
+    @GetMapping("/seller-order/type")
+    public String getFoodSellerOrderedByType(@RequestParam("sttCode") Integer sttCode, Model model, Authentication authentication) {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        addAttrSellerOrder(currentUser.getId(), sttCode, 4, model);
+        return "module-food";
+    }
+
+    @GetMapping("/order/note")
+    public String getNoteFoodOrder(
             @RequestParam("orderId") Integer foodOrderId,
             @RequestParam("sttCode") Integer sttCode,
             Authentication authentication,
@@ -400,49 +370,44 @@ public class FoodController {
         } else {
             return "login";
         }
-        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
-        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
-                Constants.STT_FOOD_CODE_PENDING_APPROVAL,
-                Constants.STT_FOOD_CODE_APPROVED);
-        List<FoodOrder> foodOrderedList;
-        if(sttCode == 0) {
-            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
-                    Constants.STT_FOOD_CODE_REJECT,
-                    Constants.STT_FOOD_CODE_COMPLETE,
-                    Constants.STT_FOOD_CODE_EXPIRED);
-        } else {
-            foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(), sttCode);
-        }
+        addAttrSellerOrder(currentUser.getId(), sttCode, 4, model);
         FoodOrder foodOrder = foodOrderService.getOne(foodOrderId);
-        model.addAttribute("sttTypeList", sttTypeList);
-        model.addAttribute("reasonReject", foodOrder.getFoodOrderNote());
-        model.addAttribute("sttCode", sttCode);
-        model.addAttribute("foodOrderList", foodOrderList);
-        model.addAttribute("foodOrderedList", foodOrderedList);
-        model.addAttribute("page", 4);
+        model.addAttribute("buyerNote", foodOrder.getFoodOrderNote());
         return "module-food";
     }
 
-    @GetMapping("/seller-order/type")
-    public String getFoodSellerOrderedByType(@RequestParam("sttCode") Integer sttCode, Model model, Authentication authentication) {
+    @GetMapping("/order/reject-order")
+    public String getFormRejectOrder(
+            @RequestParam("orderId") Integer orderId,
+            @RequestParam("sttCode") Integer sttCode,
+            Model model,
+            Authentication authentication
+    ) {
         CustomUser currentUser;
         if (authentication != null) {
             currentUser = (CustomUser) authentication.getPrincipal();
         } else {
             return "login";
         }
-        List<FoodOrder> foodOrderList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(),
-                Constants.STT_FOOD_CODE_PENDING_APPROVAL,
-                Constants.STT_FOOD_CODE_APPROVED);
-        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
-        List<FoodOrder> foodOrderedList = foodOrderService.getAllByUserIdAndStatus(currentUser.getId(), sttCode);
-
-        model.addAttribute("sttCode", sttCode);
-        model.addAttribute("sttTypeList", sttTypeList);
-        model.addAttribute("foodOrderList", foodOrderList);
-        model.addAttribute("foodOrderedList", foodOrderedList);
-        model.addAttribute("page", 4);
+        addAttrSellerOrder(currentUser.getId(), sttCode, 4, model);
+        model.addAttribute("orderId", orderId);
         return "module-food";
     }
 
+    @PostMapping("/reject-order")
+    public String addRejectReasonOrder(
+            @RequestParam("orderId") Integer orderId,
+            @RequestParam("content") String content
+    ) {
+        FoodOrder foodOrder = FoodOrder.builder().build();
+        foodOrder.setFoodOrderId(orderId);
+        foodOrder.setSttFoodCode(Constants.STT_FOOD_CODE_REJECT);
+        foodOrder.setFoodOrderReasonReject(content);
+        boolean isCheck = foodOrderService.addReasonReject(foodOrder);
+        if (isCheck) {
+            return "redirect:" + "/food/seller-order";
+        } else {
+            return "404";
+        }
+    }
 }

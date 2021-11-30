@@ -12,6 +12,7 @@
           <table id="order-table-no-filter" table class="table m-0" cellspacing="0" width="100%">
             <thead>
             <tr>
+              <th class="text-center">#</th>
               <th>Mã đơn hàng</th>
               <th class="text-center">Thời gian</th>
               <th class="text-end">Tổng tiền</th>
@@ -20,7 +21,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="foodOrder : ${foodOrderList}">
+            <tr th:each="foodOrder, iStat : ${foodOrderList}">
+              <td class="text-center" th:text="*{iStat.index + 1}"></td>
               <td><a th:href="@{/food/order/detail(orderId=*{foodOrder.foodOrderId}, sttCode=${sttCode},
               orderStatus=*{foodOrder.sttFoodCode})}">
                 #<span th:text="*{T(com.hola.holalandcore.util.Format).orderId(foodOrder.foodOrderId)}"></span></a></td>
@@ -58,9 +60,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
         <a th:href="@{/food/order}" class="label-info m-mb-16"
-           th:classappend="${page == 3 ? 'active' : ''}">
+           th:classappend="${sttCode == 0 ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
               <i class="fas fa-list-ul"></i>
@@ -72,7 +74,7 @@
           <div class="description">Tất cả</div>
         </a>
       </div>
-      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-4" th:each="type : ${sttTypeList}">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="type : ${sttTypeList}">
         <a th:href="@{/food/order/type(sttCode=*{type.sttFoodId})}" class="label-info m-mb-16"
            th:classappend="${type.sttFoodId == sttCode ? 'active' : ''}">
           <div class="flex">
@@ -93,6 +95,7 @@
           <table id="order-history-table" table class="table" cellspacing="0" width="100%">
             <thead>
             <tr>
+              <th class="text-center">#</th>
               <th>Mã đơn hàng<i class="fas fa-sort fa-size"></i></th>
               <th class="text-center">Thời gian<i class="fas fa-sort fa-size"></i></th>
               <th class="text-end">Tổng tiền<i class="fas fa-sort fa-size"></i></th>
@@ -101,7 +104,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="foodOrdered : ${foodOrderedList}">
+            <tr th:each="foodOrdered, iStat : ${foodOrderedList}">
+              <td class="text-center" th:text="*{iStat.index + 1}"></td>
               <td><a th:href="@{/food/order/detail(orderId=*{foodOrdered.foodOrderId}, sttCode=${sttCode},
               orderStatus=*{foodOrdered.sttFoodCode})}">
                 #<span th:text="*{T(com.hola.holalandcore.util.Format).orderId(foodOrdered.foodOrderId)}"></span></a></td>
@@ -124,7 +128,7 @@
                   <a th:href="@{/food/order/reason-reject
                   (orderId=*{foodOrdered.foodOrderId}, sttCode=${sttCode})}" class="text-info">
                     <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip"
-                       th:title= "*{foodOrdered.foodOrderNote}">
+                       th:title= "*{foodOrdered.foodOrderReasonReject}">
                     </i>
                   </a>
                 </th:block>

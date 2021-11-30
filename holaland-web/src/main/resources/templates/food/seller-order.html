@@ -22,10 +22,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="foodOrder : ${foodOrderList}">
-              <td class="text-center">1</td>
+            <tr th:each="foodOrder, iStat : ${foodOrderList}">
+              <td class="text-center" th:text="*{iStat.index}"></td>
               <td>
-                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#listOrderDetailModal">#000022</a>
+                <a th:href="@{/food/order/detail(orderId=*{foodOrder.foodOrderId}, sttCode=${sttCode},
+              orderStatus=*{foodOrder.sttFoodCode})}">
+                  #<span th:text="*{T(com.hola.holalandcore.util.Format).orderId(foodOrder.foodOrderId)}"></span></a>
               </td>
               <td class="text-center">
                 <i class="bi bi-calendar3-week me-1"></i>
@@ -36,13 +38,15 @@
               <td class="text-end"><span
                   th:text="*{#numbers.formatInteger(foodOrder.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
               </td>
-              <<td th:classappend="*{foodOrder.sttFoodCode == 1 ? 'text-info text-end' : 'text-warning text-end'}"
+              <td th:classappend="*{foodOrder.sttFoodCode == 1 ? 'text-info text-end' : 'text-warning text-end'}"
                    th:text="*{foodOrder.sttFoodCode == 1 ? 'Chờ xác nhận' : 'Đã xác nhận'}"></td>
               <td class="text-end">
-                <a href="javascript:void(0)" class="text-info" data-bs-toggle="modal" data-bs-target="#noteOrderModal">
-                  <i class="far fa-comment-dots me-2" data-bs-placement="top" data-bs-toggle="tooltip" title="Ghi chú"></i>
-                </a>
-                <a href="javascript:void(0)" class="color-danger" data-bs-toggle="modal" data-bs-target="#rejectOrderModal">
+                <th:block th:if="*{foodOrder.foodOrderNote.length != 0}">
+                  <a th:href="@{/food/order/note(orderId=*{foodOrder.foodOrderId}, sttCode=${sttCode})}" class="text-info">
+                    <i class="far fa-comment-dots me-2" data-bs-placement="top" data-bs-toggle="tooltip" title="Ghi chú"></i>
+                  </a>
+                </th:block>
+                <a th:href="@{/food/order/reject-order(orderId=*{foodOrder.foodOrderId}, sttCode=${sttCode})}" class="color-danger">
                   <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip" title="Từ chối đơn hàng"></i>
                 </a>
               </td>
@@ -62,8 +66,8 @@
     </div>
     <div class="row">
       <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
-        <a th:href="@{/seller-food/order}" class="label-info m-mb-16"
-           th:classappend="${page == 4 ? 'active' : ''}">
+        <a th:href="@{/food/seller-order}" class="label-info m-mb-16"
+           th:classappend="${sttCode == 0 ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
               <i class="fas fa-list-ul"></i>
@@ -75,8 +79,8 @@
           <div class="description">Tất cả</div>
         </a>
       </div>
-      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-4" th:each="type : ${sttTypeList}">
-        <a th:href="@{/food/order/type(sttCode=*{type.sttFoodId})}" class="label-info m-mb-16"
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="type : ${sttTypeList}">
+        <a th:href="@{/food/seller-order/type(sttCode=*{type.sttFoodId})}" class="label-info m-mb-16"
            th:classappend="${type.sttFoodId == sttCode ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
@@ -104,8 +108,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="foodOrdered : ${foodOrderedList}">
-              <td class="text-center">1</td>
+            <tr th:each="foodOrdered, iStat : ${foodOrderedList}">
+              <td class="text-center" th:text="*{iStat.index}"></td>
               <td><a th:href="@{/food/order/detail(orderId=*{foodOrdered.foodOrderId}, sttCode=${sttCode},
               orderStatus=*{foodOrdered.sttFoodCode})}">
                 #<span th:text="*{T(com.hola.holalandcore.util.Format).orderId(foodOrdered.foodOrderId)}"></span></a></td>
@@ -128,7 +132,7 @@
                   <a th:href="@{/food/order/reason-reject
                   (orderId=*{foodOrdered.foodOrderId}, sttCode=${sttCode})}" class="text-info">
                     <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip"
-                       th:title= "*{foodOrdered.foodOrderNote}">
+                       th:title= "*{foodOrdered.foodOrderReasonReject}">
                     </i>
                   </a>
                 </th:block>
