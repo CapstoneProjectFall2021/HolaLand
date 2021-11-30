@@ -53,7 +53,7 @@
               </a>
             </li>
             <li sec:authorize="hasRole('SELLER')">
-              <a th:href="@{/}" th:classappend="${page == 4 ? 'active' : ''}">
+              <a th:href="@{/food/seller-order}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
               </a>
             </li>
@@ -83,6 +83,10 @@
         <!-- User order -->
         <th:block th:if="${page == 3}">
           <div th:replace="food/user-order :: user-order"></div>
+        </th:block>
+        <!-- Seller order -->
+        <th:block th:if="${page == 4}">
+          <div th:replace="food/seller-order :: seller-order"></div>
         </th:block>
         <!-- Online store info -->
         <th:block th:if="${page == 9}">

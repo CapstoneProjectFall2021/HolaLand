@@ -346,4 +346,11 @@ public class FoodController {
             return "404";
         }
     }
+
+    @GetMapping("/seller-order")
+    public String goToSellerOrder(Model model, Authentication authentication) {
+
+        model.addAttribute("page", 4);
+        return "module-food";
+    }
 }
