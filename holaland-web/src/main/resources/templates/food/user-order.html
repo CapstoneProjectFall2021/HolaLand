@@ -24,7 +24,10 @@
               <td><a th:href="@{/food/order/detail(orderId=*{foodOrder.foodOrderId}, sttCode=${sttCode},
               orderStatus=*{foodOrder.sttFoodCode})}">
                 #<span th:text="*{T(com.hola.holalandcore.util.Format).orderId(foodOrder.foodOrderId)}"></span></a></td>
-              <td class="text-center" th:text="*{#dates.format(foodOrder.foodOrderCreatedDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
+              <td class="text-center">
+                <i class="bi bi-calendar3-week me-1"> <span th:text="*{#dates.format(foodOrder.foodOrderCreatedDate, 'dd-MM-yyyy')}"></span></i>
+                <i class="far fa-clock ms-2 me-1"> <span th:text="*{#dates.format(foodOrder.foodOrderCreatedDate, 'HH:mm:ss')}"></span></i>
+              </td>
               <td class="text-end"><span
                   th:text="*{#numbers.formatInteger(foodOrder.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
               </td>
