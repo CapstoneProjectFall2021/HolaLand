@@ -159,4 +159,9 @@ public interface IRepositoryQuery {
     //Insert all tag for food_store_online_tag table
     String INSERT_ALL_TAG_BY_FOOD_STORE_ONLINE_ID = "INSERT INTO food_store_online_tag (food_store_online_id, food_tag_id) values(?,?)";
 
+    //Insert food item
+    String INSERT_FOOD_ITEM = "INSERT INTO food_item (FOOD_STORE_ONLINE_ID, FOOD_TAG_ID, FOOD_TYPE_ID,\n" +
+            "FOOD_ITEM_IMAGE, FOOD_ITEM_NAME, FOOD_ITEM_PRICE, FOOD_ITEM_SOLD_NUMBER,\n" +
+            "FOOD_ITEM_IS_ACTIVE, FOOD_ITEM_DELETED) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
 }

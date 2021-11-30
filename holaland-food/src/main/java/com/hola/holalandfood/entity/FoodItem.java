@@ -7,6 +7,7 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
+@ToString
 public class FoodItem {
 
     private int foodItemId;
@@ -17,6 +18,6 @@ public class FoodItem {
     private String foodItemName;
     private int foodItemPrice;
     private int foodItemSoldNumber;
-    private boolean foodItemIsActive;
-    private boolean foodItemDeleted;
+    private int foodItemIsActive;
+    private int foodItemDeleted;
 }
