@@ -136,7 +136,7 @@
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
 <script crossorigin="anonymous" th:src="@{/js/templates/food.js}"></script>
-<th:block th:if="${page == 3}">
+<th:block th:if="${page == 3 || page == 4}">
   <script th:src="@{/js/datatables/jquery.min.js}"></script>
   <script th:src="@{/js/datatables/jquery.dataTables.min.js}"></script>
   <script th:src="@{/js/datatables/datatables.vietnamese.js}"></script>
