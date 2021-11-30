@@ -18,5 +18,6 @@ public class FoodOrder {
     private int foodOrderTotalPrice;
     private Date foodOrderCreatedDate;
     private String foodOrderNote;
+    private String foodOrderReasonReject;
     private boolean foodOrderDeleted;
 }

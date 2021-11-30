@@ -80,7 +80,6 @@ public interface IRepositoryQuery {
     String FOOD_STORE_ONLINE_GET_ALL_BY_TYPE = "SELECT\n" +
             "       T1.food_store_online_id,\n" +
             "       T1.user_id,\n" +
-            "       T1.food_store_type_id,\n" +
             "       T1.stt_food_code,\n" +
             "       T1.food_store_online_image,\n" +
             "       T1.food_store_online_name,\n" +
@@ -91,10 +90,12 @@ public interface IRepositoryQuery {
             "       T1.food_store_online_count_food_item,\n" +
             "       T1.food_store_online_count_rate,\n" +
             "       T1.food_store_online_count_report,\n" +
+            "       T1.food_store_online_pause_selling_flag,\n" +
+            "       T1.food_store_online_stop_selling_flag,\n" +
             "       T1.food_store_online_deleted\n" +
             "FROM food_store_online T1\n" +
             "LEFT JOIN food_store_online_type T2\n" +
-            "ON T1.food_store_type_id = T2.food_store_online_id\n" +
+            "ON T1.food_store_online_id = T2.food_store_online_id\n" +
             "WHERE T2.food_type_id = ?\n" +
             "AND T1.stt_food_code = ?\n" +
             "AND T1.food_store_online_deleted = 0";
@@ -133,9 +134,6 @@ public interface IRepositoryQuery {
 
     String FOOD_STORE_ONLINE_TYPE_GET_ALL = "SELECT * FROM food_store_online_type";
     String FOOD_STORE_ONLINE_TYPE_GET_ONE = "SELECT * FROM food_store_online_type WHERE food_store_online_type_id = ?";
-
-    String FOOD_STORE_TYPE_GET_ALL = "SELECT * FROM food_store_type";
-    String FOOD_STORE_TYPE_GET_ONE = "SELECT * FROM food_store_type WHERE food_store_type_id = ?";
 
     String FOOD_TAG_GET_ALL = "SELECT * FROM food_tag";
     String FOOD_TAG_GET_ONE = "SELECT * FROM food_tag WHERE food_tag_id = ?";

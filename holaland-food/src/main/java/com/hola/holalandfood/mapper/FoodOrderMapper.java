@@ -17,6 +17,7 @@ public class FoodOrderMapper implements RowMapper<FoodOrder> {
                 .foodOrderTotalPrice(rs.getInt("food_order_total_price"))
                 .foodOrderCreatedDate(rs.getDate("food_order_created_date"))
                 .foodOrderNote(rs.getString("food_order_note"))
+                .foodOrderReasonReject(rs.getString("food_order_reason_reject"))
                 .foodOrderDeleted(rs.getBoolean("food_order_deleted"))
                 .build();
     }
