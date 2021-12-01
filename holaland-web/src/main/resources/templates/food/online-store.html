@@ -79,6 +79,7 @@
         <!-- Tab content -->
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-food" role="tabpanel" aria-labelledby="pills-food-tab">
+            <!-- List tag -->
             <div class="row m-mb-16">
               <div class="col-md-12">
                 <div class="list-tag">
@@ -109,8 +110,8 @@
                              th:text="*{foodItem.foodItemName}">
                           </a>
                           <div class="food-info">
-                            <p>Giá: <span
-                                th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
+                            <p>Giá:
+                              <span th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
                               &nbsp;&#8226;&nbsp;
                               Đã bán: <span th:text="*{foodItem.foodItemSoldNumber}"></span>
                             </p>
