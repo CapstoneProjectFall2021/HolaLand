@@ -35,7 +35,7 @@
           </tbody>
         </table>
         <div class="note mt-3" sec:authorize="hasRole('SELLER')">
-          Ghi chú: <span th:text="${buyerNote}"></span>
+          Ghi chú: <span th:text="${userNote.length != 0 ? userNote : 'Không có ghi chú nào.'}"></span>
         </div>
       </div>
       <div class="modal-footer">

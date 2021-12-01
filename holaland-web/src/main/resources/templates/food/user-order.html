@@ -133,7 +133,7 @@
                   </a>
                 </th:block>
                 <th:block th:if="*{foodOrdered.sttFoodCode == 4}">
-                <a th:href="@{/food/order/report-order(storeId=*{foodOrdered.foodStoreOnlineId},
+                <a th:href="@{/food/order/report(storeId=*{foodOrdered.foodStoreOnlineId},
                 orderId=*{foodOrdered.foodOrderId}, sttCode=${sttCode})}" class="text-warning">
                   <i class="bi bi-exclamation-circle" data-bs-placement="top" data-bs-toggle="tooltip"
                      title="Báo cáo"></i>

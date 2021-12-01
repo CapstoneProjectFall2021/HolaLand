@@ -23,7 +23,7 @@
             </thead>
             <tbody>
             <tr th:each="foodOrder, iStat : ${foodOrderList}">
-              <td class="text-center" th:text="*{iStat.index}"></td>
+              <td class="text-center" th:text="*{iStat.index + 1}"></td>
               <td>
                 <a th:href="@{/food/order/detail(orderId=*{foodOrder.foodOrderId}, sttCode=${sttCode},
               orderStatus=*{foodOrder.sttFoodCode})}">
@@ -46,7 +46,7 @@
                     <i class="far fa-comment-dots me-2" data-bs-placement="top" data-bs-toggle="tooltip" title="Ghi chú"></i>
                   </a>
                 </th:block>
-                <a th:href="@{/food/order/reject-order(orderId=*{foodOrder.foodOrderId}, sttCode=${sttCode})}" class="color-danger">
+                <a th:href="@{/food/order/reject(orderId=*{foodOrder.foodOrderId}, sttCode=${sttCode})}" class="color-danger">
                   <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip" title="Từ chối đơn hàng"></i>
                 </a>
               </td>
@@ -66,7 +66,7 @@
     </div>
     <div class="row">
       <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
-        <a th:href="@{/food/seller-order}" class="label-info m-mb-16"
+        <a th:href="@{/food/order}" class="label-info m-mb-16"
            th:classappend="${sttCode == 0 ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
@@ -80,7 +80,7 @@
         </a>
       </div>
       <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="type : ${sttTypeList}">
-        <a th:href="@{/food/seller-order/type(sttCode=*{type.sttFoodId})}" class="label-info m-mb-16"
+        <a th:href="@{/food/order/type(sttCode=*{type.sttFoodId})}" class="label-info m-mb-16"
            th:classappend="${type.sttFoodId == sttCode ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
@@ -109,7 +109,7 @@
             </thead>
             <tbody>
             <tr th:each="foodOrdered, iStat : ${foodOrderedList}">
-              <td class="text-center" th:text="*{iStat.index}"></td>
+              <td class="text-center" th:text="*{iStat.index + 1}"></td>
               <td><a th:href="@{/food/order/detail(orderId=*{foodOrdered.foodOrderId}, sttCode=${sttCode},
               orderStatus=*{foodOrdered.sttFoodCode})}">
                 #<span th:text="*{T(com.hola.holalandcore.util.Format).orderId(foodOrdered.foodOrderId)}"></span></a></td>

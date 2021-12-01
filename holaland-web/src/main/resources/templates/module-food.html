@@ -53,7 +53,7 @@
               </a>
             </li>
             <li sec:authorize="hasRole('SELLER')">
-              <a th:href="@{/food/seller-order}" th:classappend="${page == 4 ? 'active' : ''}">
+              <a th:href="@{/food/order}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
               </a>
             </li>
@@ -108,28 +108,26 @@
 <th:block th:if="${page == 3}">
   <!-- Import modal confirm cancel order -->
   <div th:replace="food/modal/modal-confirm-cancel-order :: confirmCancelOrderModal"></div>
-  <!-- Import modal reason rejection order -->
-  <div th:replace="food/modal/modal-reason-rejection-order :: reasonRejectionOrderModal"></div>
-</th:block>
-<th:block th:if="${page == 3 && foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
-  <!-- Import modal list order detail -->
-  <div th:replace="food/modal/modal-list-order-detail :: listOrderDetailModal"></div>
 </th:block>
 <th:block th:if="${page == 3 && newFoodReport != null}">
   <!-- Import modal report order -->
   <div th:replace="food/modal/modal-report-order :: reportOrderModal"></div>
 </th:block>
-<th:block th:if="${page == 4}">
+<th:block th:if="${page == 4 && newFoodOrder != null}">
   <!-- Import modal report order -->
   <div th:replace="food/modal/modal-reject-order :: rejectOrderModal"></div>
-  <!-- Import modal report order -->
-  <div th:replace="food/modal/modal-note-order :: noteOrderModal"></div>
-  <!-- Import modal reason rejection order -->
-  <div th:replace="food/modal/modal-reason-rejection-order :: reasonRejectionOrderModal"></div>
 </th:block>
-<th:block th:if="${page == 4 && foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
+<th:block th:if="${page == 3 || page == 4 && foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
   <!-- Import modal list order detail -->
   <div th:replace="food/modal/modal-list-order-detail :: listOrderDetailModal"></div>
+</th:block>
+<th:block th:if="${page == 4 && buyerNote != null}">
+  <!-- Import modal note order -->
+  <div th:replace="food/modal/modal-note-order :: noteOrderModal"></div>
+</th:block>
+<th:block th:if="${page == 3 || page == 4 && reasonReject != null}">
+  <!-- Import modal reason rejection order -->
+  <div th:replace="food/modal/modal-reason-rejection-order :: reasonRejectionOrderModal"></div>
 </th:block>
 
 
@@ -152,7 +150,7 @@
     myModal.show();
 </script>
 
-<script th:if="${buyerNote != null}">
+<script th:if="${page == 4 && buyerNote != null}">
     const myModal = new bootstrap.Modal(document.getElementById('noteOrderModal'));
     myModal.show();
 </script>
@@ -162,7 +160,7 @@
     myModal.show();
 </script>
 
-<script th:if="${orderId != null}">
+<script th:if="${newFoodOrder != null}">
     const myModal = new bootstrap.Modal(document.getElementById('rejectOrderModal'));
     myModal.show();
 </script>

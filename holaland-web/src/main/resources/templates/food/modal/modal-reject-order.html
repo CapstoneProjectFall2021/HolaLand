@@ -6,13 +6,13 @@
       <div class="modal-header">
         <h5 class="modal-title" id="rejectOrderModalLabel">Từ chối đơn hàng</h5>
       </div>
-      <form id="rejectForm" class="row" method="post" th:action="@{/food/reject-order}">
+      <form id="rejectForm" class="row" method="post" th:action="@{/food/order/reject}" th:object="${newFoodOrder}">
         <div class="modal-body">
           <div class="form-group col-md-12 m-0">
-            <input type="hidden" name="orderId" th:value="${orderId}">
+            <input type="hidden" name="orderId" th:field="*{foodOrderId}">
             <fieldset>
               <legend>Lý do từ chối</legend>
-              <textarea class="form-control" rows="3" name="content"></textarea>
+              <textarea class="form-control" rows="3" th:field="*{foodOrderReasonReject}"></textarea>
             </fieldset>
           </div>
         </div>
