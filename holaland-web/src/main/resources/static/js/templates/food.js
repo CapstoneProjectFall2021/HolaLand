@@ -23,6 +23,8 @@ function addFoodToCart(e) {
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
             console.log("OK");
+            console.log(this.responseText);
+            showToast("toastAddToCartSuccess");
         } else {
             console.log("ERROR");
         }
@@ -53,13 +55,14 @@ function reportFoodOrder(e) {
     const foodOrderId = e.target.firstElementChild.innerHTML;
     const storeId = e.target.lastElementChild.innerHTML;
 
-    openModal("reportFoodOrderModal");
     document.getElementById("orderId").value = foodOrderId;
     document.getElementById("storeId").value = storeId;
+    openModal("reportFoodOrderModal");
 }
 
 function getOrderReasonReject(e) {
-    document.getElementById("orderReasonReject").innerHTML = e.target.firstElementChild.innerHTML;
+    const reasonReject = e.target.firstElementChild.innerHTML;
+    document.getElementById("orderReasonReject").innerHTML = reasonReject;
     openModal("reasonRejectionOrderModal");
 }
 
@@ -68,13 +71,13 @@ function getOrderReasonReject(e) {
  */
 function confirmDeleteFood(e) {
     const foodId = e.target.firstElementChild.innerHTML;
-    openModal("confirmDeleteFoodModal");
     document.getElementById("btn-delete-food").href = "/store/manage-food/delete?foodId=" + foodId;
+    openModal("confirmDeleteFoodModal");
 }
 
 function confirmCancelOrder(e) {
     const orderId = e.target.firstElementChild.innerHTML;
-    openModal("confirmCancelOrderModal");
     document.getElementById("btn-cancel-order").href = "/food/order/updateSttFood?orderId=" + orderId;
+    openModal("confirmCancelOrderModal");
 }
 

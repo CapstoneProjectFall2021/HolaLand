@@ -116,11 +116,14 @@
                         </div>
                       </div>
                       <div class="flex">
-                        <a href="javascript:void(0)" class="btn-more mx-0">
+                        <a href="javascript:void(0)" class="btn-more mx-0" sec:authorize="isAuthenticated()">
                           <i class="fas fa-plus fa-lg text-success" onclick="addFoodToCart(event)">
                             <span th:text="${foodItem.foodItemId}" class="d-none"></span>
                             <span th:text="${foodItem.foodStoreOnlineId}" class="d-none"></span>
                           </i>
+                        </a>
+                        <a th:href="@{/login}" class="btn-more mx-0" sec:authorize="!isAuthenticated()">
+                          <i class="fas fa-plus fa-lg text-success"></i>
                         </a>
                       </div>
                     </div>
