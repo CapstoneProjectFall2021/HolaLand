@@ -101,7 +101,7 @@
   <!-- Import modal online store rate -->
   <div th:replace="food/modal/modal-online-store-rate :: onlineStoreRateModal"></div>
 </th:block>
-<th:block th:if="${page == 9 && item != null}">
+<th:block th:if="${page == 9}">
   <!-- Import modal food detail -->
   <div th:replace="food/modal/modal-food-detail :: foodDetailModal"></div>
 </th:block>
@@ -140,16 +140,6 @@
   <script th:src="@{/js/datatables/jquery.dataTables.min.js}"></script>
   <script th:src="@{/js/datatables/datatables.vietnamese.js}"></script>
 </th:block>
-
-<script th:if="${item != null}">
-  const myModal = new bootstrap.Modal(document.getElementById('foodDetailModal'));
-  myModal.show();
-</script>
-
-<script th:if="${reasonReject != null}">
-    const myModal = new bootstrap.Modal(document.getElementById('reasonRejectionOrderModal'));
-    myModal.show();
-</script>
 
 <script th:if="${page == 4 && buyerNote != null}">
     const myModal = new bootstrap.Modal(document.getElementById('noteOrderModal'));

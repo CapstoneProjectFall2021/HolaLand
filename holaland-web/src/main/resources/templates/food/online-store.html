@@ -102,16 +102,13 @@
                     <div class="flex-sb">
                       <div class="flex">
                         <div class="icon-circle">
-                          <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
+                          <img th:id="'food-item-img-' + *{foodItem.foodItemId}" class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
                         </div>
                         <div class="content-body">
-                          <a th:href="@{/food/online-store/food-detail(id=${foodStoreOnline.foodStoreOnlineId},
-                              itemId=*{foodItem.foodItemId}, tagId=${tagId})}"
-                             th:text="*{foodItem.foodItemName}">
-                          </a>
+                          <a th:id="'food-item-name-' + *{foodItem.foodItemId}" href="javascript:void(0)" th:text="*{foodItem.foodItemName}" onclick="getFoodItemDetail(event)"></a>
                           <div class="food-info">
                             <p>Giá:
-                              <span th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
+                              <span th:id="'food-item-price-' + *{foodItem.foodItemId}" th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
                               &nbsp;&#8226;&nbsp;
                               Đã bán: <span th:text="*{foodItem.foodItemSoldNumber}"></span>
                             </p>

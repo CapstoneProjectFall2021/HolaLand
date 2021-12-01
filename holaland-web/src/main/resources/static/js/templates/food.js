@@ -31,6 +31,22 @@ function addFoodToCart(e) {
 }
 
 /*
+ * Online store food item
+ */
+function getFoodItemDetail(e) {
+    const arr = e.target.id.split("-");
+    const foodItemId = arr[arr.length - 1];
+    const foodItemImg = document.getElementById("food-item-img-" + foodItemId).src;
+    const foodItemName = document.getElementById("food-item-name-" + foodItemId).innerHTML;
+    const foodItemPrice = document.getElementById("food-item-price-" + foodItemId).innerHTML;
+
+    document.getElementById("food-item-img-modal").src = foodItemImg;
+    document.getElementById("food-item-name-modal").innerHTML = foodItemName;
+    document.getElementById("food-item-price-modal").innerHTML = foodItemPrice;
+    openModal("foodDetailModal");
+}
+
+/*
  * Order food
  */
 function reportFoodOrder(e) {
