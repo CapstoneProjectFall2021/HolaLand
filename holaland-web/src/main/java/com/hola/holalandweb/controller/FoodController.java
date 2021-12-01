@@ -300,17 +300,28 @@ public class FoodController {
 
     @PostMapping("/order/report")
     public String postUserReportOrder(
-            @ModelAttribute("newFoodReport") FoodReport newFoodReport,
-            BindingResult bindingResult
+            @RequestParam("foodStoreOnlineId") int storeId,
+            @RequestParam("foodOrderId") int orderId,
+            @RequestParam("reportContent") String content,
+            Authentication authentication
     ) {
-        if (bindingResult.hasErrors()) {
-            System.out.println("There was a error " + bindingResult);
-            return "404";
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
         }
         Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
-        newFoodReport.setFoodReportCreateDate(currentDate);
-        newFoodReport.setFoodReportDeleted(false);
-        boolean isCheck = foodReportService.save(newFoodReport);
+        FoodReport foodReport =  FoodReport.builder()
+                .userId(currentUser.getId())
+                .foodOrderId(orderId)
+                .foodStoreOnlineId(storeId)
+                .foodReportContent(content)
+                .foodReportCreateDate(currentDate)
+                .foodReportDeleted(false)
+                .build();
+
+        boolean isCheck = foodReportService.save(foodReport);
         if (isCheck) {
             return "redirect:" + "/food/order";
         } else {

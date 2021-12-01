@@ -109,7 +109,7 @@
   <!-- Import modal confirm cancel order -->
   <div th:replace="food/modal/modal-confirm-cancel-order :: confirmCancelOrderModal"></div>
 </th:block>
-<th:block th:if="${page == 3 && newFoodReport != null}">
+<th:block th:if="${page == 3}">
   <!-- Import modal report order -->
   <div th:replace="food/modal/modal-report-order :: reportOrderModal"></div>
 </th:block>
@@ -125,7 +125,7 @@
   <!-- Import modal note order -->
   <div th:replace="food/modal/modal-note-order :: noteOrderModal"></div>
 </th:block>
-<th:block th:if="${page == 3 || page == 4 && reasonReject != null}">
+<th:block th:if="${page == 3 || page == 4}">
   <!-- Import modal reason rejection order -->
   <div th:replace="food/modal/modal-reason-rejection-order :: reasonRejectionOrderModal"></div>
 </th:block>
@@ -133,7 +133,8 @@
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
-<script crossorigin="anonymous" th:src="@{/js/templates/food.js}"></script>
+<script th:src="@{/js/templates/food.js}"></script>
+
 <th:block th:if="${page == 3 || page == 4}">
   <script th:src="@{/js/datatables/jquery.min.js}"></script>
   <script th:src="@{/js/datatables/jquery.dataTables.min.js}"></script>

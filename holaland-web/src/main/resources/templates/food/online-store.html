@@ -119,8 +119,11 @@
                         </div>
                       </div>
                       <div class="flex">
-                        <a href="javascript:void(0)" class="btn-more mx-0" onclick="showToast()">
-                          <i class="fas fa-plus text-success"></i>
+                        <a href="javascript:void(0)" class="btn-more mx-0">
+                          <i class="fas fa-plus fa-lg text-success" onclick="addFoodToCart(event)">
+                            <span th:text="${foodItem.foodItemId}" class="d-none"></span>
+                            <span th:text="${foodItem.foodStoreOnlineId}" class="d-none"></span>
+                          </i>
                         </a>
                       </div>
                     </div>

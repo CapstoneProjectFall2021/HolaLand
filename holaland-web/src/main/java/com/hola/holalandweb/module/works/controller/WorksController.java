@@ -1,4 +1,4 @@
-package com.hola.holalandweb.controller;
+package com.hola.holalandweb.module.works.controller;
 
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.repository.UserRepository;

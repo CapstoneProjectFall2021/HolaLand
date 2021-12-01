@@ -1,4 +1,4 @@
-package com.hola.holalandweb.controller;
+package com.hola.holalandweb.module.fptu.controller;
 
 import com.hola.holalandfptu.entity.Club;
 import com.hola.holalandfptu.entity.ClubType;

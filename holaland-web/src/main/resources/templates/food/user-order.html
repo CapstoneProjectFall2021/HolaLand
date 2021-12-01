@@ -118,25 +118,26 @@
               <td class="text-end"><span
                   th:text="*{#numbers.formatInteger(foodOrdered.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
               </td>
-              <td th:classappend="*{foodOrdered.sttFoodCode == 3 ? 'text-secondary' :
-              (foodOrdered.sttFoodCode == 4 ? 'color-success' : 'text-danger')} + ' text-end'"
-                  th:text="*{foodOrdered.sttFoodCode == 3 ? 'Đã từ chối' :
-              (foodOrdered.sttFoodCode == 4 ? 'Hoàn thành' : 'Đã hủy')}">
+              <td class="text-end" th:classappend="*{foodOrdered.sttFoodCode == 3 ? 'text-secondary' :
+              (foodOrdered.sttFoodCode == 4 ? 'color-success' : 'text-danger')}"
+                  th:text="*{foodOrdered.sttFoodCode == 3 ? 'Đã từ chối' : (foodOrdered.sttFoodCode == 4 ? 'Hoàn thành' : 'Đã hủy')}">
               </td>
               <td class="text-end">
                 <th:block th:if="*{foodOrdered.sttFoodCode == 3}">
-                  <a th:href="@{/food/order/reason-reject
-                  (orderId=*{foodOrdered.foodOrderId}, sttCode=${sttCode})}" class="text-info">
-                    <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip"
-                       th:title= "*{foodOrdered.foodOrderReasonReject}">
+                  <a href="javascript:void(0)" class="text-info">
+                    <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip" title="Lý do từ chối"
+                    onclick="getOrderReasonReject(event)">
+                      <span class="d-none" th:text="*{foodOrdered.foodOrderReasonReject}"></span>
                     </i>
                   </a>
                 </th:block>
                 <th:block th:if="*{foodOrdered.sttFoodCode == 4}">
-                <a th:href="@{/food/order/report(storeId=*{foodOrdered.foodStoreOnlineId},
-                orderId=*{foodOrdered.foodOrderId}, sttCode=${sttCode})}" class="text-warning">
+                <a href="javascript:void(0)" class="text-warning">
                   <i class="bi bi-exclamation-circle" data-bs-placement="top" data-bs-toggle="tooltip"
-                     title="Báo cáo"></i>
+                     title="Báo cáo" onclick="reportFoodOrder(event)">
+                    <span th:text="${foodOrdered.foodOrderId}" class="d-none"></span>
+                    <span th:text="${foodOrdered.foodStoreOnlineId}" class="d-none"></span>
+                  </i>
                 </a>
                 </th:block>
               </td>
