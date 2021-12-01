@@ -142,7 +142,7 @@ public class FoodController {
         model.addAttribute("page", page);
     }
 
-    @GetMapping("/list-offline-store")
+    @GetMapping("/offline-store")
     public String goToOfflineStore(Model model) {
         model.addAttribute("page", 2);
         return "module-food";
