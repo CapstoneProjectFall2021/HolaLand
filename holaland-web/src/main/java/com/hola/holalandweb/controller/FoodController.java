@@ -2,6 +2,7 @@ package com.hola.holalandweb.controller;
 
 import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.service.UserDetailService;
+import com.hola.holalandcore.util.Format;
 import com.hola.holalandfood.entity.*;
 import com.hola.holalandfood.service.*;
 import com.hola.holalandweb.constant.Constants;
@@ -194,6 +195,7 @@ public class FoodController {
             }
             model.addAttribute("page", 3);
         }
+        model.addAttribute("format", new Format());
         model.addAttribute("sttCode", sttCode);
         model.addAttribute("sttTypeList", sttTypeList);
         model.addAttribute("foodOrderList", foodOrderList);

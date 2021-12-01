@@ -18,8 +18,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr th:each="foodOrderDetail, iterStat : ${foodOrderDetailList}">
-            <td th:text="*{iterStat.index + 1}"></td>
+          <tr th:each="foodOrderDetail, stt : ${foodOrderDetailList}">
+            <td th:text="*{stt.index + 1}"></td>
             <td th:with="foodItem=${foodItemService.getOne(foodOrderDetail.foodItemId)}">
               <a th:href="@{/food/online-store(id=${foodStoreOnline.foodStoreOnlineId})}"
                    th:text="${foodItem.foodItemName}">Cơm hến xào</a></td>
@@ -34,8 +34,8 @@
           </tr>
           </tbody>
         </table>
-        <div class="note mt-3" sec:authorize="hasRole('SELLER')">
-          Ghi chú: <span th:text="${userNote.length != 0 ? userNote : 'Không có ghi chú nào.'}"></span>
+        <div class="note mt-3" sec:authorize="hasRole('SELLER')" th:if="${userNote.length != 0}">
+          Ghi chú: <span th:text="${userNote}"></span>
         </div>
       </div>
       <div class="modal-footer">

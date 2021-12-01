@@ -13,7 +13,7 @@
           </div>
           <div class="content-body">
             <h3 th:text="${item.foodItemName}"></h3>
-            <p class="price">Giá: <span th:text="${item.foodItemPrice}"></span><sup>đ</sup></p>
+            <p class="price">Giá: <span th:text="${#numbers.formatInteger(item.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup></p>
           </div>
         </div>
       </div>
