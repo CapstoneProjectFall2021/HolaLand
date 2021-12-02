@@ -6,7 +6,7 @@
         <h1 class="title fix-mb-title">Chỉnh sửa thông tin</h1>
       </div>
     </div>
-    <form id="updateInfoForm" class="row panel-form mx-0" method="post" th:action="@{/update-profile-user}"
+    <form id="updateUserInfoForm" class="row panel-form mx-0" method="post" th:action="@{/profile/update}"
           th:object="${updateUser}">
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
@@ -25,12 +25,14 @@
           <legend>Giới tính</legend>
           <div class="custom-radio">
             <div class="form-check me-4">
-              <input class="form-check-input me-2" type="radio" th:field="${userDetail.userDetailGender}" id="male"
+              <input class="form-check-input me-2" type="radio"
+                     th:field="${userDetail.userDetailGender}" id="male"
                      value="1" th:checked="${userDetail.userDetailGender == 1}">
               <label class="form-check-label" for="male">Nam</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input me-2" type="radio" th:field="${userDetail.userDetailGender}" id="female"
+              <input class="form-check-input me-2" type="radio"
+                     th:field="${userDetail.userDetailGender}" id="female"
                      value="0" th:checked="${userDetail.userDetailGender == 0}">
               <label class="form-check-label" for="female">Nữ</label>
             </div>
@@ -51,7 +53,7 @@
       </div>
       <div class="col-md-12 text-end mt-2">
         <a href="javascript:void(0)" class="btn btn-md btn-secondary m-mb-12"
-           onclick="document.getElementById('updateInfoForm').submit();">
+           onclick="document.getElementById('updateUserInfoForm').submit();">
           <i class="fas fa-check text-success mr-2"></i>Cập nhật thông tin
         </a>
       </div>
@@ -64,7 +66,7 @@
         <h1 class="title fix-mb-title fix-mt-title">Đổi mật khẩu</h1>
       </div>
     </div>
-    <form id="updatePasswordForm" class="row panel-form mx-0" method="post" th:action="@{/update-password-user}">
+    <form id="updateUserPasswordForm" class="row panel-form mx-0" method="post" th:action="@{/profile/change-password}">
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Mật khẩu cũ</legend>
@@ -85,7 +87,7 @@
       </div>
       <div class="col-md-12 text-end mt-2">
         <a href="javascript:void(0)" class="btn btn-md btn-secondary m-mb-12"
-           onclick="document.getElementById('updatePasswordForm').submit();">
+           onclick="document.getElementById('updateUserPasswordForm').submit();">
           <i class="fas fa-check text-success mr-2"></i>Xác nhận
         </a>
       </div>

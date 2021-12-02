@@ -12,65 +12,71 @@
             <button class="btn-search" id="search" type="submit"><i class="bi bi-search"></i></button>
           </form>
         </li>
-        <li sec:authorize="isAuthenticated()" class="navbar-btn dropdown">
-          <a aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0)"
-             id="language"
-             role="button">
-            <i class="far fa-bell m-0 fa-fw"></i>
+        <li class="navbar-btn dropdown">
+          <a class="dropdown-toggle" href="javascript:void(0)">
+            <i class="bi bi-bag-plus m-0"></i>
           </a>
-          <span class="notification-dot">8</span>
-          <!-- Start: Notification dropdown -->
-          <ul aria-labelledby="language" class="dropdown-menu notification-dropdown">
-            <li class="dropdown-item">
-              <a href="">
-                <div class="media">
-                  <span class="me-3">
-                    <img alt="" class="media-object" th:src="@{'/images/system/v.png'}" width="50">
-                  </span>
-                  <div class="media-body">
-                    <h6 class="media-heading">John Smith</h6>
-                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
-                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="dropdown-item notification-preview">
-              <a href="">
-                <div class="media">
-                  <span class="me-3">
-                    <img alt="" class="media-object" th:src="@{'/images/system/v.png'}" width="50">
-                  </span>
-                  <div class="media-body">
-                    <h6 class="media-heading">John Smith</h6>
-                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
-                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="dropdown-item notification-preview">
-              <a href="">
-                <div class="media">
-                  <span class="me-3">
-                    <img alt="" class="media-object" th:src="@{'/images/system/v.png'}" width="50">
-                  </span>
-                  <div class="media-body">
-                    <h6 class="media-heading">John Smith</h6>
-                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>
-                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>
-                  </div>
-                </div>
-              </a>
-            </li>
-            <li class="dropdown-item btn-link">
-              <a class="text-end" href="">
-                Xem tất cả
-              </a>
-            </li>
-          </ul>
-          <!-- End: Notification dropdown -->
+          <span id="numberFoodItemInCart" class="notification-dot">3</span>
         </li>
+<!--        <li sec:authorize="isAuthenticated()" class="navbar-btn dropdown">-->
+<!--          <a aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0)"-->
+<!--             id="language"-->
+<!--             role="button">-->
+<!--            <i class="far fa-bell m-0 fa-fw"></i>-->
+<!--          </a>-->
+<!--          <span class="notification-dot">8</span>-->
+<!--          &lt;!&ndash; Start: Notification dropdown &ndash;&gt;-->
+<!--          <ul aria-labelledby="language" class="dropdown-menu notification-dropdown">-->
+<!--            <li class="dropdown-item">-->
+<!--              <a href="">-->
+<!--                <div class="media">-->
+<!--                  <span class="me-3">-->
+<!--                    <img alt="" class="media-object" th:src="@{'/images/system/v.png'}" width="50">-->
+<!--                  </span>-->
+<!--                  <div class="media-body">-->
+<!--                    <h6 class="media-heading">John Smith</h6>-->
+<!--                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>-->
+<!--                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li class="dropdown-item notification-preview">-->
+<!--              <a href="">-->
+<!--                <div class="media">-->
+<!--                  <span class="me-3">-->
+<!--                    <img alt="" class="media-object" th:src="@{'/images/system/v.png'}" width="50">-->
+<!--                  </span>-->
+<!--                  <div class="media-body">-->
+<!--                    <h6 class="media-heading">John Smith</h6>-->
+<!--                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>-->
+<!--                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li class="dropdown-item notification-preview">-->
+<!--              <a href="">-->
+<!--                <div class="media">-->
+<!--                  <span class="me-3">-->
+<!--                    <img alt="" class="media-object" th:src="@{'/images/system/v.png'}" width="50">-->
+<!--                  </span>-->
+<!--                  <div class="media-body">-->
+<!--                    <h6 class="media-heading">John Smith</h6>-->
+<!--                    <p class="text-small text-muted mb-1">Yesterday at 4:32 PM</p>-->
+<!--                    <p class="text mb-0">Lorem ipsum dolor sit amet...</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li class="dropdown-item btn-link">-->
+<!--              <a class="text-end" href="">-->
+<!--                Xem tất cả-->
+<!--              </a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--          &lt;!&ndash; End: Notification dropdown &ndash;&gt;-->
+<!--        </li>-->
         <li sec:authorize="isAuthenticated()" class="navbar-btn dropdown pointer-events-none">
           <a aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0)"
              id="userDropdown"
