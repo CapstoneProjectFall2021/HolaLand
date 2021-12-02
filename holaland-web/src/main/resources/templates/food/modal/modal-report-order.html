@@ -7,7 +7,7 @@
         <h5 class="modal-title" id="reportFoodOrderModalLabel">Thông báo</h5>
       </div>
       <div class="modal-body">
-        <form id="reportForm" class="row" method="post" th:action="@{/food/order/report}" th:object="${newFoodReport}">
+        <form id="reportForm" class="row" method="post" th:action="@{/food/order/report}">
           <div class="form-group col-md-12 m-0">
             <input type="hidden" name="foodStoreOnlineId" id="storeId">
             <input type="hidden" name="foodOrderId" id="orderId">

@@ -60,10 +60,23 @@ function reportFoodOrder(e) {
     openModal("reportFoodOrderModal");
 }
 
+function rejectFoodOrder(e) {
+    const foodOrderId = e.target.firstElementChild.innerHTML;
+
+    document.getElementById("orderRejectId").value = foodOrderId;
+    openModal("rejectOrderModal");
+}
+
 function getOrderReasonReject(e) {
     const reasonReject = e.target.firstElementChild.innerHTML;
     document.getElementById("orderReasonReject").innerHTML = reasonReject;
     openModal("reasonRejectionOrderModal");
+}
+
+function getOrderNote(e) {
+    const note = e.target.firstElementChild.innerHTML;
+    document.getElementById("orderNote").innerHTML = note;
+    openModal("noteOrderModal");
 }
 
 /*

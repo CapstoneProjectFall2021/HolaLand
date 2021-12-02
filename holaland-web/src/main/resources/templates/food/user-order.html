@@ -9,7 +9,13 @@
     <div class="panel pt-2">
       <div class="row data-tables">
         <div class="col-lg-12">
-          <table id="order-table-no-filter" table class="table m-0" cellspacing="0" width="100%">
+          <div class="flex-sb" th:if="${foodOrderList.size() == 0}">
+            <p class="m-mt-8 m-0">Danh sách đơn hàng hiện tại trống.</p>
+            <div>
+              <a th:href="@{/food}" class="m-mt-8 btn btn-md btn-secondary">Đặt hàng ngay</a>
+            </div>
+          </div>
+          <table id="order-table-no-filter" table class="table m-0" cellspacing="0" width="100%" th:if="${foodOrderList.size() != 0}">
             <thead>
             <tr>
               <th class="text-center">#</th>
@@ -35,7 +41,7 @@
               <td class="text-end"><span
                   th:text="*{#numbers.formatInteger(foodOrder.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
               </td>
-              <td th:classappend="*{foodOrder.sttFoodCode == 1 ? 'text-info' : 'text-warning'} + ' text-end'"
+              <td class="text-end" th:classappend="*{foodOrder.sttFoodCode == 1 ? 'text-info' : 'text-warning'}"
                   th:text="*{foodOrder.sttFoodCode == 1 ? 'Chờ xác nhận' : 'Đã xác nhận'}"></td>
               <td class="text-end">
                 <a href="javascript:void(0)" class="color-danger">
@@ -104,39 +110,39 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="foodOrdered, stt : ${foodOrderedList}">
+            <tr th:each="historyOrder, stt : ${historyOrderList}">
               <td class="text-center" th:text="*{stt.index + 1}"></td>
-              <td><a th:href="@{/food/order/detail(orderId=*{foodOrdered.foodOrderId}, sttCode=${sttCode},
-              orderStatus=*{foodOrdered.sttFoodCode})}">
-                #<span th:text="*{format.orderId(foodOrdered.foodOrderId)}"></span></a></td>
+              <td><a th:href="@{/food/order/detail(orderId=*{historyOrder.foodOrderId}, sttCode=${sttCode},
+              orderStatus=*{historyOrder.sttFoodCode})}">
+                #<span th:text="*{format.orderId(historyOrder.foodOrderId)}"></span></a></td>
               <td class="text-center">
                 <i class="bi bi-calendar3-week me-1"></i>
-                <span th:text="*{#dates.format(foodOrdered.foodOrderCreatedDate, 'dd-MM-yyyy')}"></span>
+                <span th:text="*{#dates.format(historyOrder.foodOrderCreatedDate, 'dd-MM-yyyy')}"></span>
                 <i class="far fa-clock ms-2 me-1"></i>
-                <span th:text="*{#dates.format(foodOrdered.foodOrderCreatedDate, 'HH:mm:ss')}"></span>
+                <span th:text="*{#dates.format(historyOrder.foodOrderCreatedDate, 'HH:mm:ss')}"></span>
               </td>
               <td class="text-end"><span
-                  th:text="*{#numbers.formatInteger(foodOrdered.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
+                  th:text="*{#numbers.formatInteger(historyOrder.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
               </td>
-              <td class="text-end" th:classappend="*{foodOrdered.sttFoodCode == 3 ? 'text-secondary' :
-              (foodOrdered.sttFoodCode == 4 ? 'color-success' : 'text-danger')}"
-                  th:text="*{foodOrdered.sttFoodCode == 3 ? 'Đã từ chối' : (foodOrdered.sttFoodCode == 4 ? 'Hoàn thành' : 'Đã hủy')}">
+              <td class="text-end" th:classappend="*{historyOrder.sttFoodCode == 3 ? 'text-secondary' :
+              (historyOrder.sttFoodCode == 4 ? 'color-success' : 'text-danger')}"
+                  th:text="*{historyOrder.sttFoodCode == 3 ? 'Đã từ chối' : (historyOrder.sttFoodCode == 4 ? 'Hoàn thành' : 'Đã hủy')}">
               </td>
               <td class="text-end">
-                <th:block th:if="*{foodOrdered.sttFoodCode == 3}">
+                <th:block th:if="*{historyOrder.sttFoodCode == 3}">
                   <a href="javascript:void(0)" class="text-info">
                     <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip" title="Lý do từ chối"
                     onclick="getOrderReasonReject(event)">
-                      <span class="d-none" th:text="*{foodOrdered.foodOrderReasonReject}"></span>
+                      <span class="d-none" th:text="*{historyOrder.foodOrderReasonReject}"></span>
                     </i>
                   </a>
                 </th:block>
-                <th:block th:if="*{foodOrdered.sttFoodCode == 4}">
+                <th:block th:if="*{historyOrder.sttFoodCode == 4}">
                 <a href="javascript:void(0)" class="text-warning">
                   <i class="bi bi-exclamation-circle" data-bs-placement="top" data-bs-toggle="tooltip"
                      title="Báo cáo" onclick="reportFoodOrder(event)">
-                    <span th:text="${foodOrdered.foodOrderId}" class="d-none"></span>
-                    <span th:text="${foodOrdered.foodStoreOnlineId}" class="d-none"></span>
+                    <span th:text="${historyOrder.foodOrderId}" class="d-none"></span>
+                    <span th:text="${historyOrder.foodStoreOnlineId}" class="d-none"></span>
                   </i>
                 </a>
                 </th:block>
