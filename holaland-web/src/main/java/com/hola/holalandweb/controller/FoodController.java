@@ -38,17 +38,19 @@ public class FoodController {
     private final FoodOrderDetailService foodOrderDetailService;
 
     @Autowired
-    public FoodController(FoodStoreOnlineService foodStoreOnlineService,
-                          FoodTypeService foodTypeService,
-                          FoodStoreOnlineTagService foodStoreOnlineTagService,
-                          FoodTagService foodTagService,
-                          FoodItemService foodItemService,
-                          FoodStoreOnlineRateService foodStoreOnlineRateService,
-                          UserDetailService userDetailService,
-                          FoodReportService foodReportService,
-                          FoodOrderService foodOrderService,
-                          SttFoodService sttFoodService,
-                          FoodOrderDetailService foodOrderDetailService) {
+    public FoodController(
+            FoodStoreOnlineService foodStoreOnlineService,
+            FoodTypeService foodTypeService,
+            FoodStoreOnlineTagService foodStoreOnlineTagService,
+            FoodTagService foodTagService,
+            FoodItemService foodItemService,
+            FoodStoreOnlineRateService foodStoreOnlineRateService,
+            UserDetailService userDetailService,
+            FoodReportService foodReportService,
+            FoodOrderService foodOrderService,
+            SttFoodService sttFoodService,
+            FoodOrderDetailService foodOrderDetailService
+    ) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTypeService = foodTypeService;
         this.foodStoreOnlineTagService = foodStoreOnlineTagService;
@@ -278,7 +280,7 @@ public class FoodController {
         }
 
         Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
-        FoodReport foodReport =  FoodReport.builder()
+        FoodReport foodReport = FoodReport.builder()
                 .userId(currentUser.getId())
                 .foodOrderId(orderId)
                 .foodStoreOnlineId(storeId)
