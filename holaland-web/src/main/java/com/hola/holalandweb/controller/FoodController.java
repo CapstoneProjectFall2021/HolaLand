@@ -123,12 +123,10 @@ public class FoodController {
         List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
         List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
         List<FoodReport> listReport = foodReportService.getAllByOrderId(id);
-        List<FoodItem> foodItemList;
-        if (tagId == 0) {
-            foodItemList = foodItemService.getAllByStoreOnlineId(id);
-        } else {
-            foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);
-        }
+        List<FoodItem> foodItemList = (tagId == 0)
+                        ? foodItemService.getAllByStoreOnlineId(id)
+                        : foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);;
+
         model.addAttribute("tagId", tagId);
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
