@@ -26,7 +26,7 @@ function addFoodToCart(e) {
             console.log(this.responseText);
             showToast("toastAddToCartSuccess");
         } else {
-            console.log("ERROR");
+            showToast("toastAddToCartError");
         }
     };
     request.send(null);

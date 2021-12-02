@@ -1,7 +1,6 @@
 /*!
- * js
+ * Switch theme
  */
-
 let theme = localStorage.getItem('data-theme');
 const checkbox = document.getElementById("switch");
 
@@ -38,11 +37,17 @@ checkbox.addEventListener('change', () => {
   }
 });
 
+/*!
+ * Tooltip
+ */
 const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl)
 })
 
+/*!
+ * Show - hidden navbar
+ */
 window.onscroll = function() {
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
     document.getElementById("navbar").className = "navbar navbar-expand-lg fixed-top dark";
