@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hola Land - Food</title>
+  <title>Hola Land - Ăn - uống</title>
   <!-- Font Awesome CSS -->
   <link rel="stylesheet" th:href="@{/css/all.css}"/>
   <!-- Bootstrap CSS -->
@@ -100,10 +100,11 @@
 <th:block th:if="${page == 9}">
   <!-- Import modal online store rate -->
   <div th:replace="food/modal/modal-online-store-rate :: onlineStoreRateModal"></div>
-  <!-- Import toast add to cart -->
-  <div th:replace="food/toast/toast-add-to-cart-success :: toastAddToCartSuccess"></div>
   <!-- Import modal food detail -->
   <div th:replace="food/modal/modal-food-detail :: foodDetailModal"></div>
+  <!-- Import toast add to cart -->
+  <div th:replace="food/toast/toast-add-to-cart-success :: toastAddToCartSuccess"></div>
+  <div th:replace="food/toast/toast-add-to-cart-error :: toastAddToCartError"></div>
 </th:block>
 <th:block th:if="${page == 3}">
   <!-- Import modal confirm cancel order -->
