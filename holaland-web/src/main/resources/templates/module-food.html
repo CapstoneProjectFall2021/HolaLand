@@ -110,6 +110,10 @@
   <div th:replace="food/modal/modal-confirm-cancel-order :: confirmCancelOrderModal"></div>
   <!-- Import modal report order -->
   <div th:replace="food/modal/modal-report-order :: reportOrderModal"></div>
+  <!-- Import modal order report content -->
+  <div th:replace="food/modal/modal-order-report-content :: reportOrderContentModal"></div>
+  <!-- Import modal confirm delete report -->
+  <div th:replace="food/modal/modal-confirm-delete-report :: confirmDeleteReportOrderModal"></div>
 </th:block>
 <th:block th:if="${page == 4}">
   <!-- Import modal note order -->

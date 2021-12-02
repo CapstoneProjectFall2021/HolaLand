@@ -15,7 +15,8 @@
               <a th:href="@{/food}" class="m-mt-8 btn btn-md btn-secondary">Đặt hàng ngay</a>
             </div>
           </div>
-          <table id="order-table-no-filter" table class="table m-0" cellspacing="0" width="100%" th:if="${foodOrderList.size() != 0}">
+          <table id="order-table-no-filter" table class="table m-0" cellspacing="0" width="100%"
+                 th:if="${foodOrderList.size() != 0}">
             <thead>
             <tr>
               <th class="text-center">#</th>
@@ -45,7 +46,8 @@
                   th:text="*{foodOrder.sttFoodCode == 1 ? 'Chờ xác nhận' : 'Đã xác nhận'}"></td>
               <td class="text-end">
                 <a href="javascript:void(0)" class="color-danger">
-                  <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip" onclick="confirmCancelOrder(event)"
+                  <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip"
+                     onclick="confirmCancelOrder(event)"
                      title="Hủy đơn hàng">
                     <span th:text="${foodOrder.foodOrderId}" class="d-none"></span>
                   </i>
@@ -131,20 +133,39 @@
               <td class="text-end">
                 <th:block th:if="*{historyOrder.sttFoodCode == 3}">
                   <a href="javascript:void(0)" class="text-info">
-                    <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip" title="Lý do từ chối"
-                    onclick="getOrderReasonReject(event)">
+                    <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip"
+                       title="Lý do từ chối"
+                       onclick="getOrderReasonReject(event)">
                       <span class="d-none" th:text="*{historyOrder.foodOrderReasonReject}"></span>
                     </i>
                   </a>
                 </th:block>
-                <th:block th:if="*{historyOrder.sttFoodCode == 4}">
-                <a href="javascript:void(0)" class="text-warning">
-                  <i class="bi bi-exclamation-circle" data-bs-placement="top" data-bs-toggle="tooltip"
-                     title="Báo cáo" onclick="reportFoodOrder(event)">
-                    <span th:text="${historyOrder.foodOrderId}" class="d-none"></span>
-                    <span th:text="${historyOrder.foodStoreOnlineId}" class="d-none"></span>
-                  </i>
-                </a>
+                <th:block th:if="*{historyOrder.sttFoodCode == 4}"
+                          th:with="foodReport=${foodReportService.checkUserReported(historyOrder.userId,
+                          historyOrder.foodOrderId)}">
+                  <th:block th:if="${foodReport.size() == 0}">
+                    <a href="javascript:void(0)" class="text-warning">
+                      <i class="bi bi-exclamation-circle" data-bs-placement="top" data-bs-toggle="tooltip"
+                         title="Báo cáo" onclick="reportFoodOrder(event)">
+                        <span th:text="${historyOrder.foodOrderId}" class="d-none"></span>
+                        <span th:text="${historyOrder.foodStoreOnlineId}" class="d-none"></span>
+                      </i>
+                    </a>
+                  </th:block>
+                  <th:block th:if="${foodReport.size() != 0}">
+                    <a href="javascript:void(0)" class="text-info me-2">
+                      <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip"
+                         title="Lý do báo cáo" onclick="getOrderReportContent(event)">
+                        <span class="d-none" th:text="${foodReport.get(0).foodReportContent}"></span>
+                      </i>
+                    </a>
+                    <a href="javascript:void(0)" class="color-danger">
+                      <i class="far fa-trash-alt" data-bs-placement="top" data-bs-toggle="tooltip"
+                         title="Xoá báo cáo" onclick="confirmDeleteReport(event)">
+                        <span class="d-none" th:text="${foodReport.get(0).foodReportId}"></span>
+                      </i>
+                    </a>
+                  </th:block>
                 </th:block>
               </td>
             </tr>

@@ -51,6 +51,12 @@ function getFoodItemDetail(e) {
 /*
  * Order food
  */
+function confirmDeleteReport(e) {
+    const foodReportId = e.target.firstElementChild.innerHTML;
+    document.getElementById("btn-delete-report").href = "/food/order/delete-report?reportId=" + foodReportId;
+    openModal("confirmDeleteReportOrderModal");
+}
+
 function reportFoodOrder(e) {
     const foodOrderId = e.target.firstElementChild.innerHTML;
     const storeId = e.target.lastElementChild.innerHTML;
@@ -77,6 +83,12 @@ function getOrderNote(e) {
     const note = e.target.firstElementChild.innerHTML;
     document.getElementById("orderNote").innerHTML = note;
     openModal("noteOrderModal");
+}
+
+function getOrderReportContent(e) {
+    const reportContent = e.target.firstElementChild.innerHTML;
+    document.getElementById("reportContent").innerHTML = reportContent;
+    openModal("reportOrderContentModal");
 }
 
 /*

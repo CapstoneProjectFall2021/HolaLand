@@ -149,6 +149,11 @@ public interface IRepositoryQuery {
             "WHERE T2.food_store_online_id = ?";
     String FOOD_REPORT_INSERT_ONE = "INSERT INTO food_report (user_id, food_store_online_id, food_order_id, " +
             "food_report_content, food_report_create_date, food_report_deleted) VALUES (?, ?, ?, ?, ?, ?)";
+    String FOOD_REPORT_DELETE_ONE = "UPDATE food_report\n" +
+            "SET food_report_deleted = 1\n" +
+            "WHERE food_report_id = ?";
+    String FOOD_REPORT_CHECK_EXISTS = "SELECT * FROM food_report WHERE user_id = ? AND food_order_id = ? " +
+            "AND food_report_deleted = 0";
 
     String FOOD_STORE_ONLINE_TAG_GET_ALL = "SELECT * FROM food_store_online_tag";
     String FOOD_STORE_ONLINE_TAG_GET_ONE = "SELECT * FROM food_store_online_tag WHERE food_store_online_tag_id = ?";

@@ -193,6 +193,7 @@ public class FoodController {
             } else {
                 historyOrderList = foodOrderService.getAllUserOrderByUserIdAndStatus(currentUser.getId(), sttCode);
             }
+            model.addAttribute("foodReportService", foodReportService);
             model.addAttribute("page", 3);
         }
         model.addAttribute("format", new Format());
@@ -277,7 +278,6 @@ public class FoodController {
                 .foodReportCreateDate(currentDate)
                 .foodReportDeleted(false)
                 .build();
-
         boolean isCheck = foodReportService.save(foodReport);
         if (isCheck) {
             return "redirect:" + "/food/order";
@@ -299,6 +299,16 @@ public class FoodController {
                 .build();
 
         boolean isCheck = foodOrderService.addReasonReject(newFoodOrder);
+        if (isCheck) {
+            return "redirect:" + "/food/order";
+        } else {
+            return "404";
+        }
+    }
+
+    @GetMapping("/order/delete-report")
+    public String deleteReportOrder(@RequestParam("reportId") int reportId) {
+        boolean isCheck = foodReportService.delete(reportId);
         if (isCheck) {
             return "redirect:" + "/food/order";
         } else {
