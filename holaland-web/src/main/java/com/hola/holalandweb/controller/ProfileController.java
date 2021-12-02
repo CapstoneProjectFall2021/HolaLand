@@ -33,9 +33,13 @@ public class ProfileController {
     private User user;
 
     @Autowired
-    public ProfileController(PasswordEncoder passwordEncoder, UserRepository userRepository,
-                             RoleRepository roleRepository, UserDetailService userDetailService,
-                             UserAddressService userAddressService) {
+    public ProfileController(
+            PasswordEncoder passwordEncoder,
+            UserRepository userRepository,
+            RoleRepository roleRepository,
+            UserDetailService userDetailService,
+            UserAddressService userAddressService
+    ) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
