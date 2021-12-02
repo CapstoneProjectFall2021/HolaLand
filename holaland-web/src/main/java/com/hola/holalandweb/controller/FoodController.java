@@ -5,6 +5,7 @@ import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandcore.util.Format;
 import com.hola.holalandfood.entity.*;
 import com.hola.holalandfood.service.*;
+import com.hola.holalandfood.view.FoodCountSttOrder;
 import com.hola.holalandweb.constant.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,14 +13,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLOutput;
 import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/food")
@@ -36,6 +33,7 @@ public class FoodController {
     private final FoodOrderService foodOrderService;
     private final SttFoodService sttFoodService;
     private final FoodOrderDetailService foodOrderDetailService;
+    private final FoodCountSttOrderService foodCountSttOrderService;
 
     @Autowired
     public FoodController(
@@ -49,8 +47,8 @@ public class FoodController {
             FoodReportService foodReportService,
             FoodOrderService foodOrderService,
             SttFoodService sttFoodService,
-            FoodOrderDetailService foodOrderDetailService
-    ) {
+            FoodOrderDetailService foodOrderDetailService,
+            FoodCountSttOrderService foodCountSttOrderService) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTypeService = foodTypeService;
         this.foodStoreOnlineTagService = foodStoreOnlineTagService;
@@ -62,6 +60,7 @@ public class FoodController {
         this.foodOrderService = foodOrderService;
         this.sttFoodService = sttFoodService;
         this.foodOrderDetailService = foodOrderDetailService;
+        this.foodCountSttOrderService = foodCountSttOrderService;
     }
 
     @GetMapping("")
@@ -242,11 +241,21 @@ public class FoodController {
             model.addAttribute("foodReportService", foodReportService);
             model.addAttribute("page", 3);
         }
+
+        FoodCountSttOrder foodCountSttOrder;
+        if(isSeller) {
+            FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByUserId(currentUser.getId());
+            foodCountSttOrder = foodCountSttOrderService.getCountSttOrderSeller(foodStoreOnline.getFoodStoreOnlineId());
+        } else {
+            foodCountSttOrder = foodCountSttOrderService.getCountSttOrderStudent(currentUser.getId());
+        }
+
         model.addAttribute("format", new Format());
         model.addAttribute("sttCode", sttCode);
         model.addAttribute("sttTypeList", sttTypeList);
         model.addAttribute("foodOrderList", foodOrderList);
         model.addAttribute("historyOrderList", historyOrderList);
+        model.addAttribute("foodCountSttOrder", foodCountSttOrder);
     }
 
     @GetMapping("/order/updateSttFood")

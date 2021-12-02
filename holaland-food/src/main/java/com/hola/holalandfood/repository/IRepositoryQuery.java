@@ -194,4 +194,33 @@ public interface IRepositoryQuery {
     //Insert all tag for food_store_online_tag table
     String INSERT_ALL_TAG_BY_FOOD_STORE_ONLINE_ID = "INSERT INTO food_store_online_tag (food_store_online_id, food_tag_id) values(?,?)";
 
+    // Count stt food in history order
+    String COUNT_STT_ORDER_SELLER = "SELECT IFNULL(T1.reject_order,0) reject_order, IFNULL(T2.completed,0) completed, IFNULL(T3.cancel,0) cancel\n" +
+            "FROM\n" +
+            "(SELECT food_store_online_id, COUNT(stt_food_code) reject_order\n" +
+            "    FROM food_order\n" +
+            "    WHERE stt_food_code = 3 AND food_store_online_id = ?) T1\n" +
+            "LEFT OUTER JOIN (SELECT food_store_online_id, COUNT(stt_food_code) completed\n" +
+            "    FROM food_order\n" +
+            "    WHERE stt_food_code = 4 AND food_store_online_id = ?) T2\n" +
+            "ON T1.food_store_online_id = T2.food_store_online_id\n" +
+            "LEFT OUTER JOIN (SELECT food_store_online_id, COUNT(stt_food_code) cancel\n" +
+            "    FROM food_order\n" +
+            "    WHERE stt_food_code = 5 AND food_store_online_id = ?) T3\n" +
+            "ON T1.food_store_online_id = T3.food_store_online_id";
+
+    String COUNT_STT_ORDER_STUDENT = "SELECT IFNULL(T1.reject_order,0) reject_order, IFNULL(T2.completed,0) completed, IFNULL(T3.cancel,0) cancel\n" +
+            "FROM\n" +
+            "(SELECT user_id, COUNT(stt_food_code) reject_order\n" +
+            "    FROM food_order\n" +
+            "    WHERE stt_food_code = 3 AND user_id = ?) T1\n" +
+            "LEFT OUTER JOIN (SELECT user_id, COUNT(stt_food_code) completed\n" +
+            "    FROM food_order\n" +
+            "    WHERE stt_food_code = 4 AND user_id = ?) T2\n" +
+            "ON T1.user_id = T2.user_id\n" +
+            "LEFT OUTER JOIN (SELECT user_id, COUNT(stt_food_code) cancel\n" +
+            "    FROM food_order\n" +
+            "    WHERE stt_food_code = 5 AND user_id = ?) T3\n" +
+            "ON T1.user_id = T3.user_id";
+
 }

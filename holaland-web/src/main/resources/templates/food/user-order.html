@@ -76,24 +76,58 @@
               <i class="fas fa-list-ul"></i>
             </div>
             <div class="number">
-              <h4>0</h4>
+              <h4></h4>
             </div>
           </div>
           <div class="description">Tất cả</div>
         </a>
       </div>
-      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="type : ${sttTypeList}">
-        <a th:href="@{/food/order/type(sttCode=*{type.sttFoodId})}" class="label-info m-mb-16"
-           th:classappend="${type.sttFoodId == sttCode ? 'active' : ''}">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a th:href="@{/food/order/type(sttCode=3)}" class="label-info m-mb-16"
+           th:classappend="${sttCode == 3 ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
-              <i th:classappend="*{type.sttFoodIcon}"></i>
+              <i class="far fa-stop-circle"></i>
             </div>
             <div class="number">
-              <h4>0</h4>
+              <h4 th:text = "${foodCountSttOrder.rejectOrder}"></h4>
             </div>
           </div>
-          <div class="description" th:text="*{type.sttFoodValue}"></div>
+          <div class="description">
+            Đơn hàng đã từ chối
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a th:href="@{/food/order/type(sttCode=4)}" class="label-info m-mb-16"
+           th:classappend="${sttCode == 4 ? 'active' : ''}">
+          <div class="flex">
+            <div class="icon">
+              <i class="far fa-check-circle"></i>
+            </div>
+            <div class="number">
+              <h4 th:text = "${foodCountSttOrder.completed}"></h4>
+            </div>
+          </div>
+          <div class="description">
+            Đơn hàng đã hoàn thành
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a th:href="@{/food/order/type(sttCode=5)}" class="label-info m-mb-16"
+           th:classappend="${sttCode == 5 ? 'active' : ''}">
+          <div class="flex">
+            <div class="icon">
+              <i class="far fa-times-circle"></i>
+            </div>
+            <div class="number">
+              <h4 th:text = "${foodCountSttOrder.cancel}"></h4>
+            </div>
+          </div>
+          <div class="description">
+            Đơn hàng đã huỷ
+          </div>
         </a>
       </div>
     </div>
