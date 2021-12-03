@@ -93,7 +93,6 @@ public class FoodController {
         return "module-food";
     }
 
-
     @GetMapping("/online-store")
     public String goToOnlineStore(@RequestParam("id") Integer id, Model model) {
         addAttrStoreOnline(id, 0, 9, model);
@@ -303,7 +302,6 @@ public class FoodController {
             return "404";
         }
     }
-
 
     @PostMapping("/order/reject")
     public String addRejectReasonOrder(

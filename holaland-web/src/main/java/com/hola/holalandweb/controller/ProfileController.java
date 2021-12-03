@@ -102,4 +102,10 @@ public class ProfileController {
             return "404";
         }
     }
+
+    @GetMapping("/address-update")
+    public String addressUpdate(Model model) {
+        model.addAttribute("page", 4);
+        return "profile";
+    }
 }
