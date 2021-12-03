@@ -93,19 +93,20 @@ public class FoodController {
         return "module-food";
     }
 
-    @GetMapping("/online-store")
+
+    @GetMapping("/store")
     public String goToOnlineStore(@RequestParam("id") Integer id, Model model) {
         addAttrStoreOnline(id, 0, 9, model);
         return "module-food";
     }
 
-    @GetMapping("/online-store/tag")
+    @GetMapping("/store/tag")
     public String getFoodOnlineStoreByTag(@RequestParam("tagId") Integer tagId, @RequestParam("id") Integer id, Model model) {
         addAttrStoreOnline(id, tagId, 9, model);
         return "module-food";
     }
 
-    @GetMapping("/online-store/food-detail")
+    @GetMapping("/store/detail")
     public String getFoodDetail(
             @RequestParam("id") Integer id,
             @RequestParam("itemId") Integer itemId,
@@ -196,7 +197,7 @@ public class FoodController {
     }
 
     public void addAttrOrder(CustomUser currentUser, int sttCode, Model model) {
-        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
+        List<SttFood> sttTypeList = sttFoodService.getAllHistoryOrder();
         List<FoodOrder> foodOrderList;
         List<FoodOrder> historyOrderList;
 
@@ -257,7 +258,7 @@ public class FoodController {
         model.addAttribute("foodCountSttOrder", foodCountSttOrder);
     }
 
-    @GetMapping("/order/updateSttFood")
+    @GetMapping("/order/update-status-food")
     public String updateSttFoodOrder(@RequestParam("orderId") Integer foodOrderId) {
         FoodOrder foodOrder = FoodOrder.builder()
                 .foodOrderId(foodOrderId)
@@ -302,6 +303,7 @@ public class FoodController {
             return "404";
         }
     }
+
 
     @PostMapping("/order/reject")
     public String addRejectReasonOrder(

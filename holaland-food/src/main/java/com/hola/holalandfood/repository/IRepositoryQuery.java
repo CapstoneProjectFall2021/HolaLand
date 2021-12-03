@@ -186,7 +186,7 @@ public interface IRepositoryQuery {
 
     String STT_FOOD_GET_ALL = "SELECT * FROM stt_food";
     String STT_FOOD_GET_ONE = "SELECT * FROM stt_food WHERE stt_food_id = ?";
-    String STT_Food_GET_ALL_BY_HISTORY_ORDER = "SELECT * FROM stt_food WHERE stt_food_code BETWEEN 3 AND 5";
+    String STT_FOOD_GET_ALL_HISTORY_ORDER = "SELECT * FROM stt_food WHERE stt_food_code BETWEEN 3 AND 5 AND stt_food_name = 'FOOD_ORDER'";
 
     //Delete all food tag by food store online id
     String DELETE_ALL_TAG_BY_FOOD_STORE_ONLINE_ID = "DELETE FROM food_store_online_tag WHERE food_store_online_id = ?";

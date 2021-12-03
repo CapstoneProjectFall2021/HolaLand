@@ -102,7 +102,7 @@ function confirmDeleteFood(e) {
 
 function confirmCancelOrder(e) {
     const orderId = e.target.firstElementChild.innerHTML;
-    document.getElementById("btn-cancel-order").href = "/food/order/updateSttFood?orderId=" + orderId;
+    document.getElementById("btn-cancel-order").href = "/food/order/update-status-food?orderId=" + orderId;
     openModal("confirmCancelOrderModal");
 }
 

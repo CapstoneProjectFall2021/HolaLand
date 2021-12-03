@@ -21,7 +21,7 @@
           <tr th:each="foodOrderDetail, stt : ${foodOrderDetailList}">
             <td th:text="*{stt.index + 1}"></td>
             <td th:with="foodItem=${foodItemService.getOne(foodOrderDetail.foodItemId)}">
-              <a th:href="@{/food/online-store(id=${foodStoreOnline.foodStoreOnlineId})}"
+              <a th:href="@{/food/store(id=${foodStoreOnline.foodStoreOnlineId})}"
                    th:text="${foodItem.foodItemName}">Cơm hến xào</a></td>
             <td class="text-center" th:text="*{foodOrderDetail.foodItemQuantity}"></td>
             <td class="text-center">
@@ -40,7 +40,7 @@
       </div>
       <div class="modal-footer">
         <th:block sec:authorize="hasRole('MEMBER')" th:if="${orderStatus < 3}">
-          <a th:href="@{/food/order/updateSttFood(orderId=${orderId})}" class="btn btn-sm btn-secondary me-2">
+          <a th:href="@{/food/order/update-status-food(orderId=${orderId})}" class="btn btn-sm btn-secondary me-2">
             <i class="fas fa-times text-danger"></i>Huỷ đơn hàng
           </a>
         </th:block>

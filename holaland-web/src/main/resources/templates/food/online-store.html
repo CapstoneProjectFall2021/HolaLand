@@ -84,10 +84,10 @@
               <div class="col-md-12">
                 <div class="list-tag">
                   <div class="tags">
-                    <a class="tag" th:href="@{/food/online-store(id=${foodStoreOnline.foodStoreOnlineId})}">Tất cả</a>
+                    <a class="tag" th:href="@{/food/store(id=${foodStoreOnline.foodStoreOnlineId})}">Tất cả</a>
                     <th:block th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}">
                       <a class="tag"
-                         th:href="@{/food/online-store/tag(tagId=*{foodStoreOnlineTag.foodTagId}, id=${foodStoreOnline.foodStoreOnlineId})}"
+                         th:href="@{/food/store/tag(tagId=*{foodStoreOnlineTag.foodTagId}, id=${foodStoreOnline.foodStoreOnlineId})}"
                          th:text="*{foodStoreOnlineTag.foodTagName}">
                       </a>
                     </th:block>
