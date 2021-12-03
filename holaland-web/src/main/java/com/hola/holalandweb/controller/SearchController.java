@@ -7,11 +7,13 @@ import com.hola.holalandfood.service.FoodTagService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/search")
 public class SearchController {
 
     private final FoodItemService foodItemService;
@@ -24,14 +26,14 @@ public class SearchController {
         this.foodTagService = foodTagService;
     }
 
-    @GetMapping("/search")
+    @GetMapping("")
     public String search(Model model, @RequestParam("textSearch") String textSearch) {
         this.textSearch = textSearch;
         model.addAttribute("page", 1);
         return "search";
     }
 
-    @GetMapping("/search/food")
+    @GetMapping("/food")
     public String searchFood(Model model) {
         List<FoodItem> foodItemListSearch = foodItemService.search(textSearch);
         List<FoodTag> foodTagListSearch = foodTagService.search(textSearch);
