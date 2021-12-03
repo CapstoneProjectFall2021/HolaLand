@@ -140,8 +140,31 @@ public class ProfileController {
             return "login";
         }
         List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(currentUser.getId());
+        UserAddress newUserAddress = UserAddress.builder().build();
+        model.addAttribute("newUserAddress", newUserAddress);
         model.addAttribute("userAddressList", userAddressList);
         model.addAttribute("page", 4);
         return "profile";
+    }
+
+    @PostMapping("/update-address")
+    public String updateUserAddress(
+            @RequestParam("addressId") int addressId,
+            @RequestParam("userName") String userName,
+            @RequestParam("phone") String phone,
+            @RequestParam("address") String address
+    )
+    {
+        UserAddress newUserAddress = UserAddress.builder().build();
+        newUserAddress.setUserAddressId(addressId);
+        newUserAddress.setUserName(userName);
+        newUserAddress.setUserPhone(phone);
+        newUserAddress.setUserAddress(address);
+        boolean isCheck = userAddressService.update(newUserAddress);
+        if(isCheck) {
+            return "redirect:" + "/address-update";
+        }else {
+            return "404";
+        }
     }
 }

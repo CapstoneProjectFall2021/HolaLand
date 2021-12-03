@@ -28,4 +28,9 @@ public class UserAddressServiceImpl implements UserAddressService {
     public List<UserAddress> getAllAddressByUserId(int id) throws DataAccessException {
         return userAddressRepository.getAllAddressByUserId(id);
     }
+
+    @Override
+    public boolean update(UserAddress obj) throws DataAccessException {
+        return userAddressRepository.update(obj);
+    }
 }

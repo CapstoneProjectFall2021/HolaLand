@@ -10,4 +10,6 @@ public interface UserAddressRepository {
     List<UserAddress> getAllAddressByUserDetailId(int id) throws DataAccessException;
 
     List<UserAddress> getAllAddressByUserId(int id) throws DataAccessException;
+
+    boolean update(UserAddress obj) throws DataAccessException;
 }

@@ -30,4 +30,15 @@ public class UserAddressRepositoryImpl implements UserAddressRepository, IReposi
     public List<UserAddress> getAllAddressByUserId(int id) throws DataAccessException {
         return jdbcTemplate.query(GET_USER_ADDRESS_BY_USER_ID, new UserAddressMapper(), id);
     }
+
+    @Override
+    public boolean update(UserAddress obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                UPDATE_USER_ADDRESS_ONE,
+                obj.getUserName(),
+                obj.getUserPhone(),
+                obj.getUserAddress(),
+                obj.getUserAddressId()
+        ) > 0;
+    }
 }

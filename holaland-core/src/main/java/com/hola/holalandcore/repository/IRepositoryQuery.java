@@ -58,7 +58,12 @@ public interface IRepositoryQuery {
             "FROM user_address T1\n" +
             "INNER JOIN user_detail T2\n" +
             "ON T1.user_detail_id = T2.user_detail_id\n" +
-            "WHERE T2.user_id = ?";
+            "WHERE T2.user_id = ?\n" +
+            "AND user_address_deleted = 0";
+
+    String UPDATE_USER_ADDRESS_ONE = "UPDATE user_address\n" +
+            "SET user_name = ?, user_phone = ?, user_address = ?\n" +
+            "WHERE user_address_id = ?";
 
     String USER_DETAIL_UPDATE_ONE = "UPDATE user_detail\n" +
             "SET user_name = ?, user_dob = ?,  user_gender = ?, user_phone = ?, user_email = ?\n" +
@@ -67,4 +72,5 @@ public interface IRepositoryQuery {
     String UPDATE_USER_PASSWORD = "UPDATE user\n" +
             "SET user_password = ?\n" +
             "WHERE user_id = ?";
+
 }
