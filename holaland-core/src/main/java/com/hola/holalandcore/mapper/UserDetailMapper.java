@@ -14,7 +14,7 @@ public class UserDetailMapper implements RowMapper<UserDetail> {
                 .userDetailId(resultSet.getInt("user_detail_id"))
                 .userId(resultSet.getInt("user_id"))
                 .userDetailName(resultSet.getString("user_name"))
-                .userDetailDob(resultSet.getString("user_dob"))
+                .userDetailDob(resultSet.getDate("user_dob"))
                 .userDetailGender(resultSet.getInt("user_gender"))
                 .userDetailPhone(resultSet.getString("user_phone"))
                 .userDetailEmail(resultSet.getString("user_email"))

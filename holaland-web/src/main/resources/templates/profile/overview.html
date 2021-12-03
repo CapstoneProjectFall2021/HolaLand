@@ -86,7 +86,7 @@
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Ngày sinh</legend>
-          <input type="text" class="form-control" th:value="${userDetail.userDetailDob}" readonly>
+          <input type="text" class="form-control" th:value="${#dates.format(userDetail.userDetailDob, 'dd-MM-yyyy')}" readonly>
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-6 col-lg-4">
