@@ -1,14 +1,12 @@
 package com.hola.holalandweb.controller;
 
-import com.hola.holalandcore.entity.Role;
-import com.hola.holalandcore.entity.User;
-import com.hola.holalandcore.entity.UserAddress;
-import com.hola.holalandcore.entity.UserDetail;
+import com.hola.holalandcore.entity.*;
 import com.hola.holalandcore.repository.RoleRepository;
 import com.hola.holalandcore.repository.UserRepository;
 import com.hola.holalandcore.service.UserAddressService;
 import com.hola.holalandcore.service.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -29,8 +26,6 @@ public class ProfileController {
     private final RoleRepository roleRepository;
     private final UserDetailService userDetailService;
     private final UserAddressService userAddressService;
-
-    private User user;
 
     @Autowired
     public ProfileController(
@@ -48,10 +43,23 @@ public class ProfileController {
     }
 
     @GetMapping("/profile")
-    public String profile(Model model, Principal principal) {
-        this.user = userRepository.findByEmail(principal.getName());
-        UserDetail userDetail = userDetailService.getOneByUserId(this.user.getUserId());
+    public String profile(Model model, Authentication authentication) {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        UserDetail userDetail = userDetailService.getOneByUserId(currentUser.getId());
         List<UserAddress> userAddressList = userAddressService.getAllAddressByUserDetailId(userDetail.getUserDetailId());
+        List<Role> roles = roleRepository.getRolesByUserEmail(currentUser.getUsername());
+        String userRole="";
+        for (Role role : roles) {
+            userRole += (role.getRoleId() == 1 ? "Thành viên" : (role.getRoleId() == 2 ? "Nhà tuyển dụng"
+                    : (role.getRoleId() == 3 ? "Bán hàng" : "Khác")))
+                    + ((roles.indexOf(role) == (roles.size()-1)) ? "" : ", ");
+        }
+        model.addAttribute("userRole", userRole);
         model.addAttribute("userDetail", userDetail);
         model.addAttribute("userAddressList", userAddressList);
         model.addAttribute("page", 1);
@@ -59,8 +67,14 @@ public class ProfileController {
     }
 
     @GetMapping("/profile-update")
-    public String profileUpdate(Model model) {
-        UserDetail userDetail = userDetailService.getOneByUserId(this.user.getUserId());
+    public String profileUpdate(Model model, Authentication authentication) {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        UserDetail userDetail = userDetailService.getOneByUserId(currentUser.getId());
         UserDetail updateUser = UserDetail.builder().build();
         model.addAttribute("userDetail", userDetail);
         model.addAttribute("updateUser", updateUser);
@@ -71,13 +85,20 @@ public class ProfileController {
     @PostMapping("/update-profile-user")
     public String updateProfileUserByUserId(
             @ModelAttribute("updateUser") UserDetail updateUser,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            Authentication authentication
     ) {
         if (bindingResult.hasErrors()) {
             System.out.println("There was a error " + bindingResult);
             return "404";
         }
-        updateUser.setUserId(this.user.getUserId());
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        updateUser.setUserId(currentUser.getId());
         boolean isCheck = userDetailService.update(updateUser);
         if(isCheck) {
             return "redirect:" + "/profile-update";
@@ -90,11 +111,18 @@ public class ProfileController {
     public String updatePasswordUserByUserId(
             @RequestParam("oldPass") String oldPass,
             @RequestParam("newPass") String newPass,
-            @RequestParam("confirmNewPass") String confirmNewPass
+            @RequestParam("confirmNewPass") String confirmNewPass,
+            Authentication authentication
     ) {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
         boolean isCheck = false;
-        if(passwordEncoder.matches(oldPass, this.user.getUserPassword()) && newPass.equals(confirmNewPass)) {
-            isCheck = userRepository.updatePassword(passwordEncoder.encode(newPass),this.user.getUserId());
+        if(passwordEncoder.matches(oldPass, currentUser.getPassword()) && newPass.equals(confirmNewPass)) {
+            isCheck = userRepository.updatePassword(passwordEncoder.encode(newPass),currentUser.getId());
         }
         if(isCheck) {
             return "redirect:" + "/profile-update";
@@ -104,7 +132,15 @@ public class ProfileController {
     }
 
     @GetMapping("/address-update")
-    public String addressUpdate(Model model) {
+    public String addressUpdate(Model model, Authentication authentication) {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(currentUser.getId());
+        model.addAttribute("userAddressList", userAddressList);
         model.addAttribute("page", 4);
         return "profile";
     }

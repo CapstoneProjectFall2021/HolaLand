@@ -45,7 +45,20 @@ public interface IRepositoryQuery {
 
     String GET_USER_DETAIL_BY_USER_ID = "SELECT * FROM user_detail WHERE user_id = ?";
 
-    String GET_USER_ADDRESS_BY_USER_DETAIL_ID = "SELECT * FROM user_address WHERE user_detail_id = ?";
+    String GET_USER_ADDRESS_BY_USER_DETAIL_ID = "SELECT * FROM user_address WHERE user_detail_id = ? " +
+            "AND user_address_deleted = 0";
+    String GET_USER_ADDRESS_BY_USER_ID = "SELECT\n" +
+            "       T1.user_address_id,\n" +
+            "       T1.user_detail_id,\n" +
+            "       T1.user_name,\n" +
+            "       T1.user_phone,\n" +
+            "       T1.user_address,\n" +
+            "       T1.user_address_default,\n" +
+            "       T1.user_address_deleted\n" +
+            "FROM user_address T1\n" +
+            "INNER JOIN user_detail T2\n" +
+            "ON T1.user_detail_id = T2.user_detail_id\n" +
+            "WHERE T2.user_id = ?";
 
     String USER_DETAIL_UPDATE_ONE = "UPDATE user_detail\n" +
             "SET user_name = ?, user_dob = ?,  user_gender = ?, user_phone = ?, user_email = ?\n" +

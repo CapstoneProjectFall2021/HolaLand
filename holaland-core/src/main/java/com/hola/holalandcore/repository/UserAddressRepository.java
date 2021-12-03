@@ -8,4 +8,6 @@ import java.util.List;
 public interface UserAddressRepository {
 
     List<UserAddress> getAllAddressByUserDetailId(int id) throws DataAccessException;
+
+    List<UserAddress> getAllAddressByUserId(int id) throws DataAccessException;
 }

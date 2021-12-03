@@ -92,7 +92,8 @@
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Giới tính</legend>
-          <input type="text" class="form-control" th:value="${userDetail.userDetailGender == 1 ? 'Nam' : 'Nữ'}" readonly>
+          <input type="text" class="form-control" th:value="${userDetail.userDetailGender == 1 ? 'Nam' : 'Nữ'}"
+                 readonly>
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-6 col-lg-4">
@@ -110,13 +111,7 @@
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Vai trò</legend>
-          <th:block th:each="authority, iterStat : ${#authentication.getAuthorities()}">
-            <input type="text" class="form-control"
-                   th:value="${(authority.getAuthority() == 'ROLE_MEMBER'
-                   ? 'Thành viên' : (authority.getAuthority() == 'ROLE_RECRUITER'
-                   ? 'Nhà tuyển dụng' : (authority.getAuthority() == 'ROLE_SELLER'
-                   ? 'Bán hàng' : 'Khác'))) + (iterStat.last?'':',')}" readonly>
-          </th:block>
+          <input type="text" class="form-control" th:value="${userRole}" readonly>
         </fieldset>
       </div>
     </form>
@@ -132,19 +127,19 @@
       <div class="form-group col-12 col-md-6 col-lg-3">
         <fieldset>
           <legend>Họ và tên</legend>
-          <input type="text" class="form-control" th:value="${userAddress.userName}" readonly>
+          <input type="text" class="form-control" th:value="*{userAddress.userName}" readonly>
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-6 col-lg-3">
         <fieldset>
           <legend>Số điện thoại</legend>
-          <input type="text" class="form-control" th:value="${userAddress.userPhone}" readonly>
+          <input type="text" class="form-control" th:value="*{userAddress.userPhone}" readonly>
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-12 col-lg-6 mb-0">
         <fieldset>
           <legend>Địa chỉ</legend>
-          <input type="text" class="form-control" th:value="${userAddress.userAddress}" readonly>
+          <input type="text" class="form-control" th:value="*{userAddress.userAddress}" readonly>
         </fieldset>
       </div>
     </form>
