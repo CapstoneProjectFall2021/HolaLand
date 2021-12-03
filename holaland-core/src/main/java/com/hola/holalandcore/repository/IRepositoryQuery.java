@@ -59,13 +59,32 @@ public interface IRepositoryQuery {
             "INNER JOIN user_detail T2\n" +
             "ON T1.user_detail_id = T2.user_detail_id\n" +
             "WHERE T2.user_id = ?\n" +
-            "AND user_address_deleted = 0";
+            "AND T1.user_address_deleted = 0";
 
     String INSERT_USER_ADDRESS_ONE = "INSERT INTO user_address(user_detail_id, user_name, user_phone, user_address, " +
             "user_address_default, user_address_deleted) VALUES (?, ?, ?, ?, ?, ?)";
 
     String UPDATE_USER_ADDRESS_ONE = "UPDATE user_address\n" +
             "SET user_name = ?, user_phone = ?, user_address = ?\n" +
+            "WHERE user_address_id = ?";
+
+    String GET_CURRENT_USER_ADDRESS_DEFAULT_BY_USER_ID = "SELECT\n" +
+            "      T1.user_address_id,\n" +
+            "      T1.user_detail_id,\n" +
+            "      T1.user_name,\n" +
+            "      T1.user_phone,\n" +
+            "      T1.user_address,\n" +
+            "      T1.user_address_default,\n" +
+            "      T1.user_address_deleted\n" +
+            "FROM user_address T1\n" +
+            "INNER JOIN user_detail T2\n" +
+            "ON T1.user_detail_id = T2.user_detail_id\n" +
+            "WHERE T2.user_id = ?\n" +
+            "AND T1.user_address_default = 1\n" +
+            "AND T1.user_address_deleted = 0";
+
+    String UPDATE_USER_ADDRESS_DEFAULT = "UPDATE user_address\n" +
+            "SET user_address_default = ?\n" +
             "WHERE user_address_id = ?";
 
     String DELETE_USER_ADDRESS_ONE = "UPDATE user_address\n" +

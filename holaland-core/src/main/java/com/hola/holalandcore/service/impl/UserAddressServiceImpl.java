@@ -30,6 +30,11 @@ public class UserAddressServiceImpl implements UserAddressService {
     }
 
     @Override
+    public List<UserAddress> getCurrentDefaultAddressByUserId(int userId) throws DataAccessException {
+        return userAddressRepository.getCurrentDefaultAddressByUserId(userId);
+    }
+
+    @Override
     public boolean save(UserAddress obj) throws DataAccessException {
         return userAddressRepository.save(obj);
     }
@@ -37,6 +42,11 @@ public class UserAddressServiceImpl implements UserAddressService {
     @Override
     public boolean update(UserAddress obj) throws DataAccessException {
         return userAddressRepository.update(obj);
+    }
+
+    @Override
+    public boolean updateDefaultAddress(boolean isDefault, int id) throws DataAccessException {
+        return userAddressRepository.updateDefaultAddress(isDefault, id);
     }
 
     @Override

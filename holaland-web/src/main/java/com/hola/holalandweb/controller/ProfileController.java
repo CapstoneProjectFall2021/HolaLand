@@ -205,4 +205,28 @@ public class ProfileController {
             return "404";
         }
     }
+
+    @GetMapping("/address/default")
+    public String changeUserAddressDefault(
+            @RequestParam("addressId") int addressId,
+            Authentication authentication
+    )
+    {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        List<UserAddress> userAddressDefault = userAddressService.getCurrentDefaultAddressByUserId(currentUser.getId());
+        if(userAddressDefault.size() != 0) {
+            userAddressService.updateDefaultAddress(false,userAddressDefault.get(0).getUserAddressId());
+        }
+        boolean isCheck = userAddressService.updateDefaultAddress(true,addressId);
+        if(isCheck) {
+            return "redirect:" + "/address-update";
+        }else {
+            return "404";
+        }
+    }
 }

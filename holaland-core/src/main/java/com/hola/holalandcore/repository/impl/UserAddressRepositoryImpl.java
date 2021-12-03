@@ -32,6 +32,11 @@ public class UserAddressRepositoryImpl implements UserAddressRepository, IReposi
     }
 
     @Override
+    public List<UserAddress> getCurrentDefaultAddressByUserId(int userId) throws DataAccessException {
+        return jdbcTemplate.query(GET_CURRENT_USER_ADDRESS_DEFAULT_BY_USER_ID, new UserAddressMapper(), userId);
+    }
+
+    @Override
     public boolean save(UserAddress obj) throws DataAccessException {
         return jdbcTemplate.update(
                 INSERT_USER_ADDRESS_ONE,
@@ -52,6 +57,15 @@ public class UserAddressRepositoryImpl implements UserAddressRepository, IReposi
                 obj.getUserPhone(),
                 obj.getUserAddress(),
                 obj.getUserAddressId()
+        ) > 0;
+    }
+
+    @Override
+    public boolean updateDefaultAddress(boolean isDefault, int id) throws DataAccessException {
+        return jdbcTemplate.update(
+                UPDATE_USER_ADDRESS_DEFAULT,
+                isDefault,
+                id
         ) > 0;
     }
 

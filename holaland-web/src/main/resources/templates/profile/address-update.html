@@ -54,7 +54,7 @@
               <span class="d-none" th:text="*{userAddress.userAddressId}"></span>
               <i class="fas fa-ban text-danger"></i>Xoá
             </a>
-            <a href="javascript:void(0)" class="btn btn-md btn-secondary me-2">
+            <a th:href="@{/address/default(addressId=*{userAddress.userAddressId})}" class="btn btn-md btn-secondary me-2">
               <i class="fas fa-map-marker-alt text-warning"></i>Thiết lập mặc định
             </a>
           </th:block>

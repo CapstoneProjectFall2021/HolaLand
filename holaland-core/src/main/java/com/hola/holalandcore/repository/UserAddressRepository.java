@@ -11,9 +11,13 @@ public interface UserAddressRepository {
 
     List<UserAddress> getAllAddressByUserId(int id) throws DataAccessException;
 
+    List<UserAddress> getCurrentDefaultAddressByUserId(int userId) throws DataAccessException;
+
     boolean save(UserAddress obj) throws DataAccessException;
 
     boolean update(UserAddress obj) throws DataAccessException;
+
+    boolean updateDefaultAddress(boolean isDefault, int id) throws DataAccessException;
 
     boolean delete(int id) throws DataAccessException;
 }
