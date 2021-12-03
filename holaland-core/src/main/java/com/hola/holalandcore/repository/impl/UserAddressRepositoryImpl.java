@@ -32,6 +32,19 @@ public class UserAddressRepositoryImpl implements UserAddressRepository, IReposi
     }
 
     @Override
+    public boolean save(UserAddress obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                INSERT_USER_ADDRESS_ONE,
+                obj.getUserDetailId(),
+                obj.getUserName(),
+                obj.getUserPhone(),
+                obj.getUserAddress(),
+                obj.getUserAddressDefault(),
+                obj.getUserAddressDeleted()
+        ) > 0;
+    }
+
+    @Override
     public boolean update(UserAddress obj) throws DataAccessException {
         return jdbcTemplate.update(
                 UPDATE_USER_ADDRESS_ONE,

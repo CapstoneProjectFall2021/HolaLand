@@ -61,6 +61,9 @@ public interface IRepositoryQuery {
             "WHERE T2.user_id = ?\n" +
             "AND user_address_deleted = 0";
 
+    String INSERT_USER_ADDRESS_ONE = "INSERT INTO user_address(user_detail_id, user_name, user_phone, user_address, " +
+            "user_address_default, user_address_deleted) VALUES (?, ?, ?, ?, ?, ?)";
+
     String UPDATE_USER_ADDRESS_ONE = "UPDATE user_address\n" +
             "SET user_name = ?, user_phone = ?, user_address = ?\n" +
             "WHERE user_address_id = ?";

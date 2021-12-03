@@ -11,6 +11,8 @@ public interface UserAddressService {
 
     List<UserAddress> getAllAddressByUserId(int id) throws DataAccessException;
 
+    boolean save(UserAddress obj) throws DataAccessException;
+
     boolean update(UserAddress obj) throws DataAccessException;
 
     boolean delete(int id) throws DataAccessException;

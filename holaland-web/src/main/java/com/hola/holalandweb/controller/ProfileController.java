@@ -140,8 +140,6 @@ public class ProfileController {
             return "login";
         }
         List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(currentUser.getId());
-        UserAddress newUserAddress = UserAddress.builder().build();
-        model.addAttribute("newUserAddress", newUserAddress);
         model.addAttribute("userAddressList", userAddressList);
         model.addAttribute("page", 4);
         return "profile";
@@ -161,6 +159,36 @@ public class ProfileController {
         newUserAddress.setUserPhone(phone);
         newUserAddress.setUserAddress(address);
         boolean isCheck = userAddressService.update(newUserAddress);
+        if(isCheck) {
+            return "redirect:" + "/address-update";
+        }else {
+            return "404";
+        }
+    }
+
+    @PostMapping("/add-address")
+    public String addNewUserAddress(
+            @RequestParam("newUserName") String newUserName,
+            @RequestParam("newPhone") String newPhone,
+            @RequestParam("newAddress") String newAddress,
+            Authentication authentication
+    )
+    {
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        UserDetail userDetail = userDetailService.getOneByUserId(currentUser.getId());
+        UserAddress newUserAddress = UserAddress.builder().build();
+        newUserAddress.setUserDetailId(userDetail.getUserDetailId());
+        newUserAddress.setUserName(newUserName);
+        newUserAddress.setUserPhone(newPhone);
+        newUserAddress.setUserAddress(newAddress);
+        newUserAddress.setUserAddressDefault(false);
+        newUserAddress.setUserAddressDeleted(false);
+        boolean isCheck = userAddressService.save(newUserAddress);
         if(isCheck) {
             return "redirect:" + "/address-update";
         }else {

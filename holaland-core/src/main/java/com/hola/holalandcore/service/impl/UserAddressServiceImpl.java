@@ -30,6 +30,11 @@ public class UserAddressServiceImpl implements UserAddressService {
     }
 
     @Override
+    public boolean save(UserAddress obj) throws DataAccessException {
+        return userAddressRepository.save(obj);
+    }
+
+    @Override
     public boolean update(UserAddress obj) throws DataAccessException {
         return userAddressRepository.update(obj);
     }
