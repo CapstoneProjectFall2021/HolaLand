@@ -33,4 +33,9 @@ public class UserAddressServiceImpl implements UserAddressService {
     public boolean update(UserAddress obj) throws DataAccessException {
         return userAddressRepository.update(obj);
     }
+
+    @Override
+    public boolean delete(int id) throws DataAccessException {
+        return userAddressRepository.delete(id);
+    }
 }

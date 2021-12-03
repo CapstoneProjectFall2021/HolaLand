@@ -41,4 +41,12 @@ public class UserAddressRepositoryImpl implements UserAddressRepository, IReposi
                 obj.getUserAddressId()
         ) > 0;
     }
+
+    @Override
+    public boolean delete(int id) throws DataAccessException {
+        return jdbcTemplate.update(
+                DELETE_USER_ADDRESS_ONE,
+                id
+        ) > 0;
+    }
 }

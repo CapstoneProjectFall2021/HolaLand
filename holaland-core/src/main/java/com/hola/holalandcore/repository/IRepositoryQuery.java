@@ -65,6 +65,10 @@ public interface IRepositoryQuery {
             "SET user_name = ?, user_phone = ?, user_address = ?\n" +
             "WHERE user_address_id = ?";
 
+    String DELETE_USER_ADDRESS_ONE = "UPDATE user_address\n" +
+            "SET user_address_deleted = 1\n" +
+            "WHERE user_address_id = ?";
+
     String USER_DETAIL_UPDATE_ONE = "UPDATE user_detail\n" +
             "SET user_name = ?, user_dob = ?,  user_gender = ?, user_phone = ?, user_email = ?\n" +
             "WHERE user_id = ?";

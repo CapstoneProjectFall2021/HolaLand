@@ -167,4 +167,14 @@ public class ProfileController {
             return "404";
         }
     }
+
+    @GetMapping("/address/delete")
+    public String deleteUserAddress(@RequestParam("addressId") int addressId) {
+        boolean isCheck = userAddressService.delete(addressId);
+        if(isCheck) {
+            return "redirect:" + "/address-update";
+        }else {
+            return "404";
+        }
+    }
 }
