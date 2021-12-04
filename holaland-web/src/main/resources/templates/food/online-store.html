@@ -176,6 +176,14 @@
                         <div class="comment-content" th:with="user=${userDetailService.getOneByUserId(report.userId)}">
                           <h3 th:text="${user.userDetailName}"></h3>
                           <p th:text="*{report.foodReportContent}"></p>
+                          <p class="order-report" th:with="order=${foodOrderService.getOne(report.foodOrderId)}">
+                            Đơn hàng: <a th:href="@{/food/store/report/detail(orderId=*{order.foodOrderId})}">
+                            #<span th:text="${format.orderId(order.foodOrderId)}"></span></a>
+                            <i class="bi bi-calendar3-week ms-2 me-1"></i>
+                            <span th:text="${#dates.format(order.foodOrderCreatedDate, 'dd-MM-yyyy')}"></span>
+                            <i class="far fa-clock ms-2 me-1"></i>
+                            <span th:text="${#dates.format(order.foodOrderCreatedDate, 'HH:mm:ss')}"></span>
+                          </p>
                         </div>
                         <div class="time">
                           <p th:text="${#dates.format(report.foodReportCreateDate, 'dd-MM-yyyy HH:mm')}"></p>
