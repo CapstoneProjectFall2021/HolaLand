@@ -1,14 +1,14 @@
 <!-- Modal List Order Detail -->
-<div class="modal fade" id="listOrderDetailModal" tabindex="-1" aria-labelledby="listOrderDetailModalLabel"
-     aria-hidden="true" th:fragment="listOrderDetailModal">
+<div class="modal fade" id="orderDetailModal" tabindex="-1" aria-labelledby="orderDetailModalLabel"
+     aria-hidden="true" th:fragment="orderDetailModal">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="listOrderDetailModalLabel">Thông tin giao hàng</h5>
+        <h5 class="modal-title" id="orderDetailModalLabel">Thông tin giao hàng</h5>
       </div>
       <div class="modal-body">
         <div class="user-info">
-          <form class="row panel-form mx-0 p-0" sec:authorize="hasRole('SELLER')">
+          <form class="row panel-form mx-0 p-0">
             <div class="form-group col-12 col-md-6 col-lg-6 ps-0">
               <fieldset>
                 <legend>Họ và tên</legend>
@@ -35,7 +35,9 @@
             </div>
           </form>
         </div>
-        <h5 class="modal-sub-title">Chi tiết đơn hàng</h5>
+        <h5 class="modal-sub-title">Chi tiết đơn hàng
+          <span class="text-info" th:text="${'#' + format.orderId(foodOrderDetailList.get(0).foodOrderId)}"></span>
+        </h5>
         <table class="table mb-0">
           <thead>
           <tr>
@@ -49,30 +51,25 @@
           <tbody>
           <tr th:each="foodOrderDetail, stt : ${foodOrderDetailList}">
             <td th:text="*{stt.index + 1}"></td>
-            <td th:with="foodItem=${foodItemService.getOne(foodOrderDetail.foodItemId)}">
-              <a th:href="@{/food/store(id=${foodStoreOnline.foodStoreOnlineId})}"
-                   th:text="${foodItem.foodItemName}">Cơm hến xào</a></td>
-            <td class="text-center" th:text="*{foodOrderDetail.foodItemQuantity}"></td>
+            <td>
+              <a th:href="@{/food/store(id=${foodStoreOnlineId})}"
+                 th:text="${foodOrderDetail.foodItemName}">
+              </a>
+            </td>
+            <td class="text-center">
+              <span th:text="*{foodOrderDetail.foodItemQuantity}"></span>
+            </td>
             <td class="text-center">
               <span th:text="*{#numbers.formatInteger(foodOrderDetail.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
             </td>
             <td class="text-end">
-              <span th:text="*{#numbers.formatInteger(foodOrderDetail.foodItemQuantity * foodOrderDetail.foodItemPrice,
-              3, 'POINT')}"></span><sup>đ</sup>
+              <span th:text="*{#numbers.formatInteger(foodOrderDetail.foodItemQuantity * foodOrderDetail.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
             </td>
           </tr>
           </tbody>
         </table>
-        <div class="contact-mobile mt-3" sec:authorize="hasRole('MEMBER')">
-          Số điện thoại liên hệ: <span class="text-info">0922 235 222</span>
-        </div>
       </div>
       <div class="modal-footer">
-        <th:block sec:authorize="hasRole('MEMBER')" th:if="${orderStatus < 3}">
-          <a th:href="@{/food/order/update-status-food(orderId=${orderId})}" class="btn btn-sm btn-secondary me-2">
-            <i class="fas fa-times text-danger"></i>Huỷ đơn hàng
-          </a>
-        </th:block>
         <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
       </div>
     </div>

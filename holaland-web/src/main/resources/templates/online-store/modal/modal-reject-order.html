@@ -1,0 +1,29 @@
+<!-- Modal reject Order -->
+<div class="modal fade" id="rejectOrderModal" tabindex="-1" aria-labelledby="rejectOrderModalLabel" aria-hidden="true"
+     th:fragment="rejectOrderModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="rejectOrderModalLabel">Từ chối đơn hàng</h5>
+      </div>
+      <form id="rejectForm" class="row" method="post" th:action="@{/food/order/reject}">
+        <div class="modal-body">
+          <div class="form-group col-md-12 m-0">
+            <input type="hidden" name="orderId" id="orderRejectId">
+            <fieldset>
+              <legend>Lý do từ chối</legend>
+              <textarea class="form-control" rows="3" name="reasonReject"></textarea>
+            </fieldset>
+          </div>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary me-2"
+           onclick="document.getElementById('rejectForm').submit();">
+          <i class="fas fa-check text-success"></i>Xác nhận
+        </a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+      </div>
+    </div>
+  </div>
+</div>
