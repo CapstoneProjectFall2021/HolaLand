@@ -42,11 +42,11 @@
                 <i class="fas fa-pizza-slice fa-fw"></i>Đặt đồ online
               </a>
             </li>
-            <li>
-              <a th:href="@{/food/offline-store}" th:classappend="${page == 2 ? 'active' : ''}">
-                <i class="fas fa-store fa-fw"></i>Danh sách nhà hàng
-              </a>
-            </li>
+<!--            <li>-->
+<!--              <a th:href="@{/food/offline-store}" th:classappend="${page == 2 ? 'active' : ''}">-->
+<!--                <i class="fas fa-store fa-fw"></i>Danh sách nhà hàng-->
+<!--              </a>-->
+<!--            </li>-->
             <li sec:authorize="hasRole('MEMBER')">
               <a th:href="@{/food/order}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
@@ -79,11 +79,6 @@
         <th:block th:if="${page == 3}">
           <div th:replace="food/user-order :: user-order"></div>
         </th:block>
-        <!-- Seller order -->
-<!--        <th:block th:if="${page == 4}">-->
-<!--          <div th:replace="food/seller-order :: seller-order"></div>-->
-<!--        </th:block>-->
-        <!-- Online store info -->
         <th:block th:if="${page == 9}">
           <div th:replace="food/online-store :: online-store"></div>
         </th:block>
