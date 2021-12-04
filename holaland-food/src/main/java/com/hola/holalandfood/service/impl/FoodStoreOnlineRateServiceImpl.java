@@ -33,4 +33,9 @@ public class FoodStoreOnlineRateServiceImpl implements FoodStoreOnlineRateServic
     public FoodStoreOnlineRate getOne(int id) throws DataAccessException {
         return foodStoreOnlineRateRepository.getOne(id);
     }
+
+    @Override
+    public boolean insert(FoodStoreOnlineRate obj) throws DataAccessException {
+        return foodStoreOnlineRateRepository.insert(obj);
+    }
 }

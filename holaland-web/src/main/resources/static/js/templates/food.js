@@ -33,7 +33,7 @@ function addFoodToCart(e) {
 }
 
 /*
- * Online store food item
+ * Online store
  */
 function getFoodItemDetail(e) {
     const arr = e.target.id.split("-");
@@ -46,6 +46,12 @@ function getFoodItemDetail(e) {
     document.getElementById("food-item-name-modal").innerHTML = foodItemName;
     document.getElementById("food-item-price-modal").innerHTML = foodItemPrice;
     openModal("foodDetailModal");
+}
+
+function insertNewRate(e) {
+    const foodStoreOnlineId = e.target.firstElementChild.innerHTML;
+    document.getElementById("storeId").value = foodStoreOnlineId
+    openModal("onlineStoreRateModal");
 }
 
 /*

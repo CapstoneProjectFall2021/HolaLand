@@ -13,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -96,9 +97,39 @@ public class FoodController {
 
     @GetMapping("/store")
     public String goToOnlineStore(@RequestParam("id") Integer id, Model model) {
+        FoodStoreOnlineRate newRate = FoodStoreOnlineRate.builder().build();
         addAttrStoreOnline(id, 0, 9, model);
-        model.addAttribute("cart", true);
+        model.addAttribute("newRate", newRate);
         return "module-food";
+    }
+
+    @PostMapping("/store/rate")
+    public String insertNewRate(@ModelAttribute("newRate") FoodStoreOnlineRate newRate,
+                                BindingResult bindingResult,
+                                Authentication authentication
+    )
+    {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+        CustomUser currentUser;
+
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+        Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
+        newRate.setUserId(currentUser.getId());
+        newRate.setFoodStoreOnlineRateCreateTime(currentDate);
+        newRate.setFoodStoreOnlineDeleted(false);
+        boolean isCheck = foodStoreOnlineRateService.insert(newRate);
+        if (isCheck) {
+            return "redirect:" + "/food/store?id=" + newRate.getFoodStoreOnlineId();
+        } else {
+            return "404";
+        }
     }
 
     @GetMapping("/store/tag")

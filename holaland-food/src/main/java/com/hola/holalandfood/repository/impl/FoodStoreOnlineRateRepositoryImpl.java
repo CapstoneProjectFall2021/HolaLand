@@ -35,4 +35,17 @@ public class FoodStoreOnlineRateRepositoryImpl implements FoodStoreOnlineRateRep
     public FoodStoreOnlineRate getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(FOOD_STORE_ONLINE_RATE_GET_ONE,new FoodStoreOnlineRateMapper(),id);
     }
+
+    @Override
+    public boolean insert(FoodStoreOnlineRate obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                FOOF_STORE_ONLINE_RATE_INSERT,
+                obj.getUserId(),
+                obj.getFoodStoreOnlineId(),
+                obj.getFoodStoreOnlineRatePoint(),
+                obj.getFoodStoreOnlineRateComment(),
+                obj.getFoodStoreOnlineRateCreateTime(),
+                obj.isFoodStoreOnlineDeleted()
+        ) > 0;
+    }
 }

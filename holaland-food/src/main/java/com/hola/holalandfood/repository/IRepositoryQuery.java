@@ -130,6 +130,14 @@ public interface IRepositoryQuery {
     String FOOD_STORE_ONLINE_RATE_GET_ALL = "SELECT * FROM food_store_online_rate";
     String FOOD_STORE_ONLINE_RATE_GET_ONE = "SELECT * FROM food_store_online_rate WHERE food_store_online_rate_id = ?";
     String FOOD_STORE_ONLINE_RATE_GET_ALL_BY_STORE_ONLINE_ID = "SELECT * FROM food_store_online_rate WHERE food_store_online_id = ?";
+    String FOOF_STORE_ONLINE_RATE_INSERT = "INSERT INTO food_store_online_rate (" +
+            " user_id," +
+            " food_store_online_id," +
+            " food_store_online_rate_point," +
+            " food_store_online_rate_comment," +
+            " food_store_online_rate_create_time," +
+            " food_store_online_rate_deleted) " +
+            "VALUES (?, ?, ?, ?, ?, ?);";
 
     String FOOD_REPORT_GET_ALL = "SELECT * FROM food_report";
     String FOOD_REPORT_GET_ONE = "SELECT * FROM food_report WHERE food_report_id = ?";
