@@ -52,7 +52,7 @@ public class ProfileController {
     public String profile(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         UserDetail userDetail = userDetailService.getOneByUserId(currentUser.getId());
-        List<UserAddress> userAddressList = userAddressService.getAllAddressByUserDetailId(userDetail.getUserDetailId());
+        List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(userDetail.getUserDetailId());
 
         model.addAttribute("userDetail", userDetail);
         model.addAttribute("userAddressList", userAddressList);
@@ -148,10 +148,9 @@ public class ProfileController {
             Authentication authentication
     ) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        UserDetail userDetail = userDetailService.getOneByUserId(currentUser.getId());
 
         UserAddress newUserAddress = UserAddress.builder().build();
-        newUserAddress.setUserDetailId(userDetail.getUserDetailId());
+        newUserAddress.setUserId(currentUser.getId());
         newUserAddress.setUserName(newUserName);
         newUserAddress.setUserPhone(newPhone);
         newUserAddress.setUserAddress(newAddress);
@@ -178,10 +177,6 @@ public class ProfileController {
     @GetMapping("/address/default")
     public String changeUserAddressDefault(@RequestParam("addressId") int addressId, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        List<UserAddress> userAddressDefault = userAddressService.getCurrentDefaultAddressByUserId(currentUser.getId());
-        if(userAddressDefault.size() != 0) {
-            userAddressService.updateDefaultAddress(false,userAddressDefault.get(0).getUserAddressId());
-        }
         boolean isCheck = userAddressService.updateDefaultAddress(true,addressId);
         if(isCheck) {
             return "redirect:" + "/address-update";
