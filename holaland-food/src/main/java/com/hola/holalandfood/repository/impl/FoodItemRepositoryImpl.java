@@ -54,4 +54,10 @@ public class FoodItemRepositoryImpl implements FoodItemRepository, IRepositoryQu
                 obj.getFoodItemId()
         ) > 0;
     }
+
+    @Override
+    public List<FoodItem> search(String textSearch) throws DataAccessException {
+        return jdbcTemplate.query(FOOD_ITEM_SEARCH, new FoodItemMapper(), "%" + textSearch + "%");
+    }
+
 }
