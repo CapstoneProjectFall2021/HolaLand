@@ -12,11 +12,11 @@
             <button class="btn-search" id="search" type="submit"><i class="bi bi-search"></i></button>
           </form>
         </li>
-        <li class="navbar-btn dropdown">
+        <li class="navbar-btn dropdown d-none" id="food-cart">
           <a class="dropdown-toggle" href="javascript:void(0)">
             <i class="bi bi-bag-plus m-0"></i>
           </a>
-          <span id="numberFoodItemInCart" class="notification-dot">3</span>
+          <span id="number-food-item-in-cart" class="notification-dot">3</span>
         </li>
 <!--        <li sec:authorize="isAuthenticated()" class="navbar-btn dropdown">-->
 <!--          <a aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0)"-->
@@ -140,11 +140,11 @@
           </div>
         </li>
         <li><a th:href="@{/fpt-university}"><i class="fas fa-university fa-fw"></i>FPT University</a></li>
-        <li><a href="#"><i class="fas fa-graduation-cap fa-fw"></i>Học tập</a></li>
+<!--        <li><a href="#"><i class="fas fa-graduation-cap fa-fw"></i>Học tập</a></li>-->
         <li><a th:href="@{/works}"><i class="fas fa-user-check fa-fw"></i>Công việc</a></li>
-        <li><a href="#"><i class="fas fa-cart-plus fa-fw"></i>Mua sắm</a></li>
+<!--        <li><a href="#"><i class="fas fa-cart-plus fa-fw"></i>Mua sắm</a></li>-->
         <li><a th:href="@{/food}"><i class="fas fa-pizza-slice fa-fw"></i>Dịch vụ Ăn - Uống</a></li>
-        <li><a href="#"><i class="fab fa-xbox fa-fw"></i>Vui chơi - Giải trí</a></li>
+<!--        <li><a href="#"><i class="fab fa-xbox fa-fw"></i>Vui chơi - Giải trí</a></li>-->
         <li><a th:href="@{/traffic}"><i class="fas fa-bus-alt fa-fw"></i>Giao thông</a></li>
         <li><a href="#"><i class="fas fa-bars fa-fw"></i>Khác</a></li>
       </ul>

@@ -10,11 +10,12 @@ function showToast(id) {
     const toast = new bootstrap.Toast(document.getElementById(id));
     toast.show();
 }
+
 /*
  * Address
  */
 function confirmDeleteUserAddress(e) {
     const addressId = e.target.firstElementChild.innerHTML;
-    document.getElementById("btn-delete-address").href = "/address/delete?addressId="+ addressId;
+    document.getElementById("btn-delete-address").href = "/profile/address/delete?addressId="+ addressId;
     openModal("confirmDeleteAddressModal");
 }

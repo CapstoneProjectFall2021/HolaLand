@@ -1,4 +1,4 @@
-.data-tables {
+.datatable {
   margin-top: 2px;
   margin-bottom: 2px;
 }
@@ -90,7 +90,7 @@
   float: right;
 }
 
-.data-tables label {
+.datatable label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 20px;
@@ -106,7 +106,7 @@
 
 /* Customer - Select */
 
-label select {
+.datatable label select {
   margin: 0 5px;
   border: 1px solid var(--secondary-border-color);
   color: var(--secondary-text);
@@ -115,18 +115,18 @@ label select {
   border-radius: 8px;
 }
 
-label select:focus {
+.datatable label select:focus {
   outline-color: #555;
 }
 
-label select option {
+.datatable label select option {
   background-color: #fff;
 }
 
 
 /* Customer - Search */
 
-label input {
+.datatable label input {
   margin-left: 10px;
   border: 1px solid var(--secondary-border-color);
   color: var(--secondary-text);
@@ -137,7 +137,7 @@ label input {
   border-radius: 8px;
 }
 
-label input:focus {
+.datatable label input:focus {
   outline: none;
 }
 

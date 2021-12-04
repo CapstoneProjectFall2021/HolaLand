@@ -66,23 +66,23 @@
         <h1 class="title fix-mb-title fix-mt-title">Đổi mật khẩu</h1>
       </div>
     </div>
-    <form id="updateUserPasswordForm" class="row panel-form mx-0" method="post" th:action="@{/profile/change-password}">
+    <form id="updateUserPasswordForm" class="row panel-form mx-0" method="post" th:action="@{/profile/password/update}">
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Mật khẩu cũ</legend>
-          <input type="password" class="form-control" th:name="oldPass">
+          <input type="password" class="form-control" name="oldPass">
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Mật khẩu mới</legend>
-          <input type="password" class="form-control" th:name="newPass">
+          <input type="password" class="form-control" name="newPass">
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Xác nhận mật khẩu mới</legend>
-          <input type="password" class="form-control" th:name="confirmNewPass">
+          <input type="password" class="form-control" name="confirmNewPass">
         </fieldset>
       </div>
       <div class="col-md-12 text-end mt-2">

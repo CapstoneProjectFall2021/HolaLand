@@ -20,22 +20,23 @@ public class UserAddressServiceImpl implements UserAddressService {
     }
 
     @Override
-    public List<UserAddress> getAllAddressByUserDetailId(int id) throws DataAccessException {
-        return userAddressRepository.getAllAddressByUserDetailId(id);
-    }
-
-    @Override
     public List<UserAddress> getAllAddressByUserId(int id) throws DataAccessException {
         return userAddressRepository.getAllAddressByUserId(id);
     }
 
     @Override
-    public List<UserAddress> getCurrentDefaultAddressByUserId(int userId) throws DataAccessException {
-        return userAddressRepository.getCurrentDefaultAddressByUserId(userId);
+    public UserAddress getOneByUserId(int id) throws DataAccessException {
+        return userAddressRepository.getOneByUserId(id);
     }
 
     @Override
     public boolean save(UserAddress obj) throws DataAccessException {
+        List<UserAddress> userAddresses = getAllAddressByUserId(obj.getUserId());
+        if(userAddresses.size() == 0) {
+            obj.setUserAddressDefault(true);
+        } else {
+            obj.setUserAddressDefault(false);
+        }
         return userAddressRepository.save(obj);
     }
 
@@ -45,12 +46,19 @@ public class UserAddressServiceImpl implements UserAddressService {
     }
 
     @Override
-    public boolean updateDefaultAddress(boolean isDefault, int id) throws DataAccessException {
-        return userAddressRepository.updateDefaultAddress(isDefault, id);
+    public boolean updateDefaultAddress(int id, int userId) throws DataAccessException {
+        // set all address default = 0
+        userAddressRepository.deleteDefaultAddressByUserId(userId);
+        return userAddressRepository.updateDefaultAddress(id);
     }
 
     @Override
     public boolean delete(int id) throws DataAccessException {
         return userAddressRepository.delete(id);
+    }
+
+    @Override
+    public boolean deleteDefaultAddressByUserId(int userId) throws DataAccessException {
+        return userAddressRepository.deleteDefaultAddressByUserId(userId);
     }
 }

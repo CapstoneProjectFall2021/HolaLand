@@ -2,7 +2,6 @@ package com.hola.holalandweb.controller;
 
 import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.entity.Role;
-import com.hola.holalandcore.entity.User;
 import com.hola.holalandcore.entity.UserAddress;
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.repository.RoleRepository;
@@ -52,8 +51,15 @@ public class ProfileController {
     public String profile(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         UserDetail userDetail = userDetailService.getOneByUserId(currentUser.getId());
-        List<UserAddress> userAddressList = userAddressService.getAllAddressByUserDetailId(userDetail.getUserDetailId());
-
+        List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(userDetail.getUserDetailId());
+        List<Role> roles = roleRepository.getRolesByUserEmail(currentUser.getUsername());
+        String userRole="";
+        for (Role role : roles) {
+            userRole += (role.getRoleId() == 1 ? "Thành viên" : (role.getRoleId() == 2 ? "Nhà tuyển dụng"
+                    : (role.getRoleId() == 3 ? "Bán hàng" : "Khác")))
+                    + ((roles.indexOf(role) == (roles.size()-1)) ? "" : ", ");
+        }
+        model.addAttribute("userRole", userRole);
         model.addAttribute("userDetail", userDetail);
         model.addAttribute("userAddressList", userAddressList);
         model.addAttribute("page", 1);
@@ -92,7 +98,7 @@ public class ProfileController {
         }
     }
 
-    @PostMapping("/change-password")
+    @PostMapping("/password/update")
     public String updatePasswordUserByUserId(
             @RequestParam("oldPass") String oldPass,
             @RequestParam("newPass") String newPass,
@@ -101,7 +107,7 @@ public class ProfileController {
     ) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         boolean isCheck = false;
-        if (passwordEncoder.matches(oldPass, currentUser.getPassword()) && newPass.equals(confirmNewPass)) {
+        if (passwordEncoder.matches(oldPass, currentUser.getCustomUserPassword()) && newPass.equals(confirmNewPass)) {
             isCheck = userRepository.updatePassword(passwordEncoder.encode(newPass), currentUser.getId());
         }
         if (isCheck) {
@@ -111,7 +117,7 @@ public class ProfileController {
         }
     }
 
-    @GetMapping("/address-update")
+    @GetMapping("/address/update")
     public String addressUpdate(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(currentUser.getId());
@@ -120,27 +126,28 @@ public class ProfileController {
         return "profile";
     }
 
-    @PostMapping("/update-address")
+    @PostMapping("/address/update")
     public String updateUserAddress(
             @RequestParam("addressId") int addressId,
             @RequestParam("userName") String userName,
             @RequestParam("phone") String phone,
             @RequestParam("address") String address
     ) {
-        UserAddress newUserAddress = UserAddress.builder().build();
-        newUserAddress.setUserAddressId(addressId);
-        newUserAddress.setUserName(userName);
-        newUserAddress.setUserPhone(phone);
-        newUserAddress.setUserAddress(address);
+        UserAddress newUserAddress = UserAddress.builder()
+                .userAddressId(addressId)
+                .userName(userName)
+                .userPhone(phone)
+                .userAddress(address)
+                .build();
         boolean isCheck = userAddressService.update(newUserAddress);
         if(isCheck) {
-            return "redirect:" + "/address-update";
+            return "redirect:" + "/profile/address/update";
         }else {
             return "404";
         }
     }
 
-    @PostMapping("/add-address")
+    @PostMapping("/address/add")
     public String addNewUserAddress(
             @RequestParam("newUserName") String newUserName,
             @RequestParam("newPhone") String newPhone,
@@ -148,18 +155,17 @@ public class ProfileController {
             Authentication authentication
     ) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        UserDetail userDetail = userDetailService.getOneByUserId(currentUser.getId());
 
-        UserAddress newUserAddress = UserAddress.builder().build();
-        newUserAddress.setUserDetailId(userDetail.getUserDetailId());
-        newUserAddress.setUserName(newUserName);
-        newUserAddress.setUserPhone(newPhone);
-        newUserAddress.setUserAddress(newAddress);
-        newUserAddress.setUserAddressDefault(false);
-        newUserAddress.setUserAddressDeleted(false);
+        UserAddress newUserAddress = UserAddress.builder()
+                .userId(currentUser.getId())
+                .userName(newUserName)
+                .userPhone(newPhone)
+                .userAddress(newAddress)
+                .userAddressDeleted(false)
+                .build();
         boolean isCheck = userAddressService.save(newUserAddress);
         if(isCheck) {
-            return "redirect:" + "/address-update";
+            return "redirect:" + "/profile/address/update";
         }else {
             return "404";
         }
@@ -169,7 +175,7 @@ public class ProfileController {
     public String deleteUserAddress(@RequestParam("addressId") int addressId) {
         boolean isCheck = userAddressService.delete(addressId);
         if(isCheck) {
-            return "redirect:" + "/address-update";
+            return "redirect:" + "/profile/address/update";
         }else {
             return "404";
         }
@@ -178,13 +184,9 @@ public class ProfileController {
     @GetMapping("/address/default")
     public String changeUserAddressDefault(@RequestParam("addressId") int addressId, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        List<UserAddress> userAddressDefault = userAddressService.getCurrentDefaultAddressByUserId(currentUser.getId());
-        if(userAddressDefault.size() != 0) {
-            userAddressService.updateDefaultAddress(false,userAddressDefault.get(0).getUserAddressId());
-        }
-        boolean isCheck = userAddressService.updateDefaultAddress(true,addressId);
+        boolean isCheck = userAddressService.updateDefaultAddress(addressId, currentUser.getId());
         if(isCheck) {
-            return "redirect:" + "/address-update";
+            return "redirect:" + "/profile/address/update";
         }else {
             return "404";
         }

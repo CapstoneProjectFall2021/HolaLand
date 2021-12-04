@@ -7,30 +7,30 @@
         <h5 class="modal-title" id="onlineStoreRateModalLabel">Đánh giá cửa hàng</h5>
       </div>
       <div class="modal-body">
-        <form class="row" id="rateForm" method="post" th:action="@{/food/store/rate}" th:object="${newRate}">
+        <form class="row" id="rateForm" method="post" th:action="@{/food/store/rate}" th:object="${rate}">
           <div class="form-group col-md-12">
             <input type="hidden" name="foodStoreOnlineId" id="storeId">
             <fieldset class="fieldset-rate">
               <legend>Điểm đánh giá</legend>
               <div class="custom-radio">
                 <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" th:field="*{foodStoreOnlineRatePoint}" id="one-star" value="1">
+                  <input class="form-check-input me-2" type="radio" name="foodStoreOnlineRatePoint" id="one-star" value="1">
                   <label class="form-check-label" for="one-star">1<i class="fas fa-star ms-1 checked"></i></label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" th:field="*{foodStoreOnlineRatePoint}" id="two-star" value="2">
+                  <input class="form-check-input me-2" type="radio" name="foodStoreOnlineRatePoint" id="two-star" value="2">
                   <label class="form-check-label" for="two-star">2<i class="fas fa-star ms-1 checked"></i></label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" th:field="*{foodStoreOnlineRatePoint}" id="three-star" value="3">
+                  <input class="form-check-input me-2" type="radio" name="foodStoreOnlineRatePoint" id="three-star" value="3">
                   <label class="form-check-label" for="three-star">3<i class="fas fa-star ms-1 checked"></i></label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" th:field="*{foodStoreOnlineRatePoint}" id="four-star" value="4">
+                  <input class="form-check-input me-2" type="radio" name="foodStoreOnlineRatePoint" id="four-star" value="4">
                   <label class="form-check-label" for="four-star">4<i class="fas fa-star ms-1 checked"></i></label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input me-2" type="radio" th:field="*{foodStoreOnlineRatePoint}" id="five-star" value="5">
+                  <input class="form-check-input me-2" type="radio" name="foodStoreOnlineRatePoint" id="five-star" value="5">
                   <label class="form-check-label" for="five-star">5<i class="fas fa-star ms-1 checked"></i></label>
                 </div>
               </div>
@@ -39,7 +39,7 @@
           <div class="form-group col-md-12 m-0">
             <fieldset>
               <legend>Ý kiến đánh giá</legend>
-              <textarea th:field="*{foodStoreOnlineRateComment}" class="form-control" rows="3"></textarea>
+              <textarea name="foodStoreOnlineRateComment" class="form-control" rows="3"></textarea>
             </fieldset>
           </div>
         </form>

@@ -10,7 +10,7 @@ import lombok.*;
 public class UserAddress {
 
     private int userAddressId;
-    private int userDetailId;
+    private int userId;
     private String userName;
     private String userPhone;
     private String userAddress;

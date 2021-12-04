@@ -270,8 +270,22 @@
   font-weight: var(--font-weight-5);
 }
 
+.list-comment .comment.flex .comment-area .comment-content p.order-report {
+  margin-top: 8px;
+  margin-bottom: 0;
+  padding-top: 4px;
+  font-size: 14px;
+  color: var(--secondary-text);
+  border-top: 1px solid var(--third-border-color);
+}
+
+.list-comment .comment.flex .comment-area .comment-content p.order-report a {
+  font-weight: 500;
+}
+
 .list-comment .comment.flex .comment-area .comment-content p {
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
   font-size: 16px;
   color: var(--secondary-text);
 }
@@ -284,8 +298,9 @@
 .list-comment .comment.flex .comment-area .time p {
   margin-top: 4px;
   margin-bottom: 12px;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--secondary-text);
+  letter-spacing: 0.5px;
 }
 
 
@@ -293,6 +308,10 @@
 
 .custom-radio {
   justify-content: space-between;
+}
+
+.custom-radio label {
+  margin: 0;
 }
 
 .custom-radio label i {
@@ -317,6 +336,7 @@
 
 /* Online store order ===============================================================================*/
 
-.note {
+.contact-mobile,
+.report-order {
   color: var(--secondary-text);
 }

@@ -42,24 +42,19 @@
                 <i class="fas fa-pizza-slice fa-fw"></i>Đặt đồ online
               </a>
             </li>
-            <li>
-              <a th:href="@{/food/offline-store}" th:classappend="${page == 2 ? 'active' : ''}">
-                <i class="fas fa-store fa-fw"></i>Danh sách nhà hàng
-              </a>
-            </li>
+<!--            <li>-->
+<!--              <a th:href="@{/food/offline-store}" th:classappend="${page == 2 ? 'active' : ''}">-->
+<!--                <i class="fas fa-store fa-fw"></i>Danh sách nhà hàng-->
+<!--              </a>-->
+<!--            </li>-->
             <li sec:authorize="hasRole('MEMBER')">
               <a th:href="@{/food/order}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
               </a>
             </li>
             <li sec:authorize="hasRole('SELLER')">
-              <a th:href="@{/food/order}" th:classappend="${page == 4 ? 'active' : ''}">
-                <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
-              </a>
-            </li>
-            <li sec:authorize="hasRole('SELLER')">
-              <a th:href="@{/store/info}" th:classappend="${page == 5 ? 'active' : ''}">
-                <i class="fas fa-chart-bar fa-fw"></i>Quản lý cửa hàng
+              <a th:href="@{/food/order/manage}" th:classappend="${page == 4 ? 'active' : ''}">
+                <i class="fas fa-user-tag fa-fw"></i>Kênh người bán
               </a>
             </li>
             <li>
@@ -84,11 +79,6 @@
         <th:block th:if="${page == 3}">
           <div th:replace="food/user-order :: user-order"></div>
         </th:block>
-        <!-- Seller order -->
-        <th:block th:if="${page == 4}">
-          <div th:replace="food/seller-order :: seller-order"></div>
-        </th:block>
-        <!-- Online store info -->
         <th:block th:if="${page == 9}">
           <div th:replace="food/online-store :: online-store"></div>
         </th:block>
@@ -106,6 +96,10 @@
   <div th:replace="food/toast/toast-add-to-cart-success :: toastAddToCartSuccess"></div>
   <div th:replace="food/toast/toast-add-to-cart-error :: toastAddToCartError"></div>
 </th:block>
+<th:block th:if="${page == 9 && foodOrderDetailReport != null && foodOrderDetailReport.size() != 0}">
+  <!-- Import modal report order detail -->
+  <div th:replace="food/modal/modal-order-detail-report :: orderDetailReportModal"></div>
+</th:block>
 <th:block th:if="${page == 3}">
   <!-- Import modal confirm cancel order -->
   <div th:replace="food/modal/modal-confirm-cancel-order :: confirmCancelOrderModal"></div>
@@ -115,35 +109,30 @@
   <div th:replace="food/modal/modal-order-report-content :: reportOrderContentModal"></div>
   <!-- Import modal confirm delete report -->
   <div th:replace="food/modal/modal-confirm-delete-report :: confirmDeleteReportOrderModal"></div>
-</th:block>
-<th:block th:if="${page == 4}">
-  <!-- Import modal note order -->
-  <div th:replace="food/modal/modal-note-order :: noteOrderModal"></div>
-  <!-- Import modal report order -->
-  <div th:replace="food/modal/modal-reject-order :: rejectOrderModal"></div>
-</th:block>
-<th:block th:if="${page == 3 || page == 4 && foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
-  <!-- Import modal list order detail -->
-  <div th:replace="food/modal/modal-list-order-detail :: listOrderDetailModal"></div>
-</th:block>
-<th:block th:if="${page == 3 || page == 4}">
   <!-- Import modal reason rejection order -->
   <div th:replace="food/modal/modal-reason-rejection-order :: reasonRejectionOrderModal"></div>
 </th:block>
-
+<th:block th:if="${page == 3 && foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
+  <!-- Import modal list order detail -->
+  <div th:replace="food/modal/modal-order-detail :: orderDetailModal"></div>
+</th:block>
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
 <script th:src="@{/js/templates/food.js}"></script>
-
-<th:block th:if="${page == 3 || page == 4}">
+<th:block th:if="${page == 3}">
   <script th:src="@{/js/datatables/jquery.min.js}"></script>
   <script th:src="@{/js/datatables/jquery.dataTables.min.js}"></script>
   <script th:src="@{/js/datatables/datatables.vietnamese.js}"></script>
 </th:block>
 
 <script th:if="${foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
-    const myModal = new bootstrap.Modal(document.getElementById('listOrderDetailModal'));
+    const myModal = new bootstrap.Modal(document.getElementById('orderDetailModal'));
+    myModal.show();
+</script>
+
+<script th:if="${foodOrderDetailReport != null && foodOrderDetailReport.size() != 0}">
+    const myModal = new bootstrap.Modal(document.getElementById('orderDetailReportModal'));
     myModal.show();
 </script>
 

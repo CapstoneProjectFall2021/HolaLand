@@ -1,0 +1,52 @@
+<!-- Modal order detail -->
+<div class="modal fade" id="orderDetailReportModal" tabindex="-1" aria-labelledby="orderDetailReportModalLabel" aria-hidden="true"
+     th:fragment="orderDetailReportModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content" th:with="orderId=${foodOrderDetailReport.get(0).foodOrderId}">
+      <div class="modal-header flex-sb">
+        <h5 class="modal-title" id="orderDetailReportModalLabel">
+          Chi tiết đơn hàng <span class="text-info" th:text="${'#' + format.orderId(orderId)}"></span>
+        </h5>
+        <div class="report-order" th:with="order=${foodOrderService.getOne(orderId)}">
+          <i class="bi bi-calendar3-week ms-2 me-1"></i><span th:text="${#dates.format(order.foodOrderCreatedDate, 'dd-MM-yyyy')}"></span>
+          <i class="far fa-clock ms-2 me-1"></i><span th:text="${#dates.format(order.foodOrderCreatedDate, 'HH:mm:ss')}"></span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <table class="table mb-0">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tên đồ ăn</th>
+            <th scope="col" class="text-center">Số lượng</th>
+            <th scope="col" class="text-center">Đơn giá</th>
+            <th scope="col" class="text-end">Tổng tiền</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="foodOrderDetail, stt : ${foodOrderDetailReport}">
+            <td th:text="*{stt.index + 1}"></td>
+            <td>
+              <a th:href="@{/food/store(id=${foodStoreOnline.foodStoreOnlineId})}"
+                 th:text="${foodOrderDetail.foodItemName}">
+              </a>
+            </td>
+            <td class="text-center">
+              <span th:text="*{foodOrderDetail.foodItemQuantity}"></span>
+            </td>
+            <td class="text-center">
+              <span th:text="*{#numbers.formatInteger(foodOrderDetail.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
+            </td>
+            <td class="text-end">
+              <span th:text="*{#numbers.formatInteger(foodOrderDetail.foodItemQuantity * foodOrderDetail.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+      </div>
+    </div>
+  </div>
+</div>
