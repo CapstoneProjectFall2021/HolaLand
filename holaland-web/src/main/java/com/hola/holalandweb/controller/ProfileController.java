@@ -92,7 +92,7 @@ public class ProfileController {
         }
     }
 
-    @PostMapping("/change-password")
+    @PostMapping("/password/update")
     public String updatePasswordUserByUserId(
             @RequestParam("oldPass") String oldPass,
             @RequestParam("newPass") String newPass,
@@ -111,7 +111,7 @@ public class ProfileController {
         }
     }
 
-    @GetMapping("/address-update")
+    @GetMapping("/address/update")
     public String addressUpdate(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(currentUser.getId());
@@ -120,7 +120,7 @@ public class ProfileController {
         return "profile";
     }
 
-    @PostMapping("/update-address")
+    @PostMapping("/address/update")
     public String updateUserAddress(
             @RequestParam("addressId") int addressId,
             @RequestParam("userName") String userName,
@@ -134,13 +134,13 @@ public class ProfileController {
         newUserAddress.setUserAddress(address);
         boolean isCheck = userAddressService.update(newUserAddress);
         if(isCheck) {
-            return "redirect:" + "/address-update";
+            return "redirect:" + "/profile/address/update";
         }else {
             return "404";
         }
     }
 
-    @PostMapping("/add-address")
+    @PostMapping("/address/add")
     public String addNewUserAddress(
             @RequestParam("newUserName") String newUserName,
             @RequestParam("newPhone") String newPhone,
@@ -159,7 +159,7 @@ public class ProfileController {
         newUserAddress.setUserAddressDeleted(false);
         boolean isCheck = userAddressService.save(newUserAddress);
         if(isCheck) {
-            return "redirect:" + "/address-update";
+            return "redirect:" + "/profile/address/update";
         }else {
             return "404";
         }
@@ -169,7 +169,7 @@ public class ProfileController {
     public String deleteUserAddress(@RequestParam("addressId") int addressId) {
         boolean isCheck = userAddressService.delete(addressId);
         if(isCheck) {
-            return "redirect:" + "/address-update";
+            return "redirect:" + "/profile//address/update";
         }else {
             return "404";
         }

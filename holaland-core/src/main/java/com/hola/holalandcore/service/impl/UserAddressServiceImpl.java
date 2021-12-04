@@ -46,6 +46,7 @@ public class UserAddressServiceImpl implements UserAddressService {
 
     @Override
     public boolean updateDefaultAddress(boolean isDefault, int id) throws DataAccessException {
+        // set all address default = 0
         return userAddressRepository.updateDefaultAddress(isDefault, id);
     }
 
