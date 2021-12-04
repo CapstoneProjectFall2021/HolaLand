@@ -7,7 +7,6 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-
 public class FoodCountSttOrder {
     private int rejectOrder;
     private int completed;
