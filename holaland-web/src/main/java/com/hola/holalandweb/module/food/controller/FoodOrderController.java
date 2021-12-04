@@ -27,7 +27,7 @@ public class FoodOrderController {
     }
 
     @GetMapping("add-to-cart")
-    public ResponseEntity<?> getCourseById(
+    public ResponseEntity<Integer> getCourseById(
             @RequestParam("foodId") int foodId,
             @RequestParam("storeId") int storeId,
             HttpSession session
@@ -62,6 +62,15 @@ public class FoodOrderController {
             }
         }
         session.setAttribute("listFoodOrder", listFoodOrder);
-        return new ResponseEntity<>(listFoodOrder.size(), HttpStatus.OK);
+        listFoodOrder.forEach(System.out::println);
+        return new ResponseEntity<>(countQuantity(listFoodOrder), HttpStatus.OK);
+    }
+
+    private int countQuantity(List<FoodItemCart> listFoodOrder) {
+        int count = 0;
+        for (FoodItemCart foodItemCart : listFoodOrder) {
+            count += foodItemCart.getQuantity();
+        }
+        return count;
     }
 }

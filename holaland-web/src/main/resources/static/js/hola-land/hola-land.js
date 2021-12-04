@@ -43,11 +43,6 @@ const tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl)
 })
 
-const toastElList = [].slice.call(document.querySelectorAll('.toast'));
-const toastList = toastElList.map(function(toastEl) {
-  return new bootstrap.Toast(toastEl, option);
-})
-
 window.onscroll = function() {
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
     document.getElementById("navbar").className = "navbar navbar-sm navbar-expand-lg fixed-top dark";

@@ -1,6 +1,7 @@
 package com.hola.holalandfood.service.impl;
 
 import com.hola.holalandfood.entity.FoodItem;
+import com.hola.holalandfood.entity.FoodItemCart;
 import com.hola.holalandfood.repository.FoodItemRepository;
 import com.hola.holalandfood.service.FoodItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class FoodItemServiceImpl implements FoodItemService {
 
     @Override
     public List<FoodItem> getAllByStoreOnlineIdAndTagId(int id, int tagId) throws DataAccessException {
-        return foodItemRepository.getAllByStoreOnlineIdAndTagId(id,tagId);
+        return foodItemRepository.getAllByStoreOnlineIdAndTagId(id, tagId);
     }
 
     @Override
@@ -53,7 +54,7 @@ public class FoodItemServiceImpl implements FoodItemService {
     public boolean save(FoodItem foodItem) throws DataAccessException {
         return foodItemRepository.save(foodItem);
     }
-    
+
     @Override
     public List<FoodItem> search(String textSearch) throws DataAccessException {
         return foodItemRepository.search(textSearch);

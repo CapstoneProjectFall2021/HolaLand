@@ -1,6 +1,8 @@
 /*
  *
  */
+document.getElementById("food-cart").className = "navbar-btn dropdown";
+
 function openModal(modal) {
     const myModal = new bootstrap.Modal(document.getElementById(modal));
     myModal.show();
@@ -24,6 +26,7 @@ function addFoodToCart(e) {
         if (this.readyState === 4 && this.status === 200) {
             console.log("OK");
             console.log(this.responseText);
+            document.getElementById("number-food-item-in-cart").innerHTML = this.responseText;
             showToast("toastAddToCartSuccess");
         } else {
             showToast("toastAddToCartError");
@@ -97,18 +100,19 @@ function getOrderReportContent(e) {
     openModal("reportOrderContentModal");
 }
 
-/*
- * Store online manage
- */
-function confirmDeleteFood(e) {
-    const foodId = e.target.firstElementChild.innerHTML;
-    document.getElementById("btn-delete-food").href = "/store/manage-food/delete?foodId=" + foodId;
-    openModal("confirmDeleteFoodModal");
-}
-
 function confirmCancelOrder(e) {
     const orderId = e.target.firstElementChild.innerHTML;
     document.getElementById("btn-cancel-order").href = "/food/order/update-status-food?orderId=" + orderId;
     openModal("confirmCancelOrderModal");
 }
+
+/*
+ * Store online manage
+ */
+function confirmDeleteFood(e) {
+    const foodId = e.target.firstElementChild.innerHTML;
+    document.getElementById("btn-delete-food").href = "/store/manage/food/delete?foodId=" + foodId;
+    openModal("confirmDeleteFoodModal");
+}
+
 

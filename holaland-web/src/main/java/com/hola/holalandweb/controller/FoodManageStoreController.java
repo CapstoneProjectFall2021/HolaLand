@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/store")
 public class FoodManageStoreController {
 
     private final FoodStoreOnlineService foodStoreOnlineService;
@@ -48,14 +50,9 @@ public class FoodManageStoreController {
         this.foodStoreOnlineTagService = foodStoreOnlineTagService;
     }
 
-    @GetMapping("/store/info")
+    @GetMapping("/info")
     public String getShopInfo(Model model, Authentication authentication) {
-        CustomUser currentUser;
-        if (authentication != null) {
-            currentUser = (CustomUser) authentication.getPrincipal();
-        } else {
-            return "login";
-        }
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
 
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByUserId(currentUser.getId());
         model.addAttribute("foodStoreOnline", foodStoreOnline);
@@ -63,17 +60,19 @@ public class FoodManageStoreController {
         return "module-food-manage-store";
     }
 
-    @PostMapping("/update-store-info")
+    // update avatar image pending
+    @PostMapping("/update")
     public String updatingShopInfo(
             @RequestParam("storeId") Integer shopId,
             @RequestParam("storeName") String shopName,
             @RequestParam("storeDescription") String storeDescription
     ) {
-        FoodStoreOnline newShopInfo = FoodStoreOnline.builder().build();
-        newShopInfo.setFoodStoreOnlineId(shopId);
-        newShopInfo.setFoodStoreOnlineName(shopName);
-        newShopInfo.setFoodStoreOnlineDescription(storeDescription);
-        boolean isCheck = foodStoreOnlineService.updateShopInfo(newShopInfo);
+        FoodStoreOnline storeInfoUpdate = FoodStoreOnline.builder()
+                .foodStoreOnlineId(shopId)
+                .foodStoreOnlineName(shopName)
+                .foodStoreOnlineDescription(storeDescription)
+                .build();
+        boolean isCheck = foodStoreOnlineService.updateShopInfo(storeInfoUpdate);
         if (isCheck) {
             return "redirect:" + "/store/info";
         } else {
@@ -81,23 +80,20 @@ public class FoodManageStoreController {
         }
     }
 
-    @GetMapping("/store/manage-food")
+    @GetMapping("/manage/food")
     public String manageFood(Model model, Authentication authentication) {
-        CustomUser currentUser;
-        if (authentication != null) {
-            currentUser = (CustomUser) authentication.getPrincipal();
-        } else {
-            return "login";
-        }
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+
         List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(currentUser.getId());
         List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(currentUser.getId());
+
         model.addAttribute("foodStoreItemList", foodShopItemList);
         model.addAttribute("foodStoreTagList", foodShopTagList);
         model.addAttribute("page", 2);
         return "module-food-manage-store";
     }
 
-    @GetMapping("/store/manage-food/delete")
+    @GetMapping("/manage/food/delete")
     public String deleteFoodManagerStore(@RequestParam("foodId") Integer foodId) {
         FoodItem foodItem = FoodItem.builder().build();
         foodItem.setFoodItemId(foodId);
@@ -110,15 +106,10 @@ public class FoodManageStoreController {
         }
     }
 
-    @GetMapping("/store/manage-food/store-tag")
-    public String getFormUpdateTagShop(Model model, Authentication authentication) {
-        CustomUser currentUser;
-        if (authentication != null) {
-            currentUser = (CustomUser) authentication.getPrincipal();
-        } else {
-            return "login";
-        }
-        System.out.println(currentUser.getId());
+    @GetMapping("/manage/tag")
+    public String getFormUpdateStoreTag(Model model, Authentication authentication) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+
         List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(currentUser.getId());
         List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(currentUser.getId());
         List<FoodTag> foodTagList = foodTagService.getAll();
@@ -129,16 +120,23 @@ public class FoodManageStoreController {
         return "module-food-manage-store";
     }
 
-    @PostMapping("/store/manage-food/update-tag")
-    public String updateFormUpdateTagShop(Model model, @RequestParam(value = "tagList") List<Integer> tagList, Authentication authentication) {
-        CustomUser currentUser;
-        if (authentication != null) {
-            currentUser = (CustomUser) authentication.getPrincipal();
-        } else {
-            return "login";
-        }
+    @PostMapping("/manage/tag/update")
+    public String updateStoreTag(
+            Model model,
+            @RequestParam(value = "tagList") List<Integer> tagList,
+            Authentication authentication
+    ) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+
+        // Get current list tag
+        List<FoodTag> foodStoreCurrentTagList = foodTagService.getAllByUserId(currentUser.getId());
+
+        // Get list tag if remove
+        // Check tag id in table food items
+
 
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByUserId(currentUser.getId());
+
         List<FoodStoreOnlineTag> foodStoreOnlineTags = new ArrayList<>();
         for (Integer foodTagId : tagList) {
             FoodStoreOnlineTag foodStoreOnlineTag = new FoodStoreOnlineTag();
@@ -153,13 +151,14 @@ public class FoodManageStoreController {
         //get list tag after update
         List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(currentUser.getId());
         List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(currentUser.getId());
+
         model.addAttribute("foodStoreTagList", foodShopTagList);
         model.addAttribute("foodStoreItemList", foodShopItemList);
         model.addAttribute("page", 2);
         return "module-food-manage-store";
     }
 
-    @GetMapping("/store/manage-order")
+    @GetMapping("/store/manage/order")
     public String manageOrder(Model model) {
         model.addAttribute("page", 3);
         return "module-food-manage-store";
@@ -193,7 +192,8 @@ public class FoodManageStoreController {
         foodItem.setFoodStoreOnlineId(foodStoreOnlineId);
         foodItem.setFoodItemIsActive(1);
         foodItem.setFoodItemDeleted(0);
-        String uploadDir = new File("holaland-web/src/main/resources/static/images/food").getAbsolutePath();
+        //String uploadDir = new File("holaland-web/src/main/resources/static/images/food").getAbsolutePath();
+        String uploadDir = new File("holaland-web/target/classes/static/images/food").getAbsolutePath();
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         foodItemService.save(foodItem);
         //get list tag after update
