@@ -6,8 +6,8 @@
         <h1 class="title fix-mb-title">Danh sách đơn hàng</h1>
       </div>
     </div>
-    <div class="panel pt-2">
-      <div class="row data-tables">
+    <div class="panel pt-1">
+      <div class="row datatable">
         <div class="col-lg-12">
           <p class="m-mt-8 m-0" th:if="${foodOrderList.size() == 0}">Không có đơn hàng nào cần xử lý.</p>
           <table id="order-table-no-filter" class="table m-0" cellspacing="0" width="100%" th:if="${foodOrderList.size() != 0}">
@@ -79,7 +79,7 @@
               <i class="fas fa-list-ul"></i>
             </div>
             <div class="number">
-              <h4></h4>
+              <h4 th:text = "${foodCountSttOrder.rejectOrder + foodCountSttOrder.completed + foodCountSttOrder.cancel}"></h4>
             </div>
           </div>
           <div class="description">Tất cả</div>
@@ -135,7 +135,7 @@
       </div>
     </div>
     <div class="panel m-mt-20">
-      <div class="row data-tables">
+      <div class="row datatable">
         <div class="col-lg-12">
           <table id="order-history-table" class="table" cellspacing="0" width="100%">
             <thead>
