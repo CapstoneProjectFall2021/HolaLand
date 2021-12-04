@@ -35,22 +35,27 @@
           </div>
           <ul class="nav navbar-nav sub-menu">
             <li>
-              <a href="profile.html">
+              <a th:href="@{/profile}" th:classappend="${page == 1 ? 'active' : ''}">
                 <i class="fas fa-user fa-fw"></i>Trang cá nhân
               </a>
             </li>
             <li>
-              <a href="profile-update.html">
-                <i class="fas fa-user-edit fa-fw"></i>Chỉnh sửa thông tin
-              </a>
-            </li>
-            <li>
-              <a href="profile-notification.html">
+              <a href="">
                 <i class="far fa-bell fa-fw"></i>Thông báo
               </a>
             </li>
             <li>
-              <a href="#">
+              <a th:href="@{/profile-update}" th:classappend="${page == 3 ? 'active' : ''}">
+                <i class="fas fa-user-edit fa-fw"></i>Chỉnh sửa thông tin
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/address-update}" th:classappend="${page == 4 ? 'active' : ''}">
+                <i class="fas fa-map-marked-alt fa-fw"></i>Chỉnh sửa địa chỉ
+              </a>
+            </li>
+            <li>
+              <a href="">
                 <i class="fas fa-chevron-left fa-fw"></i>Quay lại
               </a>
             </li>
@@ -58,137 +63,33 @@
         </div>
       </div>
       <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
-        <div class="col-right">
-          <!-- Account info -->
-          <div class="account-info">
-            <div class="row">
-              <div class="col-12">
-                <h1 class="title fix-mb-title">Thông tin tài khoản</h1>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
-                <a href="jobs.html" class="label-info m-mb-16">
-                  <div class="flex">
-                    <div class="icon">
-                      <i class="far fa-check-square"></i>
-                    </div>
-                    <div class="number">
-                      <h4>20</h4>
-                    </div>
-                  </div>
-                  <div class="description club-type">
-                    Đơn hàng đã đặt
-                  </div>
-                </a>
-              </div>
-              <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
-                <a href="jobs.html" class="label-info m-mb-16">
-                  <div class="flex">
-                    <div class="icon">
-                      <i class="far fa-file-alt"></i>
-                    </div>
-                    <div class="number">
-                      <h4>20</h4>
-                    </div>
-                  </div>
-                  <div class="description club-type">
-                    Bài tìm việc đã đăng
-                  </div>
-                </a>
-              </div>
-              <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
-                <a href="#" class="label-info m-mb-16">
-                  <div class="flex">
-                    <div class="icon">
-                      <i class="fas fa-tasks"></i>
-                    </div>
-                    <div class="number">
-                      <h4>3</h4>
-                    </div>
-                  </div>
-                  <div class="description club-type">
-                    Việc đã ứng tuyển
-                  </div>
-                </a>
-              </div>
-              <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
-                <a href="#" class="label-info m-mb-16">
-                  <div class="flex">
-                    <div class="icon">
-                      <i class="far fa-bookmark"></i>
-                    </div>
-                    <div class="number">
-                      <h4>5</h4>
-                    </div>
-                  </div>
-                  <div class="description club-type">
-                    Việc làm đã lưu
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-          <!-- Profile info -->
-          <div class="profile-info">
-            <div class="row">
-              <div class="col-12">
-                <h1 class="title fix-mb-title fix-mt-title">Thông tin cá nhân</h1>
-              </div>
-            </div>
-            <form class="row panel-form mx-0">
-              <div class="form-group col-12 col-md-6 col-lg-4">
-                <fieldset>
-                  <legend>Họ và tên</legend>
-                  <input type="text" class="form-control" value="Nguyễn Văn A" readonly>
-                </fieldset>
-              </div>
-              <div class="form-group col-12 col-md-6 col-lg-4">
-                <fieldset>
-                  <legend>Ngày sinh</legend>
-                  <input type="text" class="form-control" value="11/11/1994" readonly>
-                </fieldset>
-              </div>
-              <div class="form-group col-12 col-md-6 col-lg-4">
-                <fieldset>
-                  <legend>Giới tính</legend>
-                  <input type="text" class="form-control" value="Nam" readonly>
-                </fieldset>
-              </div>
-              <div class="form-group col-12 col-md-6 col-lg-4">
-                <fieldset>
-                  <legend>Số điện thoại</legend>
-                  <input type="text" class="form-control" value="0123 456 789" readonly>
-                </fieldset>
-              </div>
-              <div class="form-group col-12 col-md-6 col-lg-4">
-                <fieldset>
-                  <legend>Email</legend>
-                  <input type="text" class="form-control" value="nguyenvana@gmail.com" readonly>
-                </fieldset>
-              </div>
-              <div class="form-group col-12 col-md-6 col-lg-4">
-                <fieldset>
-                  <legend>Vai trò</legend>
-                  <input type="text" class="form-control" value="Thành viên" readonly>
-                </fieldset>
-              </div>
-              <div class="form-group mb-0 col-12 col-md-12 col-lg-12">
-                <fieldset>
-                  <legend>Địa chỉ</legend>
-                  <input type="text" class="form-control" value="Thôn 8, Thạch Hoà, Thạch Thất, Hà Nội" readonly>
-                </fieldset>
-              </div>
-            </form>
-          </div>
-        </div>
+        <!-- Overview -->
+        <th:block th:if="${page == 1}">
+          <div th:replace="profile/overview :: overview"></div>
+        </th:block>
+        <!-- Profile update -->
+        <th:block th:if="${page == 3}">
+          <div th:replace="profile/profile-update :: profile-update"></div>
+        </th:block>
+        <!-- Update Address -->
+        <th:block th:if="${page == 4}">
+          <div th:replace="profile/address-update :: address-update"></div>
+        </th:block>
       </div>
     </div>
   </div>
 </div>
 
+<th:block th:if="${page == 4}">
+  <!-- Import modal delete address -->
+  <div th:replace="profile/modal/modal-delete-address :: confirmDeleteAddressModal"></div>
+  <!-- Import modal add new address -->
+  <div th:replace="profile/modal/modal-add-new-address :: addNewAddressModal"></div>
+</th:block>
+
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
+<script th:src="@{/js/templates/profile.js}"></script>
 </body>
 
 </html>

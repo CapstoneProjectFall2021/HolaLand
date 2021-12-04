@@ -93,7 +93,6 @@ public class MemberController {
         return "members";
     }
 
-
     @PostMapping("/update-member")
     public String updateMember(@ModelAttribute("updateMember") Member updateMember, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {

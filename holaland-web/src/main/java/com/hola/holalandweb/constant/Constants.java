@@ -24,7 +24,7 @@ public interface Constants {
     int STT_WORK_CODE_REQUEST_APPLY_BOOK_DENIED = 3;
 
     // Module food
-    String STT_FOOD__NAME_FOOD_ORDER = "FOOD_STUDENT_ORDER";
+    String STT_FOOD_NAME_FOOD_ORDER = "FOOD_STUDENT_ORDER";
     int STT_FOOD_CODE_PENDING_APPROVAL = 1;
     int STT_FOOD_CODE_APPROVED = 2;
     int STT_FOOD_CODE_REJECT = 3;

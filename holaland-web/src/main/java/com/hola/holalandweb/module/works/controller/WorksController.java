@@ -1,4 +1,4 @@
-package com.hola.holalandweb.controller;
+package com.hola.holalandweb.module.works.controller;
 
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.repository.UserRepository;
@@ -51,17 +51,18 @@ public class WorksController {
     private final UserRepository userRepository;
 
     @Autowired
-    public WorksController(WorkRequestRecruitmentService workRequestRecruitmentService,
-                           WorkRequestTypeService workRequestTypeService,
-                           WorkRequestApplyService workRequestApplyService,
-                           WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
-                           WorkRequestFindJobService workRequestFindJobService,
-                           WorkPaymentMethodService workPaymentMethodService,
-                           WorkTimeService workTimeService,
-                           UserDetailService userDetailService,
-                           SttWorkService sttWorkService,
-                           SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService,
-                           UserRepository userRepository
+    public WorksController(
+            WorkRequestRecruitmentService workRequestRecruitmentService,
+            WorkRequestTypeService workRequestTypeService,
+            WorkRequestApplyService workRequestApplyService,
+            WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
+            WorkRequestFindJobService workRequestFindJobService,
+            WorkPaymentMethodService workPaymentMethodService,
+            WorkTimeService workTimeService,
+            UserDetailService userDetailService,
+            SttWorkService sttWorkService,
+            SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService,
+            UserRepository userRepository
     ) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.workRequestTypeService = workRequestTypeService;
@@ -469,9 +470,60 @@ public class WorksController {
         return "module-works";
     }
 
+    @GetMapping("/works/request-find-job-manage/repost-request-find-job")
+    public String getFormRepostRequestFindJob(
+            @RequestParam("requestFindJobId") Integer requestFindJobId,
+            @RequestParam("code") Integer sttWorkCode,
+            Model model
+    ) {
+        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 2);
+        List<WorkRequestFindJob> requestFindJobList = workRequestFindJobService.getAllByUserIdAndTypeId(
+                2,
+                sttWorkCode
+        );
+        model.addAttribute("requestFindJobId", requestFindJobId);
+        model.addAttribute("sttWorkCode", sttWorkCode);
+        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
+        model.addAttribute("requestFindJobList", requestFindJobList);
+        model.addAttribute("page", 5);
+        return "module-works";
+    }
+
+    @PostMapping("/repost-request-find-job")
+    public String repostRequestFindJob(
+            @RequestParam("endDate") Date endDate,
+            @RequestParam("id") Integer id
+    ) {
+        Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        WorkRequestFindJob requestFindJob = workRequestFindJobService.getOne(id);
+        WorkRequestFindJob newRequestFindJob = WorkRequestFindJob.builder().build();
+        newRequestFindJob.setUserId(requestFindJob.getUserId());
+        newRequestFindJob.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
+        newRequestFindJob.setWorkRequestTypeId(requestFindJob.getWorkRequestTypeId());
+        newRequestFindJob.setWorkSalaryUnitId(requestFindJob.getWorkSalaryUnitId());
+        newRequestFindJob.setWorkPaymentMethodId(requestFindJob.getWorkPaymentMethodId());
+        newRequestFindJob.setWorkTimeId(requestFindJob.getWorkTimeId());
+        newRequestFindJob.setWorkRequestFindJobExpectedSalary(requestFindJob.getWorkRequestFindJobExpectedSalary());
+        newRequestFindJob.setWorkRequestFindJobExpectedLocation(requestFindJob.getWorkRequestFindJobExpectedLocation());
+        newRequestFindJob.setWorkRequestFindJobTitle(requestFindJob.getWorkRequestFindJobTitle());
+        newRequestFindJob.setWorkRequestFindJobStartDateTime(currentDate);
+        newRequestFindJob.setWorkRequestFindJobLastUpdateDateTime(currentDate);
+        newRequestFindJob.setWorkRequestFindJobEndDateTime(endDate);
+        newRequestFindJob.setWorkRequestFindJobDescription(requestFindJob.getWorkRequestFindJobDescription());
+        newRequestFindJob.setWorkRequestFindJobPersonalExperience(requestFindJob.getWorkRequestFindJobPersonalExperience());
+        newRequestFindJob.setWorkRequestFindJobDeleted(requestFindJob.isWorkRequestFindJobDeleted());
+        boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
+        if (isCheck) {
+            return "redirect:" + "/works/request-find-job-manage";
+        } else {
+            return "404";
+        }
+    }
+
     @GetMapping("/works/request-recruitment-manage/repost-request-recruitment")
     public String getFormRepostRequestRecruitment(
-            @RequestParam("requestId") Integer requestId,
+            @RequestParam("requestRecruitmentId") Integer requestRecruitmentId,
             @RequestParam("code") Integer sttWorkCode,
             Model model
     ) {
@@ -481,9 +533,7 @@ public class WorksController {
                 1,
                 sttWorkCode
         );
-        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
-        model.addAttribute("requestId", requestId);
-        model.addAttribute("newRequestRecruitment", newRequestRecruitment);
+        model.addAttribute("requestRecruitmentId", requestRecruitmentId);
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
@@ -493,15 +543,12 @@ public class WorksController {
 
     @PostMapping("/repost-request-recruitment")
     public String repostRequestRecruitment(
-            @ModelAttribute("newRequestRecruitment") WorkRequestRecruitment newRequestRecruitment,
-            BindingResult bindingResult
+            @RequestParam("endDate") Date endDate,
+            @RequestParam("id") Integer id
     ) {
-        if (bindingResult.hasErrors()) {
-            System.out.println("There was a error " + bindingResult);
-            return "404";
-        }
         Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-        WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(newRequestRecruitment.getWorkRequestRecruitmentId());
+        WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(id);
+        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
         newRequestRecruitment.setUserId(requestRecruitment.getUserId());
         newRequestRecruitment.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
         newRequestRecruitment.setWorkRequestTypeId(requestRecruitment.getWorkRequestTypeId());
@@ -509,6 +556,7 @@ public class WorksController {
         newRequestRecruitment.setWorkPaymentMethodId(requestRecruitment.getWorkPaymentMethodId());
         newRequestRecruitment.setWorkRequestRecruitmentTitle(requestRecruitment.getWorkRequestRecruitmentTitle());
         newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
+        newRequestRecruitment.setWorkRequestRecruitmentEndDateTime(endDate);
         newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentDescription(requestRecruitment.getWorkRequestRecruitmentDescription());
         newRequestRecruitment.setWorkRequestRecruitmentRequirement(requestRecruitment.getWorkRequestRecruitmentRequirement());
@@ -554,7 +602,7 @@ public class WorksController {
     }
 
     @GetMapping("works/request-recruitment-manage/reason-reject")
-    public String getReasonRejectRequest(
+    public String getReasonRejectRecruitmentRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,
             Model model
@@ -571,6 +619,27 @@ public class WorksController {
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
         model.addAttribute("page", 9);
+        return "module-works";
+    }
+
+    @GetMapping("works/request-find-job-manage/reason-reject")
+    public String getReasonRejectFindJobRequest(
+            @RequestParam("requestId") Integer requestId,
+            @RequestParam("code") Integer sttWorkCode,
+            Model model
+    ) {
+        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 2);
+        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(
+                2,
+                sttWorkCode
+        );
+        WorkRequestFindJob requestFindJob = workRequestFindJobService.getOne(requestId);
+        model.addAttribute("reasonReject", requestFindJob.getWorkRequestFindJobNote());
+        model.addAttribute("sttWorkCode", sttWorkCode);
+        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
+        model.addAttribute("requestFindJobList", workRequestFindJobs);
+        model.addAttribute("page", 5);
         return "module-works";
     }
 }

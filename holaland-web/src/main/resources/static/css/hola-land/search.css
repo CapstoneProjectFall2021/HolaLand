@@ -1,0 +1,11 @@
+/* List tag */
+
+.list-tag .tags .tag:hover {
+  background-color: var(--label-button-background);
+}
+
+@media (max-width: 992px) {
+  .list-tag .tags {
+    padding-bottom: 4px;
+  }
+}

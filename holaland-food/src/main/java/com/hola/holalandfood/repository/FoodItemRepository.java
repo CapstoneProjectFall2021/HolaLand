@@ -20,4 +20,6 @@ public interface FoodItemRepository {
     boolean deletedOne(FoodItem obj) throws DataAccessException;
 
     boolean save(FoodItem foodItem) throws DataAccessException;
+
+    List<FoodItem> search(String textSearch) throws DataAccessException;
 }

@@ -193,12 +193,6 @@
 
 /* List food */
 
-.list-food .label-info .flex-sb {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .list-food .label-info .flex {
   justify-content: start;
 }
@@ -224,7 +218,7 @@
 #foodDetailModal .modal-body .flex .icon-circle img {
   border-radius: var(--primary-border-radius);
   margin-right: 20px;
-  width: 220px;
+  width: 250px;
 }
 
 #foodDetailModal .modal-body .flex .content-body h3 {
@@ -288,7 +282,7 @@
 }
 
 .list-comment .comment.flex .comment-area .time p {
-  margin-top: 3px;
+  margin-top: 4px;
   margin-bottom: 12px;
   font-size: 12px;
   color: var(--secondary-text);
@@ -318,4 +312,11 @@
 
 .preview-img {
   border-radius: var(--secondary-border-radius);
+}
+
+
+/* Online store order ===============================================================================*/
+
+.note {
+  color: var(--secondary-text);
 }

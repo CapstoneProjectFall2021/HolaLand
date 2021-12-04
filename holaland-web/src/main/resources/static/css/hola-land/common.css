@@ -1178,8 +1178,8 @@
   height: 40px;
   background-color: var(--secondary-button-background);
   border-radius: 50%;
-  margin-left: 6px;
-  margin-right: 6px;
+  margin-left: 8px;
+  margin-right: 8px;
   margin-bottom: 4px;
   transition: .3s;
   display: flex;
@@ -1190,6 +1190,12 @@
 
 .btn-more i {
   margin: 0;
+}
+
+.flex-sb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 

@@ -9,7 +9,13 @@ public interface FoodOrderService {
 
     List<FoodOrder> getAll() throws DataAccessException;
 
-    List<FoodOrder> getAllByUserIdAndStatus(int userId, Integer... status) throws DataAccessException;
+    List<FoodOrder> getAllUserOrderByUserIdAndStatus(int userId, Integer... status) throws DataAccessException;
+
+    List<FoodOrder> getAllSellerOrderByUserIdAndStatus(int userId, Integer... status) throws DataAccessException;
 
     FoodOrder getOne(int id) throws DataAccessException;
+
+    boolean updateSttFood(FoodOrder  obj) throws DataAccessException;
+
+    boolean addReasonReject(FoodOrder obj) throws DataAccessException;
 }

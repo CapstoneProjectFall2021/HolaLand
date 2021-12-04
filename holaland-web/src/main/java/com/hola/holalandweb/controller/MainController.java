@@ -45,10 +45,11 @@ public class MainController {
     }
 
     @GetMapping("/show-info")
-    public String admin(Model model, Principal principal) {
+    public String admin(Model model, Principal principal, Authentication authentication) {
         String email = principal.getName();
         com.hola.holalandcore.entity.User user = userRepository.findByEmail(email);
         model.addAttribute("userInfo", user);
+        model.addAttribute("userRole", authentication.getAuthorities());
         return "show-info";
     }
 

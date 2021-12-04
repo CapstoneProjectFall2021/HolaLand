@@ -20,11 +20,6 @@ public class UserDetailServiceImpl implements UserDetailService {
     }
 
     @Override
-    public List<UserDetail> getAll() throws DataAccessException {
-        return userDetailRepository.getAll();
-    }
-
-    @Override
     public List<UserDetail> getAllUserBookedByUserId(int id) throws DataAccessException {
         return userDetailRepository.getAllUserBookedByUserId(id);
     }
@@ -35,7 +30,12 @@ public class UserDetailServiceImpl implements UserDetailService {
     }
 
     @Override
-    public UserDetail getOneByUserId(int userId) throws DataAccessException {
-        return userDetailRepository.getOneByUserId(userId);
+    public UserDetail getOneByUserId(int id) throws DataAccessException {
+        return userDetailRepository.getOneByUserId(id);
+    }
+
+    @Override
+    public boolean update(UserDetail obj) throws DataAccessException {
+        return userDetailRepository.update(obj);
     }
 }

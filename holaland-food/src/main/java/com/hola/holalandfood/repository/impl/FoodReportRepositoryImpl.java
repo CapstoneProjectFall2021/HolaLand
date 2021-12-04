@@ -7,6 +7,7 @@ import com.hola.holalandfood.repository.FoodReportRepository;
 import com.hola.holalandfood.repository.IRepositoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -23,16 +24,42 @@ public class FoodReportRepositoryImpl implements FoodReportRepository, IReposito
 
     @Override
     public List<FoodReport> getAll() throws DataAccessException {
-        return jdbcTemplate.query(FOOD_REPORT_GET_ALL,new FoodReportMapper());
+        return jdbcTemplate.query(FOOD_REPORT_GET_ALL, new FoodReportMapper());
     }
 
     @Override
     public List<FoodReport> getAllByOrderId(int id) throws DataAccessException {
-        return jdbcTemplate.query(FOOD_REPORT_GET_ALL_BY_ORDER_ID,new FoodReportMapper(), id);
+        return jdbcTemplate.query(FOOD_REPORT_GET_ALL_BY_ORDER_ID, new FoodReportMapper(), id);
     }
 
     @Override
     public FoodReport getOne(int id) throws DataAccessException {
-        return jdbcTemplate.queryForObject(FOOD_REPORT_GET_ONE,new FoodReportMapper(),id);
+        return jdbcTemplate.queryForObject(FOOD_REPORT_GET_ONE, new FoodReportMapper(), id);
+    }
+
+    @Override
+    public List<FoodReport> checkUserReported(int userId, int orderId) throws DataAccessException{
+        return jdbcTemplate.query(FOOD_REPORT_CHECK_EXISTS, new FoodReportMapper(), userId, orderId);
+    }
+
+    @Override
+    public boolean save(FoodReport obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                FOOD_REPORT_INSERT_ONE,
+                obj.getUserId(),
+                obj.getFoodStoreOnlineId(),
+                obj.getFoodOrderId(),
+                obj.getFoodReportContent(),
+                obj.getFoodReportCreateDate(),
+                obj.isFoodReportDeleted()
+        ) > 0;
+    }
+
+    @Override
+    public boolean delete(int id) throws DataAccessException {
+        return jdbcTemplate.update(
+                FOOD_REPORT_DELETE_ONE,
+                id
+        ) > 0;
     }
 }

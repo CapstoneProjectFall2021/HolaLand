@@ -33,4 +33,19 @@ public class FoodReportServiceImpl implements FoodReportService {
     public FoodReport getOne(int id) throws DataAccessException {
         return foodReportRepository.getOne(id);
     }
+
+    @Override
+    public boolean save(FoodReport obj) throws DataAccessException {
+        return foodReportRepository.save(obj);
+    }
+
+    @Override
+    public List<FoodReport> checkUserReported(int userId, int orderId) throws DataAccessException {
+        return foodReportRepository.checkUserReported(userId, orderId);
+    }
+
+    @Override
+    public boolean delete(int id) throws DataAccessException {
+        return foodReportRepository.delete(id);
+    }
 }

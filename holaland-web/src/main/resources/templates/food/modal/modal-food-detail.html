@@ -9,11 +9,11 @@
       <div class="modal-body">
         <div class="flex">
           <div class="icon-circle">
-            <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
+            <img id="food-item-img-modal" class="media-object" src="" alt="">
           </div>
           <div class="content-body">
-            <h3 th:text="${item.foodItemName}"></h3>
-            <p class="price">Giá: <span th:text="${item.foodItemPrice}"></span><sup>đ</sup></p>
+            <h3 id="food-item-name-modal"></h3>
+            <p class="price">Giá: <span id="food-item-price-modal"></span><sup>đ</sup></p>
           </div>
         </div>
       </div>

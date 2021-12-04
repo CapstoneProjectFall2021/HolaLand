@@ -1,0 +1,30 @@
+<!-- Modal Repost Order -->
+<div class="modal fade" id="reportFoodOrderModal" tabindex="-1" aria-labelledby="reportFoodOrderModalLabel" aria-hidden="true"
+     th:fragment="reportOrderModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reportFoodOrderModalLabel">Thông báo</h5>
+      </div>
+      <div class="modal-body">
+        <form id="reportForm" class="row" method="post" th:action="@{/food/order/report}">
+          <div class="form-group col-md-12 m-0">
+            <input type="hidden" name="foodStoreOnlineId" id="storeId">
+            <input type="hidden" name="foodOrderId" id="orderId">
+            <fieldset>
+              <legend>Lý do báo cáo</legend>
+              <textarea name="reportContent" class="form-control" rows="3"></textarea>
+            </fieldset>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary me-2"
+           onclick="document.getElementById('reportForm').submit();">
+          <i class="fas fa-check text-success"></i>Xác nhận
+        </a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+      </div>
+    </div>
+  </div>
+</div>

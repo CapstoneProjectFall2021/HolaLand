@@ -6,9 +6,9 @@
     <div class="navbar-btn-group">
       <ul class="m-0 p-0">
         <li class="navbar-search">
-          <form class="input-group">
+          <form class="input-group" th:action="@{/search}" method="get">
             <input aria-describedby="search" aria-label="Search..." class="form-control" placeholder="Search..."
-                   type="text">
+                   type="text" th:name="textSearch">
             <button class="btn-search" id="search" type="submit"><i class="bi bi-search"></i></button>
           </form>
         </li>
@@ -88,7 +88,7 @@
               </div>
             </div>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#"><i class="far fa-eye fa-fw"></i>Trang cá nhân</a>
+            <a class="dropdown-item" th:href="@{/profile}"><i class="far fa-eye fa-fw"></i>Trang cá nhân</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#"><i class="far fa-comment fa-fw"></i>Đóng góp ý kiến</a>
             <div class="dropdown-divider"></div>

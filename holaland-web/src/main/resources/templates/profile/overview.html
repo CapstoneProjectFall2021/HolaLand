@@ -1,0 +1,147 @@
+<div class="col-right" th:fragment="overview">
+  <!-- User info -->
+  <div class="user-info">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Thông tin tài khoản</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="jobs.html" class="label-info m-mb-16">
+          <div class="flex">
+            <div class="icon">
+              <i class="far fa-check-square"></i>
+            </div>
+            <div class="number">
+              <h4>20</h4>
+            </div>
+          </div>
+          <div class="description">
+            Đơn hàng đã đặt
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="jobs.html" class="label-info m-mb-16">
+          <div class="flex">
+            <div class="icon">
+              <i class="far fa-file-alt"></i>
+            </div>
+            <div class="number">
+              <h4>20</h4>
+            </div>
+          </div>
+          <div class="description">
+            Bài tìm việc đã đăng
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="#" class="label-info m-mb-16">
+          <div class="flex">
+            <div class="icon">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <div class="number">
+              <h4>3</h4>
+            </div>
+          </div>
+          <div class="description">
+            Việc đã ứng tuyển
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a href="#" class="label-info m-mb-16">
+          <div class="flex">
+            <div class="icon">
+              <i class="far fa-bookmark"></i>
+            </div>
+            <div class="number">
+              <h4>5</h4>
+            </div>
+          </div>
+          <div class="description">
+            Việc làm đã lưu
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Profile info -->
+  <div class="profile-info">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title fix-mt-title">Thông tin cá nhân</h1>
+      </div>
+    </div>
+    <form class="row panel-form mx-0">
+      <div class="form-group col-12 col-md-6 col-lg-4">
+        <fieldset>
+          <legend>Họ và tên</legend>
+          <input type="text" class="form-control" th:value="${userDetail.userDetailName}" readonly>
+        </fieldset>
+      </div>
+      <div class="form-group col-12 col-md-6 col-lg-4">
+        <fieldset>
+          <legend>Ngày sinh</legend>
+          <input type="text" class="form-control" th:value="${#dates.format(userDetail.userDetailDob, 'dd-MM-yyyy')}" readonly>
+        </fieldset>
+      </div>
+      <div class="form-group col-12 col-md-6 col-lg-4">
+        <fieldset>
+          <legend>Giới tính</legend>
+          <input type="text" class="form-control" th:value="${userDetail.userDetailGender == 1 ? 'Nam' : 'Nữ'}"
+                 readonly>
+        </fieldset>
+      </div>
+      <div class="form-group col-12 col-md-6 col-lg-4">
+        <fieldset>
+          <legend>Số điện thoại</legend>
+          <input type="text" class="form-control" th:value="${userDetail.userDetailPhone}" readonly>
+        </fieldset>
+      </div>
+      <div class="form-group col-12 col-md-6 col-lg-4">
+        <fieldset>
+          <legend>Email</legend>
+          <input type="text" class="form-control" th:value="${userDetail.userDetailEmail}" readonly>
+        </fieldset>
+      </div>
+      <div class="form-group col-12 col-md-6 col-lg-4">
+        <fieldset>
+          <legend>Vai trò</legend>
+          <input type="text" class="form-control" th:value="${userRole}" readonly>
+        </fieldset>
+      </div>
+    </form>
+  </div>
+  <!-- Address -->
+  <div class="profile-info">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title fix-mt-title">Địa chỉ</h1>
+      </div>
+    </div>
+    <form class="row panel-form mx-0" th:each="userAddress : ${userAddressList}">
+      <div class="form-group col-12 col-md-6 col-lg-3">
+        <fieldset>
+          <legend>Họ và tên</legend>
+          <input type="text" class="form-control" th:value="*{userAddress.userName}" readonly>
+        </fieldset>
+      </div>
+      <div class="form-group col-12 col-md-6 col-lg-3">
+        <fieldset>
+          <legend>Số điện thoại</legend>
+          <input type="text" class="form-control" th:value="*{userAddress.userPhone}" readonly>
+        </fieldset>
+      </div>
+      <div class="form-group col-12 col-md-12 col-lg-6 mb-0">
+        <fieldset>
+          <legend>Địa chỉ</legend>
+          <input type="text" class="form-control" th:value="*{userAddress.userAddress}" readonly>
+        </fieldset>
+      </div>
+    </form>
+  </div>
+</div>
