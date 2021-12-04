@@ -50,7 +50,7 @@
               </a>
             </li>
             <li>
-              <a href="">
+              <a th:href="@{/address-update}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="fas fa-map-marked-alt fa-fw"></i>Chỉnh sửa địa chỉ
               </a>
             </li>
@@ -71,13 +71,25 @@
         <th:block th:if="${page == 3}">
           <div th:replace="profile/profile-update :: profile-update"></div>
         </th:block>
+        <!-- Update Address -->
+        <th:block th:if="${page == 4}">
+          <div th:replace="profile/address-update :: address-update"></div>
+        </th:block>
       </div>
     </div>
   </div>
 </div>
 
+<th:block th:if="${page == 4}">
+  <!-- Import modal delete address -->
+  <div th:replace="profile/modal/modal-delete-address :: confirmDeleteAddressModal"></div>
+  <!-- Import modal add new address -->
+  <div th:replace="profile/modal/modal-add-new-address :: addNewAddressModal"></div>
+</th:block>
+
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
+<script th:src="@{/js/templates/profile.js}"></script>
 </body>
 
 </html>

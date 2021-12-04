@@ -5,6 +5,7 @@ import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandcore.util.Format;
 import com.hola.holalandfood.entity.*;
 import com.hola.holalandfood.service.*;
+import com.hola.holalandfood.view.FoodCountSttOrder;
 import com.hola.holalandweb.constant.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,14 +13,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLOutput;
 import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/food")
@@ -36,6 +33,7 @@ public class FoodController {
     private final FoodOrderService foodOrderService;
     private final SttFoodService sttFoodService;
     private final FoodOrderDetailService foodOrderDetailService;
+    private final FoodCountSttOrderService foodCountSttOrderService;
 
     @Autowired
     public FoodController(
@@ -49,8 +47,8 @@ public class FoodController {
             FoodReportService foodReportService,
             FoodOrderService foodOrderService,
             SttFoodService sttFoodService,
-            FoodOrderDetailService foodOrderDetailService
-    ) {
+            FoodOrderDetailService foodOrderDetailService,
+            FoodCountSttOrderService foodCountSttOrderService) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTypeService = foodTypeService;
         this.foodStoreOnlineTagService = foodStoreOnlineTagService;
@@ -62,6 +60,7 @@ public class FoodController {
         this.foodOrderService = foodOrderService;
         this.sttFoodService = sttFoodService;
         this.foodOrderDetailService = foodOrderDetailService;
+        this.foodCountSttOrderService = foodCountSttOrderService;
     }
 
     @GetMapping("")
@@ -95,20 +94,20 @@ public class FoodController {
     }
 
 
-    @GetMapping("/online-store")
+    @GetMapping("/store")
     public String goToOnlineStore(@RequestParam("id") Integer id, Model model) {
         addAttrStoreOnline(id, 0, 9, model);
         model.addAttribute("cart", true);
         return "module-food";
     }
 
-    @GetMapping("/online-store/tag")
+    @GetMapping("/store/tag")
     public String getFoodOnlineStoreByTag(@RequestParam("tagId") Integer tagId, @RequestParam("id") Integer id, Model model) {
         addAttrStoreOnline(id, tagId, 9, model);
         return "module-food";
     }
 
-    @GetMapping("/online-store/food-detail")
+    @GetMapping("/store/detail")
     public String getFoodDetail(
             @RequestParam("id") Integer id,
             @RequestParam("itemId") Integer itemId,
@@ -126,12 +125,10 @@ public class FoodController {
         List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
         List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
         List<FoodReport> listReport = foodReportService.getAllByOrderId(id);
-        List<FoodItem> foodItemList;
-        if (tagId == 0) {
-            foodItemList = foodItemService.getAllByStoreOnlineId(id);
-        } else {
-            foodItemList = foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);
-        }
+        List<FoodItem> foodItemList = (tagId == 0)
+                        ? foodItemService.getAllByStoreOnlineId(id)
+                        : foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);;
+
         model.addAttribute("tagId", tagId);
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
@@ -201,7 +198,7 @@ public class FoodController {
     }
 
     public void addAttrOrder(CustomUser currentUser, int sttCode, Model model) {
-        List<SttFood> sttTypeList = sttFoodService.getAllByHistoryOrder();
+        List<SttFood> sttTypeList = sttFoodService.getAllHistoryOrder();
         List<FoodOrder> foodOrderList;
         List<FoodOrder> historyOrderList;
 
@@ -242,16 +239,27 @@ public class FoodController {
             } else {
                 historyOrderList = foodOrderService.getAllUserOrderByUserIdAndStatus(currentUser.getId(), sttCode);
             }
+            model.addAttribute("foodReportService", foodReportService);
             model.addAttribute("page", 3);
         }
+
+        FoodCountSttOrder foodCountSttOrder;
+        if(isSeller) {
+            FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByUserId(currentUser.getId());
+            foodCountSttOrder = foodCountSttOrderService.getCountSttOrderSeller(foodStoreOnline.getFoodStoreOnlineId());
+        } else {
+            foodCountSttOrder = foodCountSttOrderService.getCountSttOrderStudent(currentUser.getId());
+        }
+
         model.addAttribute("format", new Format());
         model.addAttribute("sttCode", sttCode);
         model.addAttribute("sttTypeList", sttTypeList);
         model.addAttribute("foodOrderList", foodOrderList);
         model.addAttribute("historyOrderList", historyOrderList);
+        model.addAttribute("foodCountSttOrder", foodCountSttOrder);
     }
 
-    @GetMapping("/order/updateSttFood")
+    @GetMapping("/order/update-status-food")
     public String updateSttFoodOrder(@RequestParam("orderId") Integer foodOrderId) {
         FoodOrder foodOrder = FoodOrder.builder()
                 .foodOrderId(foodOrderId)
@@ -289,7 +297,6 @@ public class FoodController {
                 .foodReportCreateDate(currentDate)
                 .foodReportDeleted(false)
                 .build();
-
         boolean isCheck = foodReportService.save(foodReport);
         if (isCheck) {
             return "redirect:" + "/food/order";
@@ -310,6 +317,16 @@ public class FoodController {
                 .build();
 
         boolean isCheck = foodOrderService.addReasonReject(newFoodOrder);
+        if (isCheck) {
+            return "redirect:" + "/food/order";
+        } else {
+            return "404";
+        }
+    }
+
+    @GetMapping("/order/delete-report")
+    public String deleteReportOrder(@RequestParam("reportId") int reportId) {
+        boolean isCheck = foodReportService.delete(reportId);
         if (isCheck) {
             return "redirect:" + "/food/order";
         } else {

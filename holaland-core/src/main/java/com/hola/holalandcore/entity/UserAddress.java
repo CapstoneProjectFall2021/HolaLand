@@ -14,4 +14,6 @@ public class UserAddress {
     private String userName;
     private String userPhone;
     private String userAddress;
+    private Boolean userAddressDefault;
+    private Boolean userAddressDeleted;
 }

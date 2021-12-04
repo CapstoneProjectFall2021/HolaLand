@@ -18,4 +18,8 @@ public interface FoodItemRepository {
     List<FoodItem> getAllByUserId(int userId) throws DataAccessException;
 
     boolean deletedOne(FoodItem obj) throws DataAccessException;
+
+    boolean save(FoodItem foodItem) throws DataAccessException;
+
+    List<FoodItem> search(String textSearch) throws DataAccessException;
 }

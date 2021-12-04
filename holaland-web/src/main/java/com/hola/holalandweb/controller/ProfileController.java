@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -108,6 +107,85 @@ public class ProfileController {
         if (isCheck) {
             return "redirect:" + "/profile/update";
         } else {
+            return "404";
+        }
+    }
+
+    @GetMapping("/address-update")
+    public String addressUpdate(Model model, Authentication authentication) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(currentUser.getId());
+        model.addAttribute("userAddressList", userAddressList);
+        model.addAttribute("page", 4);
+        return "profile";
+    }
+
+    @PostMapping("/update-address")
+    public String updateUserAddress(
+            @RequestParam("addressId") int addressId,
+            @RequestParam("userName") String userName,
+            @RequestParam("phone") String phone,
+            @RequestParam("address") String address
+    ) {
+        UserAddress newUserAddress = UserAddress.builder().build();
+        newUserAddress.setUserAddressId(addressId);
+        newUserAddress.setUserName(userName);
+        newUserAddress.setUserPhone(phone);
+        newUserAddress.setUserAddress(address);
+        boolean isCheck = userAddressService.update(newUserAddress);
+        if(isCheck) {
+            return "redirect:" + "/address-update";
+        }else {
+            return "404";
+        }
+    }
+
+    @PostMapping("/add-address")
+    public String addNewUserAddress(
+            @RequestParam("newUserName") String newUserName,
+            @RequestParam("newPhone") String newPhone,
+            @RequestParam("newAddress") String newAddress,
+            Authentication authentication
+    ) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        UserDetail userDetail = userDetailService.getOneByUserId(currentUser.getId());
+
+        UserAddress newUserAddress = UserAddress.builder().build();
+        newUserAddress.setUserDetailId(userDetail.getUserDetailId());
+        newUserAddress.setUserName(newUserName);
+        newUserAddress.setUserPhone(newPhone);
+        newUserAddress.setUserAddress(newAddress);
+        newUserAddress.setUserAddressDefault(false);
+        newUserAddress.setUserAddressDeleted(false);
+        boolean isCheck = userAddressService.save(newUserAddress);
+        if(isCheck) {
+            return "redirect:" + "/address-update";
+        }else {
+            return "404";
+        }
+    }
+
+    @GetMapping("/address/delete")
+    public String deleteUserAddress(@RequestParam("addressId") int addressId) {
+        boolean isCheck = userAddressService.delete(addressId);
+        if(isCheck) {
+            return "redirect:" + "/address-update";
+        }else {
+            return "404";
+        }
+    }
+
+    @GetMapping("/address/default")
+    public String changeUserAddressDefault(@RequestParam("addressId") int addressId, Authentication authentication) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        List<UserAddress> userAddressDefault = userAddressService.getCurrentDefaultAddressByUserId(currentUser.getId());
+        if(userAddressDefault.size() != 0) {
+            userAddressService.updateDefaultAddress(false,userAddressDefault.get(0).getUserAddressId());
+        }
+        boolean isCheck = userAddressService.updateDefaultAddress(true,addressId);
+        if(isCheck) {
+            return "redirect:" + "/address-update";
+        }else {
             return "404";
         }
     }

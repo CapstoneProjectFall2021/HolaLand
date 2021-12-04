@@ -9,14 +9,21 @@ import com.hola.holalandfood.service.FoodItemService;
 import com.hola.holalandfood.service.FoodStoreOnlineService;
 import com.hola.holalandfood.service.FoodStoreOnlineTagService;
 import com.hola.holalandfood.service.FoodTagService;
+import com.hola.holalandweb.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,7 +101,7 @@ public class FoodManageStoreController {
     public String deleteFoodManagerStore(@RequestParam("foodId") Integer foodId) {
         FoodItem foodItem = FoodItem.builder().build();
         foodItem.setFoodItemId(foodId);
-        foodItem.setFoodItemDeleted(true);
+        foodItem.setFoodItemDeleted(1);
         boolean isCheck = foodItemService.deletedOne(foodItem);
         if (isCheck) {
             return "redirect:" + "/store/manage-food";
@@ -161,6 +168,41 @@ public class FoodManageStoreController {
     @GetMapping("/store/statistics")
     public String statistics(Model model) {
         model.addAttribute("page", 4);
+        return "module-food-manage-store";
+    }
+
+    @PostMapping("/food/save-image-food")
+    public String saveImageFood(Model model, @RequestParam("imageFood") MultipartFile multipartFile,
+                                @ModelAttribute("foodItem") FoodItem foodItem,
+                                BindingResult bindingResult, Authentication authentication) throws IOException {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+
+        CustomUser currentUser;
+        if (authentication != null) {
+            currentUser = (CustomUser) authentication.getPrincipal();
+        } else {
+            return "login";
+        }
+
+        int foodStoreOnlineId = foodStoreOnlineService.getOneByUserId(currentUser.getId()).getFoodStoreOnlineId();
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        foodItem.setFoodItemImage(fileName);
+        foodItem.setFoodStoreOnlineId(foodStoreOnlineId);
+        foodItem.setFoodItemIsActive(1);
+        foodItem.setFoodItemDeleted(0);
+        String uploadDir = new File("holaland-web/src/main/resources/static/images/food").getAbsolutePath();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        foodItemService.save(foodItem);
+        //get list tag after update
+
+        List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(currentUser.getId());
+        List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(currentUser.getId());
+        model.addAttribute("foodStoreTagList", foodShopTagList);
+        model.addAttribute("foodStoreItemList", foodShopItemList);
+        model.addAttribute("page", 2);
         return "module-food-manage-store";
     }
 }

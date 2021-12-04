@@ -18,8 +18,8 @@ public class FoodItemMapper implements RowMapper<FoodItem> {
                 .foodItemName(rs.getString("food_item_name"))
                 .foodItemPrice(rs.getInt("food_item_price"))
                 .foodItemSoldNumber(rs.getInt("food_item_sold_number"))
-                .foodItemIsActive(rs.getBoolean("food_item_is_active"))
-                .foodItemDeleted(rs.getBoolean("food_item_deleted"))
+                .foodItemIsActive(rs.getInt("food_item_is_active"))
+                .foodItemDeleted(rs.getInt("food_item_deleted"))
                 .build();
     }
 }

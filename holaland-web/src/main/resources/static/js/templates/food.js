@@ -51,6 +51,12 @@ function getFoodItemDetail(e) {
 /*
  * Order food
  */
+function confirmDeleteReport(e) {
+    const foodReportId = e.target.firstElementChild.innerHTML;
+    document.getElementById("btn-delete-report").href = "/food/order/delete-report?reportId=" + foodReportId;
+    openModal("confirmDeleteReportOrderModal");
+}
+
 function reportFoodOrder(e) {
     const foodOrderId = e.target.firstElementChild.innerHTML;
     const storeId = e.target.lastElementChild.innerHTML;
@@ -79,6 +85,12 @@ function getOrderNote(e) {
     openModal("noteOrderModal");
 }
 
+function getOrderReportContent(e) {
+    const reportContent = e.target.firstElementChild.innerHTML;
+    document.getElementById("reportContent").innerHTML = reportContent;
+    openModal("reportOrderContentModal");
+}
+
 /*
  * Store online manage
  */
@@ -90,7 +102,7 @@ function confirmDeleteFood(e) {
 
 function confirmCancelOrder(e) {
     const orderId = e.target.firstElementChild.innerHTML;
-    document.getElementById("btn-cancel-order").href = "/food/order/updateSttFood?orderId=" + orderId;
+    document.getElementById("btn-cancel-order").href = "/food/order/update-status-food?orderId=" + orderId;
     openModal("confirmCancelOrderModal");
 }
 

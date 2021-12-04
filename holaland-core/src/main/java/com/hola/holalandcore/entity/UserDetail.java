@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -16,7 +18,7 @@ public class UserDetail {
     private int userDetailId;
     private int userId;
     private String userDetailName;
-    private String userDetailDob;
+    private Date userDetailDob;
     private int userDetailGender;
     private String userDetailPhone;
     private String userDetailEmail;

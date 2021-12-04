@@ -1,0 +1,57 @@
+<!-- Modal Add New Food -->
+<div class="modal fade" id="addNewFoodModal" tabindex="-1" aria-labelledby="addNewFoodModalLabel" aria-hidden="true" th:fragment="addNewFoodModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addNewFoodModalLabel">Thêm sản phẩm mới</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-md-6 m-mb-20 m-mt-10">
+                        <img id="blah" class="preview-img" width="100%" height="100%" src="images/system/no-name.png" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <form id="addNewFoodForm" class="row" th:action="@{/food/save-image-food}" method="post" enctype="multipart/form-data" th:object="${foodItem}">
+                            <div class="form-group col-md-12">
+                                <fieldset>
+                                    <legend>Lựa chọn hình ảnh</legend>
+                                    <input type="file" name="imageFood" class="form-control custom-file-input" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+                                </fieldset>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <fieldset>
+                                    <legend>Tên sản phẩm</legend>
+                                    <input type="text" class="form-control" field="*{foodItemName}" name="foodItemName">
+                                </fieldset>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <fieldset>
+                                    <legend>Giá sản phẩm</legend>
+                                    <input type="number" class="form-control pe-5" field="*{foodItemPrice}" name="foodItemPrice">
+                                    <label class="unit">VND</label>
+                                </fieldset>
+                            </div>
+                            <div class="form-group col-md-12 mb-0">
+                                <fieldset class="bg-dark-ui">
+                                    <legend>Chọn thẻ</legend>
+                                    <select class="form-control form-select" field="*{foodTagId}" name="foodTagId">
+                                        <option value="1" selected="selected">Cơm</option>
+                                        <option value="2">Phở</option>
+                                        <option value="3">Cháo</option>
+                                        <option value="4">Bún đậu</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0)" class="btn btn-sm btn-secondary me-2" onclick="document.getElementById('addNewFoodForm').submit();">
+                    <i class="fas fa-check text-success"></i>Xác nhận
+                </a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+            </div>
+        </div>
+    </div>
+</div>
