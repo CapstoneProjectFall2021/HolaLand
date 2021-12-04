@@ -67,12 +67,12 @@ public class FoodManageStoreController {
     public String updatingShopInfo(
             @RequestParam("storeId") Integer shopId,
             @RequestParam("storeName") String shopName,
-            @RequestParam("storeDescript") String shopDescript
+            @RequestParam("storeDescription") String storeDescription
     ) {
         FoodStoreOnline newShopInfo = FoodStoreOnline.builder().build();
         newShopInfo.setFoodStoreOnlineId(shopId);
         newShopInfo.setFoodStoreOnlineName(shopName);
-        newShopInfo.setFoodStoreOnlineDescription(shopDescript);
+        newShopInfo.setFoodStoreOnlineDescription(storeDescription);
         boolean isCheck = foodStoreOnlineService.updateShopInfo(newShopInfo);
         if (isCheck) {
             return "redirect:" + "/store/info";

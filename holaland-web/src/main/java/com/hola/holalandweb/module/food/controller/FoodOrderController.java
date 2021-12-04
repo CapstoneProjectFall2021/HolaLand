@@ -48,7 +48,6 @@ public class FoodOrderController {
         if (listFoodOrder == null) {
             listFoodOrder = new ArrayList<>();
             listFoodOrder.add(foodItemCart);
-            session.setAttribute("listFoodOrder", listFoodOrder);
         } else {
             for (FoodItemCart f : listFoodOrder) {
                 if (f.getFoodId() == foodId) {
@@ -61,11 +60,8 @@ public class FoodOrderController {
                 listFoodOrder.add(foodItemCart);
                 flat = true;
             }
-            session.setAttribute("listFoodOrder", listFoodOrder);
         }
-
-        listFoodOrder.forEach(s -> System.out.println(s));
-
+        session.setAttribute("listFoodOrder", listFoodOrder);
         return new ResponseEntity<>(listFoodOrder.size(), HttpStatus.OK);
     }
 }
