@@ -48,4 +48,14 @@ public class FoodItemServiceImpl implements FoodItemService {
     public boolean deletedOne(FoodItem obj) throws DataAccessException {
         return foodItemRepository.deletedOne(obj);
     }
+
+    @Override
+    public boolean save(FoodItem foodItem) throws DataAccessException {
+        return foodItemRepository.save(foodItem);
+    }
+    
+    @Override
+    public List<FoodItem> search(String textSearch) throws DataAccessException {
+        return foodItemRepository.search(textSearch);
+    }
 }

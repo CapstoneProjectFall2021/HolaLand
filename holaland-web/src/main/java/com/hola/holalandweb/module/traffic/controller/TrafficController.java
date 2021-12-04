@@ -1,4 +1,4 @@
-package com.hola.holalandweb.controller;
+package com.hola.holalandweb.module.traffic.controller;
 
 import com.hola.holalandtraffic.entity.Bus;
 import com.hola.holalandtraffic.entity.MotorbikeTaxiDrivers;

@@ -1,4 +1,4 @@
-package com.hola.holalandweb.controller;
+package com.hola.holalandweb.module.works.controller;
 
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.repository.UserRepository;
@@ -51,17 +51,18 @@ public class WorksController {
     private final UserRepository userRepository;
 
     @Autowired
-    public WorksController(WorkRequestRecruitmentService workRequestRecruitmentService,
-                           WorkRequestTypeService workRequestTypeService,
-                           WorkRequestApplyService workRequestApplyService,
-                           WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
-                           WorkRequestFindJobService workRequestFindJobService,
-                           WorkPaymentMethodService workPaymentMethodService,
-                           WorkTimeService workTimeService,
-                           UserDetailService userDetailService,
-                           SttWorkService sttWorkService,
-                           SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService,
-                           UserRepository userRepository
+    public WorksController(
+            WorkRequestRecruitmentService workRequestRecruitmentService,
+            WorkRequestTypeService workRequestTypeService,
+            WorkRequestApplyService workRequestApplyService,
+            WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
+            WorkRequestFindJobService workRequestFindJobService,
+            WorkPaymentMethodService workPaymentMethodService,
+            WorkTimeService workTimeService,
+            UserDetailService userDetailService,
+            SttWorkService sttWorkService,
+            SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService,
+            UserRepository userRepository
     ) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.workRequestTypeService = workRequestTypeService;

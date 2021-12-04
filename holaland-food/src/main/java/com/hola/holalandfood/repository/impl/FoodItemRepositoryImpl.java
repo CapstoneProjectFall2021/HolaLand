@@ -50,8 +50,27 @@ public class FoodItemRepositoryImpl implements FoodItemRepository, IRepositoryQu
     public boolean deletedOne(FoodItem obj) throws DataAccessException {
         return jdbcTemplate.update(
                 FOOD_ITEM_DELETED_ONE,
-                obj.isFoodItemDeleted(),
+                obj.getFoodItemDeleted(),
                 obj.getFoodItemId()
         ) > 0;
+    }
+
+    @Override
+    public boolean save(FoodItem foodItem) throws DataAccessException {
+        return jdbcTemplate.update(INSERT_FOOD_ITEM,
+                foodItem.getFoodStoreOnlineId(),
+                foodItem.getFoodTagId(),
+                foodItem.getFoodTagId(),
+                foodItem.getFoodItemImage(),
+                foodItem.getFoodItemName(),
+                foodItem.getFoodItemPrice(),
+                foodItem.getFoodItemSoldNumber(),
+                foodItem.getFoodItemIsActive(),
+                foodItem.getFoodItemDeleted()) > 0;
+    }
+
+    @Override
+    public List<FoodItem> search(String textSearch) throws DataAccessException {
+        return null;
     }
 }

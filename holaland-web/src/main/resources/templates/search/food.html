@@ -1,7 +1,7 @@
 <div class="col-right" th:fragment="food">
   <div class="row">
     <div class="col-12">
-      <h1 class="title fix-mb-title">Kết quả tìm kiếm cho "Ăn - uống"</h1>
+      <h1 class="title fix-mb-title">Kết quả tìm kiếm cho "Ăn - uống" - Từ Khóa: "<span th:text="${textSearch}"></span>"</h1>
     </div>
   </div>
 
@@ -14,13 +14,15 @@
   <!-- Tags -->
   <div class="row m-mb-20">
     <div class="col-md-12">
-      <div class="list-tag">
+      <div class="list-tag" th:if="${foodTagListSearch.size() != 0}">
         <div class="tags">
-          <a href="#" class="tag">Cơm</a>
-          <a href="#" class="tag">Bánh mỳ</a>
-          <a href="#" class="tag">Đồ ăn vặt</a>
-          <a href="#" class="tag">Đồ ăn nhanh</a>
+          <th:block th:each="foodTagSearch: ${foodTagListSearch}">
+            <a href="#" class="tag"  th:text="*{foodTagSearch.foodTagName}"></a>
+          </th:block>
         </div>
+      </div>
+      <div th:if="${foodTagListSearch.size() == 0}">
+        Không tìm thấy thẻ nào có kết quả "<span th:text="${textSearch}"></span>"
       </div>
     </div>
   </div>
@@ -32,9 +34,9 @@
     </div>
   </div>
   <!-- List food -->
-  <div class="list-food">
+  <div class="list-food" th:if="${foodItemListSearch.size() != 0}">
     <div class="row">
-      <div class="col-lg-12 col-xl-6 col-xxl-6">
+      <div class="col-lg-12 col-xl-6 col-xxl-6" th:each="foodItemSearch : ${foodItemListSearch}">
         <div class="food label-info m-mb-16">
           <div class="flex-sb">
             <div class="flex">
@@ -42,68 +44,12 @@
                 <img class="media-object" src="assets/images/food/ride.jpg" alt="">
               </div>
               <div class="content-body">
-                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal">
-                  Cơm hến Xào
+                <a th:href="@{/food/online-store(id=*{foodItemSearch.foodStoreOnlineId})}"
+                   th:text="*{foodItemSearch.foodItemName}">
                 </a>
                 <div class="food-info">
-                  <p>Giá: 35.000<sup>đ</sup> &nbsp;&#8226;&nbsp; Đã bán: 50</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-12 col-xl-6 col-xxl-6">
-        <div class="food label-info m-mb-16">
-          <div class="flex-sb">
-            <div class="flex">
-              <div class="icon-circle">
-                <img class="media-object" src="assets/images/food/ride.jpg" alt="">
-              </div>
-              <div class="content-body">
-                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal">
-                  Cơm hến Xào
-                </a>
-                <div class="food-info">
-                  <p>Giá: 35.000<sup>đ</sup> &nbsp;&#8226;&nbsp; Đã bán: 50</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-12 col-xl-6 col-xxl-6">
-        <div class="food label-info m-mb-16">
-          <div class="flex-sb">
-            <div class="flex">
-              <div class="icon-circle">
-                <img class="media-object" src="assets/images/food/ride.jpg" alt="">
-              </div>
-              <div class="content-body">
-                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal">
-                  Cơm hến Xào
-                </a>
-                <div class="food-info">
-                  <p>Giá: 35.000<sup>đ</sup> &nbsp;&#8226;&nbsp; Đã bán: 50</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-12 col-xl-6 col-xxl-6">
-        <div class="food label-info m-mb-16">
-          <div class="flex-sb">
-            <div class="flex">
-              <div class="icon-circle">
-                <img class="media-object" src="assets/images/food/ride.jpg" alt="">
-              </div>
-              <div class="content-body">
-                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal">
-                  Cơm hến Xào
-                </a>
-                <div class="food-info">
-                  <p>Giá: 35.000<sup>đ</sup> &nbsp;&#8226;&nbsp; Đã bán: 50</p>
+                  <p>Giá: <span th:text="*{#numbers.formatInteger(foodItemSearch.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
+                    &nbsp;&#8226;&nbsp; Đã bán: <span th:text="*{foodItemSearch.foodItemSoldNumber}"></span></p>
                 </div>
               </div>
             </div>
@@ -111,5 +57,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div  th:if="${foodItemListSearch.size() == 0}">
+    Không tìm thấy món ăn nào có kết quả "<span th:text="${textSearch}"></span>"
   </div>
 </div>

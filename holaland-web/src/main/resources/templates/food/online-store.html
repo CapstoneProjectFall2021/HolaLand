@@ -69,8 +69,8 @@
               <a th:href="@{/login}" class="nav-link" sec:authorize="!isAuthenticated()">
                 Đánh giá
               </a>
-              <a href="javascript:void(0)" class="nav-link" data-bs-toggle="modal"
-                 data-bs-target="#onlineStoreRateModal" sec:authorize="isAuthenticated()">
+              <a href="javascript:void(0)" class="nav-link" onclick="insertNewRate(event)" sec:authorize="isAuthenticated()">
+                <span th:text="${foodStoreOnline.foodStoreOnlineId}" class="d-none"></span>
                 Đánh giá
               </a>
             </li>
@@ -79,14 +79,15 @@
         <!-- Tab content -->
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-food" role="tabpanel" aria-labelledby="pills-food-tab">
+            <!-- List tag -->
             <div class="row m-mb-16">
               <div class="col-md-12">
                 <div class="list-tag">
                   <div class="tags">
-                    <a class="tag" th:href="@{/food/online-store(id=${foodStoreOnline.foodStoreOnlineId})}">Tất cả</a>
+                    <a class="tag" th:href="@{/food/store(id=${foodStoreOnline.foodStoreOnlineId})}">Tất cả</a>
                     <th:block th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}">
                       <a class="tag"
-                         th:href="@{/food/online-store/tag(tagId=*{foodStoreOnlineTag.foodTagId}, id=${foodStoreOnline.foodStoreOnlineId})}"
+                         th:href="@{/food/store/tag(tagId=*{foodStoreOnlineTag.foodTagId}, id=${foodStoreOnline.foodStoreOnlineId})}"
                          th:text="*{foodStoreOnlineTag.foodTagName}">
                       </a>
                     </th:block>
@@ -101,16 +102,13 @@
                     <div class="flex-sb">
                       <div class="flex">
                         <div class="icon-circle">
-                          <img class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
+                          <img th:id="'food-item-img-' + *{foodItem.foodItemId}" class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
                         </div>
                         <div class="content-body">
-                          <a th:href="@{/food/online-store/food-detail(id=${foodStoreOnline.foodStoreOnlineId},
-                              itemId=*{foodItem.foodItemId}, tagId=${tagId})}"
-                             th:text="*{foodItem.foodItemName}">
-                          </a>
+                          <a th:id="'food-item-name-' + *{foodItem.foodItemId}" href="javascript:void(0)" th:text="*{foodItem.foodItemName}" onclick="getFoodItemDetail(event)"></a>
                           <div class="food-info">
-                            <p>Giá: <span
-                                th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
+                            <p>Giá:
+                              <span th:id="'food-item-price-' + *{foodItem.foodItemId}" th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
                               &nbsp;&#8226;&nbsp;
                               Đã bán: <span th:text="*{foodItem.foodItemSoldNumber}"></span>
                             </p>
@@ -118,8 +116,14 @@
                         </div>
                       </div>
                       <div class="flex">
-                        <a href="javascript:void(0)" class="btn-more mx-0" onclick="showToast()">
-                          <i class="fas fa-plus text-success"></i>
+                        <a href="javascript:void(0)" class="btn-more mx-0" sec:authorize="isAuthenticated()">
+                          <i class="fas fa-plus fa-lg text-success" onclick="addFoodToCart(event)">
+                            <span th:text="${foodItem.foodItemId}" class="d-none"></span>
+                            <span th:text="${foodItem.foodStoreOnlineId}" class="d-none"></span>
+                          </i>
+                        </a>
+                        <a th:href="@{/login}" class="btn-more mx-0" sec:authorize="!isAuthenticated()">
+                          <i class="fas fa-plus fa-lg text-success"></i>
                         </a>
                       </div>
                     </div>

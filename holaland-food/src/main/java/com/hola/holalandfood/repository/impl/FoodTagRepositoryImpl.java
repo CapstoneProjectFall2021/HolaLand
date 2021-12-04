@@ -40,4 +40,9 @@ public class FoodTagRepositoryImpl implements FoodTagRepository, IRepositoryQuer
     public List<FoodTag> getAllByUserId(int userId) throws DataAccessException {
         return jdbcTemplate.query(FOOD_TAG_GET_ALL_BY_USER_ID,  new FoodTagMapper(), userId);
     }
+
+    @Override
+    public List<FoodTag> search(String textSearch) throws DataAccessException {
+        return jdbcTemplate.query(FOOD_TAG_SEARCH,  new FoodTagMapper(), "%" + textSearch + "%");
+    }
 }

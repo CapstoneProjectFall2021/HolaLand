@@ -45,32 +45,19 @@ public class MainController {
     }
 
     @GetMapping("/show-info")
-    public String admin(Model model, Principal principal) {
+    public String admin(Model model, Principal principal, Authentication authentication) {
         String email = principal.getName();
         com.hola.holalandcore.entity.User user = userRepository.findByEmail(email);
         model.addAttribute("userInfo", user);
+        model.addAttribute("userRole", authentication.getAuthorities());
         return "show-info";
     }
-
-//    @GetMapping("/works-2")
-//    public String loginOK(Model model, Principal principal) {
-//
-//        // After login success will have principal
-//        String userName = principal.getName();
-//        System.out.println("USER NAME: " + userName);
-//
-//        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-//        String userInfo = WebUtils.toString(loginedUser);
-//        //model.addAttribute("userInfo", userInfo);
-//
-//        return "index";
-//    }
 
     @GetMapping("/403")
     public String accessDenied(Principal principal) {
         if (principal != null) {
-            User loginedUser = (User) ((Authentication) principal).getPrincipal();
-            String userInfo = WebUtils.toString(loginedUser);
+            User currentUser = (User) ((Authentication) principal).getPrincipal();
+            String userInfo = WebUtils.toString(currentUser);
             String message = "Hi " + principal.getName() + "<br> You do not have permission to access this page!";
             System.err.println(userInfo);
             System.err.println(message);

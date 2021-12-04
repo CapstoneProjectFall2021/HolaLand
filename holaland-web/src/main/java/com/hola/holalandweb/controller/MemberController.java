@@ -40,12 +40,6 @@ public class MemberController {
         this.clubTypeService = clubTypeService;
     }
 
-    @GetMapping("/members")
-    public String members(Model model) {
-        backToMembers(model);
-        return "members";
-    }
-
     @GetMapping("/send-email")
     public String sendEmail(@RequestParam("id") Integer id, Model model) {
         Member member = memberService.getOne(id);
@@ -55,51 +49,6 @@ public class MemberController {
                 member.getMemberEmail()
         );
         model.addAttribute("send", "- Gửi email thành công!");
-        backToMembers(model);
-        return "members";
-    }
-
-    //add member
-    @PostMapping("/add-member")
-    public String addMember(@ModelAttribute("addMember") Member addMember, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            System.out.println("There was a error " + bindingResult);
-            return "404";
-        }
-        addMember.setMemberRankId(1);
-        addMember.setMemberStatusId(1);
-
-        int memberId = memberService.save(addMember);
-        if (memberId > 0) {
-            backToMembers(model);
-            return "members";
-        } else {
-            return "404";
-        }
-    }
-
-    @GetMapping("/get-one-member")
-    public String getOneMember(@RequestParam("id") Integer id, Model model) {
-        Member member = memberService.getOne(id);
-        backToMembers(model);
-        model.addAttribute("oneMember", member);
-        return "members";
-    }
-
-    @GetMapping("/confirm-delete-member")
-    public String deleteMember(@RequestParam("id") Integer id, Model model) {
-        memberService.delete(id);
-        backToMembers(model);
-        return "members";
-    }
-
-    @PostMapping("/update-member")
-    public String updateMember(@ModelAttribute("updateMember") Member updateMember, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            System.out.println("There was a error " + bindingResult);
-            return "404";
-        }
-        memberService.update(updateMember);
         backToMembers(model);
         return "members";
     }

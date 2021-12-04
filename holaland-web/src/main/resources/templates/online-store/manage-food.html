@@ -8,10 +8,13 @@
     </div>
     <form class="row panel-form mx-0 m-mb-16" >
       <div class="list-update-tag m-mt-8" >
-        <div class="tags" >
+        <div class="tags" th:if="${foodStoreTagList.size() != 0}">
           <th:block th:each="foodTag: ${foodStoreTagList}">
             <span class="tag" th:text="*{foodTag.foodTagName}"></span>
           </th:block>
+        </div>
+        <div th:if="${foodStoreTagList.size() == 0}">
+          Cửa hàng chưa có thẻ nào!
         </div>
       </div>
       <div class="col-md-12 text-end">
@@ -43,7 +46,7 @@
           <div class="flex-sb">
             <div class="flex">
               <div class="icon-circle">
-                <img class="media-object" src="assets/images/food/ride.jpg" alt="">
+                <img class="media-object" th:src="@{'/images/food/'+ *{foodItem.foodItemImage}}">
               </div>
               <div class="content-body">
                 <a href="javascript:void(0)" >

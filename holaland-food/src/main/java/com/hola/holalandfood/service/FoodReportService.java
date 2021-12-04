@@ -14,4 +14,8 @@ public interface FoodReportService {
     FoodReport getOne(int id) throws DataAccessException;
 
     boolean save(FoodReport obj) throws DataAccessException;
+
+    List<FoodReport> checkUserReported(int userId, int orderId) throws DataAccessException;
+
+    boolean delete(int id) throws DataAccessException;
 }

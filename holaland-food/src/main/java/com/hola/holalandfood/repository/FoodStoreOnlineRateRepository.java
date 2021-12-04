@@ -12,4 +12,6 @@ public interface FoodStoreOnlineRateRepository {
     List<FoodStoreOnlineRate> getAllCommentByStoreOnlineId(int id) throws DataAccessException;
 
     FoodStoreOnlineRate getOne(int id) throws DataAccessException;
+
+    boolean insert(FoodStoreOnlineRate obj) throws DataAccessException;
 }
