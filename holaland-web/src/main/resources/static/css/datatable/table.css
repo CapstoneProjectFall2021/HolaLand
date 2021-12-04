@@ -90,7 +90,7 @@
   float: right;
 }
 
-.data-tables label {
+label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 20px;

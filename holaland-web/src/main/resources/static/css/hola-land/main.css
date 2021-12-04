@@ -20,6 +20,7 @@ html[data-theme='light'] {
   /* border-color ------------------------------------ */
   --primary-border-color: transparent;
   --secondary-border-color: #E4E6EB;
+  --third-border-color: #D5D6DB;
   /* text-color -------------------------------------- */
   --main-text: #198754;
   --accent-text: #2271FF;
@@ -63,6 +64,7 @@ html[data-theme='dark'] {
   /* --primary-border-color: #3A3B3C; */
   --primary-border-color: transparent;
   --secondary-border-color: #3A3B3C;
+  --third-border-color: #4E4F50;
   /* text-color -------------------------------------- */
   --main-text: #198754;
   --accent-text: #2271FF;

@@ -1,0 +1,79 @@
+.cart table .icon-circle img {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+}
+
+.cart table tr th {
+  padding-top: 8px;
+  padding-bottom: 16px;
+}
+
+.btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-group .totalMoney {
+  font-weight: 400;
+}
+
+.btn-group .totalMoney span {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.btn-cart {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+#foodDetailModal .modal-body .flex {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+#foodDetailModal .modal-body .flex .icon-circle img {
+  border-radius: var(--primary-border-radius);
+  margin-right: 20px;
+  width: 250px;
+}
+
+#foodDetailModal .modal-body .flex .content-body h3 {
+  font-size: 22px;
+  margin-bottom: 4px;
+  font-weight: var(--font-weight-4);
+}
+
+#foodDetailModal .modal-body .flex .content-body p {
+  font-size: 16px;
+  color: var(--secondary-text);
+  margin-bottom: 0;
+}
+
+#confirmOrderSuccessfullyModal .modal-body h3 {
+  font-size: 22px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+#confirmOrderSuccessfullyModal .modal-body h3 i {
+  font-size: 80px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
+
+#confirmOrderSuccessfullyModal .modal-footer {
+  display: block;
+  padding-top: 10px;
+}
+
+#confirmOrderSuccessfullyModal .modal-footer a {
+  width: 180px;
+}
