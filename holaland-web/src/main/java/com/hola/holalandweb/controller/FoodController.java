@@ -97,29 +97,26 @@ public class FoodController {
 
     @GetMapping("/store")
     public String goToOnlineStore(@RequestParam("id") Integer id, Model model) {
-        FoodStoreOnlineRate newRate = FoodStoreOnlineRate.builder().build();
-        addAttrStoreOnline(id, 0, 9, model);
-        model.addAttribute("newRate", newRate);
+        FoodStoreOnlineRate rate = FoodStoreOnlineRate.builder().build();
+        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
+
+        addAttrStoreOnline(foodStoreOnline, 0, 9, model);
+        model.addAttribute("newRate", rate);
         return "module-food";
     }
 
     @PostMapping("/store/rate")
-    public String insertNewRate(@ModelAttribute("newRate") FoodStoreOnlineRate newRate,
-                                BindingResult bindingResult,
-                                Authentication authentication
-    )
-    {
+    public String insertNewRate(
+            @ModelAttribute("newRate") FoodStoreOnlineRate newRate,
+            BindingResult bindingResult,
+            Authentication authentication
+    ) {
         if (bindingResult.hasErrors()) {
             System.out.println("There was a error " + bindingResult);
             return "404";
         }
-        CustomUser currentUser;
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
 
-        if (authentication != null) {
-            currentUser = (CustomUser) authentication.getPrincipal();
-        } else {
-            return "login";
-        }
         Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
         newRate.setUserId(currentUser.getId());
         newRate.setFoodStoreOnlineRateCreateTime(currentDate);
@@ -132,46 +129,31 @@ public class FoodController {
         }
     }
 
-    @GetMapping("/store/report/detail")
+    @GetMapping("/store/report/order/detail")
     public String getFoodOrderDetailReport(@RequestParam("orderId") Integer orderId, Model model) {
-
         List<FoodOrderDetail> foodOrderDetailReport = foodOrderDetailService.getAllByOrderId(orderId);
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByOrderId(orderId);
-        model.addAttribute("orderId", orderId);
+
+        addAttrStoreOnline(foodStoreOnline, 0, 9, model);
         model.addAttribute("foodOrderDetailReport", foodOrderDetailReport);
-        model.addAttribute("foodStoreOnline", foodStoreOnline);
-        model.addAttribute("foodItemService", foodItemService);
-        addAttrStoreOnline(foodStoreOnline.getFoodStoreOnlineId(), 0, 9, model);
+        model.addAttribute("tab", 3);
         return "module-food";
     }
 
     @GetMapping("/store/tag")
-    public String getFoodOnlineStoreByTag(@RequestParam("tagId") Integer tagId, @RequestParam("id") Integer id, Model model) {
-        addAttrStoreOnline(id, tagId, 9, model);
+    public String getFoodOnlineStoreByTag(@RequestParam("storeId") Integer storeId, @RequestParam("tagId") Integer tagId, Model model) {
+        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(storeId);
+        addAttrStoreOnline(foodStoreOnline, tagId, 9, model);
         return "module-food";
     }
 
-    @GetMapping("/store/detail")
-    public String getFoodDetail(
-            @RequestParam("id") Integer id,
-            @RequestParam("itemId") Integer itemId,
-            @RequestParam("tagId") Integer tagId,
-            Model model
-    ) {
-        addAttrStoreOnline(id, tagId, 9, model);
-        FoodItem item = foodItemService.getOne(itemId);
-        model.addAttribute("item", item);
-        return "module-food";
-    }
-
-    private void addAttrStoreOnline(int id, int tagId, int page, Model model) {
-        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
-        List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(id);
-        List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(id);
-        List<FoodReport> listReport = foodReportService.getAllByOrderId(id);
+    private void addAttrStoreOnline(FoodStoreOnline foodStoreOnline, int tagId, int page, Model model) {
+        List<FoodTag> foodStoreOnlineTagList = foodTagService.getAllByStoreOnlineId(foodStoreOnline.getFoodStoreOnlineId());
+        List<FoodStoreOnlineRate> listComment = foodStoreOnlineRateService.getAllCommentByStoreOnlineId(foodStoreOnline.getFoodStoreOnlineId());
+        List<FoodReport> listReport = foodReportService.getAllByOrderId(foodStoreOnline.getFoodStoreOnlineId());
         List<FoodItem> foodItemList = (tagId == 0)
-                        ? foodItemService.getAllByStoreOnlineId(id)
-                        : foodItemService.getAllByStoreOnlineIdAndTagId(id, tagId);;
+                ? foodItemService.getAllByStoreOnlineId(foodStoreOnline.getFoodStoreOnlineId())
+                : foodItemService.getAllByStoreOnlineIdAndTagId(foodStoreOnline.getFoodStoreOnlineId(), tagId);
 
         model.addAttribute("tagId", tagId);
         model.addAttribute("foodStoreOnline", foodStoreOnline);
@@ -179,7 +161,7 @@ public class FoodController {
         model.addAttribute("foodItemList", foodItemList);
         model.addAttribute("listComment", listComment);
         model.addAttribute("listReport", listReport);
-        model.addAttribute("userDetailService", userDetailService);
+        model.addAttribute("userDetailService", userDetailService);  // get name off user in tab comment & report
         model.addAttribute("foodOrderService", foodOrderService);
         model.addAttribute("format", new Format());
         model.addAttribute("page", page);
@@ -290,7 +272,7 @@ public class FoodController {
         }
 
         FoodCountSttOrder foodCountSttOrder;
-        if(isSeller) {
+        if (isSeller) {
             FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByUserId(currentUser.getId());
             foodCountSttOrder = foodCountSttOrderService.getCountSttOrderSeller(foodStoreOnline.getFoodStoreOnlineId());
         } else {

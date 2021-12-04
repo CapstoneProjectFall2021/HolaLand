@@ -56,7 +56,7 @@ public class FoodManageStoreController {
 
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByUserId(currentUser.getId());
         model.addAttribute("foodStoreOnline", foodStoreOnline);
-        model.addAttribute("page", 1);
+        model.addAttribute("page", 3);
         return "module-food-manage-store";
     }
 

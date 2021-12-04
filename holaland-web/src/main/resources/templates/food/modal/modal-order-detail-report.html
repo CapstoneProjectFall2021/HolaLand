@@ -2,7 +2,7 @@
 <div class="modal fade" id="orderDetailReportModal" tabindex="-1" aria-labelledby="orderDetailReportModalLabel" aria-hidden="true"
      th:fragment="orderDetailReportModal">
   <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content" th:with="orderId=${foodOrderDetailReport.get(0).foodOrderId}">
       <div class="modal-header">
         <h5 class="modal-title" id="orderDetailReportModalLabel">Chi tiết đơn hàng <span class="text-info">
           #<span th:text="${format.orderId(orderId)}"></span>
@@ -22,16 +22,16 @@
           <tbody>
           <tr th:each="foodOrderDetail, stt : ${foodOrderDetailReport}">
             <td th:text="*{stt.index + 1}"></td>
-            <td th:with="foodItem=${foodItemService.getOne(foodOrderDetail.foodItemId)}">
+            <td>
               <a th:href="@{/food/store(id=${foodStoreOnline.foodStoreOnlineId})}"
-                 th:text="${foodItem.foodItemName}">Cơm hến xào</a></td>
+                 th:text="${foodOrderDetail.foodItemName}"></a>
+            </td>
             <td class="text-center" th:text="*{foodOrderDetail.foodItemQuantity}"></td>
             <td class="text-center">
               <span th:text="*{#numbers.formatInteger(foodOrderDetail.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
             </td>
             <td class="text-end">
-              <span th:text="*{#numbers.formatInteger(foodOrderDetail.foodItemQuantity * foodOrderDetail.foodItemPrice,
-              3, 'POINT')}"></span><sup>đ</sup>
+              <span th:text="*{#numbers.formatInteger(foodOrderDetail.foodItemQuantity * foodOrderDetail.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
             </td>
           </tr>
           </tbody>

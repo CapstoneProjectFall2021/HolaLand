@@ -53,13 +53,8 @@
               </a>
             </li>
             <li sec:authorize="hasRole('SELLER')">
-              <a th:href="@{/food/order}" th:classappend="${page == 4 ? 'active' : ''}">
-                <i class="fas fa-list-ul fa-fw"></i>Đơn hàng
-              </a>
-            </li>
-            <li sec:authorize="hasRole('SELLER')">
-              <a th:href="@{/store/info}" th:classappend="${page == 5 ? 'active' : ''}">
-                <i class="fas fa-chart-bar fa-fw"></i>Quản lý cửa hàng
+              <a th:href="@{/store/info}" th:classappend="${page == 4 ? 'active' : ''}">
+                <i class="fas fa-user-tag fa-fw"></i>Kênh người bán
               </a>
             </li>
             <li>
