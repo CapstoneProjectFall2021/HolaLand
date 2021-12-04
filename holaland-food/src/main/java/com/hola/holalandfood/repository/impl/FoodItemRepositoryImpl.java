@@ -68,4 +68,9 @@ public class FoodItemRepositoryImpl implements FoodItemRepository, IRepositoryQu
                 foodItem.getFoodItemIsActive(),
                 foodItem.getFoodItemDeleted()) > 0;
     }
+
+    @Override
+    public List<FoodItem> search(String textSearch) throws DataAccessException {
+        return null;
+    }
 }
