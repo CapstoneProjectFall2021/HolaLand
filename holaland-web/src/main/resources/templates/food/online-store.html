@@ -69,8 +69,8 @@
               <a th:href="@{/login}" class="nav-link" sec:authorize="!isAuthenticated()">
                 Đánh giá
               </a>
-              <a href="javascript:void(0)" class="nav-link" data-bs-toggle="modal"
-                 data-bs-target="#onlineStoreRateModal" sec:authorize="isAuthenticated()">
+              <a href="javascript:void(0)" class="nav-link" onclick="insertNewRate(event)" sec:authorize="isAuthenticated()">
+                <span th:text="${foodStoreOnline.foodStoreOnlineId}" class="d-none"></span>
                 Đánh giá
               </a>
             </li>
