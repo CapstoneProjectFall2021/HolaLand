@@ -11,7 +11,6 @@ public class FoodStoreOnline {
 
     private int foodStoreOnlineId;
     private int userId;
-    private int foodStoreTypeId;
     private int sttFoodCode;
     private String foodStoreOnlineImage;
     private String foodStoreOnlineName;
@@ -22,5 +21,7 @@ public class FoodStoreOnline {
     private int foodStoreOnlineCountFoodItem;
     private int foodStoreOnlineCountRate;
     private int foodStoreOnlineCountReport;
+    private boolean foodStoreOnlinePauseSellingFlag;
+    private boolean foodStoreOnlineStopSellingFlag;
     private boolean foodStoreOnlineDeleted;
 }

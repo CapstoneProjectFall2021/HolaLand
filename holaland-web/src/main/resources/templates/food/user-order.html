@@ -9,10 +9,18 @@
     <div class="panel pt-2">
       <div class="row data-tables">
         <div class="col-lg-12">
-          <table id="order-table-no-filter" table class="table m-0" cellspacing="0" width="100%">
+          <div class="flex-sb" th:if="${foodOrderList.size() == 0}">
+            <p class="m-mt-8 m-0">Danh sách đơn hàng hiện tại trống.</p>
+            <div>
+              <a th:href="@{/food}" class="m-mt-8 btn btn-md btn-secondary">Đặt hàng ngay</a>
+            </div>
+          </div>
+          <table id="order-table-no-filter" table class="table m-0" cellspacing="0" width="100%"
+                 th:if="${foodOrderList.size() != 0}">
             <thead>
             <tr>
-              <th>Mã GD</th>
+              <th class="text-center">#</th>
+              <th>Mã đơn hàng</th>
               <th class="text-center">Thời gian</th>
               <th class="text-end">Tổng tiền</th>
               <th class="text-end">Trạng thái</th>
@@ -20,19 +28,26 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="foodOrder : ${foodOrderList}">
-              <td><a th:href="@{/food/user-order/order-detail(orderId=*{foodOrder.foodOrderId}, sttCODE=${sttCODE},
+            <tr th:each="foodOrder, stt : ${foodOrderList}">
+              <td class="text-center" th:text="*{stt.index + 1}"></td>
+              <td><a th:href="@{/food/order/detail(orderId=*{foodOrder.foodOrderId}, sttCode=${sttCode},
               orderStatus=*{foodOrder.sttFoodCode})}">
-                #<span th:text="*{T(com.hola.holalandcore.util.Format).orderId(foodOrder.foodOrderId)}"></span></a></td>
-              <td class="text-center" th:text="*{#dates.format(foodOrder.foodOrderCreatedDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                #<span th:text="*{format.orderId(foodOrder.foodOrderId)}"></span></a></td>
+              <td class="text-center">
+                <i class="bi bi-calendar3-week me-1"></i>
+                <span th:text="*{#dates.format(foodOrder.foodOrderCreatedDate, 'dd-MM-yyyy')}"></span>
+                <i class="far fa-clock ms-2 me-1"></i>
+                <span th:text="*{#dates.format(foodOrder.foodOrderCreatedDate, 'HH:mm:ss')}"></span>
+              </td>
               <td class="text-end"><span
                   th:text="*{#numbers.formatInteger(foodOrder.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
               </td>
-              <td th:classappend="*{foodOrder.sttFoodCode == 1 ? 'text-info text-end' : 'text-warning text-end'}"
+              <td class="text-end" th:classappend="*{foodOrder.sttFoodCode == 1 ? 'text-info' : 'text-warning'}"
                   th:text="*{foodOrder.sttFoodCode == 1 ? 'Chờ xác nhận' : 'Đã xác nhận'}"></td>
               <td class="text-end">
                 <a href="javascript:void(0)" class="color-danger">
-                  <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip" onclick="confirmCancelOrder(event)"
+                  <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip"
+                     onclick="confirmCancelOrder(event)"
                      title="Hủy đơn hàng">
                     <span th:text="${foodOrder.foodOrderId}" class="d-none"></span>
                   </i>
@@ -53,19 +68,66 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-4" th:each="type : ${sttTypeList}">
-        <a th:href="@{/food/user-order/type(sttCODE=*{type.sttFoodId})}" class="label-info m-mb-16"
-           th:classappend="${type.sttFoodId == sttCODE ? 'active' : ''}">
-
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a th:href="@{/food/order}" class="label-info m-mb-16"
+           th:classappend="${sttCode == 0 ? 'active' : ''}">
           <div class="flex">
             <div class="icon">
-              <i th:classappend="*{type.sttFoodIcon}"></i>
+              <i class="fas fa-list-ul"></i>
             </div>
             <div class="number">
-              <h4>0</h4>
+              <h4></h4>
             </div>
           </div>
-          <div class="description" th:text="*{type.sttFoodValue}"></div>
+          <div class="description">Tất cả</div>
+        </a>
+      </div>
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a th:href="@{/food/order/type(sttCode=3)}" class="label-info m-mb-16"
+           th:classappend="${sttCode == 3 ? 'active' : ''}">
+          <div class="flex">
+            <div class="icon">
+              <i class="far fa-stop-circle"></i>
+            </div>
+            <div class="number">
+              <h4 th:text = "${foodCountSttOrder.rejectOrder}"></h4>
+            </div>
+          </div>
+          <div class="description">
+            Đơn hàng đã từ chối
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a th:href="@{/food/order/type(sttCode=4)}" class="label-info m-mb-16"
+           th:classappend="${sttCode == 4 ? 'active' : ''}">
+          <div class="flex">
+            <div class="icon">
+              <i class="far fa-check-circle"></i>
+            </div>
+            <div class="number">
+              <h4 th:text = "${foodCountSttOrder.completed}"></h4>
+            </div>
+          </div>
+          <div class="description">
+            Đơn hàng đã hoàn thành
+          </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+        <a th:href="@{/food/order/type(sttCode=5)}" class="label-info m-mb-16"
+           th:classappend="${sttCode == 5 ? 'active' : ''}">
+          <div class="flex">
+            <div class="icon">
+              <i class="far fa-times-circle"></i>
+            </div>
+            <div class="number">
+              <h4 th:text = "${foodCountSttOrder.cancel}"></h4>
+            </div>
+          </div>
+          <div class="description">
+            Đơn hàng đã huỷ
+          </div>
         </a>
       </div>
     </div>
@@ -75,7 +137,8 @@
           <table id="order-history-table" table class="table" cellspacing="0" width="100%">
             <thead>
             <tr>
-              <th>Mã GD<i class="fas fa-sort fa-size"></i></th>
+              <th class="text-center">#</th>
+              <th>Mã đơn hàng<i class="fas fa-sort fa-size"></i></th>
               <th class="text-center">Thời gian<i class="fas fa-sort fa-size"></i></th>
               <th class="text-end">Tổng tiền<i class="fas fa-sort fa-size"></i></th>
               <th class="text-end">Trạng thái<i class="fas fa-sort fa-size"></i></th>
@@ -83,34 +146,60 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="foodOrdered : ${foodOrderedList}">
-              <td><a th:href="@{/food/user-order/order-detail(orderId=*{foodOrdered.foodOrderId}, sttCODE=${sttCODE},
-              orderStatus=*{foodOrdered.sttFoodCode})}">
-                #<span th:text="*{T(com.hola.holalandcore.util.Format).orderId(foodOrdered.foodOrderId)}"></span></a></td>
-              <td class="text-center" th:text="*{#dates.format(foodOrdered.foodOrderCreatedDate, 'dd-MM-yyyy HH:mm:ss')}"></td>
-              <td class="text-end"><span
-                  th:text="*{#numbers.formatInteger(foodOrdered.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
+            <tr th:each="historyOrder, stt : ${historyOrderList}">
+              <td class="text-center" th:text="*{stt.index + 1}"></td>
+              <td><a th:href="@{/food/order/detail(orderId=*{historyOrder.foodOrderId}, sttCode=${sttCode},
+              orderStatus=*{historyOrder.sttFoodCode})}">
+                #<span th:text="*{format.orderId(historyOrder.foodOrderId)}"></span></a></td>
+              <td class="text-center">
+                <i class="bi bi-calendar3-week me-1"></i>
+                <span th:text="*{#dates.format(historyOrder.foodOrderCreatedDate, 'dd-MM-yyyy')}"></span>
+                <i class="far fa-clock ms-2 me-1"></i>
+                <span th:text="*{#dates.format(historyOrder.foodOrderCreatedDate, 'HH:mm:ss')}"></span>
               </td>
-              <td th:classappend="*{foodOrdered.sttFoodCode == 3 ? 'text-secondary text-end' :
-              (foodOrdered.sttFoodCode == 4 ? 'color-success text-end' : 'text-danger text-end')}"
-                  th:text="*{foodOrdered.sttFoodCode == 3 ? 'Đã từ chối' :
-              (foodOrdered.sttFoodCode == 4 ? 'Hoàn thành' : 'Đã hủy')}">
+              <td class="text-end"><span
+                  th:text="*{#numbers.formatInteger(historyOrder.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
+              </td>
+              <td class="text-end" th:classappend="*{historyOrder.sttFoodCode == 3 ? 'text-secondary' :
+              (historyOrder.sttFoodCode == 4 ? 'color-success' : 'text-danger')}"
+                  th:text="*{historyOrder.sttFoodCode == 3 ? 'Đã từ chối' : (historyOrder.sttFoodCode == 4 ? 'Hoàn thành' : 'Đã hủy')}">
               </td>
               <td class="text-end">
-                <th:block th:if="*{foodOrdered.sttFoodCode == 3}">
-                  <a th:href="@{/food/user-order/reason-reject
-                  (orderId=*{foodOrdered.foodOrderId}, sttCODE=${sttCODE})}" class="text-info">
+                <th:block th:if="*{historyOrder.sttFoodCode == 3}">
+                  <a href="javascript:void(0)" class="text-info">
                     <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip"
-                       th:title= "*{foodOrdered.foodOrderNote}">
+                       title="Lý do từ chối"
+                       onclick="getOrderReasonReject(event)">
+                      <span class="d-none" th:text="*{historyOrder.foodOrderReasonReject}"></span>
                     </i>
                   </a>
                 </th:block>
-                <th:block th:if="*{foodOrdered.sttFoodCode == 4}">
-                <a th:href="@{/food/user-order/report-order(storeId=*{foodOrdered.foodStoreOnlineId},
-                orderId=*{foodOrdered.foodOrderId}, sttCODE=${sttCODE})}" class="text-warning">
-                  <i class="bi bi-exclamation-circle" data-bs-placement="top" data-bs-toggle="tooltip"
-                     title="Báo cáo"></i>
-                </a>
+                <th:block th:if="*{historyOrder.sttFoodCode == 4}"
+                          th:with="foodReport=${foodReportService.checkUserReported(historyOrder.userId,
+                          historyOrder.foodOrderId)}">
+                  <th:block th:if="${foodReport.size() == 0}">
+                    <a href="javascript:void(0)" class="text-warning">
+                      <i class="bi bi-exclamation-circle" data-bs-placement="top" data-bs-toggle="tooltip"
+                         title="Báo cáo" onclick="reportFoodOrder(event)">
+                        <span th:text="${historyOrder.foodOrderId}" class="d-none"></span>
+                        <span th:text="${historyOrder.foodStoreOnlineId}" class="d-none"></span>
+                      </i>
+                    </a>
+                  </th:block>
+                  <th:block th:if="${foodReport.size() != 0}">
+                    <a href="javascript:void(0)" class="text-info me-2">
+                      <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip"
+                         title="Lý do báo cáo" onclick="getOrderReportContent(event)">
+                        <span class="d-none" th:text="${foodReport.get(0).foodReportContent}"></span>
+                      </i>
+                    </a>
+                    <a href="javascript:void(0)" class="color-danger">
+                      <i class="far fa-trash-alt" data-bs-placement="top" data-bs-toggle="tooltip"
+                         title="Xoá báo cáo" onclick="confirmDeleteReport(event)">
+                        <span class="d-none" th:text="${foodReport.get(0).foodReportId}"></span>
+                      </i>
+                    </a>
+                  </th:block>
                 </th:block>
               </td>
             </tr>

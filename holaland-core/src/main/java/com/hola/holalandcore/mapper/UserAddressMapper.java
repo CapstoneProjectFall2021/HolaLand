@@ -16,6 +16,8 @@ public class UserAddressMapper implements RowMapper<UserAddress> {
                 .userName(resultSet.getString("user_name"))
                 .userPhone(resultSet.getString("user_phone"))
                 .userAddress(resultSet.getString("user_address"))
+                .userAddressDefault(resultSet.getBoolean("user_address_default"))
+                .userAddressDeleted(resultSet.getBoolean("user_address_deleted"))
                 .build();
     }
 }

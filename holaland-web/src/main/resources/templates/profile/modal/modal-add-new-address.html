@@ -1,0 +1,40 @@
+<!-- Modal Add New Address -->
+<div class="modal fade" id="addNewAddressModal" tabindex="-1" aria-labelledby="addNewAddressModalLabel" aria-hidden="true"
+     th:fragment="addNewAddressModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addNewAddressModalLabel">Thêm địa chỉ mới</h5>
+      </div>
+      <div class="modal-body">
+        <form id="addressForm" class="row" method="post" th:action="@{/add-address}">
+          <div class="form-group col-md-12">
+            <fieldset>
+              <legend>Họ và tên</legend>
+              <input type="text" name="newUserName" class="form-control">
+            </fieldset>
+          </div>
+          <div class="form-group col-md-12">
+            <fieldset>
+              <legend>Số điện thoại</legend>
+              <input type="text" name="newPhone" class="form-control">
+            </fieldset>
+          </div>
+          <div class="form-group col-md-12 mb-0">
+            <fieldset>
+              <legend>Địa chỉ</legend>
+              <input type="text" name="newAddress" class="form-control">
+            </fieldset>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary me-2"
+           onclick="document.getElementById('addressForm').submit();">
+          <i class="fas fa-check text-success"></i>Xác nhận
+        </a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+      </div>
+    </div>
+  </div>
+</div>

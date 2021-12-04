@@ -27,8 +27,8 @@ public class SttFoodRepositoryImpl implements SttFoodRepository, IRepositoryQuer
     }
 
     @Override
-    public List<SttFood> getAllByHistoryOrder() throws DataAccessException {
-        return jdbcTemplate.query(STT_Food_GET_ALL_BY_HISTORY_ORDER, new SttFoodMapper());
+    public List<SttFood> getAllHistoryOrder() throws DataAccessException {
+        return jdbcTemplate.query(STT_FOOD_GET_ALL_HISTORY_ORDER, new SttFoodMapper());
     }
 
     @Override

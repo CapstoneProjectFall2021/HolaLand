@@ -31,7 +31,7 @@
         </div>
         <div class="row">
           <div class="col-md-12" th:each="foodStoreOnline : ${foodStoreOnlineList}">
-            <a th:href="@{/food/online-store(id=*{foodStoreOnline.foodStoreOnlineId})}" class="label-info m-mb-16">
+            <a th:href="@{/food/store(id=*{foodStoreOnline.foodStoreOnlineId})}" class="label-info m-mb-16">
               <div class="flex">
                 <div class="icon-circle">
                   <img class="media-object" th:src="@{'/images/system/v.png'}" alt="">
@@ -60,12 +60,6 @@
                       <th:block th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}">
                         <span class="tag" th:text="*{foodStoreOnlineTag.foodTagName}"></span>
                       </th:block>
-                    </div>
-                    <div class="note">
-                      <p class="m-0" th:text="*{foodStoreOnline.foodStoreTypeId == 1 ? 'Chỉ bán online'
-                      : (foodStoreOnline.foodStoreTypeId == 2 ? 'Nhà hàng'
-                      : 'Quán ăn')}">
-                      </p>
                     </div>
                   </div>
                 </div>

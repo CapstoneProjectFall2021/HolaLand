@@ -37,6 +37,10 @@ Authenticated user roles: <span sec:authentication="principal.authorities"></spa
     <td>Email:</td>
     <td><span th:text="${userInfo.userEmail}"></span></td>
   </tr>
+  <tr>
+    <td>Role:</td>
+    <td th:each="role : ${userRole}"><span th:text="*{role}"></span></td>
+  </tr>
 </table>
 </body>
 

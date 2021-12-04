@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 @Setter
 
 public class FoodReport {
+
     private int foodReportId;
     private int userId;
     private int foodStoreOnlineId;

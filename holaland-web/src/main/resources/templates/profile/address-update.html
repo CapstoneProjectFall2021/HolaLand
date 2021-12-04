@@ -1,0 +1,70 @@
+<div class="col-right" th:fragment="address-update">
+  <!-- Add new address -->
+  <div class="add-new-address">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Thêm địa chỉ mới</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 mb-3">
+        <a href="javascript:void(0)" class="btn btn-lg btn-primary m-mb-12" data-bs-toggle="modal"
+           data-bs-target="#addNewAddressModal">
+          <i class="fas fa-plus text-success"></i>Thêm địa chỉ mới
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Update address -->
+  <div class="update-address">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title fix-mt-title">Chỉnh sửa địa chỉ</h1>
+      </div>
+    </div>
+  </div>
+  <th:block th:each="userAddress : ${userAddressList}">
+    <form class="row panel-form mx-0" method="post" th:action="@{/update-address}">
+      <input type="hidden" name="userAddressId" th:name="addressId" th:value="*{userAddress.userAddressId}">
+      <div class="form-group col-12 col-md-6 col-lg-3">
+        <fieldset>
+          <legend>Họ và tên</legend>
+          <input type="text" class="form-control" th:name="userName" th:value="*{userAddress.userName}">
+        </fieldset>
+      </div>
+      <div class="form-group col-12 col-md-6 col-lg-3">
+        <fieldset>
+          <legend>Số điện thoại</legend>
+          <input type="text" class="form-control" th:name="phone" th:value="*{userAddress.userPhone}">
+        </fieldset>
+      </div>
+      <div class="form-group col-12 col-md-12 col-lg-6 mb-0">
+        <fieldset>
+          <legend>Địa chỉ</legend>
+          <input type="text" class="form-control" th:name="address" th:value="*{userAddress.userAddress}">
+        </fieldset>
+      </div>
+      <div class="col-md-12 text-end mt-2 btn-group">
+        <div class="m-mb-12">
+          <span class="btn default" th:if="*{userAddress.userAddressDefault}"><i class="fas fa-house-user"></i>Địa chỉ mặc định</span>
+        </div>
+        <div class="m-mb-12">
+          <th:block th:if="*{!userAddress.userAddressDefault}">
+            <a href="javascript:void(0)" class="btn btn-md btn-secondary me-2" onclick="confirmDeleteUserAddress(event)">
+              <span class="d-none" th:text="*{userAddress.userAddressId}"></span>
+              <i class="fas fa-ban text-danger"></i>Xoá
+            </a>
+            <a th:href="@{/address/default(addressId=*{userAddress.userAddressId})}" class="btn btn-md btn-secondary me-2">
+              <i class="fas fa-map-marker-alt text-warning"></i>Thiết lập mặc định
+            </a>
+          </th:block>
+          <button class="btn btn-md btn-secondary" type="submit">
+            <i class="fas fa-check text-success"></i>Chỉnh sửa
+          </button>
+        </div>
+      </div>
+    </form>
+  </th:block>
+</div>
+
+
