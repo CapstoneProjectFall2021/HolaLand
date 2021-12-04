@@ -1,6 +1,7 @@
 package com.hola.holalandweb.controller;
 
 import com.hola.holalandcore.entity.CustomUser;
+import com.hola.holalandcore.service.UserAddressService;
 import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandcore.util.Format;
 import com.hola.holalandfood.entity.*;
@@ -35,6 +36,7 @@ public class FoodController {
     private final SttFoodService sttFoodService;
     private final FoodOrderDetailService foodOrderDetailService;
     private final FoodCountSttOrderService foodCountSttOrderService;
+    private final UserAddressService userAddressService;
 
     @Autowired
     public FoodController(
@@ -49,7 +51,9 @@ public class FoodController {
             FoodOrderService foodOrderService,
             SttFoodService sttFoodService,
             FoodOrderDetailService foodOrderDetailService,
-            FoodCountSttOrderService foodCountSttOrderService) {
+            FoodCountSttOrderService foodCountSttOrderService,
+            UserAddressService userAddressService
+    ) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTypeService = foodTypeService;
         this.foodStoreOnlineTagService = foodStoreOnlineTagService;
@@ -62,6 +66,7 @@ public class FoodController {
         this.sttFoodService = sttFoodService;
         this.foodOrderDetailService = foodOrderDetailService;
         this.foodCountSttOrderService = foodCountSttOrderService;
+        this.userAddressService = userAddressService;
     }
 
     @GetMapping("")
@@ -217,6 +222,8 @@ public class FoodController {
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByOrderId(orderId);
         FoodOrder foodOrder = foodOrderService.getOne(orderId);
         model.addAttribute("userNote", foodOrder.getFoodOrderNote());
+        model.addAttribute("user", userDetailService);
+        model.addAttribute("userAddress", userAddressService.getOneByUserId(foodOrder.getUserId()));
         model.addAttribute("orderId", orderId);
         model.addAttribute("orderStatus", orderStatus);
         model.addAttribute("foodOrderDetailList", foodOrderDetailList);
