@@ -20,18 +20,8 @@ public class UserAddressServiceImpl implements UserAddressService {
     }
 
     @Override
-    public List<UserAddress> getAllAddressByUserDetailId(int id) throws DataAccessException {
-        return userAddressRepository.getAllAddressByUserDetailId(id);
-    }
-
-    @Override
     public List<UserAddress> getAllAddressByUserId(int id) throws DataAccessException {
         return userAddressRepository.getAllAddressByUserId(id);
-    }
-
-    @Override
-    public List<UserAddress> getCurrentDefaultAddressByUserId(int userId) throws DataAccessException {
-        return userAddressRepository.getCurrentDefaultAddressByUserId(userId);
     }
 
     @Override

@@ -12,7 +12,7 @@ public class UserAddressMapper implements RowMapper<UserAddress> {
     public UserAddress mapRow(ResultSet resultSet, int i) throws SQLException {
         return UserAddress.builder()
                 .userAddressId(resultSet.getInt("user_address_id"))
-                .userDetailId(resultSet.getInt("user_detail_id"))
+                .userId(resultSet.getInt("user_id"))
                 .userName(resultSet.getString("user_name"))
                 .userPhone(resultSet.getString("user_phone"))
                 .userAddress(resultSet.getString("user_address"))
