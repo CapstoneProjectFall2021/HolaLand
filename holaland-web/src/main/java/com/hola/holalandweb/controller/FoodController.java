@@ -132,6 +132,19 @@ public class FoodController {
         }
     }
 
+    @GetMapping("/store/report/detail")
+    public String getFoodOrderDetailReport(@RequestParam("orderId") Integer orderId, Model model) {
+
+        List<FoodOrderDetail> foodOrderDetailReport = foodOrderDetailService.getAllByOrderId(orderId);
+        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByOrderId(orderId);
+        model.addAttribute("orderId", orderId);
+        model.addAttribute("foodOrderDetailReport", foodOrderDetailReport);
+        model.addAttribute("foodStoreOnline", foodStoreOnline);
+        model.addAttribute("foodItemService", foodItemService);
+        addAttrStoreOnline(foodStoreOnline.getFoodStoreOnlineId(), 0, 9, model);
+        return "module-food";
+    }
+
     @GetMapping("/store/tag")
     public String getFoodOnlineStoreByTag(@RequestParam("tagId") Integer tagId, @RequestParam("id") Integer id, Model model) {
         addAttrStoreOnline(id, tagId, 9, model);
@@ -167,6 +180,8 @@ public class FoodController {
         model.addAttribute("listComment", listComment);
         model.addAttribute("listReport", listReport);
         model.addAttribute("userDetailService", userDetailService);
+        model.addAttribute("foodOrderService", foodOrderService);
+        model.addAttribute("format", new Format());
         model.addAttribute("page", page);
     }
 

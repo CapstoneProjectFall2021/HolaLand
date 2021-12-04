@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12 col-md-6 m-mb-20 m-mt-10">
-                        <img id="blah" class="preview-img" width="100%" height="100%" src="images/system/no-name.png" />
+                        <img id="blah" class="preview-img" width="100%" height="100%" th:src="@{'/images/system/no-image.png'}" />
                     </div>
                     <div class="col-12 col-md-6">
                         <form id="addNewFoodForm" class="row" th:action="@{/food/save-image-food}" method="post" enctype="multipart/form-data" th:object="${foodItem}">

@@ -57,6 +57,7 @@ public class UserServiceImpl implements UserDetailsService {
                 user.getUserPassword(),
                 grantedAuthorities,
                 user.getUserId(),
+                user.getUserPassword(),
                 user.getUserCreateTime(),
                 user.getUserStatusId(),
                 user.isUserDeleted()

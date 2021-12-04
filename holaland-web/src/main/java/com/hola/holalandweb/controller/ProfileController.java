@@ -108,8 +108,7 @@ public class ProfileController {
     ) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         boolean isCheck = false;
-        System.out.println(currentUser.getPassword()+" ,"+currentUser.getUsername());
-        if (passwordEncoder.matches(oldPass, currentUser.getPassword()) && newPass.equals(confirmNewPass)) {
+        if (passwordEncoder.matches(oldPass, currentUser.getCustomUserPassword()) && newPass.equals(confirmNewPass)) {
             isCheck = userRepository.updatePassword(passwordEncoder.encode(newPass), currentUser.getId());
         }
         if (isCheck) {

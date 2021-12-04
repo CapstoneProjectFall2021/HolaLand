@@ -106,6 +106,10 @@
   <div th:replace="food/toast/toast-add-to-cart-success :: toastAddToCartSuccess"></div>
   <div th:replace="food/toast/toast-add-to-cart-error :: toastAddToCartError"></div>
 </th:block>
+<th:block th:if="${page == 9 && foodOrderDetailReport != null && foodOrderDetailReport.size() != 0}">
+  <!-- Import modal report order detail -->
+  <div th:replace="food/modal/modal-order-detail-report :: orderDetailReportModal"></div>
+</th:block>
 <th:block th:if="${page == 3}">
   <!-- Import modal confirm cancel order -->
   <div th:replace="food/modal/modal-confirm-cancel-order :: confirmCancelOrderModal"></div>
@@ -144,6 +148,11 @@
 
 <script th:if="${foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
     const myModal = new bootstrap.Modal(document.getElementById('listOrderDetailModal'));
+    myModal.show();
+</script>
+
+<script th:if="${foodOrderDetailReport != null && foodOrderDetailReport.size() != 0}">
+    const myModal = new bootstrap.Modal(document.getElementById('orderDetailReportModal'));
     myModal.show();
 </script>
 
