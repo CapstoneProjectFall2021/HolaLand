@@ -26,6 +26,12 @@ public class UserAddressServiceImpl implements UserAddressService {
 
     @Override
     public boolean save(UserAddress obj) throws DataAccessException {
+        List<UserAddress> userAddresses = getAllAddressByUserId(obj.getUserId());
+        if(userAddresses.size() == 0) {
+            obj.setUserAddressDefault(true);
+        } else {
+            obj.setUserAddressDefault(false);
+        }
         return userAddressRepository.save(obj);
     }
 
@@ -35,13 +41,19 @@ public class UserAddressServiceImpl implements UserAddressService {
     }
 
     @Override
-    public boolean updateDefaultAddress(boolean isDefault, int id) throws DataAccessException {
+    public boolean updateDefaultAddress(int id, int userId) throws DataAccessException {
         // set all address default = 0
-        return userAddressRepository.updateDefaultAddress(isDefault, id);
+        userAddressRepository.deleteDefaultAddressByUserId(userId);
+        return userAddressRepository.updateDefaultAddress(id);
     }
 
     @Override
     public boolean delete(int id) throws DataAccessException {
         return userAddressRepository.delete(id);
+    }
+
+    @Override
+    public boolean deleteDefaultAddressByUserId(int userId) throws DataAccessException {
+        return userAddressRepository.deleteDefaultAddressByUserId(userId);
     }
 }

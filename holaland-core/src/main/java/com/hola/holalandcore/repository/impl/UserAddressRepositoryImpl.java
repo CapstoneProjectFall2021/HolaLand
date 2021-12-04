@@ -51,10 +51,9 @@ public class UserAddressRepositoryImpl implements UserAddressRepository, IReposi
     }
 
     @Override
-    public boolean updateDefaultAddress(boolean isDefault, int id) throws DataAccessException {
+    public boolean updateDefaultAddress(int id) throws DataAccessException {
         return jdbcTemplate.update(
                 UPDATE_USER_ADDRESS_DEFAULT,
-                isDefault,
                 id
         ) > 0;
     }
@@ -64,6 +63,14 @@ public class UserAddressRepositoryImpl implements UserAddressRepository, IReposi
         return jdbcTemplate.update(
                 DELETE_USER_ADDRESS_ONE,
                 id
+        ) > 0;
+    }
+
+    @Override
+    public boolean deleteDefaultAddressByUserId(int userId) throws DataAccessException {
+        return jdbcTemplate.update(
+                DELETE_USER_ADDRESS_DEFAULT_BY_USER_ID,
+                userId
         ) > 0;
     }
 }

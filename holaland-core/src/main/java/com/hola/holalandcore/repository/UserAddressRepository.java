@@ -13,7 +13,9 @@ public interface UserAddressRepository {
 
     boolean update(UserAddress obj) throws DataAccessException;
 
-    boolean updateDefaultAddress(boolean isDefault, int id) throws DataAccessException;
+    boolean updateDefaultAddress(int id) throws DataAccessException;
 
     boolean delete(int id) throws DataAccessException;
+
+    boolean deleteDefaultAddressByUserId(int userId) throws DataAccessException;
 }

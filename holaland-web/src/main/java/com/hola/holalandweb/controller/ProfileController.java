@@ -53,7 +53,14 @@ public class ProfileController {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         UserDetail userDetail = userDetailService.getOneByUserId(currentUser.getId());
         List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(userDetail.getUserDetailId());
-
+        List<Role> roles = roleRepository.getRolesByUserEmail(currentUser.getUsername());
+        String userRole="";
+        for (Role role : roles) {
+            userRole += (role.getRoleId() == 1 ? "Thành viên" : (role.getRoleId() == 2 ? "Nhà tuyển dụng"
+                    : (role.getRoleId() == 3 ? "Bán hàng" : "Khác")))
+                    + ((roles.indexOf(role) == (roles.size()-1)) ? "" : ", ");
+        }
+        model.addAttribute("userRole", userRole);
         model.addAttribute("userDetail", userDetail);
         model.addAttribute("userAddressList", userAddressList);
         model.addAttribute("page", 1);
@@ -101,6 +108,7 @@ public class ProfileController {
     ) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         boolean isCheck = false;
+        System.out.println(currentUser.getPassword()+" ,"+currentUser.getUsername());
         if (passwordEncoder.matches(oldPass, currentUser.getPassword()) && newPass.equals(confirmNewPass)) {
             isCheck = userRepository.updatePassword(passwordEncoder.encode(newPass), currentUser.getId());
         }
@@ -127,11 +135,12 @@ public class ProfileController {
             @RequestParam("phone") String phone,
             @RequestParam("address") String address
     ) {
-        UserAddress newUserAddress = UserAddress.builder().build();
-        newUserAddress.setUserAddressId(addressId);
-        newUserAddress.setUserName(userName);
-        newUserAddress.setUserPhone(phone);
-        newUserAddress.setUserAddress(address);
+        UserAddress newUserAddress = UserAddress.builder()
+                .userAddressId(addressId)
+                .userName(userName)
+                .userPhone(phone)
+                .userAddress(address)
+                .build();
         boolean isCheck = userAddressService.update(newUserAddress);
         if(isCheck) {
             return "redirect:" + "/profile/address/update";
@@ -149,13 +158,13 @@ public class ProfileController {
     ) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
 
-        UserAddress newUserAddress = UserAddress.builder().build();
-        newUserAddress.setUserId(currentUser.getId());
-        newUserAddress.setUserName(newUserName);
-        newUserAddress.setUserPhone(newPhone);
-        newUserAddress.setUserAddress(newAddress);
-        newUserAddress.setUserAddressDefault(false);
-        newUserAddress.setUserAddressDeleted(false);
+        UserAddress newUserAddress = UserAddress.builder()
+                .userId(currentUser.getId())
+                .userName(newUserName)
+                .userPhone(newPhone)
+                .userAddress(newAddress)
+                .userAddressDeleted(false)
+                .build();
         boolean isCheck = userAddressService.save(newUserAddress);
         if(isCheck) {
             return "redirect:" + "/profile/address/update";
@@ -168,7 +177,7 @@ public class ProfileController {
     public String deleteUserAddress(@RequestParam("addressId") int addressId) {
         boolean isCheck = userAddressService.delete(addressId);
         if(isCheck) {
-            return "redirect:" + "/profile//address/update";
+            return "redirect:" + "/profile/address/update";
         }else {
             return "404";
         }
@@ -177,9 +186,9 @@ public class ProfileController {
     @GetMapping("/address/default")
     public String changeUserAddressDefault(@RequestParam("addressId") int addressId, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        boolean isCheck = userAddressService.updateDefaultAddress(true,addressId);
+        boolean isCheck = userAddressService.updateDefaultAddress(addressId, currentUser.getId());
         if(isCheck) {
-            return "redirect:" + "/address-update";
+            return "redirect:" + "/profile/address/update";
         }else {
             return "404";
         }
