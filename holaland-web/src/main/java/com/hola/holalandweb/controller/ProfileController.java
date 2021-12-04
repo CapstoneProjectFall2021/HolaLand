@@ -2,7 +2,6 @@ package com.hola.holalandweb.controller;
 
 import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.entity.Role;
-import com.hola.holalandcore.entity.User;
 import com.hola.holalandcore.entity.UserAddress;
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.repository.RoleRepository;

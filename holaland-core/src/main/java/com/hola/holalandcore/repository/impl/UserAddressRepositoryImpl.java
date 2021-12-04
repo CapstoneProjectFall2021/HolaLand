@@ -27,6 +27,11 @@ public class UserAddressRepositoryImpl implements UserAddressRepository, IReposi
     }
 
     @Override
+    public UserAddress getOneByUserId(int id) throws DataAccessException {
+        return jdbcTemplate.queryForObject(GET_ONE_ADDRESS_BY_USER_ID, new UserAddressMapper(), id);
+    }
+
+    @Override
     public boolean save(UserAddress obj) throws DataAccessException {
         return jdbcTemplate.update(
                 INSERT_USER_ADDRESS_ONE,

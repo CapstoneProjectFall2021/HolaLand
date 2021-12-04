@@ -1,0 +1,77 @@
+<!-- Modal List Order Detail -->
+<div class="modal fade" id="orderDetailModal" tabindex="-1" aria-labelledby="orderDetailModalLabel"
+     aria-hidden="true" th:fragment="orderDetailModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="orderDetailModalLabel">Thông tin giao hàng</h5>
+      </div>
+      <div class="modal-body">
+        <div class="user-info">
+          <form class="row panel-form mx-0 p-0">
+            <div class="form-group col-12 col-md-6 col-lg-6 ps-0">
+              <fieldset>
+                <legend>Họ và tên</legend>
+                <input type="text" class="form-control" th:value="${userAddress.userName}" readonly>
+              </fieldset>
+            </div>
+            <div class="form-group col-12 col-md-6 col-lg-6 pe-0">
+              <fieldset>
+                <legend>Số điện thoại</legend>
+                <input type="text" class="form-control" th:value="${userAddress.userPhone}" readonly>
+              </fieldset>
+            </div>
+            <div class="form-group col-12 col-md-12 col-lg-12 px-0">
+              <fieldset>
+                <legend>Địa chỉ</legend>
+                <input type="text" class="form-control" th:value="${userAddress.userAddress}" readonly>
+              </fieldset>
+            </div>
+            <div class="form-group col-12 col-md-12 col-lg-12 mb-0 px-0">
+              <fieldset>
+                <legend>Ghi chú</legend>
+                <input type="text" class="form-control" th:value="${userNote}" readonly>
+              </fieldset>
+            </div>
+          </form>
+        </div>
+        <h5 class="modal-sub-title">Chi tiết đơn hàng
+          <span class="text-info" th:text="${'#' + format.orderId(foodOrderDetailList.get(0).foodOrderId)}"></span>
+        </h5>
+        <table class="table mb-0">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tên đồ ăn</th>
+            <th scope="col" class="text-center">Số lượng</th>
+            <th scope="col" class="text-center">Đơn giá</th>
+            <th scope="col" class="text-end">Tổng tiền</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="foodOrderDetail, stt : ${foodOrderDetailList}">
+            <td th:text="*{stt.index + 1}"></td>
+            <td>
+              <a th:href="@{/food/store(id=${foodStoreOnlineId})}"
+                 th:text="${foodOrderDetail.foodItemName}">
+              </a>
+            </td>
+            <td class="text-center">
+              <span th:text="*{foodOrderDetail.foodItemQuantity}"></span>
+            </td>
+            <td class="text-center">
+              <span th:text="*{#numbers.formatInteger(foodOrderDetail.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
+            </td>
+            <td class="text-end">
+              <span th:text="*{#numbers.formatInteger(foodOrderDetail.foodItemQuantity * foodOrderDetail.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+      </div>
+    </div>
+  </div>
+</div>

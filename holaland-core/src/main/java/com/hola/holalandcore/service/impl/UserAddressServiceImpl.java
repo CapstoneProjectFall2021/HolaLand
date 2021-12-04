@@ -25,6 +25,11 @@ public class UserAddressServiceImpl implements UserAddressService {
     }
 
     @Override
+    public UserAddress getOneByUserId(int id) throws DataAccessException {
+        return userAddressRepository.getOneByUserId(id);
+    }
+
+    @Override
     public boolean save(UserAddress obj) throws DataAccessException {
         List<UserAddress> userAddresses = getAllAddressByUserId(obj.getUserId());
         if(userAddresses.size() == 0) {

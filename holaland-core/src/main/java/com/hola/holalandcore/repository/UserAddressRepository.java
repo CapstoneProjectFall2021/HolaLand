@@ -9,6 +9,8 @@ public interface UserAddressRepository {
 
     List<UserAddress> getAllAddressByUserId(int id) throws DataAccessException;
 
+    UserAddress getOneByUserId(int id) throws DataAccessException;
+
     boolean save(UserAddress obj) throws DataAccessException;
 
     boolean update(UserAddress obj) throws DataAccessException;

@@ -12,6 +12,8 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
   <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.css}"/>
+  <!-- Data Table -->
+  <link rel="stylesheet" th:href="@{/css/datatable/table.css}">
   <!-- Custom CSS -->
   <link rel="stylesheet" th:href="@{/css/hola-land/main.css}"/>
   <link rel="stylesheet" th:href="@{/css/hola-land/common.css}"/>
@@ -35,9 +37,9 @@
             </div>
           </div>
           <ul class="nav navbar-nav sub-menu">
-            <li>
-              <a th:href="@{/store/info}" th:classappend="${page == 1 ? 'active' : ''}">
-                <i class="fas fa-info fa-fw"></i>Thông tin shop
+            <li sec:authorize="hasRole('SELLER')">
+              <a th:href="@{/food/order/manage}" th:classappend="${page == 1 ? 'active' : ''}">
+                <i class="fas fa-list-ul fa-fw"></i>Quản lý đơn hàng
               </a>
             </li>
             <li>
@@ -46,8 +48,8 @@
               </a>
             </li>
             <li>
-              <a th:href="@{/store/manage/order}" th:classappend="${page == 3 ? 'active' : ''}">
-                <i class="fas fa-list-ul fa-fw"></i>Quản lý đơn hàng
+              <a th:href="@{/store/info}" th:classappend="${page == 3 ? 'active' : ''}">
+                <i class="fas fa-info fa-fw"></i>Thông tin shop
               </a>
             </li>
             <li>
@@ -65,17 +67,17 @@
       </div>
       <!-- Right side  -->
       <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
-        <!-- Online store overview -->
+        <!-- Online store manage order -->
         <th:block th:if="${page == 1}">
-          <div th:replace="online-store/overview :: overview"></div>
+          <div th:replace="online-store/manage-order :: manage-order"></div>
         </th:block>
         <!-- Online store manage food -->
         <th:block th:if="${page == 2}">
           <div th:replace="online-store/manage-food :: manage-food"></div>
         </th:block>
-        <!-- Online store manage order -->
+        <!-- Online store overview -->
         <th:block th:if="${page == 3}">
-          <div th:replace="online-store/manage-order :: manage-order"></div>
+          <div th:replace="online-store/overview :: overview"></div>
         </th:block>
         <!-- Online store statistics -->
         <th:block th:if="${page == 4}">
@@ -87,9 +89,16 @@
 </div>
 
 <th:block th:if="${page == 1}">
-  <!-- Import modal update shop info -->
-  <div th:replace="online-store/modal/modal-update-shop-info
-  :: updateShopInfoModal(store=${foodStoreOnline})"></div>
+  <!-- Import modal note order -->
+  <div th:replace="online-store/modal/modal-note-order :: noteOrderModal"></div>
+  <!-- Import modal report order -->
+  <div th:replace="online-store/modal/modal-reject-order :: rejectOrderModal"></div>
+  <!-- Import modal reason rejection order -->
+  <div th:replace="online-store/modal/modal-reason-rejection-order :: reasonRejectionOrderModal"></div>
+</th:block>
+<th:block th:if="${page == 1 && foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
+  <!-- Import modal list order detail -->
+  <div th:replace="online-store/modal/modal-order-detail :: orderDetailModal"></div>
 </th:block>
 <th:block th:if="${page == 2}">
   <!-- Import modal update shop tag -->
@@ -99,14 +108,30 @@
   <!-- Import modal add new food -->
   <div th:replace="online-store/modal/modal-add-new-food-item :: addNewFoodModal"></div>
 </th:block>
+<th:block th:if="${page == 3}">
+  <!-- Import modal update shop info -->
+  <div th:replace="online-store/modal/modal-update-shop-info
+  :: updateShopInfoModal(store=${foodStoreOnline})"></div>
+</th:block>
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
-<script crossorigin="anonymous" th:src="@{/js/templates/food.js}"></script>
+<script th:src="@{/js/templates/food.js}"></script>
+<th:block th:if="${page == 1}">
+  <script th:src="@{/js/datatables/jquery.min.js}"></script>
+  <script th:src="@{/js/datatables/jquery.dataTables.min.js}"></script>
+  <script th:src="@{/js/datatables/datatables.vietnamese.js}"></script>
+</th:block>
+
 <script th:if="${foodTagList != null}">
-    const myModal = new bootstrap.Modal(document.getElementById('updateTagModal'));
-    myModal.show();
+  const myModal = new bootstrap.Modal(document.getElementById('updateTagModal'));
+  myModal.show();
 </script>
+<script th:if="${foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
+  const myModal = new bootstrap.Modal(document.getElementById('orderDetailModal'));
+  myModal.show();
+</script>
+
 <th:block th:if="${page == 4}">
   <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
