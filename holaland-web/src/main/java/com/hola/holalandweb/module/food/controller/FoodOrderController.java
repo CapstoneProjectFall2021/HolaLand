@@ -38,7 +38,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/food/order")
@@ -286,6 +288,12 @@ public class FoodOrderController {
         }
     }
 
+    @GetMapping("/cart")
+    public String goToCart(Model model) {
+        model.addAttribute("page", 8);
+        return "module-food";
+    }
+
     @GetMapping("add-to-cart")
     public ResponseEntity<Integer> getCourseById(
             @RequestParam("foodId") int foodId,
@@ -296,19 +304,22 @@ public class FoodOrderController {
         FoodItemCart foodItemCart = FoodItemCart.builder()
                 .foodId(foodId)
                 .foodName(foodItem.getFoodItemName())
+                .foodImage(foodItem.getFoodItemImage())
                 .unitPrice(foodItem.getFoodItemPrice())
                 .quantity(1)
                 .totalPrice(foodItem.getFoodItemPrice())
                 .build();
 
-        List<FoodItemCart> listFoodOrder = null;
-        listFoodOrder = (ArrayList<FoodItemCart>) session.getAttribute("listFoodOrder");
+        Map<String, Object> mapFoodOrder = (Map<String, Object>) session.getAttribute("mapFoodOrder");
+        List<FoodItemCart> listFoodOrder;
 
         boolean flat = true;
-        if (listFoodOrder == null) {
+        if (mapFoodOrder == null) {
+            mapFoodOrder = new LinkedHashMap<>();
             listFoodOrder = new ArrayList<>();
             listFoodOrder.add(foodItemCart);
         } else {
+            listFoodOrder = (List<FoodItemCart>) mapFoodOrder.get("listFoodOrder");
             for (FoodItemCart f : listFoodOrder) {
                 if (f.getFoodId() == foodId) {
                     f.setQuantity(f.getQuantity() + 1);
@@ -316,13 +327,17 @@ public class FoodOrderController {
                     flat = false;
                 }
             }
+            // add new item
             if (flat) {
                 listFoodOrder.add(foodItemCart);
                 flat = true;
             }
         }
-        session.setAttribute("listFoodOrder", listFoodOrder);
-        listFoodOrder.forEach(System.out::println);
+
+        mapFoodOrder.put("listFoodOrder", listFoodOrder);
+        mapFoodOrder.put("totalMoney", getTotalMoney(listFoodOrder));
+
+        session.setAttribute("mapFoodOrder", mapFoodOrder);
         return new ResponseEntity<>(countQuantity(listFoodOrder), HttpStatus.OK);
     }
 
@@ -332,5 +347,13 @@ public class FoodOrderController {
             count += foodItemCart.getQuantity();
         }
         return count;
+    }
+
+    private double getTotalMoney(List<FoodItemCart> listFoodOrder) {
+        double total = 0;
+        for (FoodItemCart foodItemCart : listFoodOrder) {
+            total += foodItemCart.getTotalPrice();
+        }
+        return total;
     }
 }

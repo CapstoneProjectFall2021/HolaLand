@@ -19,6 +19,7 @@ public class FoodItemCart implements Serializable {
 
     private int foodId;
     private String foodName;
+    private String foodImage;
     private double unitPrice;
     private int quantity;
     private double totalPrice;

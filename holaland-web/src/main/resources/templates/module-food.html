@@ -20,6 +20,7 @@
   <link rel="stylesheet" th:href="@{/css/hola-land/grid.css}"/>
   <link rel="stylesheet" th:href="@{/css/hola-land/form.css}"/>
   <link rel="stylesheet" th:href="@{/css/hola-land/food.css}"/>
+  <link rel="stylesheet" th:href="@{/css/hola-land/cart.css}"/>
 </head>
 
 <body>
@@ -79,6 +80,9 @@
         <th:block th:if="${page == 3}">
           <div th:replace="food/user-order :: user-order"></div>
         </th:block>
+        <th:block th:if="${page == 8}">
+          <div th:replace="food/cart :: cart"></div>
+        </th:block>
         <th:block th:if="${page == 9}">
           <div th:replace="food/online-store :: online-store"></div>
         </th:block>
@@ -87,6 +91,18 @@
   </div>
 </div>
 
+<th:block th:if="${page == 8}">
+  <!-- Import modal food detail -->
+  <div th:replace="food/modal/modal-food-detail :: foodDetailModal"></div>
+  <!-- Import modal cancel order -->
+  <div th:replace="food/modal/modal-cancel-order :: confirmCancelOrderInCartModal"></div>
+  <!-- Import modal delete cart -->
+  <div th:replace="food/modal/modal-delete-cart :: confirmDeleteCartModal"></div>
+  <!-- Import modal delete item in cart -->
+  <div th:replace="food/modal/modal-delete-item-in-cart :: confirmDeleteItemInCartModal"></div>
+  <!-- Import modal confirm order successfully -->
+  <div th:replace="food/modal/modal-order-successfully :: confirmOrderSuccessfullyModal"></div>
+</th:block>
 <th:block th:if="${page == 9}">
   <!-- Import modal online store rate -->
   <div th:replace="food/modal/modal-online-store-rate :: onlineStoreRateModal"></div>
@@ -127,13 +143,13 @@
 </th:block>
 
 <script th:if="${foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
-    const myModal = new bootstrap.Modal(document.getElementById('orderDetailModal'));
-    myModal.show();
+  const myModal = new bootstrap.Modal(document.getElementById('orderDetailModal'));
+  myModal.show();
 </script>
 
 <script th:if="${foodOrderDetailReport != null && foodOrderDetailReport.size() != 0}">
-    const myModal = new bootstrap.Modal(document.getElementById('orderDetailReportModal'));
-    myModal.show();
+  const myModal = new bootstrap.Modal(document.getElementById('orderDetailReportModal'));
+  myModal.show();
 </script>
 
 </body>

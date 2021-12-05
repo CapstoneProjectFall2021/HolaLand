@@ -30,30 +30,6 @@
   margin-right: 12px;
 }
 
-#foodDetailModal .modal-body .flex {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-}
-
-#foodDetailModal .modal-body .flex .icon-circle img {
-  border-radius: var(--primary-border-radius);
-  margin-right: 20px;
-  width: 250px;
-}
-
-#foodDetailModal .modal-body .flex .content-body h3 {
-  font-size: 22px;
-  margin-bottom: 4px;
-  font-weight: var(--font-weight-4);
-}
-
-#foodDetailModal .modal-body .flex .content-body p {
-  font-size: 16px;
-  color: var(--secondary-text);
-  margin-bottom: 0;
-}
-
 #confirmOrderSuccessfullyModal .modal-body h3 {
   font-size: 22px;
   font-weight: 400;

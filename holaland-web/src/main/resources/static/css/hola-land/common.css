@@ -1070,13 +1070,13 @@
 .btn-sm {
   border-radius: var(--third-border-radius);
   font-size: 16px;
-  padding: 6px 15px;
+  padding: 6px 16px;
 }
 
 .btn-md {
   border-radius: var(--secondary-border-radius);
   font-size: 16px;
-  padding: 9px 18px;
+  padding: 8px 18px;
 }
 
 .btn-lg {
