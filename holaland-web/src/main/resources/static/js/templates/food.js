@@ -25,6 +25,8 @@ function addFoodToCart(e) {
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
             showToast("toastAddToCartSuccess");
+        } else if (this.status === 400) {
+            showToast("toastAddToCartErrorDifferentStore");
         } else {
             showToast("toastAddToCartError");
         }

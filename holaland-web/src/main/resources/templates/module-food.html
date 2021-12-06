@@ -97,9 +97,9 @@
   <!-- Import modal cancel order -->
   <div th:replace="food/modal/modal-cancel-order :: confirmCancelOrderInCartModal"></div>
   <!-- Import modal delete cart -->
-  <div th:replace="food/modal/modal-delete-cart :: confirmDeleteCartModal"></div>
+  <div th:replace="food/modal/modal-confirm-delete-cart :: confirmDeleteCartModal"></div>
   <!-- Import modal delete item in cart -->
-  <div th:replace="food/modal/modal-delete-item-in-cart :: confirmDeleteItemInCartModal"></div>
+  <div th:replace="food/modal/modal-confirm-delete-item-in-cart :: confirmDeleteItemInCartModal"></div>
   <!-- Import modal confirm order successfully -->
   <div th:replace="food/modal/modal-order-successfully :: confirmOrderSuccessfullyModal"></div>
 </th:block>
@@ -110,6 +110,7 @@
   <div th:replace="food/modal/modal-food-detail :: foodDetailModal"></div>
   <!-- Import toast add to cart -->
   <div th:replace="food/toast/toast-add-to-cart-success :: toastAddToCartSuccess"></div>
+  <div th:replace="food/toast/toast-add-to-cart-error-different-store :: toastAddToCartErrorDifferentStore"></div>
   <div th:replace="food/toast/toast-add-to-cart-error :: toastAddToCartError"></div>
 </th:block>
 <th:block th:if="${page == 9 && foodOrderDetailReport != null && foodOrderDetailReport.size() != 0}">

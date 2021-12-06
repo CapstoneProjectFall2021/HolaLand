@@ -62,17 +62,21 @@ public class FoodCartController {
             listFoodOrder.add(foodItemCart);
         } else {
             listFoodOrder = (List<FoodItemCart>) mapFoodOrder.get("listFoodOrder");
-            for (FoodItemCart f : listFoodOrder) {
-                if (f.getFoodId() == foodId) {
-                    f.setQuantity(f.getQuantity() + 1);
-                    f.setTotalPrice(f.getQuantity() * f.getUnitPrice());
-                    flat = false;
+            if (listFoodOrder.get(0).getStoreId() != storeId) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            } else {
+                for (FoodItemCart f : listFoodOrder) {
+                    if (f.getFoodId() == foodId) {
+                        f.setQuantity(f.getQuantity() + 1);
+                        f.setTotalPrice(f.getQuantity() * f.getUnitPrice());
+                        flat = false;
+                    }
                 }
-            }
-            // add new item
-            if (flat) {
-                listFoodOrder.add(foodItemCart);
-                flat = true;
+                // add new item
+                if (flat) {
+                    listFoodOrder.add(foodItemCart);
+                    flat = true;
+                }
             }
         }
 
@@ -100,5 +104,12 @@ public class FoodCartController {
             total += foodItemCart.getTotalPrice();
         }
         return total;
+    }
+
+    @GetMapping("/delete")
+    public String deleteCart(Model model, HttpSession session) {
+        session.removeAttribute("mapFoodOrder");
+        model.addAttribute("page", 8);
+        return "module-food";
     }
 }

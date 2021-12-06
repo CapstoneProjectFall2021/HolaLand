@@ -12,7 +12,7 @@
           <div class="flex-sb" th:if="${session.mapFoodOrder == null}">
             <p class="m-mt-8 m-0">Danh sách giỏ hàng hiện tại trống.</p>
             <div>
-              <a href="food.html" class="m-mt-8 btn btn-md btn-secondary">
+              <a th:href="@{/food}" class="m-mt-8 btn btn-md btn-secondary">
                 <i class="fas fa-plus text-success"></i>Đặt hàng ngay
               </a>
             </div>
