@@ -62,7 +62,7 @@ function insertNewRate(e) {
  */
 function confirmDeleteReport(e) {
     const foodReportId = e.target.firstElementChild.innerHTML;
-    document.getElementById("btn-delete-report").href = "/food/order/delete-report?reportId=" + foodReportId;
+    document.getElementById("btn-delete-report").href = "/food/order/report/delete?reportId=" + foodReportId;
     openModal("confirmDeleteReportOrderModal");
 }
 
@@ -102,7 +102,7 @@ function getOrderReportContent(e) {
 
 function confirmCancelOrder(e) {
     const orderId = e.target.firstElementChild.innerHTML;
-    document.getElementById("btn-cancel-order").href = "/food/order/update-status-food?orderId=" + orderId;
+    document.getElementById("btn-cancel-order").href = "/food/order/cancel?orderId=" + orderId;
     openModal("confirmCancelOrderModal");
 }
 
