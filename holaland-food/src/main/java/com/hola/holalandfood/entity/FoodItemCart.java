@@ -18,6 +18,7 @@ import java.io.Serializable;
 public class FoodItemCart implements Serializable {
 
     private int foodId;
+    private int storeId;
     private String foodName;
     private String foodImage;
     private double unitPrice;

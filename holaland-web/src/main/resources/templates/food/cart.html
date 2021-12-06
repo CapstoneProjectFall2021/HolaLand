@@ -18,7 +18,7 @@
             </div>
           </div>
           <div th:if="${session.mapFoodOrder != null}">
-            <table id="cart-table" table class="table" cellspacing="0" width="100%">
+            <table id="cart-table" class="table" cellspacing="0" width="100%">
               <thead>
               <tr>
                 <th class="text-center">#</th>
@@ -30,8 +30,8 @@
               </tr>
               </thead>
               <tbody>
-              <tr th:each="food, index : ${session.mapFoodOrder.get('listFoodOrder')}">
-                <td class="text-center">1</td>
+              <tr th:each="food, stt : ${session.mapFoodOrder.get('listFoodOrder')}">
+                <td class="text-center" th:text="*{stt.index + 1}"></td>
                 <td>
                   <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal"
                   th:text="*{food.foodName}"></a>

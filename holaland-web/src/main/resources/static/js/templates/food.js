@@ -21,12 +21,9 @@ function addFoodToCart(e) {
     const storeId = e.target.lastElementChild.innerHTML;
 
     const request = new XMLHttpRequest();
-    request.open("GET", "/food/order/add-to-cart?storeId=" + storeId + "&foodId=" + foodId, true);
+    request.open("GET", "/food/cart/add?storeId=" + storeId + "&foodId=" + foodId, true);
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
-            console.log("OK");
-            console.log(this.responseText);
-            document.getElementById("number-food-item-in-cart").innerHTML = this.responseText;
             showToast("toastAddToCartSuccess");
         } else {
             showToast("toastAddToCartError");

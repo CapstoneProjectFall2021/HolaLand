@@ -13,10 +13,10 @@
           </form>
         </li>
         <li class="navbar-btn dropdown d-none" id="food-cart">
-          <a class="dropdown-toggle" th:href="@{/food/order/cart}">
+          <a class="dropdown-toggle" th:href="@{/food/cart}">
             <i class="bi bi-bag-plus m-0"></i>
           </a>
-          <span id="number-food-item-in-cart" class="notification-dot">3</span>
+          <span class="notification-dot" th:text="${session.mapFoodOrder.get('quantity')}"></span>
         </li>
 <!--        <li sec:authorize="isAuthenticated()" class="navbar-btn dropdown">-->
 <!--          <a aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0)"-->
