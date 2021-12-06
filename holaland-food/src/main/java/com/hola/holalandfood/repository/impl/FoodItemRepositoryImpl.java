@@ -71,6 +71,6 @@ public class FoodItemRepositoryImpl implements FoodItemRepository, IRepositoryQu
 
     @Override
     public List<FoodItem> search(String textSearch) throws DataAccessException {
-        return null;
+        return jdbcTemplate.query(FOOD_ITEM_SEARCH, new FoodItemMapper(), "%" + textSearch + "%");
     }
 }

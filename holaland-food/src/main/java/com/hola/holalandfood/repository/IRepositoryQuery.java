@@ -60,7 +60,7 @@ public interface IRepositoryQuery {
 
     String FOOD_ITEM_DELETED_ONE = "UPDATE food_item SET food_item_deleted = ? WHERE food_item_id = ?";
 
-    String FOOD_ITEM_SEARCH = "SELECT * FROM food_item WHERE food_item_name LIKE ?";
+    String FOOD_ITEM_SEARCH = "SELECT * FROM food_item WHERE food_item_name LIKE ? AND food_item_deleted = 0";
 
     String FOOD_ORDER_DETAIL_GET_ALL = "SELECT * FROM food_order_detail";
     String FOOD_ORDER_DETAIL_GET_ONE = "SELECT * FROM food_order_detail WHERE food_order_detail_id = ?";
@@ -187,7 +187,7 @@ public interface IRepositoryQuery {
             "ON T1.food_tag_id = T2.food_tag_id\n" +
             "WHERE T2.food_store_online_id = ?";
 
-    String FOOD_TAG_SEARCH = "select * from food_tag where food_tag_name like ?\n";
+    String FOOD_TAG_SEARCH = "SELECT * FROM food_tag WHERE food_tag_name LIKE ?";
 
     String FOOD_TYPE_GET_ALL = "SELECT * FROM food_type WHERE food_type_deleted = 0";
     String FOOD_TYPE_GET_ONE = "SELECT * FROM food_type WHERE food_type_id = ? AND food_type_deleted = 0";

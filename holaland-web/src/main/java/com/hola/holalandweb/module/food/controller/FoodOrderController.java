@@ -106,11 +106,13 @@ public class FoodOrderController {
 
         // Get store id for click food name in modal
         int foodStoreOnlineId = foodStoreOnlineService.getOneByOrderId(orderId).getFoodStoreOnlineId();
+        int sellerId = foodStoreOnlineService.getOneByOrderId(orderId).getUserId();
 
         // Add more attr for modal order detail
         model.addAttribute("orderStatus", orderStatus);
         model.addAttribute("foodOrderDetailList", foodOrderDetailList);
         model.addAttribute("foodStoreOnlineId", foodStoreOnlineId);
+        model.addAttribute("sellerPhone", userAddressService.getOneByUserId(sellerId).getUserPhone());
         return "module-food";
     }
 
@@ -218,7 +220,7 @@ public class FoodOrderController {
         model.addAttribute("page", 1);
     }
 
-    @GetMapping("/order/cancel")
+    @GetMapping("/cancel")
     public String userCancelOrder(@RequestParam("orderId") Integer foodOrderId) {
         FoodOrder foodOrder = FoodOrder.builder()
                 .foodOrderId(foodOrderId)
@@ -233,7 +235,7 @@ public class FoodOrderController {
         }
     }
 
-    @PostMapping("/order/report")
+    @PostMapping("/report")
     public String userReportOrder(
             @RequestParam("foodStoreOnlineId") int storeId,
             @RequestParam("foodOrderId") int orderId,
@@ -259,7 +261,7 @@ public class FoodOrderController {
         }
     }
 
-    @PostMapping("/order/reject")
+    @PostMapping("/reject")
     public String sellerRejectOrder(
             @RequestParam("orderId") int orderId,
             @RequestParam("reasonReject") String reasonReject
@@ -272,13 +274,13 @@ public class FoodOrderController {
 
         boolean isCheck = foodOrderService.addReasonReject(newFoodOrder);
         if (isCheck) {
-            return "redirect:" + "/food/order";
+            return "redirect:" + "/food/order/manage";
         } else {
             return "404";
         }
     }
 
-    @GetMapping("/order/report/delete")
+    @GetMapping("/report/delete")
     public String userDeleteReportOrder(@RequestParam("reportId") int reportId) {
         boolean isCheck = foodReportService.delete(reportId);
         if (isCheck) {
