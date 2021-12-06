@@ -6,7 +6,7 @@
         <h1 class="title fix-mb-title">Chỉnh sửa thông tin</h1>
       </div>
     </div>
-    <form id="updateUserInfoForm" class="row panel-form mx-0" method="post" th:action="@{/profile/update}"
+    <form id="updateUserInfoForm" class="row panel-form mx-0 m-mb-16" method="post" th:action="@{/profile/update}"
           th:object="${updateUser}">
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
@@ -23,7 +23,7 @@
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Giới tính</legend>
-          <div class="custom-radio">
+          <div class="custom-radio ms-1">
             <div class="form-check me-4">
               <input class="form-check-input me-2" type="radio"
                      th:field="${userDetail.userDetailGender}" id="male"
