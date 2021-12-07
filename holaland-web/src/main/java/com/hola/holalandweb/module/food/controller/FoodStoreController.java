@@ -87,14 +87,17 @@ public class FoodStoreController {
             return "404";
         }
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-
-        Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
-        newRate.setUserId(currentUser.getId());
-        newRate.setFoodStoreOnlineRateCreateTime(currentDate);
-        newRate.setFoodStoreOnlineDeleted(false);
-        boolean isCheck = foodStoreOnlineRateService.insert(newRate);
-        if (isCheck) {
-            return "redirect:" + "/food/store?id=" + newRate.getFoodStoreOnlineId();
+        if(newRate.getFoodStoreOnlineRatePoint() != 0 && newRate.getFoodStoreOnlineRateComment().length() != 0) {
+            Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
+            newRate.setUserId(currentUser.getId());
+            newRate.setFoodStoreOnlineRateCreateTime(currentDate);
+            newRate.setFoodStoreOnlineDeleted(false);
+            boolean isCheck = foodStoreOnlineRateService.insert(newRate);
+            if (isCheck) {
+                return "redirect:" + "/food/store?id=" + newRate.getFoodStoreOnlineId();
+            } else {
+                return "404";
+            }
         } else {
             return "404";
         }
