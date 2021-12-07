@@ -95,6 +95,8 @@
   <div th:replace="online-store/modal/modal-reject-order :: rejectOrderModal"></div>
   <!-- Import modal reason rejection order -->
   <div th:replace="online-store/modal/modal-reason-rejection-order :: reasonRejectionOrderModal"></div>
+  <!-- Import modal confirm complete order -->
+  <div th:replace="online-store/modal/modal-confirm-complete-order :: confirmOrderModal"></div>
 </th:block>
 <th:block th:if="${page == 1 && foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
   <!-- Import modal list order detail -->

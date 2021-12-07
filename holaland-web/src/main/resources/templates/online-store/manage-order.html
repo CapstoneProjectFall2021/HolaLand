@@ -10,7 +10,8 @@
       <div class="row datatable">
         <div class="col-lg-12">
           <p class="m-mt-8 m-0" th:if="${foodOrderList.size() == 0}">Không có đơn hàng nào cần xử lý.</p>
-          <table id="order-table-no-filter" class="table m-0" cellspacing="0" width="100%" th:if="${foodOrderList.size() != 0}">
+          <table id="order-table-no-filter" class="table m-0" cellspacing="0" width="100%"
+                 th:if="${foodOrderList.size() != 0}">
             <thead>
             <tr>
               <th class="text-center">#</th>
@@ -49,12 +50,26 @@
                     </i>
                   </a>
                 </th:block>
-                <a href="javascript:void(0)" class="color-danger">
-                  <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip" title="Từ chối đơn hàng"
-                     onclick="rejectFoodOrder(event)">
-                    <span class="d-none" th:text="*{foodOrder.foodOrderId}"></span>
-                  </i>
-                </a>
+                <th:block th:if="*{foodOrder.sttFoodCode == 2}">
+                  <a href="javascript:void(0)" class="text-success">
+                    <i class="fas fa-check me-3" data-bs-placement="top" data-bs-toggle="tooltip"
+                       title="Xác nhận hoàn thành" onclick="confirmCompleteOrder(event)">
+                      <span class="d-none" th:text="*{foodOrder.foodOrderId}"></span>
+                    </i>
+                  </a>
+                </th:block>
+                <th:block th:if="*{foodOrder.sttFoodCode == 1}">
+                  <a th:href="@{/food/order/confirm(orderId=*{foodOrder.foodOrderId})}" class="text-success">
+                    <i class="fas fa-check me-3" data-bs-placement="top" data-bs-toggle="tooltip" title="Xác nhận"></i>
+                  </a>
+                  <a href="javascript:void(0)" class="color-danger">
+                    <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip"
+                       title="Từ chối đơn hàng"
+                       onclick="rejectFoodOrder(event)">
+                      <span class="d-none" th:text="*{foodOrder.foodOrderId}"></span>
+                    </i>
+                  </a>
+                </th:block>
               </td>
             </tr>
             </tbody>
@@ -79,7 +94,7 @@
               <i class="fas fa-list-ul"></i>
             </div>
             <div class="number">
-              <h4 th:text = "${foodCountSttOrder.rejectOrder + foodCountSttOrder.completed + foodCountSttOrder.cancel}"></h4>
+              <h4 th:text="${foodCountSttOrder.rejectOrder + foodCountSttOrder.completed + foodCountSttOrder.cancel}"></h4>
             </div>
           </div>
           <div class="description">Tất cả</div>
@@ -93,7 +108,7 @@
               <i class="far fa-stop-circle"></i>
             </div>
             <div class="number">
-              <h4 th:text = "${foodCountSttOrder.rejectOrder}"></h4>
+              <h4 th:text="${foodCountSttOrder.rejectOrder}"></h4>
             </div>
           </div>
           <div class="description">
@@ -109,7 +124,7 @@
               <i class="far fa-check-circle"></i>
             </div>
             <div class="number">
-              <h4 th:text = "${foodCountSttOrder.completed}"></h4>
+              <h4 th:text="${foodCountSttOrder.completed}"></h4>
             </div>
           </div>
           <div class="description">
@@ -125,7 +140,7 @@
               <i class="far fa-times-circle"></i>
             </div>
             <div class="number">
-              <h4 th:text = "${foodCountSttOrder.cancel}"></h4>
+              <h4 th:text="${foodCountSttOrder.cancel}"></h4>
             </div>
           </div>
           <div class="description">
@@ -163,18 +178,20 @@
                 <span th:text="*{#dates.format(historyOrder.foodOrderCreatedDate, 'HH:mm:ss')}"></span>
               </td>
               <td class="text-end">
-                <span th:text="*{#numbers.formatInteger(historyOrder.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
+                <span
+                    th:text="*{#numbers.formatInteger(historyOrder.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
               </td>
               <td class="text-end">
                 <span
-                  th:classappend="*{historyOrder.sttFoodCode == 3 ? 'text-secondary' : (historyOrder.sttFoodCode == 4 ? 'color-success' : 'text-danger')}"
-                  th:text="*{historyOrder.sttFoodCode == 3 ? 'Đã từ chối' : (historyOrder.sttFoodCode == 4 ? 'Hoàn thành' : 'Đã hủy')}">
+                    th:classappend="*{historyOrder.sttFoodCode == 3 ? 'text-secondary' : (historyOrder.sttFoodCode == 4 ? 'color-success' : 'text-danger')}"
+                    th:text="*{historyOrder.sttFoodCode == 3 ? 'Đã từ chối' : (historyOrder.sttFoodCode == 4 ? 'Hoàn thành' : 'Đã hủy')}">
                 </span>
               </td>
               <td class="text-end">
                 <th:block th:if="*{historyOrder.sttFoodCode == 3}">
                   <a href="javascript:void(0)" class="text-info">
-                    <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip" title= "Lý do từ chối"
+                    <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip"
+                       title="Lý do từ chối"
                        onclick="getOrderReasonReject(event)">
                       <span class="d-none" th:text="*{historyOrder.foodOrderReasonReject}"></span>
                     </i>

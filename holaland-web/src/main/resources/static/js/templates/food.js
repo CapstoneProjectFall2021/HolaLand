@@ -105,6 +105,12 @@ function confirmCancelOrder(e) {
     openModal("confirmCancelOrderModal");
 }
 
+function confirmCompleteOrder(e) {
+    const orderId = e.target.firstElementChild.innerHTML;
+    document.getElementById("btn-confirm-complete-order").href = "/food/order/complete?orderId=" + orderId;
+    openModal("confirmOrderModal");
+}
+
 /*
  * Store online manage
  */
