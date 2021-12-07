@@ -18,6 +18,8 @@ import com.hola.holalandfood.service.FoodStoreOnlineService;
 import com.hola.holalandfood.service.FoodTagService;
 import com.hola.holalandfood.service.FoodTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -78,9 +80,39 @@ public class FoodStoreController {
         return "module-food";
     }
 
+    @GetMapping("/exits")
+    public ResponseEntity<?> isExitsOrder(@RequestParam("storeId") Integer storeId, Authentication authentication) {
+        boolean isCheck1 = false;
+        boolean isCheck2 = true;
+
+        // rate lần đầu
+        if (isCheck1) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        // rate lần 2 => update
+        if (isCheck2) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        // chưa mua hàng mà đòi rate
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("rated")
+    public ResponseEntity<FoodStoreOnlineRate> getUserRated(@RequestParam("storeId") Integer storeId, Authentication authentication) {
+        FoodStoreOnlineRate rate = FoodStoreOnlineRate.builder()
+                .foodStoreOnlineRatePoint(4)
+                .foodStoreOnlineRateComment("Quán ăn ngon - xịn...")
+                .build();
+
+        if (rate != null) {
+            return new ResponseEntity<>(rate, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
     @PostMapping("/rate")
     public String rate(
-            @ModelAttribute("newRate") FoodStoreOnlineRate newRate,
+            @ModelAttribute("rate") FoodStoreOnlineRate rate,
             BindingResult bindingResult,
             Authentication authentication
     ) {
@@ -89,17 +121,19 @@ public class FoodStoreController {
             return "404";
         }
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        if(newRate.getFoodStoreOnlineRatePoint() != 0 && newRate.getFoodStoreOnlineRateComment().length() != 0) {
-            Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
-            newRate.setUserId(currentUser.getId());
-            newRate.setFoodStoreOnlineRateCreateTime(currentDate);
-            newRate.setFoodStoreOnlineDeleted(false);
-            boolean isCheck = foodStoreOnlineRateService.insert(newRate);
-            if (isCheck) {
-                return "redirect:" + "/food/store?id=" + newRate.getFoodStoreOnlineId();
-            } else {
-                return "404";
-            }
+
+        Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
+        rate.setUserId(currentUser.getId());
+        rate.setFoodStoreOnlineRateCreateTime(currentDate);
+        rate.setFoodStoreOnlineDeleted(false);
+
+        boolean isRateExits = true; // kiem tra xem thang userId nay là rate lan dau hay lan 2
+
+        // if else => insert hay update
+
+        boolean isCheck = foodStoreOnlineRateService.insert(rate);
+        if (isCheck) {
+            return "redirect:" + "/food/store?id=" + rate.getFoodStoreOnlineId();
         } else {
             return "404";
         }
@@ -130,13 +164,7 @@ public class FoodStoreController {
         List<FoodItem> foodItemList = (tagId == 0)
                 ? foodItemService.getAllByStoreOnlineId(foodStoreOnline.getFoodStoreOnlineId())
                 : foodItemService.getAllByStoreOnlineIdAndTagId(foodStoreOnline.getFoodStoreOnlineId(), tagId);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        int userId = 0;
-        if(auth != null && !(auth instanceof AnonymousAuthenticationToken)) {
-            CustomUser currentUser = (CustomUser) auth.getPrincipal();
-            userId = currentUser.getId();
-        }
-        model.addAttribute("userId", userId);
+
         model.addAttribute("tagId", tagId);
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);

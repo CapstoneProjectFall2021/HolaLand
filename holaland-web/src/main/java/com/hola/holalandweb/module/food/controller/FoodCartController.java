@@ -79,9 +79,6 @@ public class FoodCartController {
                 }
             }
         }
-
-        listFoodOrder.forEach(s -> System.out.println(s));
-
         mapFoodOrder.put("listFoodOrder", listFoodOrder);
         mapFoodOrder.put("quantity", countQuantity(listFoodOrder));
         mapFoodOrder.put("totalMoney", getTotalMoney(listFoodOrder));

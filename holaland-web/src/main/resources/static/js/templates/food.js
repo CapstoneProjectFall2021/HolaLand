@@ -50,10 +50,52 @@ function getFoodItemDetail(e) {
     openModal("foodDetailModal");
 }
 
-function insertNewRate(e) {
-    const foodStoreOnlineId = e.target.firstElementChild.innerHTML;
-    document.getElementById("storeId").value = foodStoreOnlineId
-    openModal("onlineStoreRateModal");
+function getUserRated(storeId) {
+    const request = new XMLHttpRequest();
+    request.open("GET", "/food/store/rated?storeId=" + storeId, true);
+    request.onload = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            const obj = JSON.parse(this.responseText);
+
+            if (obj.foodStoreOnlineRatePoint === 1) {
+                document.getElementById("one-star").checked = true;
+            } else if (obj.foodStoreOnlineRatePoint === 2) {
+                document.getElementById("two-star").checked = true;
+            } else if (obj.foodStoreOnlineRatePoint === 3) {
+                document.getElementById("three-star").checked = true;
+            } else if (obj.foodStoreOnlineRatePoint === 4) {
+                document.getElementById("four-star").checked = true;
+            } else {
+                document.getElementById("five-star").checked = true;
+            }
+
+            document.getElementById("rate-content").value = obj.foodStoreOnlineRateComment;
+            openModal("onlineStoreRateModal");
+        } else {
+            showToast("toastRateStoreError");
+        }
+    };
+    request.send(null);
+}
+
+function checkUserOrderInStore(e) {
+    const storeId = e.target.firstElementChild.innerHTML;
+
+    const request = new XMLHttpRequest();
+    request.open("GET", "/food/store/exits?storeId=" + storeId, true);
+    request.onload = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            openModal("onlineStoreRateModal");
+        } else if (this.status === 409) {
+            // rate lần 2
+            getUserRated(storeId);
+        } else if (this.status === 404) {
+            showToast("toastRateStoreWarning");
+        } else {
+            showToast("toastRateStoreError");
+        }
+    };
+    request.send(null);
 }
 
 /*
