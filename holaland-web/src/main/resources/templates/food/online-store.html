@@ -69,7 +69,8 @@
               <a th:href="@{/login}" class="nav-link" sec:authorize="!isAuthenticated()">
                 Đánh giá
               </a>
-              <a href="javascript:void(0)" class="nav-link" onclick="insertNewRate(event)" sec:authorize="isAuthenticated()">
+              <a href="javascript:void(0)" class="nav-link" onclick="insertNewRate(event)" sec:authorize="isAuthenticated()"
+                 th:if="${foodStoreOnline.userId != userId}">
                 <span th:text="${foodStoreOnline.foodStoreOnlineId}" class="d-none"></span>
                 Đánh giá
               </a>

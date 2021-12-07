@@ -18,7 +18,9 @@ import com.hola.holalandfood.service.FoodStoreOnlineService;
 import com.hola.holalandfood.service.FoodTagService;
 import com.hola.holalandfood.service.FoodTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -128,7 +130,13 @@ public class FoodStoreController {
         List<FoodItem> foodItemList = (tagId == 0)
                 ? foodItemService.getAllByStoreOnlineId(foodStoreOnline.getFoodStoreOnlineId())
                 : foodItemService.getAllByStoreOnlineIdAndTagId(foodStoreOnline.getFoodStoreOnlineId(), tagId);
-
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int userId = 0;
+        if(auth != null && !(auth instanceof AnonymousAuthenticationToken)) {
+            CustomUser currentUser = (CustomUser) auth.getPrincipal();
+            userId = currentUser.getId();
+        }
+        model.addAttribute("userId", userId);
         model.addAttribute("tagId", tagId);
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodStoreOnlineTagList", foodStoreOnlineTagList);
