@@ -52,7 +52,7 @@
                 </th:block>
                 <th:block th:if="*{foodOrder.sttFoodCode == 2}">
                   <a href="javascript:void(0)" class="text-success">
-                    <i class="fas fa-check me-3" data-bs-placement="top" data-bs-toggle="tooltip"
+                    <i class="fas fa-check" data-bs-placement="top" data-bs-toggle="tooltip"
                        title="Xác nhận hoàn thành" onclick="confirmCompleteOrder(event)">
                       <span class="d-none" th:text="*{foodOrder.foodOrderId}"></span>
                     </i>
