@@ -13,7 +13,7 @@ public interface FoodReportRepository {
 
     FoodReport getOne(int id) throws DataAccessException;
 
-    FoodReport checkUserReported(int userId, int orderId) throws DataAccessException;
+    FoodReport getUserReported(int userId, int orderId) throws DataAccessException;
 
     boolean save(FoodReport obj) throws DataAccessException;
 

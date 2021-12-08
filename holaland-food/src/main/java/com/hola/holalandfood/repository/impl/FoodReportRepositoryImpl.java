@@ -38,7 +38,7 @@ public class FoodReportRepositoryImpl implements FoodReportRepository, IReposito
     }
 
     @Override
-    public FoodReport checkUserReported(int userId, int orderId) throws DataAccessException{
+    public FoodReport getUserReported(int userId, int orderId) throws DataAccessException{
         try{
             return jdbcTemplate.queryForObject(FOOD_REPORT_CHECK_EXISTS, new FoodReportMapper(), userId, orderId);
         }catch (EmptyResultDataAccessException e) {

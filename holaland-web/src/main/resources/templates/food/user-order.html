@@ -178,7 +178,7 @@
                   </a>
                 </th:block>
                 <th:block th:if="*{historyOrder.sttFoodCode == 4}"
-                          th:with="foodReport=${foodReportService.checkUserReported(historyOrder.userId, historyOrder.foodOrderId)}">
+                          th:with="foodReport=${foodReportService.getUserReported(historyOrder.userId, historyOrder.foodOrderId)}">
                   <th:block th:if="${foodReport == null}">
                     <a href="javascript:void(0)" class="text-warning">
                       <i class="bi bi-exclamation-circle" data-bs-placement="top" data-bs-toggle="tooltip"
