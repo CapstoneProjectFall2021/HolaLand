@@ -70,6 +70,18 @@ public class FoodItemRepositoryImpl implements FoodItemRepository, IRepositoryQu
     }
 
     @Override
+    public boolean update(FoodItem obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                FOOD_ITEM_UPDATE,
+                obj.getFoodItemImage(),
+                obj.getFoodItemName(),
+                obj.getFoodItemPrice(),
+                obj.getFoodTagId(),
+                obj.getFoodItemId()
+        ) > 0;
+    }
+
+    @Override
     public List<FoodItem> search(String textSearch) throws DataAccessException {
         return jdbcTemplate.query(FOOD_ITEM_SEARCH, new FoodItemMapper(), "%" + textSearch + "%");
     }

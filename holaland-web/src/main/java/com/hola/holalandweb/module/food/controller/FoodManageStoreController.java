@@ -201,4 +201,31 @@ public class FoodManageStoreController {
         model.addAttribute("page", 2);
         return "module-food-manage-store";
     }
+
+    @PostMapping("/food/update")
+    public String updateFoodItem(
+            @RequestParam("foodItemId") Integer foodItemId,
+            @RequestParam("imageFood") MultipartFile multipartFile,
+            @RequestParam("foodItemName") String foodItemName,
+            @RequestParam("foodItemPrice") Integer foodItemPrice,
+            @RequestParam("foodTagId") Integer foodTagId) throws Exception
+    {
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String uploadDir = new File("holaland-web/target/classes/static/images/food").getAbsolutePath();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        FoodItem updateFood = FoodItem.builder()
+                .foodItemId(foodItemId)
+                .foodItemImage(fileName)
+                .foodItemName(foodItemName)
+                .foodItemPrice(foodItemPrice)
+                .foodTagId(foodTagId)
+                .build();
+        boolean isCheck = foodItemService.update(updateFood);
+        if (isCheck) {
+            return "redirect:" + "/store/manage/food";
+        } else {
+            return "404";
+        }
+    }
 }

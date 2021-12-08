@@ -22,5 +22,7 @@ public interface FoodItemService {
 
     boolean save(FoodItem foodItem) throws DataAccessException;
 
+    boolean update(FoodItem obj) throws DataAccessException;
+
     List<FoodItem> search(String textSearch) throws DataAccessException;
 }

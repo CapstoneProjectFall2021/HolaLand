@@ -56,6 +56,11 @@ public class FoodItemServiceImpl implements FoodItemService {
     }
 
     @Override
+    public boolean update(FoodItem obj) throws DataAccessException {
+        return foodItemRepository.update(obj);
+    }
+
+    @Override
     public List<FoodItem> search(String textSearch) throws DataAccessException {
         return foodItemRepository.search(textSearch);
     }

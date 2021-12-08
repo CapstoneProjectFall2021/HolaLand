@@ -166,4 +166,10 @@ function confirmDeleteFood(e) {
     openModal("confirmDeleteFoodModal");
 }
 
+function updateFood(e) {
+    const foodItemId = e.target.firstElementChild.innerHTML;
+    document.getElementById("foodItemId").value = foodItemId;
+    openModal("updateFoodModal");
+}
+
 

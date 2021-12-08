@@ -9,15 +9,15 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-12 col-md-6 m-mb-20 m-mt-10">
-            <img id="blah" class="preview-img" width="100%" height="100%" th:src="@{'/images/system/no-image.png'}" />
+            <img id="blah1" class="preview-img" width="100%" height="100%" th:src="@{'/images/system/no-image.png'}" />
           </div>
           <div class="col-12 col-md-6">
             <form id="updateFoodForm" class="row" th:action="@{/store/food/update}" method="post" enctype="multipart/form-data">
               <div class="form-group col-md-12">
                 <fieldset>
-                  <input type="hidden" name="foodItemId" id="foodItemId">
+                  <input type="hidden" id="foodItemId" name="foodItemId">
                   <legend>Lựa chọn hình ảnh</legend>
-                  <input type="file" name="imageFood" class="form-control custom-file-input" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+                  <input type="file" name="imageFood" class="form-control custom-file-input" onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])">
                 </fieldset>
               </div>
               <div class="form-group col-md-12">
