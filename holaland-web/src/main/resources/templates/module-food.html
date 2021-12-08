@@ -59,7 +59,7 @@
               </a>
             </li>
             <li>
-              <a th:href="@{/}">
+              <a id="btn-back-page" href="javascript:void(0)" onclick="goBack()">
                 <i class="fas fa-chevron-left fa-fw"></i>Quay lại
               </a>
             </li>
@@ -160,6 +160,16 @@
 <script th:if="${userRated != null}">
   const myModal = new bootstrap.Modal(document.getElementById('onlineStoreRateModal'));
   myModal.show();
+</script>
+
+<script th:inline="javascript">
+    function goBack() {
+        if([[${page}]] == 8 || [[${page}]] == 9) {
+            window.history.back();
+        }else {
+            document.getElementById("btn-back-page").href = "/";
+        }
+    }
 </script>
 
 </body>
