@@ -114,6 +114,8 @@
   <div th:replace="food/toast/toast-add-to-cart-error :: toastAddToCartError"></div>
   <!-- Import toast rate -->
   <div th:replace="food/toast/toast-rate-store-warning :: toastRateStoreWarning"></div>
+  <div th:replace="food/toast/toast-rate-store-by-owner-warning :: toastRateStoreByOwnerWarning"></div>
+  <div th:replace="food/toast/toast-rate-store-error :: toastRateStoreError"></div>
 </th:block>
 <th:block th:if="${page == 9 && foodOrderDetailReport != null && foodOrderDetailReport.size() != 0}">
   <!-- Import modal report order detail -->

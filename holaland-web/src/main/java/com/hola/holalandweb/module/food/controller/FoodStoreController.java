@@ -76,33 +76,35 @@ public class FoodStoreController {
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
 
         addAttrStoreOnline(foodStoreOnline, 0, 9, model);
-        model.addAttribute("newRate", rate);
+        model.addAttribute("rate", rate);
         return "module-food";
     }
 
     @GetMapping("/exits")
     public ResponseEntity<?> isExitsOrder(@RequestParam("storeId") Integer storeId, Authentication authentication) {
-        boolean isCheck1 = false;
-        boolean isCheck2 = true;
-
-        // rate lần đầu
-        if (isCheck1) {
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        // rate lần 2 => update
-        if (isCheck2) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        boolean haveOrder = foodOrderService.checkUserOrder(storeId, currentUser.getId());
+        boolean isRate = foodStoreOnlineRateService.checkUserCommentExist(currentUser.getId(), storeId);
+        boolean isOwner = foodStoreOnlineService.checkUserIsOwner(currentUser.getId(), storeId);
+        if(isOwner) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         // chưa mua hàng mà đòi rate
+        if(haveOrder) {
+            // rate lần đầu
+            if (!isRate) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            }else { // rate lần 2 => update
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+        }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("rated")
     public ResponseEntity<FoodStoreOnlineRate> getUserRated(@RequestParam("storeId") Integer storeId, Authentication authentication) {
-        FoodStoreOnlineRate rate = FoodStoreOnlineRate.builder()
-                .foodStoreOnlineRatePoint(4)
-                .foodStoreOnlineRateComment("Quán ăn ngon - xịn...")
-                .build();
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        FoodStoreOnlineRate rate = foodStoreOnlineRateService.getUserComment(currentUser.getId(), storeId);
 
         if (rate != null) {
             return new ResponseEntity<>(rate, HttpStatus.OK);
@@ -125,13 +127,18 @@ public class FoodStoreController {
         Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
         rate.setUserId(currentUser.getId());
         rate.setFoodStoreOnlineRateCreateTime(currentDate);
+        rate.setFoodStoreOnlineRateUpdateTime(currentDate);
         rate.setFoodStoreOnlineDeleted(false);
-
-        boolean isRateExits = true; // kiem tra xem thang userId nay là rate lan dau hay lan 2
+        boolean isCheck;
+        // kiem tra xem thang userId nay là rate lan dau hay lan 2
+        boolean isRateExits = foodStoreOnlineRateService.checkUserCommentExist(currentUser.getId(), rate.getFoodStoreOnlineId());
 
         // if else => insert hay update
-
-        boolean isCheck = foodStoreOnlineRateService.insert(rate);
+        if(isRateExits) {
+            isCheck = foodStoreOnlineRateService.update(rate);
+        }else {
+            isCheck = foodStoreOnlineRateService.save(rate);
+        }
         if (isCheck) {
             return "redirect:" + "/food/store?id=" + rate.getFoodStoreOnlineId();
         } else {

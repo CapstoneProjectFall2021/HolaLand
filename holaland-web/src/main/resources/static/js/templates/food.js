@@ -68,7 +68,8 @@ function getUserRated(storeId) {
             } else {
                 document.getElementById("five-star").checked = true;
             }
-
+            document.getElementById("rateId").value = obj.foodStoreOnlineRateId;
+            document.getElementById("storeId").value = storeId;
             document.getElementById("rate-content").value = obj.foodStoreOnlineRateComment;
             openModal("onlineStoreRateModal");
         } else {
@@ -85,12 +86,15 @@ function checkUserOrderInStore(e) {
     request.open("GET", "/food/store/exits?storeId=" + storeId, true);
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
+            document.getElementById("storeId").value = storeId;
             openModal("onlineStoreRateModal");
         } else if (this.status === 409) {
             // rate lần 2
             getUserRated(storeId);
         } else if (this.status === 404) {
             showToast("toastRateStoreWarning");
+        } else if (this.status === 401) {
+            showToast("toastRateStoreByOwnerWarning")
         } else {
             showToast("toastRateStoreError");
         }

@@ -47,6 +47,11 @@ public class FoodStoreOnlineRepositoryImpl implements FoodStoreOnlineRepository,
     }
 
     @Override
+    public boolean checkUserIsOwner(int userId, int storeId) throws DataAccessException {
+        return jdbcTemplate.queryForObject(FOOD_STORE_ONLINE_CHECK_USER_IS_OWNER, Boolean.class, userId, storeId);
+    }
+
+    @Override
     public boolean updateShopInfo(FoodStoreOnline obj) throws DataAccessException {
         return jdbcTemplate.update(
                 FOOD_STORE_ONLINE_UPDATE_INFO_ONE,

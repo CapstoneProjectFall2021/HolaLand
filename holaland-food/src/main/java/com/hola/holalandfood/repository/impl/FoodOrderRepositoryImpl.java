@@ -71,6 +71,11 @@ public class FoodOrderRepositoryImpl implements FoodOrderRepository, IRepository
     }
 
     @Override
+    public boolean checkUserOrder(int storeId, int userId) throws DataAccessException {
+        return jdbcTemplate.queryForObject(FOOD_ORDER_CHECK_USER_ORDER, Boolean.class, userId, storeId);
+    }
+
+    @Override
     public boolean updateSttFood(FoodOrder obj) throws DataAccessException {
         return jdbcTemplate.update(
                 FOOD_ORDER_UPDATE_STT_FOOD,

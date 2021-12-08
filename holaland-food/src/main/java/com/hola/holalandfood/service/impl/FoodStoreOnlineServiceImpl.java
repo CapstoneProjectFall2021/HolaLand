@@ -45,6 +45,11 @@ public class FoodStoreOnlineServiceImpl implements FoodStoreOnlineService {
     }
 
     @Override
+    public boolean checkUserIsOwner(int userId, int storeId) throws DataAccessException {
+        return foodStoreOnlineRepository.checkUserIsOwner(userId, storeId);
+    }
+
+    @Override
     public boolean updateShopInfo(FoodStoreOnline obj) throws DataAccessException {
         return foodStoreOnlineRepository.updateShopInfo(obj);
     }

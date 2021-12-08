@@ -9,6 +9,7 @@
       <div class="modal-body">
         <form class="row" id="rateForm" method="post" th:action="@{/food/store/rate}" th:object="${rate}">
           <div class="form-group col-md-12">
+            <input type="hidden" name="foodStoreOnlineRateId" id="rateId" value="0">
             <input type="hidden" name="foodStoreOnlineId" id="storeId">
             <fieldset class="fieldset-rate">
               <legend>Điểm đánh giá</legend>

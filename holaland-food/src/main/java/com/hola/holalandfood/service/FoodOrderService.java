@@ -15,6 +15,8 @@ public interface FoodOrderService {
 
     FoodOrder getOne(int id) throws DataAccessException;
 
+    boolean checkUserOrder(int storeId, int userId) throws DataAccessException;
+
     boolean updateSttFood(FoodOrder  obj) throws DataAccessException;
 
     boolean addReasonReject(FoodOrder obj) throws DataAccessException;

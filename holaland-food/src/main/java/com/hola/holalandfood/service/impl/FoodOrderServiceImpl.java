@@ -40,6 +40,11 @@ public class FoodOrderServiceImpl implements FoodOrderService {
     }
 
     @Override
+    public boolean checkUserOrder(int storeId, int userId) throws DataAccessException {
+        return foodOrderRepository.checkUserOrder(storeId, userId);
+    }
+
+    @Override
     public boolean updateSttFood(FoodOrder obj) throws DataAccessException {
         return foodOrderRepository.updateSttFood(obj);
     }
