@@ -14,7 +14,7 @@
             <div class="col-lg-12 col-xl-9">
               <div class="flex">
                 <div class="icon-circle">
-                  <img class="media-object" th:src="@{'/images/system/v.png'}" alt="">
+                  <img class="media-object" th:src="@{'/images/system/'+ *{foodStoreOnline.foodStoreOnlineImage}}" alt="">
                 </div>
                 <div class="content-body">
                   <h3 th:text="${foodStoreOnline.foodStoreOnlineName}"></h3>
