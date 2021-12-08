@@ -34,7 +34,7 @@
             <a th:href="@{/food/store(id=*{foodStoreOnline.foodStoreOnlineId})}" class="label-info m-mb-16">
               <div class="flex">
                 <div class="icon-circle">
-                  <img class="media-object" th:src="@{'/images/system/shop.png'}" alt="">
+                  <img class="media-object rounded-circle" th:src="@{'/images/food/'+ *{foodStoreOnline.foodStoreOnlineImage}}" alt="">
 <!--                  <img class="media-object rounded-circle" th:src="@{'/images/system/shop.png'}" alt="">-->
                 </div>
                 <div class="content-body">
