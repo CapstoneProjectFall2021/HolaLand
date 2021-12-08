@@ -100,7 +100,7 @@ public class FoodManageStoreController {
         foodItem.setFoodItemDeleted(1);
         boolean isCheck = foodItemService.deletedOne(foodItem);
         if (isCheck) {
-            return "redirect:" + "/store/manage-food";
+            return "redirect:" + "/store/manage/food";
         } else {
             return "404";
         }
