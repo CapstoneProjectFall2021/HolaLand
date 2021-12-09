@@ -63,7 +63,7 @@ public interface IRepositoryQuery {
     String FOOD_ITEM_SEARCH = "SELECT * FROM food_item WHERE food_item_name LIKE ? AND food_item_deleted = 0";
 
     String FOOD_ITEM_UPDATE = "UPDATE food_item\n" +
-            "SET food_item_image = ?,\n" +
+            "SET food_item_image = COALESCE(?,food_item_image),\n" +
             "    food_item_name = ?,\n" +
             "    food_item_price = ?,\n" +
             "    food_tag_id = ?\n" +

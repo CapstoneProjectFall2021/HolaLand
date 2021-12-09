@@ -168,7 +168,15 @@ function confirmDeleteFood(e) {
 
 function updateFood(e) {
     const foodItemId = e.target.firstElementChild.innerHTML;
+    const foodItemTagId = e.target.lastElementChild.innerHTML;
+    const foodItemImg = document.getElementById("food-item-img-" + foodItemId).src;
+    const foodItemName = document.getElementById("food-item-name-" + foodItemId).innerHTML;
+    const foodItemPrice = document.getElementById("food-item-price-" + foodItemId).innerHTML;
     document.getElementById("foodItemId").value = foodItemId;
+    document.getElementById("itemTagId").value = foodItemTagId;
+    document.getElementById('blah1').src = foodItemImg;
+    document.getElementById("itemName").value = foodItemName;
+    document.getElementById("itemPrice").value = parseInt(foodItemPrice.replace('.', ''));
     openModal("updateFoodModal");
 }
 

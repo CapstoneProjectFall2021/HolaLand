@@ -21,24 +21,25 @@
                             <div class="form-group col-md-12">
                                 <fieldset>
                                     <legend>Tên sản phẩm</legend>
-                                    <input type="text" class="form-control" field="*{foodItemName}" name="foodItemName">
+                                    <input type="text" class="form-control" name="foodItemName">
                                 </fieldset>
                             </div>
                             <div class="form-group col-md-12">
                                 <fieldset>
                                     <legend>Giá sản phẩm</legend>
-                                    <input type="number" class="form-control pe-5" field="*{foodItemPrice}" name="foodItemPrice">
+                                    <input type="number" class="form-control pe-5" name="foodItemPrice">
                                     <label class="unit">VND</label>
                                 </fieldset>
                             </div>
                             <div class="form-group col-md-12 mb-0">
                                 <fieldset class="bg-dark-ui">
                                     <legend>Chọn thẻ</legend>
-                                    <select class="form-control form-select" field="*{foodTagId}" name="foodTagId">
-                                        <option value="1" selected="selected">Cơm</option>
-                                        <option value="2">Phở</option>
-                                        <option value="3">Cháo</option>
-                                        <option value="4">Bún đậu</option>
+                                    <select class="form-control form-select" name="foodTagId">
+                                        <th:block th:each="tag : ${tagList}">
+                                            <option th:value="${tag.foodTagId}"
+                                                    th:selected="${tag.foodTagId == tagList.get(0).foodTagId}"
+                                                    th:text="${tag.foodTagName}"></option>
+                                        </th:block>
                                     </select>
                                 </fieldset>
                             </div>

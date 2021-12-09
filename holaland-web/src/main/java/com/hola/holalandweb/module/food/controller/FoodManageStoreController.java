@@ -210,9 +210,12 @@ public class FoodManageStoreController {
             @RequestParam("foodItemPrice") Integer foodItemPrice,
             @RequestParam("foodTagId") Integer foodTagId) throws Exception
     {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        String uploadDir = new File("holaland-web/target/classes/static/images/food").getAbsolutePath();
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        String fileName = null;
+        if(!multipartFile.isEmpty()) {
+            fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            String uploadDir = new File("holaland-web/target/classes/static/images/food").getAbsolutePath();
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        }
 
         FoodItem updateFood = FoodItem.builder()
                 .foodItemId(foodItemId)
