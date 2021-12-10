@@ -38,6 +38,8 @@ public class FoodStoreControllerTest {
     FoodReportService foodReportService;
     @Mock
     FoodItemService foodItemService;
+    @Mock
+    FoodOrderDetailService foodOrderDetailService;
 
     @Before
     public void setUp() {
@@ -46,9 +48,7 @@ public class FoodStoreControllerTest {
                 .build();
     }
 
-    @Test
-    public void goToOnlineStore() throws Exception {
-        //FoodStoreOnline
+    public FoodStoreOnline setAttrFoodStoreOnline(){
         FoodStoreOnline foodStoreOnline = new FoodStoreOnline();
         foodStoreOnline.setFoodStoreOnlineId(1);
         foodStoreOnline.setUserId(1);
@@ -65,13 +65,17 @@ public class FoodStoreControllerTest {
         foodStoreOnline.setFoodStoreOnlinePauseSellingFlag(false);
         foodStoreOnline.setFoodStoreOnlineStopSellingFlag(false);
         foodStoreOnline.setFoodStoreOnlineDeleted(false);
-        //FoodTag
+        return foodStoreOnline;
+    }
+
+    public FoodTag setAttrFoodTag(){
         FoodTag foodTag = new FoodTag();
         foodTag.setFoodTagId(1);
         foodTag.setFoodTagName("Cơm");
-        List<FoodTag> foodTagList = new ArrayList<>();
-        foodTagList.add(foodTag);
-        //Food Rate
+        return foodTag;
+    }
+
+    public FoodStoreOnlineRate setAttrFoodStoreOnlineRate(){
         FoodStoreOnlineRate foodStoreOnlineRate = new FoodStoreOnlineRate();
         foodStoreOnlineRate.setFoodStoreOnlineRateId(1);
         foodStoreOnlineRate.setUserId(1);
@@ -81,9 +85,10 @@ public class FoodStoreControllerTest {
         foodStoreOnlineRate.setFoodStoreOnlineRateCreateTime(Timestamp.valueOf("2021-10-22 10:20:43"));
         foodStoreOnlineRate.setFoodStoreOnlineRateUpdateTime(Timestamp.valueOf("2021-10-22 10:20:43"));
         foodStoreOnlineRate.setFoodStoreOnlineDeleted(false);
-        List<FoodStoreOnlineRate> foodStoreOnlineRateList = new ArrayList<>();
-        foodStoreOnlineRateList.add(foodStoreOnlineRate);
-        //FoodReport
+        return foodStoreOnlineRate;
+    }
+
+    public FoodReport  setAttrFoodReport(){
         FoodReport foodReport = new FoodReport();
         foodReport.setFoodReportId(1);
         foodReport.setUserId(1);
@@ -93,9 +98,10 @@ public class FoodStoreControllerTest {
         foodReport.setFoodReportCreateDate(Timestamp.valueOf("2021-10-22 10:20:43"));
         foodReport.setFoodReportUpdateDate(Timestamp.valueOf("2021-10-22 10:20:43"));
         foodReport.setFoodReportDeleted(false);
-        List<FoodReport> foodReportList = new ArrayList<>();
-        foodReportList.add(foodReport);
-        //FoodItems
+        return foodReport;
+    }
+
+    public FoodItem setAttrFoodItem(){
         FoodItem foodItem = new FoodItem();
         foodItem.setFoodItemId(1);
         foodItem.setFoodStoreOnlineId(1);
@@ -107,18 +113,89 @@ public class FoodStoreControllerTest {
         foodItem.setFoodItemSoldNumber(10);
         foodItem.setFoodItemIsActive(1);
         foodItem.setFoodItemDeleted(1);
+        return foodItem;
+    }
+
+    public FoodOrderDetail setAttrFoodOrderDetail(){
+        FoodOrderDetail foodOrderDetail = new FoodOrderDetail();
+        foodOrderDetail.setFoodOrderDetailId(1);
+        foodOrderDetail.setFoodOrderId(1);
+        foodOrderDetail.setFoodItemId(1);
+        foodOrderDetail.setFoodItemName("Khô gà");
+        foodOrderDetail.setFoodItemPrice(35000);
+        foodOrderDetail.setFoodItemQuantity(5);
+        return foodOrderDetail;
+    }
+
+    @Test
+    public void goToOnlineStore() throws Exception {
+        //FoodTag
+        List<FoodTag> foodTagList = new ArrayList<>();
+        foodTagList.add(setAttrFoodTag());
+        //Food Rate
+        List<FoodStoreOnlineRate> foodStoreOnlineRateList = new ArrayList<>();
+        foodStoreOnlineRateList.add(setAttrFoodStoreOnlineRate());
+        //FoodReport
+        List<FoodReport> foodReportList = new ArrayList<>();
+        foodReportList.add(setAttrFoodReport());
+        //FoodItems
         List<FoodItem> foodItemList = new ArrayList<>();
-        foodItemList.add(foodItem);
+        foodItemList.add(setAttrFoodItem());
+
         LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
-        requestParams.add("id","1");
-        when(foodStoreOnlineService.getOne(1)).thenReturn(foodStoreOnline);
+        requestParams.add("id", "1");
+        when(foodStoreOnlineService.getOne(1)).thenReturn(setAttrFoodStoreOnline());
         when(foodTagService.getAllByStoreOnlineId(1)).thenReturn(foodTagList);
         when(foodStoreOnlineRateService.getAllCommentByStoreOnlineId(1)).thenReturn(foodStoreOnlineRateList);
         when(foodReportService.getAllByOrderId(1)).thenReturn(foodReportList);
-        when(foodItemService.getAllByStoreOnlineIdAndTagId(1,1)).thenReturn(foodItemList);
+        when(foodItemService.getAllByStoreOnlineIdAndTagId(1, 1)).thenReturn(foodItemList);
         mockMvc.perform(get("/food/store").params(requestParams))
                 .andExpect(status().isOk())
                 .andExpect(view().name("module-food"));
     }
+
+    @Test
+    public void getFoodOrderDetailReportTest() throws Exception {
+        //FoodOrderDetail
+        List<FoodOrderDetail> foodOrderDetailList = new ArrayList<>();
+        foodOrderDetailList.add(setAttrFoodOrderDetail());
+        //FoodStoreOnline
+        LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
+        requestParams.add("orderId", "1");
+        when(foodOrderDetailService.getAllByOrderId(1)).thenReturn(foodOrderDetailList);
+        when(foodStoreOnlineService.getOneByOrderId(1)).thenReturn(setAttrFoodStoreOnline());
+        mockMvc.perform(get("/food/store/report/order/detail").params(requestParams))
+                .andExpect(status().isOk())
+                .andExpect(view().name("module-food"));
+    }
+
+    @Test
+    public void getFoodOnlineStoreByTagTest() throws Exception{
+        //FoodTag
+        List<FoodTag> foodTagList = new ArrayList<>();
+        foodTagList.add(setAttrFoodTag());
+        //Food Rate
+        List<FoodStoreOnlineRate> foodStoreOnlineRateList = new ArrayList<>();
+        foodStoreOnlineRateList.add(setAttrFoodStoreOnlineRate());
+        //FoodReport
+        List<FoodReport> foodReportList = new ArrayList<>();
+        foodReportList.add(setAttrFoodReport());
+        //FoodItems
+        List<FoodItem> foodItemList = new ArrayList<>();
+        foodItemList.add(setAttrFoodItem());
+
+        LinkedMultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();
+        requestParams.add("storeId", "1");
+        requestParams.add("tagId", "1");
+        when(foodStoreOnlineService.getOne(1)).thenReturn(setAttrFoodStoreOnline());
+        when(foodTagService.getAllByStoreOnlineId(1)).thenReturn(foodTagList);
+        when(foodStoreOnlineRateService.getAllCommentByStoreOnlineId(1)).thenReturn(foodStoreOnlineRateList);
+        when(foodReportService.getAllByOrderId(1)).thenReturn(foodReportList);
+        when(foodItemService.getAllByStoreOnlineIdAndTagId(1, 1)).thenReturn(foodItemList);
+        mockMvc.perform(get("/food/store/tag").params(requestParams))
+                .andExpect(status().isOk())
+                .andExpect(view().name("module-food"));
+    }
+
 
 }
