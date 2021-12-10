@@ -68,6 +68,9 @@ public interface IRepositoryQuery {
             "    food_item_price = ?,\n" +
             "    food_tag_id = ?\n" +
             "WHERE food_item_id = ?";
+    String FOOD_ITEM_COUNT_ITEM_SOLD = "SELECT SUM(food_item_sold_number)\n" +
+            "FROM food_item\n" +
+            "WHERE food_store_online_id = ?";
 
     String FOOD_ORDER_DETAIL_GET_ALL = "SELECT * FROM food_order_detail";
     String FOOD_ORDER_DETAIL_GET_ONE = "SELECT * FROM food_order_detail WHERE food_order_detail_id = ?";

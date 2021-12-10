@@ -53,12 +53,14 @@ public class FoodManageStoreController {
 
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByUserId(currentUser.getId());
         int storeId = foodStoreOnline.getFoodStoreOnlineId();
+        int countItemSold = foodItemService.countItemSold(storeId);
         List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineId(storeId);
         List<FoodOrder> foodOrderList = foodOrderService.getAllByStoreOnlineId(storeId);
 
         model.addAttribute("foodStoreOnline", foodStoreOnline);
         model.addAttribute("foodItemList", foodItemList);
         model.addAttribute("foodOrderList", foodOrderList);
+        model.addAttribute("countItemSold", countItemSold);
         model.addAttribute("page", 3);
         return "module-food-manage-store";
     }
