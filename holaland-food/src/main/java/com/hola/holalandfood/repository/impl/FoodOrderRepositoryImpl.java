@@ -27,6 +27,11 @@ public class FoodOrderRepositoryImpl implements FoodOrderRepository, IRepository
     }
 
     @Override
+    public List<FoodOrder> getAllByStoreOnlineId(int id) throws DataAccessException {
+        return jdbcTemplate.query(FOOD_ORDER_GET_ALL_BY_STORE_ONLINE_ID, new FoodOrderMapper(), id);
+    }
+
+    @Override
     public List<FoodOrder> getAllUserOrderByUserIdAndStatus(int userId, Integer... status) throws DataAccessException {
         StringBuilder s = new StringBuilder("(");
         for (int i = 0; i < status.length; i++) {

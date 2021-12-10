@@ -76,6 +76,8 @@ public interface IRepositoryQuery {
     String FOOD_ORDER_GET_ALL = "SELECT * FROM food_order";
     String FOOD_ORDER_GET_ONE = "SELECT * FROM food_order WHERE food_order_id = ?";
 
+    String FOOD_ORDER_GET_ALL_BY_STORE_ONLINE_ID = "SELECT * FROM food_order WHERE food_store_online_id = ? AND food_order_deleted = 0;";
+
     String FOOD_ORDER_CHECK_USER_ORDER = "SELECT EXISTS(SELECT * FROM food_order\n" +
             "WHERE user_id = ?\n" +
             "AND food_store_online_id = ?\n" +
@@ -177,7 +179,7 @@ public interface IRepositoryQuery {
             "FROM food_report T1\n" +
             "INNER JOIN food_order T2\n" +
             "ON T1.food_order_id = T2.food_order_id\n" +
-            "WHERE T2.food_store_online_id = ?";
+            "WHERE T2.food_store_online_id = ? AND T1.food_report_deleted = 0";
     String FOOD_REPORT_INSERT_ONE = "INSERT INTO food_report (user_id, food_store_online_id, food_order_id, " +
             "food_report_content, food_report_create_date, food_report_deleted) VALUES (?, ?, ?, ?, ?, ?)";
     String FOOD_REPORT_DELETE_ONE = "UPDATE food_report\n" +
