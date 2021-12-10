@@ -43,6 +43,41 @@ public class FoodControllerTest {
     }
 
     @Test
+    public void goToFood() throws Exception {
+        FoodType foodType = new FoodType();
+        foodType.setFoodTypeId(1);
+        foodType.setFoodTypeName("Đồ ăn chính");
+        foodType.setFoodTypeIcon("fas fa-hamburger");
+        foodType.setFoodTypeCount(3);
+        foodType.setFoodTypeDeleted(false);
+        List<FoodType> foodTypeList = new ArrayList<>();
+        foodTypeList.add(foodType);
+        FoodStoreOnline foodStoreOnline = new FoodStoreOnline();
+        foodStoreOnline.setFoodStoreOnlineId(1);
+        foodStoreOnline.setUserId(1);
+        foodStoreOnline.setSttFoodCode(1);
+        foodStoreOnline.setFoodStoreOnlineImage("name.jpg");
+        foodStoreOnline.setFoodStoreOnlineName("Quán cơm con gà");
+        foodStoreOnline.setFoodStoreOnlineRate(5);
+        foodStoreOnline.setFoodStoreOnlineMinPrice(15000);
+        foodStoreOnline.setFoodStoreOnlineMaxPrice(20000);
+        foodStoreOnline.setFoodStoreOnlineDescription("chuyên bán cơm");
+        foodStoreOnline.setFoodStoreOnlineCountFoodItem(22);
+        foodStoreOnline.setFoodStoreOnlineCountRate(5);
+        foodStoreOnline.setFoodStoreOnlineCountReport(4);
+        foodStoreOnline.setFoodStoreOnlinePauseSellingFlag(true);
+        foodStoreOnline.setFoodStoreOnlineStopSellingFlag(true);
+        foodStoreOnline.setFoodStoreOnlineDeleted(false);
+        List<FoodStoreOnline> foodStoreOnlineList = new ArrayList<>();
+        foodStoreOnlineList.add(foodStoreOnline);
+        when(foodTypeService.getAll()).thenReturn(foodTypeList);
+        when(foodStoreOnlineService.getAllByType(1,1)).thenReturn(foodStoreOnlineList);
+        mockMvc.perform(get("/food"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("module-food"));
+    }
+
+    @Test
     public void getFoodStoreByType() throws Exception {
         FoodType foodType = new FoodType();
         foodType.setFoodTypeId(1);
