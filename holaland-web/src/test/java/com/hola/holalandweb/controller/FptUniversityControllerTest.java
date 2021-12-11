@@ -1,12 +1,9 @@
 package com.hola.holalandweb.controller;
 
-import com.hola.holalandfood.entity.*;
-import com.hola.holalandfood.service.*;
 import com.hola.holalandfptu.entity.Club;
 import com.hola.holalandfptu.entity.ClubType;
 import com.hola.holalandfptu.service.ClubService;
 import com.hola.holalandfptu.service.ClubTypeService;
-import com.hola.holalandweb.module.food.controller.FoodStoreController;
 import com.hola.holalandweb.module.fptu.controller.FptUniversityController;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.junit.Before;
@@ -18,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,5 +120,5 @@ public class FptUniversityControllerTest {
                 .andExpect(view().name("module-fpt-university"));
     }
 
-    
+
 }
