@@ -52,6 +52,8 @@ public class FoodControllerTest {
         foodType.setFoodTypeDeleted(false);
         List<FoodType> foodTypeList = new ArrayList<>();
         foodTypeList.add(foodType);
+
+
         FoodStoreOnline foodStoreOnline = new FoodStoreOnline();
         foodStoreOnline.setFoodStoreOnlineId(1);
         foodStoreOnline.setUserId(1);
@@ -68,8 +70,10 @@ public class FoodControllerTest {
         foodStoreOnline.setFoodStoreOnlinePauseSellingFlag(true);
         foodStoreOnline.setFoodStoreOnlineStopSellingFlag(true);
         foodStoreOnline.setFoodStoreOnlineDeleted(false);
+
         List<FoodStoreOnline> foodStoreOnlineList = new ArrayList<>();
         foodStoreOnlineList.add(foodStoreOnline);
+
         when(foodTypeService.getAll()).thenReturn(foodTypeList);
         when(foodStoreOnlineService.getAllByType(1,1)).thenReturn(foodStoreOnlineList);
         mockMvc.perform(get("/food"))
