@@ -29,7 +29,11 @@ public class MemberController {
     @Autowired
     public MemberController(MemberService memberService, SendEmailService sendEmailService, BusService busService, MotorbikeTaxiDriversService motorbikeTaxiDriversService,
                             ClubService clubService, ClubTypeService clubTypeService) {
-        
+        this.memberService = memberService;
+        this.sendEmailService = sendEmailService;
+        this.busService = busService;
+        this.clubService = clubService;
+        this.clubTypeService = clubTypeService;
     }
 
     @GetMapping("/send-email")
