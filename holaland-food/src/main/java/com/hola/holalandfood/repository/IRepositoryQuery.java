@@ -148,6 +148,14 @@ public interface IRepositoryQuery {
             "AND T1.stt_food_code = ?\n" +
             "AND T1.food_store_online_deleted = 0";
 
+    String FOOD_STORE_ONLINE_STOP_SELLING = "UPDATE food_store_online\n" +
+            "SET food_store_online_stop_selling_flag = ?\n" +
+            "WHERE food_store_online_id = ?";
+
+    String FOOD_STORE_ONLINE_PAUSE_SELLING = "UPDATE food_store_online\n" +
+            "SET food_store_online_pause_selling_flag = ?\n" +
+            "WHERE food_store_online_id = ?";
+
     String FOOD_STORE_ONLINE_RATE_GET_ALL = "SELECT * FROM food_store_online_rate";
     String FOOD_STORE_ONLINE_RATE_GET_ONE = "SELECT * FROM food_store_online_rate WHERE food_store_online_rate_id = ?";
     String FOOD_STORE_ONLINE_RATE_GET_ALL_BY_STORE_ONLINE_ID = "SELECT * FROM food_store_online_rate WHERE food_store_online_id = ? " +
