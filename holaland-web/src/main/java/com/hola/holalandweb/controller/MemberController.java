@@ -49,5 +49,13 @@ public class MemberController {
         return "members";
     }
 
-    
+    private void backToMembers(Model model) {
+        List<Member> members = memberService.getAll();
+        List listBus = busService.getAll();
+        List listClub = clubService.getAllByType(1);
+        List listCLubType = clubTypeService.getAll();
+
+        model.addAttribute("addMember", Member.builder().build());
+        
+    }
 }
