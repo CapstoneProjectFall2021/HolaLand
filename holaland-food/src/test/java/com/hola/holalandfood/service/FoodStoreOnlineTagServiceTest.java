@@ -33,7 +33,7 @@ public class FoodStoreOnlineTagServiceTest {
     }
 
     @Test
-    public void getAllFoodStoreOnline() {
+    public void getAllFoodStoreTagOnline() {
         List<FoodStoreOnlineTag> foodStoreOnlineTagList = new ArrayList<>();
         foodStoreOnlineTagList.add(genFoodStoreOnlineTag());
         when(foodStoreOnlineTagRepository.getAll()).thenReturn(foodStoreOnlineTagList);
@@ -41,7 +41,7 @@ public class FoodStoreOnlineTagServiceTest {
     }
 
     @Test
-    public void getOneFoodStoreOnline() {
+    public void getOneFoodStoreTagOnline() {
         when(foodStoreOnlineTagRepository.getOne(1)).thenReturn(genFoodStoreOnlineTag());
         foodStoreOnlineTagService.getOne(1);
     }
