@@ -1,11 +1,7 @@
 package com.hola.holalandfood.service;
 
-import com.hola.holalandfood.entity.FoodItem;
 import com.hola.holalandfood.entity.FoodOrder;
-import com.hola.holalandfood.entity.FoodOrderDetail;
-import com.hola.holalandfood.repository.FoodOrderDetailRepository;
 import com.hola.holalandfood.repository.FoodOrderRepository;
-import com.hola.holalandfood.service.impl.FoodOrderDetailServiceImpl;
 import com.hola.holalandfood.service.impl.FoodOrderServiceImpl;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
