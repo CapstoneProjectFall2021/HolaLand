@@ -191,7 +191,8 @@ public interface IRepositoryQuery {
             "FROM food_report T1\n" +
             "INNER JOIN food_order T2\n" +
             "ON T1.food_order_id = T2.food_order_id\n" +
-            "WHERE T2.food_store_online_id = ? AND T1.food_report_deleted = 0";
+            "WHERE T2.food_store_online_id = ? AND T1.food_report_deleted = 0\n" +
+            "ORDER BY T1.food_report_create_date DESC";
     String FOOD_REPORT_INSERT_ONE = "INSERT INTO food_report (user_id, food_store_online_id, food_order_id, " +
             "food_report_content, food_report_create_date, food_report_deleted) VALUES (?, ?, ?, ?, ?, ?)";
     String FOOD_REPORT_DELETE_ONE = "UPDATE food_report\n" +
