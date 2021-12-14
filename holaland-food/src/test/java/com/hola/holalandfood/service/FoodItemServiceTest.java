@@ -10,6 +10,9 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -42,4 +45,70 @@ public class FoodItemServiceTest {
         when(foodItemRepository.save(any())).thenReturn(true);
         foodItemService.save(genFoodItem());
     }
+
+    @Test
+    public void getAllFoodItem() throws Exception {
+        List<FoodItem> foodItemList = new ArrayList<>();
+        foodItemList.add(genFoodItem());
+        when(foodItemRepository.getAll()).thenReturn(foodItemList);
+        foodItemService.getAll();
+    }
+
+    @Test
+    public void getAllByStoreOnlineId() throws Exception {
+        List<FoodItem> foodItemList = new ArrayList<>();
+        foodItemList.add(genFoodItem());
+        when(foodItemRepository.getAllByStoreOnlineId(1)).thenReturn(foodItemList);
+        foodItemService.getAllByStoreOnlineId(1);
+    }
+
+    @Test
+    public void getAllByStoreOnlineIdAndTagId() throws Exception {
+        List<FoodItem> foodItemList = new ArrayList<>();
+        foodItemList.add(genFoodItem());
+        when(foodItemRepository.getAllByStoreOnlineIdAndTagId(1,1)).thenReturn(foodItemList);
+        foodItemService.getAllByStoreOnlineIdAndTagId(1,1);
+    }
+
+    @Test
+    public void getOneFoodItem() throws Exception {
+        when(foodItemRepository.getOne(1)).thenReturn(genFoodItem());
+        foodItemService.getOne(1);
+    }
+
+    @Test
+    public void getAllByUserId() throws Exception {
+        List<FoodItem> foodItemList = new ArrayList<>();
+        foodItemList.add(genFoodItem());
+        when(foodItemRepository.getAllByUserId(1)).thenReturn(foodItemList);
+        foodItemService.getAllByUserId(1);
+    }
+
+    @Test
+    public void deletedOneFoodItem() throws Exception {
+        when(foodItemRepository.deletedOne(any())).thenReturn(true);
+        foodItemService.deletedOne(genFoodItem());
+    }
+
+    @Test
+    public void updateFoodItem() throws Exception {
+        when(foodItemRepository.update(any())).thenReturn(true);
+        foodItemService.update(genFoodItem());
+    }
+
+    @Test
+    public void searchFood() throws Exception {
+        List<FoodItem> foodItemList = new ArrayList<>();
+        foodItemList.add(genFoodItem());
+        when(foodItemRepository.search(any())).thenReturn(foodItemList);
+        foodItemService.search("b");
+    }
+
+
+
+
+
+
+
+
 }
