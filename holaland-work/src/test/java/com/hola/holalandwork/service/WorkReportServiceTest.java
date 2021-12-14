@@ -1,7 +1,6 @@
 package com.hola.holalandwork.service;
 
 import com.hola.holalandwork.entity.WorkReport;
-import com.hola.holalandwork.entity.WorkReportReason;
 import com.hola.holalandwork.repository.WorkReportRepository;
 import com.hola.holalandwork.service.impl.WorkReportServiceImpl;
 import org.junit.runner.RunWith;

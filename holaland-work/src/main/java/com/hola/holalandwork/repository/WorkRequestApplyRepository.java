@@ -17,4 +17,5 @@ public interface WorkRequestApplyRepository {
     boolean save(WorkRequestApply obj) throws DataAccessException;
 
     boolean delete(int id) throws DataAccessException;
+
 }
