@@ -1,6 +1,5 @@
 package com.hola.holalandfood.service;
 
-import com.hola.holalandfood.entity.FoodType;
 import com.hola.holalandfood.entity.SttFood;
 import com.hola.holalandfood.repository.SttFoodRepository;
 import com.hola.holalandfood.service.impl.SttFoodServiceImpl;
