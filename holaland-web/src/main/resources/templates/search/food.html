@@ -41,7 +41,7 @@
           <div class="flex-sb">
             <div class="flex">
               <div class="icon-circle">
-                <img class="media-object" src="assets/images/food/ride.jpg" alt="">
+                <img class="media-object rounded-circle" th:src="@{'/images/food/'+ *{foodItemSearch.foodItemImage}}">
               </div>
               <div class="content-body">
                 <a th:href="@{/food/store(id=*{foodItemSearch.foodStoreOnlineId})}"

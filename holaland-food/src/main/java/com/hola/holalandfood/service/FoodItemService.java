@@ -15,6 +15,8 @@ public interface FoodItemService {
 
     FoodItem getOne(int id) throws DataAccessException;
 
+    int countItemSold(int id) throws DataAccessException;
+
     List<FoodItem> getAllByUserId(int userId) throws DataAccessException;
 
     boolean deletedOne(FoodItem obj) throws DataAccessException;

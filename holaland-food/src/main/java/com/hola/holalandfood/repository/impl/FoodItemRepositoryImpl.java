@@ -47,6 +47,11 @@ public class FoodItemRepositoryImpl implements FoodItemRepository, IRepositoryQu
     }
 
     @Override
+    public int countItemSold(int id) throws DataAccessException {
+        return jdbcTemplate.queryForObject(FOOD_ITEM_COUNT_ITEM_SOLD, Integer.class, id);
+    }
+
+    @Override
     public boolean deletedOne(FoodItem obj) throws DataAccessException {
         return jdbcTemplate.update(
                 FOOD_ITEM_DELETED_ONE,

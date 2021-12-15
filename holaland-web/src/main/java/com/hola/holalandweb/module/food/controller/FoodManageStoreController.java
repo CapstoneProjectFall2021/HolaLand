@@ -1,14 +1,8 @@
 package com.hola.holalandweb.module.food.controller;
 
 import com.hola.holalandcore.entity.CustomUser;
-import com.hola.holalandfood.entity.FoodItem;
-import com.hola.holalandfood.entity.FoodStoreOnline;
-import com.hola.holalandfood.entity.FoodStoreOnlineTag;
-import com.hola.holalandfood.entity.FoodTag;
-import com.hola.holalandfood.service.FoodItemService;
-import com.hola.holalandfood.service.FoodStoreOnlineService;
-import com.hola.holalandfood.service.FoodStoreOnlineTagService;
-import com.hola.holalandfood.service.FoodTagService;
+import com.hola.holalandfood.entity.*;
+import com.hola.holalandfood.service.*;
 import com.hola.holalandweb.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -36,18 +30,21 @@ public class FoodManageStoreController {
     private final FoodTagService foodTagService;
     private final FoodItemService foodItemService;
     private final FoodStoreOnlineTagService foodStoreOnlineTagService;
+    private final FoodOrderService foodOrderService;
 
     @Autowired
     public FoodManageStoreController(
             FoodStoreOnlineService foodStoreOnlineService,
             FoodTagService foodTagService,
             FoodItemService foodItemService,
-            FoodStoreOnlineTagService foodStoreOnlineTagService
+            FoodStoreOnlineTagService foodStoreOnlineTagService,
+            FoodOrderService foodOrderService
     ) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTagService = foodTagService;
         this.foodItemService = foodItemService;
         this.foodStoreOnlineTagService = foodStoreOnlineTagService;
+        this.foodOrderService = foodOrderService;
     }
 
     @GetMapping("/info")
@@ -55,7 +52,15 @@ public class FoodManageStoreController {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
 
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByUserId(currentUser.getId());
+        int storeId = foodStoreOnline.getFoodStoreOnlineId();
+        int countItemSold = foodItemService.countItemSold(storeId);
+        List<FoodItem> foodItemList = foodItemService.getAllByStoreOnlineId(storeId);
+        List<FoodOrder> foodOrderList = foodOrderService.getAllByStoreOnlineId(storeId);
+
         model.addAttribute("foodStoreOnline", foodStoreOnline);
+        model.addAttribute("foodItemList", foodItemList);
+        model.addAttribute("foodOrderList", foodOrderList);
+        model.addAttribute("countItemSold", countItemSold);
         model.addAttribute("page", 3);
         return "module-food-manage-store";
     }

@@ -9,6 +9,8 @@ public interface FoodOrderService {
 
     List<FoodOrder> getAll() throws DataAccessException;
 
+    List<FoodOrder> getAllByStoreOnlineId(int id) throws DataAccessException;
+
     List<FoodOrder> getAllUserOrderByUserIdAndStatus(int userId, Integer... status) throws DataAccessException;
 
     List<FoodOrder> getAllSellerOrderByUserIdAndStatus(int userId, Integer... status) throws DataAccessException;

@@ -25,6 +25,11 @@ public class FoodOrderServiceImpl implements FoodOrderService {
     }
 
     @Override
+    public List<FoodOrder> getAllByStoreOnlineId(int id) throws DataAccessException {
+        return foodOrderRepository.getAllByStoreOnlineId(id);
+    }
+
+    @Override
     public List<FoodOrder> getAllUserOrderByUserIdAndStatus(int userId, Integer... status) throws DataAccessException {
         return foodOrderRepository.getAllUserOrderByUserIdAndStatus(userId, status);
     }
