@@ -739,6 +739,11 @@
   background-color: var(--primary-button-background);
 }
 
+.tags .tag.active {
+  color: var(--primary-text);
+  background-color: var(--secondary-button-background);
+}
+
 @media (max-width: 992px) {
   .tags .tag {
     margin-right: 3px;
@@ -850,7 +855,6 @@
 /* Image icon - avatar content */
 
 .label-info .flex .icon-circle img {
-  border-radius: 50%;
   margin-right: 20px;
   margin-bottom: 4px;
   width: 52px;
@@ -1070,13 +1074,13 @@
 .btn-sm {
   border-radius: var(--third-border-radius);
   font-size: 16px;
-  padding: 6px 15px;
+  padding: 6px 16px;
 }
 
 .btn-md {
   border-radius: var(--secondary-border-radius);
   font-size: 16px;
-  padding: 9px 18px;
+  padding: 8px 18px;
 }
 
 .btn-lg {

@@ -17,9 +17,13 @@ public interface FoodItemRepository {
 
     List<FoodItem> getAllByUserId(int userId) throws DataAccessException;
 
+    int countItemSold(int id) throws DataAccessException;
+
     boolean deletedOne(FoodItem obj) throws DataAccessException;
 
     boolean save(FoodItem foodItem) throws DataAccessException;
+
+    boolean update(FoodItem obj) throws DataAccessException;
 
     List<FoodItem> search(String textSearch) throws DataAccessException;
 }

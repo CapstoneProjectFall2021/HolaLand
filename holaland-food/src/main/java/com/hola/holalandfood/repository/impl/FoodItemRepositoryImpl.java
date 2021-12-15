@@ -47,6 +47,11 @@ public class FoodItemRepositoryImpl implements FoodItemRepository, IRepositoryQu
     }
 
     @Override
+    public int countItemSold(int id) throws DataAccessException {
+        return jdbcTemplate.queryForObject(FOOD_ITEM_COUNT_ITEM_SOLD, Integer.class, id);
+    }
+
+    @Override
     public boolean deletedOne(FoodItem obj) throws DataAccessException {
         return jdbcTemplate.update(
                 FOOD_ITEM_DELETED_ONE,
@@ -70,7 +75,19 @@ public class FoodItemRepositoryImpl implements FoodItemRepository, IRepositoryQu
     }
 
     @Override
+    public boolean update(FoodItem obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                FOOD_ITEM_UPDATE,
+                obj.getFoodItemImage(),
+                obj.getFoodItemName(),
+                obj.getFoodItemPrice(),
+                obj.getFoodTagId(),
+                obj.getFoodItemId()
+        ) > 0;
+    }
+
+    @Override
     public List<FoodItem> search(String textSearch) throws DataAccessException {
-        return null;
+        return jdbcTemplate.query(FOOD_ITEM_SEARCH, new FoodItemMapper(), "%" + textSearch + "%");
     }
 }

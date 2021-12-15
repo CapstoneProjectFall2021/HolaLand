@@ -4,13 +4,10 @@ import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.service.UserAddressService;
 import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandcore.util.Format;
-import com.hola.holalandfood.entity.FoodItem;
-import com.hola.holalandfood.entity.FoodItemCart;
 import com.hola.holalandfood.entity.FoodOrder;
 import com.hola.holalandfood.entity.FoodOrderDetail;
 import com.hola.holalandfood.entity.FoodReport;
 import com.hola.holalandfood.entity.FoodStoreOnline;
-import com.hola.holalandfood.entity.SttFood;
 import com.hola.holalandfood.service.FoodCountSttOrderService;
 import com.hola.holalandfood.service.FoodItemService;
 import com.hola.holalandfood.service.FoodOrderDetailService;
@@ -21,11 +18,7 @@ import com.hola.holalandfood.service.SttFoodService;
 import com.hola.holalandfood.view.FoodCountSttOrder;
 import com.hola.holalandweb.constant.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,25 +26,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 
 @Controller
 @RequestMapping("/food/order")
 public class FoodOrderController {
 
-    private final FoodItemService foodItemService;
-    private final SttFoodService sttFoodService;
     private final FoodStoreOnlineService foodStoreOnlineService;
     private final FoodCountSttOrderService foodCountSttOrderService;
     private final UserAddressService userAddressService;
     private final FoodOrderService foodOrderService;
     private final FoodOrderDetailService foodOrderDetailService;
-    private final UserDetailService userDetailService;
     private final FoodReportService foodReportService;
 
     @Autowired
@@ -66,18 +53,18 @@ public class FoodOrderController {
             UserDetailService userDetailService,
             FoodReportService foodReportService
     ) {
-        this.foodItemService = foodItemService;
-        this.sttFoodService = sttFoodService;
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodCountSttOrderService = foodCountSttOrderService;
         this.userAddressService = userAddressService;
         this.foodOrderService = foodOrderService;
         this.foodOrderDetailService = foodOrderDetailService;
-        this.userDetailService = userDetailService;
         this.foodReportService = foodReportService;
     }
 
-    // User order
+    /**
+     * -----------------------------------------------------------------------------------------------------------------
+     * User Order
+     */
     @GetMapping("")
     public String goToUserOrder(Model model, Authentication authentication) {
         addAttrUserOrder(0, model, authentication);
@@ -104,11 +91,13 @@ public class FoodOrderController {
 
         // Get store id for click food name in modal
         int foodStoreOnlineId = foodStoreOnlineService.getOneByOrderId(orderId).getFoodStoreOnlineId();
+        int sellerId = foodStoreOnlineService.getOneByOrderId(orderId).getUserId();
 
         // Add more attr for modal order detail
         model.addAttribute("orderStatus", orderStatus);
         model.addAttribute("foodOrderDetailList", foodOrderDetailList);
         model.addAttribute("foodStoreOnlineId", foodStoreOnlineId);
+        model.addAttribute("sellerPhone", userAddressService.getOneByUserId(sellerId).getUserPhone());
         return "module-food";
     }
 
@@ -144,7 +133,10 @@ public class FoodOrderController {
         model.addAttribute("page", 3);
     }
 
-    // Seller order
+    /**
+     * -----------------------------------------------------------------------------------------------------------------
+     * Seller Order
+     */
     @GetMapping("/manage")
     public String goToSellerManageOrder(Model model, Authentication authentication) {
         addAttrSellerOrder(0, model, authentication);
@@ -216,22 +208,11 @@ public class FoodOrderController {
         model.addAttribute("page", 1);
     }
 
-    @GetMapping("/order/cancel")
-    public String userCancelOrder(@RequestParam("orderId") Integer foodOrderId) {
-        FoodOrder foodOrder = FoodOrder.builder()
-                .foodOrderId(foodOrderId)
-                .sttFoodCode(Constants.STT_FOOD_CODE_EXPIRED)
-                .build();
-
-        boolean isCheck = foodOrderService.updateSttFood(foodOrder);
-        if (isCheck) {
-            return "redirect:" + "/food/order";
-        } else {
-            return "404";
-        }
-    }
-
-    @PostMapping("/order/report")
+    /**
+     * -----------------------------------------------------------------------------------------------------------------
+     * Manage Order
+     */
+    @PostMapping("/report")
     public String userReportOrder(
             @RequestParam("foodStoreOnlineId") int storeId,
             @RequestParam("foodOrderId") int orderId,
@@ -257,7 +238,7 @@ public class FoodOrderController {
         }
     }
 
-    @PostMapping("/order/reject")
+    @PostMapping("/reject")
     public String sellerRejectOrder(
             @RequestParam("orderId") int orderId,
             @RequestParam("reasonReject") String reasonReject
@@ -270,13 +251,13 @@ public class FoodOrderController {
 
         boolean isCheck = foodOrderService.addReasonReject(newFoodOrder);
         if (isCheck) {
-            return "redirect:" + "/food/order";
+            return "redirect:" + "/food/order/manage";
         } else {
             return "404";
         }
     }
 
-    @GetMapping("/order/report/delete")
+    @GetMapping("/report/delete")
     public String userDeleteReportOrder(@RequestParam("reportId") int reportId) {
         boolean isCheck = foodReportService.delete(reportId);
         if (isCheck) {
@@ -286,51 +267,45 @@ public class FoodOrderController {
         }
     }
 
-    @GetMapping("add-to-cart")
-    public ResponseEntity<Integer> getCourseById(
-            @RequestParam("foodId") int foodId,
-            @RequestParam("storeId") int storeId,
-            HttpSession session
-    ) {
-        FoodItem foodItem = foodItemService.getOne(foodId);
-        FoodItemCart foodItemCart = FoodItemCart.builder()
-                .foodId(foodId)
-                .foodName(foodItem.getFoodItemName())
-                .unitPrice(foodItem.getFoodItemPrice())
-                .quantity(1)
-                .totalPrice(foodItem.getFoodItemPrice())
+    @GetMapping("/cancel")
+    public String userCancelOrder(@RequestParam("orderId") Integer foodOrderId) {
+        FoodOrder foodOrder = FoodOrder.builder()
+                .foodOrderId(foodOrderId)
+                .sttFoodCode(Constants.STT_FOOD_CODE_EXPIRED)
                 .build();
-
-        List<FoodItemCart> listFoodOrder = null;
-        listFoodOrder = (ArrayList<FoodItemCart>) session.getAttribute("listFoodOrder");
-
-        boolean flat = true;
-        if (listFoodOrder == null) {
-            listFoodOrder = new ArrayList<>();
-            listFoodOrder.add(foodItemCart);
+        boolean isCheck = foodOrderService.updateSttFood(foodOrder);
+        if (isCheck) {
+            return "redirect:" + "/food/order";
         } else {
-            for (FoodItemCart f : listFoodOrder) {
-                if (f.getFoodId() == foodId) {
-                    f.setQuantity(f.getQuantity() + 1);
-                    f.setTotalPrice(f.getQuantity() * f.getUnitPrice());
-                    flat = false;
-                }
-            }
-            if (flat) {
-                listFoodOrder.add(foodItemCart);
-                flat = true;
-            }
+            return "404";
         }
-        session.setAttribute("listFoodOrder", listFoodOrder);
-        listFoodOrder.forEach(System.out::println);
-        return new ResponseEntity<>(countQuantity(listFoodOrder), HttpStatus.OK);
     }
 
-    private int countQuantity(List<FoodItemCart> listFoodOrder) {
-        int count = 0;
-        for (FoodItemCart foodItemCart : listFoodOrder) {
-            count += foodItemCart.getQuantity();
+    @GetMapping("/confirm")
+    public String sellerConfirmOrder(@RequestParam("orderId") Integer orderId) {
+        FoodOrder foodOrder = FoodOrder.builder()
+                .foodOrderId(orderId)
+                .sttFoodCode(Constants.STT_FOOD_CODE_APPROVED)
+                .build();
+        boolean isCheck = foodOrderService.updateSttFood(foodOrder);
+        if (isCheck) {
+            return "redirect:" + "/food/order/manage";
+        } else {
+            return "404";
         }
-        return count;
+    }
+
+    @GetMapping("/complete")
+    public String sellerConfirmCompleteOrder(@RequestParam("orderId") Integer orderId) {
+        FoodOrder foodOrder = FoodOrder.builder()
+                .foodOrderId(orderId)
+                .sttFoodCode(Constants.STT_FOOD_CODE_COMPLETE)
+                .build();
+        boolean isCheck = foodOrderService.updateSttFood(foodOrder);
+        if (isCheck) {
+            return "redirect:" + "/food/order/manage";
+        } else {
+            return "404";
+        }
     }
 }

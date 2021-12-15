@@ -14,7 +14,7 @@
               <i class="far fa-check-square"></i>
             </div>
             <div class="number">
-              <h4>20</h4>
+              <h4><span th:text = "${foodOrderList.size}"></span></h4>
             </div>
           </div>
           <div class="description">
@@ -29,7 +29,7 @@
               <i class="fas fa-list-ul"></i>
             </div>
             <div class="number">
-              <h4>20</h4>
+              <h4><span th:text = "${foodItemList.size}"></span></h4>
             </div>
           </div>
           <div class="description">
@@ -44,7 +44,7 @@
               <i class="fas fa-tasks"></i>
             </div>
             <div class="number">
-              <h4>3</h4>
+              <h4><span th:text = "${countItemSold}"></span></h4>
             </div>
           </div>
           <div class="description">
@@ -63,7 +63,12 @@
     </div>
     <form class="row panel-form mx-0 m-mb-16">
       <div class="col-12 col-md-12 col-lg-3 m-mb-12 m-mt-8">
-        <img class="preview-img" width="100%" th:src="@{'/images/system/no-image.png'}" />
+        <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage != null}">
+          <img class="preview-img" width="100%" th:src="@{'/images/food/'+ *{foodStoreOnline.foodStoreOnlineImage}}" alt="">
+        </th:block>
+        <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage == null}">
+          <img class="preview-img" width="100%" th:src="@{'/images/system/shop.png'}" alt="">
+        </th:block>
       </div>
       <div class="col-12 col-md-12 col-lg-9">
         <div class="row">

@@ -95,6 +95,8 @@
   <div th:replace="online-store/modal/modal-reject-order :: rejectOrderModal"></div>
   <!-- Import modal reason rejection order -->
   <div th:replace="online-store/modal/modal-reason-rejection-order :: reasonRejectionOrderModal"></div>
+  <!-- Import modal confirm complete order -->
+  <div th:replace="online-store/modal/modal-confirm-complete-order :: confirmOrderModal"></div>
 </th:block>
 <th:block th:if="${page == 1 && foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
   <!-- Import modal list order detail -->
@@ -106,7 +108,9 @@
   <!-- Import modal confirm delete food -->
   <div th:replace="online-store/modal/modal-confirm-delete-food :: confirmDeleteFoodModal"></div>
   <!-- Import modal add new food -->
-  <div th:replace="online-store/modal/modal-add-new-food-item :: addNewFoodModal"></div>
+  <div th:replace="online-store/modal/modal-add-new-food-item :: addNewFoodModal(tagList=${foodStoreTagList})"></div>
+  <!-- Import modal update food -->
+  <div th:replace="online-store/modal/modal-update-food-item :: updateFoodModal(tagList=${foodStoreTagList})"></div>
 </th:block>
 <th:block th:if="${page == 3}">
   <!-- Import modal update shop info -->

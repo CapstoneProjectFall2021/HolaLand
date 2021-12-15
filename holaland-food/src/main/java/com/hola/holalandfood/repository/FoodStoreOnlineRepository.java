@@ -16,5 +16,7 @@ public interface FoodStoreOnlineRepository {
 
     FoodStoreOnline getOneByOrderId(int orderId) throws DataAccessException;
 
+    boolean checkUserIsOwner(int userId, int storeId) throws DataAccessException;
+
     boolean updateShopInfo(FoodStoreOnline obj) throws DataAccessException;
 }

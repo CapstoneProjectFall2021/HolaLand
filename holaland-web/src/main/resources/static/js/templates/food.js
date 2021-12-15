@@ -21,13 +21,12 @@ function addFoodToCart(e) {
     const storeId = e.target.lastElementChild.innerHTML;
 
     const request = new XMLHttpRequest();
-    request.open("GET", "/food/order/add-to-cart?storeId=" + storeId + "&foodId=" + foodId, true);
+    request.open("GET", "/food/cart/add?storeId=" + storeId + "&foodId=" + foodId, true);
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
-            console.log("OK");
-            console.log(this.responseText);
-            document.getElementById("number-food-item-in-cart").innerHTML = this.responseText;
             showToast("toastAddToCartSuccess");
+        } else if (this.status === 400) {
+            showToast("toastAddToCartErrorDifferentStore");
         } else {
             showToast("toastAddToCartError");
         }
@@ -51,10 +50,56 @@ function getFoodItemDetail(e) {
     openModal("foodDetailModal");
 }
 
-function insertNewRate(e) {
-    const foodStoreOnlineId = e.target.firstElementChild.innerHTML;
-    document.getElementById("storeId").value = foodStoreOnlineId
-    openModal("onlineStoreRateModal");
+function getUserRated(storeId) {
+    const request = new XMLHttpRequest();
+    request.open("GET", "/food/store/rated?storeId=" + storeId, true);
+    request.onload = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            const obj = JSON.parse(this.responseText);
+
+            if (obj.foodStoreOnlineRatePoint === 1) {
+                document.getElementById("one-star").checked = true;
+            } else if (obj.foodStoreOnlineRatePoint === 2) {
+                document.getElementById("two-star").checked = true;
+            } else if (obj.foodStoreOnlineRatePoint === 3) {
+                document.getElementById("three-star").checked = true;
+            } else if (obj.foodStoreOnlineRatePoint === 4) {
+                document.getElementById("four-star").checked = true;
+            } else {
+                document.getElementById("five-star").checked = true;
+            }
+            document.getElementById("rateId").value = obj.foodStoreOnlineRateId;
+            document.getElementById("storeId").value = storeId;
+            document.getElementById("rate-content").value = obj.foodStoreOnlineRateComment;
+            openModal("onlineStoreRateModal");
+        } else {
+            showToast("toastRateStoreError");
+        }
+    };
+    request.send(null);
+}
+
+function checkUserOrderInStore(e) {
+    const storeId = e.target.firstElementChild.innerHTML;
+
+    const request = new XMLHttpRequest();
+    request.open("GET", "/food/store/exits?storeId=" + storeId, true);
+    request.onload = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            document.getElementById("storeId").value = storeId;
+            openModal("onlineStoreRateModal");
+        } else if (this.status === 409) {
+            // rate lần 2
+            getUserRated(storeId);
+        } else if (this.status === 404) {
+            showToast("toastRateStoreWarning");
+        } else if (this.status === 401) {
+            showToast("toastRateStoreByOwnerWarning")
+        } else {
+            showToast("toastRateStoreError");
+        }
+    };
+    request.send(null);
 }
 
 /*
@@ -62,7 +107,7 @@ function insertNewRate(e) {
  */
 function confirmDeleteReport(e) {
     const foodReportId = e.target.firstElementChild.innerHTML;
-    document.getElementById("btn-delete-report").href = "/food/order/delete-report?reportId=" + foodReportId;
+    document.getElementById("btn-delete-report").href = "/food/order/report/delete?reportId=" + foodReportId;
     openModal("confirmDeleteReportOrderModal");
 }
 
@@ -102,8 +147,14 @@ function getOrderReportContent(e) {
 
 function confirmCancelOrder(e) {
     const orderId = e.target.firstElementChild.innerHTML;
-    document.getElementById("btn-cancel-order").href = "/food/order/update-status-food?orderId=" + orderId;
+    document.getElementById("btn-cancel-order").href = "/food/order/cancel?orderId=" + orderId;
     openModal("confirmCancelOrderModal");
+}
+
+function confirmCompleteOrder(e) {
+    const orderId = e.target.firstElementChild.innerHTML;
+    document.getElementById("btn-confirm-complete-order").href = "/food/order/complete?orderId=" + orderId;
+    openModal("confirmOrderModal");
 }
 
 /*
@@ -113,6 +164,20 @@ function confirmDeleteFood(e) {
     const foodId = e.target.firstElementChild.innerHTML;
     document.getElementById("btn-delete-food").href = "/store/manage/food/delete?foodId=" + foodId;
     openModal("confirmDeleteFoodModal");
+}
+
+function updateFood(e) {
+    const foodItemId = e.target.firstElementChild.innerHTML;
+    const foodItemTagId = e.target.lastElementChild.innerHTML;
+    const foodItemImg = document.getElementById("food-item-img-" + foodItemId).src;
+    const foodItemName = document.getElementById("food-item-name-" + foodItemId).innerHTML;
+    const foodItemPrice = document.getElementById("food-item-price-" + foodItemId).innerHTML;
+    document.getElementById("foodItemId").value = foodItemId;
+    document.getElementById("itemTagId").value = foodItemTagId;
+    document.getElementById('blah1').src = foodItemImg;
+    document.getElementById("itemName").value = foodItemName;
+    document.getElementById("itemPrice").value = parseInt(foodItemPrice.replace('.', ''));
+    openModal("updateFoodModal");
 }
 
 

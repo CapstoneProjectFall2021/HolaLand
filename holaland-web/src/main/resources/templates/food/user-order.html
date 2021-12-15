@@ -178,8 +178,8 @@
                   </a>
                 </th:block>
                 <th:block th:if="*{historyOrder.sttFoodCode == 4}"
-                          th:with="foodReport=${foodReportService.checkUserReported(historyOrder.userId, historyOrder.foodOrderId)}">
-                  <th:block th:if="${foodReport.size() == 0}">
+                          th:with="foodReport=${foodReportService.getUserReported(historyOrder.userId, historyOrder.foodOrderId)}">
+                  <th:block th:if="${foodReport == null}">
                     <a href="javascript:void(0)" class="text-warning">
                       <i class="bi bi-exclamation-circle" data-bs-placement="top" data-bs-toggle="tooltip"
                          title="Báo cáo" onclick="reportFoodOrder(event)">
@@ -188,17 +188,17 @@
                       </i>
                     </a>
                   </th:block>
-                  <th:block th:if="${foodReport.size() != 0}">
+                  <th:block th:if="${foodReport != null}">
                     <a href="javascript:void(0)" class="text-info me-3">
                       <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip"
                          title="Lý do báo cáo" onclick="getOrderReportContent(event)">
-                        <span class="d-none" th:text="${foodReport.get(0).foodReportContent}"></span>
+                        <span class="d-none" th:text="${foodReport.foodReportContent}"></span>
                       </i>
                     </a>
                     <a href="javascript:void(0)" class="color-danger">
                       <i class="far fa-trash-alt" data-bs-placement="top" data-bs-toggle="tooltip"
                          title="Xoá báo cáo" onclick="confirmDeleteReport(event)">
-                        <span class="d-none" th:text="${foodReport.get(0).foodReportId}"></span>
+                        <span class="d-none" th:text="${foodReport.foodReportId}"></span>
                       </i>
                     </a>
                   </th:block>

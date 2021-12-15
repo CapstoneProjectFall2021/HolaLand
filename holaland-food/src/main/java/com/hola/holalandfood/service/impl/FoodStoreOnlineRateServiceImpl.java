@@ -35,7 +35,22 @@ public class FoodStoreOnlineRateServiceImpl implements FoodStoreOnlineRateServic
     }
 
     @Override
-    public boolean insert(FoodStoreOnlineRate obj) throws DataAccessException {
-        return foodStoreOnlineRateRepository.insert(obj);
+    public FoodStoreOnlineRate getUserComment(int userId, int storeId) throws DataAccessException {
+        return foodStoreOnlineRateRepository.getUserComment(userId, storeId);
+    }
+
+    @Override
+    public boolean checkUserCommentExist(int userId, int storeId) throws DataAccessException {
+        return foodStoreOnlineRateRepository.checkUserCommentExist(userId, storeId);
+    }
+
+    @Override
+    public boolean save(FoodStoreOnlineRate obj) throws DataAccessException {
+        return foodStoreOnlineRateRepository.save(obj);
+    }
+
+    @Override
+    public boolean update(FoodStoreOnlineRate obj) throws DataAccessException {
+        return foodStoreOnlineRateRepository.update(obj);
     }
 }

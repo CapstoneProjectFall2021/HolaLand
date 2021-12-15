@@ -1,31 +1,28 @@
-package com.hola.holalandweb.controller;
+package com.hola.holalandweb.module.food.controller;
 
 import com.hola.holalandcore.entity.CustomUser;
-import com.hola.holalandcore.service.UserAddressService;
 import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandcore.util.Format;
 import com.hola.holalandfood.entity.FoodItem;
-import com.hola.holalandfood.entity.FoodOrder;
 import com.hola.holalandfood.entity.FoodOrderDetail;
 import com.hola.holalandfood.entity.FoodReport;
 import com.hola.holalandfood.entity.FoodStoreOnline;
 import com.hola.holalandfood.entity.FoodStoreOnlineRate;
 import com.hola.holalandfood.entity.FoodTag;
-import com.hola.holalandfood.entity.FoodType;
-import com.hola.holalandfood.service.FoodCountSttOrderService;
 import com.hola.holalandfood.service.FoodItemService;
 import com.hola.holalandfood.service.FoodOrderDetailService;
 import com.hola.holalandfood.service.FoodOrderService;
 import com.hola.holalandfood.service.FoodReportService;
 import com.hola.holalandfood.service.FoodStoreOnlineRateService;
 import com.hola.holalandfood.service.FoodStoreOnlineService;
-import com.hola.holalandfood.service.FoodStoreOnlineTagService;
 import com.hola.holalandfood.service.FoodTagService;
 import com.hola.holalandfood.service.FoodTypeService;
-import com.hola.holalandfood.service.SttFoodService;
-import com.hola.holalandweb.constant.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,11 +37,10 @@ import java.util.Calendar;
 import java.util.List;
 
 @Controller
-@RequestMapping("/food")
-public class FoodController {
+@RequestMapping("/food/store")
+public class FoodStoreController {
 
     private final FoodStoreOnlineService foodStoreOnlineService;
-    private final FoodTypeService foodTypeService;
     private final FoodTagService foodTagService;
     private final FoodItemService foodItemService;
     private final FoodStoreOnlineRateService foodStoreOnlineRateService;
@@ -54,9 +50,8 @@ public class FoodController {
     private final FoodOrderDetailService foodOrderDetailService;
 
     @Autowired
-    public FoodController(
+    public FoodStoreController(
             FoodStoreOnlineService foodStoreOnlineService,
-            FoodTypeService foodTypeService,
             FoodTagService foodTagService,
             FoodItemService foodItemService,
             FoodStoreOnlineRateService foodStoreOnlineRateService,
@@ -66,7 +61,6 @@ public class FoodController {
             FoodOrderDetailService foodOrderDetailService
     ) {
         this.foodStoreOnlineService = foodStoreOnlineService;
-        this.foodTypeService = foodTypeService;
         this.foodTagService = foodTagService;
         this.foodItemService = foodItemService;
         this.foodStoreOnlineRateService = foodStoreOnlineRateService;
@@ -77,49 +71,50 @@ public class FoodController {
     }
 
     @GetMapping("")
-    public String goToFood(Model model) {
-        List<FoodType> foodTypeList = foodTypeService.getAll();
-        List<FoodStoreOnline> foodStoreOnlineList = foodStoreOnlineService.getAllByType(
-                foodTypeList.get(0).getFoodTypeId(),
-                Constants.STT_FOOD_CODE_PENDING_APPROVAL
-        );
-        model.addAttribute("foodTypeId", foodTypeList.get(0).getFoodTypeId());
-        model.addAttribute("foodTypeList", foodTypeList);
-        model.addAttribute("foodStoreOnlineList", foodStoreOnlineList);
-        model.addAttribute("foodTagService", foodTagService);
-        model.addAttribute("page", 1);
-        return "module-food";
-    }
-
-    @GetMapping("/type")
-    public String getFoodsByType(@RequestParam("typeId") Integer typeId, Model model) {
-        List<FoodType> foodTypeList = foodTypeService.getAll();
-        List<FoodStoreOnline> foodStoreOnlineList = foodStoreOnlineService.getAllByType(
-                typeId,
-                Constants.STT_FOOD_CODE_PENDING_APPROVAL
-        );
-        model.addAttribute("foodTypeId", typeId);
-        model.addAttribute("foodTypeList", foodTypeList);
-        model.addAttribute("foodStoreOnlineList", foodStoreOnlineList);
-        model.addAttribute("foodTagService", foodTagService);
-        model.addAttribute("page", 1);
-        return "module-food";
-    }
-
-
-    @GetMapping("/store")
     public String goToOnlineStore(@RequestParam("id") Integer id, Model model) {
         FoodStoreOnlineRate rate = FoodStoreOnlineRate.builder().build();
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(id);
 
         addAttrStoreOnline(foodStoreOnline, 0, 9, model);
-        model.addAttribute("newRate", rate);
+        model.addAttribute("rate", rate);
         return "module-food";
     }
 
-    @PostMapping("/store/rate")
-    public String insertNewRate(
-            @ModelAttribute("newRate") FoodStoreOnlineRate newRate,
+    @GetMapping("/exits")
+    public ResponseEntity<?> isExitsOrder(@RequestParam("storeId") Integer storeId, Authentication authentication) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        boolean haveOrder = foodOrderService.checkUserOrder(storeId, currentUser.getId());
+        boolean isRate = foodStoreOnlineRateService.checkUserCommentExist(currentUser.getId(), storeId);
+        boolean isOwner = foodStoreOnlineService.checkUserIsOwner(currentUser.getId(), storeId);
+        if(isOwner) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        // chưa mua hàng mà đòi rate
+        if(haveOrder) {
+            // rate lần đầu
+            if (!isRate) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            }else { // rate lần 2 => update
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("rated")
+    public ResponseEntity<FoodStoreOnlineRate> getUserRated(@RequestParam("storeId") Integer storeId, Authentication authentication) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        FoodStoreOnlineRate rate = foodStoreOnlineRateService.getUserComment(currentUser.getId(), storeId);
+
+        if (rate != null) {
+            return new ResponseEntity<>(rate, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/rate")
+    public String rate(
+            @ModelAttribute("rate") FoodStoreOnlineRate rate,
             BindingResult bindingResult,
             Authentication authentication
     ) {
@@ -130,18 +125,28 @@ public class FoodController {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
 
         Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
-        newRate.setUserId(currentUser.getId());
-        newRate.setFoodStoreOnlineRateCreateTime(currentDate);
-        newRate.setFoodStoreOnlineDeleted(false);
-        boolean isCheck = foodStoreOnlineRateService.insert(newRate);
+        rate.setUserId(currentUser.getId());
+        rate.setFoodStoreOnlineRateCreateTime(currentDate);
+        rate.setFoodStoreOnlineRateUpdateTime(currentDate);
+        rate.setFoodStoreOnlineDeleted(false);
+        boolean isCheck;
+        // kiem tra xem thang userId nay là rate lan dau hay lan 2
+        boolean isRateExits = foodStoreOnlineRateService.checkUserCommentExist(currentUser.getId(), rate.getFoodStoreOnlineId());
+
+        // if else => insert hay update
+        if(isRateExits) {
+            isCheck = foodStoreOnlineRateService.update(rate);
+        }else {
+            isCheck = foodStoreOnlineRateService.save(rate);
+        }
         if (isCheck) {
-            return "redirect:" + "/food/store?id=" + newRate.getFoodStoreOnlineId();
+            return "redirect:" + "/food/store?id=" + rate.getFoodStoreOnlineId();
         } else {
             return "404";
         }
     }
 
-    @GetMapping("/store/report/order/detail")
+    @GetMapping("/report/order/detail")
     public String getFoodOrderDetailReport(@RequestParam("orderId") Integer orderId, Model model) {
         List<FoodOrderDetail> foodOrderDetailReport = foodOrderDetailService.getAllByOrderId(orderId);
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByOrderId(orderId);
@@ -152,7 +157,7 @@ public class FoodController {
         return "module-food";
     }
 
-    @GetMapping("/store/tag")
+    @GetMapping("/tag")
     public String getFoodOnlineStoreByTag(@RequestParam("storeId") Integer storeId, @RequestParam("tagId") Integer tagId, Model model) {
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(storeId);
         addAttrStoreOnline(foodStoreOnline, tagId, 9, model);
@@ -173,15 +178,9 @@ public class FoodController {
         model.addAttribute("foodItemList", foodItemList);
         model.addAttribute("listComment", listComment);
         model.addAttribute("listReport", listReport);
-        model.addAttribute("userDetailService", userDetailService);  // get name off user in tab comment & report
+        model.addAttribute("userDetailService", userDetailService);  // get name off user in tab comment & tab report
         model.addAttribute("foodOrderService", foodOrderService);
         model.addAttribute("format", new Format());
         model.addAttribute("page", page);
-    }
-
-    @GetMapping("/offline-store")
-    public String goToOfflineStore(Model model) {
-        model.addAttribute("page", 2);
-        return "module-food";
     }
 }

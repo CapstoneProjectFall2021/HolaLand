@@ -40,8 +40,8 @@ public class FoodReportServiceImpl implements FoodReportService {
     }
 
     @Override
-    public List<FoodReport> checkUserReported(int userId, int orderId) throws DataAccessException {
-        return foodReportRepository.checkUserReported(userId, orderId);
+    public FoodReport getUserReported(int userId, int orderId) throws DataAccessException {
+        return foodReportRepository.getUserReported(userId, orderId);
     }
 
     @Override

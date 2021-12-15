@@ -14,7 +14,12 @@
             <div class="col-lg-12 col-xl-9">
               <div class="flex">
                 <div class="icon-circle">
-                  <img class="media-object" th:src="@{'/images/system/v.png'}" alt="">
+                  <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage != null}">
+                    <img class="media-object rounded-circle" th:src="@{'/images/food/'+ *{foodStoreOnline.foodStoreOnlineImage}}" alt="">
+                  </th:block>
+                  <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage == null}">
+                    <img class="media-object" th:src="@{'/images/system/shop.png'}" alt="">
+                  </th:block>
                 </div>
                 <div class="content-body">
                   <h3 th:text="${foodStoreOnline.foodStoreOnlineName}"></h3>
@@ -69,7 +74,7 @@
               <a th:href="@{/login}" class="nav-link" sec:authorize="!isAuthenticated()">
                 Đánh giá
               </a>
-              <a href="javascript:void(0)" class="nav-link" onclick="insertNewRate(event)" sec:authorize="isAuthenticated()">
+              <a href="javascript:void(0)" class="nav-link" onclick="checkUserOrderInStore(event)" sec:authorize="isAuthenticated()">
                 <span th:text="${foodStoreOnline.foodStoreOnlineId}" class="d-none"></span>
                 Đánh giá
               </a>
@@ -80,13 +85,15 @@
         <div class="tab-content" id="pills-tabContent">
           <div th:classappend="${tab == 3 ? 'tab-pane fade' : 'tab-pane fade show active'}" id="pills-food" role="tabpanel" aria-labelledby="pills-food-tab">
             <!-- List tag -->
-            <div class="row m-mb-16">
+            <div class="row m-mb-20">
               <div class="col-md-12">
                 <div class="list-tag">
                   <div class="tags">
-                    <a class="tag" th:href="@{/food/store(id=${foodStoreOnline.foodStoreOnlineId})}">Tất cả</a>
+                    <a class="tag" th:classappend="*{tagId == 0 ? 'active' : ''}"
+                       th:href="@{/food/store(id=${foodStoreOnline.foodStoreOnlineId})}">Tất cả</a>
                     <th:block th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}">
                       <a class="tag"
+                         th:classappend="*{foodStoreOnlineTag.foodTagId == tagId ? 'active' : ''}"
                          th:href="@{/food/store/tag(storeId=${foodStoreOnline.foodStoreOnlineId}, tagId=*{foodStoreOnlineTag.foodTagId})}"
                          th:text="*{foodStoreOnlineTag.foodTagName}">
                       </a>
@@ -102,7 +109,7 @@
                     <div class="flex-sb">
                       <div class="flex">
                         <div class="icon-circle">
-                          <img th:id="'food-item-img-' + *{foodItem.foodItemId}" class="media-object" th:src="@{'/images/food/ride.jpg'}" alt="">
+                          <img th:id="'food-item-img-' + *{foodItem.foodItemId}" class="media-object rounded-circle" th:src="@{'/images/food/'+ *{foodItem.foodItemImage}}">
                         </div>
                         <div class="content-body">
                           <a th:id="'food-item-name-' + *{foodItem.foodItemId}" href="javascript:void(0)" th:text="*{foodItem.foodItemName}" onclick="getFoodItemDetail(event)"></a>

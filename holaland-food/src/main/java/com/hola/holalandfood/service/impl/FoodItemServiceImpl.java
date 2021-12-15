@@ -41,6 +41,11 @@ public class FoodItemServiceImpl implements FoodItemService {
     }
 
     @Override
+    public int countItemSold(int id) throws DataAccessException {
+        return foodItemRepository.countItemSold(id);
+    }
+
+    @Override
     public List<FoodItem> getAllByUserId(int userId) throws DataAccessException {
         return foodItemRepository.getAllByUserId(userId);
     }
@@ -53,6 +58,11 @@ public class FoodItemServiceImpl implements FoodItemService {
     @Override
     public boolean save(FoodItem foodItem) throws DataAccessException {
         return foodItemRepository.save(foodItem);
+    }
+
+    @Override
+    public boolean update(FoodItem obj) throws DataAccessException {
+        return foodItemRepository.update(obj);
     }
 
     @Override

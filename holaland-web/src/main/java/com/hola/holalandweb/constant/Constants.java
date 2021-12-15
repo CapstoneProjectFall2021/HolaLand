@@ -4,7 +4,6 @@ public interface Constants {
 
     // Module works
     String STT_WORK_NAME_RECRUITMENT_FIND_JOB = "WORK_REQUEST_RECRUITMENT_FIND_JOB";
-
     int STT_WORK_CODE_PENDING_APPROVAL = 1;
     int STT_WORK_CODE_REJECT = 2;
     int STT_WORK_CODE_APPROVED = 3;

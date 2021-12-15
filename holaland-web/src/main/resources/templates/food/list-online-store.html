@@ -34,7 +34,12 @@
             <a th:href="@{/food/store(id=*{foodStoreOnline.foodStoreOnlineId})}" class="label-info m-mb-16">
               <div class="flex">
                 <div class="icon-circle">
-                  <img class="media-object" th:src="@{'/images/system/v.png'}" alt="">
+                  <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage != null}">
+                    <img class="media-object rounded-circle" th:src="@{'/images/food/'+ *{foodStoreOnline.foodStoreOnlineImage}}" alt="">
+                  </th:block>
+                  <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage == null}">
+                    <img class="media-object" th:src="@{'/images/system/shop.png'}" alt="">
+                  </th:block>
                 </div>
                 <div class="content-body">
                   <h4 th:text="*{foodStoreOnline.foodStoreOnlineName}"></h4>
@@ -48,7 +53,7 @@
                     </p>
                     <p class="price">
                       Giá: <span th:text="*{#numbers.formatInteger(foodStoreOnline.foodStoreOnlineMinPrice, 3, 'POINT')}"></span><sup>đ</sup> -
-                      <span th:text="*{#numbers.formatInteger(foodStoreOnline.foodStoreOnlineMinPrice, 3, 'POINT')}"></span></span><sup>đ</sup>
+                      <span th:text="*{#numbers.formatInteger(foodStoreOnline.foodStoreOnlineMaxPrice, 3, 'POINT')}"></span></span><sup>đ</sup>
                     </p>
                   </div>
                   <div class=" row-info panel-small">

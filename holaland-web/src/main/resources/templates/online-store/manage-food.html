@@ -46,25 +46,28 @@
           <div class="flex-sb">
             <div class="flex">
               <div class="icon-circle">
-                <img class="media-object" th:src="@{'/images/food/'+ *{foodItem.foodItemImage}}">
+                <img th:id="'food-item-img-' + *{foodItem.foodItemId}" class="media-object rounded-circle" th:src="@{'/images/food/'+ *{foodItem.foodItemImage}}">
               </div>
               <div class="content-body">
-                <a href="javascript:void(0)" >
-                  <span th:text="*{foodItem.foodItemName}" ></span>
+                <a href="javascript:void(0)">
+                  <span th:id="'food-item-name-' + *{foodItem.foodItemId}" th:text="*{foodItem.foodItemName}" ></span>
                 </a>
                 <div class="food-info">
-                  <p>Giá: <span th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
+                  <p>Giá: <span th:id="'food-item-price-' + *{foodItem.foodItemId}" th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
                     &nbsp;&#8226;&nbsp; Đã bán: <span th:text="*{foodItem.foodItemSoldNumber}"></span></p>
                 </div>
               </div>
             </div>
             <div class="flex">
               <a href="javascript:void(0)" class="btn-more">
-                <i class="fas fa-pencil-alt text-success"></i>
+                <i class="fas fa-pencil-alt text-success" onclick="updateFood(event)">
+                  <span th:text = "*{foodItem.foodItemId}" class="d-none"></span>
+                  <span th:text = "*{foodItem.foodTagId}" class="d-none"></span>
+                </i>
               </a>
               <a href="javascript:void(0)" class="btn-more me-0" >
                 <i class="far fa-trash-alt text-danger" onclick="confirmDeleteFood(event)">
-                  <span th:text="${foodItem.foodItemId}" class="d-none"></span>
+                  <span th:text="*{foodItem.foodItemId}" class="d-none"></span>
                 </i>
               </a>
             </div>

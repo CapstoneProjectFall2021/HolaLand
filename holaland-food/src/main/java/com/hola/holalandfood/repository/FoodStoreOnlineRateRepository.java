@@ -13,5 +13,11 @@ public interface FoodStoreOnlineRateRepository {
 
     FoodStoreOnlineRate getOne(int id) throws DataAccessException;
 
-    boolean insert(FoodStoreOnlineRate obj) throws DataAccessException;
+    FoodStoreOnlineRate getUserComment(int userId, int storeId) throws DataAccessException;
+
+    boolean checkUserCommentExist(int userId, int storeId) throws DataAccessException;
+
+    boolean save(FoodStoreOnlineRate obj) throws DataAccessException;
+
+    boolean update(FoodStoreOnlineRate obj) throws DataAccessException;
 }
