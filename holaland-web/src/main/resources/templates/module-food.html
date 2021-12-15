@@ -110,7 +110,8 @@
   <div th:replace="food/modal/modal-food-detail :: foodDetailModal"></div>
   <!-- Import toast add to cart -->
   <div th:replace="food/toast/toast-add-to-cart-success :: toastAddToCartSuccess"></div>
-  <div th:replace="food/toast/toast-add-to-cart-error-different-store :: toastAddToCartErrorDifferentStore"></div>
+  <div th:replace="food/toast/toast-add-to-cart-different-store-error :: toastAddToCartDifferentStoreError"></div>
+  <div th:replace="food/toast/toast-add-to-cart-by-owner-warning :: toastAddToCartByOwnerWarning"></div>
   <div th:replace="food/toast/toast-add-to-cart-error :: toastAddToCartError"></div>
   <!-- Import toast rate -->
   <div th:replace="food/toast/toast-rate-store-warning :: toastRateStoreWarning"></div>
@@ -157,14 +158,9 @@
   myModal.show();
 </script>
 
-<script th:if="${userRated != null}">
-  const myModal = new bootstrap.Modal(document.getElementById('onlineStoreRateModal'));
-  myModal.show();
-</script>
-
 <script th:inline="javascript">
     function goBack() {
-        if([[${page}]] == 8 || [[${page}]] == 9) {
+        if([[${page}]] === 8 || [[${page}]] === 9) {
             window.history.back();
         }else {
             document.getElementById("btn-back-page").href = "/";

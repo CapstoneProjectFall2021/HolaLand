@@ -1,4 +1,5 @@
 <div class="col-right" th:fragment="overview">
+
   <!-- Dashboard -->
   <div class="dashboard">
     <div class="row">
@@ -7,7 +8,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
         <a href="" class="label-info m-mb-16">
           <div class="flex">
             <div class="icon">
@@ -22,7 +23,7 @@
           </div>
         </a>
       </div>
-      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
         <a href="" class="label-info m-mb-16">
           <div class="flex">
             <div class="icon">
@@ -37,7 +38,7 @@
           </div>
         </a>
       </div>
-      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3">
+      <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
         <a href="#" class="label-info m-mb-16">
           <div class="flex">
             <div class="icon">
@@ -54,6 +55,7 @@
       </div>
     </div>
   </div>
+
   <!-- Info -->
   <div class="info">
     <div class="row">
@@ -63,10 +65,10 @@
     </div>
     <form class="row panel-form mx-0 m-mb-16">
       <div class="col-12 col-md-12 col-lg-3 m-mb-12 m-mt-8">
-        <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage != null}">
+        <th:block th:if="${foodStoreOnline.foodStoreOnlineImage != null}">
           <img class="preview-img" width="100%" th:src="@{'/images/food/'+ *{foodStoreOnline.foodStoreOnlineImage}}" alt="">
         </th:block>
-        <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage == null}">
+        <th:block th:if="${foodStoreOnline.foodStoreOnlineImage == null}">
           <img class="preview-img" width="100%" th:src="@{'/images/system/shop.png'}" alt="">
         </th:block>
       </div>

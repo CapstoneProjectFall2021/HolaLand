@@ -1,11 +1,17 @@
 package com.hola.holalandweb.module.food.controller;
 
+import com.hola.holalandcore.entity.CustomUser;
+import com.hola.holalandcore.entity.UserAddress;
+import com.hola.holalandcore.service.UserAddressService;
+import com.hola.holalandcore.util.Format;
 import com.hola.holalandfood.entity.FoodItem;
 import com.hola.holalandfood.entity.FoodItemCart;
 import com.hola.holalandfood.service.FoodItemService;
+import com.hola.holalandfood.service.FoodStoreOnlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,14 +29,30 @@ import java.util.Map;
 public class FoodCartController {
 
     private final FoodItemService foodItemService;
+    private final UserAddressService userAddressService;
+    private final FoodStoreOnlineService foodStoreOnlineService;
 
     @Autowired
-    public FoodCartController(FoodItemService foodItemService) {
+    public FoodCartController(
+            FoodItemService foodItemService,
+            UserAddressService userAddressService,
+            FoodStoreOnlineService foodStoreOnlineService
+    ) {
         this.foodItemService = foodItemService;
+        this.userAddressService = userAddressService;
+        this.foodStoreOnlineService = foodStoreOnlineService;
     }
 
     @GetMapping("")
-    public String goToCart(Model model) {
+    public String goToCart(Model model, Authentication authentication, HttpSession session) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        Map<String, Object> mapFoodOrder = (Map<String, Object>) session.getAttribute("mapFoodOrder");
+
+        if (mapFoodOrder != null) {
+            UserAddress userAddress = userAddressService.getOneByUserId(currentUser.getId());
+            model.addAttribute("userAddress", userAddress);
+            model.addAttribute("format", new Format());
+        }
         model.addAttribute("page", 8);
         return "module-food";
     }
@@ -39,8 +61,16 @@ public class FoodCartController {
     public ResponseEntity<?> addToCart(
             @RequestParam("foodId") int foodId,
             @RequestParam("storeId") int storeId,
-            HttpSession session
+            HttpSession session,
+            Authentication authentication
     ) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        boolean isOwner = foodStoreOnlineService.checkUserIsOwner(currentUser.getId(), storeId);
+
+        if (isOwner) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
         FoodItem foodItem = foodItemService.getOne(foodId);
         FoodItemCart foodItemCart = FoodItemCart.builder()
                 .foodId(foodId)
@@ -84,7 +114,7 @@ public class FoodCartController {
         mapFoodOrder.put("totalMoney", getTotalMoney(listFoodOrder));
 
         session.setAttribute("mapFoodOrder", mapFoodOrder);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(countQuantity(listFoodOrder), HttpStatus.OK);
     }
 
     private int countQuantity(List<FoodItemCart> listFoodOrder) {

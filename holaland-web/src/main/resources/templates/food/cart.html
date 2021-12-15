@@ -6,68 +6,89 @@
         <h1 class="title fix-mb-title">Giỏ hàng</h1>
       </div>
     </div>
-    <div class="panel pt-2">
+    <div class="panel" th:if="${session.mapFoodOrder == null}">
       <div class="row">
         <div class="col-lg-12">
-          <div class="flex-sb" th:if="${session.mapFoodOrder == null}">
-            <p class="m-mt-8 m-0">Danh sách giỏ hàng hiện tại trống.</p>
+          <div class="flex-sb">
+            <p class="m-0">Danh sách giỏ hàng hiện tại trống.</p>
             <div>
-              <a th:href="@{/food}" class="m-mt-8 btn btn-md btn-secondary">
-                <i class="fas fa-plus text-success"></i>Đặt hàng ngay
+              <a th:href="@{/food}" class="btn btn-md btn-secondary">
+                <i class="fas fa-plus text-success"></i>Mua hàng ngay
               </a>
             </div>
           </div>
-          <div th:if="${session.mapFoodOrder != null}">
-            <table id="cart-table" class="table" cellspacing="0" width="100%">
-              <thead>
-              <tr>
-                <th class="text-center">#</th>
-                <th>Tên sản phẩm</th>
-                <th class="text-center">Giá</th>
-                <th class="text-center">Số lượng</th>
-                <th class="text-end">Tổng tiền</th>
-                <th class="text-end">Thêm</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr th:each="food, stt : ${session.mapFoodOrder.get('listFoodOrder')}">
-                <td class="text-center" th:text="*{stt.index + 1}"></td>
-                <td>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal"
-                  th:text="*{food.foodName}"></a>
-                </td>
-                <td class="text-center">
-                  <span th:text="*{#numbers.formatInteger(food.unitPrice, 3, 'POINT')}"></span><sup>đ</sup>
-                </td>
-                <td class="text-center">
-                  <a href="javascript:void(0)" class="btn-cart">
-                    <i class="fas fa-minus text-info"></i>
-                  </a>
-                  <span th:text="*{food.quantity}"></span>
-                  <a href="javascript:void(0)" class="btn-cart">
-                    <i class="fas fa-plus text-info"></i>
-                  </a>
-                </td>
-                <td class="text-end">
-                  <span th:text="*{#numbers.formatInteger(food.totalPrice, 3, 'POINT')}"></span><sup>đ</sup>
-                </td>
-                <td class="text-end">
-                  <a href="javascript:void(0)" class="color-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteItemInCartModal">
-                    <i class="far fa-trash-alt" data-bs-placement="top" data-bs-toggle="tooltip" title="Xoá đồ ăn"></i>
-                  </a>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-            <div class="btn-group">
-              <div class="totalMoney">
-                Tổng tiền:&nbsp; <span class="text-info" th:text="${#numbers.formatInteger(session.mapFoodOrder.get('totalMoney'), 3, 'POINT')}"></span><sup class="text-info">đ</sup>
-              </div>
-              <div>
-                <a href="javascript:void(0)" class="btn btn-md btn-secondary" data-bs-toggle="modal" data-bs-target="#confirmDeleteCartModal">
-                  <i class="far fa-trash-alt color-danger"></i>Xoá tất cả
+        </div>
+      </div>
+    </div>
+    <div class="panel" th:if="${session.mapFoodOrder != null}">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="flex-sb">
+            <p class="m-0 store-name"><i class="fas fa-store me-3"></i>Cơm bình dân</p>
+            <div>
+              <a th:href="@{/food}" class="btn btn-md btn-secondary">
+                <i class="fas fa-plus text-success"></i>Tiếp tục mua hàng
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel pt-2" th:if="${session.mapFoodOrder != null}">
+      <div class="row">
+        <div class="col-lg-12">
+          <table id="cart-table" class="table" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+              <th class="text-center">#</th>
+              <th>Tên sản phẩm</th>
+              <th class="text-center">Giá</th>
+              <th class="text-center">Số lượng</th>
+              <th class="text-end">Tổng tiền</th>
+              <th class="text-end">Thêm</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="food, stt : ${session.mapFoodOrder.get('listFoodOrder')}">
+              <td class="text-center" th:text="*{stt.index + 1}"></td>
+              <td>
+                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal"
+                th:text="*{food.foodName}"></a>
+              </td>
+              <td class="text-center">
+                <span th:text="*{#numbers.formatInteger(food.unitPrice, 3, 'POINT')}"></span><sup>đ</sup>
+              </td>
+              <td class="text-center">
+                <a href="javascript:void(0)" class="btn-cart">
+                  <i class="fas fa-minus text-info"></i>
                 </a>
-              </div>
+                <span th:text="*{food.quantity}"></span>
+                <a href="javascript:void(0)" class="btn-cart">
+                  <i class="fas fa-plus text-info"></i>
+                </a>
+              </td>
+              <td class="text-end">
+                <span th:text="*{#numbers.formatInteger(food.totalPrice, 3, 'POINT')}"></span><sup>đ</sup>
+              </td>
+              <td class="text-end">
+                <a href="javascript:void(0)" class="color-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteItemInCartModal">
+                  <i class="far fa-trash-alt" data-bs-placement="top" data-bs-toggle="tooltip" title="Xoá đồ ăn"
+                     onclick="confirmDeleteItemInCart(event)">
+                    <span class="d-none" th:text="*{food.foodId}"></span>
+                  </i>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="btn-group">
+            <div class="totalMoney">
+              Tổng tiền:&nbsp; <span class="text-info" th:text="${#numbers.formatInteger(session.mapFoodOrder.get('totalMoney'), 3, 'POINT')}"></span><sup class="text-info">đ</sup>
+            </div>
+            <div>
+              <a href="javascript:void(0)" class="btn btn-md btn-secondary" data-bs-toggle="modal" data-bs-target="#confirmDeleteCartModal">
+                <i class="far fa-trash-alt color-danger"></i>Xoá tất cả
+              </a>
             </div>
           </div>
         </div>
@@ -86,19 +107,19 @@
       <div class="form-group col-12 col-md-12 col-lg-6">
         <fieldset>
           <legend>Họ và tên</legend>
-          <input type="text" class="form-control" value="Nguyễn Văn A" readonly>
+          <input type="text" class="form-control" readonly th:value="${userAddress.userName}">
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-12 col-lg-6">
         <fieldset>
           <legend>Số điện thoại</legend>
-          <input type="text" class="form-control" value="0123 456 789" readonly>
+          <input type="text" class="form-control" readonly th:value="${format.phoneNumber(userAddress.userPhone)}">
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-12 col-lg-12">
         <fieldset>
           <legend>Địa chỉ</legend>
-          <input type="text" class="form-control" value="Chung cư Phenikaa, Thạch Hoà, Thạch Thất, Hà Nội" readonly>
+          <input type="text" class="form-control" readonly th:value="${userAddress.userAddress}">
         </fieldset>
       </div>
       <div class="form-group col-12 col-md-12 col-lg-12">

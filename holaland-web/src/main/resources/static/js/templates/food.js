@@ -24,14 +24,22 @@ function addFoodToCart(e) {
     request.open("GET", "/food/cart/add?storeId=" + storeId + "&foodId=" + foodId, true);
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
+            document.getElementById("numberFoodInCart").innerHTML = this.responseText;
             showToast("toastAddToCartSuccess");
+        } else if (this.status === 401) {
+            showToast("toastAddToCartByOwnerWarning");
         } else if (this.status === 400) {
-            showToast("toastAddToCartErrorDifferentStore");
+            showToast("toastAddToCartDifferentStoreError");
         } else {
             showToast("toastAddToCartError");
         }
     };
     request.send(null);
+}
+
+function confirmDeleteItemInCart(e) {
+    const foodId = e.target.firstElementChild.innerHTML;
+    console.log(foodId);
 }
 
 /*
