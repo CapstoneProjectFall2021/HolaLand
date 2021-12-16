@@ -95,6 +95,8 @@
   <div th:replace="online-store/modal/modal-reject-order :: rejectOrderModal"></div>
   <!-- Import modal reason rejection order -->
   <div th:replace="online-store/modal/modal-reason-rejection-order :: reasonRejectionOrderModal"></div>
+  <!-- Import modal order report content -->
+  <div th:replace="online-store/modal/modal-order-report-content :: orderReportContentModal"></div>
   <!-- Import modal confirm complete order -->
   <div th:replace="online-store/modal/modal-confirm-complete-order :: confirmOrderModal"></div>
 </th:block>
@@ -110,7 +112,7 @@
   <!-- Import modal add new food -->
   <div th:replace="online-store/modal/modal-add-new-food-item :: addNewFoodModal(tagList=${foodStoreTagList})"></div>
   <!-- Import modal update food -->
-  <div th:replace="online-store/modal/modal-update-food-item :: updateFoodModal(tagList=${foodStoreTagList})"></div>
+  <div th:replace="online-store/modal/modal-update-food-item :: updateFoodItemModal(tagList=${foodStoreTagList})"></div>
 </th:block>
 <th:block th:if="${page == 3}">
   <!-- Import modal update shop info -->

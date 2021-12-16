@@ -189,8 +189,9 @@ public interface IRepositoryQuery {
     String FOOD_REPORT_DELETE_ONE = "UPDATE food_report\n" +
             "SET food_report_deleted = 1\n" +
             "WHERE food_report_id = ?";
-    String FOOD_REPORT_CHECK_EXISTS = "SELECT * FROM food_report WHERE user_id = ? AND food_order_id = ? " +
+    String FOOD_USER_REPORT_CHECK_EXISTS = "SELECT * FROM food_report WHERE user_id = ? AND food_order_id = ? " +
             "AND food_report_deleted = 0";
+    String FOOD_ORDER_REPORT_CHECK_EXISTS = "SELECT * FROM food_report WHERE food_order_id = ? AND food_report_deleted = 0";
 
     String FOOD_STORE_ONLINE_TAG_GET_ALL = "SELECT * FROM food_store_online_tag";
     String FOOD_STORE_ONLINE_TAG_GET_ONE = "SELECT * FROM food_store_online_tag WHERE food_store_online_tag_id = ?";
@@ -266,5 +267,4 @@ public interface IRepositoryQuery {
             "    FROM food_order\n" +
             "    WHERE stt_food_code = 5 AND user_id = ?) T3\n" +
             "ON T1.user_id = T3.user_id";
-
 }

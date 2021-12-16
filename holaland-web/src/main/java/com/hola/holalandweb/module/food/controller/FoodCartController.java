@@ -45,15 +45,7 @@ public class FoodCartController {
 
     @GetMapping("")
     public String goToCart(Model model, Authentication authentication, HttpSession session) {
-        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        Map<String, Object> mapFoodOrder = (Map<String, Object>) session.getAttribute("mapFoodOrder");
-
-        if (mapFoodOrder != null) {
-            UserAddress userAddress = userAddressService.getOneByUserId(currentUser.getId());
-            model.addAttribute("userAddress", userAddress);
-            model.addAttribute("format", new Format());
-        }
-        model.addAttribute("page", 8);
+        backToCart(model, authentication, session);
         return "module-food";
     }
 
@@ -109,11 +101,7 @@ public class FoodCartController {
                 }
             }
         }
-        mapFoodOrder.put("listFoodOrder", listFoodOrder);
-        mapFoodOrder.put("quantity", countQuantity(listFoodOrder));
-        mapFoodOrder.put("totalMoney", getTotalMoney(listFoodOrder));
-
-        session.setAttribute("mapFoodOrder", mapFoodOrder);
+        setAttributeCart(mapFoodOrder, listFoodOrder, session);
         return new ResponseEntity<>(countQuantity(listFoodOrder), HttpStatus.OK);
     }
 
@@ -137,6 +125,81 @@ public class FoodCartController {
     public String deleteCart(Model model, HttpSession session) {
         session.removeAttribute("mapFoodOrder");
         model.addAttribute("page", 8);
-        return "module-food";
+        return "redirect:" + "/food/cart";
+    }
+
+    @GetMapping("/delete/item")
+    public String deleteItemInCart(
+            @RequestParam("foodId") int foodId,
+            HttpSession session
+    ) {
+        Map<String, Object> mapFoodOrder = (Map<String, Object>) session.getAttribute("mapFoodOrder");
+        List<FoodItemCart> listFoodOrder = (List<FoodItemCart>) mapFoodOrder.get("listFoodOrder");
+
+        for (int i = 0; i < listFoodOrder.size(); i++) {
+            if (listFoodOrder.get(i).getFoodId() == foodId) {
+                listFoodOrder.remove(i);
+            }
+        }
+
+        if (listFoodOrder.size() == 0 || listFoodOrder.isEmpty()) {
+            session.removeAttribute("mapFoodOrder");
+        } else {
+            setAttributeCart(mapFoodOrder, listFoodOrder, session);
+        }
+        return "redirect:" + "/food/cart";
+    }
+
+    @GetMapping("/update/quantity")
+    public String updateQuantityItemInCart(
+            @RequestParam("foodId") int foodId,
+            @RequestParam("flag") int flag,
+            HttpSession session
+    ) {
+        Map<String, Object> mapFoodOrder = (Map<String, Object>) session.getAttribute("mapFoodOrder");
+        List<FoodItemCart> listFoodOrder = (List<FoodItemCart>) mapFoodOrder.get("listFoodOrder");
+
+        for (int i = 0; i < listFoodOrder.size(); i++) {
+            FoodItemCart foodItemCart = listFoodOrder.get(i);
+            if (foodItemCart.getFoodId() == foodId) {
+                if (flag == 1) {
+                    foodItemCart.setQuantity(foodItemCart.getQuantity() + 1);
+                } else {
+                    foodItemCart.setQuantity(foodItemCart.getQuantity() - 1);
+
+                    if (foodItemCart.getQuantity() == 0) {
+                        listFoodOrder.remove(i);
+                    }
+                }
+                foodItemCart.setTotalPrice(foodItemCart.getQuantity() * foodItemCart.getUnitPrice());
+            }
+        }
+
+        if (listFoodOrder.size() == 0 || listFoodOrder.isEmpty()) {
+            session.removeAttribute("mapFoodOrder");
+        } else {
+            setAttributeCart(mapFoodOrder, listFoodOrder, session);
+        }
+        return "redirect:" + "/food/cart";
+    }
+
+    private void setAttributeCart(Map<String, Object> mapFoodOrder, List<FoodItemCart> listFoodOrder, HttpSession session) {
+        mapFoodOrder.put("listFoodOrder", listFoodOrder);
+        mapFoodOrder.put("quantity", countQuantity(listFoodOrder));
+        mapFoodOrder.put("totalMoney", getTotalMoney(listFoodOrder));
+
+        session.setAttribute("mapFoodOrder", mapFoodOrder);
+    }
+
+    private void backToCart(Model model, Authentication authentication, HttpSession session) {
+
+        Map<String, Object> mapFoodOrder = (Map<String, Object>) session.getAttribute("mapFoodOrder");
+        if (mapFoodOrder != null) {
+            CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+            UserAddress userAddress = userAddressService.getOneByUserId(currentUser.getId());
+            model.addAttribute("userAddress", userAddress);
+            model.addAttribute("format", new Format());
+        }
+        model.addAttribute("page", 8);
     }
 }

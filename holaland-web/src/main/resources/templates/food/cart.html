@@ -59,11 +59,11 @@
                 <span th:text="*{#numbers.formatInteger(food.unitPrice, 3, 'POINT')}"></span><sup>đ</sup>
               </td>
               <td class="text-center">
-                <a href="javascript:void(0)" class="btn-cart">
+                <a class="btn-cart" th:href="@{/food/cart/update/quantity(foodId=*{food.foodId}, flag=0)}">
                   <i class="fas fa-minus text-info"></i>
                 </a>
                 <span th:text="*{food.quantity}"></span>
-                <a href="javascript:void(0)" class="btn-cart">
+                <a class="btn-cart" th:href="@{/food/cart/update/quantity(foodId=*{food.foodId}, flag=1)}">
                   <i class="fas fa-plus text-info"></i>
                 </a>
               </td>
@@ -71,10 +71,9 @@
                 <span th:text="*{#numbers.formatInteger(food.totalPrice, 3, 'POINT')}"></span><sup>đ</sup>
               </td>
               <td class="text-end">
-                <a href="javascript:void(0)" class="color-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteItemInCartModal">
+                <a href="javascript:void(0)" class="color-danger">
                   <i class="far fa-trash-alt" data-bs-placement="top" data-bs-toggle="tooltip" title="Xoá đồ ăn"
-                     onclick="confirmDeleteItemInCart(event)">
-                    <span class="d-none" th:text="*{food.foodId}"></span>
+                     th:onclick="'javascript:confirmDeleteItemInCart(' + *{food.foodId} + ')'">
                   </i>
                 </a>
               </td>
