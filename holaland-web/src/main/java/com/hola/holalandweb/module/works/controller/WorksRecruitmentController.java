@@ -3,16 +3,8 @@ package com.hola.holalandweb.module.works.controller;
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandweb.constant.Constants;
-import com.hola.holalandwork.entity.SttWork;
-import com.hola.holalandwork.entity.SttWorkRequestRecruitmentFindJobCount;
-import com.hola.holalandwork.entity.WorkRequestRecruitment;
-import com.hola.holalandwork.entity.WorkRequestType;
-import com.hola.holalandwork.service.SttWorkRequestRecruitmentFindJobCountService;
-import com.hola.holalandwork.service.SttWorkService;
-import com.hola.holalandwork.service.WorkRequestApplyService;
-import com.hola.holalandwork.service.WorkRequestRecruitmentSavedService;
-import com.hola.holalandwork.service.WorkRequestRecruitmentService;
-import com.hola.holalandwork.service.WorkRequestTypeService;
+import com.hola.holalandwork.entity.*;
+import com.hola.holalandwork.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,47 +28,62 @@ public class WorksRecruitmentController {
     private final WorkRequestApplyService workRequestApplyService;
     private final SttWorkService sttWorkService;
     private final WorkRequestTypeService workRequestTypeService;
+    private final WorkRequestFindJobService workRequestFindJobService;
     private final UserDetailService userDetailService;
 
     @Autowired
-    public WorksRecruitmentController(WorkRequestRecruitmentService workRequestRecruitmentService,
-                                      WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
-                                      SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService,
-                                      WorkRequestApplyService workRequestApplyService,
-                                      SttWorkService sttWorkService,
-                                      WorkRequestTypeService workRequestTypeService,
-                                      UserDetailService userDetailService) {
+    public WorksRecruitmentController(
+            WorkRequestRecruitmentService workRequestRecruitmentService,
+            WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
+            SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService,
+            WorkRequestApplyService workRequestApplyService,
+            SttWorkService sttWorkService,
+            WorkRequestTypeService workRequestTypeService,
+            WorkRequestFindJobService workRequestFindJobService, UserDetailService userDetailService
+    ) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.workRequestRecruitmentSavedService = workRequestRecruitmentSavedService;
         this.sttWorkRequestRecruitmentFindJobCountService = sttWorkRequestRecruitmentFindJobCountService;
         this.workRequestApplyService = workRequestApplyService;
         this.sttWorkService = sttWorkService;
         this.workRequestTypeService = workRequestTypeService;
+        this.workRequestFindJobService = workRequestFindJobService;
         this.userDetailService = userDetailService;
     }
 
-    @GetMapping("/jobs-apply")
-    public String getJobsApply(Model model) {
-        List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(2);
-        model.addAttribute("jobApplyList", jobApplyList);
-        model.addAttribute("page", 3);
+    @GetMapping("/jobs/find")
+    public String getWorkerList(Model model) {
+        List<WorkRequestType> requestTypeList = workRequestTypeService.getAll();
+        List<WorkRequestFindJob> workerList = workRequestFindJobService.getAllByType(
+                requestTypeList.get(0).getWorkRequestTypeId(),
+                Constants.STT_WORK_CODE_APPROVED
+        );
+
+        model.addAttribute("workRequestTypeId", 1);
+        model.addAttribute("requestTypeList", requestTypeList);
+        model.addAttribute("workerList", workerList);
+        model.addAttribute("page", 7);
         return "module-works";
     }
 
-    @GetMapping("/jobs-apply/delete")
-    public String deleteJobsApplyRequest(@RequestParam("requestId") Integer requestId, Model model) {
-        boolean isCheck = workRequestApplyService.delete(requestId);
-        if (isCheck) {
-            List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(2);
-            model.addAttribute("jobApplyList", jobApplyList);
-            model.addAttribute("page", 3);
-            return "module-works";
-        } else {
-            return "404";
-        }
+    @GetMapping("/jobs/find/type") // jobs/find/type
+    public String getWorkerRequestType(
+            @RequestParam("workRequestTypeId") Integer workRequestTypeId,
+            Model model
+    ) {
+        List<WorkRequestType> requestTypeList = workRequestTypeService.getAll();
+        List<WorkRequestFindJob> workerList = workRequestFindJobService.getAllByType(
+                workRequestTypeId,
+                Constants.STT_WORK_CODE_APPROVED
+        );
+        model.addAttribute("workRequestTypeId", workRequestTypeId);
+        model.addAttribute("requestTypeList", requestTypeList);
+        model.addAttribute("workerList", workerList);
+        model.addAttribute("page", 7);
+        return "module-works";
     }
 
-    @GetMapping("/request-recruitment-manage")
+    @GetMapping("/jobs/recruitment/manage") // jobs/recruitment/manage
     public String getRecruitmentsPosted(Model model) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
         Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
@@ -91,7 +98,7 @@ public class WorksRecruitmentController {
         return "module-works";
     }
 
-    @GetMapping("/request-recruitment-manage/status")
+    @GetMapping("/jobs/recruitment/manage/status") //jobs/recruitment/manage/status
     public String getRecruitmentsPostedStatus(
             @RequestParam("code") Integer sttWorkCode,
             Model model
@@ -109,7 +116,7 @@ public class WorksRecruitmentController {
         return "module-works";
     }
 
-    @GetMapping("/request-recruitment-manage/delete")
+    @GetMapping("/jobs/recruitment/manage/delete") //jobs/recruitment/manage/delete
     public String getRecruitmentDeleteRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,
@@ -142,7 +149,7 @@ public class WorksRecruitmentController {
         return sttWorkCountMap;
     }
 
-    @GetMapping("/request-recruitment-detail")
+    @GetMapping("/jobs/recruitment/detail") // jobs/recruitment/detail
     public String getRequestRecruitmentDetail(
             @RequestParam("id") Integer id,
             Model model
@@ -155,7 +162,7 @@ public class WorksRecruitmentController {
         return "module-works";
     }
 
-    @GetMapping("/create-request-recruitment")
+    @GetMapping("/jobs/recruitment/create") // jobs/recruitment/create
     public String getFormCreateRequestRecruitment(Model model) {
         WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
         model.addAttribute("newRequestRecruitment", newRequestRecruitment);
@@ -163,7 +170,7 @@ public class WorksRecruitmentController {
         return "module-works";
     }
 
-    @PostMapping(value = "/create-request-recruitment", params = "save")
+    @PostMapping(value = "/jobs/recruitment/create", params = "save") // jobs/recruitment/create
     public String createRequestRecruitment(
             @ModelAttribute("newRequestRecruitment") WorkRequestRecruitment newRequestRecruitment,
             BindingResult bindingResult
@@ -175,13 +182,13 @@ public class WorksRecruitmentController {
         setAttrNewRequestRecruitment(newRequestRecruitment, 1, Constants.STT_WORK_CODE_PENDING_APPROVAL);
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
         if (isCheck) {
-            return "redirect:" + "/works/request-recruitment-manage";
+            return "redirect:" + "/works/jobs/recruitment/manage";
         } else {
             return "404";
         }
     }
 
-    @PostMapping(value = "/create-request-recruitment", params = "saveDraft")
+    @PostMapping(value = "/jobs/recruitment/create", params = "saveDraft") // jobs/recruitment/create
     public String createRequestRecruitmentSaveDraft(
             @ModelAttribute("newRequestRecruitment") WorkRequestRecruitment newRequestRecruitment,
             BindingResult bindingResult
@@ -193,7 +200,7 @@ public class WorksRecruitmentController {
         setAttrNewRequestRecruitment(newRequestRecruitment, 1, Constants.STT_WORK_CODE_SAVE_DRAFT);
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
         if (isCheck) {
-            return "redirect:" + "/works/request-recruitment-manage/status?code=6";
+            return "redirect:" + "/works/jobs/recruitment/manage/status?code=6";
         } else {
             return "404";
         }
@@ -219,15 +226,8 @@ public class WorksRecruitmentController {
         }
     }
 
-    @GetMapping("/list-applied")
-    public String getListApplied(Model model) {
-        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, 1);
-        model.addAttribute("listApplied", listApplied);
-        model.addAttribute("page", 8);
-        return "module-works";
-    }
 
-    @GetMapping("/request-recruitment-manage/repost-request-recruitment")
+    @GetMapping("/jobs/recruitment/manage/repost") // jobs/recruitment/manage/repost
     public String getFormRepostRequestRecruitment(
             @RequestParam("requestRecruitmentId") Integer requestRecruitmentId,
             @RequestParam("code") Integer sttWorkCode,
@@ -247,7 +247,7 @@ public class WorksRecruitmentController {
         return "module-works";
     }
 
-    @PostMapping("/repost-request-recruitment")
+    @PostMapping("/jobs/recruitment/manage/repost") // jobs/recruitment/manage/repost
     public String repostRequestRecruitment(
             @RequestParam("endDate") Date endDate,
             @RequestParam("id") Integer id
@@ -275,13 +275,21 @@ public class WorksRecruitmentController {
         newRequestRecruitment.setWorkRequestRecruitmentDeleted(requestRecruitment.isWorkRequestRecruitmentDeleted());
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
         if (isCheck) {
-            return "redirect:" + "/works/request-recruitment-manage";
+            return "redirect:" + "/works/jobs/recruitment/manage";
         } else {
             return "404";
         }
     }
 
-    @GetMapping("/applied/show")
+    @GetMapping("/apply") // apply
+    public String getListApplied(Model model) {
+        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, 1);
+        model.addAttribute("listApplied", listApplied);
+        model.addAttribute("page", 8);
+        return "module-works";
+    }
+
+    @GetMapping("/aplly/show") // aplly/show
     public String getListUserApplied(
             @RequestParam("appliedId") Integer appliedId,
             Model model
@@ -294,7 +302,7 @@ public class WorksRecruitmentController {
         return "module-works";
     }
 
-    @GetMapping("/request-recruitment-manage/reason-reject")
+    @GetMapping("/jobs/recruitment/manage/reject/reason") // jobs/recruitment/manage/reject/reason
     public String getReasonRejectRecruitmentRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,

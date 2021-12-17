@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="requestType : ${requestTypeList}">
                 <a href="request-recruitment.html" class="label-info m-mb-16"
-                   th:href="@{/works/request-find-job/type(workRequestTypeId=*{requestType.workRequestTypeId})}"
+                   th:href="@{/works/jobs/find/type(workRequestTypeId=*{requestType.workRequestTypeId})}"
                    th:classappend="${requestType.workRequestTypeId == workRequestTypeId ? 'active' : ''}">
                     <div class="flex">
                         <div class="icon">
@@ -34,7 +34,7 @@
         </div>
         <div class="row">
             <div class="col-md-12" th:each="worker : ${workerList}">
-                <a th:href="@{/works/request-find-job-detail(id=${worker.workRequestFindJobId})}" class="label-info m-mb-16">
+                <a th:href="@{/works/jobs/find/detail(id=${worker.workRequestFindJobId})}" class="label-info m-mb-16">
                     <div class="flex">
                         <div class="icon-s">
                             <img class="media-object" th:src="@{'/images/system/job.png'}" alt="">

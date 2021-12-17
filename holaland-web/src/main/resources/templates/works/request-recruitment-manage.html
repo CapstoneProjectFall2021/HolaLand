@@ -8,7 +8,7 @@
     </div>
     <div class="row">
       <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="sttWork : ${sttWorkCountMap}">
-        <a th:href="@{/works/request-recruitment-manage/status(code=*{sttWork.key.sttWorkCode})}"
+        <a th:href="@{/works/jobs/recruitment/manage/status(code=*{sttWork.key.sttWorkCode})}"
            class="label-info m-mb-16"
            th:classappend="${sttWork.key.sttWorkCode == sttWorkCode ? 'active' : ''}">
           <div class="flex">
@@ -58,7 +58,7 @@
           </div>
           <div class="btn-action me-4" th:if="${sttWorkCode == 4}">
             <a class="me-2" href="javascript:void(0)">
-              <a class="me-2" th:href="@{/works/request-recruitment-manage/repost-request-recruitment
+              <a class="me-2" th:href="@{/works/jobs/recruitment/manage/repost
                 (requestRecruitmentId=${requestRecruitment.workRequestRecruitmentId},
                 code=${requestRecruitment.sttWorkCode})}">
                 <i class="fas fa-undo-alt m-0"></i>
@@ -74,7 +74,7 @@
           </div>
           <div class="btn-action me-4" th:if="${sttWorkCode == 5}">
             <a class="me-2" th:href=
-                "@{/works/request-recruitment-manage/repost-request-recruitment
+                "@{/works/jobs/recruitment/manage/repost
                 (requestRecruitmentId=${requestRecruitment.workRequestRecruitmentId},
                 code=${requestRecruitment.sttWorkCode})}">
               <i class="fas fa-undo-alt m-0"></i>
@@ -88,7 +88,7 @@
             </a>
           </div>
           <div class="btn-action" style="margin-right: 62px;" th:if="${sttWorkCode == 2}">
-            <a class="me-2" th:href="@{/works/request-recruitment-manage/reason-reject
+            <a class="me-2" th:href="@{/works/jobs/recruitment/manage/reject/reason
             (requestId=${requestRecruitment.workRequestRecruitmentId},
                 code=${requestRecruitment.sttWorkCode})}">
               <i class="far fa-comment-dots text-warning m-0"></i>
@@ -127,7 +127,7 @@
               <img class="media-object" th:src="@{'/images/system/job.png'}" alt="">
             </div>
             <div class="content-body">
-              <a th:href="@{/works/request-recruitment-detail(id=${requestRecruitment.workRequestRecruitmentId})}"
+              <a th:href="@{/works/jobs/recruitment/detail(id=${requestRecruitment.workRequestRecruitmentId})}"
                  th:text="*{requestRecruitment.workRequestRecruitmentTitle}"></a>
               <div class="request-info">
                 <p>Lương: <span th:text="*{requestRecruitment.workRequestRecruitmentSalary}"></span></p>

@@ -41,47 +41,47 @@
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/list-booked}" th:classappend="${page == 2 ? 'active' : ''}">
+              <a th:href="@{/works/booked}" th:classappend="${page == 2 ? 'active' : ''}">
                 <i class="fas fa-list fa-fw"></i>Danh sách thuê
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/jobs-apply}" th:classappend="${page == 3 ? 'active' : ''}">
+              <a th:href="@{/works/jobs/apply}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-tasks fa-fw"></i>Việc làm đã ứng tuyển
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/jobs-save}" th:classappend="${page == 4 ? 'active' : ''}">
+              <a th:href="@{/works/jobs/save}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="far fa-bookmark fa-fw"></i>Việc làm đã lưu
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/request-find-job-manage}" th:classappend="${page == 5 ? 'active' : ''}">
+              <a th:href="@{/works/jobs/find/manage}" th:classappend="${page == 5 ? 'active' : ''}">
                 <i class="far fa-file-alt fa-fw"></i>Quản lý bài viết
               </a>
             </li>
             <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/create-request-find-job}" th:classappend="${page == 6 ? 'active' : ''}">
+              <a th:href="@{/works/jobs/find/create}" th:classappend="${page == 6 ? 'active' : ''}">
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a th:href="@{/works/request-find-job}" th:classappend="${page == 7 ? 'active' : ''}">
+              <a th:href="@{/works/jobs/find}" th:classappend="${page == 7 ? 'active' : ''}">
                 <i class="fas fa-search fa-fw"></i>Danh sách tìm việc
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a th:href="@{/works/list-applied}" th:classappend="${page == 8 ? 'active' : ''}">
+              <a th:href="@{/works/apply}" th:classappend="${page == 8 ? 'active' : ''}">
                 <i class="fas fa-tasks fa-fw"></i>Danh sách ứng tuyển
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a th:href="@{/works/request-recruitment-manage}" th:classappend="${page == 9 ? 'active' : ''}">
+              <a th:href="@{/works/jobs/recruitment/manage}" th:classappend="${page == 9 ? 'active' : ''}">
                 <i class="far fa-file-alt fa-fw"></i>Quản lý bài viết
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a th:href="@{/works/create-request-recruitment}" th:classappend="${page == 10 ? 'active' : ''}">
+              <a th:href="@{/works/jobs/recruitment/create}" th:classappend="${page == 10 ? 'active' : ''}">
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tuyển dụng
               </a>
             </li>

@@ -8,7 +8,7 @@
     </div>
     <div class="row">
       <div class="col-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="sttWork : ${sttWorkCountMap}">
-        <a th:href="@{/works/request-find-job-manage/status(code=*{sttWork.key.sttWorkCode})}"
+        <a th:href="@{/works/jobs/find/manage/status(code=*{sttWork.key.sttWorkCode})}"
            class="label-info m-mb-16"
            th:classappend="${sttWork.key.sttWorkCode == sttWorkCode ? 'active' : ''}">
           <div class="flex">
@@ -57,7 +57,7 @@
             </a>
           </div>
           <div class="btn-action me-4" th:if="${sttWorkCode == 4}">
-            <a class="me-2" th:href="@{/works/request-find-job-manage/repost-request-find-job
+            <a class="me-2" th:href="@{/works/jobs/find/manage/repost
                 (requestFindJobId=${requestFindJob.workRequestFindJobId},
                 code=${requestFindJob.sttWorkCode})}">
               <i class="fas fa-undo-alt m-0"></i>
@@ -71,7 +71,7 @@
             </a>
           </div>
           <div class="btn-action me-4" th:if="${sttWorkCode == 5}">
-            <a class="me-2" th:href="@{/works/request-find-job-manage/repost-request-find-job
+            <a class="me-2" th:href="@{/works/jobs/find/manage/repost
                 (requestFindJobId=${requestFindJob.workRequestFindJobId},
                 code=${requestFindJob.sttWorkCode})}">
               <i class="fas fa-undo-alt m-0"></i>
@@ -85,7 +85,7 @@
             </a>
           </div>
           <div class="btn-action" style="margin-right: 62px;" th:if="${sttWorkCode == 2}">
-            <a class="me-2" th:href="@{/works/request-find-job-manage/reason-reject
+            <a class="me-2" th:href="@{/works/jobs/find/manage/reject/reason
             (requestId=${requestFindJob.workRequestFindJobId},
                 code=${requestFindJob.sttWorkCode})}">
               <i class="far fa-comment-dots text-warning m-0"></i>
@@ -124,7 +124,7 @@
               <img class="media-object" th:src="@{'/images/system/job.png'}" alt="">
             </div>
             <div class="content-body">
-              <a th:href="@{/works/request-find-job-detail(id=*{requestFindJob.workRequestFindJobId})}"
+              <a th:href="@{/works/jobs/find/detail(id=*{requestFindJob.workRequestFindJobId})}"
                  th:text="*{requestFindJob.workRequestFindJobTitle}"></a>
               <div class="request-info">
                 <p>Lương mong muốn:

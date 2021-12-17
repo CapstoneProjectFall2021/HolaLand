@@ -17,13 +17,13 @@ function showToast(id) {
 function confirmDeleteRequestApply(e) {
   const requestId = e.target.firstElementChild.innerHTML;
   openModal("confirmCancelApplyJobModal");
-  document.getElementById("btn-delete-request-apply").href = "/works/jobs-apply/delete?requestId=" + requestId;
+  document.getElementById("btn-delete-request-apply").href = "/works/jobs/apply/delete?requestId=" + requestId;
 }
 
 function confirmDeleteRequestSave(e) {
   const requestId = e.target.firstElementChild.innerHTML;
   openModal("confirmRemoveJobSaveModal");
-  document.getElementById("btn-delete-request-save").href = "/works/jobs-save/delete?requestId=" + requestId;
+  document.getElementById("btn-delete-request-save").href = "/works/jobs/save/delete?requestId=" + requestId;
 }
 
 function getIdOfRequestBooked(e) {
@@ -33,7 +33,7 @@ function getIdOfRequestBooked(e) {
 
 function getIdOfRequestApplied(e) {
   const appliedId = e.target.firstElementChild.innerHTML;
-  document.getElementById("btn-show-list-user-applied" + appliedId).href = "/works/applied/show?appliedId=" + appliedId;
+  document.getElementById("btn-show-list-user-applied" + appliedId).href = "/works/aplly/show?appliedId=" + appliedId;
 }
 
 function confirmRemoveRecruitmentRequest(e) {
@@ -46,7 +46,7 @@ function confirmRemoveRecruitmentRequest(e) {
 
   openModal("confirmRemoveRecruitmentRequestModal");
   document.getElementById("btn-delete-recruitment-request").href =
-    "/works/request-recruitment-manage/delete?requestId=" + requestId + "&code=" + sttWorkCode;
+    "/works/jobs/recruitment/manage/delete?requestId=" + requestId + "&code=" + sttWorkCode;
 }
 
 function confirmRemoveFindJobRequest(e) {
@@ -59,7 +59,7 @@ function confirmRemoveFindJobRequest(e) {
 
   openModal("confirmRemoveFindJobRequestModal");
   document.getElementById("btn-delete-find-request").href =
-    "/works/request-find-job-manage/delete?requestId=" + requestId + "&code=" + sttWorkCode;
+    "/works/jobs/find/manage/delete?requestId=" + requestId + "&code=" + sttWorkCode;
 }
 
 /*

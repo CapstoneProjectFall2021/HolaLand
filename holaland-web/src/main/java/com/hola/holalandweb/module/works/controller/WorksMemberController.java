@@ -30,16 +30,19 @@ public class WorksMemberController {
     private final WorkPaymentMethodService workPaymentMethodService;
     private final WorkTimeService workTimeService;
     private final UserDetailService userDetailService;
+    private final WorkRequestApplyService workRequestApplyService;
 
     @Autowired
-    public WorksMemberController(WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
-                                 SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService,
-                                 WorkRequestTypeService workRequestTypeService,
-                                 WorkRequestFindJobService workRequestFindJobService,
-                                 SttWorkService sttWorkService,
-                                 WorkPaymentMethodService workPaymentMethodService,
-                                 WorkTimeService workTimeService,
-                                 UserDetailService userDetailService) {
+    public WorksMemberController(
+            WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
+            SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService,
+            WorkRequestTypeService workRequestTypeService,
+            WorkRequestFindJobService workRequestFindJobService,
+            SttWorkService sttWorkService,
+            WorkPaymentMethodService workPaymentMethodService,
+            WorkTimeService workTimeService,
+            UserDetailService userDetailService,
+            WorkRequestApplyService workRequestApplyService) {
         this.workRequestRecruitmentSavedService = workRequestRecruitmentSavedService;
         this.sttWorkRequestRecruitmentFindJobCountService = sttWorkRequestRecruitmentFindJobCountService;
         this.workRequestTypeService = workRequestTypeService;
@@ -48,9 +51,10 @@ public class WorksMemberController {
         this.workPaymentMethodService = workPaymentMethodService;
         this.workTimeService = workTimeService;
         this.userDetailService = userDetailService;
+        this.workRequestApplyService = workRequestApplyService;
     }
 
-    @GetMapping("/jobs-save")
+    @GetMapping("/jobs/save")
     public String getJobsSave(Model model) {
         List<WorkRequestRecruitment> jobSaveList = workRequestRecruitmentSavedService.getAllByAccountId(2);
         model.addAttribute("jobSaveList", jobSaveList);
@@ -58,7 +62,7 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @GetMapping("/jobs-save/delete")
+    @GetMapping("/jobs/save/delete")
     public String deleteJobsSaveRequest(@RequestParam("requestId") Integer requestId, Model model) {
         boolean isCheck = workRequestRecruitmentSavedService.delete(requestId);
         if (isCheck) {
@@ -71,39 +75,28 @@ public class WorksMemberController {
         }
     }
 
-    @GetMapping("/request-find-job")
-    public String getWorkerList(Model model) {
-        List<WorkRequestType> requestTypeList = workRequestTypeService.getAll();
-        List<WorkRequestFindJob> workerList = workRequestFindJobService.getAllByType(
-                requestTypeList.get(0).getWorkRequestTypeId(),
-                Constants.STT_WORK_CODE_APPROVED
-        );
-
-        model.addAttribute("workRequestTypeId", 1);
-        model.addAttribute("requestTypeList", requestTypeList);
-        model.addAttribute("workerList", workerList);
-        model.addAttribute("page", 7);
+    @GetMapping("/jobs/apply") // jobs/apply
+    public String getJobsApply(Model model) {
+        List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(2);
+        model.addAttribute("jobApplyList", jobApplyList);
+        model.addAttribute("page", 3);
         return "module-works";
     }
 
-    @GetMapping("/request-find-job/type")
-    public String getWorkerRequestType(
-            @RequestParam("workRequestTypeId") Integer workRequestTypeId,
-            Model model
-    ) {
-        List<WorkRequestType> requestTypeList = workRequestTypeService.getAll();
-        List<WorkRequestFindJob> workerList = workRequestFindJobService.getAllByType(
-                workRequestTypeId,
-                Constants.STT_WORK_CODE_APPROVED
-        );
-        model.addAttribute("workRequestTypeId", workRequestTypeId);
-        model.addAttribute("requestTypeList", requestTypeList);
-        model.addAttribute("workerList", workerList);
-        model.addAttribute("page", 7);
-        return "module-works";
+    @GetMapping("/jobs/apply/delete") // jobs/apply/delete
+    public String deleteJobsApplyRequest(@RequestParam("requestId") Integer requestId, Model model) {
+        boolean isCheck = workRequestApplyService.delete(requestId);
+        if (isCheck) {
+            List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(2);
+            model.addAttribute("jobApplyList", jobApplyList);
+            model.addAttribute("page", 3);
+            return "module-works";
+        } else {
+            return "404";
+        }
     }
 
-    @GetMapping("/request-find-job-manage")
+    @GetMapping("/jobs/find/manage") // jobs/find/manage
     public String getJobsPosted(Model model) {
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
         Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 2);
@@ -118,7 +111,7 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @GetMapping("/request-find-job-manage/status")
+    @GetMapping("/jobs/find/manage/status") // jobs/find/manage/status
     public String getJobsPostedStatus(
             @RequestParam("code") Integer sttWorkCode,
             Model model
@@ -136,7 +129,7 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @GetMapping("/request-find-job-manage/delete")
+    @GetMapping("/jobs/find/manage/delete/delete") // jobs/find/manage/delete
     public String getFindJobDeleteRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,
@@ -170,7 +163,7 @@ public class WorksMemberController {
         return sttWorkCountMap;
     }
 
-    @GetMapping("/request-find-job-detail")
+    @GetMapping("/jobs/find/detail") // jobs/find/detail
     public String getRequestFindJobDetail(
             @RequestParam("id") Integer id,
             Model model
@@ -188,7 +181,7 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @GetMapping("/create-request-find-job")
+    @GetMapping("/jobs/find/create") // jobs/find/create
     public String getFormCreateRequestFindJob(Model model) {
         WorkRequestFindJob newRequestFindJob = WorkRequestFindJob.builder().build();
         model.addAttribute("newRequestFindJob", newRequestFindJob);
@@ -196,7 +189,7 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @PostMapping(value = "/create-request-find-job", params = "save")
+    @PostMapping(value = "/jobs/find/create", params = "save") // jobs/find/create
     public String createRequestFindJob(
             @ModelAttribute("newRequestFindJob") WorkRequestFindJob newRequestFindJob,
             BindingResult bindingResult
@@ -216,13 +209,13 @@ public class WorksMemberController {
 
         boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
         if (isCheck) {
-            return "redirect:" + "/works/request-find-job-manage";
+            return "redirect:" + "/works/jobs/find/manage";
         } else {
             return "404";
         }
     }
 
-    @PostMapping(value = "/create-request-find-job", params = "saveDraft")
+    @PostMapping(value = "/jobs/find/create", params = "saveDraft")  // jobs/find/create
     public String createRequestFindJobSaveDraft(
             @ModelAttribute("newRequestFindJob") WorkRequestFindJob newRequestFindJob,
             BindingResult bindingResult
@@ -242,13 +235,13 @@ public class WorksMemberController {
 
         boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
         if (isCheck) {
-            return "redirect:" + "/works/request-find-job-manage/status?code=6";
+            return "redirect:" + "/works/jobs/find/manage/status?code=6";
         } else {
             return "404";
         }
     }
 
-    @GetMapping("/list-booked")
+    @GetMapping("/booked") // /booked
     public String getListBooked(Model model) {
         List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(2, 1);
         model.addAttribute("listBooked", listBooked);
@@ -256,7 +249,7 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @GetMapping("/request-find-job-manage/repost-request-find-job")
+    @GetMapping("/jobs/find/manage/repost")  // jobs/find/manage/repost
     public String getFormRepostRequestFindJob(
             @RequestParam("requestFindJobId") Integer requestFindJobId,
             @RequestParam("code") Integer sttWorkCode,
@@ -276,7 +269,7 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @PostMapping("/repost-request-find-job")
+    @PostMapping("/jobs/find/manage/repost") // jobs/find/manage/repost
     public String repostRequestFindJob(
             @RequestParam("endDate") Date endDate,
             @RequestParam("id") Integer id
@@ -301,7 +294,7 @@ public class WorksMemberController {
         newRequestFindJob.setWorkRequestFindJobDeleted(requestFindJob.isWorkRequestFindJobDeleted());
         boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
         if (isCheck) {
-            return "redirect:" + "/works/request-find-job-manage";
+            return "redirect:" + "/works/jobs/find/manage";
         } else {
             return "404";
         }
@@ -320,7 +313,7 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @GetMapping("/request-find-job-manage/reason-reject")
+    @GetMapping("/jobs/find/manage/reject/reason") // jobs/find/manage/reject/reason
     public String getReasonRejectFindJobRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,
