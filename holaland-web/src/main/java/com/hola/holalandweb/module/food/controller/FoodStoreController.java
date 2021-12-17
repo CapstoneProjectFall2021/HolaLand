@@ -86,15 +86,14 @@ public class FoodStoreController {
         boolean haveOrder = foodOrderService.checkUserOrder(storeId, currentUser.getId());
         boolean isRate = foodStoreOnlineRateService.checkUserCommentExist(currentUser.getId(), storeId);
         boolean isOwner = foodStoreOnlineService.checkUserIsOwner(currentUser.getId(), storeId);
-        if(isOwner) {
+        if (isOwner) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        // chưa mua hàng mà đòi rate
-        if(haveOrder) {
-            // rate lần đầu
+
+        if (haveOrder) {
             if (!isRate) {
                 return new ResponseEntity<>(HttpStatus.OK);
-            }else { // rate lần 2 => update
+            } else {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
         }
@@ -129,14 +128,14 @@ public class FoodStoreController {
         rate.setFoodStoreOnlineRateCreateTime(currentDate);
         rate.setFoodStoreOnlineRateUpdateTime(currentDate);
         rate.setFoodStoreOnlineDeleted(false);
-        boolean isCheck;
-        // kiem tra xem thang userId nay là rate lan dau hay lan 2
+
+        // check this is the first rate
         boolean isRateExits = foodStoreOnlineRateService.checkUserCommentExist(currentUser.getId(), rate.getFoodStoreOnlineId());
 
-        // if else => insert hay update
-        if(isRateExits) {
+        boolean isCheck;
+        if (isRateExits) {
             isCheck = foodStoreOnlineRateService.update(rate);
-        }else {
+        } else {
             isCheck = foodStoreOnlineRateService.save(rate);
         }
         if (isCheck) {

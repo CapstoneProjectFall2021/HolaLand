@@ -60,14 +60,13 @@
             </div>
             <div class="flex">
               <a href="javascript:void(0)" class="btn-more">
-                <i class="fas fa-pencil-alt text-success" onclick="updateFood(event)">
-                  <span th:text = "*{foodItem.foodItemId}" class="d-none"></span>
-                  <span th:text = "*{foodItem.foodTagId}" class="d-none"></span>
+                <i class="fas fa-pencil-alt text-success"
+                   th:onclick="'javascript:updateFood(' + *{foodItem.foodItemId} + ',' + *{foodItem.foodTagId} + ')'">
                 </i>
               </a>
               <a href="javascript:void(0)" class="btn-more me-0" >
-                <i class="far fa-trash-alt text-danger" onclick="confirmDeleteFood(event)">
-                  <span th:text="*{foodItem.foodItemId}" class="d-none"></span>
+                <i class="far fa-trash-alt text-danger"
+                  th:onclick="'javascript:confirmDeleteFood(' + *{foodItem.foodItemId} + ')'">
                 </i>
               </a>
             </div>

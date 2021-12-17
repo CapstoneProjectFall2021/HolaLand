@@ -74,8 +74,9 @@
               <a th:href="@{/login}" class="nav-link" sec:authorize="!isAuthenticated()">
                 Đánh giá
               </a>
-              <a href="javascript:void(0)" class="nav-link" onclick="checkUserOrderInStore(event)" sec:authorize="isAuthenticated()">
-                <span th:text="${foodStoreOnline.foodStoreOnlineId}" class="d-none"></span>
+              <a href="javascript:void(0)" class="nav-link"
+                 th:onclick="'javascript:checkUserOrderInStore(' + ${foodStoreOnline.foodStoreOnlineId} + ')'"
+                 sec:authorize="isAuthenticated()">
                 Đánh giá
               </a>
             </li>
@@ -124,9 +125,8 @@
                       </div>
                       <div class="flex">
                         <a href="javascript:void(0)" class="btn-more mx-0" sec:authorize="isAuthenticated()">
-                          <i class="fas fa-plus text-success" onclick="addFoodToCart(event)">
-                            <span th:text="${foodItem.foodItemId}" class="d-none"></span>
-                            <span th:text="${foodItem.foodStoreOnlineId}" class="d-none"></span>
+                          <i class="fas fa-plus text-success"
+                             th:onclick="'javascript:addFoodToCart(' + ${foodItem.foodItemId} + ',' + ${foodItem.foodStoreOnlineId} + ')'">
                           </i>
                         </a>
                         <a th:href="@{/login}" class="btn-more mx-0" sec:authorize="!isAuthenticated()">

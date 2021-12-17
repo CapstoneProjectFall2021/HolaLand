@@ -45,6 +45,11 @@ public class FoodReportServiceImpl implements FoodReportService {
     }
 
     @Override
+    public FoodReport getOrderReport(int orderId) throws DataAccessException {
+        return foodReportRepository.getOrderReport(orderId);
+    }
+
+    @Override
     public boolean delete(int id) throws DataAccessException {
         return foodReportRepository.delete(id);
     }

@@ -43,14 +43,11 @@ public class FoodOrderController {
 
     @Autowired
     public FoodOrderController(
-            FoodItemService foodItemService,
-            SttFoodService sttFoodService,
             FoodStoreOnlineService foodStoreOnlineService,
             FoodCountSttOrderService foodCountSttOrderService,
             UserAddressService userAddressService,
             FoodOrderService foodOrderService,
             FoodOrderDetailService foodOrderDetailService,
-            UserDetailService userDetailService,
             FoodReportService foodReportService
     ) {
         this.foodStoreOnlineService = foodStoreOnlineService;
@@ -210,7 +207,7 @@ public class FoodOrderController {
 
     /**
      * -----------------------------------------------------------------------------------------------------------------
-     * Manage Order
+     * User Manage Order
      */
     @PostMapping("/report")
     public String userReportOrder(
@@ -238,25 +235,6 @@ public class FoodOrderController {
         }
     }
 
-    @PostMapping("/reject")
-    public String sellerRejectOrder(
-            @RequestParam("orderId") int orderId,
-            @RequestParam("reasonReject") String reasonReject
-    ) {
-        FoodOrder newFoodOrder = FoodOrder.builder()
-                .foodOrderId(orderId)
-                .foodOrderReasonReject(reasonReject)
-                .sttFoodCode(Constants.STT_FOOD_CODE_REJECT)
-                .build();
-
-        boolean isCheck = foodOrderService.addReasonReject(newFoodOrder);
-        if (isCheck) {
-            return "redirect:" + "/food/order/manage";
-        } else {
-            return "404";
-        }
-    }
-
     @GetMapping("/report/delete")
     public String userDeleteReportOrder(@RequestParam("reportId") int reportId) {
         boolean isCheck = foodReportService.delete(reportId);
@@ -276,6 +254,29 @@ public class FoodOrderController {
         boolean isCheck = foodOrderService.updateSttFood(foodOrder);
         if (isCheck) {
             return "redirect:" + "/food/order";
+        } else {
+            return "404";
+        }
+    }
+
+    /**
+     * -----------------------------------------------------------------------------------------------------------------
+     * Seller Manage Order
+     */
+    @PostMapping("/reject")
+    public String sellerRejectOrder(
+            @RequestParam("orderId") int orderId,
+            @RequestParam("reasonReject") String reasonReject
+    ) {
+        FoodOrder newFoodOrder = FoodOrder.builder()
+                .foodOrderId(orderId)
+                .foodOrderReasonReject(reasonReject)
+                .sttFoodCode(Constants.STT_FOOD_CODE_REJECT)
+                .build();
+
+        boolean isCheck = foodOrderService.addReasonReject(newFoodOrder);
+        if (isCheck) {
+            return "redirect:" + "/food/order/manage";
         } else {
             return "404";
         }

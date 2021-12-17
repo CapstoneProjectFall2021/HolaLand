@@ -17,5 +17,7 @@ public interface FoodReportService {
 
     FoodReport getUserReported(int userId, int orderId) throws DataAccessException;
 
+    FoodReport getOrderReport(int orderId) throws DataAccessException;
+
     boolean delete(int id) throws DataAccessException;
 }

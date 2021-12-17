@@ -12,4 +12,10 @@ public class Format {
         }
         return strId;
     }
+
+    public static String phoneNumber(String strPhoneNumber) {
+        return strPhoneNumber.substring(0, 4) + " "
+                + strPhoneNumber.substring(4, 7) + " "
+                + strPhoneNumber.substring(7, 10);
+    }
 }

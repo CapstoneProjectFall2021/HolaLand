@@ -39,17 +39,16 @@
                 <i class="far fa-clock ms-2 me-1"></i>
                 <span th:text="*{#dates.format(foodOrder.foodOrderCreatedDate, 'HH:mm:ss')}"></span>
               </td>
-              <td class="text-end"><span
-                  th:text="*{#numbers.formatInteger(foodOrder.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
+              <td class="text-end">
+                <span th:text="*{#numbers.formatInteger(foodOrder.foodOrderTotalPrice, 3, 'POINT')}"></span><sup>đ</sup>
               </td>
               <td class="text-end" th:classappend="*{foodOrder.sttFoodCode == 1 ? 'text-info' : 'text-warning'}"
                   th:text="*{foodOrder.sttFoodCode == 1 ? 'Chờ xác nhận' : 'Đã xác nhận'}"></td>
               <td class="text-end">
                 <a href="javascript:void(0)" class="color-danger">
                   <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip"
-                     onclick="confirmCancelOrder(event)"
-                     title="Hủy đơn hàng">
-                    <span th:text="${foodOrder.foodOrderId}" class="d-none"></span>
+                     title="Hủy đơn hàng"
+                     th:onclick="'javascript:confirmCancelOrder(' + ${foodOrder.foodOrderId} + ')'">
                   </i>
                 </a>
               </td>
@@ -60,6 +59,7 @@
       </div>
     </div>
   </div>
+
   <!-- User history order -->
   <div class="user-history-order">
     <div class="row">
@@ -181,24 +181,21 @@
                           th:with="foodReport=${foodReportService.getUserReported(historyOrder.userId, historyOrder.foodOrderId)}">
                   <th:block th:if="${foodReport == null}">
                     <a href="javascript:void(0)" class="text-warning">
-                      <i class="bi bi-exclamation-circle" data-bs-placement="top" data-bs-toggle="tooltip"
-                         title="Báo cáo" onclick="reportFoodOrder(event)">
-                        <span th:text="${historyOrder.foodOrderId}" class="d-none"></span>
-                        <span th:text="${historyOrder.foodStoreOnlineId}" class="d-none"></span>
+                      <i class="bi bi-exclamation-circle" data-bs-placement="top" data-bs-toggle="tooltip" title="Báo cáo"
+                         th:onclick="'javascript:reportFoodOrder(' + ${historyOrder.foodOrderId} + ',' + ${historyOrder.foodStoreOnlineId} + ')'">
                       </i>
                     </a>
                   </th:block>
                   <th:block th:if="${foodReport != null}">
-                    <a href="javascript:void(0)" class="text-info me-3">
-                      <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip"
-                         title="Lý do báo cáo" onclick="getOrderReportContent(event)">
+                    <a href="javascript:void(0)" class="text-warning me-3">
+                      <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip" title="Lý do báo cáo"
+                         onclick="getOrderReportContent(event)">
                         <span class="d-none" th:text="${foodReport.foodReportContent}"></span>
                       </i>
                     </a>
                     <a href="javascript:void(0)" class="color-danger">
-                      <i class="far fa-trash-alt" data-bs-placement="top" data-bs-toggle="tooltip"
-                         title="Xoá báo cáo" onclick="confirmDeleteReport(event)">
-                        <span class="d-none" th:text="${foodReport.foodReportId}"></span>
+                      <i class="far fa-trash-alt" data-bs-placement="top" data-bs-toggle="tooltip" title="Xoá báo cáo"
+                        th:onclick="'javascript:confirmDeleteReport(' + ${foodReport.foodReportId} + ')'">
                       </i>
                     </a>
                   </th:block>
