@@ -98,7 +98,7 @@ public interface IRepositoryQuery {
     String FOOD_STORE_ONLINE_GET_ONE = "SELECT * FROM food_store_online WHERE food_store_online_id = ?";
 
     String FOOD_STORE_ONLINE_UPDATE_INFO_ONE = "UPDATE food_store_online\n" +
-            "SET food_store_online_name = ?, food_store_online_description = ?\n" +
+            "SET food_store_online_image = COALESCE(?,food_store_online_image), food_store_online_name = ?, food_store_online_description = ?\n" +
             "WHERE food_store_online_id = ?";
 
     String FOOD_STORE_ONLINE_GET_ONE_BY_USER_ID = "SELECT * FROM food_store_online WHERE user_id = ? AND food_store_online_deleted = 0";
@@ -148,6 +148,14 @@ public interface IRepositoryQuery {
             "AND T1.stt_food_code = ?\n" +
             "AND T1.food_store_online_deleted = 0";
 
+    String FOOD_STORE_ONLINE_STOP_SELLING = "UPDATE food_store_online\n" +
+            "SET food_store_online_stop_selling_flag = ?\n" +
+            "WHERE food_store_online_id = ?";
+
+    String FOOD_STORE_ONLINE_PAUSE_SELLING = "UPDATE food_store_online\n" +
+            "SET food_store_online_pause_selling_flag = ?\n" +
+            "WHERE food_store_online_id = ?";
+
     String FOOD_STORE_ONLINE_RATE_GET_ALL = "SELECT * FROM food_store_online_rate";
     String FOOD_STORE_ONLINE_RATE_GET_ONE = "SELECT * FROM food_store_online_rate WHERE food_store_online_rate_id = ?";
     String FOOD_STORE_ONLINE_RATE_GET_ALL_BY_STORE_ONLINE_ID = "SELECT * FROM food_store_online_rate WHERE food_store_online_id = ? " +
@@ -183,7 +191,8 @@ public interface IRepositoryQuery {
             "FROM food_report T1\n" +
             "INNER JOIN food_order T2\n" +
             "ON T1.food_order_id = T2.food_order_id\n" +
-            "WHERE T2.food_store_online_id = ? AND T1.food_report_deleted = 0";
+            "WHERE T2.food_store_online_id = ? AND T1.food_report_deleted = 0\n" +
+            "ORDER BY T1.food_report_create_date DESC";
     String FOOD_REPORT_INSERT_ONE = "INSERT INTO food_report (user_id, food_store_online_id, food_order_id, " +
             "food_report_content, food_report_create_date, food_report_deleted) VALUES (?, ?, ?, ?, ?, ?)";
     String FOOD_REPORT_DELETE_ONE = "UPDATE food_report\n" +

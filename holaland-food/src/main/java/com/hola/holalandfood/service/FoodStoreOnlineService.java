@@ -20,4 +20,8 @@ public interface FoodStoreOnlineService {
     boolean checkUserIsOwner(int userId, int storeId) throws DataAccessException;
 
     boolean updateShopInfo(FoodStoreOnline obj) throws DataAccessException;
+
+    boolean isShopStopSelling(FoodStoreOnline obj) throws DataAccessException;
+
+    boolean isShopPauseSelling(FoodStoreOnline obj) throws DataAccessException;
 }

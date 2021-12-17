@@ -80,6 +80,13 @@
   </div>
 </div>
 
+<th:block th:if="${page == 3}">
+  <!-- Import toast update password -->
+  <div th:replace="profile/toast/toast-update-pass-success :: toastUpdatePassSuccess"></div>
+  <div th:replace="profile/toast/toast-check-old-password-failed :: toastCheckOldPassFailed"></div>
+  <div th:replace="profile/toast/toast-check-confirm-pass-failed :: toastCheckConfirmPassFailed"></div>
+  <div th:replace="profile/toast/toast-error :: toastError"></div>
+</th:block>
 <th:block th:if="${page == 4}">
   <!-- Import modal delete address -->
   <div th:replace="profile/modal/modal-delete-address :: confirmDeleteAddressModal"></div>

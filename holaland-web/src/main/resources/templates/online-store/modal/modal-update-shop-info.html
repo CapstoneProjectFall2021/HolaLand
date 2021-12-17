@@ -7,34 +7,34 @@
         <h5 class="modal-title" id="updateShopInfoModalLabel">Thay đổi thông tin</h5>
       </div>
       <div class="modal-body">
-        <form id="updateShopForm" class="row" method="post" th:action="@{/store/update}">
+        <form id="updateShopForm" class="row" method="post" enctype="multipart/form-data" th:action="@{/store/update}">
           <div class="col-12 col-md-12 col-lg-5 m-mb-20 m-mt-10">
-            <th:block th:if="${store.foodStoreOnlineImage != null}">
-              <img class="preview-img" width="100%" th:src="@{'/images/food/'+ *{foodStoreOnline.foodStoreOnlineImage}}" alt="">
+            <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage != null}">
+              <img id="blah" class="preview-img" width="100%" th:src="@{'/images/food/'+ *{store.foodStoreOnlineImage}}" alt="">
             </th:block>
-            <th:block th:if="${store.foodStoreOnlineImage == null}">
-              <img class="preview-img" width="100%" th:src="@{'/images/system/shop.png'}" alt="">
+            <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage == null}">
+              <img id="blah" class="preview-img" width="100%" th:src="@{'/images/system/shop.png'}" alt="">
             </th:block>
           </div>
           <div class="col-12 col-md-12 col-lg-7">
             <div class="row">
-              <input type="hidden" th:name="storeId" th:value="${store.foodStoreOnlineId}">
+              <input type="hidden" name="storeId" th:value="${store.foodStoreOnlineId}">
               <div class="form-group col-12 col-md-12 col-lg-12">
                 <fieldset>
                   <legend>Lựa chọn hình ảnh</legend>
-                  <input type="file" class="form-control custom-file-input" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+                  <input type="file" name="shopImage" class="form-control custom-file-input" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
                 </fieldset>
               </div>
               <div class="form-group col-md-12">
                 <fieldset>
                   <legend>Tên shop</legend>
-                  <input type="text" class="form-control" th:name="storeName" th:value="${store.foodStoreOnlineName}">
+                  <input type="text" class="form-control" name="storeName" th:value="${store.foodStoreOnlineName}">
                 </fieldset>
               </div>
               <div class="form-group col-md-12 mb-0">
                 <fieldset>
                   <legend>Mô tả ngắn</legend>
-                  <textarea class="form-control" rows="3" th:name="storeDescription" th:text="${store.foodStoreOnlineDescription}"></textarea>
+                  <textarea class="form-control" rows="3" name="storeDescription" th:text="${store.foodStoreOnlineDescription}"></textarea>
                 </fieldset>
               </div>
             </div>
