@@ -62,16 +62,17 @@ public interface IRepositoryQuery {
 
     String FOOD_ITEM_SEARCH = "SELECT * FROM food_item WHERE food_item_name LIKE ? AND food_item_deleted = 0";
 
-    String FOOD_ITEM_UPDATE = "UPDATE food_item\n" +
-            "SET food_item_image = COALESCE(?,food_item_image),\n" +
-            "    food_item_name = ?,\n" +
-            "    food_item_price = ?,\n" +
-            "    food_tag_id = ?\n" +
-            "WHERE food_item_id = ?";
+    String FOOD_ITEM_UPDATE = "UPDATE food_item" +
+            " SET food_item_image = COALESCE(?, food_item_image)," +
+            " food_item_name = ?," +
+            " food_item_price = ?," +
+            " food_tag_id = ?" +
+            " WHERE food_item_id = ?";
 
-    String FOOD_ITEM_COUNT_ITEM_SOLD = "SELECT SUM(food_item_sold_number)\n" +
-            "FROM food_item\n" +
-            "WHERE food_store_online_id = ? AND food_item_deleted = 0";
+    String FOOD_ITEM_COUNT_ITEM_SOLD = "SELECT SUM(food_item_sold_number)" +
+            " FROM food_item" +
+            " WHERE food_store_online_id = ?" +
+            " AND food_item_deleted = 0";
 
     String FOOD_ORDER_DETAIL_GET_ALL = "SELECT * FROM food_order_detail";
     String FOOD_ORDER_DETAIL_GET_ONE = "SELECT * FROM food_order_detail WHERE food_order_detail_id = ?";
@@ -90,20 +91,24 @@ public interface IRepositoryQuery {
 
     String FOOD_ORDER_UPDATE_STT_FOOD = "UPDATE food_order SET stt_food_code = ? WHERE food_order_id = ?";
 
-    String FOOD_ORDER_REJECT_ONE = "UPDATE food_order\n" +
-            "SET food_order_reason_reject = ?, stt_food_code = ?\n" +
-            "WHERE food_order_id = ?";
+    String FOOD_ORDER_REJECT_ONE = "UPDATE food_order" +
+            " SET food_order_reason_reject = ?," +
+            " stt_food_code = ?" +
+            " WHERE food_order_id = ?";
 
     String FOOD_STORE_ONLINE_GET_ALL = "SELECT * FROM food_store_online WHERE food_store_online_deleted = 0";
     String FOOD_STORE_ONLINE_GET_ONE = "SELECT * FROM food_store_online WHERE food_store_online_id = ?";
 
-    String FOOD_STORE_ONLINE_UPDATE_INFO_ONE = "UPDATE food_store_online\n" +
-            "SET food_store_online_name = ?, food_store_online_description = ?\n" +
-            "WHERE food_store_online_id = ?";
+    String FOOD_STORE_ONLINE_UPDATE_INFO_ONE = "UPDATE food_store_online" +
+            " SET food_store_online_name = ?," +
+            " food_store_online_description = ?" +
+            " WHERE food_store_online_id = ?";
 
     String FOOD_STORE_ONLINE_GET_ONE_BY_USER_ID = "SELECT * FROM food_store_online WHERE user_id = ? AND food_store_online_deleted = 0";
-    String FOOD_STORE_ONLINE_CHECK_USER_IS_OWNER = "SELECT EXISTS(SELECT * FROM food_store_online WHERE user_id = ? " +
-            "AND food_store_online_id = ? AND food_store_online_deleted = 0)";
+    String FOOD_STORE_ONLINE_CHECK_USER_IS_OWNER = "SELECT EXISTS(SELECT * FROM food_store_online" +
+            " WHERE user_id = ?" +
+            " AND food_store_online_id = ?" +
+            " AND food_store_online_deleted = 0)";
     String FOOD_STORE_ONLINE_GET_ONE_BY_ORDER_ID = "SELECT\n" +
             "       T1.food_store_online_id,\n" +
             "       T1.user_id,\n" +
@@ -163,12 +168,14 @@ public interface IRepositoryQuery {
             " food_store_online_rate_comment," +
             " food_store_online_rate_create_time," +
             " food_store_online_rate_update_time," +
-            " food_store_online_rate_deleted) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?);";
+            " food_store_online_rate_deleted)" +
+            " VALUES (?, ?, ?, ?, ?, ?, ?);";
 
-    String FOOD_STORE_ONLINE_RATE_UPDATE = "UPDATE food_store_online_rate\n" +
-            "SET food_store_online_rate_point = ?, food_store_online_rate_comment = ?, food_store_online_rate_update_time = ?\n" +
-            "WHERE food_store_online_rate_id = ?";
+    String FOOD_STORE_ONLINE_RATE_UPDATE = "UPDATE food_store_online_rate" +
+            " SET food_store_online_rate_point = ?," +
+            " food_store_online_rate_comment = ?," +
+            " food_store_online_rate_update_time = ?" +
+            " WHERE food_store_online_rate_id = ?";
 
     String FOOD_REPORT_GET_ALL = "SELECT * FROM food_report";
     String FOOD_REPORT_GET_ONE = "SELECT * FROM food_report WHERE food_report_id = ?";

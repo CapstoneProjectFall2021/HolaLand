@@ -125,8 +125,6 @@ public class FoodStoreController {
 
         Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
         rate.setUserId(currentUser.getId());
-        rate.setFoodStoreOnlineRateCreateTime(currentDate);
-        rate.setFoodStoreOnlineRateUpdateTime(currentDate);
         rate.setFoodStoreOnlineDeleted(false);
 
         // check this is the first rate
@@ -134,8 +132,11 @@ public class FoodStoreController {
 
         boolean isCheck;
         if (isRateExits) {
+            rate.setFoodStoreOnlineRateUpdateTime(currentDate);
             isCheck = foodStoreOnlineRateService.update(rate);
         } else {
+            rate.setFoodStoreOnlineRateCreateTime(currentDate);
+            rate.setFoodStoreOnlineRateUpdateTime(currentDate);
             isCheck = foodStoreOnlineRateService.save(rate);
         }
         if (isCheck) {

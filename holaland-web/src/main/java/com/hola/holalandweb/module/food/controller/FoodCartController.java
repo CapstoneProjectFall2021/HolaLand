@@ -6,6 +6,7 @@ import com.hola.holalandcore.service.UserAddressService;
 import com.hola.holalandcore.util.Format;
 import com.hola.holalandfood.entity.FoodItem;
 import com.hola.holalandfood.entity.FoodItemCart;
+import com.hola.holalandfood.entity.FoodStoreOnline;
 import com.hola.holalandfood.service.FoodItemService;
 import com.hola.holalandfood.service.FoodStoreOnlineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -184,6 +185,11 @@ public class FoodCartController {
     }
 
     private void setAttributeCart(Map<String, Object> mapFoodOrder, List<FoodItemCart> listFoodOrder, HttpSession session) {
+        if (listFoodOrder != null || listFoodOrder.isEmpty()) {
+            FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(listFoodOrder.get(0).getStoreId());
+            mapFoodOrder.put("foodStoreOnlineId", foodStoreOnline.getFoodStoreOnlineId());
+            mapFoodOrder.put("foodStoreOnlineName", foodStoreOnline.getFoodStoreOnlineName());
+        }
         mapFoodOrder.put("listFoodOrder", listFoodOrder);
         mapFoodOrder.put("quantity", countQuantity(listFoodOrder));
         mapFoodOrder.put("totalMoney", getTotalMoney(listFoodOrder));

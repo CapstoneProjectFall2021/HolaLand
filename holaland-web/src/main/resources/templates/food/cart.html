@@ -24,9 +24,11 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="flex-sb">
-            <p class="m-0 store-name"><i class="fas fa-store me-3"></i>Cơm bình dân</p>
+            <p class="m-0 store-name"><i class="fas fa-store me-3"></i>
+              <span th:text="${session.mapFoodOrder.get('foodStoreOnlineName')}"></span>
+            </p>
             <div>
-              <a th:href="@{/food}" class="btn btn-md btn-secondary">
+              <a th:href="@{/food/store(id=${session.mapFoodOrder.get('foodStoreOnlineId')})}" class="btn btn-md btn-secondary">
                 <i class="fas fa-plus text-success"></i>Tiếp tục mua hàng
               </a>
             </div>
