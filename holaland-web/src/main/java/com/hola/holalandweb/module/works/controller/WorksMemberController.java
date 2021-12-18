@@ -266,6 +266,7 @@ public class WorksMemberController {
     public String getListBooked(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(currentUser.getId(), 1);
+        model.addAttribute("userDetailService", userDetailService);
         model.addAttribute("listBooked", listBooked);
         model.addAttribute("page", 2);
         return "module-works";
@@ -321,6 +322,7 @@ public class WorksMemberController {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(currentUser.getId(), 1);
         List<UserDetail> listBookedModal = userDetailService.getAllUserBookedByUserId(bookedId);
+        model.addAttribute("userDetailService", userDetailService);
         model.addAttribute("listBooked", listBooked);
         model.addAttribute("page", 2);
         model.addAttribute("listBookedModal", listBookedModal);

@@ -284,6 +284,7 @@ public class WorksRecruitmentController {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(currentUser.getId(), 1);
         model.addAttribute("listApplied", listApplied);
+        model.addAttribute("userDetailService",userDetailService);
         model.addAttribute("page", 8);
         return "module-works";
     }
@@ -298,6 +299,7 @@ public class WorksRecruitmentController {
         List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(currentUser.getId(), 1);
         List<UserDetail> listAppliedModal = userDetailService.getAllUserAppliedByUserId(appliedId);
         model.addAttribute("listApplied", listApplied);
+        model.addAttribute("userDetailService",userDetailService);
         model.addAttribute("page", 8);
         model.addAttribute("listAppliedModal", listAppliedModal);
         return "module-works";
