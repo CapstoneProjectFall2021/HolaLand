@@ -28,7 +28,8 @@ public interface IRepositoryQuery {
             "FROM work_request_book T1\n" +
             "INNER JOIN user_detail T2\n" +
             "ON T1.user_id = T2.user_id\n" +
-            "WHERE T1.work_request_find_job_id = ?";
+            "WHERE T1.work_request_find_job_id = ?\n" +
+            "AND T1.stt_work_code = 1";
 
     String GET_LIST_USER_APPLIED_BY_USER_ID = "SELECT\n" +
             "T2.user_detail_id,\n" +
@@ -41,7 +42,8 @@ public interface IRepositoryQuery {
             "FROM work_request_apply T1\n" +
             "INNER JOIN user_detail T2\n" +
             "ON T1.user_id = T2.user_id\n" +
-            "WHERE T1.work_request_recruitment_id = ?";
+            "WHERE T1.work_request_recruitment_id = ?\n" +
+            "AND T1.stt_work_code = 1";
 
     String GET_USER_DETAIL_BY_USER_ID = "SELECT * FROM user_detail WHERE user_id = ?";
 

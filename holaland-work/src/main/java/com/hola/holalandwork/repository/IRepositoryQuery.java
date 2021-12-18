@@ -8,6 +8,9 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_FIND_JOB_DELETED_ONE = "UPDATE work_request_find_job\n" +
             "SET work_request_find_job_deleted = 1\n" +
             "WHERE work_request_find_job_id = ?";
+    String WORK_REQUEST_FIND_JOB_UPDATE_STT_ONE = "UPDATE work_request_find_job\n" +
+            "SET stt_work_code = ?\n" +
+            "WHERE work_request_find_job_id = ?";
 
     String WORK_REQUEST_RECRUITMENT_GET_ALL = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_deleted = 0";
     String WORK_REQUEST_RECRUITMENT_GET_ALL_BY_TYPE = "SELECT * FROM work_request_recruitment WHERE work_request_type_id = ? AND stt_work_code = ? AND work_request_recruitment_deleted = 0";
@@ -81,9 +84,17 @@ public interface IRepositoryQuery {
             " work_request_recruitment_id, work_request_recruitment_saved_deleted) VALUES(?, ?, ?)";
 
     String WORK_REQUEST_BOOK_GET_ALL = "SELECT * FROM work_request_book WHERE work_request_book_deleted = 0";
+    String WORK_REQUEST_BOOK_GET_ALL_BY_REQUEST_ID = "SELECT * FROM work_request_book WHERE work_request_find_job_id = ? " +
+            "AND work_request_book_deleted = 0";
     String WORK_REQUEST_BOOK_GET_ONE = "SELECT * FROM work_request_book WHERE work_request_book_id = ? AND work_request_book_deleted = 0";
     String INSERT_WORK_REQUEST_BOOK = "INSERT INTO work_request_book (user_id, work_request_find_job_id," +
             " stt_work_code, work_request_book_deleted) VALUES(?, ?, ?, ?)";
+    String WORK_REQUEST_BOOK_UPDATE_STT_ONE = "UPDATE work_request_book\n" +
+            "SET stt_work_code = ?\n" +
+            "WHERE user_id = ? AND work_request_find_job_id = ?";
+    String WORK_REQUEST_BOOK_REJECT_STT_ALL = "UPDATE work_request_book\n" +
+            "SET stt_work_code = ?\n" +
+            "WHERE work_request_find_job_id = ?";
 
     String WORK_PAYMENT_METHOD_GET_ALL = "SELECT * FROM work_payment_method WHERE work_payment_method_deleted = 0";
     String WORK_PAYMENT_METHOD_GET_ONE = "SELECT * FROM work_payment_method WHERE work_payment_method_id = ? AND work_payment_method_deleted = 0";

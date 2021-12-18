@@ -56,11 +56,17 @@
               </i>
             </a>
           </div>
+          <div class="btn-action" style="margin-right: 62px;" th:if="${sttWorkCode == 4}">
+            <a class="me-2" th:href="@{/works/jobs/find/manage/list/booked
+            (requestId=${requestFindJob.workRequestFindJobId}, code=${requestFindJob.sttWorkCode})}">
+              <i class="fas fa-user-friends m-0"></i>
+            </a>
+          </div>
           <div class="btn-action me-4" th:if="${sttWorkCode == 4}">
             <a class="me-2" th:href="@{/works/jobs/find/manage/repost
                 (requestFindJobId=${requestFindJob.workRequestFindJobId},
                 code=${requestFindJob.sttWorkCode})}">
-              <i class="fas fa-undo-alt m-0"></i>
+              <i class="fas fa-undo-alt text-warning m-0"></i>
             </a>
           </div>
           <div class="btn-remove" th:if="${sttWorkCode == 4}">
@@ -74,7 +80,7 @@
             <a class="me-2" th:href="@{/works/jobs/find/manage/repost
                 (requestFindJobId=${requestFindJob.workRequestFindJobId},
                 code=${requestFindJob.sttWorkCode})}">
-              <i class="fas fa-undo-alt m-0"></i>
+              <i class="fas fa-undo-alt text-warning m-0"></i>
             </a>
           </div>
           <div class="btn-remove" th:if="${sttWorkCode == 5}">

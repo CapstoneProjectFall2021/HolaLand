@@ -159,7 +159,7 @@
   </div>
 </div>
 
-<th:block th:if="${page == 2}">
+<th:block th:if="${page == 2 && listBookedModal != null && listBookedModal.size() != 0}">
   <!-- Import modal list recruitment -->
   <div th:replace="works/modal/modal-list-booked :: listBookedModal"></div>
 </th:block>
@@ -179,6 +179,10 @@
   <!-- Import modal confirm repost request find job -->
   <div th:replace="works/modal/modal-confirm-repost-request-find-job :: confirmRepostRequestFindJobModal"></div>
 </th:block>
+<th:block th:if="${page == 5 && listBooked != null && listBooked.size() != 0}">
+  <!-- Import modal list user booked -->
+  <div th:replace="works/modal/modal-list-user-booked :: listUserBookedModal"></div>
+</th:block>
 <th:block th:if="${page == 6}">
   <!-- Import modal request find job preview -->
   <div th:replace="works/modal/modal-request-find-job-preview :: findJobPreviewModal"></div>
@@ -194,6 +198,8 @@
   <div th:replace="works/modal/modal-reason-reject :: reasonRejectModal(reason=${reasonReject})"></div>
   <!-- Import modal confirm repost request recruitment -->
   <div th:replace="works/modal/modal-confirm-repost-request-recruitment :: confirmRepostRequestRecruitmentModal"></div>
+  <!-- Import modal list user applied -->
+  <div th:replace="works/modal/modal-list-user-applied :: listUserAppliedModal"></div>
 </th:block>
 <th:block th:if="${page == 10}">
   <!-- Import modal request find job preview -->
@@ -243,6 +249,11 @@
 <script th:if="${listAppliedModal != null && listAppliedModal.size() != 0}">
   const myModal = new bootstrap.Modal(document.getElementById('listAppliedModal'));
   myModal.show();
+</script>
+
+<script th:if="${listBooked != null && listBooked.size() != 0}">
+    const myModal = new bootstrap.Modal(document.getElementById('listUserBookedModal'));
+    myModal.show();
 </script>
 
 <script th:inline="javascript">

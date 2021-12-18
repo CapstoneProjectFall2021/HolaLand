@@ -27,8 +27,32 @@ public class WorkRequestBookRepositoryImpl implements WorkRequestBookRepository,
     }
 
     @Override
+    public List<WorkRequestBook> getAllByRequestId(int id) throws DataAccessException {
+        return jdbcTemplate.query(WORK_REQUEST_BOOK_GET_ALL_BY_REQUEST_ID, new WorkRequestBookMapper(), id);
+    }
+
+    @Override
     public WorkRequestBook getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(WORK_REQUEST_BOOK_GET_ONE, new WorkRequestBookMapper(), id);
+    }
+
+    @Override
+    public boolean updateStatusRequestByUserIdAndFindJobId(WorkRequestBook obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                WORK_REQUEST_BOOK_UPDATE_STT_ONE,
+                obj.getSttWorkCode(),
+                obj.getUserId(),
+                obj.getWorkRequestFindJobId()
+        ) > 0;
+    }
+
+    @Override
+    public boolean rejectAllRequestByFindJobId(WorkRequestBook obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                WORK_REQUEST_BOOK_REJECT_STT_ALL,
+                3,
+                obj.getWorkRequestFindJobId()
+        ) > 0;
     }
 
     @Override

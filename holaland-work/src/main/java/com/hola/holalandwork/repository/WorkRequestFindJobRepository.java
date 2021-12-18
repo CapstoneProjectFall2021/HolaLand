@@ -18,6 +18,8 @@ public interface WorkRequestFindJobRepository {
 
     List<WorkRequestFindJob> getAllListRecruitmentByUserId (int userId, int sttWorkCode) throws DataAccessException;
 
+    boolean updateSttRequest(WorkRequestFindJob obj) throws DataAccessException;
+
     boolean save(WorkRequestFindJob obj) throws DataAccessException;
 
     boolean delete(int id) throws DataAccessException;

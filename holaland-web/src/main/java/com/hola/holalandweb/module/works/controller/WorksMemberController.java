@@ -7,6 +7,8 @@ import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandwork.entity.*;
 import com.hola.holalandwork.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +35,7 @@ public class WorksMemberController {
     private final WorkTimeService workTimeService;
     private final UserDetailService userDetailService;
     private final WorkRequestApplyService workRequestApplyService;
+    private final WorkRequestBookService workRequestBookService;
 
     @Autowired
     public WorksMemberController(
@@ -44,7 +47,8 @@ public class WorksMemberController {
             WorkPaymentMethodService workPaymentMethodService,
             WorkTimeService workTimeService,
             UserDetailService userDetailService,
-            WorkRequestApplyService workRequestApplyService) {
+            WorkRequestApplyService workRequestApplyService,
+            WorkRequestBookService workRequestBookService) {
         this.workRequestRecruitmentSavedService = workRequestRecruitmentSavedService;
         this.sttWorkRequestRecruitmentFindJobCountService = sttWorkRequestRecruitmentFindJobCountService;
         this.workRequestTypeService = workRequestTypeService;
@@ -54,6 +58,7 @@ public class WorksMemberController {
         this.workTimeService = workTimeService;
         this.userDetailService = userDetailService;
         this.workRequestApplyService = workRequestApplyService;
+        this.workRequestBookService = workRequestBookService;
     }
 
     @GetMapping("/jobs/save")
@@ -265,7 +270,7 @@ public class WorksMemberController {
     @GetMapping("/booked") // /booked
     public String getListBooked(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(currentUser.getId(), 1);
+        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(currentUser.getId(), Constants.STT_WORK_CODE_WAITING_REPOSITORY);
         model.addAttribute("userDetailService", userDetailService);
         model.addAttribute("listBooked", listBooked);
         model.addAttribute("page", 2);
@@ -320,13 +325,55 @@ public class WorksMemberController {
             Authentication authentication
     ) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(currentUser.getId(), 1);
+        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(currentUser.getId(), Constants.STT_WORK_CODE_WAITING_REPOSITORY);
         List<UserDetail> listBookedModal = userDetailService.getAllUserBookedByUserId(bookedId);
+        model.addAttribute("bookedId", bookedId);
         model.addAttribute("userDetailService", userDetailService);
         model.addAttribute("listBooked", listBooked);
         model.addAttribute("page", 2);
         model.addAttribute("listBookedModal", listBookedModal);
         return "module-works";
+    }
+
+    @GetMapping("/booked/accepted")
+    public String userAcceptRecruiterBooked(
+            @RequestParam("bookedId") Integer bookedId,
+            @RequestParam("recruiterId") Integer recruiterId
+    ) {
+        WorkRequestBook requestAccepted = WorkRequestBook.builder()
+                .sttWorkCode(Constants.STT_WORK_CODE_REQUEST_APPLY_BOOK_AGREED)
+                .userId(recruiterId)
+                .workRequestFindJobId(bookedId)
+                .build();
+        WorkRequestFindJob currentRequest = WorkRequestFindJob.builder()
+                .sttWorkCode(Constants.STT_WORK_CODE_COMPLETE)
+                .workRequestFindJobId(bookedId)
+                .build();
+        boolean isCheck1 = workRequestBookService.userAcceptRecruiterBooked(requestAccepted);
+        boolean isCheck2 = workRequestFindJobService.updateSttRequest(currentRequest);
+        if(isCheck1 && isCheck2) {
+            return "redirect:" + "/works/booked";
+        }else {
+            return "404";
+        }
+    }
+
+    @GetMapping("/booked/show/rejected")
+    public String userRejectRecruiterBooked(
+            @RequestParam("bookedId") Integer bookedId,
+            @RequestParam("recruiterId") Integer recruiterId
+    ) {
+        WorkRequestBook requestReject = WorkRequestBook.builder()
+                .sttWorkCode(Constants.STT_WORK_CODE_REQUEST_APPLY_BOOK_DENIED)
+                .userId(recruiterId)
+                .workRequestFindJobId(bookedId)
+                .build();
+        boolean isCheck = workRequestBookService.userRejectRecruiterBooked(requestReject);
+        if(isCheck) {
+            return "redirect:" + "/works/booked/show?bookedId="+bookedId;
+        }else {
+            return "404";
+        }
     }
 
     @GetMapping("/jobs/find/manage/reject/reason") // jobs/find/manage/reject/reason
@@ -351,4 +398,29 @@ public class WorksMemberController {
         model.addAttribute("page", 5);
         return "module-works";
     }
+
+    @GetMapping("/jobs/find/manage/list/booked") // jobs/find/manage/reject/reason
+    public String getListBookedFindJobRequest(
+            @RequestParam("requestId") Integer requestId,
+            @RequestParam("code") Integer sttWorkCode,
+            Model model,
+            Authentication authentication
+    ) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, currentUser.getId());
+        List<WorkRequestFindJob> workRequestFindJobs = workRequestFindJobService.getAllByUserIdAndTypeId(
+                currentUser.getId(),
+                sttWorkCode
+        );
+        List<WorkRequestBook> listBooked = workRequestBookService.getAllByRequestId(requestId);
+        model.addAttribute("listBooked", listBooked);
+        model.addAttribute("userDetailService", userDetailService);
+        model.addAttribute("sttWorkCode", sttWorkCode);
+        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
+        model.addAttribute("requestFindJobList", workRequestFindJobs);
+        model.addAttribute("page", 5);
+        return "module-works";
+    }
+
 }
