@@ -26,7 +26,7 @@
               </a>
               <div class="request-info">
                 <p>Lương: <span th:text="*{jobApplied.workRequestRecruitmentSalary}"></span> &nbsp;&#8226;&nbsp;
-                  Thời hạn: <span th:text="*{jobApplied.workRequestRecruitmentEndDateTime}"></span></p>
+                  Thời hạn: <span th:text="*{#dates.format(jobApplied.workRequestRecruitmentEndDateTime, 'dd-MM-yyyy')}"></span></p>
                 <p th:classappend="*{jobApplied.sttWorkCode == 3 ? 'text-success' : 'text-danger'}"
                    th:text="*{jobApplied.sttWorkCode == 3 ? 'Đang tuyển dụng' : 'Hết hạn tuyển dụng'}"></p>
               </div>

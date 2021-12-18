@@ -50,7 +50,7 @@
                                         worker.workSalaryUnitId == 3 ? 'VNĐ/Tuần' : 'VNĐ/Tháng'}"
                                     ></span>
                                 </p>
-                                <p>Thời hạn: <span th:text="*{worker.workRequestFindJobEndDateTime}"></span></p>
+                                <p>Thời hạn: <span th:text="*{#dates.format(worker.workRequestFindJobEndDateTime, 'dd-MM-yyyy')}"></span></p>
                             </div>
                         </div>
                     </div>

@@ -14,7 +14,7 @@
               <h3 th:text="${jobDetail.workRequestRecruitmentTitle}"></h3>
               <p>
                 <i class="far fa-clock fa-fw"></i>Hạn nộp hồ sơ:
-                <span th:text="${jobDetail.workRequestRecruitmentEndDateTime}"></span>
+                <span th:text="${#dates.format(jobDetail.workRequestRecruitmentEndDateTime, 'dd-MM-yyyy')}"></span>
               </p>
               <p>
                 <i class="fas fa-map-marker-alt fa-fw"></i>Địa điểm:

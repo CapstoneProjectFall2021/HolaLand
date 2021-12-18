@@ -14,7 +14,7 @@
               <h3 th:text="${jobDetail.workRequestFindJobTitle}">
               </h3>
               <p><i class="far fa-calendar-alt fa-fw"></i>Ngày hết hạn:
-                <span th:text="${jobDetail.workRequestFindJobEndDateTime}"></span>
+                <span th:text="${#dates.format(jobDetail.workRequestFindJobEndDateTime, 'dd-MM-yyyy')}"></span>
               </p>
             </div>
             <div class="col-md-12 col-lg-12 col-xl-3">

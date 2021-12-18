@@ -32,7 +32,7 @@
                                         work.workSalaryUnitId == 2 ? 'ngày' :
                                         work.workSalaryUnitId == 3 ? 'tuần' : 'tháng'
                                     }"></span> &nbsp;&#8226;&nbsp; Thời hạn:
-                <span th:text="*{work.workRequestFindJobEndDateTime}"></span></p>
+                <span th:text="*{#dates.format(work.workRequestFindJobEndDateTime, 'dd-MM-yyyy')}"></span></p>
                 <p th:classappend="*{work.sttWorkCode == 3 ? 'text-success' : 'text-danger'}"
                    th:text="*{work.sttWorkCode == 3 ? 'Đang ứng tuyển' : 'Hết hạn ứng tuyển'}"></p>
               </div>
