@@ -267,26 +267,11 @@ public class WorksRecruitmentController {
     ) {
         Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
         WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(id);
-        WorkRequestRecruitment newRequestRecruitment = WorkRequestRecruitment.builder().build();
-        newRequestRecruitment.setUserId(requestRecruitment.getUserId());
-        newRequestRecruitment.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
-        newRequestRecruitment.setWorkRequestTypeId(requestRecruitment.getWorkRequestTypeId());
-        newRequestRecruitment.setWorkSalaryUnitId(requestRecruitment.getWorkSalaryUnitId());
-        newRequestRecruitment.setWorkPaymentMethodId(requestRecruitment.getWorkPaymentMethodId());
-        newRequestRecruitment.setWorkRequestRecruitmentTitle(requestRecruitment.getWorkRequestRecruitmentTitle());
-        newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
-        newRequestRecruitment.setWorkRequestRecruitmentEndDateTime(endDate);
-        newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
-        newRequestRecruitment.setWorkRequestRecruitmentDescription(requestRecruitment.getWorkRequestRecruitmentDescription());
-        newRequestRecruitment.setWorkRequestRecruitmentRequirement(requestRecruitment.getWorkRequestRecruitmentRequirement());
-        newRequestRecruitment.setWorkRequestRecruitmentBenefit(requestRecruitment.getWorkRequestRecruitmentBenefit());
-        newRequestRecruitment.setWorkRequestRecruitmentSalary(requestRecruitment.getWorkRequestRecruitmentSalary());
-        newRequestRecruitment.setWorkRequestRecruitmentQuantity(requestRecruitment.getWorkRequestRecruitmentQuantity());
-        newRequestRecruitment.setWorkRequestRecruitmentExperienceRequirement(requestRecruitment.isWorkRequestRecruitmentExperienceRequirement());
-        newRequestRecruitment.setWorkRequestRecruitmentGenderRequirement(requestRecruitment.isWorkRequestRecruitmentGenderRequirement());
-        newRequestRecruitment.setWorkRequestRecruitmentWorkLocation(requestRecruitment.getWorkRequestRecruitmentWorkLocation());
-        newRequestRecruitment.setWorkRequestRecruitmentDeleted(requestRecruitment.isWorkRequestRecruitmentDeleted());
-        boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
+        requestRecruitment.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
+        requestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);;
+        requestRecruitment.setWorkRequestRecruitmentEndDateTime(endDate);;
+        requestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
+        boolean isCheck = workRequestRecruitmentService.save(requestRecruitment);
         if (isCheck) {
             return "redirect:" + "/works/jobs/recruitment/manage";
         } else {

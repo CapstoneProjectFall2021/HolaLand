@@ -300,23 +300,11 @@ public class WorksMemberController {
     ) {
         Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
         WorkRequestFindJob requestFindJob = workRequestFindJobService.getOne(id);
-        WorkRequestFindJob newRequestFindJob = WorkRequestFindJob.builder().build();
-        newRequestFindJob.setUserId(requestFindJob.getUserId());
-        newRequestFindJob.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
-        newRequestFindJob.setWorkRequestTypeId(requestFindJob.getWorkRequestTypeId());
-        newRequestFindJob.setWorkSalaryUnitId(requestFindJob.getWorkSalaryUnitId());
-        newRequestFindJob.setWorkPaymentMethodId(requestFindJob.getWorkPaymentMethodId());
-        newRequestFindJob.setWorkTimeId(requestFindJob.getWorkTimeId());
-        newRequestFindJob.setWorkRequestFindJobExpectedSalary(requestFindJob.getWorkRequestFindJobExpectedSalary());
-        newRequestFindJob.setWorkRequestFindJobExpectedLocation(requestFindJob.getWorkRequestFindJobExpectedLocation());
-        newRequestFindJob.setWorkRequestFindJobTitle(requestFindJob.getWorkRequestFindJobTitle());
-        newRequestFindJob.setWorkRequestFindJobStartDateTime(currentDate);
-        newRequestFindJob.setWorkRequestFindJobLastUpdateDateTime(currentDate);
-        newRequestFindJob.setWorkRequestFindJobEndDateTime(endDate);
-        newRequestFindJob.setWorkRequestFindJobDescription(requestFindJob.getWorkRequestFindJobDescription());
-        newRequestFindJob.setWorkRequestFindJobPersonalExperience(requestFindJob.getWorkRequestFindJobPersonalExperience());
-        newRequestFindJob.setWorkRequestFindJobDeleted(requestFindJob.isWorkRequestFindJobDeleted());
-        boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
+        requestFindJob.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);;
+        requestFindJob.setWorkRequestFindJobStartDateTime(currentDate);;
+        requestFindJob.setWorkRequestFindJobLastUpdateDateTime(currentDate);;
+        requestFindJob.setWorkRequestFindJobEndDateTime(endDate);;
+        boolean isCheck = workRequestFindJobService.save(requestFindJob);
         if (isCheck) {
             return "redirect:" + "/works/jobs/find/manage";
         } else {
