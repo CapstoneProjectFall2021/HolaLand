@@ -1,11 +1,13 @@
 package com.hola.holalandweb.module.works.controller;
 
+import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandwork.entity.*;
 import com.hola.holalandwork.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -84,11 +86,12 @@ public class WorksRecruitmentController {
     }
 
     @GetMapping("/jobs/recruitment/manage") // jobs/recruitment/manage
-    public String getRecruitmentsPosted(Model model) {
+    public String getRecruitmentsPosted(Model model, Authentication authentication) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, currentUser.getId());
         List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
-                1,
+                currentUser.getId(),
                 sttWorkList.get(0).getSttWorkCode()
         );
         model.addAttribute("sttWorkCode", sttWorkList.get(0).getSttWorkCode());
@@ -101,12 +104,14 @@ public class WorksRecruitmentController {
     @GetMapping("/jobs/recruitment/manage/status") //jobs/recruitment/manage/status
     public String getRecruitmentsPostedStatus(
             @RequestParam("code") Integer sttWorkCode,
-            Model model
+            Model model,
+            Authentication authentication
     ) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, currentUser.getId());
         List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
-                1,
+                currentUser.getId(),
                 sttWorkCode
         );
         model.addAttribute("sttWorkCode", sttWorkCode);
@@ -120,13 +125,15 @@ public class WorksRecruitmentController {
     public String getRecruitmentDeleteRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,
-            Model model) {
+            Model model,
+            Authentication authentication) {
         // code delete
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         workRequestRecruitmentService.delete(requestId);
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, currentUser.getId());
         List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
-                1,
+                currentUser.getId(),
                 sttWorkCode
         );
         model.addAttribute("sttWorkCode", sttWorkCode);
@@ -140,12 +147,12 @@ public class WorksRecruitmentController {
         SttWorkRequestRecruitmentFindJobCount sttCount = sttWorkRequestRecruitmentFindJobCountService.getOneByUserId(userId);
 
         Map<SttWork, Integer> sttWorkCountMap = new LinkedHashMap<>();
-        sttWorkCountMap.put(sttWorkList.get(0), sttCount.getSttWorkRequestRecruitmentFindJobCountPending());
-        sttWorkCountMap.put(sttWorkList.get(1), sttCount.getSttWorkRequestRecruitmentFindJobCountReject());
-        sttWorkCountMap.put(sttWorkList.get(2), sttCount.getSttWorkRequestRecruitmentFindJobCountApproved());
-        sttWorkCountMap.put(sttWorkList.get(3), sttCount.getSttWorkRequestRecruitmentFindJobCountComplete());
-        sttWorkCountMap.put(sttWorkList.get(4), sttCount.getSttWorkRequestRecruitmentFindJobCountExpired());
-        sttWorkCountMap.put(sttWorkList.get(5), sttCount.getSttWorkRequestRecruitmentFindJobCountSaveDraft());
+        sttWorkCountMap.put(sttWorkList.get(0), sttCount != null ? sttCount.getSttWorkRequestRecruitmentFindJobCountPending() : 0);
+        sttWorkCountMap.put(sttWorkList.get(1), sttCount != null ? sttCount.getSttWorkRequestRecruitmentFindJobCountReject() : 0);
+        sttWorkCountMap.put(sttWorkList.get(2), sttCount != null ? sttCount.getSttWorkRequestRecruitmentFindJobCountApproved() : 0);
+        sttWorkCountMap.put(sttWorkList.get(3), sttCount != null ? sttCount.getSttWorkRequestRecruitmentFindJobCountComplete() : 0);
+        sttWorkCountMap.put(sttWorkList.get(4), sttCount != null ? sttCount.getSttWorkRequestRecruitmentFindJobCountExpired() : 0);
+        sttWorkCountMap.put(sttWorkList.get(5), sttCount != null ? sttCount.getSttWorkRequestRecruitmentFindJobCountSaveDraft() : 0);
         return sttWorkCountMap;
     }
 
@@ -173,13 +180,15 @@ public class WorksRecruitmentController {
     @PostMapping(value = "/jobs/recruitment/create", params = "save") // jobs/recruitment/create
     public String createRequestRecruitment(
             @ModelAttribute("newRequestRecruitment") WorkRequestRecruitment newRequestRecruitment,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            Authentication authentication
     ) {
         if (bindingResult.hasErrors()) {
             System.out.println("There was a error " + bindingResult);
             return "404";
         }
-        setAttrNewRequestRecruitment(newRequestRecruitment, 1, Constants.STT_WORK_CODE_PENDING_APPROVAL);
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        setAttrNewRequestRecruitment(newRequestRecruitment, currentUser.getId(), Constants.STT_WORK_CODE_PENDING_APPROVAL);
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
         if (isCheck) {
             return "redirect:" + "/works/jobs/recruitment/manage";
@@ -191,13 +200,15 @@ public class WorksRecruitmentController {
     @PostMapping(value = "/jobs/recruitment/create", params = "saveDraft") // jobs/recruitment/create
     public String createRequestRecruitmentSaveDraft(
             @ModelAttribute("newRequestRecruitment") WorkRequestRecruitment newRequestRecruitment,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            Authentication authentication
     ) {
         if (bindingResult.hasErrors()) {
             System.out.println("There was a error " + bindingResult);
             return "404";
         }
-        setAttrNewRequestRecruitment(newRequestRecruitment, 1, Constants.STT_WORK_CODE_SAVE_DRAFT);
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        setAttrNewRequestRecruitment(newRequestRecruitment, currentUser.getId(), Constants.STT_WORK_CODE_SAVE_DRAFT);
         boolean isCheck = workRequestRecruitmentService.save(newRequestRecruitment);
         if (isCheck) {
             return "redirect:" + "/works/jobs/recruitment/manage/status?code=6";
@@ -231,12 +242,14 @@ public class WorksRecruitmentController {
     public String getFormRepostRequestRecruitment(
             @RequestParam("requestRecruitmentId") Integer requestRecruitmentId,
             @RequestParam("code") Integer sttWorkCode,
-            Model model
+            Model model,
+            Authentication authentication
     ) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, currentUser.getId());
         List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
-                1,
+                currentUser.getId(),
                 sttWorkCode
         );
         model.addAttribute("requestRecruitmentId", requestRecruitmentId);
@@ -282,8 +295,9 @@ public class WorksRecruitmentController {
     }
 
     @GetMapping("/apply") // apply
-    public String getListApplied(Model model) {
-        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, 1);
+    public String getListApplied(Model model, Authentication authentication) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(currentUser.getId(), 1);
         model.addAttribute("listApplied", listApplied);
         model.addAttribute("page", 8);
         return "module-works";
@@ -292,9 +306,11 @@ public class WorksRecruitmentController {
     @GetMapping("/aplly/show") // aplly/show
     public String getListUserApplied(
             @RequestParam("appliedId") Integer appliedId,
-            Model model
+            Model model,
+            Authentication authentication
     ) {
-        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(1, 1);
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(currentUser.getId(), 1);
         List<UserDetail> listAppliedModal = userDetailService.getAllUserAppliedByUserId(appliedId);
         model.addAttribute("listApplied", listApplied);
         model.addAttribute("page", 8);
@@ -306,12 +322,14 @@ public class WorksRecruitmentController {
     public String getReasonRejectRecruitmentRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,
-            Model model
+            Model model,
+            Authentication authentication
     ) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, 1);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, currentUser.getId());
         List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
-                1,
+                currentUser.getId(),
                 sttWorkCode
         );
         WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(requestId);
