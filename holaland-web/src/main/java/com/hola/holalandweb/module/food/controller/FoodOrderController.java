@@ -2,19 +2,16 @@ package com.hola.holalandweb.module.food.controller;
 
 import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.service.UserAddressService;
-import com.hola.holalandcore.service.UserDetailService;
 import com.hola.holalandcore.util.Format;
 import com.hola.holalandfood.entity.FoodOrder;
 import com.hola.holalandfood.entity.FoodOrderDetail;
 import com.hola.holalandfood.entity.FoodReport;
 import com.hola.holalandfood.entity.FoodStoreOnline;
 import com.hola.holalandfood.service.FoodCountSttOrderService;
-import com.hola.holalandfood.service.FoodItemService;
 import com.hola.holalandfood.service.FoodOrderDetailService;
 import com.hola.holalandfood.service.FoodOrderService;
 import com.hola.holalandfood.service.FoodReportService;
 import com.hola.holalandfood.service.FoodStoreOnlineService;
-import com.hola.holalandfood.service.SttFoodService;
 import com.hola.holalandfood.view.FoodCountSttOrder;
 import com.hola.holalandweb.constant.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,14 +84,17 @@ public class FoodOrderController {
         List<FoodOrderDetail> foodOrderDetailList = foodOrderDetailService.getAllByOrderId(orderId);
 
         // Get store id for click food name in modal
-        int foodStoreOnlineId = foodStoreOnlineService.getOneByOrderId(orderId).getFoodStoreOnlineId();
+        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByOrderId(orderId);
         int sellerId = foodStoreOnlineService.getOneByOrderId(orderId).getUserId();
 
         // Add more attr for modal order detail
         model.addAttribute("orderStatus", orderStatus);
         model.addAttribute("foodOrderDetailList", foodOrderDetailList);
-        model.addAttribute("foodStoreOnlineId", foodStoreOnlineId);
-        model.addAttribute("sellerPhone", userAddressService.getOneByUserId(sellerId).getUserPhone());
+        model.addAttribute("foodStoreOnlineId", foodStoreOnline.getFoodStoreOnlineId());
+        model.addAttribute("foodStoreOnlineName", foodStoreOnline.getFoodStoreOnlineName());
+        model.addAttribute("sellerPhoneNumber", userAddressService.getOneByUserId(sellerId).getUserPhone());
+        model.addAttribute("foodOrderService", foodOrderService);
+        model.addAttribute("format", new Format());
         return "module-food";
     }
 

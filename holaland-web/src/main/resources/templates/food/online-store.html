@@ -74,9 +74,8 @@
               <a th:href="@{/login}" class="nav-link" sec:authorize="!isAuthenticated()">
                 Đánh giá
               </a>
-              <a href="javascript:void(0)" class="nav-link"
-                 th:onclick="'javascript:checkUserOrderInStore(' + ${foodStoreOnline.foodStoreOnlineId} + ')'"
-                 sec:authorize="isAuthenticated()">
+              <a href="javascript:void(0)" class="nav-link" sec:authorize="isAuthenticated()"
+                 th:onclick="'javascript:checkUserOrderInStore(' + ${foodStoreOnline.foodStoreOnlineId} + ')'">
                 Đánh giá
               </a>
             </li>
@@ -113,7 +112,9 @@
                           <img th:id="'food-item-img-' + *{foodItem.foodItemId}" class="media-object rounded-circle" th:src="@{'/images/food/'+ *{foodItem.foodItemImage}}">
                         </div>
                         <div class="content-body">
-                          <a th:id="'food-item-name-' + *{foodItem.foodItemId}" href="javascript:void(0)" th:text="*{foodItem.foodItemName}" onclick="getFoodItemDetail(event)"></a>
+                          <a th:id="'food-item-name-' + *{foodItem.foodItemId}" href="javascript:void(0)" th:text="*{foodItem.foodItemName}"
+                             th:onclick="'javascript:getFoodItemDetail(' + ${foodItem.foodItemId} + ')'">
+                          </a>
                           <div class="food-info">
                             <p>Giá:
                               <span th:id="'food-item-price-' + *{foodItem.foodItemId}" th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
@@ -125,7 +126,7 @@
                       </div>
                       <div class="flex">
                         <a href="javascript:void(0)" class="btn-more mx-0" sec:authorize="isAuthenticated()">
-                          <i class="fas fa-plus text-success"
+                          <i class="fas fa-plus text-success" data-bs-placement="top" data-bs-toggle="tooltip" title="Thêm vào giỏ hàng"
                              th:onclick="'javascript:addFoodToCart(' + ${foodItem.foodItemId} + ',' + ${foodItem.foodStoreOnlineId} + ')'">
                           </i>
                         </a>

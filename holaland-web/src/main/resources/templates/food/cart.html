@@ -6,7 +6,7 @@
         <h1 class="title fix-mb-title">Giỏ hàng</h1>
       </div>
     </div>
-    <div class="panel" th:if="${session.mapFoodOrder == null}">
+    <div class="panel" th:if="${session.mapOrderInCart == null}">
       <div class="row">
         <div class="col-lg-12">
           <div class="flex-sb">
@@ -20,15 +20,15 @@
         </div>
       </div>
     </div>
-    <div class="panel" th:if="${session.mapFoodOrder != null}">
+    <div class="panel" th:if="${session.mapOrderInCart != null}">
       <div class="row">
         <div class="col-lg-12">
           <div class="flex-sb">
             <p class="m-0 store-name"><i class="fas fa-store me-3"></i>
-              <span th:text="${session.mapFoodOrder.get('foodStoreOnlineName')}"></span>
+              <span th:text="${session.mapOrderInCart.get('foodStoreOnlineName')}"></span>
             </p>
             <div>
-              <a th:href="@{/food/store(id=${session.mapFoodOrder.get('foodStoreOnlineId')})}" class="btn btn-md btn-secondary">
+              <a th:href="@{/food/store(id=${session.mapOrderInCart.get('foodStoreOnlineId')})}" class="btn btn-md btn-secondary">
                 <i class="fas fa-plus text-success"></i>Tiếp tục mua hàng
               </a>
             </div>
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="panel pt-2" th:if="${session.mapFoodOrder != null}">
+    <div class="panel pt-2" th:if="${session.mapOrderInCart != null}">
       <div class="row">
         <div class="col-lg-12">
           <table id="cart-table" class="table" cellspacing="0" width="100%">
@@ -51,22 +51,28 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="food, stt : ${session.mapFoodOrder.get('listFoodOrder')}">
+            <tr th:each="food, stt : ${session.mapOrderInCart.get('listFoodItemOrder')}">
               <td class="text-center" th:text="*{stt.index + 1}"></td>
+              <td class="d-none">
+                <img th:id="'food-item-img-' + *{food.foodId}" th:src="@{'/images/food/'+ *{food.foodImage}}">
+              </td>
               <td>
-                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#foodDetailModal"
-                th:text="*{food.foodName}"></a>
+                <a th:id="'food-item-name-' + *{food.foodId}" href="javascript:void(0)" th:text="*{food.foodName}"
+                   th:onclick="'javascript:getFoodItemDetail(' + ${food.foodId} + ')'">
+                </a>
               </td>
               <td class="text-center">
-                <span th:text="*{#numbers.formatInteger(food.unitPrice, 3, 'POINT')}"></span><sup>đ</sup>
+                <span th:id="'food-item-price-' + *{food.foodId}" th:text="*{#numbers.formatInteger(food.unitPrice, 3, 'POINT')}"></span><sup>đ</sup>
               </td>
               <td class="text-center">
                 <a class="btn-cart" th:href="@{/food/cart/update/quantity(foodId=*{food.foodId}, flag=0)}">
-                  <i class="fas fa-minus text-info"></i>
+                  <!-- <i class="fas fa-minus text-info"></i> -->
+                  <i class="bi bi-dash-square text-info"></i>
                 </a>
                 <span th:text="*{food.quantity}"></span>
                 <a class="btn-cart" th:href="@{/food/cart/update/quantity(foodId=*{food.foodId}, flag=1)}">
-                  <i class="fas fa-plus text-info"></i>
+                  <!-- <i class="fas fa-plus text-info"></i> -->
+                  <i class="bi bi-plus-square text-info"></i>
                 </a>
               </td>
               <td class="text-end">
@@ -84,7 +90,9 @@
           </table>
           <div class="btn-group">
             <div class="totalMoney">
-              Tổng tiền:&nbsp; <span class="text-info" th:text="${#numbers.formatInteger(session.mapFoodOrder.get('totalMoney'), 3, 'POINT')}"></span><sup class="text-info">đ</sup>
+              Tổng tiền:&nbsp;
+              <span class="text-info" th:text="${#numbers.formatInteger(session.mapOrderInCart.get('totalMoney'), 3, 'POINT')}">
+              </span><sup class="text-info">đ</sup>
             </div>
             <div>
               <a href="javascript:void(0)" class="btn btn-md btn-secondary" data-bs-toggle="modal" data-bs-target="#confirmDeleteCartModal">
@@ -98,35 +106,35 @@
   </div>
 
   <!-- Shipping address -->
-  <div class="shipping-address" th:if="${session.mapFoodOrder != null}">
+  <div class="shipping-address" th:if="${session.mapOrderInCart != null}">
     <div class="row">
       <div class="col-12">
         <h1 class="title fix-mb-title fix-mt-title">Thông tin giao hàng</h1>
       </div>
     </div>
-    <form class="row panel-form mx-0 m-mb-16">
-      <div class="form-group col-12 col-md-12 col-lg-6">
+    <form class="row panel-form mx-0 m-mb-16" method="post" th:action="@{/food/cart/confirm}">
+      <div class="form-group col-12 col-md-12 col-lg-4">
         <fieldset>
           <legend>Họ và tên</legend>
           <input type="text" class="form-control" readonly th:value="${userAddress.userName}">
         </fieldset>
       </div>
-      <div class="form-group col-12 col-md-12 col-lg-6">
-        <fieldset>
-          <legend>Số điện thoại</legend>
-          <input type="text" class="form-control" readonly th:value="${format.phoneNumber(userAddress.userPhone)}">
-        </fieldset>
-      </div>
-      <div class="form-group col-12 col-md-12 col-lg-12">
+      <div class="form-group col-12 col-md-12 col-lg-8">
         <fieldset>
           <legend>Địa chỉ</legend>
           <input type="text" class="form-control" readonly th:value="${userAddress.userAddress}">
         </fieldset>
       </div>
-      <div class="form-group col-12 col-md-12 col-lg-12">
+      <div class="form-group col-12 col-md-12 col-lg-4">
+        <fieldset>
+          <legend>Số điện thoại</legend>
+          <input type="text" class="form-control" readonly th:value="${format.phoneNumber(userAddress.userPhone)}">
+        </fieldset>
+      </div>
+      <div class="form-group col-12 col-md-12 col-lg-8">
         <fieldset>
           <legend>Ghi chú</legend>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" name="note">
         </fieldset>
       </div>
       <div class="col-md-12 text-end mt-2">
@@ -136,9 +144,9 @@
         <a href="javascript:void(0)" class="btn btn-md btn-secondary m-mb-12 me-2">
           <i class="fas fa-pencil-alt text-success"></i>Chỉnh sửa địa chỉ
         </a>
-        <a href="javascript:void(0)" class="btn btn-md btn-secondary m-mb-12" data-bs-toggle="modal" data-bs-target="#confirmOrderSuccessfullyModal">
+        <button type="submit" class="btn btn-md btn-secondary m-mb-12">
           <i class="fas fa-check text-success"></i>Xác nhận mua hàng
-        </a>
+        </button>
       </div>
     </form>
   </div>

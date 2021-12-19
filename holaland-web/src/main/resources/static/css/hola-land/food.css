@@ -222,7 +222,7 @@
 }
 
 #foodDetailModal .modal-body .flex .content-body h3 {
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 4px;
   font-weight: var(--font-weight-4);
 }
@@ -336,6 +336,7 @@
 
 /* Online store order ===============================================================================*/
 
+.contact-store-name,
 .contact-mobile,
 .report-order {
   color: var(--secondary-text);

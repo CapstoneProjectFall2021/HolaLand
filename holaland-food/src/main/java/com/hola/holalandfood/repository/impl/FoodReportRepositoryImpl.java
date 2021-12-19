@@ -2,7 +2,6 @@ package com.hola.holalandfood.repository.impl;
 
 import com.hola.holalandfood.entity.FoodReport;
 import com.hola.holalandfood.mapper.FoodReportMapper;
-import com.hola.holalandfood.mapper.FoodStoreOnlineRateMapper;
 import com.hola.holalandfood.repository.FoodReportRepository;
 import com.hola.holalandfood.repository.IRepositoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;

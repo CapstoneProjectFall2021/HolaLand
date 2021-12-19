@@ -48,11 +48,11 @@ public interface IRepositoryQuery {
     String GET_USER_ADDRESS_BY_USER_ID = "SELECT * FROM user_address WHERE user_id = ? " +
             "AND user_address_deleted = 0";
 
-    String GET_ONE_ADDRESS_BY_USER_ID = "SELECT *\n" +
-            "FROM user_address\n" +
-            "WHERE user_id = ?\n" +
-            "AND user_address_deleted = 0\n" +
-            "AND user_address_default = 1";
+    String GET_ONE_ADDRESS_BY_USER_ID = "SELECT *" +
+            " FROM user_address" +
+            " WHERE user_id = ?" +
+            " AND user_address_deleted = 0" +
+            " AND user_address_default = 1";
 
     String INSERT_USER_ADDRESS_ONE = "INSERT INTO user_address(user_id, user_name, user_phone, user_address, " +
             "user_address_default, user_address_deleted) VALUES (?, ?, ?, ?, ?, ?)";

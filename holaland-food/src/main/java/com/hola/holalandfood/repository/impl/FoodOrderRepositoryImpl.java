@@ -7,8 +7,12 @@ import com.hola.holalandfood.repository.IRepositoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 @Repository
@@ -50,29 +54,47 @@ public class FoodOrderRepositoryImpl implements FoodOrderRepository, IRepository
         for (int i = 0; i < status.length; i++) {
             s.append((i != status.length - 1) ? status[i] + "," : status[i] + ")");
         }
-        String sql = "SELECT\n" +
-                "       T1.food_order_id,\n" +
-                "       T1.user_id,\n" +
-                "       T1.food_store_online_id,\n" +
-                "       T1.stt_food_code,\n" +
-                "       T1.food_order_total_price,\n" +
-                "       T1.food_order_created_date,\n" +
-                "       T1.food_order_note,\n" +
-                "       T1.food_order_reason_reject,\n" +
-                "       T1.food_order_deleted\n" +
-                "FROM food_order T1\n" +
-                "LEFT JOIN food_store_online T2\n" +
-                "ON T1.food_store_online_id = T2.food_store_online_id\n" +
-                "WHERE T2.user_id = ?\n" +
-                "  AND T1.stt_food_code in "+ s +"\n" +
-                "  AND T1.food_order_deleted = 0\n" +
-                "ORDER BY T1.food_order_created_date DESC";
+        String sql = "SELECT " +
+                " T1.food_order_id," +
+                " T1.user_id," +
+                " T1.food_store_online_id," +
+                " T1.stt_food_code," +
+                " T1.food_order_total_price," +
+                " T1.food_order_created_date," +
+                " T1.food_order_note," +
+                " T1.food_order_reason_reject," +
+                " T1.food_order_deleted" +
+                " FROM food_order T1" +
+                " LEFT JOIN food_store_online T2" +
+                " ON T1.food_store_online_id = T2.food_store_online_id" +
+                " WHERE T2.user_id = ?" +
+                " AND T1.stt_food_code in "+ s +
+                " AND T1.food_order_deleted = 0" +
+                " ORDER BY T1.food_order_created_date DESC";
         return jdbcTemplate.query(sql, new FoodOrderMapper(), userId);
     }
 
     @Override
     public FoodOrder getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(FOOD_ORDER_GET_ONE, new FoodOrderMapper(),id);
+    }
+
+    @Override
+    public int save(FoodOrder obj) throws DataAccessException {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(FOOD_ORDER_SAVE, Statement.RETURN_GENERATED_KEYS);
+            ps.setObject(1, obj.getUserId());
+            ps.setObject(2, obj.getFoodStoreOnlineId());
+            ps.setObject(3, obj.getSttFoodCode());
+            ps.setObject(4, obj.getFoodOrderTotalPrice());
+            ps.setObject(5, obj.getFoodOrderCreatedDate());
+            ps.setObject(6, obj.getFoodOrderNote());
+            ps.setObject(7, obj.getFoodOrderReasonReject());
+            ps.setObject(8, obj.isFoodOrderDeleted());
+            return ps;
+        }, keyHolder);
+        return keyHolder.getKey().intValue();
     }
 
     @Override

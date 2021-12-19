@@ -86,6 +86,9 @@
         <th:block th:if="${page == 9}">
           <div th:replace="food/online-store :: online-store"></div>
         </th:block>
+        <th:block th:if="${page == 10}">
+          <div th:replace="food/order-success :: order-success"></div>
+        </th:block>
       </div>
     </div>
   </div>
@@ -104,10 +107,10 @@
   <div th:replace="food/modal/modal-order-successfully :: confirmOrderSuccessfullyModal"></div>
 </th:block>
 <th:block th:if="${page == 9}">
-  <!-- Import modal online store rate -->
-  <div th:replace="food/modal/modal-online-store-rate :: onlineStoreRateModal"></div>
   <!-- Import modal food detail -->
   <div th:replace="food/modal/modal-food-detail :: foodDetailModal"></div>
+  <!-- Import modal online store rate -->
+  <div th:replace="food/modal/modal-online-store-rate :: onlineStoreRateModal"></div>
   <!-- Import toast add to cart -->
   <div th:replace="food/toast/toast-add-to-cart-success :: toastAddToCartSuccess"></div>
   <div th:replace="food/toast/toast-add-to-cart-different-store-error :: toastAddToCartDifferentStoreError"></div>
