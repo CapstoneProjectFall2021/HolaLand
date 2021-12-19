@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-12 col-lg-12 col-xl-3">
               <div class="apply-area">
-                <div class="apply-area-btn" sec:authorize="hasRole('MEMBER')">
+                <div class="apply-area-btn" sec:authorize="hasRole('STUDENT')">
                   <div class="btn-apply">
                     <a th:href="@{/works/apply-request-recruitment}" class="btn btn-md btn-success"
                        data-bs-toggle="modal"

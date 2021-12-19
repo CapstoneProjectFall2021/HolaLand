@@ -12,18 +12,12 @@ function showToast(id) {
 }
 
 /*
- * Recruitment manage
+ * Recruitment
  */
 function confirmDeleteRequestApply(e) {
   const requestId = e.target.firstElementChild.innerHTML;
   openModal("confirmCancelApplyJobModal");
   document.getElementById("btn-delete-request-apply").href = "/works/jobs/apply/delete?requestId=" + requestId;
-}
-
-function confirmDeleteRequestSave(e) {
-  const requestId = e.target.firstElementChild.innerHTML;
-  openModal("confirmRemoveJobSaveModal");
-  document.getElementById("btn-delete-request-save").href = "/works/jobs/save/delete?requestId=" + requestId;
 }
 
 function getIdOfRequestBooked(e) {
@@ -63,7 +57,15 @@ function confirmRemoveFindJobRequest(e) {
 }
 
 /*
- * Request recruitment save
+ * User
+ */
+function confirmDeleteRequestSave(requestId) {
+  document.getElementById("btn-delete-request-save").href = "/works/jobs/save/delete?requestId=" + requestId;
+  openModal("confirmRemoveJobSaveModal");
+}
+
+/*
+ * Request recruitment save => chuc năng lưu tin tuyển dụng
  */
 function saveRequestRecruitment() {
   const request = new XMLHttpRequest();

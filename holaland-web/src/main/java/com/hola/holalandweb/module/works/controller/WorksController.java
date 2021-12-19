@@ -20,8 +20,10 @@ public class WorksController {
     private final WorkRequestTypeService workRequestTypeService;
 
     @Autowired
-    public WorksController(WorkRequestRecruitmentService workRequestRecruitmentService,
-                           WorkRequestTypeService workRequestTypeService) {
+    public WorksController(
+            WorkRequestRecruitmentService workRequestRecruitmentService,
+            WorkRequestTypeService workRequestTypeService
+    ) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.workRequestTypeService = workRequestTypeService;
     }

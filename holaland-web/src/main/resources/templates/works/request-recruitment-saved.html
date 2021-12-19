@@ -11,8 +11,8 @@
         <div class="label-info m-mb-16">
           <div class="btn-remove">
             <a href="javascript:void(0)">
-              <i class="far fa-trash-alt m-0" onclick="confirmDeleteRequestSave(event)">
-                <span th:text="${job.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="far fa-trash-alt m-0" data-bs-placement="top" data-bs-toggle="tooltip" title="Xoá bài viết"
+                 th:onclick="'javascript:confirmDeleteRequestSave(' + ${job.workRequestRecruitmentId} + ')'">
               </i>
             </a>
           </div>
@@ -30,7 +30,7 @@
                       th:text="${#dates.format(job.workRequestRecruitmentEndDateTime, 'dd-MM-yyyy')}"></span>
                 </p>
                 <p th:classappend="*{job.sttWorkCode == 3 ? 'text-success' : 'text-danger'}"
-                   th:text="*{job.sttWorkCode == 3 ? 'Đang tuyển dụng' : 'Hết hạn tuyển dụng'}"></p>
+                   th:text="*{job.sttWorkCode == 3 ? 'Đang ứng tuyển' : 'Hết hạn ứng tuyển'}"></p>
               </div>
             </div>
           </div>

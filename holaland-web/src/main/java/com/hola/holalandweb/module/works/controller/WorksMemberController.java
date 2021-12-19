@@ -49,7 +49,8 @@ public class WorksMemberController {
             WorkTimeService workTimeService,
             UserDetailService userDetailService,
             WorkRequestApplyService workRequestApplyService,
-            WorkRequestBookService workRequestBookService) {
+            WorkRequestBookService workRequestBookService
+    ) {
         this.workRequestRecruitmentSavedService = workRequestRecruitmentSavedService;
         this.sttWorkRequestRecruitmentFindJobCountService = sttWorkRequestRecruitmentFindJobCountService;
         this.workRequestTypeService = workRequestTypeService;
@@ -76,8 +77,7 @@ public class WorksMemberController {
             @RequestParam("requestId") Integer requestId,
             Model model,
             Authentication authentication
-    )
-    {
+    ) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         boolean isCheck = workRequestRecruitmentSavedService.delete(requestId);
         if (isCheck) {
@@ -99,11 +99,12 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @GetMapping("/jobs/apply/delete") // jobs/apply/delete
+    @GetMapping("/jobs/apply/delete")
     public String deleteJobsApplyRequest(
             @RequestParam("requestId") Integer requestId,
             Model model,
-            Authentication authentication) {
+            Authentication authentication
+    ) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         boolean isCheck = workRequestApplyService.delete(requestId);
         if (isCheck) {
@@ -116,31 +117,27 @@ public class WorksMemberController {
         }
     }
 
-    @GetMapping("/jobs/find/manage") // jobs/find/manage
+    @GetMapping("/jobs/find/manage")
     public String getJobsPosted(Model model, Authentication authentication) {
-        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, currentUser.getId());
-        List<WorkRequestFindJob> requestFindJobList = workRequestFindJobService.getAllByUserIdAndTypeId(
-                currentUser.getId(),
-                sttWorkList.get(0).getSttWorkCode()
-        );
-        model.addAttribute("sttWorkCode", sttWorkList.get(0).getSttWorkCode());
-        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
-        model.addAttribute("requestFindJobList", requestFindJobList);
-        model.addAttribute("page", 5);
+        getJobsPostedStatus(model, authentication, sttWorkList, sttWorkList.get(0).getSttWorkCode());
         return "module-works";
     }
 
-    @GetMapping("/jobs/find/manage/status") // jobs/find/manage/status
+    @GetMapping("/jobs/find/manage/status")
     public String getJobsPostedStatus(
             @RequestParam("code") Integer sttWorkCode,
             Model model,
             Authentication authentication
     ) {
-        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
-        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, currentUser.getId());
+        getJobsPostedStatus(model, authentication, sttWorkList, sttWorkCode);
+        return "module-works";
+    }
+
+    private void getJobsPostedStatus(Model model, Authentication authentication, List<SttWork> sttWorkList, int sttWorkCode) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        Map sttWorkCountMap = getSttCountMap(sttWorkList, currentUser.getId());
         List<WorkRequestFindJob> requestFindJobList = workRequestFindJobService.getAllByUserIdAndTypeId(
                 currentUser.getId(),
                 sttWorkCode
@@ -149,10 +146,9 @@ public class WorksMemberController {
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestFindJobList", requestFindJobList);
         model.addAttribute("page", 5);
-        return "module-works";
     }
 
-    @GetMapping("/jobs/find/manage/delete") // jobs/find/manage/delete
+    @GetMapping("/jobs/find/manage/delete")
     public String getFindJobDeleteRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,
@@ -188,11 +184,8 @@ public class WorksMemberController {
         return sttWorkCountMap;
     }
 
-    @GetMapping("/jobs/find/detail") // jobs/find/detail
-    public String getRequestFindJobDetail(
-            @RequestParam("id") Integer id,
-            Model model
-    ) {
+    @GetMapping("/jobs/find/detail")
+    public String getRequestFindJobDetail(@RequestParam("id") Integer id, Model model) {
         WorkRequestFindJob jobDetail = workRequestFindJobService.getOne(id);
         WorkRequestType jobType = workRequestTypeService.getOne(jobDetail.getWorkRequestTypeId());
         WorkPaymentMethod jobPaymentMethod = workPaymentMethodService.getOne(jobDetail.getWorkPaymentMethodId());
@@ -206,7 +199,7 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @GetMapping("/jobs/find/create") // jobs/find/create
+    @GetMapping("/jobs/find/create")
     public String getFormCreateRequestFindJob(Model model) {
         WorkRequestFindJob newRequestFindJob = WorkRequestFindJob.builder().build();
         model.addAttribute("newRequestFindJob", newRequestFindJob);
@@ -214,7 +207,7 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @PostMapping(value = "/jobs/find/create", params = "save") // jobs/find/create
+    @PostMapping(value="/jobs/find/create", params="save")
     public String createRequestFindJob(
             @ModelAttribute("newRequestFindJob") WorkRequestFindJob newRequestFindJob,
             BindingResult bindingResult,
@@ -224,16 +217,8 @@ public class WorksMemberController {
             System.out.println("There was a error " + bindingResult);
             return "404";
         }
-        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-        // set attribute
-        newRequestFindJob.setUserId(currentUser.getId());
-        newRequestFindJob.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
-        newRequestFindJob.setWorkRequestFindJobStartDateTime(currentDate);
-        newRequestFindJob.setWorkRequestFindJobLastUpdateDateTime(currentDate);
-        newRequestFindJob.setWorkRequestFindJobDeleted(false);
 
-        boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
+        boolean isCheck = createRequestFindJobObject(newRequestFindJob, authentication, Constants.STT_WORK_CODE_PENDING_APPROVAL);
         if (isCheck) {
             return "redirect:" + "/works/jobs/find/manage";
         } else {
@@ -241,7 +226,7 @@ public class WorksMemberController {
         }
     }
 
-    @PostMapping(value = "/jobs/find/create", params = "saveDraft")  // jobs/find/create
+    @PostMapping(value="/jobs/find/create", params="saveDraft")
     public String createRequestFindJobSaveDraft(
             @ModelAttribute("newRequestFindJob") WorkRequestFindJob newRequestFindJob,
             BindingResult bindingResult,
@@ -251,16 +236,8 @@ public class WorksMemberController {
             System.out.println("There was a error " + bindingResult);
             return "404";
         }
-        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-        // set attribute
-        newRequestFindJob.setUserId(currentUser.getId());
-        newRequestFindJob.setSttWorkCode(Constants.STT_WORK_CODE_SAVE_DRAFT);
-        newRequestFindJob.setWorkRequestFindJobStartDateTime(currentDate);
-        newRequestFindJob.setWorkRequestFindJobLastUpdateDateTime(currentDate);
-        newRequestFindJob.setWorkRequestFindJobDeleted(false);
 
-        boolean isCheck = workRequestFindJobService.save(newRequestFindJob);
+        boolean isCheck = createRequestFindJobObject(newRequestFindJob, authentication, Constants.STT_WORK_CODE_SAVE_DRAFT);
         if (isCheck) {
             return "redirect:" + "/works/jobs/find/manage/status?code=6";
         } else {
@@ -268,17 +245,33 @@ public class WorksMemberController {
         }
     }
 
-    @GetMapping("/booked") // /booked
+    private boolean createRequestFindJobObject(WorkRequestFindJob newRequestFindJob, Authentication authentication, int sttWorkCode) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        // set attribute
+        newRequestFindJob.setUserId(currentUser.getId());
+        newRequestFindJob.setSttWorkCode(sttWorkCode);
+        newRequestFindJob.setWorkRequestFindJobStartDateTime(currentDate);
+        newRequestFindJob.setWorkRequestFindJobLastUpdateDateTime(currentDate);
+        newRequestFindJob.setWorkRequestFindJobDeleted(false);
+
+        return workRequestFindJobService.save(newRequestFindJob);
+    }
+
+    @GetMapping("/booked")
     public String getListBooked(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(currentUser.getId(), Constants.STT_WORK_CODE_WAITING_REPOSITORY);
+        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(
+                currentUser.getId(),
+                Constants.STT_WORK_CODE_WAITING_REPOSITORY
+        );
         model.addAttribute("userDetailService", userDetailService);
         model.addAttribute("listBooked", listBooked);
         model.addAttribute("page", 2);
         return "module-works";
     }
 
-    @GetMapping("/jobs/find/manage/repost")  // jobs/find/manage/repost
+    @GetMapping("/jobs/find/manage/repost")
     public String getFormRepostRequestFindJob(
             @RequestParam("requestFindJobId") Integer requestFindJobId,
             @RequestParam("code") Integer sttWorkCode,
@@ -300,17 +293,17 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @PostMapping("/jobs/find/manage/repost") // jobs/find/manage/repost
+    @PostMapping("/jobs/find/manage/repost")
     public String repostRequestFindJob(
             @RequestParam("endDate") Date endDate,
             @RequestParam("id") Integer id
     ) {
         Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
         WorkRequestFindJob requestFindJob = workRequestFindJobService.getOne(id);
-        requestFindJob.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);;
-        requestFindJob.setWorkRequestFindJobStartDateTime(currentDate);;
-        requestFindJob.setWorkRequestFindJobLastUpdateDateTime(currentDate);;
-        requestFindJob.setWorkRequestFindJobEndDateTime(endDate);;
+        requestFindJob.setSttWorkCode(Constants.STT_WORK_CODE_PENDING_APPROVAL);
+        requestFindJob.setWorkRequestFindJobStartDateTime(currentDate);
+        requestFindJob.setWorkRequestFindJobLastUpdateDateTime(currentDate);
+        requestFindJob.setWorkRequestFindJobEndDateTime(endDate);
         boolean isCheck = workRequestFindJobService.save(requestFindJob);
         if (isCheck) {
             return "redirect:" + "/works/jobs/find/manage";
@@ -326,7 +319,10 @@ public class WorksMemberController {
             Authentication authentication
     ) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(currentUser.getId(), Constants.STT_WORK_CODE_WAITING_REPOSITORY);
+        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(
+                currentUser.getId(),
+                Constants.STT_WORK_CODE_WAITING_REPOSITORY
+        );
         List<UserDetail> listBookedModal = userDetailService.getAllUserBookedByUserId(bookedId);
         model.addAttribute("bookedId", bookedId);
         model.addAttribute("userDetailService", userDetailService);
@@ -347,16 +343,18 @@ public class WorksMemberController {
                 .userId(recruiterId)
                 .workRequestFindJobId(bookedId)
                 .build();
+
         WorkRequestFindJob currentRequest = WorkRequestFindJob.builder()
                 .sttWorkCode(Constants.STT_WORK_CODE_COMPLETE)
                 .workRequestFindJobId(bookedId)
                 .build();
+
         boolean isCheck1 = workRequestBookService.userAcceptRecruiterBooked(requestAccepted);
         boolean isCheck2 = workRequestFindJobService.updateSttRequest(currentRequest);
-        if(isCheck1 && isCheck2) {
+        if (isCheck1 && isCheck2) {
             rm.addFlashAttribute("applySuccess", true);
-            return "redirect:" + "/works/jobs/find/manage/status?code="+Constants.STT_WORK_CODE_COMPLETE;
-        }else {
+            return "redirect:" + "/works/jobs/find/manage/status?code=" + Constants.STT_WORK_CODE_COMPLETE;
+        } else {
             return "404";
         }
     }
@@ -372,14 +370,14 @@ public class WorksMemberController {
                 .workRequestFindJobId(bookedId)
                 .build();
         boolean isCheck = workRequestBookService.userRejectRecruiterBooked(requestReject);
-        if(isCheck) {
-            return "redirect:" + "/works/booked/show?bookedId="+bookedId;
-        }else {
+        if (isCheck) {
+            return "redirect:" + "/works/booked/show?bookedId=" + bookedId;
+        } else {
             return "404";
         }
     }
 
-    @GetMapping("/jobs/find/manage/reject/reason") // jobs/find/manage/reject/reason
+    @GetMapping("/jobs/find/manage/reject/reason")
     public String getReasonRejectFindJobRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,

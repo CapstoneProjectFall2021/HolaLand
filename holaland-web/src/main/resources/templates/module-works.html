@@ -40,27 +40,27 @@
                 <i class="fas fa-list-ul fa-fw"></i>Danh sách việc làm
               </a>
             </li>
-            <li sec:authorize="hasRole('MEMBER')">
+            <li sec:authorize="hasRole('STUDENT')">
               <a th:href="@{/works/booked}" th:classappend="${page == 2 ? 'active' : ''}">
                 <i class="fas fa-list fa-fw"></i>Danh sách thuê
               </a>
             </li>
-            <li sec:authorize="hasRole('MEMBER')">
+            <li sec:authorize="hasRole('STUDENT')">
               <a th:href="@{/works/jobs/apply}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-tasks fa-fw"></i>Việc làm đã ứng tuyển
               </a>
             </li>
-            <li sec:authorize="hasRole('MEMBER')">
+            <li sec:authorize="hasRole('STUDENT')">
               <a th:href="@{/works/jobs/save}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="far fa-bookmark fa-fw"></i>Việc làm đã lưu
               </a>
             </li>
-            <li sec:authorize="hasRole('MEMBER')">
+            <li sec:authorize="hasRole('STUDENT')">
               <a th:href="@{/works/jobs/find/manage}" th:classappend="${page == 5 ? 'active' : ''}">
                 <i class="far fa-file-alt fa-fw"></i>Quản lý bài viết
               </a>
             </li>
-            <li sec:authorize="hasRole('MEMBER')">
+            <li sec:authorize="hasRole('STUDENT')">
               <a th:href="@{/works/jobs/find/create}" th:classappend="${page == 6 ? 'active' : ''}">
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
               </a>
@@ -86,19 +86,8 @@
               </a>
             </li>
             <li>
-              <hr/>
-            </li>
-            <li>
               <a id="btn-back-page" href="javascript:void(0)" onclick="goBack()">
                 <i class="fas fa-chevron-left fa-fw"></i>Quay lại
-              </a>
-            </li>
-            <li>
-              <hr/>
-            </li>
-            <li>
-              <a href="javascript:void(0)" onclick="showToast('toast-success')">
-                <i class="fas fa-pencil-alt fa-fw"></i>Test Toast
               </a>
             </li>
           </ul>
@@ -224,15 +213,7 @@
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
-<script crossorigin="anonymous" th:src="@{/js/templates/work.js}"></script>
-
-<!--<script th:inline="javascript" th:if="${requestId != null && modal != null}">-->
-<!--  /*<![CDATA[*/-->
-<!--  const modal = /*[[${modal}]]*/;-->
-<!--  /*]]>*/-->
-<!--  const myModal = new bootstrap.Modal(document.getElementById(modal));-->
-<!--  myModal.show();-->
-<!--</script>-->
+<script th:src="@{/js/templates/work.js}"></script>
 
 <script th:if="${requestRecruitmentId != null}">
   const myModal = new bootstrap.Modal(document.getElementById('confirmRepostRequestRecruitmentModal'));
@@ -280,11 +261,6 @@
 </script>
 
 <script th:inline="javascript">
-  function showToast() {
-    const toast = new bootstrap.Toast(document.getElementById('toast-success'));
-    toast.show();
-  }
-
   function goBack() {
       if([[${page}]] == 11 || [[${page}]] == 12) {
           window.history.back();
@@ -293,9 +269,6 @@
       }
   }
 </script>
-
-<!-- Import toast -->
-<th:block th:replace="~{common/toast-success :: toast-success}"></th:block>
 
 </body>
 
