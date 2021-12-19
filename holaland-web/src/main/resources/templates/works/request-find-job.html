@@ -42,7 +42,7 @@
                         <div class="content-body">
                             <h4 class="accent" th:text="*{worker.workRequestFindJobTitle}"></h4>
                             <div class="request-info">
-                                <p>Lương mong muốn: <span th:text="*{worker.workRequestFindJobExpectedSalary}"></span>
+                                <p>Lương mong muốn: <span th:text="*{#numbers.formatInteger(worker.workRequestFindJobExpectedSalary, 3, 'POINT')}"></span>
                                     <span
                                         th:text="*{
                                         worker.workSalaryUnitId == 1 ? 'VNĐ/h' :

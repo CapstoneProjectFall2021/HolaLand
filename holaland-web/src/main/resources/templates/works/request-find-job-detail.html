@@ -36,7 +36,7 @@
           <div class="row-info">
             <div><i class="fas fa-coins fa-fw"></i>Mức lương mong muốn</div>
             <div>
-              <span th:text="${jobDetail.workRequestFindJobExpectedSalary}"></span>
+              <span th:text="${#numbers.formatInteger(jobDetail.workRequestFindJobExpectedSalary, 3, 'POINT')}"></span>
               <span
                 th:text="${
                   jobDetail.workSalaryUnitId == 1 ? 'VNĐ/h' :
