@@ -289,7 +289,7 @@ public class WorksRecruitmentController {
         return "module-works";
     }
 
-    @GetMapping("/aplly/show") // aplly/show
+    @GetMapping("/apply/show") // apply/show
     public String getListUserApplied(
             @RequestParam("appliedId") Integer appliedId,
             Model model,
@@ -298,11 +298,54 @@ public class WorksRecruitmentController {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<WorkRequestRecruitment> listApplied = workRequestRecruitmentService.getAllListAppliedByUserId(currentUser.getId(), 1);
         List<UserDetail> listAppliedModal = userDetailService.getAllUserAppliedByUserId(appliedId);
+        model.addAttribute("appliedId", appliedId);
         model.addAttribute("listApplied", listApplied);
         model.addAttribute("userDetailService",userDetailService);
         model.addAttribute("page", 8);
         model.addAttribute("listAppliedModal", listAppliedModal);
         return "module-works";
+    }
+
+    @GetMapping("/apply/show/accepted")
+    public String recruiterAcceptUserApply(
+            @RequestParam("appliedId") Integer appliedId,
+            @RequestParam("userId") Integer userId
+    ) {
+        WorkRequestApply requestReject = WorkRequestApply.builder()
+                .sttWorkCode(Constants.STT_WORK_CODE_REQUEST_APPLY_BOOK_AGREED)
+                .userId(userId)
+                .workRequestRecruitmentId(appliedId)
+                .build();
+        WorkRequestRecruitment currentRequest = WorkRequestRecruitment.builder()
+                .sttWorkCode(Constants.STT_WORK_CODE_COMPLETE)
+                .workRequestRecruitmentId(appliedId)
+                .build();
+
+        boolean isCheck1 = workRequestApplyService.recruiterAcceptUserApply(requestReject);
+        boolean isCheck2 = workRequestRecruitmentService.updateSttRequest(currentRequest);
+        if(isCheck1 && isCheck2) {
+            return "redirect:" + "/works/apply";
+        }else {
+            return "404";
+        }
+    }
+
+    @GetMapping("/apply/show/rejected")
+    public String recruiterRejectUserApply(
+            @RequestParam("appliedId") Integer appliedId,
+            @RequestParam("userId") Integer userId
+    ) {
+        WorkRequestApply requestReject = WorkRequestApply.builder()
+                .sttWorkCode(Constants.STT_WORK_CODE_REQUEST_APPLY_BOOK_DENIED)
+                .userId(userId)
+                .workRequestRecruitmentId(appliedId)
+                .build();
+        boolean isCheck = workRequestApplyService.recruiterRejectUserApply(requestReject);
+        if(isCheck) {
+            return "redirect:" + "/works/apply/show?appliedId="+appliedId;
+        }else {
+            return "404";
+        }
     }
 
     @GetMapping("/jobs/recruitment/manage/reject/reason") // jobs/recruitment/manage/reject/reason
@@ -321,6 +364,30 @@ public class WorksRecruitmentController {
         );
         WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(requestId);
         model.addAttribute("reasonReject", requestRecruitment.getWorkRequestRecruitmentNote());
+        model.addAttribute("sttWorkCode", sttWorkCode);
+        model.addAttribute("sttWorkCountMap", sttWorkCountMap);
+        model.addAttribute("requestRecruitmentList", workRequestRecruitments);
+        model.addAttribute("page", 9);
+        return "module-works";
+    }
+
+    @GetMapping("/jobs/recruitment/manage/list/apply")
+    public String getListBookedFindJobRequest(
+            @RequestParam("requestId") Integer requestId,
+            @RequestParam("code") Integer sttWorkCode,
+            Model model,
+            Authentication authentication
+    ) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        List<SttWork> sttWorkList = sttWorkService.getAllByName(Constants.STT_WORK_NAME_RECRUITMENT_FIND_JOB);
+        Map<SttWork, Integer> sttWorkCountMap = getSttCountMap(sttWorkList, currentUser.getId());
+        List<WorkRequestRecruitment> workRequestRecruitments = workRequestRecruitmentService.getAllByUserIdAndTypeId(
+                currentUser.getId(),
+                sttWorkCode
+        );
+        List<WorkRequestApply> listApply = workRequestApplyService.getAllByRequestId(requestId);
+        model.addAttribute("listApply", listApply);
+        model.addAttribute("userDetailService", userDetailService);
         model.addAttribute("sttWorkCode", sttWorkCode);
         model.addAttribute("sttWorkCountMap", sttWorkCountMap);
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);

@@ -51,6 +51,11 @@ public class WorkRequestRecruitmentServiceImpl implements WorkRequestRecruitment
     }
 
     @Override
+    public boolean updateSttRequest(WorkRequestRecruitment obj) throws DataAccessException {
+        return workRequestRecruitmentRepository.updateSttRequest(obj);
+    }
+
+    @Override
     public boolean delete(int id) throws DataAccessException {
         return workRequestRecruitmentRepository.delete(id);
     }

@@ -33,7 +33,7 @@ function getIdOfRequestBooked(e) {
 
 function getIdOfRequestApplied(e) {
   const appliedId = e.target.firstElementChild.innerHTML;
-  document.getElementById("btn-show-list-user-applied" + appliedId).href = "/works/aplly/show?appliedId=" + appliedId;
+  document.getElementById("btn-show-list-user-applied" + appliedId).href = "/works/apply/show?appliedId=" + appliedId;
 }
 
 function confirmRemoveRecruitmentRequest(e) {

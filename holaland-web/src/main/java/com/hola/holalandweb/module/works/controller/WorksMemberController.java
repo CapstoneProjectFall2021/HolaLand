@@ -399,7 +399,7 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @GetMapping("/jobs/find/manage/list/booked") // jobs/find/manage/reject/reason
+    @GetMapping("/jobs/find/manage/list/booked")
     public String getListBookedFindJobRequest(
             @RequestParam("requestId") Integer requestId,
             @RequestParam("code") Integer sttWorkCode,

@@ -10,11 +10,17 @@ public interface WorkRequestApplyRepository {
 
     List<WorkRequestApply> getAll() throws DataAccessException;
 
+    List<WorkRequestApply> getAllByRequestId(int id) throws DataAccessException;
+
     List<WorkRequestRecruitment> getAllByAccountId(int accountId) throws DataAccessException;
 
     WorkRequestApply getOne(int id) throws DataAccessException;
 
     boolean save(WorkRequestApply obj) throws DataAccessException;
+
+    boolean updateStatusRequestByUserIdAndRecruitmentId(WorkRequestApply obj) throws DataAccessException;
+
+    boolean rejectAllRequestByRecruitmentId(WorkRequestApply obj) throws DataAccessException;
 
     boolean delete(int id) throws DataAccessException;
 }

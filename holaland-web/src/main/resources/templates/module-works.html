@@ -201,6 +201,10 @@
   <!-- Import modal list user applied -->
   <div th:replace="works/modal/modal-list-user-applied :: listUserAppliedModal"></div>
 </th:block>
+<th:block th:if="${page == 9 && listApply != null && listApply.size() != 0}">
+  <!-- Import modal list user applied -->
+  <div th:replace="works/modal/modal-list-user-applied :: listUserAppliedModal"></div>
+</th:block>
 <th:block th:if="${page == 10}">
   <!-- Import modal request find job preview -->
   <div th:replace="works/modal/modal-request-recruitment-preview :: recruitmentPreviewModal"></div>
@@ -253,6 +257,11 @@
 
 <script th:if="${listBooked != null && listBooked.size() != 0}">
     const myModal = new bootstrap.Modal(document.getElementById('listUserBookedModal'));
+    myModal.show();
+</script>
+
+<script th:if="${listApply != null && listApply.size() != 0}">
+    const myModal = new bootstrap.Modal(document.getElementById('listUserAppliedModal'));
     myModal.show();
 </script>
 

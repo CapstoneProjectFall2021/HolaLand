@@ -18,8 +18,13 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_RECRUITMENT_DELETED_ONE = "UPDATE work_request_recruitment\n" +
             "SET work_request_recruitment_deleted = 1\n" +
             "WHERE work_request_recruitment_id = ?";
+    String WORK_REQUEST_RECRUITMENT_UPDATE_STT_ONE = "UPDATE work_request_recruitment\n" +
+            "SET stt_work_code = ?\n" +
+            "WHERE work_request_recruitment_id = ?";
 
     String WORK_REQUEST_APPLY_GET_ALL = "SELECT * FROM work_request_apply WHERE work_request_apply_deleted = 0";
+    String WORK_REQUEST_APPLY_GET_ALL_BY_REQUEST_ID = "SELECT * FROM work_request_apply WHERE work_request_recruitment_id = ?\n" +
+            "AND work_request_apply_deleted = 0";
     String WORK_REQUEST_APPLY_GET_ONE = "SELECT * FROM work_request_apply WHERE work_request_apply_id = ? AND work_request_apply_deleted = 0";
     String WORK_REQUEST_APPLY_GET_ALL_BY_ACCOUNT_ID = "SELECT\n" +
             "       T1.work_request_recruitment_id,\n" +
@@ -50,6 +55,12 @@ public interface IRepositoryQuery {
             "AND T2.work_request_apply_deleted = 0";
     String INSERT_WORK_REQUEST_APPLY = "INSERT INTO work_request_apply (user_id, work_request_recruitment_id," +
             " stt_work_code, work_request_apply_deleted) VALUES(?, ?, ?, ?)";
+    String WORK_REQUEST_APPLY_UPDATE_STT_ONE = "UPDATE work_request_apply\n" +
+            "SET stt_work_code = ?\n" +
+            "WHERE user_id = ? AND work_request_recruitment_id = ?";
+    String WORK_REQUEST_APPLY_REJECT_STT_ALL = "UPDATE work_request_apply\n" +
+            "SET stt_work_code = ?\n" +
+            "WHERE work_request_recruitment_id = ?";
 
     String WORK_REQUEST_RECRUITMENT_SAVED_GET_ALL = "SELECT * FROM work_request_recruitment_saved WHERE work_request_recruitment_saved_deleted = 0";
     String WORK_REQUEST_RECRUITMENT_SAVED_GET_ONE = "SELECT * FROM work_request_recruitment_saved WHERE work_request_recruitment_saved_id = ? AND work_request_recruitment_saved_deleted = 0";

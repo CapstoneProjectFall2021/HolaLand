@@ -26,10 +26,10 @@
             <td><span th:text="*{userDetail.userDetailPhone}"></span></td>
             <td><span th:text="*{userDetail.userDetailGender == 1 ? 'Nam' : 'Nữ' }"></span></td>
             <td class="text-end">
-              <a href="javascript:void(0)" class="me-2">
+              <a th:href="@{/works/apply/show/accepted(appliedId=${appliedId}, userId=*{userDetail.userId})}" class="me-2">
                 <i class="fas fa-check text-success"></i>
               </a>
-              <a href="javascript:void(0)">
+              <a th:href="@{/works/apply/show/rejected(appliedId=${appliedId}, userId=*{userDetail.userId})}">
                 <i class="fas fa-ban text-danger"></i>
               </a>
             </td>

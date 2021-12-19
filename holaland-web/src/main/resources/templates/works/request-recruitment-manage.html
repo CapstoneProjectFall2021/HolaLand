@@ -57,7 +57,9 @@
             </a>
           </div>
           <div class="btn-action" style="margin-right: 62px;" th:if="${sttWorkCode == 4}">
-            <a class="me-2" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#listUserAppliedModal">
+            <a class="me-2" th:href="@{/works/jobs/recruitment/manage/list/apply
+            (requestId=${requestRecruitment.workRequestRecruitmentId},
+                code=${requestRecruitment.sttWorkCode})}">
               <i class="fas fa-user-friends m-0"></i>
             </a>
           </div>

@@ -19,21 +19,17 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>1</td>
-            <td>Phạm Ngọc Thanh</td>
-            <td>11/11/1994</td>
-            <td>0983 875 125</td>
-            <td>Nam</td>
-            <td class="text-end text-success">Đã chấp nhận</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Trần Minh Ngọc</td>
-            <td>11/11/1999</td>
-            <td>0983 875 999</td>
-            <td>Nữ</td>
-            <td class="text-end">Đã từ chối</td>
+          <tr th:each="apply, stt : ${listApply}">
+            <td><span th:text="*{(stt.index) + 1}"></span></td>
+            <th:block th:with="user=${userDetailService.getOneByUserId(apply.userId)}">
+              <td><span th:text="${user.userDetailName}"></span></td>
+              <td><span th:text="${#dates.format(user.userDetailDob, 'dd-MM-yyyy')}"></span></td>
+              <td><span th:text="${user.userDetailPhone}"></span></td>
+              <td><span th:text="${user.userDetailGender == 1 ? 'Nam' : 'Nữ' }"></span></td>
+            </th:block>
+            <td class="text-end" th:classappend="*{apply.sttWorkCode == 2 ? 'text-success' : ''}">
+              <span th:text="*{apply.sttWorkCode == 2 ? 'Đã chấp nhận' : 'Đã từ chối'}"></span>
+            </td>
           </tr>
           </tbody>
         </table>

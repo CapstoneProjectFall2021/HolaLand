@@ -31,6 +31,11 @@ public class WorkRequestApplyServiceImpl implements WorkRequestApplyService {
     }
 
     @Override
+    public List<WorkRequestApply> getAllByRequestId(int id) throws DataAccessException {
+        return workRequestApplyRepository.getAllByRequestId(id);
+    }
+
+    @Override
     public WorkRequestApply getOne(int id) throws DataAccessException {
         return workRequestApplyRepository.getOne(id);
     }
@@ -38,6 +43,21 @@ public class WorkRequestApplyServiceImpl implements WorkRequestApplyService {
     @Override
     public boolean save(WorkRequestApply obj) throws DataAccessException {
         return workRequestApplyRepository.save(obj);
+    }
+
+    @Override
+    public boolean recruiterAcceptUserApply(WorkRequestApply obj) throws DataAccessException {
+        boolean isCheck = workRequestApplyRepository.rejectAllRequestByRecruitmentId(obj);
+        if(isCheck) {
+            return workRequestApplyRepository.updateStatusRequestByUserIdAndRecruitmentId(obj);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean recruiterRejectUserApply(WorkRequestApply obj) throws DataAccessException {
+        return workRequestApplyRepository.updateStatusRequestByUserIdAndRecruitmentId(obj);
     }
 
     @Override
