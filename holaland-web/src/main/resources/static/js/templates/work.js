@@ -14,46 +14,43 @@ function showToast(id) {
 /*
  * Recruitment
  */
-function confirmDeleteRequestApply(e) {
-  const requestId = e.target.firstElementChild.innerHTML;
-  openModal("confirmCancelApplyJobModal");
+function confirmDeleteRequestApply(requestId) {
   document.getElementById("btn-delete-request-apply").href = "/works/jobs/apply/delete?requestId=" + requestId;
+  openModal("confirmCancelApplyJobModal");
 }
 
-function getIdOfRequestBooked(e) {
-  const bookedId = e.target.firstElementChild.innerHTML;
+function getIdOfRequestBooked(bookedId) {
   document.getElementById("btn-show-list-booked" + bookedId).href = "/works/booked/show?bookedId=" + bookedId;
 }
 
-function getIdOfRequestApplied(e) {
-  const appliedId = e.target.firstElementChild.innerHTML;
+function getIdOfRequestApplied(appliedId) {
   document.getElementById("btn-show-list-user-applied" + appliedId).href = "/works/apply/show?appliedId=" + appliedId;
 }
 
-function confirmRemoveRecruitmentRequest(e) {
-  const requestId = e.target.firstElementChild.innerHTML;
+function confirmRemoveRecruitmentRequest(requestId) {
   let url = new URL(window.location.href);
   let sttWorkCode = 1;
   if (url.searchParams.has("code")) {
     sttWorkCode = url.searchParams.get("code");
   }
 
-  openModal("confirmRemoveRecruitmentRequestModal");
   document.getElementById("btn-delete-recruitment-request").href =
-    "/works/jobs/recruitment/manage/delete?requestId=" + requestId + "&code=" + sttWorkCode;
+      "/works/jobs/recruitment/manage/delete?requestId=" + requestId + "&code=" + sttWorkCode;
+  openModal("confirmRemoveRecruitmentRequestModal");
+
 }
 
-function confirmRemoveFindJobRequest(e) {
-  const requestId = e.target.firstElementChild.innerHTML;
+function confirmRemoveFindJobRequest(requestId) {
   let url = new URL(window.location.href);
   let sttWorkCode = 1;
   if (url.searchParams.has("code")) {
     sttWorkCode = url.searchParams.get("code");
   }
 
-  openModal("confirmRemoveFindJobRequestModal");
   document.getElementById("btn-delete-find-request").href =
-    "/works/jobs/find/manage/delete?requestId=" + requestId + "&code=" + sttWorkCode;
+      "/works/jobs/find/manage/delete?requestId=" + requestId + "&code=" + sttWorkCode;
+  openModal("confirmRemoveFindJobRequestModal");
+
 }
 
 /*

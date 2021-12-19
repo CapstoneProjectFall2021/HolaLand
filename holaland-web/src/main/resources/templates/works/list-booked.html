@@ -14,8 +14,8 @@
               <th:block th:with="listUser=${userDetailService.getAllUserBookedByUserId(work.workRequestFindJobId)}">
                 <span th:text="${listUser.size()}"></span>
               </th:block>
-              <i class="fas fa-user-friends m-0" onclick="getIdOfRequestBooked(event)">
-                <span th:text="${work.workRequestFindJobId}" class="d-none"></span>
+              <i class="fas fa-user-friends m-0"
+                 th:onclick="'javascript:getIdOfRequestBooked('${work.workRequestFindJobId}')'">
               </i>
             </a>
           </div>

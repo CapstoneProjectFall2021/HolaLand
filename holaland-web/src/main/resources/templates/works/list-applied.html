@@ -14,8 +14,8 @@
               <th:block th:with="listUser=${userDetailService.getAllUserAppliedByUserId(jobApplied.workRequestRecruitmentId)}">
                 <span th:text="${listUser.size()}"></span>
               </th:block>
-              <i class="fas fa-user-friends m-0" onclick="getIdOfRequestApplied(event)">
-                <span th:text="${jobApplied.workRequestRecruitmentId}" class="d-none"></span>
+              <i class="fas fa-user-friends m-0"
+                 th:onclick="'javascript:getIdOfRequestApplied('${jobApplied.workRequestRecruitmentId}')'">
               </i>
             </a>
           </div>
