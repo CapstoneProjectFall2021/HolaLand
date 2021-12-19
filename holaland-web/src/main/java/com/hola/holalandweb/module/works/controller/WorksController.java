@@ -81,8 +81,11 @@ public class WorksController {
     ) {
         if (authentication != null) {
             CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-            // check request này đã save hay chưa
+            // check request này đã được user hiện tại save hay chưa
             model.addAttribute("saved", true);
+
+            // check request này đã được user hiện tại ứng tuyển hay chưa
+            model.addAttribute("apply", true);
         }
 
         WorkRequestRecruitment jobDetail = workRequestRecruitmentService.getOne(id);
@@ -101,6 +104,9 @@ public class WorksController {
         WorkRequestType jobType = workRequestTypeService.getOne(jobDetail.getWorkRequestTypeId());
         WorkPaymentMethod jobPaymentMethod = workPaymentMethodService.getOne(jobDetail.getWorkPaymentMethodId());
         WorkTime jobTime = workTimeService.getOne((jobDetail.getWorkTimeId()));
+
+        // check request này đã được nhà tuyển dụng hiện tại thuê hay chưa
+        model.addAttribute("rent", true);
 
         model.addAttribute("jobPaymentMethod", jobPaymentMethod);
         model.addAttribute("jobTime", jobTime);
