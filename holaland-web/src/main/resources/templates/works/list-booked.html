@@ -15,7 +15,7 @@
                 <span th:text="${listUser.size()}"></span>
               </th:block>
               <i class="fas fa-user-friends m-0"
-                 th:onclick="'javascript:getIdOfRequestBooked('${work.workRequestFindJobId}')'">
+                 th:onclick="'javascript:getIdOfRequestBooked('+${work.workRequestFindJobId}+')'">
               </i>
             </a>
           </div>
