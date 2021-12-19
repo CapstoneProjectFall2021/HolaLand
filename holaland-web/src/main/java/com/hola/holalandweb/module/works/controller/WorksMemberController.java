@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -338,7 +339,8 @@ public class WorksMemberController {
     @GetMapping("/booked/accepted")
     public String userAcceptRecruiterBooked(
             @RequestParam("bookedId") Integer bookedId,
-            @RequestParam("recruiterId") Integer recruiterId
+            @RequestParam("recruiterId") Integer recruiterId,
+            RedirectAttributes rm
     ) {
         WorkRequestBook requestAccepted = WorkRequestBook.builder()
                 .sttWorkCode(Constants.STT_WORK_CODE_REQUEST_APPLY_BOOK_AGREED)
@@ -352,7 +354,8 @@ public class WorksMemberController {
         boolean isCheck1 = workRequestBookService.userAcceptRecruiterBooked(requestAccepted);
         boolean isCheck2 = workRequestFindJobService.updateSttRequest(currentRequest);
         if(isCheck1 && isCheck2) {
-            return "redirect:" + "/works/booked";
+            rm.addFlashAttribute("applySuccess", true);
+            return "redirect:" + "/works/jobs/find/manage/status?code="+Constants.STT_WORK_CODE_COMPLETE;
         }else {
             return "404";
         }

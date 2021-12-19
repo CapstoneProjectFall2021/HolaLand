@@ -178,6 +178,8 @@
   <div th:replace="works/modal/modal-reason-reject :: reasonRejectModal(reason=${reasonReject})"></div>
   <!-- Import modal confirm repost request find job -->
   <div th:replace="works/modal/modal-confirm-repost-request-find-job :: confirmRepostRequestFindJobModal"></div>
+  <!-- Import toast -->
+  <div th:replace="works/toast/toast-user-applied-success :: toastUserAppliedSuccess"></div>
 </th:block>
 <th:block th:if="${page == 5 && listBooked != null && listBooked.size() != 0}">
   <!-- Import modal list user booked -->
@@ -200,6 +202,8 @@
   <div th:replace="works/modal/modal-confirm-repost-request-recruitment :: confirmRepostRequestRecruitmentModal"></div>
   <!-- Import modal list user applied -->
   <div th:replace="works/modal/modal-list-user-applied :: listUserAppliedModal"></div>
+  <!-- Import toast -->
+  <div th:replace="works/toast/toast-recruiter-booked-success :: toastRecruiterBookedSuccess"></div>
 </th:block>
 <th:block th:if="${page == 9 && listApply != null && listApply.size() != 0}">
   <!-- Import modal list user applied -->
@@ -263,6 +267,16 @@
 <script th:if="${listApply != null && listApply.size() != 0}">
     const myModal = new bootstrap.Modal(document.getElementById('listUserAppliedModal'));
     myModal.show();
+</script>
+
+<script th:if="${bookedSuccess}">
+    const toast = new bootstrap.Toast(document.getElementById('toastRecruiterBookedSuccess'));
+    toast.show();
+</script>
+
+<script th:if="${applySuccess}">
+    const toast = new bootstrap.Toast(document.getElementById('toastUserAppliedSuccess'));
+    toast.show();
 </script>
 
 <script th:inline="javascript">
