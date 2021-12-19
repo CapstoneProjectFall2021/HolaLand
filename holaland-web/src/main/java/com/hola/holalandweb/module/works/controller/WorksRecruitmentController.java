@@ -26,7 +26,6 @@ import java.util.Map;
 public class WorksRecruitmentController {
 
     private final WorkRequestRecruitmentService workRequestRecruitmentService;
-    private final WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService;
     private final SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService;
     private final WorkRequestApplyService workRequestApplyService;
     private final SttWorkService sttWorkService;
@@ -37,7 +36,6 @@ public class WorksRecruitmentController {
     @Autowired
     public WorksRecruitmentController(
             WorkRequestRecruitmentService workRequestRecruitmentService,
-            WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
             SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService,
             WorkRequestApplyService workRequestApplyService,
             SttWorkService sttWorkService,
@@ -45,7 +43,6 @@ public class WorksRecruitmentController {
             WorkRequestFindJobService workRequestFindJobService, UserDetailService userDetailService
     ) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
-        this.workRequestRecruitmentSavedService = workRequestRecruitmentSavedService;
         this.sttWorkRequestRecruitmentFindJobCountService = sttWorkRequestRecruitmentFindJobCountService;
         this.workRequestApplyService = workRequestApplyService;
         this.sttWorkService = sttWorkService;
@@ -155,19 +152,6 @@ public class WorksRecruitmentController {
         sttWorkCountMap.put(sttWorkList.get(4), sttCount != null ? sttCount.getSttWorkRequestRecruitmentFindJobCountExpired() : 0);
         sttWorkCountMap.put(sttWorkList.get(5), sttCount != null ? sttCount.getSttWorkRequestRecruitmentFindJobCountSaveDraft() : 0);
         return sttWorkCountMap;
-    }
-
-    @GetMapping("/jobs/recruitment/detail") // jobs/recruitment/detail
-    public String getRequestRecruitmentDetail(
-            @RequestParam("id") Integer id,
-            Model model
-    ) {
-        WorkRequestRecruitment jobDetail = workRequestRecruitmentService.getOne(id);
-        WorkRequestType jobType = workRequestTypeService.getOne(jobDetail.getWorkRequestTypeId());
-        model.addAttribute("jobDetail", jobDetail);
-        model.addAttribute("jobType", jobType);
-        model.addAttribute("page", 11);
-        return "module-works";
     }
 
     @GetMapping("/jobs/recruitment/create") // jobs/recruitment/create

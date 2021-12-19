@@ -29,11 +29,8 @@ public class WorksMemberController {
 
     private final WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService;
     private final SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService;
-    private final WorkRequestTypeService workRequestTypeService;
     private final WorkRequestFindJobService workRequestFindJobService;
     private final SttWorkService sttWorkService;
-    private final WorkPaymentMethodService workPaymentMethodService;
-    private final WorkTimeService workTimeService;
     private final UserDetailService userDetailService;
     private final WorkRequestApplyService workRequestApplyService;
     private final WorkRequestBookService workRequestBookService;
@@ -42,28 +39,22 @@ public class WorksMemberController {
     public WorksMemberController(
             WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
             SttWorkRequestRecruitmentFindJobCountService sttWorkRequestRecruitmentFindJobCountService,
-            WorkRequestTypeService workRequestTypeService,
             WorkRequestFindJobService workRequestFindJobService,
             SttWorkService sttWorkService,
-            WorkPaymentMethodService workPaymentMethodService,
-            WorkTimeService workTimeService,
             UserDetailService userDetailService,
             WorkRequestApplyService workRequestApplyService,
             WorkRequestBookService workRequestBookService
     ) {
         this.workRequestRecruitmentSavedService = workRequestRecruitmentSavedService;
         this.sttWorkRequestRecruitmentFindJobCountService = sttWorkRequestRecruitmentFindJobCountService;
-        this.workRequestTypeService = workRequestTypeService;
         this.workRequestFindJobService = workRequestFindJobService;
         this.sttWorkService = sttWorkService;
-        this.workPaymentMethodService = workPaymentMethodService;
-        this.workTimeService = workTimeService;
         this.userDetailService = userDetailService;
         this.workRequestApplyService = workRequestApplyService;
         this.workRequestBookService = workRequestBookService;
     }
 
-    @GetMapping("/jobs/save")
+    @GetMapping("/jobs/saved")
     public String getJobsSave(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<WorkRequestRecruitment> jobSaveList = workRequestRecruitmentSavedService.getAllByAccountId(currentUser.getId());
@@ -72,8 +63,8 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @GetMapping("/jobs/save/delete")
-    public String deleteJobsSaveRequest(
+    @GetMapping("/jobs/saved/delete")
+    public String deleteJobsSave(
             @RequestParam("requestId") Integer requestId,
             Model model,
             Authentication authentication
@@ -90,7 +81,7 @@ public class WorksMemberController {
         }
     }
 
-    @GetMapping("/jobs/apply") // jobs/apply
+    @GetMapping("/jobs/apply")
     public String getJobsApply(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(currentUser.getId());
@@ -114,6 +105,23 @@ public class WorksMemberController {
             return "module-works";
         } else {
             return "404";
+        }
+    }
+
+    @GetMapping("/jobs/save")
+    public ResponseEntity<?> saveJob(@RequestParam("requestId") Integer requestId, Authentication authentication) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        WorkRequestRecruitmentSaved workRequestRecruitmentSaved = WorkRequestRecruitmentSaved.builder()
+                .userId(currentUser.getId())
+                .workRequestRecruitmentId(requestId)
+                .workRequestRecruitmentSavedDeleted(false)
+                .build();
+
+        boolean isSuccess = workRequestRecruitmentSavedService.save(workRequestRecruitmentSaved);
+        if (isSuccess) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -182,21 +190,6 @@ public class WorksMemberController {
         sttWorkCountMap.put(sttWorkList.get(4), sttCount != null ? sttCount.getSttWorkRequestRecruitmentFindJobCountExpired() : 0);
         sttWorkCountMap.put(sttWorkList.get(5), sttCount != null ? sttCount.getSttWorkRequestRecruitmentFindJobCountSaveDraft() : 0);
         return sttWorkCountMap;
-    }
-
-    @GetMapping("/jobs/find/detail")
-    public String getRequestFindJobDetail(@RequestParam("id") Integer id, Model model) {
-        WorkRequestFindJob jobDetail = workRequestFindJobService.getOne(id);
-        WorkRequestType jobType = workRequestTypeService.getOne(jobDetail.getWorkRequestTypeId());
-        WorkPaymentMethod jobPaymentMethod = workPaymentMethodService.getOne(jobDetail.getWorkPaymentMethodId());
-        WorkTime jobTime = workTimeService.getOne((jobDetail.getWorkTimeId()));
-
-        model.addAttribute("jobPaymentMethod", jobPaymentMethod);
-        model.addAttribute("jobTime", jobTime);
-        model.addAttribute("jobType", jobType);
-        model.addAttribute("jobDetail", jobDetail);
-        model.addAttribute("page", 12);
-        return "module-works";
     }
 
     @GetMapping("/jobs/find/create")

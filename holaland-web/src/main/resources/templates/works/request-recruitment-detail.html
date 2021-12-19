@@ -26,16 +26,22 @@
                 <div class="apply-area-btn" sec:authorize="hasRole('STUDENT')">
                   <div class="btn-apply">
                     <a th:href="@{/works/apply-request-recruitment}" class="btn btn-md btn-success"
-                       data-bs-toggle="modal"
-                       data-bs-target="#confirmApplyRequestModal">
+                       th:onclick="'javascript:confirmApplyRequestRecruitment(' + ${jobDetail.workRequestRecruitmentId} + ')'">
                       ỨNG TUYỂN NGAY
                     </a>
                   </div>
                   <div class="btn-save-request">
                     <a id="btn-save-request" href="javascript:void(0)" class="btn btn-md btn-secondary m-mt-16"
-                       onclick="saveRequestRecruitment()">
+                       th:onclick="'javascript:saveRequestRecruitment(' + ${jobDetail.workRequestRecruitmentId} + ')'">
                       <i id="icon-save-request" class="far fa-bookmark"></i>
                       <span id="label-save-request">LƯU TIN</span>
+                    </a>
+                  </div>
+                  <div class="btn-save-request">
+                    <a id="btn-save-request" href="javascript:void(0)" class="btn btn-md btn-secondary m-mt-16"
+                       th:onclick="'javascript:saveRequestRecruitment(' + ${jobDetail.workRequestRecruitmentId} + ')'">
+                      <i id="icon-save-request" class="fas fa-bookmark"></i>
+                      <span id="label-save-request">ĐÃ LƯU</span>
                     </a>
                   </div>
                 </div>

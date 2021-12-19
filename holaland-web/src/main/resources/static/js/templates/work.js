@@ -57,23 +57,19 @@ function confirmRemoveFindJobRequest(requestId) {
  * User
  */
 function confirmDeleteRequestSave(requestId) {
-  document.getElementById("btn-delete-request-save").href = "/works/jobs/save/delete?requestId=" + requestId;
+  document.getElementById("btn-delete-request-save").href = "/works/jobs/saved/delete?requestId=" + requestId;
   openModal("confirmRemoveJobSaveModal");
 }
 
-/*
- * Request recruitment save => chuc năng lưu tin tuyển dụng
- */
-function saveRequestRecruitment() {
+function saveRequestRecruitment(requestId) {
   const request = new XMLHttpRequest();
-  request.open("GET", "https://anest-hl-backend.herokuapp.com/course/1", false);
-  request.onreadystatechange = function () {
+  request.open("GET", "/works/jobs/save?requestId=" + requestId, true);
+  request.onload = function () {
     if (this.readyState === 4 && this.status === 200) {
-      // document.getElementById("result").innerHTML = this.responseText;
       setStateBtnSaveJob();
-      showToast('toast-success');
+      showToast('toastRequestRecruitmentSaveSuccess');
     } else {
-      alert("ERROR");
+      showToast('toastRequestRecruitmentSaveError');
     }
   };
   request.send();
@@ -86,4 +82,8 @@ function setStateBtnSaveJob() {
   document.getElementById("btn-save-request").onclick = function (e) {
     e.defaultPrevented();
   }
+}
+
+function confirmApplyRequestRecruitment(requestId) {
+
 }

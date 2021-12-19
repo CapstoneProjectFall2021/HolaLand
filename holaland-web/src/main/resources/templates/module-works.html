@@ -51,7 +51,7 @@
               </a>
             </li>
             <li sec:authorize="hasRole('STUDENT')">
-              <a th:href="@{/works/jobs/save}" th:classappend="${page == 4 ? 'active' : ''}">
+              <a th:href="@{/works/jobs/saved}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="far fa-bookmark fa-fw"></i>Việc làm đã lưu
               </a>
             </li>
@@ -205,6 +205,10 @@
 <th:block th:if="${page == 11}">
   <!-- Import modal confirm apply request -->
   <div th:replace="works/modal/modal-confirm-apply-request :: confirmApplyRequestModal"></div>
+  <!-- Import toast save request recruitment success -->
+  <div th:replace="works/toast/toast-request-recruitment-save-success :: toastRequestRecruitmentSaveSuccess"></div>
+  <!-- Import toast save request recruitment error -->
+  <div th:replace="works/toast/toast-request-recruitment-save-error :: toastRequestRecruitmentSaveError"></div>
 </th:block>
 <th:block th:if="${page == 12}">
   <!-- Import modal confirm hire -->
