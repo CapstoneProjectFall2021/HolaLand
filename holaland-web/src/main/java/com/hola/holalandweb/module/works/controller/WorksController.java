@@ -1,5 +1,6 @@
 package com.hola.holalandweb.module.works.controller;
 
+import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandwork.entity.WorkPaymentMethod;
 import com.hola.holalandwork.entity.WorkRequestFindJob;
@@ -12,6 +13,7 @@ import com.hola.holalandwork.service.WorkRequestRecruitmentService;
 import com.hola.holalandwork.service.WorkRequestTypeService;
 import com.hola.holalandwork.service.WorkTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -74,13 +76,17 @@ public class WorksController {
     @GetMapping("/jobs/recruitment/detail")
     public String getRequestRecruitmentDetail(
             @RequestParam("id") Integer id,
-            Model model
+            Model model,
+            Authentication authentication
     ) {
+        if (authentication != null) {
+            CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+            // check request này đã save hay chưa
+            model.addAttribute("saved", true);
+        }
+
         WorkRequestRecruitment jobDetail = workRequestRecruitmentService.getOne(id);
         WorkRequestType jobType = workRequestTypeService.getOne(jobDetail.getWorkRequestTypeId());
-
-        // check request này đã save hay chưa
-        model.addAttribute("saved", true);
 
         model.addAttribute("jobDetail", jobDetail);
         model.addAttribute("jobType", jobType);
@@ -88,6 +94,7 @@ public class WorksController {
         return "module-works";
     }
 
+    // need login
     @GetMapping("/jobs/find/detail")
     public String getRequestFindJobDetail(@RequestParam("id") Integer id, Model model) {
         WorkRequestFindJob jobDetail = workRequestFindJobService.getOne(id);
