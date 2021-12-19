@@ -16,6 +16,8 @@ public interface WorkRequestApplyRepository {
 
     WorkRequestApply getOne(int id) throws DataAccessException;
 
+    boolean checkUserIsApplied(int userId, int recruitmentId) throws DataAccessException;
+
     boolean save(WorkRequestApply obj) throws DataAccessException;
 
     boolean updateStatusRequestByUserIdAndRecruitmentId(WorkRequestApply obj) throws DataAccessException;

@@ -46,7 +46,7 @@
               </a>
             </li>
             <li sec:authorize="hasRole('STUDENT')">
-              <a th:href="@{/works/jobs/apply}" th:classappend="${page == 3 ? 'active' : ''}">
+              <a th:href="@{/works/jobs/applied}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-tasks fa-fw"></i>Việc làm đã ứng tuyển
               </a>
             </li>
@@ -168,7 +168,7 @@
   <!-- Import modal confirm repost request find job -->
   <div th:replace="works/modal/modal-confirm-repost-request-find-job :: confirmRepostRequestFindJobModal"></div>
   <!-- Import toast -->
-  <div th:replace="works/toast/toast-user-applied-success :: toastUserAppliedSuccess"></div>
+  <div th:replace="works/toast/toast-recruiter-booked-success :: toastRecruiterBookedSuccess"></div>
 </th:block>
 <th:block th:if="${page == 5 && listBooked != null && listBooked.size() != 0}">
   <!-- Import modal list user booked -->
@@ -192,7 +192,7 @@
   <!-- Import modal list user applied -->
   <div th:replace="works/modal/modal-list-user-applied :: listUserAppliedModal"></div>
   <!-- Import toast -->
-  <div th:replace="works/toast/toast-recruiter-booked-success :: toastRecruiterBookedSuccess"></div>
+  <div th:replace="works/toast/toast-user-applied-success :: toastUserAppliedSuccess"></div>
 </th:block>
 <th:block th:if="${page == 9 && listApply != null && listApply.size() != 0}">
   <!-- Import modal list user applied -->
@@ -209,10 +209,18 @@
   <div th:replace="works/toast/toast-request-recruitment-save-success :: toastRequestRecruitmentSaveSuccess"></div>
   <!-- Import toast save request recruitment error -->
   <div th:replace="works/toast/toast-request-recruitment-save-error :: toastRequestRecruitmentSaveError"></div>
+  <!-- Import toast apply request recruitment success -->
+  <div th:replace="works/toast/toast-request-recruitment-apply-success:: toastRequestRecruitmentApplySuccess"></div>
+  <!-- Import toast apply request recruitment error -->
+  <div th:replace="works/toast/toast-request-recruitment-apply-error:: toastRequestRecruitmentApplyError"></div>
 </th:block>
 <th:block th:if="${page == 12}">
   <!-- Import modal confirm hire -->
   <div th:replace="works/modal/modal-confirm-hire :: confirmHireModal"></div>
+  <!-- Import toast book request find job success -->
+  <div th:replace="works/toast/toast-request-find-job-book-success :: toastRequestFindJobBookSuccess"></div>
+  <!-- Import toast book request find job error -->
+  <div th:replace="works/toast/toast-request-find-job-book-error:: toastRequestFindJobBookError"></div>
 </th:block>
 
 <!-- Javascript -->
@@ -254,13 +262,13 @@
     myModal.show();
 </script>
 
-<script th:if="${bookedSuccess}">
-    const toast = new bootstrap.Toast(document.getElementById('toastRecruiterBookedSuccess'));
+<script th:if="${applySuccess}">
+    const toast = new bootstrap.Toast(document.getElementById('toastUserAppliedSuccess'));
     toast.show();
 </script>
 
-<script th:if="${applySuccess}">
-    const toast = new bootstrap.Toast(document.getElementById('toastUserAppliedSuccess'));
+<script th:if="${bookedSuccess}">
+    const toast = new bootstrap.Toast(document.getElementById('toastRecruiterBookedSuccess'));
     toast.show();
 </script>
 

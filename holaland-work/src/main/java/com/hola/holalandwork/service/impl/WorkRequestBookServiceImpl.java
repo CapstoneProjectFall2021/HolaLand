@@ -35,6 +35,11 @@ public class WorkRequestBookServiceImpl implements WorkRequestBookService {
     }
 
     @Override
+    public boolean checkUserIsBooked(int userId, int findJobId) throws DataAccessException {
+        return workRequestBookRepository.checkUserIsBooked(userId, findJobId);
+    }
+
+    @Override
     public boolean userAcceptRecruiterBooked(WorkRequestBook obj) throws DataAccessException {
         boolean isCheck = workRequestBookRepository.rejectAllRequestByFindJobId(obj);
         if(isCheck) {

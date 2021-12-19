@@ -13,6 +13,8 @@ public interface WorkRequestBookRepository {
 
     WorkRequestBook getOne(int id) throws DataAccessException;
 
+    boolean checkUserIsBooked(int userId, int findJobId) throws DataAccessException;
+
     boolean updateStatusRequestByUserIdAndFindJobId(WorkRequestBook obj) throws DataAccessException;
 
     boolean rejectAllRequestByFindJobId(WorkRequestBook obj) throws DataAccessException;

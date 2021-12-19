@@ -7,6 +7,8 @@ import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandwork.entity.*;
 import com.hola.holalandwork.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +34,7 @@ public class WorksRecruitmentController {
     private final WorkRequestTypeService workRequestTypeService;
     private final WorkRequestFindJobService workRequestFindJobService;
     private final UserDetailService userDetailService;
+    private final WorkRequestBookService workRequestBookService;
 
     @Autowired
     public WorksRecruitmentController(
@@ -40,8 +43,9 @@ public class WorksRecruitmentController {
             WorkRequestApplyService workRequestApplyService,
             SttWorkService sttWorkService,
             WorkRequestTypeService workRequestTypeService,
-            WorkRequestFindJobService workRequestFindJobService, UserDetailService userDetailService
-    ) {
+            WorkRequestFindJobService workRequestFindJobService,
+            UserDetailService userDetailService,
+            WorkRequestBookService workRequestBookService) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.sttWorkRequestRecruitmentFindJobCountService = sttWorkRequestRecruitmentFindJobCountService;
         this.workRequestApplyService = workRequestApplyService;
@@ -49,6 +53,7 @@ public class WorksRecruitmentController {
         this.workRequestTypeService = workRequestTypeService;
         this.workRequestFindJobService = workRequestFindJobService;
         this.userDetailService = userDetailService;
+        this.workRequestBookService = workRequestBookService;
     }
 
     @GetMapping("/jobs/find")
@@ -81,6 +86,24 @@ public class WorksRecruitmentController {
         model.addAttribute("workerList", workerList);
         model.addAttribute("page", 7);
         return "module-works";
+    }
+
+    @GetMapping("/jobs/book")
+    public ResponseEntity<?> bookUser(@RequestParam("requestId") Integer requestId, Authentication authentication) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        WorkRequestBook workRequestBook = WorkRequestBook.builder()
+                .userId(currentUser.getId())
+                .sttWorkCode(Constants.STT_WORK_CODE_WAITING_REPOSITORY)
+                .workRequestFindJobId(requestId)
+                .workRequestBookDeleted(false)
+                .build();
+
+        boolean isSuccess = workRequestBookService.save(workRequestBook);
+        if (isSuccess) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/jobs/recruitment/manage") // jobs/recruitment/manage
@@ -310,7 +333,7 @@ public class WorksRecruitmentController {
         boolean isCheck1 = workRequestApplyService.recruiterAcceptUserApply(requestReject);
         boolean isCheck2 = workRequestRecruitmentService.updateSttRequest(currentRequest);
         if(isCheck1 && isCheck2) {
-            rm.addFlashAttribute("bookedSuccess", true);
+            rm.addFlashAttribute("applySuccess", true);
             return "redirect:" + "/works/jobs/recruitment/manage/status?code="+Constants.STT_WORK_CODE_COMPLETE;
         }else {
             return "404";

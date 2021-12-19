@@ -36,6 +36,11 @@ public class WorkRequestRecruitmentSavedServiceImpl implements WorkRequestRecrui
     }
 
     @Override
+    public boolean checkUserSaved(int userId, int recruitmentId) throws DataAccessException {
+        return workRequestRecruitmentSavedRepository.checkUserSaved(userId, recruitmentId);
+    }
+
+    @Override
     public boolean save(WorkRequestRecruitmentSaved obj) throws DataAccessException {
         return workRequestRecruitmentSavedRepository.save(obj);
     }

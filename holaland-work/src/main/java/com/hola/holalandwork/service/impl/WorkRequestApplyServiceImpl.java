@@ -41,6 +41,11 @@ public class WorkRequestApplyServiceImpl implements WorkRequestApplyService {
     }
 
     @Override
+    public boolean checkUserIsApplied(int userId, int recruitmentId) throws DataAccessException {
+        return workRequestApplyRepository.checkUserIsApplied(userId, recruitmentId);
+    }
+
+    @Override
     public boolean save(WorkRequestApply obj) throws DataAccessException {
         return workRequestApplyRepository.save(obj);
     }

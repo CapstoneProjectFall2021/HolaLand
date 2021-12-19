@@ -81,7 +81,7 @@ public class WorksMemberController {
         }
     }
 
-    @GetMapping("/jobs/apply")
+    @GetMapping("/jobs/applied")
     public String getJobsApply(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<WorkRequestRecruitment> jobApplyList = workRequestApplyService.getAllAccountId(currentUser.getId());
@@ -90,7 +90,7 @@ public class WorksMemberController {
         return "module-works";
     }
 
-    @GetMapping("/jobs/apply/delete")
+    @GetMapping("/jobs/applied/delete")
     public String deleteJobsApplyRequest(
             @RequestParam("requestId") Integer requestId,
             Model model,
@@ -107,6 +107,25 @@ public class WorksMemberController {
             return "404";
         }
     }
+
+    @GetMapping("/jobs/apply")
+    public ResponseEntity<?> applyJob(@RequestParam("requestId") Integer requestId, Authentication authentication) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        WorkRequestApply workRequestApply = WorkRequestApply.builder()
+                .userId(currentUser.getId())
+                .workRequestRecruitmentId(requestId)
+                .sttWorkCode(Constants.STT_WORK_CODE_WAITING_REPOSITORY)
+                .workRequestApplyDeleted(false)
+                .build();
+
+        boolean isSuccess = workRequestApplyService.save(workRequestApply);
+        if (isSuccess) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     @GetMapping("/jobs/save")
     public ResponseEntity<?> saveJob(@RequestParam("requestId") Integer requestId, Authentication authentication) {
@@ -345,7 +364,7 @@ public class WorksMemberController {
         boolean isCheck1 = workRequestBookService.userAcceptRecruiterBooked(requestAccepted);
         boolean isCheck2 = workRequestFindJobService.updateSttRequest(currentRequest);
         if (isCheck1 && isCheck2) {
-            rm.addFlashAttribute("applySuccess", true);
+            rm.addFlashAttribute("bookedSuccess", true);
             return "redirect:" + "/works/jobs/find/manage/status?code=" + Constants.STT_WORK_CODE_COMPLETE;
         } else {
             return "404";

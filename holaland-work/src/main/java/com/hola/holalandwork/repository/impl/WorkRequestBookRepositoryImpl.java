@@ -37,6 +37,11 @@ public class WorkRequestBookRepositoryImpl implements WorkRequestBookRepository,
     }
 
     @Override
+    public boolean checkUserIsBooked(int userId, int findJobId) throws DataAccessException {
+        return jdbcTemplate.queryForObject(WORK_REQUEST_BOOK_CHECK_EXIST, Boolean.class, userId, findJobId);
+    }
+
+    @Override
     public boolean updateStatusRequestByUserIdAndFindJobId(WorkRequestBook obj) throws DataAccessException {
         return jdbcTemplate.update(
                 WORK_REQUEST_BOOK_UPDATE_STT_ONE,

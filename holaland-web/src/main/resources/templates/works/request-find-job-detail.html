@@ -20,10 +20,15 @@
             <div class="col-md-12 col-lg-12 col-xl-3">
               <div class="apply-area">
                 <div class="apply-area-btn" sec:authorize="hasRole('RECRUITER')">
-                  <div class="btn-apply">
-                    <a href="javascript:void(0)" class="btn btn-md btn-success" data-bs-toggle="modal"
-                       data-bs-target="#confirmHireModal">
-                      THUÊ NGAY
+                  <div class="btn-apply" th:if="${!rented}">
+                    <a id="btn-book-request" class="btn btn-md btn-success"
+                       th:onclick="'javascript:confirmHireRequestFindJob(' + ${jobDetail.workRequestFindJobId} + ')'">
+                      <span id="label-book-request">THUÊ NGAY</span>
+                    </a>
+                  </div>
+                  <div class="btn-apply" th:if="${rented}">
+                    <a href="javascript:void(0)" class="btn btn-md btn-success">
+                      ĐÃ THUÊ
                     </a>
                   </div>
                 </div>

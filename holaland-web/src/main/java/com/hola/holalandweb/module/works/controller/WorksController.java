@@ -2,16 +2,8 @@ package com.hola.holalandweb.module.works.controller;
 
 import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandweb.constant.Constants;
-import com.hola.holalandwork.entity.WorkPaymentMethod;
-import com.hola.holalandwork.entity.WorkRequestFindJob;
-import com.hola.holalandwork.entity.WorkRequestRecruitment;
-import com.hola.holalandwork.entity.WorkRequestType;
-import com.hola.holalandwork.entity.WorkTime;
-import com.hola.holalandwork.service.WorkPaymentMethodService;
-import com.hola.holalandwork.service.WorkRequestFindJobService;
-import com.hola.holalandwork.service.WorkRequestRecruitmentService;
-import com.hola.holalandwork.service.WorkRequestTypeService;
-import com.hola.holalandwork.service.WorkTimeService;
+import com.hola.holalandwork.entity.*;
+import com.hola.holalandwork.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -29,6 +21,9 @@ public class WorksController {
     private final WorkRequestFindJobService workRequestFindJobService;
     private final WorkPaymentMethodService workPaymentMethodService;
     private final WorkTimeService workTimeService;
+    private final WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService;
+    private final WorkRequestApplyService workRequestApplyService;
+    private final WorkRequestBookService workRequestBookService;
 
     @Autowired
     public WorksController(
@@ -36,13 +31,18 @@ public class WorksController {
             WorkRequestTypeService workRequestTypeService,
             WorkRequestFindJobService workRequestFindJobService,
             WorkPaymentMethodService workPaymentMethodService,
-            WorkTimeService workTimeService
-    ) {
+            WorkTimeService workTimeService,
+            WorkRequestRecruitmentSavedService workRequestRecruitmentSavedService,
+            WorkRequestApplyService workRequestApplyService,
+            WorkRequestBookService workRequestBookService) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.workRequestTypeService = workRequestTypeService;
         this.workRequestFindJobService = workRequestFindJobService;
         this.workPaymentMethodService = workPaymentMethodService;
         this.workTimeService = workTimeService;
+        this.workRequestRecruitmentSavedService = workRequestRecruitmentSavedService;
+        this.workRequestApplyService = workRequestApplyService;
+        this.workRequestBookService = workRequestBookService;
     }
 
     @GetMapping("")
@@ -82,10 +82,11 @@ public class WorksController {
         if (authentication != null) {
             CustomUser currentUser = (CustomUser) authentication.getPrincipal();
             // check request này đã được user hiện tại save hay chưa
-            model.addAttribute("saved", true);
-
+            boolean isSaved = workRequestRecruitmentSavedService.checkUserSaved(currentUser.getId(), id);
+            model.addAttribute("saved", isSaved);
+            boolean isApplied = workRequestApplyService.checkUserIsApplied(currentUser.getId(), id);
             // check request này đã được user hiện tại ứng tuyển hay chưa
-            model.addAttribute("apply", true);
+            model.addAttribute("applied", isApplied);
         }
 
         WorkRequestRecruitment jobDetail = workRequestRecruitmentService.getOne(id);
@@ -99,14 +100,16 @@ public class WorksController {
 
     // need login
     @GetMapping("/jobs/find/detail")
-    public String getRequestFindJobDetail(@RequestParam("id") Integer id, Model model) {
+    public String getRequestFindJobDetail(@RequestParam("id") Integer id, Model model, Authentication authentication) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         WorkRequestFindJob jobDetail = workRequestFindJobService.getOne(id);
         WorkRequestType jobType = workRequestTypeService.getOne(jobDetail.getWorkRequestTypeId());
         WorkPaymentMethod jobPaymentMethod = workPaymentMethodService.getOne(jobDetail.getWorkPaymentMethodId());
         WorkTime jobTime = workTimeService.getOne((jobDetail.getWorkTimeId()));
 
         // check request này đã được nhà tuyển dụng hiện tại thuê hay chưa
-        model.addAttribute("rent", true);
+        boolean isRented = workRequestBookService.checkUserIsBooked(currentUser.getId(), id);
+        model.addAttribute("rented", isRented);
 
         model.addAttribute("jobPaymentMethod", jobPaymentMethod);
         model.addAttribute("jobTime", jobTime);
