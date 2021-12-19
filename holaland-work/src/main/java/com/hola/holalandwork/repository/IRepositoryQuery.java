@@ -175,6 +175,7 @@ public interface IRepositoryQuery {
             "WHERE T1.user_id = ?\n" +
             "AND T2.stt_work_code = ?\n" +
             "AND T1.work_request_recruitment_deleted = 0\n" +
+            "AND T2.work_request_apply_deleted = 0\n" +
             "GROUP BY T1.work_request_recruitment_id";
 
     String WORK_LIST_BOOKED_GET_ALL_BY_USER_ID = "SELECT\n" +

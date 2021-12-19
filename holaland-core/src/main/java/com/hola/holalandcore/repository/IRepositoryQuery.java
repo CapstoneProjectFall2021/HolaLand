@@ -43,6 +43,7 @@ public interface IRepositoryQuery {
             "INNER JOIN user_detail T2\n" +
             "ON T1.user_id = T2.user_id\n" +
             "WHERE T1.work_request_recruitment_id = ?\n" +
+            "AND T1.work_request_apply_deleted = 0\n" +
             "AND T1.stt_work_code = 1";
 
     String GET_USER_DETAIL_BY_USER_ID = "SELECT * FROM user_detail WHERE user_id = ?";
