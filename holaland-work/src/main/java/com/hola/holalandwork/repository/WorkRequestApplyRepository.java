@@ -25,4 +25,5 @@ public interface WorkRequestApplyRepository {
     boolean rejectAllRequestByRecruitmentId(WorkRequestApply obj) throws DataAccessException;
 
     boolean delete(int id) throws DataAccessException;
+
 }

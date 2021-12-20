@@ -174,4 +174,41 @@ function updateFood(foodItemId, foodItemTagId) {
     openModal("updateFoodItemModal");
 }
 
+function storePauseSelling(checkboxElem) {
+    const arr = checkboxElem.id.split("-");
+    const storeId = arr[arr.length - 1];
+    const request = new XMLHttpRequest();
+    request.open("POST", "/store/sell/pause?storeId="+storeId+"&isPause="+checkboxElem.checked, true);
+    request.onload = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            if(checkboxElem.checked) {
+                showToast("toastStorePauseSellingSuccess");
+            } else {
+                showToast("toastStoreContinueSellingSuccess");
+            }
+        } else {
+            showToast("toastError");
+        }
+    };
+    request.send(null);
+}
+
+function storeStopSelling(checkboxElem) {
+    const arr = checkboxElem.id.split("-");
+    const storeId = arr[arr.length - 1];
+    const request = new XMLHttpRequest();
+    request.open("POST", "/store/sell/stop?storeId="+storeId+"&isStop="+checkboxElem.checked, true);
+    request.onload = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            if(checkboxElem.checked) {
+                showToast("toastStoreStopSellingSuccess");
+            } else {
+                showToast("toastStoreStartSellingSuccess");
+            }
+        } else {
+            showToast("toastError");
+        }
+    };
+    request.send(null);
+}
 

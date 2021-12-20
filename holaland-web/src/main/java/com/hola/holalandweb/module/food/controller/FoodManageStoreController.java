@@ -13,6 +13,8 @@ import com.hola.holalandfood.service.FoodStoreOnlineTagService;
 import com.hola.holalandfood.service.FoodTagService;
 import com.hola.holalandweb.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,10 +80,18 @@ public class FoodManageStoreController {
     public String updatingStoreInfo(
             @RequestParam("storeId") Integer shopId,
             @RequestParam("storeName") String shopName,
-            @RequestParam("storeDescription") String storeDescription
-    ) {
+            @RequestParam("shopImage") MultipartFile multipartFile,
+            @RequestParam("storeDescription") String storeDescription) throws Exception
+    {
+        String fileName = null;
+        if(!multipartFile.isEmpty()) {
+            fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            String uploadDir = new File("holaland-web/target/classes/static/images/food").getAbsolutePath();
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        }
         FoodStoreOnline storeInfoUpdate = FoodStoreOnline.builder()
                 .foodStoreOnlineId(shopId)
+                .foodStoreOnlineImage(fileName)
                 .foodStoreOnlineName(shopName)
                 .foodStoreOnlineDescription(storeDescription)
                 .build();
@@ -242,6 +252,42 @@ public class FoodManageStoreController {
             return "redirect:" + "/store/manage/food";
         } else {
             return "404";
+        }
+    }
+
+    @PostMapping("/sell/stop")
+    public ResponseEntity<?> isStoreStopSelling(
+            @RequestParam("storeId") int storeId,
+            @RequestParam("isStop") boolean isStop
+    )
+    {
+        FoodStoreOnline shop = FoodStoreOnline.builder()
+                .foodStoreOnlineId(storeId)
+                .foodStoreOnlineStopSellingFlag(isStop)
+                .build();
+        boolean isCheck = foodStoreOnlineService.isShopStopSelling(shop);
+        if(isCheck) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/sell/pause")
+    public ResponseEntity<?> isStorePauseSelling(
+            @RequestParam("storeId") int storeId,
+            @RequestParam("isPause") boolean isPause
+    )
+    {
+        FoodStoreOnline shop = FoodStoreOnline.builder()
+                .foodStoreOnlineId(storeId)
+                .foodStoreOnlinePauseSellingFlag(isPause)
+                .build();
+        boolean isCheck = foodStoreOnlineService.isShopPauseSelling(shop);
+        if(isCheck) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

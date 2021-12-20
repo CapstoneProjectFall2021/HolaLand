@@ -66,7 +66,7 @@
         <h1 class="title fix-mb-title fix-mt-title">Đổi mật khẩu</h1>
       </div>
     </div>
-    <form id="updateUserPasswordForm" class="row panel-form mx-0" method="post" th:action="@{/profile/password/update}">
+    <form id="updateUserPasswordForm" class="row panel-form mx-0">
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset>
           <legend>Mật khẩu cũ</legend>
@@ -87,7 +87,7 @@
       </div>
       <div class="col-md-12 text-end mt-2">
         <a href="javascript:void(0)" class="btn btn-md btn-secondary m-mb-12"
-           onclick="document.getElementById('updateUserPasswordForm').submit();">
+           onclick="checkUserPassword()">
           <i class="fas fa-check text-success mr-2"></i>Xác nhận
         </a>
       </div>

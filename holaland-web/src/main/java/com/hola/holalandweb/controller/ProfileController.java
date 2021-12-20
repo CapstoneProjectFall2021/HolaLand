@@ -9,6 +9,8 @@ import com.hola.holalandcore.repository.UserRepository;
 import com.hola.holalandcore.service.UserAddressService;
 import com.hola.holalandcore.service.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -99,21 +101,20 @@ public class ProfileController {
     }
 
     @PostMapping("/password/update")
-    public String updatePasswordUserByUserId(
+    public ResponseEntity<?> updatePasswordUserByUserId(
             @RequestParam("oldPass") String oldPass,
             @RequestParam("newPass") String newPass,
-            @RequestParam("confirmNewPass") String confirmNewPass,
             Authentication authentication
     ) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        boolean isCheck = false;
-        if (passwordEncoder.matches(oldPass, currentUser.getCustomUserPassword()) && newPass.equals(confirmNewPass)) {
-            isCheck = userRepository.updatePassword(passwordEncoder.encode(newPass), currentUser.getId());
+        if (!passwordEncoder.matches(oldPass, currentUser.getCustomUserPassword())) {
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
+        boolean isCheck = userRepository.updatePassword(passwordEncoder.encode(newPass), currentUser.getId());
         if (isCheck) {
-            return "redirect:" + "/profile/update";
+            return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            return "404";
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
