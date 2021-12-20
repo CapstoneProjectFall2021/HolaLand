@@ -45,6 +45,11 @@ public class FoodOrderServiceImpl implements FoodOrderService {
     }
 
     @Override
+    public int save(FoodOrder obj) throws DataAccessException {
+        return foodOrderRepository.save(obj);
+    }
+
+    @Override
     public boolean checkUserOrder(int storeId, int userId) throws DataAccessException {
         return foodOrderRepository.checkUserOrder(storeId, userId);
     }

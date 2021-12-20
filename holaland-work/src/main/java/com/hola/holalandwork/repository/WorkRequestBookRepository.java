@@ -9,7 +9,15 @@ public interface WorkRequestBookRepository {
 
     List<WorkRequestBook> getAll() throws DataAccessException;
 
+    List<WorkRequestBook> getAllByRequestId(int id) throws DataAccessException;
+
     WorkRequestBook getOne(int id) throws DataAccessException;
+
+    boolean checkUserIsBooked(int userId, int findJobId) throws DataAccessException;
+
+    boolean updateStatusRequestByUserIdAndFindJobId(WorkRequestBook obj) throws DataAccessException;
+
+    boolean rejectAllRequestByFindJobId(WorkRequestBook obj) throws DataAccessException;
 
     boolean save(WorkRequestBook obj) throws DataAccessException;
 }

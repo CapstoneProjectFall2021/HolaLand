@@ -28,7 +28,8 @@ public interface IRepositoryQuery {
             "FROM work_request_book T1\n" +
             "INNER JOIN user_detail T2\n" +
             "ON T1.user_id = T2.user_id\n" +
-            "WHERE T1.work_request_find_job_id = ?";
+            "WHERE T1.work_request_find_job_id = ?\n" +
+            "AND T1.stt_work_code = 1";
 
     String GET_LIST_USER_APPLIED_BY_USER_ID = "SELECT\n" +
             "T2.user_detail_id,\n" +
@@ -41,18 +42,20 @@ public interface IRepositoryQuery {
             "FROM work_request_apply T1\n" +
             "INNER JOIN user_detail T2\n" +
             "ON T1.user_id = T2.user_id\n" +
-            "WHERE T1.work_request_recruitment_id = ?";
+            "WHERE T1.work_request_recruitment_id = ?\n" +
+            "AND T1.work_request_apply_deleted = 0\n" +
+            "AND T1.stt_work_code = 1";
 
     String GET_USER_DETAIL_BY_USER_ID = "SELECT * FROM user_detail WHERE user_id = ?";
 
     String GET_USER_ADDRESS_BY_USER_ID = "SELECT * FROM user_address WHERE user_id = ? " +
             "AND user_address_deleted = 0";
 
-    String GET_ONE_ADDRESS_BY_USER_ID = "SELECT *\n" +
-            "FROM user_address\n" +
-            "WHERE user_id = ?\n" +
-            "AND user_address_deleted = 0\n" +
-            "AND user_address_default = 1";
+    String GET_ONE_ADDRESS_BY_USER_ID = "SELECT *" +
+            " FROM user_address" +
+            " WHERE user_id = ?" +
+            " AND user_address_deleted = 0" +
+            " AND user_address_default = 1";
 
     String INSERT_USER_ADDRESS_ONE = "INSERT INTO user_address(user_id, user_name, user_phone, user_address, " +
             "user_address_default, user_address_deleted) VALUES (?, ?, ?, ?, ?, ?)";

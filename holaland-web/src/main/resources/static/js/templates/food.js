@@ -39,16 +39,10 @@ function confirmDeleteItemInCart(foodId) {
     openModal("confirmDeleteItemInCartModal");
 }
 
-function getFoodItemDetailInCart() {
-
-}
-
 /*
  * Online store
  */
-function getFoodItemDetail(e) {
-    const arr = e.target.id.split("-");
-    const foodItemId = arr[arr.length - 1];
+function getFoodItemDetail(foodItemId) {
     const foodItemImg = document.getElementById("food-item-img-" + foodItemId).src;
     const foodItemName = document.getElementById("food-item-name-" + foodItemId).innerHTML;
     const foodItemPrice = document.getElementById("food-item-price-" + foodItemId).innerHTML;

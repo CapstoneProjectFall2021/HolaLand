@@ -1,6 +1,5 @@
 package com.hola.holalandwork.repository;
 
-import com.hola.holalandwork.entity.WorkRequestFindJob;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import org.springframework.dao.DataAccessException;
 
@@ -19,6 +18,8 @@ public interface WorkRequestRecruitmentRepository {
     List<WorkRequestRecruitment> getAllListAppliedByUserId (int userId, int sttWorkCode) throws DataAccessException;
 
     boolean save(WorkRequestRecruitment obj) throws DataAccessException;
+
+    boolean updateSttRequest(WorkRequestRecruitment obj) throws DataAccessException;
 
     boolean delete(int id) throws DataAccessException;
 }

@@ -1,6 +1,7 @@
 package com.hola.holalandwork.repository.impl;
 
 import com.hola.holalandwork.entity.WorkRequestApply;
+import com.hola.holalandwork.entity.WorkRequestBook;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import com.hola.holalandwork.mapper.WorkRequestApplyMapper;
 import com.hola.holalandwork.mapper.WorkRequestRecruitmentMapper;
@@ -29,6 +30,11 @@ public class WorkRequestApplyRepositoryImpl implements WorkRequestApplyRepositor
     }
 
     @Override
+    public List<WorkRequestApply> getAllByRequestId(int id) throws DataAccessException {
+        return jdbcTemplate.query(WORK_REQUEST_APPLY_GET_ALL_BY_REQUEST_ID, new WorkRequestApplyMapper(), id);
+    }
+
+    @Override
     public List<WorkRequestRecruitment> getAllByAccountId(int accountId) throws DataAccessException {
         return jdbcTemplate.query(WORK_REQUEST_APPLY_GET_ALL_BY_ACCOUNT_ID, new WorkRequestRecruitmentMapper(), accountId);
     }
@@ -39,6 +45,11 @@ public class WorkRequestApplyRepositoryImpl implements WorkRequestApplyRepositor
     }
 
     @Override
+    public boolean checkUserIsApplied(int userId, int recruitmentId) throws DataAccessException {
+        return jdbcTemplate.queryForObject(WORK_REQUEST_APPLY_CHECK_EXIST, Boolean.class, userId, recruitmentId);
+    }
+
+    @Override
     public boolean save(WorkRequestApply obj) throws DataAccessException {
         return jdbcTemplate.update(
                 INSERT_WORK_REQUEST_APPLY,
@@ -46,6 +57,25 @@ public class WorkRequestApplyRepositoryImpl implements WorkRequestApplyRepositor
                 obj.getWorkRequestRecruitmentId(),
                 obj.getSttWorkCode(),
                 obj.isWorkRequestApplyDeleted()
+        ) > 0;
+    }
+
+    @Override
+    public boolean updateStatusRequestByUserIdAndRecruitmentId(WorkRequestApply obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                WORK_REQUEST_APPLY_UPDATE_STT_ONE,
+                obj.getSttWorkCode(),
+                obj.getUserId(),
+                obj.getWorkRequestRecruitmentId()
+        ) > 0;
+    }
+
+    @Override
+    public boolean rejectAllRequestByRecruitmentId(WorkRequestApply obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                WORK_REQUEST_APPLY_REJECT_STT_ALL,
+                3,
+                obj.getWorkRequestRecruitmentId()
         ) > 0;
     }
 

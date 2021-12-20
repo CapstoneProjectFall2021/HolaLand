@@ -1,6 +1,5 @@
 package com.hola.holalandfood.repository;
 
-import com.hola.holalandfood.entity.FoodStoreOnline;
 import com.hola.holalandfood.entity.FoodTag;
 import org.springframework.dao.DataAccessException;
 

@@ -79,6 +79,15 @@ public class WorkRequestRecruitmentRepositoryImpl implements WorkRequestRecruitm
     }
 
     @Override
+    public boolean updateSttRequest(WorkRequestRecruitment obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                WORK_REQUEST_RECRUITMENT_UPDATE_STT_ONE,
+                obj.getSttWorkCode(),
+                obj.getWorkRequestRecruitmentId()
+        ) > 0;
+    }
+
+    @Override
     public boolean delete(int id) throws DataAccessException {
         return jdbcTemplate.update(
                 WORK_REQUEST_RECRUITMENT_DELETED_ONE,

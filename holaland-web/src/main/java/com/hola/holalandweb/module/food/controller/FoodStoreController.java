@@ -16,13 +16,10 @@ import com.hola.holalandfood.service.FoodReportService;
 import com.hola.holalandfood.service.FoodStoreOnlineRateService;
 import com.hola.holalandfood.service.FoodStoreOnlineService;
 import com.hola.holalandfood.service.FoodTagService;
-import com.hola.holalandfood.service.FoodTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -125,8 +122,6 @@ public class FoodStoreController {
 
         Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
         rate.setUserId(currentUser.getId());
-        rate.setFoodStoreOnlineRateCreateTime(currentDate);
-        rate.setFoodStoreOnlineRateUpdateTime(currentDate);
         rate.setFoodStoreOnlineDeleted(false);
 
         // check this is the first rate
@@ -134,8 +129,11 @@ public class FoodStoreController {
 
         boolean isCheck;
         if (isRateExits) {
+            rate.setFoodStoreOnlineRateUpdateTime(currentDate);
             isCheck = foodStoreOnlineRateService.update(rate);
         } else {
+            rate.setFoodStoreOnlineRateCreateTime(currentDate);
+            rate.setFoodStoreOnlineRateUpdateTime(currentDate);
             isCheck = foodStoreOnlineRateService.save(rate);
         }
         if (isCheck) {

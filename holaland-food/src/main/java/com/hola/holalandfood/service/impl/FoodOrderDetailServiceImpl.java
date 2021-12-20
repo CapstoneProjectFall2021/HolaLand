@@ -33,4 +33,9 @@ public class FoodOrderDetailServiceImpl implements FoodOrderDetailService {
     public FoodOrderDetail getOne(int id) throws DataAccessException {
         return foodOrderDetailRepository.getOne(id);
     }
+
+    @Override
+    public boolean save(List<FoodOrderDetail> obj) throws DataAccessException {
+        return foodOrderDetailRepository.save(obj);
+    }
 }

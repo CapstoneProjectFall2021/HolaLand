@@ -39,7 +39,7 @@
            th:href="@{/fpt-university/club/detail(page=2, clubTypeId=*{club.fptuClubTypeId}, clubId=*{club.fptuClubId})}">
           <div class="flex">
             <div class="icon-circle">
-              <img class="media-object" th:src="|data:image/png;base64,*{club.fptuClubLogo}|" width="64"/>
+              <img class="media-object rounded-circle" th:src="|data:image/png;base64,*{club.fptuClubLogo}|" width="64"/>
             </div>
             <div class="content-body">
               <h4 th:text="*{club.fptuClubName}"></h4>

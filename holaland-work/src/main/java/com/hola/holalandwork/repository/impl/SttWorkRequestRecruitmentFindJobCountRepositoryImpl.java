@@ -21,6 +21,9 @@ public class SttWorkRequestRecruitmentFindJobCountRepositoryImpl implements SttW
 
     @Override
     public SttWorkRequestRecruitmentFindJobCount getOneByUserId(int userId) throws DataAccessException {
-        return jdbcTemplate.queryForObject(STT_WORK_REQUEST_RECRUITMENT_FIND_JOB_COUNT_GET_ONE_BY_USER_ID, new SttWorkRequestRecruitmentFindJobCountMapper(), userId);
+        return jdbcTemplate.queryForObject(
+                STT_WORK_REQUEST_RECRUITMENT_FIND_JOB_COUNT_GET_ONE_BY_USER_ID,
+                new SttWorkRequestRecruitmentFindJobCountMapper(), userId
+        );
     }
 }

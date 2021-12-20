@@ -45,6 +45,11 @@ public class WorkRequestFindJobServiceImpl implements WorkRequestFindJobService 
     }
 
     @Override
+    public boolean updateSttRequest(WorkRequestFindJob obj) throws DataAccessException {
+        return workRequestFindJobRepository.updateSttRequest(obj);
+    }
+
+    @Override
     public boolean save(WorkRequestFindJob obj) throws DataAccessException {
         return workRequestFindJobRepository.save(obj);
     }

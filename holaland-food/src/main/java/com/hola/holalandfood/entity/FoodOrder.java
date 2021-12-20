@@ -1,6 +1,10 @@
 package com.hola.holalandfood.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
@@ -15,7 +19,7 @@ public class FoodOrder {
     private int userId;
     private int foodStoreOnlineId;
     private int sttFoodCode;
-    private int foodOrderTotalPrice;
+    private double foodOrderTotalPrice;
     private Timestamp foodOrderCreatedDate;
     private String foodOrderNote;
     private String foodOrderReasonReject;

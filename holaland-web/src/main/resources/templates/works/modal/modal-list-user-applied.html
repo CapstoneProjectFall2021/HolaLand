@@ -1,0 +1,45 @@
+<!-- Modal list user applied-->
+<div class="modal fade" id="listUserAppliedModal" tabindex="-1" aria-labelledby="listUserAppliedModalLabel"
+     aria-hidden="true" th:fragment="listUserAppliedModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="listUserAppliedModalLabel">Danh sách ứng tuyển</h5>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Họ và tên</th>
+            <th scope="col">Ngày sinh</th>
+            <th scope="col">Số điện thoại</th>
+            <th scope="col">Giới tính</th>
+            <th scope="col" class="text-end">Trạng thái</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="apply, stt : ${listApply}">
+            <td><span th:text="*{(stt.index) + 1}"></span></td>
+            <th:block th:with="user=${userDetailService.getOneByUserId(apply.userId)}">
+              <td><span th:text="${user.userDetailName}"></span></td>
+              <td><span th:text="${#dates.format(user.userDetailDob, 'dd-MM-yyyy')}"></span></td>
+              <td><span th:text="${user.userDetailPhone}"></span></td>
+              <td><span th:text="${user.userDetailGender == 1 ? 'Nam' : 'Nữ' }"></span></td>
+            </th:block>
+            <td class="text-end" th:classappend="*{apply.sttWorkCode == 2 ? 'text-success' : ''}">
+              <span th:text="*{apply.sttWorkCode == 2 ? 'Đã chấp nhận' : 'Đã từ chối'}"></span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary me-2">
+          <i class="fas fa-check text-success"></i>Xác nhận
+        </a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</a>
+      </div>
+    </div>
+  </div>
+</div>

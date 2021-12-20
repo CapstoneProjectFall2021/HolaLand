@@ -14,7 +14,7 @@
               <h3 th:text="${jobDetail.workRequestRecruitmentTitle}"></h3>
               <p>
                 <i class="far fa-clock fa-fw"></i>Hạn nộp hồ sơ:
-                <span th:text="${jobDetail.workRequestRecruitmentEndDateTime}"></span>
+                <span th:text="${#dates.format(jobDetail.workRequestRecruitmentEndDateTime, 'dd-MM-yyyy')}"></span>
               </p>
               <p>
                 <i class="fas fa-map-marker-alt fa-fw"></i>Địa điểm:
@@ -23,19 +23,29 @@
             </div>
             <div class="col-md-12 col-lg-12 col-xl-3">
               <div class="apply-area">
-                <div class="apply-area-btn" sec:authorize="hasRole('MEMBER')">
-                  <div class="btn-apply">
-                    <a th:href="@{/works/apply-request-recruitment}" class="btn btn-md btn-success"
-                       data-bs-toggle="modal"
-                       data-bs-target="#confirmApplyRequestModal">
-                      ỨNG TUYỂN NGAY
+                <div class="apply-area-btn" sec:authorize="hasRole('STUDENT')">
+                  <div class="btn-apply" th:if="${!applied}">
+                    <a id="btn-apply-request" class="btn btn-md btn-success"
+                       th:onclick="'javascript:confirmApplyRequestRecruitment(' + ${jobDetail.workRequestRecruitmentId} + ')'">
+                      <span id="label-apply-request">ỨNG TUYỂN NGAY<span>
                     </a>
                   </div>
-                  <div class="btn-save-request">
+                  <div class="btn-apply" th:if="${applied}">
+                    <a href="javascript:void(0)" class="btn btn-md btn-success">
+                      ĐÃ ỨNG TUYỂN
+                    </a>
+                  </div>
+                  <div class="btn-save-request" th:if="${!saved}">
                     <a id="btn-save-request" href="javascript:void(0)" class="btn btn-md btn-secondary m-mt-16"
-                       onclick="saveRequestRecruitment()">
+                       th:onclick="'javascript:saveRequestRecruitment(' + ${jobDetail.workRequestRecruitmentId} + ')'">
                       <i id="icon-save-request" class="far fa-bookmark"></i>
                       <span id="label-save-request">LƯU TIN</span>
+                    </a>
+                  </div>
+                  <div class="btn-save-request" th:if="${saved}">
+                    <a href="javascript:void(0)" class="btn btn-md btn-secondary m-mt-16">
+                      <i class="fas fa-bookmark"></i>
+                      <span>ĐÃ LƯU</span>
                     </a>
                   </div>
                 </div>

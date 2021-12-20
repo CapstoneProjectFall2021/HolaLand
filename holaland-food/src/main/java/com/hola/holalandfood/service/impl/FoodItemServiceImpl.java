@@ -1,7 +1,6 @@
 package com.hola.holalandfood.service.impl;
 
 import com.hola.holalandfood.entity.FoodItem;
-import com.hola.holalandfood.entity.FoodItemCart;
 import com.hola.holalandfood.repository.FoodItemRepository;
 import com.hola.holalandfood.service.FoodItemService;
 import org.springframework.beans.factory.annotation.Autowired;

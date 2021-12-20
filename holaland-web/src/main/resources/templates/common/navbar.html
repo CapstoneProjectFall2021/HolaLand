@@ -16,7 +16,7 @@
           <a class="dropdown-toggle" th:href="@{/food/cart}">
             <i class="bi bi-bag-plus m-0"></i>
           </a>
-          <span id="numberFoodInCart" class="notification-dot" th:text="${session.mapFoodOrder != null ? session.mapFoodOrder.get('quantity') : 0}"></span>
+          <span id="numberFoodInCart" class="notification-dot" th:text="${session.mapOrderInCart != null ? session.mapOrderInCart.get('quantity') : 0}"></span>
         </li>
 <!--        <li sec:authorize="isAuthenticated()" class="navbar-btn dropdown">-->
 <!--          <a aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0)"-->
