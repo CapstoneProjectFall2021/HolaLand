@@ -16,13 +16,10 @@ import com.hola.holalandfood.service.FoodReportService;
 import com.hola.holalandfood.service.FoodStoreOnlineRateService;
 import com.hola.holalandfood.service.FoodStoreOnlineService;
 import com.hola.holalandfood.service.FoodTagService;
-import com.hola.holalandfood.service.FoodTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -86,15 +83,14 @@ public class FoodStoreController {
         boolean haveOrder = foodOrderService.checkUserOrder(storeId, currentUser.getId());
         boolean isRate = foodStoreOnlineRateService.checkUserCommentExist(currentUser.getId(), storeId);
         boolean isOwner = foodStoreOnlineService.checkUserIsOwner(currentUser.getId(), storeId);
-        if(isOwner) {
+        if (isOwner) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        // chưa mua hàng mà đòi rate
-        if(haveOrder) {
-            // rate lần đầu
+
+        if (haveOrder) {
             if (!isRate) {
                 return new ResponseEntity<>(HttpStatus.OK);
-            }else { // rate lần 2 => update
+            } else {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
         }
@@ -126,17 +122,18 @@ public class FoodStoreController {
 
         Timestamp currentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
         rate.setUserId(currentUser.getId());
-        rate.setFoodStoreOnlineRateCreateTime(currentDate);
-        rate.setFoodStoreOnlineRateUpdateTime(currentDate);
         rate.setFoodStoreOnlineDeleted(false);
-        boolean isCheck;
-        // kiem tra xem thang userId nay là rate lan dau hay lan 2
+
+        // check this is the first rate
         boolean isRateExits = foodStoreOnlineRateService.checkUserCommentExist(currentUser.getId(), rate.getFoodStoreOnlineId());
 
-        // if else => insert hay update
-        if(isRateExits) {
+        boolean isCheck;
+        if (isRateExits) {
+            rate.setFoodStoreOnlineRateUpdateTime(currentDate);
             isCheck = foodStoreOnlineRateService.update(rate);
-        }else {
+        } else {
+            rate.setFoodStoreOnlineRateCreateTime(currentDate);
+            rate.setFoodStoreOnlineRateUpdateTime(currentDate);
             isCheck = foodStoreOnlineRateService.save(rate);
         }
         if (isCheck) {

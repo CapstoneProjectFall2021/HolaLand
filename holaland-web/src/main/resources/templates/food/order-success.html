@@ -1,0 +1,25 @@
+<div class="col-right" th:fragment="order-success">
+  <!-- Order success -->
+  <div class="order-success">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="title fix-mb-title">Thông báo</h1>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3><i class="bi bi-check2-circle"></i>Đặt hàng thành công!</h3>
+          <div class="text-center mb-4 btn-group-3">
+            <a th:href="@{/food/order}" class="btn btn-md btn-secondary me-2">
+              <i class="far fa-file-alt text-info"></i>Xem đơn hàng
+            </a>
+            <a th:href="@{/food}" class="btn btn-md btn-secondary">
+              <i class="fas fa-plus text-success"></i>Tiếp tục mua hàng
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

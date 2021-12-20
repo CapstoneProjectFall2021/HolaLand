@@ -1,5 +1,5 @@
 /*
- *
+ * food.js
  */
 document.getElementById("food-cart").className = "navbar-btn dropdown";
 
@@ -16,17 +16,17 @@ function showToast(id) {
 /*
  * Add to cart
  */
-function addFoodToCart(e) {
-    const foodId = e.target.firstElementChild.innerHTML;
-    const storeId = e.target.lastElementChild.innerHTML;
-
+function addFoodToCart(foodId, storeId) {
     const request = new XMLHttpRequest();
     request.open("GET", "/food/cart/add?storeId=" + storeId + "&foodId=" + foodId, true);
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
+            document.getElementById("numberFoodInCart").innerHTML = this.responseText;
             showToast("toastAddToCartSuccess");
+        } else if (this.status === 401) {
+            showToast("toastAddToCartByOwnerWarning");
         } else if (this.status === 400) {
-            showToast("toastAddToCartErrorDifferentStore");
+            showToast("toastAddToCartDifferentStoreError");
         } else {
             showToast("toastAddToCartError");
         }
@@ -34,12 +34,15 @@ function addFoodToCart(e) {
     request.send(null);
 }
 
+function confirmDeleteItemInCart(foodId) {
+    document.getElementById("btn-delete-item-in-cart").href = "/food/cart/delete/item?foodId=" + foodId;
+    openModal("confirmDeleteItemInCartModal");
+}
+
 /*
  * Online store
  */
-function getFoodItemDetail(e) {
-    const arr = e.target.id.split("-");
-    const foodItemId = arr[arr.length - 1];
+function getFoodItemDetail(foodItemId) {
     const foodItemImg = document.getElementById("food-item-img-" + foodItemId).src;
     const foodItemName = document.getElementById("food-item-name-" + foodItemId).innerHTML;
     const foodItemPrice = document.getElementById("food-item-price-" + foodItemId).innerHTML;
@@ -68,8 +71,8 @@ function getUserRated(storeId) {
             } else {
                 document.getElementById("five-star").checked = true;
             }
-            document.getElementById("rateId").value = obj.foodStoreOnlineRateId;
-            document.getElementById("storeId").value = storeId;
+            document.getElementById("rate-id").value = obj.foodStoreOnlineRateId;
+            document.getElementById("store-id").value = storeId;
             document.getElementById("rate-content").value = obj.foodStoreOnlineRateComment;
             openModal("onlineStoreRateModal");
         } else {
@@ -79,9 +82,7 @@ function getUserRated(storeId) {
     request.send(null);
 }
 
-function checkUserOrderInStore(e) {
-    const storeId = e.target.firstElementChild.innerHTML;
-
+function checkUserOrderInStore(storeId) {
     const request = new XMLHttpRequest();
     request.open("GET", "/food/store/exits?storeId=" + storeId, true);
     request.onload = function () {
@@ -105,38 +106,11 @@ function checkUserOrderInStore(e) {
 /*
  * Order food
  */
-function confirmDeleteReport(e) {
-    const foodReportId = e.target.firstElementChild.innerHTML;
-    document.getElementById("btn-delete-report").href = "/food/order/report/delete?reportId=" + foodReportId;
-    openModal("confirmDeleteReportOrderModal");
-}
-
-function reportFoodOrder(e) {
-    const foodOrderId = e.target.firstElementChild.innerHTML;
-    const storeId = e.target.lastElementChild.innerHTML;
-
-    document.getElementById("orderId").value = foodOrderId;
-    document.getElementById("storeId").value = storeId;
-    openModal("reportFoodOrderModal");
-}
-
-function rejectFoodOrder(e) {
-    const foodOrderId = e.target.firstElementChild.innerHTML;
-
-    document.getElementById("orderRejectId").value = foodOrderId;
-    openModal("rejectOrderModal");
-}
 
 function getOrderReasonReject(e) {
     const reasonReject = e.target.firstElementChild.innerHTML;
     document.getElementById("orderReasonReject").innerHTML = reasonReject;
     openModal("reasonRejectionOrderModal");
-}
-
-function getOrderNote(e) {
-    const note = e.target.firstElementChild.innerHTML;
-    document.getElementById("orderNote").innerHTML = note;
-    openModal("noteOrderModal");
 }
 
 function getOrderReportContent(e) {
@@ -145,39 +119,59 @@ function getOrderReportContent(e) {
     openModal("reportOrderContentModal");
 }
 
-function confirmCancelOrder(e) {
-    const orderId = e.target.firstElementChild.innerHTML;
+/* Seller order */
+function confirmCompleteOrder(orderId) {
+    document.getElementById("btn-confirm-complete-order").href = "/food/order/complete?orderId=" + orderId;
+    openModal("confirmOrderModal");
+}
+
+function rejectFoodOrder(foodOrderId) {
+    document.getElementById("orderRejectId").value = foodOrderId;
+    openModal("rejectOrderModal");
+}
+
+function getOrderNote(e) {
+    const note = e.target.firstElementChild.innerHTML;
+    document.getElementById("orderNote").innerHTML = note;
+    openModal("noteOrderModal");
+}
+
+/* User order */
+function confirmCancelOrder(orderId) {
     document.getElementById("btn-cancel-order").href = "/food/order/cancel?orderId=" + orderId;
     openModal("confirmCancelOrderModal");
 }
 
-function confirmCompleteOrder(e) {
-    const orderId = e.target.firstElementChild.innerHTML;
-    document.getElementById("btn-confirm-complete-order").href = "/food/order/complete?orderId=" + orderId;
-    openModal("confirmOrderModal");
+function reportFoodOrder(orderId, storeId) {
+    document.getElementById("order-id").value = orderId;
+    document.getElementById("store-id").value = storeId;
+    openModal("reportFoodOrderModal");
+}
+
+function confirmDeleteReport(foodReportId) {
+    document.getElementById("btn-delete-report").href = "/food/order/report/delete?reportId=" + foodReportId;
+    openModal("confirmDeleteReportOrderModal");
 }
 
 /*
  * Store online manage
  */
-function confirmDeleteFood(e) {
-    const foodId = e.target.firstElementChild.innerHTML;
+function confirmDeleteFood(foodId) {
     document.getElementById("btn-delete-food").href = "/store/manage/food/delete?foodId=" + foodId;
     openModal("confirmDeleteFoodModal");
 }
 
-function updateFood(e) {
-    const foodItemId = e.target.firstElementChild.innerHTML;
-    const foodItemTagId = e.target.lastElementChild.innerHTML;
+function updateFood(foodItemId, foodItemTagId) {
     const foodItemImg = document.getElementById("food-item-img-" + foodItemId).src;
     const foodItemName = document.getElementById("food-item-name-" + foodItemId).innerHTML;
     const foodItemPrice = document.getElementById("food-item-price-" + foodItemId).innerHTML;
-    document.getElementById("foodItemId").value = foodItemId;
-    document.getElementById("itemTagId").value = foodItemTagId;
-    document.getElementById('blah1').src = foodItemImg;
-    document.getElementById("itemName").value = foodItemName;
-    document.getElementById("itemPrice").value = parseInt(foodItemPrice.replace('.', ''));
-    openModal("updateFoodModal");
+
+    document.getElementById("food-item-id").value = foodItemId;
+    document.getElementById("item-tag-id").value = foodItemTagId;
+    document.getElementById('image').src = foodItemImg;
+    document.getElementById("item-name").value = foodItemName;
+    document.getElementById("item-price").value = parseInt(foodItemPrice.replace('.', ''));
+    openModal("updateFoodItemModal");
 }
 
 

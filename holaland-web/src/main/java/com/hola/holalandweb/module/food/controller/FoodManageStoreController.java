@@ -1,8 +1,16 @@
 package com.hola.holalandweb.module.food.controller;
 
 import com.hola.holalandcore.entity.CustomUser;
-import com.hola.holalandfood.entity.*;
-import com.hola.holalandfood.service.*;
+import com.hola.holalandfood.entity.FoodItem;
+import com.hola.holalandfood.entity.FoodOrder;
+import com.hola.holalandfood.entity.FoodStoreOnline;
+import com.hola.holalandfood.entity.FoodStoreOnlineTag;
+import com.hola.holalandfood.entity.FoodTag;
+import com.hola.holalandfood.service.FoodItemService;
+import com.hola.holalandfood.service.FoodOrderService;
+import com.hola.holalandfood.service.FoodStoreOnlineService;
+import com.hola.holalandfood.service.FoodStoreOnlineTagService;
+import com.hola.holalandfood.service.FoodTagService;
 import com.hola.holalandweb.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -48,7 +56,7 @@ public class FoodManageStoreController {
     }
 
     @GetMapping("/info")
-    public String getShopInfo(Model model, Authentication authentication) {
+    public String getStoreInfo(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
 
         FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOneByUserId(currentUser.getId());
@@ -65,9 +73,9 @@ public class FoodManageStoreController {
         return "module-food-manage-store";
     }
 
-    // update avatar image pending
+    // Update avatar of Store pending
     @PostMapping("/update")
-    public String updatingShopInfo(
+    public String updatingStoreInfo(
             @RequestParam("storeId") Integer shopId,
             @RequestParam("storeName") String shopName,
             @RequestParam("storeDescription") String storeDescription
@@ -164,7 +172,7 @@ public class FoodManageStoreController {
     }
 
     // Not yet
-    @GetMapping("/store/statistics")
+    @GetMapping("/statistics")
     public String statistics(Model model) {
         model.addAttribute("page", 4);
         return "module-food-manage-store";
@@ -213,10 +221,10 @@ public class FoodManageStoreController {
             @RequestParam("imageFood") MultipartFile multipartFile,
             @RequestParam("foodItemName") String foodItemName,
             @RequestParam("foodItemPrice") Integer foodItemPrice,
-            @RequestParam("foodTagId") Integer foodTagId) throws Exception
-    {
+            @RequestParam("foodTagId") Integer foodTagId
+    ) throws Exception {
         String fileName = null;
-        if(!multipartFile.isEmpty()) {
+        if (!multipartFile.isEmpty()) {
             fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             String uploadDir = new File("holaland-web/target/classes/static/images/food").getAbsolutePath();
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);

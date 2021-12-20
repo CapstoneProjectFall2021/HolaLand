@@ -15,6 +15,8 @@ public interface FoodReportRepository {
 
     FoodReport getUserReported(int userId, int orderId) throws DataAccessException;
 
+    FoodReport getOrderReport(int orderId) throws DataAccessException;
+
     boolean save(FoodReport obj) throws DataAccessException;
 
     boolean delete(int id) throws DataAccessException;
