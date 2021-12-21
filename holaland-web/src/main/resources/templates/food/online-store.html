@@ -85,60 +85,74 @@
         <div class="tab-content" id="pills-tabContent">
           <div th:classappend="${tab == 3 ? 'tab-pane fade' : 'tab-pane fade show active'}" id="pills-food" role="tabpanel" aria-labelledby="pills-food-tab">
             <!-- List tag -->
-            <div class="row m-mb-20">
-              <div class="col-md-12">
-                <div class="list-tag">
-                  <div class="tags">
-                    <a class="tag" th:classappend="*{tagId == 0 ? 'active' : ''}"
-                       th:href="@{/food/store(id=${foodStoreOnline.foodStoreOnlineId})}">Tất cả</a>
-                    <th:block th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}">
-                      <a class="tag"
-                         th:classappend="*{foodStoreOnlineTag.foodTagId == tagId ? 'active' : ''}"
-                         th:href="@{/food/store/tag(storeId=${foodStoreOnline.foodStoreOnlineId}, tagId=*{foodStoreOnlineTag.foodTagId})}"
-                         th:text="*{foodStoreOnlineTag.foodTagName}">
-                      </a>
-                    </th:block>
+            <th:block
+                th:if="${!foodStoreOnline.foodStoreOnlinePauseSellingFlag && !foodStoreOnline.foodStoreOnlineStopSellingFlag}">
+              <div class="row m-mb-20">
+                <div class="col-md-12">
+                  <div class="list-tag">
+                    <div class="tags">
+                      <a class="tag" th:classappend="*{tagId == 0 ? 'active' : ''}"
+                         th:href="@{/food/store(id=${foodStoreOnline.foodStoreOnlineId})}">Tất cả</a>
+                      <th:block th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}">
+                        <a class="tag"
+                           th:classappend="*{foodStoreOnlineTag.foodTagId == tagId ? 'active' : ''}"
+                           th:href="@{/food/store/tag(storeId=${foodStoreOnline.foodStoreOnlineId}, tagId=*{foodStoreOnlineTag.foodTagId})}"
+                           th:text="*{foodStoreOnlineTag.foodTagName}">
+                        </a>
+                      </th:block>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="list-food">
-              <div class="row">
-                <div class="col-lg-12 col-xl-6 col-xxl-6" th:each="foodItem : ${foodItemList}">
-                  <div class="food label-info m-mb-16">
-                    <div class="flex-sb">
-                      <div class="flex">
-                        <div class="icon-circle">
-                          <img th:id="'food-item-img-' + *{foodItem.foodItemId}" class="media-object rounded-circle" th:src="@{'/images/food/'+ *{foodItem.foodItemImage}}">
-                        </div>
-                        <div class="content-body">
-                          <a th:id="'food-item-name-' + *{foodItem.foodItemId}" href="javascript:void(0)" th:text="*{foodItem.foodItemName}"
-                             th:onclick="'javascript:getFoodItemDetail(' + ${foodItem.foodItemId} + ')'">
-                          </a>
-                          <div class="food-info">
-                            <p>Giá:
-                              <span th:id="'food-item-price-' + *{foodItem.foodItemId}" th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
-                              &nbsp;&#8226;&nbsp;
-                              Đã bán: <span th:text="*{foodItem.foodItemSoldNumber}"></span>
-                            </p>
+              <div class="list-food">
+                <div class="row">
+                  <div class="col-lg-12 col-xl-6 col-xxl-6" th:each="foodItem : ${foodItemList}">
+                    <div class="food label-info m-mb-16">
+                      <div class="flex-sb">
+                        <div class="flex">
+                          <div class="icon-circle">
+                            <img th:id="'food-item-img-' + *{foodItem.foodItemId}" class="media-object rounded-circle"
+                                 th:src="@{'/images/food/'+ *{foodItem.foodItemImage}}">
+                          </div>
+                          <div class="content-body">
+                            <a th:id="'food-item-name-' + *{foodItem.foodItemId}" href="javascript:void(0)"
+                               th:text="*{foodItem.foodItemName}"
+                               th:onclick="'javascript:getFoodItemDetail(' + ${foodItem.foodItemId} + ')'">
+                            </a>
+                            <div class="food-info">
+                              <p>Giá:
+                                <span th:id="'food-item-price-' + *{foodItem.foodItemId}"
+                                      th:text="*{#numbers.formatInteger(foodItem.foodItemPrice, 3, 'POINT')}"></span><sup>đ</sup>
+                                &nbsp;&#8226;&nbsp;
+                                Đã bán: <span th:text="*{foodItem.foodItemSoldNumber}"></span>
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="flex">
-                        <a href="javascript:void(0)" class="btn-more mx-0" sec:authorize="isAuthenticated()">
-                          <i class="fas fa-plus text-success" data-bs-placement="top" data-bs-toggle="tooltip" title="Thêm vào giỏ hàng"
-                             th:onclick="'javascript:addFoodToCart(' + ${foodItem.foodItemId} + ',' + ${foodItem.foodStoreOnlineId} + ')'">
-                          </i>
-                        </a>
-                        <a th:href="@{/login}" class="btn-more mx-0" sec:authorize="!isAuthenticated()">
-                          <i class="fas fa-plus text-success"></i>
-                        </a>
+                        <div class="flex">
+                          <a href="javascript:void(0)" class="btn-more mx-0" sec:authorize="isAuthenticated()">
+                            <i class="fas fa-plus text-success" data-bs-placement="top" data-bs-toggle="tooltip"
+                               title="Thêm vào giỏ hàng"
+                               th:onclick="'javascript:addFoodToCart(' + ${foodItem.foodItemId} + ',' + ${foodItem.foodStoreOnlineId} + ')'">
+                            </i>
+                          </a>
+                          <a th:href="@{/login}" class="btn-more mx-0" sec:authorize="!isAuthenticated()">
+                            <i class="fas fa-plus text-success"></i>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </th:block>
+            <th:block th:if="${foodStoreOnline.foodStoreOnlineStopSellingFlag}">
+              <h3>Cửa hàng đang đóng cửa</h3>
+            </th:block>
+            <th:block
+                th:if="${foodStoreOnline.foodStoreOnlinePauseSellingFlag && !foodStoreOnline.foodStoreOnlineStopSellingFlag}">
+              <h3>Cửa hàng đang nghỉ bán</h3>
+            </th:block>
           </div>
           <div class="tab-pane fade" id="pills-comment" role="tabpanel" aria-labelledby="pills-comment-tab">
             <div class="row">
