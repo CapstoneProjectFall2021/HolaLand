@@ -91,6 +91,27 @@ public class WorkRequestFindJobRepositoryImpl implements WorkRequestFindJobRepos
     }
 
     @Override
+    public boolean update(WorkRequestFindJob obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                WORK_REQUEST_FIND_JOB_UPDATE_ONE,
+                obj.getSttWorkCode(),
+                obj.getWorkRequestTypeId(),
+                obj.getWorkSalaryUnitId(),
+                obj.getWorkPaymentMethodId(),
+                obj.getWorkTimeId(),
+                obj.getWorkRequestFindJobTitle(),
+                obj.getWorkRequestFindJobEndDateTime(),
+                obj.getWorkRequestFindJobLastUpdateDateTime(),
+                obj.getWorkRequestFindJobDescription(),
+                obj.getWorkRequestFindJobPersonalExperience(),
+                obj.getWorkRequestFindJobExpectedLocation(),
+                obj.getWorkRequestFindJobExpectedSalary(),
+                obj.getWorkRequestFindJobNote(),
+                obj.getWorkRequestFindJobId()
+        ) > 0;
+    }
+
+    @Override
     public boolean delete(int id) throws DataAccessException {
         return jdbcTemplate.update(WORK_REQUEST_FIND_JOB_DELETED_ONE, id) > 0;
     }

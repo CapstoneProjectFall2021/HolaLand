@@ -84,6 +84,30 @@ public class WorkRequestRecruitmentRepositoryImpl implements WorkRequestRecruitm
     }
 
     @Override
+    public boolean update(WorkRequestRecruitment obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                WORK_REQUEST_RECRUITMENT_UPDATE_ONE,
+                obj.getSttWorkCode(),
+                obj.getWorkRequestTypeId(),
+                obj.getWorkSalaryUnitId(),
+                obj.getWorkPaymentMethodId(),
+                obj.getWorkRequestRecruitmentTitle(),
+                obj.getWorkRequestRecruitmentEndDateTime(),
+                obj.getWorkRequestRecruitmentLastUpdateDateTime(),
+                obj.getWorkRequestRecruitmentDescription(),
+                obj.getWorkRequestRecruitmentRequirement(),
+                obj.getWorkRequestRecruitmentBenefit(),
+                obj.getWorkRequestRecruitmentSalary(),
+                obj.getWorkRequestRecruitmentQuantity(),
+                obj.isWorkRequestRecruitmentExperienceRequirement(),
+                obj.isWorkRequestRecruitmentGenderRequirement(),
+                obj.getWorkRequestRecruitmentWorkLocation(),
+                obj.getWorkRequestRecruitmentNote(),
+                obj.getWorkRequestRecruitmentId()
+        ) > 0;
+    }
+
+    @Override
     public boolean updateSttRequest(WorkRequestRecruitment obj) throws DataAccessException {
         return jdbcTemplate.update(
                 WORK_REQUEST_RECRUITMENT_UPDATE_STT_ONE,

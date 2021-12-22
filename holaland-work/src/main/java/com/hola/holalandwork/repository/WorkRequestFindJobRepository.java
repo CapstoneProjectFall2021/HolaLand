@@ -23,5 +23,7 @@ public interface WorkRequestFindJobRepository {
 
     boolean save(WorkRequestFindJob obj) throws DataAccessException;
 
+    boolean update(WorkRequestFindJob obj) throws DataAccessException;
+
     boolean delete(int id) throws DataAccessException;
 }

@@ -232,6 +232,7 @@ public class WorksRecruitmentController {
         newRequestRecruitment.setSttWorkCode(sttWork);
         newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
+        newRequestRecruitment.setWorkRequestRecruitmentNote(null);
         newRequestRecruitment.setWorkRequestRecruitmentDeleted(false);
 
         if (newRequestRecruitment.getWorkSalaryUnitId() == 1) {
@@ -403,5 +404,53 @@ public class WorksRecruitmentController {
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
         model.addAttribute("page", 9);
         return "module-works";
+    }
+
+    @GetMapping("/jobs/recruitment/edit")
+    public String getFormUpdateRequestRecruitment(@RequestParam("requestId") int requestId, Model model) {
+        WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(requestId);
+        model.addAttribute("requestRecruitment", requestRecruitment);
+        model.addAttribute("page", 13);
+        return "module-works";
+    }
+
+    @PostMapping(value = "/jobs/recruitment/edit", params = "save")
+    public String updateRequestRecruitment(
+            @ModelAttribute("requestRecruitment") WorkRequestRecruitment requestRecruitment,
+            BindingResult bindingResult,
+            Authentication authentication
+    ) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        setAttrNewRequestRecruitment(requestRecruitment, currentUser.getId(), Constants.STT_WORK_CODE_PENDING_APPROVAL);
+        boolean isCheck = workRequestRecruitmentService.update(requestRecruitment);
+        if (isCheck) {
+            return "redirect:" + "/works/jobs/recruitment/manage";
+        } else {
+            return "404";
+        }
+    }
+
+    @PostMapping(value = "/jobs/recruitment/edit", params = "saveDraft")
+    public String updateRequestRecruitmentSaveDraft(
+            @ModelAttribute("requestRecruitment") WorkRequestRecruitment requestRecruitment,
+            BindingResult bindingResult,
+            Authentication authentication
+    ) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        setAttrNewRequestRecruitment(requestRecruitment, currentUser.getId(), Constants.STT_WORK_CODE_SAVE_DRAFT);
+        boolean isCheck = workRequestRecruitmentService.update(requestRecruitment);
+        if (isCheck) {
+            return "redirect:" + "/works/jobs/recruitment/manage/status?code=6";
+        } else {
+            return "404";
+        }
     }
 }

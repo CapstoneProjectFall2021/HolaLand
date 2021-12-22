@@ -8,6 +8,13 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_FIND_JOB_DELETED_ONE = "UPDATE work_request_find_job\n" +
             "SET work_request_find_job_deleted = 1\n" +
             "WHERE work_request_find_job_id = ?";
+    String WORK_REQUEST_FIND_JOB_UPDATE_ONE = "UPDATE work_request_find_job\n" +
+            "SET stt_work_code = ?, work_request_type_id = ?, work_salary_unit_id = ?, work_payment_method_id = ?, " +
+            "work_time_id = ?, work_request_find_job_title = ?, work_request_find_job_end_date_time = ?, " +
+            "work_request_find_job_last_update_date_time = ?, work_request_find_job_description = ?, " +
+            "work_request_find_job_personal_experience = ?, work_request_find_job_expected_location = ?, " +
+            "work_request_find_job_expected_salary = ?, work_request_find_job_note = ?\n" +
+            "WHERE work_request_find_job_id = ?";
     String WORK_REQUEST_FIND_JOB_UPDATE_STT_ONE = "UPDATE work_request_find_job\n" +
             "SET stt_work_code = ?\n" +
             "WHERE work_request_find_job_id = ?";
@@ -19,6 +26,15 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_RECRUITMENT_GET_ONE = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_id = ? AND work_request_recruitment_deleted = 0";
     String WORK_REQUEST_RECRUITMENT_DELETED_ONE = "UPDATE work_request_recruitment\n" +
             "SET work_request_recruitment_deleted = 1\n" +
+            "WHERE work_request_recruitment_id = ?";
+    String WORK_REQUEST_RECRUITMENT_UPDATE_ONE = "UPDATE work_request_recruitment\n" +
+            "SET stt_work_code = ?, work_request_type_id = ?, work_salary_unit_id = ?, work_payment_method_id = ?, " +
+            "work_request_recruitment_title = ?, work_request_recruitment_end_date_time = ?, " +
+            "work_request_recruitment_last_update_date_time = ?, work_request_recruitment_description = ?, " +
+            "work_request_recruitment_requirements = ?, work_request_recruitment_benefits = ?, " +
+            "work_request_recruitment_salary = ?, work_request_recruitment_quantity = ?, " +
+            "work_request_recruitment_experience_required = ?, work_request_recruitment_gender_required = ?, " +
+            "work_request_recruitment_work_location = ?, work_request_recruitment_note = ?\n" +
             "WHERE work_request_recruitment_id = ?";
     String WORK_REQUEST_RECRUITMENT_UPDATE_STT_ONE = "UPDATE work_request_recruitment\n" +
             "SET stt_work_code = ?\n" +

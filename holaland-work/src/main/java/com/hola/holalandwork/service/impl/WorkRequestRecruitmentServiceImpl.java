@@ -56,6 +56,11 @@ public class WorkRequestRecruitmentServiceImpl implements WorkRequestRecruitment
     }
 
     @Override
+    public boolean update(WorkRequestRecruitment obj) throws DataAccessException {
+        return workRequestRecruitmentRepository.update(obj);
+    }
+
+    @Override
     public boolean updateSttRequest(WorkRequestRecruitment obj) throws DataAccessException {
         return workRequestRecruitmentRepository.updateSttRequest(obj);
     }
