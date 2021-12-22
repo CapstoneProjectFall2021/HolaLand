@@ -54,6 +54,11 @@ public class WorkRequestRecruitmentRepositoryImpl implements WorkRequestRecruitm
     }
 
     @Override
+    public List<WorkRequestRecruitment> searchByTitle(String title, int code) throws DataAccessException {
+        return jdbcTemplate.query(WORK_REQUEST_RECRUITMENT_SEARCH, new WorkRequestRecruitmentMapper(), "%" + title + "%", code);
+    }
+
+    @Override
     public boolean save(WorkRequestRecruitment obj) throws DataAccessException {
         return jdbcTemplate.update(
                 INSERT_REQUEST_RECRUITMENT,

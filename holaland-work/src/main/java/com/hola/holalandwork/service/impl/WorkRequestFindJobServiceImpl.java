@@ -45,6 +45,11 @@ public class WorkRequestFindJobServiceImpl implements WorkRequestFindJobService 
     }
 
     @Override
+    public List<WorkRequestFindJob> searchByTitle(String title, int code) throws DataAccessException {
+        return workRequestFindJobRepository.searchByTitle(title, code);
+    }
+
+    @Override
     public boolean updateSttRequest(WorkRequestFindJob obj) throws DataAccessException {
         return workRequestFindJobRepository.updateSttRequest(obj);
     }

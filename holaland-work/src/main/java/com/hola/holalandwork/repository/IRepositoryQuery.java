@@ -11,6 +11,8 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_FIND_JOB_UPDATE_STT_ONE = "UPDATE work_request_find_job\n" +
             "SET stt_work_code = ?\n" +
             "WHERE work_request_find_job_id = ?";
+    String WORK_REQUEST_FIND_JOB_SEARCH = "SELECT * FROM work_request_find_job WHERE work_request_find_job_title LIKE ? " +
+            "AND stt_work_code = ? AND work_request_find_job_deleted = 0";
 
     String WORK_REQUEST_RECRUITMENT_GET_ALL = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_deleted = 0";
     String WORK_REQUEST_RECRUITMENT_GET_ALL_BY_TYPE = "SELECT * FROM work_request_recruitment WHERE work_request_type_id = ? AND stt_work_code = ? AND work_request_recruitment_deleted = 0";
@@ -21,6 +23,8 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_RECRUITMENT_UPDATE_STT_ONE = "UPDATE work_request_recruitment\n" +
             "SET stt_work_code = ?\n" +
             "WHERE work_request_recruitment_id = ?";
+    String WORK_REQUEST_RECRUITMENT_SEARCH = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_title LIKE ? " +
+            "AND stt_work_code = ? AND work_request_recruitment_deleted = 0";
 
     String WORK_REQUEST_APPLY_GET_ALL = "SELECT * FROM work_request_apply WHERE work_request_apply_deleted = 0";
     String WORK_REQUEST_APPLY_GET_ALL_BY_REQUEST_ID = "SELECT * FROM work_request_apply WHERE work_request_recruitment_id = ?\n" +

@@ -55,6 +55,11 @@ public class WorkRequestFindJobRepositoryImpl implements WorkRequestFindJobRepos
     }
 
     @Override
+    public List<WorkRequestFindJob> searchByTitle(String title, int code) throws DataAccessException {
+        return jdbcTemplate.query(WORK_REQUEST_FIND_JOB_SEARCH, new WorkRequestFindJobMapper(), "%" + title + "%", code);
+    }
+
+    @Override
     public boolean updateSttRequest(WorkRequestFindJob obj) throws DataAccessException {
         return jdbcTemplate.update(
                 WORK_REQUEST_FIND_JOB_UPDATE_STT_ONE,
