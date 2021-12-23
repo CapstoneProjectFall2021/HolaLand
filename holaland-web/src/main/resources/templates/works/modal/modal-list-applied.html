@@ -23,7 +23,7 @@
             <td><span th:text="*{(order.index) + 1}"></span></td>
             <td><span th:text="*{userDetail.userDetailName}"></span></td>
             <td><span th:text="*{#dates.format(userDetail.userDetailDob, 'dd-MM-yyyy')}"></span></td>
-            <td><span th:text="*{userDetail.userDetailPhone}"></span></td>
+            <td><span th:text="*{format.phoneNumber(userDetail.userDetailPhone)}"></span></td>
             <td><span th:text="*{userDetail.userDetailGender == 1 ? 'Nam' : 'Nữ' }"></span></td>
             <td class="text-end">
               <a th:href="@{/works/apply/show/accepted(appliedId=${appliedId}, userId=*{userDetail.userId})}" class="me-3">

@@ -166,6 +166,7 @@ public class FoodOrderController {
         // Add more attr for modal order detail
         model.addAttribute("userNote", foodOrder.getFoodOrderNote());
         model.addAttribute("userAddress", userAddressService.getOneByUserId(foodOrder.getUserId()));
+        model.addAttribute("format", new Format());
         model.addAttribute("orderStatus", orderStatus);
         model.addAttribute("foodOrderDetailList", foodOrderDetailList);
         model.addAttribute("foodStoreOnlineId", foodStoreOnlineId);

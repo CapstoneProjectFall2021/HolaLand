@@ -8,6 +8,7 @@ import com.hola.holalandcore.repository.RoleRepository;
 import com.hola.holalandcore.repository.UserRepository;
 import com.hola.holalandcore.service.UserAddressService;
 import com.hola.holalandcore.service.UserDetailService;
+import com.hola.holalandcore.util.Format;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -59,6 +60,7 @@ public class ProfileController {
                     : (role.getRoleId() == 3 ? "Bán hàng" : "Học sinh")))
                     + ((roles.indexOf(role) == (roles.size()-1)) ? "" : ", ");
         }
+        model.addAttribute("format", new Format());
         model.addAttribute("userRole", userRole);
         model.addAttribute("userDetail", userDetail);
         model.addAttribute("userAddressList", userAddressList);
@@ -121,6 +123,7 @@ public class ProfileController {
     public String addressUpdate(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(currentUser.getId());
+        model.addAttribute("format", new Format());
         model.addAttribute("userAddressList", userAddressList);
         model.addAttribute("page", 4);
         return "profile";

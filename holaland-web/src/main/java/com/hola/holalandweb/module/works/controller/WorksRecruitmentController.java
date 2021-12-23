@@ -3,6 +3,7 @@ package com.hola.holalandweb.module.works.controller;
 import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.service.UserDetailService;
+import com.hola.holalandcore.util.Format;
 import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandwork.entity.*;
 import com.hola.holalandwork.service.*;
@@ -310,6 +311,7 @@ public class WorksRecruitmentController {
         model.addAttribute("appliedId", appliedId);
         model.addAttribute("listApplied", listApplied);
         model.addAttribute("userDetailService",userDetailService);
+        model.addAttribute("format", new Format());
         model.addAttribute("page", 8);
         model.addAttribute("listAppliedModal", listAppliedModal);
         return "module-works";

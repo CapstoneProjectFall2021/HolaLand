@@ -3,6 +3,7 @@ package com.hola.holalandweb.module.works.controller;
 import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.service.UserDetailService;
+import com.hola.holalandcore.util.Format;
 import com.hola.holalandweb.constant.Constants;
 import com.hola.holalandwork.entity.*;
 import com.hola.holalandwork.service.*;
@@ -338,6 +339,7 @@ public class WorksMemberController {
         List<UserDetail> listBookedModal = userDetailService.getAllUserBookedByUserId(bookedId);
         model.addAttribute("bookedId", bookedId);
         model.addAttribute("userDetailService", userDetailService);
+        model.addAttribute("format", new Format());
         model.addAttribute("listBooked", listBooked);
         model.addAttribute("page", 2);
         model.addAttribute("listBookedModal", listBookedModal);
