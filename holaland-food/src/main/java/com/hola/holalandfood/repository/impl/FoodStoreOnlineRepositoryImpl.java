@@ -55,6 +55,7 @@ public class FoodStoreOnlineRepositoryImpl implements FoodStoreOnlineRepository,
     public boolean updateShopInfo(FoodStoreOnline obj) throws DataAccessException {
         return jdbcTemplate.update(
                 FOOD_STORE_ONLINE_UPDATE_INFO_ONE,
+                obj.getFoodStoreOnlineImage(),
                 obj.getFoodStoreOnlineName(),
                 obj.getFoodStoreOnlineDescription(),
                 obj.getFoodStoreOnlineId()

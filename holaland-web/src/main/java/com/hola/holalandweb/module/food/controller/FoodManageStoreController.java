@@ -80,10 +80,18 @@ public class FoodManageStoreController {
     public String updatingStoreInfo(
             @RequestParam("storeId") Integer shopId,
             @RequestParam("storeName") String shopName,
+            @RequestParam("shopImage") MultipartFile multipartFile,
             @RequestParam("storeDescription") String storeDescription
-    ) {
+    ) throws Exception {
+        String fileName = null;
+        if(!multipartFile.isEmpty()) {
+            fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            String uploadDir = new File("holaland-web/target/classes/static/images/food").getAbsolutePath();
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        }
         FoodStoreOnline storeInfoUpdate = FoodStoreOnline.builder()
                 .foodStoreOnlineId(shopId)
+                .foodStoreOnlineImage(fileName)
                 .foodStoreOnlineName(shopName)
                 .foodStoreOnlineDescription(storeDescription)
                 .build();
