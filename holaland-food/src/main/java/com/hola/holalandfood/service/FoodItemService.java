@@ -1,7 +1,6 @@
 package com.hola.holalandfood.service;
 
 import com.hola.holalandfood.entity.FoodItem;
-import com.hola.holalandfood.entity.FoodItemCart;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;

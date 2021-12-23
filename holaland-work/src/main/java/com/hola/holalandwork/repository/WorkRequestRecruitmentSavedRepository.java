@@ -14,6 +14,8 @@ public interface WorkRequestRecruitmentSavedRepository {
 
     WorkRequestRecruitmentSaved getOne(int id) throws DataAccessException;
 
+    boolean checkUserSaved(int userId, int recruitmentId) throws DataAccessException;
+
     boolean save(WorkRequestRecruitmentSaved obj) throws DataAccessException;
 
     boolean delete(int id) throws DataAccessException;

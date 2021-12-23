@@ -25,8 +25,33 @@ public class WorkRequestBookServiceImpl implements WorkRequestBookService {
     }
 
     @Override
+    public List<WorkRequestBook> getAllByRequestId(int id) throws DataAccessException {
+        return workRequestBookRepository.getAllByRequestId(id);
+    }
+
+    @Override
     public WorkRequestBook getOne(int id) throws DataAccessException {
         return workRequestBookRepository.getOne(id);
+    }
+
+    @Override
+    public boolean checkUserIsBooked(int userId, int findJobId) throws DataAccessException {
+        return workRequestBookRepository.checkUserIsBooked(userId, findJobId);
+    }
+
+    @Override
+    public boolean userAcceptRecruiterBooked(WorkRequestBook obj) throws DataAccessException {
+        boolean isCheck = workRequestBookRepository.rejectAllRequestByFindJobId(obj);
+        if(isCheck) {
+            return workRequestBookRepository.updateStatusRequestByUserIdAndFindJobId(obj);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean userRejectRecruiterBooked(WorkRequestBook obj) throws DataAccessException {
+        return workRequestBookRepository.updateStatusRequestByUserIdAndFindJobId(obj);
     }
 
     @Override

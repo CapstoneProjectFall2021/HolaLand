@@ -19,5 +19,7 @@ public interface WorkRequestRecruitmentService {
 
     boolean save(WorkRequestRecruitment obj) throws DataAccessException;
 
+    boolean updateSttRequest(WorkRequestRecruitment obj) throws DataAccessException;
+
     boolean delete(int id) throws DataAccessException;
 }

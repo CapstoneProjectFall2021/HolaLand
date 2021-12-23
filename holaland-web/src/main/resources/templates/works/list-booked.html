@@ -11,8 +11,11 @@
         <div class="label-info m-mb-16">
           <div class="btn-action">
             <a th:id="'btn-show-list-booked' + ${work.workRequestFindJobId}" href="javascript:void(0)">
-              <i class="fas fa-user-friends m-0" onclick="getIdOfRequestBooked(event)">
-                <span th:text="${work.workRequestFindJobId}" class="d-none"></span>
+              <th:block th:with="listUser=${userDetailService.getAllUserBookedByUserId(work.workRequestFindJobId)}">
+                <span th:text="${listUser.size()}"></span>
+              </th:block>
+              <i class="fas fa-user-friends m-0"
+                 th:onclick="'javascript:getIdOfRequestBooked('+${work.workRequestFindJobId}+')'">
               </i>
             </a>
           </div>
@@ -21,7 +24,7 @@
               <i class="fas fa-user-check fa-fw"></i>
             </div>
             <div class="content-body">
-              <a th:href="@{/works/request-find-job-detail(id=${work.workRequestFindJobId})}">
+              <a th:href="@{/works/jobs/find/detail(id=${work.workRequestFindJobId})}">
                 <span th:text="*{work.workRequestFindJobTitle}"></span>
               </a>
               <div class="request-info">
@@ -32,9 +35,9 @@
                                         work.workSalaryUnitId == 2 ? 'ngày' :
                                         work.workSalaryUnitId == 3 ? 'tuần' : 'tháng'
                                     }"></span> &nbsp;&#8226;&nbsp; Thời hạn:
-                <span th:text="*{work.workRequestFindJobEndDateTime}"></span></p>
+                <span th:text="*{#dates.format(work.workRequestFindJobEndDateTime, 'dd-MM-yyyy')}"></span></p>
                 <p th:classappend="*{work.sttWorkCode == 3 ? 'text-success' : 'text-danger'}"
-                   th:text="*{work.sttWorkCode == 3 ? 'Đang ứng tuyển' : 'Hết hạn ứng tuyển'}"></p>
+                   th:text="*{work.sttWorkCode == 3 ? 'Đang tìm việc' : 'Hết hạn tìm việc'}"></p>
               </div>
             </div>
           </div>

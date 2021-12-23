@@ -2,7 +2,6 @@ package com.hola.holalandfood.repository.impl;
 
 import com.hola.holalandfood.entity.FoodReport;
 import com.hola.holalandfood.mapper.FoodReportMapper;
-import com.hola.holalandfood.mapper.FoodStoreOnlineRateMapper;
 import com.hola.holalandfood.repository.FoodReportRepository;
 import com.hola.holalandfood.repository.IRepositoryQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +38,18 @@ public class FoodReportRepositoryImpl implements FoodReportRepository, IReposito
 
     @Override
     public FoodReport getUserReported(int userId, int orderId) throws DataAccessException{
-        try{
-            return jdbcTemplate.queryForObject(FOOD_REPORT_CHECK_EXISTS, new FoodReportMapper(), userId, orderId);
-        }catch (EmptyResultDataAccessException e) {
+        try {
+            return jdbcTemplate.queryForObject(FOOD_USER_REPORT_CHECK_EXISTS, new FoodReportMapper(), userId, orderId);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public FoodReport getOrderReport(int orderId) throws DataAccessException {
+        try {
+            return jdbcTemplate.queryForObject(FOOD_ORDER_REPORT_CHECK_EXISTS, new FoodReportMapper(), orderId);
+        } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }

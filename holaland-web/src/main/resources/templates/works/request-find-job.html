@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3" th:each="requestType : ${requestTypeList}">
                 <a href="request-recruitment.html" class="label-info m-mb-16"
-                   th:href="@{/works/request-find-job/type(workRequestTypeId=*{requestType.workRequestTypeId})}"
+                   th:href="@{/works/jobs/find/type(workRequestTypeId=*{requestType.workRequestTypeId})}"
                    th:classappend="${requestType.workRequestTypeId == workRequestTypeId ? 'active' : ''}">
                     <div class="flex">
                         <div class="icon">
@@ -34,7 +34,7 @@
         </div>
         <div class="row">
             <div class="col-md-12" th:each="worker : ${workerList}">
-                <a th:href="@{/works/request-find-job-detail(id=${worker.workRequestFindJobId})}" class="label-info m-mb-16">
+                <a th:href="@{/works/jobs/find/detail(id=${worker.workRequestFindJobId})}" class="label-info m-mb-16">
                     <div class="flex">
                         <div class="icon-s">
                             <img class="media-object" th:src="@{'/images/system/job.png'}" alt="">
@@ -42,7 +42,7 @@
                         <div class="content-body">
                             <h4 class="accent" th:text="*{worker.workRequestFindJobTitle}"></h4>
                             <div class="request-info">
-                                <p>Lương mong muốn: <span th:text="*{worker.workRequestFindJobExpectedSalary}"></span>
+                                <p>Lương mong muốn: <span th:text="*{#numbers.formatInteger(worker.workRequestFindJobExpectedSalary, 3, 'POINT')}"></span>
                                     <span
                                         th:text="*{
                                         worker.workSalaryUnitId == 1 ? 'VNĐ/h' :
@@ -50,7 +50,7 @@
                                         worker.workSalaryUnitId == 3 ? 'VNĐ/Tuần' : 'VNĐ/Tháng'}"
                                     ></span>
                                 </p>
-                                <p>Thời hạn: <span th:text="*{worker.workRequestFindJobEndDateTime}"></span></p>
+                                <p>Thời hạn: <span th:text="*{#dates.format(worker.workRequestFindJobEndDateTime, 'dd-MM-yyyy')}"></span></p>
                             </div>
                         </div>
                     </div>

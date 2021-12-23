@@ -1,6 +1,10 @@
 package com.hola.holalandfood.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,6 +17,6 @@ public class FoodOrderDetail {
     private int foodOrderId;
     private int foodItemId;
     private String foodItemName;
-    private int foodItemPrice;
+    private double foodItemPrice;
     private int foodItemQuantity;
 }

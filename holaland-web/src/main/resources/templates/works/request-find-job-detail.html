@@ -14,16 +14,21 @@
               <h3 th:text="${jobDetail.workRequestFindJobTitle}">
               </h3>
               <p><i class="far fa-calendar-alt fa-fw"></i>Ngày hết hạn:
-                <span th:text="${jobDetail.workRequestFindJobEndDateTime}"></span>
+                <span th:text="${#dates.format(jobDetail.workRequestFindJobEndDateTime, 'dd-MM-yyyy')}"></span>
               </p>
             </div>
             <div class="col-md-12 col-lg-12 col-xl-3">
               <div class="apply-area">
                 <div class="apply-area-btn" sec:authorize="hasRole('RECRUITER')">
-                  <div class="btn-apply">
-                    <a href="javascript:void(0)" class="btn btn-md btn-success" data-bs-toggle="modal"
-                       data-bs-target="#confirmHireModal">
-                      THUÊ NGAY
+                  <div class="btn-apply" th:if="${!rented}">
+                    <a id="btn-book-request" class="btn btn-md btn-success"
+                       th:onclick="'javascript:confirmHireRequestFindJob(' + ${jobDetail.workRequestFindJobId} + ')'">
+                      <span id="label-book-request">THUÊ NGAY</span>
+                    </a>
+                  </div>
+                  <div class="btn-apply" th:if="${rented}">
+                    <a href="javascript:void(0)" class="btn btn-md btn-success">
+                      ĐÃ THUÊ
                     </a>
                   </div>
                 </div>
@@ -36,7 +41,7 @@
           <div class="row-info">
             <div><i class="fas fa-coins fa-fw"></i>Mức lương mong muốn</div>
             <div>
-              <span th:text="${jobDetail.workRequestFindJobExpectedSalary}"></span>
+              <span th:text="${#numbers.formatInteger(jobDetail.workRequestFindJobExpectedSalary, 3, 'POINT')}"></span>
               <span
                 th:text="${
                   jobDetail.workSalaryUnitId == 1 ? 'VNĐ/h' :

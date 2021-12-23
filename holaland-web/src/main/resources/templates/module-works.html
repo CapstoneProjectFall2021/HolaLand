@@ -40,65 +40,54 @@
                 <i class="fas fa-list-ul fa-fw"></i>Danh sách việc làm
               </a>
             </li>
-            <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/list-booked}" th:classappend="${page == 2 ? 'active' : ''}">
+            <li sec:authorize="hasRole('STUDENT')">
+              <a th:href="@{/works/booked}" th:classappend="${page == 2 ? 'active' : ''}">
                 <i class="fas fa-list fa-fw"></i>Danh sách thuê
               </a>
             </li>
-            <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/jobs-apply}" th:classappend="${page == 3 ? 'active' : ''}">
+            <li sec:authorize="hasRole('STUDENT')">
+              <a th:href="@{/works/jobs/applied}" th:classappend="${page == 3 ? 'active' : ''}">
                 <i class="fas fa-tasks fa-fw"></i>Việc làm đã ứng tuyển
               </a>
             </li>
-            <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/jobs-save}" th:classappend="${page == 4 ? 'active' : ''}">
+            <li sec:authorize="hasRole('STUDENT')">
+              <a th:href="@{/works/jobs/saved}" th:classappend="${page == 4 ? 'active' : ''}">
                 <i class="far fa-bookmark fa-fw"></i>Việc làm đã lưu
               </a>
             </li>
-            <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/request-find-job-manage}" th:classappend="${page == 5 ? 'active' : ''}">
+            <li sec:authorize="hasRole('STUDENT')">
+              <a th:href="@{/works/jobs/find/manage}" th:classappend="${page == 5 ? 'active' : ''}">
                 <i class="far fa-file-alt fa-fw"></i>Quản lý bài viết
               </a>
             </li>
-            <li sec:authorize="hasRole('MEMBER')">
-              <a th:href="@{/works/create-request-find-job}" th:classappend="${page == 6 ? 'active' : ''}">
+            <li sec:authorize="hasRole('STUDENT')">
+              <a th:href="@{/works/jobs/find/create}" th:classappend="${page == 6 ? 'active' : ''}">
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a th:href="@{/works/request-find-job}" th:classappend="${page == 7 ? 'active' : ''}">
+              <a th:href="@{/works/jobs/find}" th:classappend="${page == 7 ? 'active' : ''}">
                 <i class="fas fa-search fa-fw"></i>Danh sách tìm việc
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a th:href="@{/works/list-applied}" th:classappend="${page == 8 ? 'active' : ''}">
+              <a th:href="@{/works/apply}" th:classappend="${page == 8 ? 'active' : ''}">
                 <i class="fas fa-tasks fa-fw"></i>Danh sách ứng tuyển
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a th:href="@{/works/request-recruitment-manage}" th:classappend="${page == 9 ? 'active' : ''}">
+              <a th:href="@{/works/jobs/recruitment/manage}" th:classappend="${page == 9 ? 'active' : ''}">
                 <i class="far fa-file-alt fa-fw"></i>Quản lý bài viết
               </a>
             </li>
             <li sec:authorize="hasRole('RECRUITER')">
-              <a th:href="@{/works/create-request-recruitment}" th:classappend="${page == 10 ? 'active' : ''}">
+              <a th:href="@{/works/jobs/recruitment/create}" th:classappend="${page == 10 ? 'active' : ''}">
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tuyển dụng
               </a>
             </li>
             <li>
-              <hr/>
-            </li>
-            <li>
               <a id="btn-back-page" href="javascript:void(0)" onclick="goBack()">
                 <i class="fas fa-chevron-left fa-fw"></i>Quay lại
-              </a>
-            </li>
-            <li>
-              <hr/>
-            </li>
-            <li>
-              <a href="javascript:void(0)" onclick="showToast('toast-success')">
-                <i class="fas fa-pencil-alt fa-fw"></i>Test Toast
               </a>
             </li>
           </ul>
@@ -159,7 +148,7 @@
   </div>
 </div>
 
-<th:block th:if="${page == 2}">
+<th:block th:if="${page == 2 && listBookedModal != null && listBookedModal.size() != 0}">
   <!-- Import modal list recruitment -->
   <div th:replace="works/modal/modal-list-booked :: listBookedModal"></div>
 </th:block>
@@ -178,6 +167,12 @@
   <div th:replace="works/modal/modal-reason-reject :: reasonRejectModal(reason=${reasonReject})"></div>
   <!-- Import modal confirm repost request find job -->
   <div th:replace="works/modal/modal-confirm-repost-request-find-job :: confirmRepostRequestFindJobModal"></div>
+  <!-- Import toast -->
+  <div th:replace="works/toast/toast-recruiter-booked-success :: toastRecruiterBookedSuccess"></div>
+</th:block>
+<th:block th:if="${page == 5 && listBooked != null && listBooked.size() != 0}">
+  <!-- Import modal list user booked -->
+  <div th:replace="works/modal/modal-list-user-booked :: listUserBookedModal"></div>
 </th:block>
 <th:block th:if="${page == 6}">
   <!-- Import modal request find job preview -->
@@ -194,6 +189,14 @@
   <div th:replace="works/modal/modal-reason-reject :: reasonRejectModal(reason=${reasonReject})"></div>
   <!-- Import modal confirm repost request recruitment -->
   <div th:replace="works/modal/modal-confirm-repost-request-recruitment :: confirmRepostRequestRecruitmentModal"></div>
+  <!-- Import modal list user applied -->
+  <div th:replace="works/modal/modal-list-user-applied :: listUserAppliedModal"></div>
+  <!-- Import toast -->
+  <div th:replace="works/toast/toast-user-applied-success :: toastUserAppliedSuccess"></div>
+</th:block>
+<th:block th:if="${page == 9 && listApply != null && listApply.size() != 0}">
+  <!-- Import modal list user applied -->
+  <div th:replace="works/modal/modal-list-user-applied :: listUserAppliedModal"></div>
 </th:block>
 <th:block th:if="${page == 10}">
   <!-- Import modal request find job preview -->
@@ -202,23 +205,27 @@
 <th:block th:if="${page == 11}">
   <!-- Import modal confirm apply request -->
   <div th:replace="works/modal/modal-confirm-apply-request :: confirmApplyRequestModal"></div>
+  <!-- Import toast save request recruitment success -->
+  <div th:replace="works/toast/toast-request-recruitment-save-success :: toastRequestRecruitmentSaveSuccess"></div>
+  <!-- Import toast save request recruitment error -->
+  <div th:replace="works/toast/toast-request-recruitment-save-error :: toastRequestRecruitmentSaveError"></div>
+  <!-- Import toast apply request recruitment success -->
+  <div th:replace="works/toast/toast-request-recruitment-apply-success:: toastRequestRecruitmentApplySuccess"></div>
+  <!-- Import toast apply request recruitment error -->
+  <div th:replace="works/toast/toast-request-recruitment-apply-error:: toastRequestRecruitmentApplyError"></div>
 </th:block>
 <th:block th:if="${page == 12}">
   <!-- Import modal confirm hire -->
   <div th:replace="works/modal/modal-confirm-hire :: confirmHireModal"></div>
+  <!-- Import toast book request find job success -->
+  <div th:replace="works/toast/toast-request-find-job-book-success :: toastRequestFindJobBookSuccess"></div>
+  <!-- Import toast book request find job error -->
+  <div th:replace="works/toast/toast-request-find-job-book-error:: toastRequestFindJobBookError"></div>
 </th:block>
 
 <!-- Javascript -->
 <th:block th:replace="~{common/script :: script/script}"></th:block>
-<script crossorigin="anonymous" th:src="@{/js/templates/work.js}"></script>
-
-<!--<script th:inline="javascript" th:if="${requestId != null && modal != null}">-->
-<!--  /*<![CDATA[*/-->
-<!--  const modal = /*[[${modal}]]*/;-->
-<!--  /*]]>*/-->
-<!--  const myModal = new bootstrap.Modal(document.getElementById(modal));-->
-<!--  myModal.show();-->
-<!--</script>-->
+<script th:src="@{/js/templates/work.js}"></script>
 
 <script th:if="${requestRecruitmentId != null}">
   const myModal = new bootstrap.Modal(document.getElementById('confirmRepostRequestRecruitmentModal'));
@@ -245,12 +252,27 @@
   myModal.show();
 </script>
 
-<script th:inline="javascript">
-  function showToast() {
-    const toast = new bootstrap.Toast(document.getElementById('toast-success'));
-    toast.show();
-  }
+<script th:if="${listBooked != null && listBooked.size() != 0}">
+    const myModal = new bootstrap.Modal(document.getElementById('listUserBookedModal'));
+    myModal.show();
+</script>
 
+<script th:if="${listApply != null && listApply.size() != 0}">
+    const myModal = new bootstrap.Modal(document.getElementById('listUserAppliedModal'));
+    myModal.show();
+</script>
+
+<script th:if="${applySuccess}">
+    const toast = new bootstrap.Toast(document.getElementById('toastUserAppliedSuccess'));
+    toast.show();
+</script>
+
+<script th:if="${bookedSuccess}">
+    const toast = new bootstrap.Toast(document.getElementById('toastRecruiterBookedSuccess'));
+    toast.show();
+</script>
+
+<script th:inline="javascript">
   function goBack() {
       if([[${page}]] == 11 || [[${page}]] == 12) {
           window.history.back();
@@ -259,9 +281,6 @@
       }
   }
 </script>
-
-<!-- Import toast -->
-<th:block th:replace="~{common/toast-success :: toast-success}"></th:block>
 
 </body>
 

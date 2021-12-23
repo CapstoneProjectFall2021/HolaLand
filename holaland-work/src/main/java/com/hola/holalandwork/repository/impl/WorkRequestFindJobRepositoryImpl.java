@@ -55,6 +55,15 @@ public class WorkRequestFindJobRepositoryImpl implements WorkRequestFindJobRepos
     }
 
     @Override
+    public boolean updateSttRequest(WorkRequestFindJob obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                WORK_REQUEST_FIND_JOB_UPDATE_STT_ONE,
+                obj.getSttWorkCode(),
+                obj.getWorkRequestFindJobId()
+        ) > 0;
+    }
+
+    @Override
     public boolean save(WorkRequestFindJob obj) throws DataAccessException {
         return jdbcTemplate.update(
                 INSERT_REQUEST_FIND_JOB,
