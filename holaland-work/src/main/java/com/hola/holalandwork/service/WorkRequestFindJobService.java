@@ -1,7 +1,6 @@
 package com.hola.holalandwork.service;
 
 import com.hola.holalandwork.entity.WorkRequestFindJob;
-import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;

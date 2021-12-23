@@ -1,7 +1,7 @@
 package com.hola.holalandwork.repository;
 
-import com.hola.holalandwork.entity.WorkRequestRecruitmentSaved;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
+import com.hola.holalandwork.entity.WorkRequestRecruitmentSaved;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;

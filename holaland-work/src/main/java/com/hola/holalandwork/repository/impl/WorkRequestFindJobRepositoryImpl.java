@@ -2,7 +2,6 @@ package com.hola.holalandwork.repository.impl;
 
 import com.hola.holalandwork.entity.WorkRequestFindJob;
 import com.hola.holalandwork.mapper.WorkRequestFindJobMapper;
-import com.hola.holalandwork.mapper.WorkRequestRecruitmentMapper;
 import com.hola.holalandwork.repository.IRepositoryQuery;
 import com.hola.holalandwork.repository.WorkRequestFindJobRepository;
 import org.springframework.beans.factory.annotation.Autowired;

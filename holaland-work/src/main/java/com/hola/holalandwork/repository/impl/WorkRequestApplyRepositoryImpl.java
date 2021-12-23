@@ -1,7 +1,6 @@
 package com.hola.holalandwork.repository.impl;
 
 import com.hola.holalandwork.entity.WorkRequestApply;
-import com.hola.holalandwork.entity.WorkRequestBook;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import com.hola.holalandwork.mapper.WorkRequestApplyMapper;
 import com.hola.holalandwork.mapper.WorkRequestRecruitmentMapper;
