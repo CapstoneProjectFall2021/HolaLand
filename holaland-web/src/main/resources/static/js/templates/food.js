@@ -123,10 +123,6 @@ function getOrderReportContent(e) {
 }
 
 /* Seller order */
-function confirmCompleteOrder(orderId) {
-    document.getElementById("btn-confirm-complete-order").href = "/food/order/complete?orderId=" + orderId;
-    openModal("confirmOrderModal");
-}
 
 function rejectFoodOrder(foodOrderId) {
     document.getElementById("orderRejectId").value = foodOrderId;
@@ -154,6 +150,11 @@ function reportFoodOrder(orderId, storeId) {
 function confirmDeleteReport(foodReportId) {
     document.getElementById("btn-delete-report").href = "/food/order/report/delete?reportId=" + foodReportId;
     openModal("confirmDeleteReportOrderModal");
+}
+
+function confirmCompleteOrder(orderId) {
+    document.getElementById("btn-confirm-complete-order").href = "/food/order/user/complete?orderId=" + orderId;
+    openModal("confirmOrderModal");
 }
 
 /*

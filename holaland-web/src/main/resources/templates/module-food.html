@@ -136,6 +136,8 @@
   <div th:replace="food/modal/modal-confirm-delete-report :: confirmDeleteReportOrderModal"></div>
   <!-- Import modal reason rejection order -->
   <div th:replace="food/modal/modal-reason-rejection-order :: reasonRejectionOrderModal"></div>
+  <!-- Import modal confirm complete order -->
+  <div th:replace="food/modal/modal-confirm-complete-order :: confirmOrderModal"></div>
 </th:block>
 <th:block th:if="${page == 3 && foodOrderDetailList != null && foodOrderDetailList.size() != 0}">
   <!-- Import modal list order detail -->
