@@ -42,7 +42,7 @@ function confirmDeleteItemInCart(foodId) {
 /*
  * Online store
  */
-function getFoodItemDetail(foodItemId) {
+function getFoodItemDetail(foodItemId, storeId) {
     const foodItemImg = document.getElementById("food-item-img-" + foodItemId).src;
     const foodItemName = document.getElementById("food-item-name-" + foodItemId).innerHTML;
     const foodItemPrice = document.getElementById("food-item-price-" + foodItemId).innerHTML;
@@ -50,6 +50,9 @@ function getFoodItemDetail(foodItemId) {
     document.getElementById("food-item-img-modal").src = foodItemImg;
     document.getElementById("food-item-name-modal").innerHTML = foodItemName;
     document.getElementById("food-item-price-modal").innerHTML = foodItemPrice;
+    document.getElementById("food-item-add-to-cart").onclick = function () {
+        addFoodToCart(foodItemId, storeId);
+    };
     openModal("foodDetailModal");
 }
 
@@ -87,7 +90,7 @@ function checkUserOrderInStore(storeId) {
     request.open("GET", "/food/store/exits?storeId=" + storeId, true);
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
-            document.getElementById("storeId").value = storeId;
+            document.getElementById("store-id").value = storeId;
             openModal("onlineStoreRateModal");
         } else if (this.status === 409) {
             // rate lần 2

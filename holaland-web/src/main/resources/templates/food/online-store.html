@@ -74,7 +74,7 @@
               <a th:href="@{/login}" class="nav-link" sec:authorize="!isAuthenticated()">
                 Đánh giá
               </a>
-              <a href="javascript:void(0)" class="nav-link" sec:authorize="isAuthenticated()"
+              <a class="nav-link" sec:authorize="isAuthenticated()"
                  th:onclick="'javascript:checkUserOrderInStore(' + ${foodStoreOnline.foodStoreOnlineId} + ')'">
                 Đánh giá
               </a>
@@ -117,7 +117,7 @@
                           <div class="content-body">
                             <a th:id="'food-item-name-' + *{foodItem.foodItemId}" href="javascript:void(0)"
                                th:text="*{foodItem.foodItemName}"
-                               th:onclick="'javascript:getFoodItemDetail(' + ${foodItem.foodItemId} + ')'">
+                               th:onclick="'javascript:getFoodItemDetail(' + ${foodItem.foodItemId} + ',' + ${foodItem.foodStoreOnlineId} + ')'">
                             </a>
                             <div class="food-info">
                               <p>Giá:
