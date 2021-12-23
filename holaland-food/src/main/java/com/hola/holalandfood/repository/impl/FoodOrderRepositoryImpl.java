@@ -121,4 +121,16 @@ public class FoodOrderRepositoryImpl implements FoodOrderRepository, IRepository
         ) > 0;
     }
 
+    // Statistic
+    @Override
+    public List<FoodOrder> getAllFoodOrderByDay(long startOfDay, long endOfDay, int storeId) {
+        String sql = "SELECT *" +
+                " FROM food_order" +
+                " WHERE UNIX_TIMESTAMP(food_order_created_date) > ?" +
+                " AND UNIX_TIMESTAMP(food_order_created_date) < ?" +
+                " AND food_store_online_id = ?" +
+                " AND stt_food_code = ?";
+        List<FoodOrder> ls = jdbcTemplate.query(sql, new FoodOrderMapper(), startOfDay, endOfDay, storeId, 4);
+        return ls;
+    }
 }
