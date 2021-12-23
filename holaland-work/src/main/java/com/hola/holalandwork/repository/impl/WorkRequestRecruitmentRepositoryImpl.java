@@ -54,6 +54,11 @@ public class WorkRequestRecruitmentRepositoryImpl implements WorkRequestRecruitm
     }
 
     @Override
+    public List<WorkRequestRecruitment> searchByTitle(String title, int code) throws DataAccessException {
+        return jdbcTemplate.query(WORK_REQUEST_RECRUITMENT_SEARCH, new WorkRequestRecruitmentMapper(), "%" + title + "%", code);
+    }
+
+    @Override
     public boolean save(WorkRequestRecruitment obj) throws DataAccessException {
         return jdbcTemplate.update(
                 INSERT_REQUEST_RECRUITMENT,
@@ -75,6 +80,30 @@ public class WorkRequestRecruitmentRepositoryImpl implements WorkRequestRecruitm
                 obj.isWorkRequestRecruitmentGenderRequirement(),
                 obj.getWorkRequestRecruitmentWorkLocation(),
                 obj.isWorkRequestRecruitmentDeleted()
+        ) > 0;
+    }
+
+    @Override
+    public boolean update(WorkRequestRecruitment obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                WORK_REQUEST_RECRUITMENT_UPDATE_ONE,
+                obj.getSttWorkCode(),
+                obj.getWorkRequestTypeId(),
+                obj.getWorkSalaryUnitId(),
+                obj.getWorkPaymentMethodId(),
+                obj.getWorkRequestRecruitmentTitle(),
+                obj.getWorkRequestRecruitmentEndDateTime(),
+                obj.getWorkRequestRecruitmentLastUpdateDateTime(),
+                obj.getWorkRequestRecruitmentDescription(),
+                obj.getWorkRequestRecruitmentRequirement(),
+                obj.getWorkRequestRecruitmentBenefit(),
+                obj.getWorkRequestRecruitmentSalary(),
+                obj.getWorkRequestRecruitmentQuantity(),
+                obj.isWorkRequestRecruitmentExperienceRequirement(),
+                obj.isWorkRequestRecruitmentGenderRequirement(),
+                obj.getWorkRequestRecruitmentWorkLocation(),
+                obj.getWorkRequestRecruitmentNote(),
+                obj.getWorkRequestRecruitmentId()
         ) > 0;
     }
 

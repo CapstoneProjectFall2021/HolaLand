@@ -53,4 +53,14 @@ public class FoodStoreOnlineServiceImpl implements FoodStoreOnlineService {
     public boolean updateShopInfo(FoodStoreOnline obj) throws DataAccessException {
         return foodStoreOnlineRepository.updateShopInfo(obj);
     }
+
+    @Override
+    public boolean isShopStopSelling(FoodStoreOnline obj) throws DataAccessException {
+        return foodStoreOnlineRepository.isShopStopSelling(obj);
+    }
+
+    @Override
+    public boolean isShopPauseSelling(FoodStoreOnline obj) throws DataAccessException {
+        return foodStoreOnlineRepository.isShopPauseSelling(obj);
+    }
 }

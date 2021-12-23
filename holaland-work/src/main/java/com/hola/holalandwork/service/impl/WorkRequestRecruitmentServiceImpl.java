@@ -46,8 +46,18 @@ public class WorkRequestRecruitmentServiceImpl implements WorkRequestRecruitment
     }
 
     @Override
+    public List<WorkRequestRecruitment> searchByTitle(String title, int code) throws DataAccessException {
+        return workRequestRecruitmentRepository.searchByTitle(title, code);
+    }
+
+    @Override
     public boolean save(WorkRequestRecruitment obj) throws DataAccessException {
         return workRequestRecruitmentRepository.save(obj);
+    }
+
+    @Override
+    public boolean update(WorkRequestRecruitment obj) throws DataAccessException {
+        return workRequestRecruitmentRepository.update(obj);
     }
 
     @Override

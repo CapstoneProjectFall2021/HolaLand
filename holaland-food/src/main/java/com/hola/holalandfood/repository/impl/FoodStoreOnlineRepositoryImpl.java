@@ -60,4 +60,22 @@ public class FoodStoreOnlineRepositoryImpl implements FoodStoreOnlineRepository,
                 obj.getFoodStoreOnlineId()
         ) > 0;
     }
+
+    @Override
+    public boolean isShopStopSelling(FoodStoreOnline obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                FOOD_STORE_ONLINE_STOP_SELLING,
+                obj.isFoodStoreOnlineStopSellingFlag(),
+                obj.getFoodStoreOnlineId()
+        ) > 0;
+    }
+
+    @Override
+    public boolean isShopPauseSelling(FoodStoreOnline obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                FOOD_STORE_ONLINE_PAUSE_SELLING,
+                obj.isFoodStoreOnlinePauseSellingFlag(),
+                obj.getFoodStoreOnlineId()
+        ) > 0;
+    }
 }

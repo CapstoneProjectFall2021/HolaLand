@@ -45,6 +45,11 @@ public class WorkRequestFindJobServiceImpl implements WorkRequestFindJobService 
     }
 
     @Override
+    public List<WorkRequestFindJob> searchByTitle(String title, int code) throws DataAccessException {
+        return workRequestFindJobRepository.searchByTitle(title, code);
+    }
+
+    @Override
     public boolean updateSttRequest(WorkRequestFindJob obj) throws DataAccessException {
         return workRequestFindJobRepository.updateSttRequest(obj);
     }
@@ -52,6 +57,11 @@ public class WorkRequestFindJobServiceImpl implements WorkRequestFindJobService 
     @Override
     public boolean save(WorkRequestFindJob obj) throws DataAccessException {
         return workRequestFindJobRepository.save(obj);
+    }
+
+    @Override
+    public boolean update(WorkRequestFindJob obj) throws DataAccessException {
+        return workRequestFindJobRepository.update(obj);
     }
 
     @Override

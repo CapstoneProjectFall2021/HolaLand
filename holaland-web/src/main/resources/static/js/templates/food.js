@@ -42,7 +42,7 @@ function confirmDeleteItemInCart(foodId) {
 /*
  * Online store
  */
-function getFoodItemDetail(foodItemId) {
+function getFoodItemDetail(foodItemId, storeId) {
     const foodItemImg = document.getElementById("food-item-img-" + foodItemId).src;
     const foodItemName = document.getElementById("food-item-name-" + foodItemId).innerHTML;
     const foodItemPrice = document.getElementById("food-item-price-" + foodItemId).innerHTML;
@@ -50,6 +50,9 @@ function getFoodItemDetail(foodItemId) {
     document.getElementById("food-item-img-modal").src = foodItemImg;
     document.getElementById("food-item-name-modal").innerHTML = foodItemName;
     document.getElementById("food-item-price-modal").innerHTML = foodItemPrice;
+    document.getElementById("food-item-add-to-cart").onclick = function () {
+        addFoodToCart(foodItemId, storeId);
+    };
     openModal("foodDetailModal");
 }
 
@@ -87,7 +90,7 @@ function checkUserOrderInStore(storeId) {
     request.open("GET", "/food/store/exits?storeId=" + storeId, true);
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
-            document.getElementById("storeId").value = storeId;
+            document.getElementById("store-id").value = storeId;
             openModal("onlineStoreRateModal");
         } else if (this.status === 409) {
             // rate lần 2
@@ -172,6 +175,44 @@ function updateFood(foodItemId, foodItemTagId) {
     document.getElementById("item-name").value = foodItemName;
     document.getElementById("item-price").value = parseInt(foodItemPrice.replace('.', ''));
     openModal("updateFoodItemModal");
+}
+
+function storePauseSelling(checkboxElem) {
+    const arr = checkboxElem.id.split("-");
+    const storeId = arr[arr.length - 1];
+    const request = new XMLHttpRequest();
+    request.open("POST", "/store/sell/pause?storeId="+storeId+"&isPause="+checkboxElem.checked, true);
+    request.onload = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            if(checkboxElem.checked) {
+                showToast("toastStorePauseSellingSuccess");
+            } else {
+                showToast("toastStoreContinueSellingSuccess");
+            }
+        } else {
+            showToast("toastError");
+        }
+    };
+    request.send(null);
+}
+
+function storeStopSelling(checkboxElem) {
+    const arr = checkboxElem.id.split("-");
+    const storeId = arr[arr.length - 1];
+    const request = new XMLHttpRequest();
+    request.open("POST", "/store/sell/stop?storeId="+storeId+"&isStop="+checkboxElem.checked, true);
+    request.onload = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            if(checkboxElem.checked) {
+                showToast("toastStoreStopSellingSuccess");
+            } else {
+                showToast("toastStoreStartSellingSuccess");
+            }
+        } else {
+            showToast("toastError");
+        }
+    };
+    request.send(null);
 }
 
 

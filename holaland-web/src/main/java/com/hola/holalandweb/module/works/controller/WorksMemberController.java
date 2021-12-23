@@ -436,4 +436,58 @@ public class WorksMemberController {
         return "module-works";
     }
 
+    @GetMapping("/jobs/find/edit")
+    public String getFormUpdateRequestFindJob(@RequestParam("requestId") int requestId, Model model) {
+        WorkRequestFindJob requestFindJob = workRequestFindJobService.getOne(requestId);
+        model.addAttribute("requestFindJob", requestFindJob);
+        model.addAttribute("page", 14);
+        return "module-works";
+    }
+
+    @PostMapping(value="/jobs/find/edit", params="save")
+    public String updateRequestFindJob(
+            @ModelAttribute("requestFindJob") WorkRequestFindJob requestFindJob,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+
+        boolean isCheck = updateRequestFindJobObject(requestFindJob, Constants.STT_WORK_CODE_PENDING_APPROVAL);
+        if (isCheck) {
+            return "redirect:" + "/works/jobs/find/manage";
+        } else {
+            return "404";
+        }
+    }
+
+    @PostMapping(value="/jobs/find/edit", params="saveDraft")
+    public String updateRequestFindJobSaveDraft(
+            @ModelAttribute("requestFindJob") WorkRequestFindJob requestFindJob,
+            BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+
+        boolean isCheck = updateRequestFindJobObject(requestFindJob, Constants.STT_WORK_CODE_SAVE_DRAFT);
+        if (isCheck) {
+            return "redirect:" + "/works/jobs/find/manage/status?code=6";
+        } else {
+            return "404";
+        }
+    }
+
+    private boolean updateRequestFindJobObject(WorkRequestFindJob requestFindJob, int sttWorkCode) {
+        Date currentDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        // set attribute
+        requestFindJob.setSttWorkCode(sttWorkCode);
+        requestFindJob.setWorkRequestFindJobLastUpdateDateTime(currentDate);
+        requestFindJob.setWorkRequestFindJobNote(null);
+        requestFindJob.setWorkRequestFindJobDeleted(false);
+
+        return workRequestFindJobService.update(requestFindJob);
+    }
 }
