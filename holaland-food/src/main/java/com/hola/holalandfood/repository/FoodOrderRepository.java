@@ -24,4 +24,7 @@ public interface FoodOrderRepository {
     boolean updateSttFood(FoodOrder obj) throws DataAccessException;
 
     boolean addReasonReject(FoodOrder obj) throws DataAccessException;
+
+    // Statistic
+    List<FoodOrder> getAllFoodOrderByDay(long startOfDay, long endOfDay, int storeId);
 }

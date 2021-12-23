@@ -181,13 +181,6 @@ public class FoodManageStoreController {
         return "module-food-manage-store";
     }
 
-    // Not yet
-    @GetMapping("/statistics")
-    public String statistics(Model model) {
-        model.addAttribute("page", 4);
-        return "module-food-manage-store";
-    }
-
     // Fix upload image
     @PostMapping("/food/save-image-food")
     public String saveImageFood(Model model, @RequestParam("imageFood") MultipartFile multipartFile,
