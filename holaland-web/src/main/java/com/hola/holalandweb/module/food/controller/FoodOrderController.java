@@ -282,6 +282,7 @@ public class FoodOrderController {
         }
     }
 
+    //hàm này hiện tại chưa dùng đến
     @GetMapping("/confirm")
     public String sellerConfirmOrder(@RequestParam("orderId") Integer orderId) {
         FoodOrder foodOrder = FoodOrder.builder()

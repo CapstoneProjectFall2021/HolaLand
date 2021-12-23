@@ -184,11 +184,7 @@ function storePauseSelling(checkboxElem) {
     request.open("POST", "/store/sell/pause?storeId="+storeId+"&isPause="+checkboxElem.checked, true);
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
-            if(checkboxElem.checked) {
-                showToast("toastStorePauseSellingSuccess");
-            } else {
-                showToast("toastStoreContinueSellingSuccess");
-            }
+            showToast("toastStoreChangeStatusSuccess");
         } else {
             showToast("toastError");
         }
@@ -203,11 +199,7 @@ function storeStopSelling(checkboxElem) {
     request.open("POST", "/store/sell/stop?storeId="+storeId+"&isStop="+checkboxElem.checked, true);
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
-            if(checkboxElem.checked) {
-                showToast("toastStoreStopSellingSuccess");
-            } else {
-                showToast("toastStoreStartSellingSuccess");
-            }
+            showToast("toastStoreChangeStatusSuccess");
         } else {
             showToast("toastError");
         }
