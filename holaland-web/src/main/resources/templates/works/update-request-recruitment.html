@@ -6,7 +6,8 @@
         <h1 class="title fix-mb-title">Chỉnh sửa bài tuyển dụng</h1>
       </div>
     </div>
-    <form class="row panel-form mx-0" method="post" th:action="@{/works/jobs/recruitment/edit}"
+    <form class="row panel-form mx-0" method="post"
+          th:action="@{${code == 2 ? '/works/jobs/recruitment/create' : '/works/jobs/recruitment/edit'}}"
           th:object="${requestRecruitment}">
       <input type="hidden" name="workRequestRecruitmentId" th:value="${requestRecruitment.workRequestRecruitmentId}"/>
       <div class="form-group col-12 col-md-6 col-lg-4">

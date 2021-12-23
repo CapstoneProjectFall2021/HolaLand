@@ -6,8 +6,8 @@
         <h1 class="title fix-mb-title">Chỉnh sửa bài tìm việc làm</h1>
       </div>
     </div>
-    <form class="row panel-form mx-0" method="post" th:action="@{/works/jobs/find/edit}"
-          th:object="${requestFindJob}">
+    <form class="row panel-form mx-0" method="post"
+          th:action="@{${code == 2 ? '/works/jobs/find/create' : '/works/jobs/find/edit'}}" th:object="${requestFindJob}">
       <input type="hidden" name="workRequestFindJobId" th:value="${requestFindJob.workRequestFindJobId}">
       <div class="form-group col-12 col-md-6 col-lg-4">
         <fieldset class="bg-dark-ui">
@@ -24,8 +24,9 @@
           <legend>Thời gian làm việc</legend>
           <select class="form-control form-select" th:field="${requestFindJob.workTimeId}">
             <option value="1" selected="selected">Buổi sáng</option>
-            <option value="2">Buổi chiều</option>
-            <option value="3">Buổi tối</option>
+            <option value="2">Buổi trưa</option>
+            <option value="3">Buổi chiều</option>
+            <option value="4">Buổi tối</option>
           </select>
         </fieldset>
       </div>

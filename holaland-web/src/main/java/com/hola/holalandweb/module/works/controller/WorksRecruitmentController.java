@@ -407,9 +407,12 @@ public class WorksRecruitmentController {
     }
 
     @GetMapping("/jobs/recruitment/edit")
-    public String getFormUpdateRequestRecruitment(@RequestParam("requestId") int requestId, Model model) {
+    public String getFormUpdateRequestRecruitment(
+            @RequestParam("requestId") int requestId, @RequestParam("code") int code, Model model
+    ) {
         WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(requestId);
         model.addAttribute("requestRecruitment", requestRecruitment);
+        model.addAttribute("code", code);
         model.addAttribute("page", 13);
         return "module-works";
     }

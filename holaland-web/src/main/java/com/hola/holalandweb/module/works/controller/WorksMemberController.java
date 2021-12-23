@@ -437,9 +437,12 @@ public class WorksMemberController {
     }
 
     @GetMapping("/jobs/find/edit")
-    public String getFormUpdateRequestFindJob(@RequestParam("requestId") int requestId, Model model) {
+    public String getFormUpdateRequestFindJob(
+            @RequestParam("requestId") int requestId, @RequestParam("code") int code, Model model
+    ) {
         WorkRequestFindJob requestFindJob = workRequestFindJobService.getOne(requestId);
         model.addAttribute("requestFindJob", requestFindJob);
+        model.addAttribute("code", code);
         model.addAttribute("page", 14);
         return "module-works";
     }
