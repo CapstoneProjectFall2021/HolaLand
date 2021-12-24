@@ -41,7 +41,6 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/works")
-
 public class WorksRecruitmentController {
 
     private final WorkRequestRecruitmentService workRequestRecruitmentService;
@@ -105,6 +104,7 @@ public class WorksRecruitmentController {
         return "module-works";
     }
 
+    // thuê người dùng
     @GetMapping("/jobs/book")
     public ResponseEntity<?> bookUser(@RequestParam("requestId") Integer requestId, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();

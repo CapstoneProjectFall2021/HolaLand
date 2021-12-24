@@ -286,19 +286,6 @@ public class WorksMemberController {
         return workRequestFindJobService.save(newRequestFindJob);
     }
 
-    @GetMapping("/booked")
-    public String getListBooked(Model model, Authentication authentication) {
-        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(
-                currentUser.getId(),
-                Constants.STT_WORK_CODE_WAITING_REPOSITORY
-        );
-        model.addAttribute("userDetailService", userDetailService);
-        model.addAttribute("listBooked", listBooked);
-        model.addAttribute("page", 2);
-        return "module-works";
-    }
-
     @GetMapping("/jobs/find/manage/repost")
     public String getFormRepostRequestFindJob(
             @RequestParam("requestFindJobId") Integer requestFindJobId,
@@ -338,6 +325,19 @@ public class WorksMemberController {
         } else {
             return "404";
         }
+    }
+
+    @GetMapping("/booked")
+    public String getListBooked(Model model, Authentication authentication) {
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        List<WorkRequestFindJob> listBooked = workRequestFindJobService.getAllListRecruitmentByUserId(
+                currentUser.getId(),
+                Constants.STT_WORK_CODE_WAITING_REPOSITORY
+        );
+        model.addAttribute("userDetailService", userDetailService);
+        model.addAttribute("listBooked", listBooked);
+        model.addAttribute("page", 2);
+        return "module-works";
     }
 
     @GetMapping("/booked/show")
