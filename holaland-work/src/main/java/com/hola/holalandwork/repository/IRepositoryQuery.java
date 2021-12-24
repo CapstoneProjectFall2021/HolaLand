@@ -243,10 +243,10 @@ public interface IRepositoryQuery {
 
     String DELETE_WORK_REQUEST_APPLY = "UPDATE work_request_apply\n" +
             "SET work_request_apply_deleted = 1\n" +
-            "WHERE work_request_apply_id = ?";
+            "WHERE work_request_recruitment_id = ?";
 
     String DELETE_WORK_REQUEST_SAVE = "UPDATE work_request_recruitment_saved\n" +
             "SET work_request_recruitment_saved_deleted = 1\n" +
-            "WHERE work_request_recruitment_saved_id = ?";
+            "WHERE work_request_recruitment_id = ?";
 
 }
