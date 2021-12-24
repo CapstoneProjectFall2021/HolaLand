@@ -72,6 +72,7 @@ public interface IRepositoryQuery {
             "ON T1.work_request_recruitment_id = T2.work_request_recruitment_id\n" +
             "WHERE T2.user_id = ?\n" +
             "AND T1.work_request_recruitment_deleted = 0\n"+
+            "AND T2.stt_work_code = 1\n"+
             "AND T2.work_request_apply_deleted = 0";
     String INSERT_WORK_REQUEST_APPLY = "INSERT INTO work_request_apply (user_id, work_request_recruitment_id," +
             " stt_work_code, work_request_apply_deleted) VALUES(?, ?, ?, ?)";
