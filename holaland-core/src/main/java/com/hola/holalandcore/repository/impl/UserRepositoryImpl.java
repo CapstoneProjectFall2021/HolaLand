@@ -25,6 +25,11 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
     }
 
     @Override
+    public User getEmailByRequestRecruitmentId(int id) throws DataAccessException {
+        return jdbcTemplate.queryForObject(GET_EMAIL_BY_REQUEST_RECRUITMENT_ID, new UserMapper(), id);
+    }
+
+    @Override
     public boolean updatePassword(String newPassword, int userId) throws DataAccessException {
         return jdbcTemplate.update(
                 UPDATE_USER_PASSWORD,

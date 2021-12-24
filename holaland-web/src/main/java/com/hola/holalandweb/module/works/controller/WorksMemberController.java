@@ -1,10 +1,13 @@
 package com.hola.holalandweb.module.works.controller;
 
 import com.hola.holalandcore.entity.CustomUser;
+import com.hola.holalandcore.entity.User;
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.service.UserDetailService;
+import com.hola.holalandcore.service.UserService;
 import com.hola.holalandcore.util.Format;
 import com.hola.holalandweb.constant.Constants;
+import com.hola.holalandweb.util.SendEmailService;
 import com.hola.holalandwork.entity.SttWork;
 import com.hola.holalandwork.entity.SttWorkRequestRecruitmentFindJobCount;
 import com.hola.holalandwork.entity.WorkRequestApply;
@@ -12,12 +15,7 @@ import com.hola.holalandwork.entity.WorkRequestBook;
 import com.hola.holalandwork.entity.WorkRequestFindJob;
 import com.hola.holalandwork.entity.WorkRequestRecruitment;
 import com.hola.holalandwork.entity.WorkRequestRecruitmentSaved;
-import com.hola.holalandwork.service.SttWorkRequestRecruitmentFindJobCountService;
-import com.hola.holalandwork.service.SttWorkService;
-import com.hola.holalandwork.service.WorkRequestApplyService;
-import com.hola.holalandwork.service.WorkRequestBookService;
-import com.hola.holalandwork.service.WorkRequestFindJobService;
-import com.hola.holalandwork.service.WorkRequestRecruitmentSavedService;
+import com.hola.holalandwork.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +48,10 @@ public class WorksMemberController {
     private final UserDetailService userDetailService;
     private final WorkRequestApplyService workRequestApplyService;
     private final WorkRequestBookService workRequestBookService;
+    private final SendEmailService sendEmailService;
+    private final WorkRequestRecruitmentService workRequestRecruitmentService;
+    private final UserService userService;
+
 
     @Autowired
     public WorksMemberController(
@@ -59,7 +61,10 @@ public class WorksMemberController {
             SttWorkService sttWorkService,
             UserDetailService userDetailService,
             WorkRequestApplyService workRequestApplyService,
-            WorkRequestBookService workRequestBookService
+            WorkRequestBookService workRequestBookService,
+            SendEmailService sendEmailService,
+            WorkRequestRecruitmentService workRequestRecruitmentService,
+            UserService userService
     ) {
         this.workRequestRecruitmentSavedService = workRequestRecruitmentSavedService;
         this.sttWorkRequestRecruitmentFindJobCountService = sttWorkRequestRecruitmentFindJobCountService;
@@ -68,6 +73,9 @@ public class WorksMemberController {
         this.userDetailService = userDetailService;
         this.workRequestApplyService = workRequestApplyService;
         this.workRequestBookService = workRequestBookService;
+        this.sendEmailService = sendEmailService;
+        this.workRequestRecruitmentService = workRequestRecruitmentService;
+        this.userService = userService;
     }
 
     @GetMapping("/jobs/saved")
@@ -134,8 +142,17 @@ public class WorksMemberController {
                 .workRequestApplyDeleted(false)
                 .build();
 
+        WorkRequestRecruitment workRequestRecruitment = workRequestRecruitmentService.getOne(requestId);
+        String email = userService.getEmailByRequestRecruitmentId(requestId).getUserEmail();
+
         boolean isSuccess = workRequestApplyService.save(workRequestApply);
         if (isSuccess) {
+            sendEmailService.send(
+                    "HolaLand",
+                    "Bạn nhận được một yêu cầu ứng tuyển từ người dùng " + currentUser.getUsername() +
+                            " cho yêu cầu tuyển dụng " + workRequestRecruitment.getWorkRequestRecruitmentTitle(),
+                    email
+            );
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

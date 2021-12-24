@@ -84,4 +84,12 @@ public interface IRepositoryQuery {
             "SET user_password = ?\n" +
             "WHERE user_id = ?";
 
+    String GET_EMAIL_BY_REQUEST_RECRUITMENT_ID ="SELECT T1.user_id, T1.user_email, T1.user_password,\n" +
+            "    T1.user_create_time, T1.user_status_id, T1.user_deleted\n" +
+            "FROM user T1\n" +
+            "INNER JOIN work_request_recruitment T2\n" +
+            "ON T1.user_id = T2.user_id\n" +
+            "WHERE T2.work_request_recruitment_id = ?\n" +
+            "AND T1.user_status_id = 1 AND T1.user_deleted = 0";
+
 }
