@@ -7,4 +7,6 @@ public interface UserService {
 
     User getEmailByRequestRecruitmentId(int id) throws DataAccessException;
 
+    User getOne(int id) throws DataAccessException;
+
 }

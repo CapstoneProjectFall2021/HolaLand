@@ -30,6 +30,11 @@ public class UserRepositoryImpl implements UserRepository, IRepositoryQuery {
     }
 
     @Override
+    public User getOne(int id) throws DataAccessException {
+        return jdbcTemplate.queryForObject(GET_ONE_USER, new UserMapper(), id);
+    }
+
+    @Override
     public boolean updatePassword(String newPassword, int userId) throws DataAccessException {
         return jdbcTemplate.update(
                 UPDATE_USER_PASSWORD,

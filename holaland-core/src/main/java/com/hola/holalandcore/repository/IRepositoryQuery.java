@@ -92,4 +92,6 @@ public interface IRepositoryQuery {
             "WHERE T2.work_request_recruitment_id = ?\n" +
             "AND T1.user_status_id = 1 AND T1.user_deleted = 0";
 
+    String GET_ONE_USER = "SELECT * FROM user WHERE user_id = ? AND user_status_id = 1 AND user_deleted = 0";
+
 }

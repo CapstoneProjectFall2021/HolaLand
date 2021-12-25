@@ -395,9 +395,20 @@ public class WorksMemberController {
                 .workRequestFindJobId(bookedId)
                 .build();
 
+        String email = userService.getOne(recruiterId).getUserEmail();
+        WorkRequestFindJob workRequestFindJob = workRequestFindJobService.getOne(bookedId);
+        String studentEmail = userService.getOne(workRequestFindJob.getUserId()).getUserEmail();
+
+
         boolean isCheck1 = workRequestBookService.userAcceptRecruiterBooked(requestAccepted);
         boolean isCheck2 = workRequestFindJobService.updateSttRequest(currentRequest);
         if (isCheck1 && isCheck2) {
+            sendEmailService.send(
+                    "HolaLand",
+                    "Yêu cầu tuyển dụng của bạn đã được  " + studentEmail +
+                            " chấp nhận cho bài đăng tìm việc " + workRequestFindJob.getWorkRequestFindJobTitle(),
+                    email
+            );
             rm.addFlashAttribute("bookedSuccess", true);
             return "redirect:" + "/works/jobs/find/manage/status?code=" + Constants.STT_WORK_CODE_COMPLETE;
         } else {
@@ -416,7 +427,18 @@ public class WorksMemberController {
                 .workRequestFindJobId(bookedId)
                 .build();
         boolean isCheck = workRequestBookService.userRejectRecruiterBooked(requestReject);
+
+        String email = userService.getOne(recruiterId).getUserEmail();
+        WorkRequestFindJob workRequestFindJob = workRequestFindJobService.getOne(bookedId);
+        String studentEmail = userService.getOne(workRequestFindJob.getUserId()).getUserEmail();
+
         if (isCheck) {
+            sendEmailService.send(
+                    "HolaLand",
+                    "Yêu cầu tuyển dụng của bạn đã được  " + studentEmail +
+                            " từ chối cho bài đăng tìm việc " + workRequestFindJob.getWorkRequestFindJobTitle(),
+                    email
+            );
             return "redirect:" + "/works/booked/show?bookedId=" + bookedId;
         } else {
             return "404";

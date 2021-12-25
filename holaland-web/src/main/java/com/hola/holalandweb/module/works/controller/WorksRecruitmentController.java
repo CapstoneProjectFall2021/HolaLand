@@ -3,8 +3,10 @@ package com.hola.holalandweb.module.works.controller;
 import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.service.UserDetailService;
+import com.hola.holalandcore.service.UserService;
 import com.hola.holalandcore.util.Format;
 import com.hola.holalandweb.constant.Constants;
+import com.hola.holalandweb.util.SendEmailService;
 import com.hola.holalandwork.entity.SttWork;
 import com.hola.holalandwork.entity.SttWorkRequestRecruitmentFindJobCount;
 import com.hola.holalandwork.entity.WorkRequestApply;
@@ -51,6 +53,9 @@ public class WorksRecruitmentController {
     private final WorkRequestFindJobService workRequestFindJobService;
     private final UserDetailService userDetailService;
     private final WorkRequestBookService workRequestBookService;
+    private final SendEmailService sendEmailService;
+    private final UserService userService;
+
 
     @Autowired
     public WorksRecruitmentController(
@@ -61,7 +66,10 @@ public class WorksRecruitmentController {
             WorkRequestTypeService workRequestTypeService,
             WorkRequestFindJobService workRequestFindJobService,
             UserDetailService userDetailService,
-            WorkRequestBookService workRequestBookService) {
+            WorkRequestBookService workRequestBookService,
+            SendEmailService sendEmailService,
+            UserService userService
+    ) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.sttWorkRequestRecruitmentFindJobCountService = sttWorkRequestRecruitmentFindJobCountService;
         this.workRequestApplyService = workRequestApplyService;
@@ -70,6 +78,8 @@ public class WorksRecruitmentController {
         this.workRequestFindJobService = workRequestFindJobService;
         this.userDetailService = userDetailService;
         this.workRequestBookService = workRequestBookService;
+        this.sendEmailService = sendEmailService;
+        this.userService = userService;
     }
 
     @GetMapping("/jobs/find")
@@ -115,8 +125,17 @@ public class WorksRecruitmentController {
                 .workRequestBookDeleted(false)
                 .build();
 
+        WorkRequestFindJob workRequestFindJob = workRequestFindJobService.getOne(requestId);
+        String email = userService.getOne(workRequestFindJob.getUserId()).getUserEmail();
+
         boolean isSuccess = workRequestBookService.save(workRequestBook);
         if (isSuccess) {
+            sendEmailService.send(
+                    "HolaLand",
+                    "Bạn nhận được một yêu cầu ứng tuyển từ người dùng " + currentUser.getUsername() +
+                            " cho yêu cầu tuyển dụng " + workRequestFindJob.getWorkRequestFindJobTitle(),
+                    email
+            );
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -349,9 +368,19 @@ public class WorksRecruitmentController {
                 .workRequestRecruitmentId(appliedId)
                 .build();
 
+        String email = userService.getOne(userId).getUserEmail();
+        WorkRequestRecruitment workRequestRecruitment = workRequestRecruitmentService.getOne(appliedId);
+        String studentEmail = userService.getOne(workRequestRecruitment.getUserId()).getUserEmail();
+
         boolean isCheck1 = workRequestApplyService.recruiterAcceptUserApply(requestReject);
         boolean isCheck2 = workRequestRecruitmentService.updateSttRequest(currentRequest);
         if(isCheck1 && isCheck2) {
+            sendEmailService.send(
+                    "HolaLand",
+                    "Yêu cầu ứng tuyển của bạn đã được  " + studentEmail +
+                            " chấp nhận cho bài đăng tuyển dụng " + workRequestRecruitment.getWorkRequestRecruitmentTitle(),
+                    email
+            );
             rm.addFlashAttribute("applySuccess", true);
             return "redirect:" + "/works/jobs/recruitment/manage/status?code="+Constants.STT_WORK_CODE_COMPLETE;
         }else {
@@ -370,7 +399,18 @@ public class WorksRecruitmentController {
                 .workRequestRecruitmentId(appliedId)
                 .build();
         boolean isCheck = workRequestApplyService.recruiterRejectUserApply(requestReject);
+
+        String email = userService.getOne(userId).getUserEmail();
+        WorkRequestRecruitment workRequestRecruitment = workRequestRecruitmentService.getOne(appliedId);
+        String studentEmail = userService.getOne(workRequestRecruitment.getUserId()).getUserEmail();
+
         if(isCheck) {
+            sendEmailService.send(
+                    "HolaLand",
+                    "Yêu cầu ứng tuyển của bạn đã được  " + studentEmail +
+                            " từ chối cho bài đăng tuyển dụng " + workRequestRecruitment.getWorkRequestRecruitmentTitle(),
+                    email
+            );
             return "redirect:" + "/works/apply/show?appliedId="+appliedId;
         }else {
             return "404";

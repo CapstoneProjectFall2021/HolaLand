@@ -70,4 +70,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public User getEmailByRequestRecruitmentId(int id) throws DataAccessException {
         return userRepository.getEmailByRequestRecruitmentId(id);
     }
+
+    @Override
+    public User getOne(int id) throws DataAccessException {
+        return userRepository.getOne(id);
+    }
 }

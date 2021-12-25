@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/food/order/**").hasAnyRole("MEMBER");
 
         // work controller
-        http.authorizeRequests().antMatchers("/works/jobs/recruitment/detail", "/works/jobs/find", "/works/jobs/find/detail").permitAll();
+        http.authorizeRequests().antMatchers("/works/jobs/recruitment/detail", "/works/jobs/find", "/works/jobs/find/detail", "/works/jobs/find/type").permitAll();
         // Work recruitment controller
         http.authorizeRequests().antMatchers("/works/jobs/recruitment/**", "/works/apply/**").hasAnyRole("RECRUITER");
         // Work member controller

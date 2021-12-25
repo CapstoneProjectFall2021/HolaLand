@@ -9,5 +9,7 @@ public interface UserRepository {
 
     User getEmailByRequestRecruitmentId(int id) throws DataAccessException;
 
+    User getOne(int id) throws DataAccessException;
+
     boolean updatePassword(String newPassword, int userId) throws DataAccessException;
 }
