@@ -114,15 +114,17 @@ public class WorksController {
     // need login
     @GetMapping("/jobs/find/detail")
     public String getRequestFindJobDetail(@RequestParam("id") Integer id, Model model, Authentication authentication) {
-        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         WorkRequestFindJob jobDetail = workRequestFindJobService.getOne(id);
         WorkRequestType jobType = workRequestTypeService.getOne(jobDetail.getWorkRequestTypeId());
         WorkPaymentMethod jobPaymentMethod = workPaymentMethodService.getOne(jobDetail.getWorkPaymentMethodId());
         WorkTime jobTime = workTimeService.getOne((jobDetail.getWorkTimeId()));
 
         // check request này đã được nhà tuyển dụng hiện tại thuê hay chưa
-        boolean isRented = workRequestBookService.checkUserIsBooked(currentUser.getId(), id);
-        model.addAttribute("rented", isRented);
+        if (authentication != null) {
+            CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+            boolean isRented = workRequestBookService.checkUserIsBooked(currentUser.getId(), id);
+            model.addAttribute("rented", isRented);
+        }
 
         model.addAttribute("jobPaymentMethod", jobPaymentMethod);
         model.addAttribute("jobTime", jobTime);
