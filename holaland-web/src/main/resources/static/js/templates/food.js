@@ -42,7 +42,7 @@ function confirmDeleteItemInCart(foodId) {
 /*
  * Online store
  */
-function getFoodItemDetail(foodItemId) {
+function getFoodItemDetail(foodItemId, storeId) {
     const foodItemImg = document.getElementById("food-item-img-" + foodItemId).src;
     const foodItemName = document.getElementById("food-item-name-" + foodItemId).innerHTML;
     const foodItemPrice = document.getElementById("food-item-price-" + foodItemId).innerHTML;
@@ -50,6 +50,9 @@ function getFoodItemDetail(foodItemId) {
     document.getElementById("food-item-img-modal").src = foodItemImg;
     document.getElementById("food-item-name-modal").innerHTML = foodItemName;
     document.getElementById("food-item-price-modal").innerHTML = foodItemPrice;
+    document.getElementById("food-item-add-to-cart").onclick = function () {
+        addFoodToCart(foodItemId, storeId);
+    };
     openModal("foodDetailModal");
 }
 
@@ -87,7 +90,7 @@ function checkUserOrderInStore(storeId) {
     request.open("GET", "/food/store/exits?storeId=" + storeId, true);
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
-            document.getElementById("storeId").value = storeId;
+            document.getElementById("store-id").value = storeId;
             openModal("onlineStoreRateModal");
         } else if (this.status === 409) {
             // rate lần 2
@@ -120,10 +123,6 @@ function getOrderReportContent(e) {
 }
 
 /* Seller order */
-function confirmCompleteOrder(orderId) {
-    document.getElementById("btn-confirm-complete-order").href = "/food/order/complete?orderId=" + orderId;
-    openModal("confirmOrderModal");
-}
 
 function rejectFoodOrder(foodOrderId) {
     document.getElementById("orderRejectId").value = foodOrderId;
@@ -151,6 +150,11 @@ function reportFoodOrder(orderId, storeId) {
 function confirmDeleteReport(foodReportId) {
     document.getElementById("btn-delete-report").href = "/food/order/report/delete?reportId=" + foodReportId;
     openModal("confirmDeleteReportOrderModal");
+}
+
+function confirmCompleteOrder(orderId) {
+    document.getElementById("btn-confirm-complete-order").href = "/food/order/user/complete?orderId=" + orderId;
+    openModal("confirmOrderModal");
 }
 
 /*
@@ -181,11 +185,7 @@ function storePauseSelling(checkboxElem) {
     request.open("POST", "/store/sell/pause?storeId="+storeId+"&isPause="+checkboxElem.checked, true);
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
-            if(checkboxElem.checked) {
-                showToast("toastStorePauseSellingSuccess");
-            } else {
-                showToast("toastStoreContinueSellingSuccess");
-            }
+            showToast("toastStoreChangeStatusSuccess");
         } else {
             showToast("toastError");
         }
@@ -200,15 +200,12 @@ function storeStopSelling(checkboxElem) {
     request.open("POST", "/store/sell/stop?storeId="+storeId+"&isStop="+checkboxElem.checked, true);
     request.onload = function () {
         if (this.readyState === 4 && this.status === 200) {
-            if(checkboxElem.checked) {
-                showToast("toastStoreStopSellingSuccess");
-            } else {
-                showToast("toastStoreStartSellingSuccess");
-            }
+            showToast("toastStoreChangeStatusSuccess");
         } else {
             showToast("toastError");
         }
     };
     request.send(null);
 }
+
 

@@ -9,10 +9,10 @@
       <div class="modal-body">
         <form id="updateShopForm" class="row" method="post" enctype="multipart/form-data" th:action="@{/store/update}">
           <div class="col-12 col-md-12 col-lg-5 m-mb-20 m-mt-10">
-            <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage != null}">
-              <img id="blah" class="preview-img" width="100%" th:src="@{'/images/food/'+ *{store.foodStoreOnlineImage}}" alt="">
+            <th:block th:if="${store.foodStoreOnlineImage != null}">
+              <img id="blah" class="preview-img" width="100%" th:src="@{'/images/food/'+ *{foodStoreOnline.foodStoreOnlineImage}}" alt="">
             </th:block>
-            <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage == null}">
+            <th:block th:if="${store.foodStoreOnlineImage == null}">
               <img id="blah" class="preview-img" width="100%" th:src="@{'/images/system/shop.png'}" alt="">
             </th:block>
           </div>

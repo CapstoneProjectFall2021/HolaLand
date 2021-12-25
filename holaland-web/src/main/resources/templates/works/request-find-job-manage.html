@@ -43,7 +43,8 @@
             </a>
           </div>
           <div class="btn-action me-4" th:if="${sttWorkCode == 1}">
-            <a class="me-2" href="javascript:void(0)">
+            <a class="me-2" th:href="@{/works/jobs/find/edit(requestId=${requestFindJob.workRequestFindJobId},
+            code=${requestFindJob.sttWorkCode})}">
               <i class="far fa-edit m-0" onclick="">
               </i>
             </a>
@@ -97,8 +98,9 @@
             </a>
           </div>
           <div class="btn-action me-4" th:if="${sttWorkCode == 2}">
-            <a class="me-2" href="javascript:void(0)">
-              <i class="far fa-edit m-0" onclick="">
+            <a class="me-2" th:href="@{/works/jobs/find/edit(requestId=${requestFindJob.workRequestFindJobId},
+            code=${requestFindJob.sttWorkCode})}">
+              <i class="far fa-edit m-0">
               </i>
             </a>
           </div>
@@ -110,8 +112,9 @@
             </a>
           </div>
           <div class="btn-action me-4" th:if="${sttWorkCode == 6}">
-            <a class="me-2" href="javascript:void(0)">
-              <i class="far fa-edit m-0" onclick="">
+            <a class="me-2" th:href="@{/works/jobs/find/edit(requestId=${requestFindJob.workRequestFindJobId},
+            code=${requestFindJob.sttWorkCode})}">
+              <i class="far fa-edit m-0">
               </i>
             </a>
           </div>

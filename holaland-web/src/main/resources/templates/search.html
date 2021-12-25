@@ -35,7 +35,7 @@
           </div>
           <ul class="nav navbar-nav sub-menu">
             <li>
-              <a th:href="@{/}" th:classappend="${page == 1 ? 'active' : ''}">
+              <a th:href="@{/search/work}" th:classappend="${page == 1 ? 'active' : ''}">
                 <i class="far fa-address-card fa-fw"></i>Công việc
               </a>
             </li>
@@ -61,13 +61,7 @@
       <div class="col-md-8 col-lg-9 col-xl-9 col-xxl-9">
         <!-- Result search for work -->
         <th:block th:if="${page == 1}">
-          <div class="col-right">
-            <div class="row">
-              <div class="col-12">
-                <h1 class="title fix-mb-title">Kết quả tìm kiếm cho "Công việc"</h1>
-              </div>
-            </div>
-          </div>
+          <div th:replace="search/work :: work"></div>
         </th:block>
         <!-- Result search for food -->
         <th:block th:if="${page == 2}">

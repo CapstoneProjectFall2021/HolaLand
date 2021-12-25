@@ -8,9 +8,18 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_FIND_JOB_DELETED_ONE = "UPDATE work_request_find_job\n" +
             "SET work_request_find_job_deleted = 1\n" +
             "WHERE work_request_find_job_id = ?";
+    String WORK_REQUEST_FIND_JOB_UPDATE_ONE = "UPDATE work_request_find_job\n" +
+            "SET stt_work_code = ?, work_request_type_id = ?, work_salary_unit_id = ?, work_payment_method_id = ?, " +
+            "work_time_id = ?, work_request_find_job_title = ?, work_request_find_job_end_date_time = ?, " +
+            "work_request_find_job_last_update_date_time = ?, work_request_find_job_description = ?, " +
+            "work_request_find_job_personal_experience = ?, work_request_find_job_expected_location = ?, " +
+            "work_request_find_job_expected_salary = ?, work_request_find_job_note = ?\n" +
+            "WHERE work_request_find_job_id = ?";
     String WORK_REQUEST_FIND_JOB_UPDATE_STT_ONE = "UPDATE work_request_find_job\n" +
             "SET stt_work_code = ?\n" +
             "WHERE work_request_find_job_id = ?";
+    String WORK_REQUEST_FIND_JOB_SEARCH = "SELECT * FROM work_request_find_job WHERE work_request_find_job_title LIKE ? " +
+            "AND stt_work_code = ? AND work_request_find_job_deleted = 0";
 
     String WORK_REQUEST_RECRUITMENT_GET_ALL = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_deleted = 0";
     String WORK_REQUEST_RECRUITMENT_GET_ALL_BY_TYPE = "SELECT * FROM work_request_recruitment WHERE work_request_type_id = ? AND stt_work_code = ? AND work_request_recruitment_deleted = 0";
@@ -18,9 +27,20 @@ public interface IRepositoryQuery {
     String WORK_REQUEST_RECRUITMENT_DELETED_ONE = "UPDATE work_request_recruitment\n" +
             "SET work_request_recruitment_deleted = 1\n" +
             "WHERE work_request_recruitment_id = ?";
+    String WORK_REQUEST_RECRUITMENT_UPDATE_ONE = "UPDATE work_request_recruitment\n" +
+            "SET stt_work_code = ?, work_request_type_id = ?, work_salary_unit_id = ?, work_payment_method_id = ?, " +
+            "work_request_recruitment_title = ?, work_request_recruitment_end_date_time = ?, " +
+            "work_request_recruitment_last_update_date_time = ?, work_request_recruitment_description = ?, " +
+            "work_request_recruitment_requirements = ?, work_request_recruitment_benefits = ?, " +
+            "work_request_recruitment_salary = ?, work_request_recruitment_quantity = ?, " +
+            "work_request_recruitment_experience_required = ?, work_request_recruitment_gender_required = ?, " +
+            "work_request_recruitment_work_location = ?, work_request_recruitment_note = ?\n" +
+            "WHERE work_request_recruitment_id = ?";
     String WORK_REQUEST_RECRUITMENT_UPDATE_STT_ONE = "UPDATE work_request_recruitment\n" +
             "SET stt_work_code = ?\n" +
             "WHERE work_request_recruitment_id = ?";
+    String WORK_REQUEST_RECRUITMENT_SEARCH = "SELECT * FROM work_request_recruitment WHERE work_request_recruitment_title LIKE ? " +
+            "AND stt_work_code = ? AND work_request_recruitment_deleted = 0";
 
     String WORK_REQUEST_APPLY_GET_ALL = "SELECT * FROM work_request_apply WHERE work_request_apply_deleted = 0";
     String WORK_REQUEST_APPLY_GET_ALL_BY_REQUEST_ID = "SELECT * FROM work_request_apply WHERE work_request_recruitment_id = ?\n" +
@@ -52,6 +72,7 @@ public interface IRepositoryQuery {
             "ON T1.work_request_recruitment_id = T2.work_request_recruitment_id\n" +
             "WHERE T2.user_id = ?\n" +
             "AND T1.work_request_recruitment_deleted = 0\n"+
+            "AND T2.stt_work_code = 1\n"+
             "AND T2.work_request_apply_deleted = 0";
     String INSERT_WORK_REQUEST_APPLY = "INSERT INTO work_request_apply (user_id, work_request_recruitment_id," +
             " stt_work_code, work_request_apply_deleted) VALUES(?, ?, ?, ?)";
@@ -223,10 +244,10 @@ public interface IRepositoryQuery {
 
     String DELETE_WORK_REQUEST_APPLY = "UPDATE work_request_apply\n" +
             "SET work_request_apply_deleted = 1\n" +
-            "WHERE work_request_apply_id = ?";
+            "WHERE work_request_recruitment_id = ?";
 
     String DELETE_WORK_REQUEST_SAVE = "UPDATE work_request_recruitment_saved\n" +
             "SET work_request_recruitment_saved_deleted = 1\n" +
-            "WHERE work_request_recruitment_saved_id = ?";
+            "WHERE work_request_recruitment_id = ?";
 
 }

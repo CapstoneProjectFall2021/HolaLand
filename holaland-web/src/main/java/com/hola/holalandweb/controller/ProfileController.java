@@ -6,8 +6,11 @@ import com.hola.holalandcore.entity.UserAddress;
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.repository.RoleRepository;
 import com.hola.holalandcore.repository.UserRepository;
+import com.hola.holalandcore.service.RoleService;
 import com.hola.holalandcore.service.UserAddressService;
 import com.hola.holalandcore.service.UserDetailService;
+import com.hola.holalandcore.service.UserService;
+import com.hola.holalandcore.util.Format;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,22 +32,22 @@ import java.util.List;
 public class ProfileController {
 
     private PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private final UserService userService;
+    private final RoleService roleService;
     private final UserDetailService userDetailService;
     private final UserAddressService userAddressService;
 
     @Autowired
     public ProfileController(
             PasswordEncoder passwordEncoder,
-            UserRepository userRepository,
-            RoleRepository roleRepository,
+            UserService userService,
+            RoleService roleService,
             UserDetailService userDetailService,
             UserAddressService userAddressService
     ) {
         this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+        this.userService = userService;
+        this.roleService = roleService;
         this.userDetailService = userDetailService;
         this.userAddressService = userAddressService;
     }
@@ -54,13 +57,14 @@ public class ProfileController {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         UserDetail userDetail = userDetailService.getOneByUserId(currentUser.getId());
         List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(userDetail.getUserDetailId());
-        List<Role> roles = roleRepository.getRolesByUserEmail(currentUser.getUsername());
+        List<Role> roles = roleService.getRolesByUserEmail(currentUser.getUsername());
         String userRole="";
         for (Role role : roles) {
             userRole += (role.getRoleId() == 1 ? "Thành viên" : (role.getRoleId() == 2 ? "Nhà tuyển dụng"
-                    : (role.getRoleId() == 3 ? "Bán hàng" : "Khác")))
+                    : (role.getRoleId() == 3 ? "Bán hàng" : "Học sinh")))
                     + ((roles.indexOf(role) == (roles.size()-1)) ? "" : ", ");
         }
+        model.addAttribute("format", new Format());
         model.addAttribute("userRole", userRole);
         model.addAttribute("userDetail", userDetail);
         model.addAttribute("userAddressList", userAddressList);
@@ -107,8 +111,9 @@ public class ProfileController {
             Authentication authentication
     ) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
-        if (!passwordEncoder.matches(oldPass, currentUser.getCustomUserPassword())) {
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        boolean isCheck = false;
+        if (passwordEncoder.matches(oldPass, currentUser.getCustomUserPassword()) && newPass.equals(confirmNewPass)) {
+            isCheck = userService.updatePassword(passwordEncoder.encode(newPass), currentUser.getId());
         }
         boolean isCheck = userRepository.updatePassword(passwordEncoder.encode(newPass), currentUser.getId());
         if (isCheck) {
@@ -122,6 +127,7 @@ public class ProfileController {
     public String addressUpdate(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(currentUser.getId());
+        model.addAttribute("format", new Format());
         model.addAttribute("userAddressList", userAddressList);
         model.addAttribute("page", 4);
         return "profile";

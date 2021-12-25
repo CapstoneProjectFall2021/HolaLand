@@ -64,9 +64,9 @@ public class Calendars {
      *
      * @return the list integer value
      */
-    public static List<Integer> getListOfDateOfTheMonth(int month, int year) {
+    public static List<Integer> getListOfDateOfTheMonth(int days) {
         List<Integer> ls = new ArrayList<>();
-        for (int i = 1; i <= getNumberOfDateInMonth(month, year); ++i) {
+        for (int i = 1; i <= days; ++i) {
             ls.add(i);
         }
         return ls;

@@ -24,4 +24,9 @@ public interface FoodOrderService {
     boolean updateSttFood(FoodOrder  obj) throws DataAccessException;
 
     boolean addReasonReject(FoodOrder obj) throws DataAccessException;
+
+    // Statistic
+    List<Double> getListMoneyOfDayOfTheMonth(int month, int year, int storeId);
+
+    List<Double> getListNumberOfOrdersOfDay(int month, int year, int storeId);
 }

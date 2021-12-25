@@ -1,6 +1,5 @@
 package com.hola.holalandwork.mapper;
 
-import com.hola.holalandwork.entity.WorkRequestRecruitmentSaved;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

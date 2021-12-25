@@ -3,9 +3,24 @@ package com.hola.holalandweb.module.works.controller;
 import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.service.UserDetailService;
+import com.hola.holalandcore.service.UserService;
+import com.hola.holalandcore.util.Format;
 import com.hola.holalandweb.constant.Constants;
-import com.hola.holalandwork.entity.*;
-import com.hola.holalandwork.service.*;
+import com.hola.holalandweb.util.SendEmailService;
+import com.hola.holalandwork.entity.SttWork;
+import com.hola.holalandwork.entity.SttWorkRequestRecruitmentFindJobCount;
+import com.hola.holalandwork.entity.WorkRequestApply;
+import com.hola.holalandwork.entity.WorkRequestBook;
+import com.hola.holalandwork.entity.WorkRequestFindJob;
+import com.hola.holalandwork.entity.WorkRequestRecruitment;
+import com.hola.holalandwork.entity.WorkRequestType;
+import com.hola.holalandwork.service.SttWorkRequestRecruitmentFindJobCountService;
+import com.hola.holalandwork.service.SttWorkService;
+import com.hola.holalandwork.service.WorkRequestApplyService;
+import com.hola.holalandwork.service.WorkRequestBookService;
+import com.hola.holalandwork.service.WorkRequestFindJobService;
+import com.hola.holalandwork.service.WorkRequestRecruitmentService;
+import com.hola.holalandwork.service.WorkRequestTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +28,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Date;
@@ -24,7 +43,6 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/works")
-
 public class WorksRecruitmentController {
 
     private final WorkRequestRecruitmentService workRequestRecruitmentService;
@@ -35,6 +53,9 @@ public class WorksRecruitmentController {
     private final WorkRequestFindJobService workRequestFindJobService;
     private final UserDetailService userDetailService;
     private final WorkRequestBookService workRequestBookService;
+    private final SendEmailService sendEmailService;
+    private final UserService userService;
+
 
     @Autowired
     public WorksRecruitmentController(
@@ -45,7 +66,10 @@ public class WorksRecruitmentController {
             WorkRequestTypeService workRequestTypeService,
             WorkRequestFindJobService workRequestFindJobService,
             UserDetailService userDetailService,
-            WorkRequestBookService workRequestBookService) {
+            WorkRequestBookService workRequestBookService,
+            SendEmailService sendEmailService,
+            UserService userService
+    ) {
         this.workRequestRecruitmentService = workRequestRecruitmentService;
         this.sttWorkRequestRecruitmentFindJobCountService = sttWorkRequestRecruitmentFindJobCountService;
         this.workRequestApplyService = workRequestApplyService;
@@ -54,6 +78,8 @@ public class WorksRecruitmentController {
         this.workRequestFindJobService = workRequestFindJobService;
         this.userDetailService = userDetailService;
         this.workRequestBookService = workRequestBookService;
+        this.sendEmailService = sendEmailService;
+        this.userService = userService;
     }
 
     @GetMapping("/jobs/find")
@@ -88,6 +114,7 @@ public class WorksRecruitmentController {
         return "module-works";
     }
 
+    // thuê người dùng
     @GetMapping("/jobs/book")
     public ResponseEntity<?> bookUser(@RequestParam("requestId") Integer requestId, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
@@ -98,8 +125,17 @@ public class WorksRecruitmentController {
                 .workRequestBookDeleted(false)
                 .build();
 
+        WorkRequestFindJob workRequestFindJob = workRequestFindJobService.getOne(requestId);
+        String email = userService.getOne(workRequestFindJob.getUserId()).getUserEmail();
+
         boolean isSuccess = workRequestBookService.save(workRequestBook);
         if (isSuccess) {
+            sendEmailService.send(
+                    "HolaLand",
+                    "Bạn nhận được một yêu cầu ứng tuyển từ người dùng " + currentUser.getUsername() +
+                            " cho yêu cầu tuyển dụng " + workRequestFindJob.getWorkRequestFindJobTitle(),
+                    email
+            );
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -232,6 +268,7 @@ public class WorksRecruitmentController {
         newRequestRecruitment.setSttWorkCode(sttWork);
         newRequestRecruitment.setWorkRequestRecruitmentStartDateTime(currentDate);
         newRequestRecruitment.setWorkRequestRecruitmentLastUpdateDateTime(currentDate);
+        newRequestRecruitment.setWorkRequestRecruitmentNote(null);
         newRequestRecruitment.setWorkRequestRecruitmentDeleted(false);
 
         if (newRequestRecruitment.getWorkSalaryUnitId() == 1) {
@@ -309,6 +346,7 @@ public class WorksRecruitmentController {
         model.addAttribute("appliedId", appliedId);
         model.addAttribute("listApplied", listApplied);
         model.addAttribute("userDetailService",userDetailService);
+        model.addAttribute("format", new Format());
         model.addAttribute("page", 8);
         model.addAttribute("listAppliedModal", listAppliedModal);
         return "module-works";
@@ -330,9 +368,19 @@ public class WorksRecruitmentController {
                 .workRequestRecruitmentId(appliedId)
                 .build();
 
+        String email = userService.getOne(userId).getUserEmail();
+        WorkRequestRecruitment workRequestRecruitment = workRequestRecruitmentService.getOne(appliedId);
+        String studentEmail = userService.getOne(workRequestRecruitment.getUserId()).getUserEmail();
+
         boolean isCheck1 = workRequestApplyService.recruiterAcceptUserApply(requestReject);
         boolean isCheck2 = workRequestRecruitmentService.updateSttRequest(currentRequest);
         if(isCheck1 && isCheck2) {
+            sendEmailService.send(
+                    "HolaLand",
+                    "Yêu cầu ứng tuyển của bạn đã được  " + studentEmail +
+                            " chấp nhận cho bài đăng tuyển dụng " + workRequestRecruitment.getWorkRequestRecruitmentTitle(),
+                    email
+            );
             rm.addFlashAttribute("applySuccess", true);
             return "redirect:" + "/works/jobs/recruitment/manage/status?code="+Constants.STT_WORK_CODE_COMPLETE;
         }else {
@@ -351,7 +399,18 @@ public class WorksRecruitmentController {
                 .workRequestRecruitmentId(appliedId)
                 .build();
         boolean isCheck = workRequestApplyService.recruiterRejectUserApply(requestReject);
+
+        String email = userService.getOne(userId).getUserEmail();
+        WorkRequestRecruitment workRequestRecruitment = workRequestRecruitmentService.getOne(appliedId);
+        String studentEmail = userService.getOne(workRequestRecruitment.getUserId()).getUserEmail();
+
         if(isCheck) {
+            sendEmailService.send(
+                    "HolaLand",
+                    "Yêu cầu ứng tuyển của bạn đã được  " + studentEmail +
+                            " từ chối cho bài đăng tuyển dụng " + workRequestRecruitment.getWorkRequestRecruitmentTitle(),
+                    email
+            );
             return "redirect:" + "/works/apply/show?appliedId="+appliedId;
         }else {
             return "404";
@@ -403,5 +462,56 @@ public class WorksRecruitmentController {
         model.addAttribute("requestRecruitmentList", workRequestRecruitments);
         model.addAttribute("page", 9);
         return "module-works";
+    }
+
+    @GetMapping("/jobs/recruitment/edit")
+    public String getFormUpdateRequestRecruitment(
+            @RequestParam("requestId") int requestId, @RequestParam("code") int code, Model model
+    ) {
+        WorkRequestRecruitment requestRecruitment = workRequestRecruitmentService.getOne(requestId);
+        model.addAttribute("requestRecruitment", requestRecruitment);
+        model.addAttribute("code", code);
+        model.addAttribute("page", 13);
+        return "module-works";
+    }
+
+    @PostMapping(value = "/jobs/recruitment/edit", params = "save")
+    public String updateRequestRecruitment(
+            @ModelAttribute("requestRecruitment") WorkRequestRecruitment requestRecruitment,
+            BindingResult bindingResult,
+            Authentication authentication
+    ) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        setAttrNewRequestRecruitment(requestRecruitment, currentUser.getId(), Constants.STT_WORK_CODE_PENDING_APPROVAL);
+        boolean isCheck = workRequestRecruitmentService.update(requestRecruitment);
+        if (isCheck) {
+            return "redirect:" + "/works/jobs/recruitment/manage";
+        } else {
+            return "404";
+        }
+    }
+
+    @PostMapping(value = "/jobs/recruitment/edit", params = "saveDraft")
+    public String updateRequestRecruitmentSaveDraft(
+            @ModelAttribute("requestRecruitment") WorkRequestRecruitment requestRecruitment,
+            BindingResult bindingResult,
+            Authentication authentication
+    ) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
+            return "404";
+        }
+        CustomUser currentUser = (CustomUser) authentication.getPrincipal();
+        setAttrNewRequestRecruitment(requestRecruitment, currentUser.getId(), Constants.STT_WORK_CODE_SAVE_DRAFT);
+        boolean isCheck = workRequestRecruitmentService.update(requestRecruitment);
+        if (isCheck) {
+            return "redirect:" + "/works/jobs/recruitment/manage/status?code=6";
+        } else {
+            return "404";
+        }
     }
 }

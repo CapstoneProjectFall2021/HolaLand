@@ -108,17 +108,17 @@
         <form>
           <div class="mb-4">
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" th:id="'enableStore-'+${foodStoreOnline.foodStoreOnlineId}"
-                     th:checked="${foodStoreOnline.foodStoreOnlineStopSellingFlag}" onchange="storeStopSelling(this)">
-              <label class="form-check-label" th:for="'enableStore-'+${foodStoreOnline.foodStoreOnlineId}">Tạm dừng bán hàng.</label>
+              <input class="form-check-input" type="checkbox" role="switch" th:id="'continueStore-'+${foodStoreOnline.foodStoreOnlineId}"
+                     th:checked="${foodStoreOnline.foodStoreOnlinePauseSellingFlag}" onchange="storePauseSelling(this)">
+              <label class="form-check-label" th:for="'continueStore-'+${foodStoreOnline.foodStoreOnlineId}">Tạm dừng bán hàng.</label>
             </div>
             <div class="form-text">Chủ động tạm dừng hoặc tiếp tục bán hàng. Người dùng sẽ không thể đặt hàng khi tạm dừng bán hàng.</div>
           </div>
           <div>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" th:id="'continueStore-'+${foodStoreOnline.foodStoreOnlineId}"
-                     th:checked="${foodStoreOnline.foodStoreOnlinePauseSellingFlag}" onchange="storePauseSelling(this)">
-              <label class="form-check-label" th:for="'continueStore-'+${foodStoreOnline.foodStoreOnlineId}">Cửa hàng tạm nghỉ bán hàng.</label>
+              <input class="form-check-input" type="checkbox" role="switch" th:id="'enableStore-'+${foodStoreOnline.foodStoreOnlineId}"
+                     th:checked="${foodStoreOnline.foodStoreOnlineStopSellingFlag}" onchange="storeStopSelling(this)">
+              <label class="form-check-label" th:for="'enableStore-'+${foodStoreOnline.foodStoreOnlineId}">Cửa hàng tạm nghỉ bán hàng.</label>
             </div>
             <div class="form-text">Thông báo cửa hàng tạm nghỉ bán hàng.</div>
           </div>

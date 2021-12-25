@@ -44,16 +44,9 @@
               <td class="text-end">
                 <th:block th:if="*{foodOrder.foodOrderNote.length != 0}">
                   <a href="javascript:void(0)" class="text-info">
-                    <i class="far fa-comment-dots me-3" data-bs-placement="top" data-bs-toggle="tooltip" title="Ghi chú"
+                    <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip" title="Ghi chú"
                        onclick="getOrderNote(event)">
                       <span class="d-none" th:text="*{foodOrder.foodOrderNote}"></span>
-                    </i>
-                  </a>
-                </th:block>
-                <th:block th:if="*{foodOrder.sttFoodCode == 2}">
-                  <a href="javascript:void(0)" class="text-success">
-                    <i class="fas fa-check" data-bs-placement="top" data-bs-toggle="tooltip" title="Xác nhận hoàn thành"
-                       th:onclick="'javascript:confirmCompleteOrder(' + *{foodOrder.foodOrderId} + ')'">
                     </i>
                   </a>
                 </th:block>

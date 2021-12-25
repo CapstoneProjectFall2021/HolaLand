@@ -81,8 +81,8 @@ public class FoodManageStoreController {
             @RequestParam("storeId") Integer shopId,
             @RequestParam("storeName") String shopName,
             @RequestParam("shopImage") MultipartFile multipartFile,
-            @RequestParam("storeDescription") String storeDescription) throws Exception
-    {
+            @RequestParam("storeDescription") String storeDescription
+    ) throws Exception {
         String fileName = null;
         if(!multipartFile.isEmpty()) {
             fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -178,13 +178,6 @@ public class FoodManageStoreController {
         model.addAttribute("foodStoreTagList", foodShopTagList);
         model.addAttribute("foodStoreItemList", foodShopItemList);
         model.addAttribute("page", 2);
-        return "module-food-manage-store";
-    }
-
-    // Not yet
-    @GetMapping("/statistics")
-    public String statistics(Model model) {
-        model.addAttribute("page", 4);
         return "module-food-manage-store";
     }
 

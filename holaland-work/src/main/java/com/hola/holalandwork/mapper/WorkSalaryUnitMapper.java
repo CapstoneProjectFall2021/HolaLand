@@ -1,7 +1,6 @@
 package com.hola.holalandwork.mapper;
 
 import com.hola.holalandwork.entity.WorkSalaryUnit;
-import com.hola.holalandwork.entity.WorkTime;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

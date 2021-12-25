@@ -166,6 +166,7 @@ public class FoodOrderController {
         // Add more attr for modal order detail
         model.addAttribute("userNote", foodOrder.getFoodOrderNote());
         model.addAttribute("userAddress", userAddressService.getOneByUserId(foodOrder.getUserId()));
+        model.addAttribute("format", new Format());
         model.addAttribute("orderStatus", orderStatus);
         model.addAttribute("foodOrderDetailList", foodOrderDetailList);
         model.addAttribute("foodStoreOnlineId", foodStoreOnlineId);
@@ -259,6 +260,20 @@ public class FoodOrderController {
         }
     }
 
+    @GetMapping("user/complete")
+    public String userConfirmCompleteOrder(@RequestParam("orderId") Integer orderId) {
+        FoodOrder foodOrder = FoodOrder.builder()
+                .foodOrderId(orderId)
+                .sttFoodCode(Constants.STT_FOOD_CODE_COMPLETE)
+                .build();
+        boolean isCheck = foodOrderService.updateSttFood(foodOrder);
+        if (isCheck) {
+            return "redirect:" + "/food/order";
+        } else {
+            return "404";
+        }
+    }
+
     /**
      * -----------------------------------------------------------------------------------------------------------------
      * Seller Manage Order
@@ -296,6 +311,7 @@ public class FoodOrderController {
         }
     }
 
+    //hàm này hiện tại chưa dùng đến
     @GetMapping("/complete")
     public String sellerConfirmCompleteOrder(@RequestParam("orderId") Integer orderId) {
         FoodOrder foodOrder = FoodOrder.builder()

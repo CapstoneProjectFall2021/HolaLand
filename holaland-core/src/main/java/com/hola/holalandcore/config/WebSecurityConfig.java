@@ -38,11 +38,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //http.authorizeRequests().anyRequest().authenticated();
 
         //http.authorizeRequests().antMatchers("/works").hasAnyRole("MEMBER");
-        http.authorizeRequests().antMatchers("/fpt-university/department/**", "/fpt-university/lecturers/**", "/works/create-request-find-job", "/works/request-find-job-manage/**", "/works/jobs-save", "/works/jobs-apply").hasAnyRole("MEMBER");
-        http.authorizeRequests().antMatchers("/profile/**").hasAnyRole("MEMBER", "RECRUITER", "SELLER");
+        http.authorizeRequests().antMatchers("/profile/**").hasAnyRole("MEMBER");
         http.authorizeRequests().antMatchers("/store/**").hasAnyRole("SELLER");
-        http.authorizeRequests().antMatchers("/food/cart/**").hasAnyRole("MEMBER", "RECRUITER", "SELLER");
-        http.authorizeRequests().antMatchers("/show-info").hasAnyRole("MEMBER", "RECRUITER", "SELLER");
+        http.authorizeRequests().antMatchers("/food/cart/**").hasAnyRole("MEMBER");
+        http.authorizeRequests().antMatchers("/food/order/**").hasAnyRole("MEMBER");
+
+        // work controller
+        http.authorizeRequests().antMatchers("/works/jobs/recruitment/detail", "/works/jobs/find", "/works/jobs/find/detail", "/works/jobs/find/type").permitAll();
+        // Work recruitment controller
+        http.authorizeRequests().antMatchers("/works/jobs/recruitment/**", "/works/apply/**").hasAnyRole("RECRUITER");
+        // Work member controller
+        http.authorizeRequests().antMatchers("/works/jobs/saved/**", "/works/jobs/find/**", "/works/jobs/applied/**", "/works/booked/**").hasAnyRole("STUDENT");
 
         // Login Form
         http.authorizeRequests().and().formLogin()//

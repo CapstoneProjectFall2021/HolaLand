@@ -2,7 +2,6 @@ package com.hola.holalandwork.repository.impl;
 
 import com.hola.holalandwork.entity.WorkRequestFindJob;
 import com.hola.holalandwork.mapper.WorkRequestFindJobMapper;
-import com.hola.holalandwork.mapper.WorkRequestRecruitmentMapper;
 import com.hola.holalandwork.repository.IRepositoryQuery;
 import com.hola.holalandwork.repository.WorkRequestFindJobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +54,11 @@ public class WorkRequestFindJobRepositoryImpl implements WorkRequestFindJobRepos
     }
 
     @Override
+    public List<WorkRequestFindJob> searchByTitle(String title, int code) throws DataAccessException {
+        return jdbcTemplate.query(WORK_REQUEST_FIND_JOB_SEARCH, new WorkRequestFindJobMapper(), "%" + title + "%", code);
+    }
+
+    @Override
     public boolean updateSttRequest(WorkRequestFindJob obj) throws DataAccessException {
         return jdbcTemplate.update(
                 WORK_REQUEST_FIND_JOB_UPDATE_STT_ONE,
@@ -82,6 +86,27 @@ public class WorkRequestFindJobRepositoryImpl implements WorkRequestFindJobRepos
                 obj.getWorkRequestFindJobDescription(),
                 obj.getWorkRequestFindJobPersonalExperience(),
                 obj.isWorkRequestFindJobDeleted()
+        ) > 0;
+    }
+
+    @Override
+    public boolean update(WorkRequestFindJob obj) throws DataAccessException {
+        return jdbcTemplate.update(
+                WORK_REQUEST_FIND_JOB_UPDATE_ONE,
+                obj.getSttWorkCode(),
+                obj.getWorkRequestTypeId(),
+                obj.getWorkSalaryUnitId(),
+                obj.getWorkPaymentMethodId(),
+                obj.getWorkTimeId(),
+                obj.getWorkRequestFindJobTitle(),
+                obj.getWorkRequestFindJobEndDateTime(),
+                obj.getWorkRequestFindJobLastUpdateDateTime(),
+                obj.getWorkRequestFindJobDescription(),
+                obj.getWorkRequestFindJobPersonalExperience(),
+                obj.getWorkRequestFindJobExpectedLocation(),
+                obj.getWorkRequestFindJobExpectedSalary(),
+                obj.getWorkRequestFindJobNote(),
+                obj.getWorkRequestFindJobId()
         ) > 0;
     }
 

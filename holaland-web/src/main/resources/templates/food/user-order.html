@@ -45,6 +45,13 @@
               <td class="text-end" th:classappend="*{foodOrder.sttFoodCode == 1 ? 'text-info' : 'text-warning'}"
                   th:text="*{foodOrder.sttFoodCode == 1 ? 'Chờ xác nhận' : 'Đã xác nhận'}"></td>
               <td class="text-end">
+                <th:block th:if="*{foodOrder.sttFoodCode == 2}">
+                  <a href="javascript:void(0)" class="text-success">
+                    <i class="fas fa-check me-3" data-bs-placement="top" data-bs-toggle="tooltip" title="Xác nhận hoàn thành"
+                       th:onclick="'javascript:confirmCompleteOrder(' + *{foodOrder.foodOrderId} + ')'">
+                    </i>
+                  </a>
+                </th:block>
                 <a href="javascript:void(0)" class="color-danger">
                   <i class="fas fa-times fa-lg" data-bs-placement="top" data-bs-toggle="tooltip"
                      title="Hủy đơn hàng"

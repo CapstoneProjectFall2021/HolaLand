@@ -65,7 +65,7 @@
                 <i class="fas fa-pencil-alt fa-fw"></i>Viết bài tìm việc
               </a>
             </li>
-            <li sec:authorize="hasRole('RECRUITER')">
+            <li>
               <a th:href="@{/works/jobs/find}" th:classappend="${page == 7 ? 'active' : ''}">
                 <i class="fas fa-search fa-fw"></i>Danh sách tìm việc
               </a>
@@ -143,6 +143,14 @@
         <th:block th:if="${page == 12}">
           <div th:replace="works/request-find-job-detail :: request-find-job-detail"></div>
         </th:block>
+        <!-- Update request recruitment -->
+        <th:block th:if="${page == 13}">
+          <div th:replace="works/update-request-recruitment :: update-request-recruitment"></div>
+        </th:block>
+        <!-- Update request find job -->
+        <th:block th:if="${page == 14}">
+          <div th:replace="works/update-request-find-job :: update-request-find-job"></div>
+        </th:block>
       </div>
     </div>
   </div>
@@ -199,7 +207,7 @@
   <div th:replace="works/modal/modal-list-user-applied :: listUserAppliedModal"></div>
 </th:block>
 <th:block th:if="${page == 10}">
-  <!-- Import modal request find job preview -->
+  <!-- Import modal request recruitment preview -->
   <div th:replace="works/modal/modal-request-recruitment-preview :: recruitmentPreviewModal"></div>
 </th:block>
 <th:block th:if="${page == 11}">
@@ -221,6 +229,14 @@
   <div th:replace="works/toast/toast-request-find-job-book-success :: toastRequestFindJobBookSuccess"></div>
   <!-- Import toast book request find job error -->
   <div th:replace="works/toast/toast-request-find-job-book-error:: toastRequestFindJobBookError"></div>
+</th:block>
+<th:block th:if="${page == 13}">
+  <!-- Import modal request recruitment preview -->
+  <div th:replace="works/modal/modal-request-recruitment-preview :: recruitmentPreviewModal"></div>
+</th:block>
+<th:block th:if="${page == 14}">
+  <!-- Import modal request find job preview -->
+  <div th:replace="works/modal/modal-request-find-job-preview :: findJobPreviewModal"></div>
 </th:block>
 
 <!-- Javascript -->
@@ -274,7 +290,7 @@
 
 <script th:inline="javascript">
   function goBack() {
-      if([[${page}]] == 11 || [[${page}]] == 12) {
+      if([[${page}]] == 11 || [[${page}]] == 12 || [[${page}]] == 13 || [[${page}]] == 14) {
           window.history.back();
       }else {
           document.getElementById("btn-back-page").href = "/";
