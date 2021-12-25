@@ -9,4 +9,5 @@ public interface UserService {
 
     User getOne(int id) throws DataAccessException;
 
+    boolean updatePassword(String newPassword, int userId) throws DataAccessException;
 }

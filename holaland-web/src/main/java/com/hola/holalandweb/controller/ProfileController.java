@@ -6,8 +6,10 @@ import com.hola.holalandcore.entity.UserAddress;
 import com.hola.holalandcore.entity.UserDetail;
 import com.hola.holalandcore.repository.RoleRepository;
 import com.hola.holalandcore.repository.UserRepository;
+import com.hola.holalandcore.service.RoleService;
 import com.hola.holalandcore.service.UserAddressService;
 import com.hola.holalandcore.service.UserDetailService;
+import com.hola.holalandcore.service.UserService;
 import com.hola.holalandcore.util.Format;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,22 +30,22 @@ import java.util.List;
 public class ProfileController {
 
     private PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private final UserService userService;
+    private final RoleService roleService;
     private final UserDetailService userDetailService;
     private final UserAddressService userAddressService;
 
     @Autowired
     public ProfileController(
             PasswordEncoder passwordEncoder,
-            UserRepository userRepository,
-            RoleRepository roleRepository,
+            UserService userService,
+            RoleService roleService,
             UserDetailService userDetailService,
             UserAddressService userAddressService
     ) {
         this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+        this.userService = userService;
+        this.roleService = roleService;
         this.userDetailService = userDetailService;
         this.userAddressService = userAddressService;
     }
@@ -53,7 +55,7 @@ public class ProfileController {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         UserDetail userDetail = userDetailService.getOneByUserId(currentUser.getId());
         List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(userDetail.getUserDetailId());
-        List<Role> roles = roleRepository.getRolesByUserEmail(currentUser.getUsername());
+        List<Role> roles = roleService.getRolesByUserEmail(currentUser.getUsername());
         String userRole="";
         for (Role role : roles) {
             userRole += (role.getRoleId() == 1 ? "Thành viên" : (role.getRoleId() == 2 ? "Nhà tuyển dụng"
@@ -110,7 +112,7 @@ public class ProfileController {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         boolean isCheck = false;
         if (passwordEncoder.matches(oldPass, currentUser.getCustomUserPassword()) && newPass.equals(confirmNewPass)) {
-            isCheck = userRepository.updatePassword(passwordEncoder.encode(newPass), currentUser.getId());
+            isCheck = userService.updatePassword(passwordEncoder.encode(newPass), currentUser.getId());
         }
         if (isCheck) {
             return "redirect:" + "/profile/update";

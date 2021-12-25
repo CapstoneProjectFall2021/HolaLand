@@ -75,4 +75,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public User getOne(int id) throws DataAccessException {
         return userRepository.getOne(id);
     }
+
+    @Override
+    public boolean updatePassword(String newPassword, int userId) throws DataAccessException {
+        return userRepository.updatePassword(newPassword, userId);
+    }
 }
