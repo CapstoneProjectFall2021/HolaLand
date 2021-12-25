@@ -65,7 +65,7 @@ public class FoodItemRepositoryImpl implements FoodItemRepository, IRepositoryQu
         return jdbcTemplate.update(INSERT_FOOD_ITEM,
                 foodItem.getFoodStoreOnlineId(),
                 foodItem.getFoodTagId(),
-                foodItem.getFoodTagId(),
+                foodItem.getFoodTypeId(),
                 foodItem.getFoodItemImage(),
                 foodItem.getFoodItemName(),
                 foodItem.getFoodItemPrice(),

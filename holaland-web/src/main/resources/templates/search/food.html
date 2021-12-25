@@ -21,7 +21,7 @@
           </th:block>
         </div>
       </div>
-      <div th:if="${foodTagListSearch == null && foodTagListSearch.size() == 0}">
+      <div th:if="${foodTagListSearch == null || foodTagListSearch.size() == 0}">
         Không tìm thấy thẻ nào có kết quả "<span th:text="${textSearch}"></span>"
       </div>
     </div>
@@ -58,7 +58,7 @@
       </div>
     </div>
   </div>
-  <div  th:if="${foodItemListSearch == null && foodItemListSearch.size() == 0}">
+  <div  th:if="${foodItemListSearch == null || foodItemListSearch.size() == 0}">
     Không tìm thấy món ăn nào có kết quả "<span th:text="${textSearch}"></span>"
   </div>
 </div>

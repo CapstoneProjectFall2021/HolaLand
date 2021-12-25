@@ -51,7 +51,6 @@ public class SearchController {
     @GetMapping("/work")
     public String searchWork(Model model) {
         addSearchWorkAttr(model);
-        model.addAttribute("textSearch", textSearch);
         return "search";
     }
 
@@ -62,6 +61,7 @@ public class SearchController {
                 textSearch, Constants.STT_WORK_CODE_APPROVED);
         model.addAttribute("requestRecruitmentListSearch", requestRecruitmentListSearch);
         model.addAttribute("requestFindJobListSearch", requestFindJobListSearch);
+        model.addAttribute("textSearch", textSearch);
         model.addAttribute("page", 1);
     }
 

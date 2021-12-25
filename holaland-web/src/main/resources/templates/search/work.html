@@ -12,7 +12,7 @@
   </div>
 
   <!-- List request -->
-  <div class="list-request">
+  <div class="list-request" th:if="${requestRecruitmentListSearch != null && requestRecruitmentListSearch.size() != 0}">
     <div class="row">
       <div class="col-md-12" th:each="requestRecruitment : ${requestRecruitmentListSearch}">
         <a th:href="@{/works/jobs/recruitment/detail(id=*{requestRecruitment.workRequestRecruitmentId})}"
@@ -35,6 +35,9 @@
       </div>
     </div>
   </div>
+  <div th:if="${requestRecruitmentListSearch == null || requestRecruitmentListSearch.size() == 0}">
+    Không tìm thấy bài tuyển dụng nào có kết quả "<span th:text="${textSearch}"></span>"
+  </div>
 
   <div class="row">
     <div class="col-12">
@@ -43,7 +46,7 @@
   </div>
 
   <!-- List request -->
-  <div class="list-request">
+  <div class="list-request" th:if="${requestFindJobListSearch != null && requestFindJobListSearch.size() != 0}">
     <div class="row">
       <div class="col-md-12" th:each="requestFindJob : ${requestFindJobListSearch}">
         <a th:href="@{/works/jobs/find/detail(id=${requestFindJob.workRequestFindJobId})}" class="label-info m-mb-16">
@@ -68,5 +71,8 @@
         </a>
       </div>
     </div>
+  </div>
+  <div th:if="${requestFindJobListSearch == null || requestFindJobListSearch.size() == 0}">
+    Không tìm thấy bài tìm việc nào có kết quả "<span th:text="${textSearch}"></span>"
   </div>
 </div>
