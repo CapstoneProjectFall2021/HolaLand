@@ -9,5 +9,7 @@ public interface FoodTypeService {
 
     List<FoodType> getAll() throws DataAccessException;
 
+    List<FoodType> getAllByUserId(int userId) throws DataAccessException;
+
     FoodType getOne(int id) throws DataAccessException;
 }

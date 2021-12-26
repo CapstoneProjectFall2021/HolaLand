@@ -33,6 +33,18 @@
                             </div>
                             <div class="form-group col-md-12 mb-0">
                                 <fieldset class="bg-dark-ui">
+                                    <legend>Chọn loại đồ ăn</legend>
+                                    <select class="form-control form-select" name="foodTypeId">
+                                        <th:block th:each="type : ${typeList}">
+                                            <option th:value="${type.foodTypeId}"
+                                                    th:selected="${type.foodTypeId == typeList.get(0).foodTypeId}"
+                                                    th:text="${type.foodTypeName}"></option>
+                                        </th:block>
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="form-group col-md-12 mb-0">
+                                <fieldset class="bg-dark-ui">
                                     <legend>Chọn thẻ</legend>
                                     <select class="form-control form-select" name="foodTagId">
                                         <th:block th:each="tag : ${tagList}">

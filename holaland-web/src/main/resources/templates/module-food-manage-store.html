@@ -108,9 +108,11 @@
   <!-- Import modal confirm delete food -->
   <div th:replace="online-store/modal/modal-confirm-delete-food :: confirmDeleteFoodModal"></div>
   <!-- Import modal add new food -->
-  <div th:replace="online-store/modal/modal-add-new-food-item :: addNewFoodModal(tagList=${foodStoreTagList})"></div>
+  <div th:replace="online-store/modal/modal-add-new-food-item
+  :: addNewFoodModal(tagList=${foodStoreTagList}, typeList=${foodShopTypeList})"></div>
   <!-- Import modal update food -->
-  <div th:replace="online-store/modal/modal-update-food-item :: updateFoodItemModal(tagList=${foodStoreTagList})"></div>
+  <div th:replace="online-store/modal/modal-update-food-item
+  :: updateFoodItemModal(tagList=${foodStoreTagList}, typeList=${foodShopTypeList})"></div>
 </th:block>
 <th:block th:if="${page == 3}">
   <!-- Import modal update shop info -->

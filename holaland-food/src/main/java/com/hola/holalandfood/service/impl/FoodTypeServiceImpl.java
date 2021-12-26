@@ -25,6 +25,11 @@ public class FoodTypeServiceImpl implements FoodTypeService {
     }
 
     @Override
+    public List<FoodType> getAllByUserId(int userId) throws DataAccessException {
+        return foodTypeRepository.getAllByUserId(userId);
+    }
+
+    @Override
     public FoodType getOne(int id) throws DataAccessException {
         return foodTypeRepository.getOne(id);
     }

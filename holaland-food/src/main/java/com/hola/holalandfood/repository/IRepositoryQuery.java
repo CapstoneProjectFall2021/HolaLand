@@ -62,7 +62,8 @@ public interface IRepositoryQuery {
             " SET food_item_image = COALESCE(?, food_item_image)," +
             " food_item_name = ?," +
             " food_item_price = ?," +
-            " food_tag_id = ?" +
+            " food_tag_id = ?," +
+            " food_type_id = ?" +
             " WHERE food_item_id = ?";
     String FOOD_ITEM_COUNT_ITEM_SOLD = "SELECT SUM(food_item_sold_number)" +
             " FROM food_item" +
@@ -229,6 +230,19 @@ public interface IRepositoryQuery {
 
     String FOOD_TYPE_GET_ALL = "SELECT * FROM food_type WHERE food_type_deleted = 0";
     String FOOD_TYPE_GET_ONE = "SELECT * FROM food_type WHERE food_type_id = ? AND food_type_deleted = 0";
+    String FOOD_TYPE_GET_ALL_BY_USER_ID = "SELECT\n" +
+            "T1.food_type_id,\n" +
+            "T1.food_type_icon,\n" +
+            "T1.food_type_name,\n" +
+            "T1.food_type_count,\n" +
+            "T1.food_type_deleted\n" +
+            "FROM food_type T1\n" +
+            "LEFT OUTER JOIN food_store_online_type T2\n" +
+            "ON T1.food_type_id = T2.food_type_id\n" +
+            "LEFT OUTER JOIN food_store_online T3\n" +
+            "ON T2.food_store_online_id = T3.food_store_online_id\n" +
+            "WHERE T3.user_id = ?\n" +
+            "AND T3.food_store_online_deleted = 0";
 
     String STT_FOOD_GET_ALL = "SELECT * FROM stt_food";
     String STT_FOOD_GET_ONE = "SELECT * FROM stt_food WHERE stt_food_id = ?";

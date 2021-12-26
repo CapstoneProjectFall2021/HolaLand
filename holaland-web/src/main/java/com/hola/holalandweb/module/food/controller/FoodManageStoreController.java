@@ -1,16 +1,8 @@
 package com.hola.holalandweb.module.food.controller;
 
 import com.hola.holalandcore.entity.CustomUser;
-import com.hola.holalandfood.entity.FoodItem;
-import com.hola.holalandfood.entity.FoodOrder;
-import com.hola.holalandfood.entity.FoodStoreOnline;
-import com.hola.holalandfood.entity.FoodStoreOnlineTag;
-import com.hola.holalandfood.entity.FoodTag;
-import com.hola.holalandfood.service.FoodItemService;
-import com.hola.holalandfood.service.FoodOrderService;
-import com.hola.holalandfood.service.FoodStoreOnlineService;
-import com.hola.holalandfood.service.FoodStoreOnlineTagService;
-import com.hola.holalandfood.service.FoodTagService;
+import com.hola.holalandfood.entity.*;
+import com.hola.holalandfood.service.*;
 import com.hola.holalandweb.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,6 +33,7 @@ public class FoodManageStoreController {
     private final FoodItemService foodItemService;
     private final FoodStoreOnlineTagService foodStoreOnlineTagService;
     private final FoodOrderService foodOrderService;
+    private final FoodTypeService foodTypeService;
 
     @Autowired
     public FoodManageStoreController(
@@ -48,13 +41,14 @@ public class FoodManageStoreController {
             FoodTagService foodTagService,
             FoodItemService foodItemService,
             FoodStoreOnlineTagService foodStoreOnlineTagService,
-            FoodOrderService foodOrderService
-    ) {
+            FoodOrderService foodOrderService,
+            FoodTypeService foodTypeService) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodTagService = foodTagService;
         this.foodItemService = foodItemService;
         this.foodStoreOnlineTagService = foodStoreOnlineTagService;
         this.foodOrderService = foodOrderService;
+        this.foodTypeService = foodTypeService;
     }
 
     @GetMapping("/info")
@@ -109,9 +103,11 @@ public class FoodManageStoreController {
 
         List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(currentUser.getId());
         List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(currentUser.getId());
+        List<FoodType> foodShopTypeList = foodTypeService.getAllByUserId(currentUser.getId());
 
         model.addAttribute("foodStoreItemList", foodShopItemList);
         model.addAttribute("foodStoreTagList", foodShopTagList);
+        model.addAttribute("foodShopTypeList", foodShopTypeList);
         model.addAttribute("page", 2);
         return "module-food-manage-store";
     }
@@ -135,10 +131,12 @@ public class FoodManageStoreController {
 
         List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(currentUser.getId());
         List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(currentUser.getId());
+        List<FoodType> foodShopTypeList = foodTypeService.getAllByUserId(currentUser.getId());
         List<FoodTag> foodTagList = foodTagService.getAll();
         model.addAttribute("foodStoreItemList", foodShopItemList);
         model.addAttribute("foodStoreTagList", foodShopTagList);
         model.addAttribute("foodTagList", foodTagList);
+        model.addAttribute("foodShopTypeList", foodShopTypeList);
         model.addAttribute("page", 2);
         return "module-food-manage-store";
     }
@@ -168,17 +166,15 @@ public class FoodManageStoreController {
             foodStoreOnlineTags.add(foodStoreOnlineTag);
         }
         //delete all old
-        foodStoreOnlineTagService.deleteAllTagByFoodStoreOnlineId(foodStoreOnline.getFoodStoreOnlineId());
+        boolean isCheck1 = foodStoreOnlineTagService.deleteAllTagByFoodStoreOnlineId(foodStoreOnline.getFoodStoreOnlineId());
         //insert new tag after update
-        foodStoreOnlineTagService.insertTagForFoodStore(foodStoreOnlineTags);
+        int[] isCheck2 =  foodStoreOnlineTagService.insertTagForFoodStore(foodStoreOnlineTags);
         //get list tag after update
-        List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(currentUser.getId());
-        List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(currentUser.getId());
-
-        model.addAttribute("foodStoreTagList", foodShopTagList);
-        model.addAttribute("foodStoreItemList", foodShopItemList);
-        model.addAttribute("page", 2);
-        return "module-food-manage-store";
+        if (isCheck1 && isCheck2.length > 0) {
+            return "redirect:" + "/store/manage/food";
+        } else {
+            return "404";
+        }
     }
 
     // Fix upload image
@@ -207,15 +203,14 @@ public class FoodManageStoreController {
         //String uploadDir = new File("holaland-web/src/main/resources/static/images/food").getAbsolutePath();
         String uploadDir = new File("holaland-web/target/classes/static/images/food").getAbsolutePath();
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        foodItemService.save(foodItem);
+        boolean isCheck = foodItemService.save(foodItem);
         //get list tag after update
 
-        List<FoodTag> foodShopTagList = foodTagService.getAllByUserId(currentUser.getId());
-        List<FoodItem> foodShopItemList = foodItemService.getAllByUserId(currentUser.getId());
-        model.addAttribute("foodStoreTagList", foodShopTagList);
-        model.addAttribute("foodStoreItemList", foodShopItemList);
-        model.addAttribute("page", 2);
-        return "module-food-manage-store";
+        if (isCheck) {
+            return "redirect:" + "/store/manage/food";
+        } else {
+            return "404";
+        }
     }
 
     @PostMapping("/food/update")
@@ -224,6 +219,7 @@ public class FoodManageStoreController {
             @RequestParam("imageFood") MultipartFile multipartFile,
             @RequestParam("foodItemName") String foodItemName,
             @RequestParam("foodItemPrice") Integer foodItemPrice,
+            @RequestParam("foodTypeId") Integer foodTypeId,
             @RequestParam("foodTagId") Integer foodTagId
     ) throws Exception {
         String fileName = null;
@@ -239,6 +235,7 @@ public class FoodManageStoreController {
                 .foodItemName(foodItemName)
                 .foodItemPrice(foodItemPrice)
                 .foodTagId(foodTagId)
+                .foodTypeId(foodTypeId)
                 .build();
         boolean isCheck = foodItemService.update(updateFood);
         if (isCheck) {

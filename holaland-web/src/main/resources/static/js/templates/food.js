@@ -165,13 +165,14 @@ function confirmDeleteFood(foodId) {
     openModal("confirmDeleteFoodModal");
 }
 
-function updateFood(foodItemId, foodItemTagId) {
+function updateFood(foodItemId, foodItemTagId, foodItemTypeId) {
     const foodItemImg = document.getElementById("food-item-img-" + foodItemId).src;
     const foodItemName = document.getElementById("food-item-name-" + foodItemId).innerHTML;
     const foodItemPrice = document.getElementById("food-item-price-" + foodItemId).innerHTML;
 
     document.getElementById("food-item-id").value = foodItemId;
     document.getElementById("item-tag-id").value = foodItemTagId;
+    document.getElementById("item-type-id").value = foodItemTypeId;
     document.getElementById('image').src = foodItemImg;
     document.getElementById("item-name").value = foodItemName;
     document.getElementById("item-price").value = parseInt(foodItemPrice.replace('.', ''));

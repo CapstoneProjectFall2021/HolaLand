@@ -27,6 +27,11 @@ public class FoodTypeRepositoryImpl implements FoodTypeRepository, IRepositoryQu
     }
 
     @Override
+    public List<FoodType> getAllByUserId(int userId) throws DataAccessException {
+        return jdbcTemplate.query(FOOD_TYPE_GET_ALL_BY_USER_ID, new FoodTypeMapper(), userId);
+    }
+
+    @Override
     public FoodType getOne(int id) throws DataAccessException {
         return jdbcTemplate.queryForObject(FOOD_TYPE_GET_ONE, new FoodTypeMapper(), id);
     }

@@ -82,6 +82,7 @@ public class FoodItemRepositoryImpl implements FoodItemRepository, IRepositoryQu
                 obj.getFoodItemName(),
                 obj.getFoodItemPrice(),
                 obj.getFoodTagId(),
+                obj.getFoodTypeId(),
                 obj.getFoodItemId()
         ) > 0;
     }
