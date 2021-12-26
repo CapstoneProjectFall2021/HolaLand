@@ -2,6 +2,7 @@ package com.hola.holalandweb.module.food.controller;
 
 import com.hola.holalandcore.entity.CustomUser;
 import com.hola.holalandcore.service.UserAddressService;
+import com.hola.holalandcore.service.UserService;
 import com.hola.holalandcore.util.Format;
 import com.hola.holalandfood.entity.FoodOrder;
 import com.hola.holalandfood.entity.FoodOrderDetail;
@@ -14,6 +15,7 @@ import com.hola.holalandfood.service.FoodReportService;
 import com.hola.holalandfood.service.FoodStoreOnlineService;
 import com.hola.holalandfood.view.FoodCountSttOrder;
 import com.hola.holalandweb.constant.Constants;
+import com.hola.holalandweb.util.SendEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -37,6 +39,8 @@ public class FoodOrderController {
     private final FoodOrderService foodOrderService;
     private final FoodOrderDetailService foodOrderDetailService;
     private final FoodReportService foodReportService;
+    private final SendEmailService sendEmailService;
+    private final UserService userService;
 
     @Autowired
     public FoodOrderController(
@@ -45,7 +49,9 @@ public class FoodOrderController {
             UserAddressService userAddressService,
             FoodOrderService foodOrderService,
             FoodOrderDetailService foodOrderDetailService,
-            FoodReportService foodReportService
+            FoodReportService foodReportService,
+            SendEmailService sendEmailService,
+            UserService userService
     ) {
         this.foodStoreOnlineService = foodStoreOnlineService;
         this.foodCountSttOrderService = foodCountSttOrderService;
@@ -53,6 +59,8 @@ public class FoodOrderController {
         this.foodOrderService = foodOrderService;
         this.foodOrderDetailService = foodOrderDetailService;
         this.foodReportService = foodReportService;
+        this.sendEmailService = sendEmailService;
+        this.userService = userService;
     }
 
     /**
@@ -229,7 +237,18 @@ public class FoodOrderController {
                 .foodReportDeleted(false)
                 .build();
         boolean isCheck = foodReportService.save(foodReport);
+        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(storeId);
+        String email = userService.getOne(foodStoreOnline.getUserId()).getUserEmail();
+        String customer = userService.getOne(currentUser.getId()).getUserEmail();
+
+
         if (isCheck) {
+            sendEmailService.send(
+                    "HolaLand",
+                    "Cửa hàng của bạn đã bị khách hàng " + customer + " đã báo cáo đơn đặt hàng #"
+                            + Format.orderId(orderId) + " với lý do: " + content,
+                    email
+            );
             return "redirect:" + "/food/order";
         } else {
             return "404";
@@ -253,7 +272,19 @@ public class FoodOrderController {
                 .sttFoodCode(Constants.STT_FOOD_CODE_EXPIRED)
                 .build();
         boolean isCheck = foodOrderService.updateSttFood(foodOrder);
+        int foodStoreOnlineId = foodOrderService.getOne(foodOrderId).getFoodStoreOnlineId();
+        int customerId = foodOrderService.getOne(foodOrderId).getUserId();
+        FoodStoreOnline foodStoreOnline = foodStoreOnlineService.getOne(foodStoreOnlineId);
+        String email = userService.getOne(foodStoreOnline.getUserId()).getUserEmail();
+        String customer = userService.getOne(customerId).getUserEmail();
+
         if (isCheck) {
+            sendEmailService.send(
+                    "HolaLand",
+                    "Khách hàng " + customer + " đã hủy đơn đặt hàng #"
+                            + Format.orderId(foodOrderId),
+                    email
+            );
             return "redirect:" + "/food/order";
         } else {
             return "404";
@@ -290,7 +321,19 @@ public class FoodOrderController {
                 .build();
 
         boolean isCheck = foodOrderService.addReasonReject(newFoodOrder);
+
+        int foodStoreOnlineId = foodOrderService.getOne(orderId).getFoodStoreOnlineId();
+        int customerId = foodOrderService.getOne(orderId).getUserId();
+        String foodStoreOnline = foodStoreOnlineService.getOne(foodStoreOnlineId).getFoodStoreOnlineName();
+        String email = userService.getOne(customerId).getUserEmail();
+
         if (isCheck) {
+            sendEmailService.send(
+                    "HolaLand",
+                    "Cửa hàng " + foodStoreOnline + " đã từ chối đơn đặt hàng #"
+                            + Format.orderId(orderId) + " với lý do: " + reasonReject,
+                    email
+            );
             return "redirect:" + "/food/order/manage";
         } else {
             return "404";
