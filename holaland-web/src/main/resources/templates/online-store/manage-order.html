@@ -43,7 +43,7 @@
                   th:text="*{foodOrder.sttFoodCode == 1 ? 'Chờ xác nhận' : 'Đã xác nhận'}"></td>
               <td class="text-end">
                 <th:block th:if="*{foodOrder.foodOrderNote.length != 0}">
-                  <a href="javascript:void(0)" class="text-info">
+                  <a href="javascript:void(0)" class="text-info me-3">
                     <i class="far fa-comment-dots" data-bs-placement="top" data-bs-toggle="tooltip" title="Ghi chú"
                        onclick="getOrderNote(event)">
                       <span class="d-none" th:text="*{foodOrder.foodOrderNote}"></span>
