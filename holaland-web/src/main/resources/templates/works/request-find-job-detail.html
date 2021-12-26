@@ -32,6 +32,13 @@
                     </a>
                   </div>
                 </div>
+                <div class="apply-area-btn" sec:authorize="!isAuthenticated()">
+                  <div class="btn-apply">
+                    <a th:href="@{/login}" class="btn btn-md btn-success">
+                      THUÊ NGAY
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -24,7 +24,8 @@
             <div class="content-body">
               <h4 class="accent" th:text="*{requestRecruitment.workRequestRecruitmentTitle}"></h4>
               <div class="request-info flex-sb">
-                <p>Lương: <span th:text="*{requestRecruitment.workRequestRecruitmentSalary}"></span></p>
+                <p sec:authorize="isAuthenticated()">Lương: <span th:text="*{requestRecruitment.workRequestRecruitmentSalary}"></span></p>
+                <p sec:authorize="!isAuthenticated()">Đăng nhập để xem lương</p>
                 <p>Thời hạn: <span
                     th:text="*{#dates.format(requestRecruitment.workRequestRecruitmentEndDateTime, 'dd-MM-yyyy')}"></span>
                 </p>
@@ -57,13 +58,14 @@
             <div class="content-body">
               <h4 class="accent" th:text="*{requestFindJob.workRequestFindJobTitle}"></h4>
               <div class="request-info flex-sb">
-                <p>Lương mong muốn: <span th:text="*{#numbers.formatInteger(requestFindJob.workRequestFindJobExpectedSalary, 3, 'POINT')}"></span>
+                <p sec:authorize="isAuthenticated()">Lương mong muốn: <span th:text="*{#numbers.formatInteger(requestFindJob.workRequestFindJobExpectedSalary, 3, 'POINT')}"></span>
                   <span
                       th:text="*{
                                         requestFindJob.workSalaryUnitId == 1 ? 'VNĐ/h' :
                                         requestFindJob.workSalaryUnitId == 2 ? 'VNĐ/Ngày' :
                                         requestFindJob.workSalaryUnitId == 3 ? 'VNĐ/Tuần' : 'VNĐ/Tháng'}"
                   ></span></p>
+                <p sec:authorize="!isAuthenticated()">Đăng nhập để xem lương</p>
                 <p>Thời hạn: <span th:text="*{#dates.format(requestFindJob.workRequestFindJobEndDateTime, 'dd-MM-yyyy')}"></span></p>
               </div>
             </div>

@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a id="food-item-add-to-cart" onclick="" class="btn btn-sm btn-success me-2">
+        <a id="food-item-add-to-cart" onclick="" class="btn btn-sm btn-success me-2" sec:authorize="isAuthenticated()">
           <i class="fas fa-plus"></i>Thêm vào giỏ hàng
         </a>
         <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Đóng</button>

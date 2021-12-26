@@ -6,26 +6,26 @@
   </div>
 
   <!-- Title tag -->
-  <div class="row">
-    <div class="col-12">
-      <h1 class="title fix-mb-title">Danh sách thẻ</h1>
-    </div>
-  </div>
+<!--  <div class="row">-->
+<!--    <div class="col-12">-->
+<!--      <h1 class="title fix-mb-title">Danh sách thẻ</h1>-->
+<!--    </div>-->
+<!--  </div>-->
   <!-- Tags -->
-  <div class="row m-mb-20">
-    <div class="col-md-12">
-      <div class="list-tag" th:if="${foodTagListSearch != null && foodTagListSearch.size() != 0}">
-        <div class="tags">
-          <th:block th:each="foodTagSearch: ${foodTagListSearch}">
-            <a href="#" class="tag"  th:text="*{foodTagSearch.foodTagName}"></a>
-          </th:block>
-        </div>
-      </div>
-      <div th:if="${foodTagListSearch == null || foodTagListSearch.size() == 0}">
-        Không tìm thấy thẻ nào có kết quả "<span th:text="${textSearch}"></span>"
-      </div>
-    </div>
-  </div>
+<!--  <div class="row m-mb-20">-->
+<!--    <div class="col-md-12">-->
+<!--      <div class="list-tag" th:if="${foodTagListSearch != null && foodTagListSearch.size() != 0}">-->
+<!--        <div class="tags">-->
+<!--          <th:block th:each="foodTagSearch: ${foodTagListSearch}">-->
+<!--            <a href="#" class="tag"  th:text="*{foodTagSearch.foodTagName}"></a>-->
+<!--          </th:block>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div th:if="${foodTagListSearch == null || foodTagListSearch.size() == 0}">-->
+<!--        Không tìm thấy thẻ nào có kết quả "<span th:text="${textSearch}"></span>"-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <!-- Title food -->
   <div class="row">

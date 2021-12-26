@@ -43,6 +43,8 @@ function confirmDeleteItemInCart(foodId) {
  * Online store
  */
 function getFoodItemDetail(foodItemId, storeId) {
+    var btnAddCart = document.getElementById("food-item-add-to-cart");
+
     const foodItemImg = document.getElementById("food-item-img-" + foodItemId).src;
     const foodItemName = document.getElementById("food-item-name-" + foodItemId).innerHTML;
     const foodItemPrice = document.getElementById("food-item-price-" + foodItemId).innerHTML;
@@ -50,9 +52,11 @@ function getFoodItemDetail(foodItemId, storeId) {
     document.getElementById("food-item-img-modal").src = foodItemImg;
     document.getElementById("food-item-name-modal").innerHTML = foodItemName;
     document.getElementById("food-item-price-modal").innerHTML = foodItemPrice;
-    document.getElementById("food-item-add-to-cart").onclick = function () {
-        addFoodToCart(foodItemId, storeId);
-    };
+    if(btnAddCart != null) {
+        btnAddCart.onclick = function () {
+            addFoodToCart(foodItemId, storeId);
+        };
+    }
     openModal("foodDetailModal");
 }
 

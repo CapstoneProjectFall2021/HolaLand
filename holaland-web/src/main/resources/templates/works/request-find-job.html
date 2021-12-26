@@ -42,7 +42,7 @@
                         <div class="content-body">
                             <h4 class="accent" th:text="*{worker.workRequestFindJobTitle}"></h4>
                             <div class="request-info">
-                                <p>Lương mong muốn: <span th:text="*{#numbers.formatInteger(worker.workRequestFindJobExpectedSalary, 3, 'POINT')}"></span>
+                                <p sec:authorize="isAuthenticated()">Lương mong muốn: <span th:text="*{#numbers.formatInteger(worker.workRequestFindJobExpectedSalary, 3, 'POINT')}"></span>
                                     <span
                                         th:text="*{
                                         worker.workSalaryUnitId == 1 ? 'VNĐ/h' :
@@ -50,6 +50,7 @@
                                         worker.workSalaryUnitId == 3 ? 'VNĐ/Tuần' : 'VNĐ/Tháng'}"
                                     ></span>
                                 </p>
+                                <p sec:authorize="!isAuthenticated()">Đăng nhập để xem lương</p>
                                 <p>Thời hạn: <span th:text="*{#dates.format(worker.workRequestFindJobEndDateTime, 'dd-MM-yyyy')}"></span></p>
                             </div>
                         </div>
