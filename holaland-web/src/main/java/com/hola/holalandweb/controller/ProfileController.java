@@ -54,7 +54,7 @@ public class ProfileController {
     public String profile(Model model, Authentication authentication) {
         CustomUser currentUser = (CustomUser) authentication.getPrincipal();
         UserDetail userDetail = userDetailService.getOneByUserId(currentUser.getId());
-        List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(userDetail.getUserDetailId());
+        List<UserAddress> userAddressList = userAddressService.getAllAddressByUserId(currentUser.getId());
         List<Role> roles = roleService.getRolesByUserEmail(currentUser.getUsername());
         String userRole="";
         for (Role role : roles) {

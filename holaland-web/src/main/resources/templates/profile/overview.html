@@ -118,7 +118,12 @@
   </div>
   <!-- Address -->
   <div class="profile-info">
-    <div class="row">
+    <div class="row" th:if="${userAddressList.size() == 0}">
+      <div class="col-12">
+        <h1 class="title fix-mb-title fix-mt-title">Không có địa chỉ nào</h1>
+      </div>
+    </div>
+    <div class="row" th:if="${userAddressList.size() != 0}">
       <div class="col-12">
         <h1 class="title fix-mb-title fix-mt-title">Địa chỉ</h1>
       </div>
