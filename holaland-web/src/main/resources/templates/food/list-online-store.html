@@ -34,10 +34,10 @@
             <a th:href="@{/food/store(id=*{foodStoreOnline.foodStoreOnlineId})}" class="label-info m-mb-16">
               <div class="flex">
                 <div class="icon-circle">
-                  <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage != null}">
+                  <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage.length() != 0}">
                     <img class="media-object rounded-circle" th:src="@{'/images/food/'+ *{foodStoreOnline.foodStoreOnlineImage}}" alt="">
                   </th:block>
-                  <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage == null}">
+                  <th:block th:if = "${foodStoreOnline.foodStoreOnlineImage.length() == 0}">
                     <img class="media-object" th:src="@{'/images/system/shop.png'}" alt="">
                   </th:block>
                 </div>
