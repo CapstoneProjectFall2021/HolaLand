@@ -65,7 +65,7 @@ public interface IRepositoryQuery {
             " food_tag_id = ?," +
             " food_type_id = ?" +
             " WHERE food_item_id = ?";
-    String FOOD_ITEM_COUNT_ITEM_SOLD = "SELECT SUM(food_item_sold_number)" +
+    String FOOD_ITEM_COUNT_ITEM_SOLD = "SELECT IFNULL(SUM(food_item_sold_number),0)" +
             " FROM food_item" +
             " WHERE food_store_online_id = ?" +
             " AND food_item_deleted = 0";

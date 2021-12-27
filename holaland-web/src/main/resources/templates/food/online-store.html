@@ -91,21 +91,25 @@
                 <div class="col-md-12">
                   <div class="list-tag">
                     <div class="tags">
-                      <a class="tag" th:classappend="*{tagId == 0 ? 'active' : ''}"
-                         th:href="@{/food/store(id=${foodStoreOnline.foodStoreOnlineId})}">Tất cả</a>
-                      <th:block th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}">
-                        <a class="tag"
-                           th:classappend="*{foodStoreOnlineTag.foodTagId == tagId ? 'active' : ''}"
-                           th:href="@{/food/store/tag(storeId=${foodStoreOnline.foodStoreOnlineId}, tagId=*{foodStoreOnlineTag.foodTagId})}"
-                           th:text="*{foodStoreOnlineTag.foodTagName}">
-                        </a>
+                      <h5 th:if="${foodStoreOnlineTagList.size() == 0}">Thẻ đồ ăn chưa được cửa hàng cập nhật!</h5>
+                      <th:block th:if="${foodStoreOnlineTagList.size() != 0}">
+                        <a class="tag" th:classappend="*{tagId == 0 ? 'active' : ''}"
+                           th:href="@{/food/store(id=${foodStoreOnline.foodStoreOnlineId})}">Tất cả</a>
+                        <th:block th:each="foodStoreOnlineTag : ${foodStoreOnlineTagList}">
+                          <a class="tag"
+                             th:classappend="*{foodStoreOnlineTag.foodTagId == tagId ? 'active' : ''}"
+                             th:href="@{/food/store/tag(storeId=${foodStoreOnline.foodStoreOnlineId}, tagId=*{foodStoreOnlineTag.foodTagId})}"
+                             th:text="*{foodStoreOnlineTag.foodTagName}">
+                          </a>
+                        </th:block>
                       </th:block>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="list-food">
-                <div class="row">
+                <h5 th:if="${foodItemList.size() == 0}">Món ăn chưa được cửa hàng cập nhật!</h5>
+                <div class="row" th:if="${foodItemList.size() != 0}">
                   <div class="col-lg-12 col-xl-6 col-xxl-6" th:each="foodItem : ${foodItemList}">
                     <div class="food label-info m-mb-16">
                       <div class="flex-sb">
@@ -157,7 +161,8 @@
           <div class="tab-pane fade" id="pills-comment" role="tabpanel" aria-labelledby="pills-comment-tab">
             <div class="row">
               <div class="col-md-12">
-                <div class="list-comment">
+                <h5 th:if="${listComment.size() == 0}">Hiện tại cửa hàng chưa có bình luận nào!</h5>
+                <div class="list-comment" th:if="${listComment.size() != 0}">
                   <div class="panel pb-1">
                     <div class="comment flex" th:each="comment : ${listComment}">
                       <div class="icon-circle">
@@ -188,7 +193,8 @@
           <div class="tab-pane fade" th:classappend="${tab == 3 ? 'show active' : ''}" id="pills-report" role="tabpanel" aria-labelledby="pills-report-tab">
             <div class="row">
               <div class="col-md-12">
-                <div class="list-comment">
+                <h5 th:if="${listReport.size() == 0}">Hiện tại cửa hàng chưa có báo cáo nào!</h5>
+                <div class="list-comment" th:if="${listReport.size() != 0}">
                   <div class="panel pb-1">
                     <div class="comment flex" th:each="report : ${listReport}">
                       <div class="icon-circle">
