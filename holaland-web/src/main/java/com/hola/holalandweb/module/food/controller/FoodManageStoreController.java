@@ -170,7 +170,7 @@ public class FoodManageStoreController {
         //insert new tag after update
         int[] isCheck2 =  foodStoreOnlineTagService.insertTagForFoodStore(foodStoreOnlineTags);
         //get list tag after update
-        if (isCheck1 && isCheck2.length > 0) {
+        if (isCheck2.length > 0) {
             return "redirect:" + "/store/manage/food";
         } else {
             return "404";
